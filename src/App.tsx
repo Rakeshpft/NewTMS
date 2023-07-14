@@ -1,25 +1,61 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, useState } from "react";
+import { ForgetPassword } from "./components/login-page";
+import { Route, Switch } from "react-router-dom";
+import Cookies from "js-cookie";
+import { LoginContext, PrivateRoute } from "./components/private-routes";
+import { IdleTimerProvider } from "react-idle-timer";
+import { handleLogout, session_Time_Logout } from "./components/auth";
+import { DashboardPage } from "./components/dashboard";
+import LoginPage from "./components/login-page/login-page";
+import { DriverPage } from "./components/driver-page";
 
 function App() {
+  const [loading, setLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    JSON.parse(Cookies.get("loggedIn") || "false")
+  );
+
+  const setLogin = (data: boolean) => {
+    const status = data.toString();
+    Cookies.set("loggedIn", status);
+    setIsLoggedIn(data);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <Suspense fallback="Loading...">
+        <LoginContext.Provider
+          value={{
+            isLoggedIn,
+            setIsLoggedIn,
+            loading,
+            setLoading,
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Switch>
+            <IdleTimerProvider
+              timeout={session_Time_Logout}
+              onIdle={handleLogout}
+            >
+              <PrivateRoute
+                exact={true}
+                path="/dashboard"
+                component={DashboardPage}
+              />
+              <Route exact={true} path="/">
+                <LoginPage loginStatus={setLogin} />
+              </Route>
+              <Route path="/forgetpassword">
+                <ForgetPassword />
+              </Route>
+              <Route path="/driverpage">
+                <DriverPage />
+              </Route>
+            </IdleTimerProvider>
+          </Switch>
+        </LoginContext.Provider>
+      </Suspense>
+    </>
   );
 }
 
