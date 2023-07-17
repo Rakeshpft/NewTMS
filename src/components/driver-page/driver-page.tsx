@@ -7,7 +7,7 @@ import NewDriverPage from "./new-driver-page";
 const DriverPage = () => {
   return (
     <>
-      <Header title="Drivers" name="export" stitle='New Driver' />
+      <Header title="Drivers" name="export" stitle="New Driver" />
       <div className="d-flex">
         <SideBar isOpen={true} />
         <div className="w-100">
@@ -53,8 +53,7 @@ const DriverPage = () => {
           </Table>
         </div>
       </div>
-      <NewDriverPage/>
-
+      <NewDriverPage />
     </>
   );
 };
