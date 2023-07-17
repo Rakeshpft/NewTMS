@@ -4,6 +4,7 @@ import { Nav, Button, Navbar, NavbarBrand, NavItem } from "reactstrap";
 import SearchPage from "../search-page";
 import CompanyLogo from "../company-logo";
 import { GiHamburgerMenu } from "react-icons/gi";
+import VendorsModal from "../partners/vendors/vendorsModal";
 
 interface HeaderProps {
   title: string;
@@ -47,13 +48,14 @@ const Header: React.FC<HeaderProps> = ({ title, name, stitle }) => {
         </Nav>
         <div className="d-flex align-items-center gap-5">
           <SearchPage />
-          <Button
+          {/* <Button
             onClick={toggle}
             data-bs-toggle="modal"
             data-bs-target={`#modal_${stitle}`}
           >
             {stitle}
-          </Button>
+          </Button> */}
+          <VendorsModal/>
         </div>
       </Navbar>
     </>

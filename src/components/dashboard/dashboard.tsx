@@ -21,6 +21,7 @@ const DashboardPage = () => {
                 image="material-symbols_conveyor-belt"
                 counter={70}
                 icon="create-a-load"
+                link="/loadpage"
                 options={["Load 1", "Load 2"]}
               />
             </Col>
@@ -41,6 +42,7 @@ const DashboardPage = () => {
                 name="Partners"
                 image="material-symbols_partner-exchange-rounded"
                 counter={3}
+                link="/vendors"
                 icon="create-a-load"
                 options={["Partner 1", "Partner 2"]}
               />

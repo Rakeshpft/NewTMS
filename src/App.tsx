@@ -8,6 +8,8 @@ import { handleLogout, session_Time_Logout } from "./components/auth";
 import { DashboardPage } from "./components/dashboard";
 import LoginPage from "./components/login-page/login-page";
 import { DriverPage } from "./components/driver-page";
+import { LoadPage } from "./components/load-page";
+import Vendors from "./components/partners/vendors/vendors";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -51,6 +53,12 @@ function App() {
               <Route path="/driverpage">
                 <DriverPage />
               </Route>
+              <Route path="/loadpage">
+                <LoadPage />
+              </Route>
+              <Route path="/vendors">
+                <Vendors/>
+                </Route>
             </IdleTimerProvider>
           </Switch>
         </LoginContext.Provider>
