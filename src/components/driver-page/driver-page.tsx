@@ -14,13 +14,7 @@ const DriverPage = () => {
   // }, []);
   return (
     <>
-      <Header
-        title="Drivers"
-        name="export"
-        // stitle="New Driver"
-        // onModalChange={}
-      />
-      <NewDriverPage />
+      <Header title="Drivers" name="export" stitle='New Driver' />
       <div className="d-flex">
         <SideBar isOpen={true} />
         <div className="w-100">
@@ -66,6 +60,8 @@ const DriverPage = () => {
           </Table>
         </div>
       </div>
+      <NewDriverPage/>
+
     </>
   );
 };

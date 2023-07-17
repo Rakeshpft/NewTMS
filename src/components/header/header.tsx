@@ -5,6 +5,7 @@ import SearchPage from "../search-page";
 import CompanyLogo from "../company-logo";
 import { GiHamburgerMenu } from "react-icons/gi";
 import NewDriverPage from "../driver-page/new-driver-page";
+import VendorsModal from "../partners/vendors/vendorsModal";
 
 interface HeaderProps {
   title: string;
@@ -64,8 +65,7 @@ const Header: React.FC<HeaderProps> = ({ title, name }) => {
             // modalName={onModalChange}
           >
             {stitle}
-          </Button> */}
-          <NewDriverPage />
+          </Button>
         </div>
       </Navbar>
     </>

@@ -23,10 +23,8 @@ const DashboardPage = () => {
                 name="Loads"
                 image="material-symbols_conveyor-belt"
                 counter={70}
-                icon={["create-a-load"]}
-                options={["Create a Load", "View Existing Loads"]}
-                cardCounter={[5, 12, 13]}
-                cardName={["New", "En-Route", "Dilivered"]}
+                icon="create-a-load"
+                options={["Load 1", "Load 2"]}
               />
             </Col>
             <Col>
@@ -47,8 +45,8 @@ const DashboardPage = () => {
                 name="Partners"
                 image="material-symbols_partner-exchange-rounded"
                 counter={3}
-                icon={["view-existing-loads"]}
-                options={["Customer", "Vendors"]}
+                icon="create-a-load"
+                options={["Partner 1", "Partner 2"]}
               />
             </Col>
             <Col>

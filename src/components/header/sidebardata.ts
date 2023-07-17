@@ -8,7 +8,7 @@ export const SidebarData = [
     subNav: [
       {
         title: "All",
-        path: "/Loads/users",
+        path: "/loadpage",
       },
       {
         title: "New",
