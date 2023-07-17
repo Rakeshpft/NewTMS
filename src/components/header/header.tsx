@@ -1,26 +1,34 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { Nav, Button, Navbar, NavbarBrand, NavItem } from "reactstrap";
+import { Link, useLocation } from "react-router-dom";
+import {  Nav, Navbar, NavbarBrand, NavItem } from "reactstrap";
 import SearchPage from "../search-page";
 import CompanyLogo from "../company-logo";
 import { GiHamburgerMenu } from "react-icons/gi";
+import NewDriverPage from "../driver-page/new-driver-page";
 
 interface HeaderProps {
   title: string;
   link?: string;
   name: string;
-  stitle: string;
+  // stitle: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ title, name, stitle }) => {
+const Header: React.FC<HeaderProps> = ({ title, name }) => {
   const [isOpen, setIsOpen] = useState(true);
-  const [modal, setModal] = useState(false);
+  // const [modal, setModal] = useState(false);
   const { pathname } = useLocation();
+  // const [modalName, setModalName] = useState<string>();
+
+  // const onModalChange = (titleName: string) => {
+  //   setModalName(titleName);
+  // };
+  // alert(modalName);
+
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
-  const toggle = () => setModal(!modal);
+  // const toggle = () => setModal(!modal);
 
   if (
     pathname === "/" ||
@@ -39,7 +47,9 @@ const Header: React.FC<HeaderProps> = ({ title, name, stitle }) => {
           onClick={toggleSidebar}
         >
           <GiHamburgerMenu />
-          <CompanyLogo height={53} />
+          <Link to="/dashboard">
+            <CompanyLogo height={53} />
+          </Link>
         </div>
         <NavbarBrand>{title}</NavbarBrand>
         <Nav className="me-auto" navbar>
@@ -47,13 +57,15 @@ const Header: React.FC<HeaderProps> = ({ title, name, stitle }) => {
         </Nav>
         <div className="d-flex align-items-center gap-5">
           <SearchPage />
-          <Button
+          {/* <Button
             onClick={toggle}
             data-bs-toggle="modal"
             data-bs-target={`#modal_${stitle}`}
+            // modalName={onModalChange}
           >
             {stitle}
-          </Button>
+          </Button> */}
+          <NewDriverPage />
         </div>
       </Navbar>
     </>

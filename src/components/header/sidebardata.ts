@@ -1,7 +1,7 @@
 export const SidebarData = [
   {
     title: "Dashboard",
-    path: "/Dashboard",
+    path: "/dashboard",
   },
   {
     title: "Loads",
@@ -49,7 +49,7 @@ export const SidebarData = [
     subNav: [
       {
         title: "All",
-        path: "/Drivers/all",
+        path: "/driverpage",
       },
       {
         title: "New",

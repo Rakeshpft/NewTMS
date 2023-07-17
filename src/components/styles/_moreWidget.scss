@@ -1,0 +1,33 @@
+.morewidget {
+  border: 1px solid #418ecb;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  flex: 1;
+  border-radius: 8px;
+  background-color: white;
+
+  .leftmore {
+    .titlemore {
+      font-weight: bold;
+      font-size: 15px;
+      color: #418ecb;
+    }
+
+    .link {
+      width: max-content;
+      font-size: 12px;
+      border-bottom: 1px solid gray;
+    }
+
+    .icon {
+      font-size: 15px;
+      padding: 5px;
+      border-radius: 5px;
+      align-self: flex-end;
+    }
+  }
+  &.small {
+    height: 60px;
+  }
+}

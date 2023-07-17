@@ -1,17 +1,10 @@
 .widget {
   border: 1px solid #418ecb;
-  display: flex;
-  gap: 0.5rem;
-  justify-content: space-between;
-  flex: 1;
-  // -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-  // box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
   border-radius: 8px;
+  background-color: white;
 
   .left,
   .bottom {
-    justify-content: space-between;
-
     .title {
       padding: 8px;
       font-weight: bold;
@@ -20,9 +13,18 @@
     }
 
     .counter {
+      content: "";
+      padding-left: 20px;
       font-size: 28px;
       font-weight: 400;
-      color: #418ecb;
+      right: 0;
+      width: 96px;
+      height: 50px;
+      background-color: #418ecb;
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+      z-index: -1;
+      transition: all 0.2s ease-in-out;
     }
 
     .link {
@@ -30,7 +32,7 @@
       font-size: 12px;
       border-bottom: 1px solid gray;
     }
-    
+
     .icon {
       font-size: 15px;
       padding: 5px;
@@ -52,5 +54,58 @@
   &.normal {
     height: 80px;
     padding: 10px;
+  }
+  .tile-body {
+    .tile-count {
+      @mixin tile-pic($name) {
+        .tile-count-item {
+          &.#{$name} {
+            position: relative;
+            padding-left: 2.25rem;
+
+            &::before {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 2rem;
+              height: 2rem;
+              background-image: url("../../../public/icons/#{$name}.svg");
+              background-size: cover;
+              background-position: center;
+            }
+          }
+
+          p {
+            font-size: 14px;
+            line-height: 1rem;
+
+            &.count {
+              font-weight: 900;
+            }
+
+            &.name {
+              font-weight: 500;
+            }
+          }
+        }
+      }
+
+      @each $name in "delivered", "new", "en-route" {
+        @include tile-pic("loads-" + $name);
+      }
+
+      @each $name in "applicants", "hired", "terminated" {
+        @include tile-pic("drivers-" + $name);
+      }
+
+      @each $name in "customers", "vendors" {
+        @include tile-pic("partners-" + $name);
+      }
+
+      @each $name in "trucks", "trailers" {
+        @include tile-pic("equipments-" + $name);
+      }
+    }
   }
 }

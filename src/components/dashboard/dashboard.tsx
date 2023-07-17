@@ -3,25 +3,30 @@ import { Col, Container, Row } from "reactstrap";
 import Widget from "./widget";
 import NavigationBar from "../navigation-bar";
 import SalesOverview from "./sales-overview";
+import MoreWidget from "./more-widget";
 
 const DashboardPage = () => {
   return (
     <>
       <NavigationBar />
-      <div className="dashboard-background">
+      <div className="dashboard-background pb-1">
         <Container>
           <Row>
-            <h4 style={{ color: "#418ecb" }} className="pb-3">
-              Dashboard
-            </h4>
+            <Row>
+              <h4 style={{ color: "#418ecb" }} className="pb-3 mt-2">
+                Dashboard
+              </h4>
+            </Row>
             <Col>
               <Widget
                 variant="large"
                 name="Loads"
                 image="material-symbols_conveyor-belt"
                 counter={70}
-                icon="create-a-load"
-                options={["Load 1", "Load 2"]}
+                icon={["create-a-load"]}
+                options={["Create a Load", "View Existing Loads"]}
+                cardCounter={[5, 12, 13]}
+                cardName={["New", "En-Route", "Dilivered"]}
               />
             </Col>
             <Col>
@@ -30,9 +35,10 @@ const DashboardPage = () => {
                 name="Drivers"
                 image="healthicons_truck-driver"
                 counter={23}
-                icon="create-a-load"
+                icon={["view-existing-loads"]}
                 link="/driverpage"
-                options={["Driver Page", "Driver 2"]}
+                options={["Create a Profile", "View Driver"]}
+                cardName={["New", "En-Route", "Dilivered"]}
               />
             </Col>
             <Col>
@@ -41,8 +47,8 @@ const DashboardPage = () => {
                 name="Partners"
                 image="material-symbols_partner-exchange-rounded"
                 counter={3}
-                icon="create-a-load"
-                options={["Partner 1", "Partner 2"]}
+                icon={["view-existing-loads"]}
+                options={["Customer", "Vendors"]}
               />
             </Col>
             <Col>
@@ -51,8 +57,8 @@ const DashboardPage = () => {
                 name="Equipment"
                 image="mdi_tools"
                 counter={50}
-                icon="create-a-load"
-                options={["Equipment 1", "Equipment 2"]}
+                icon={["view-existing-loads"]}
+                options={["Add Equipment", "View All Equipment"]}
               />
             </Col>
           </Row>
@@ -108,32 +114,24 @@ const DashboardPage = () => {
                   More
                 </h4>
                 <Col sm="3">
-                  <SalesOverview
-                    variant="small"
-                    name="Users"
-                    image="carbon_report"
-                  />
+                  <MoreWidget variant="small" name="Users" image="users" />
                 </Col>
                 <Col sm="3">
-                  <SalesOverview
+                  <MoreWidget
                     variant="small"
                     name="Data Library"
-                    image="solar_hand-money-linear"
+                    image="data-library"
                   />
                 </Col>
                 <Col sm="3">
-                  <SalesOverview
+                  <MoreWidget
                     variant="small"
                     name="Docs Exchange "
-                    image="carbon_report"
+                    image="docs-exchange"
                   />
                 </Col>
                 <Col sm="3">
-                  <SalesOverview
-                    variant="small"
-                    name="IFTA"
-                    image="solar_hand-money-linear"
-                  />
+                  <MoreWidget variant="small" name="IFTA" image="agreement" />
                 </Col>
               </Row>
             </Col>

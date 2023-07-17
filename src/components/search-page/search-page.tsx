@@ -4,7 +4,9 @@ import { Input } from "reactstrap";
 const SearchPage = () => {
   return (
     <>
-      <Input type="text" placeholder="Search here" />
+      <div className="mx-2">
+        <Input type="text" placeholder="Search here" />
+      </div>
     </>
   );
 };

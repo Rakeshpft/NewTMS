@@ -4,10 +4,23 @@ import { Header } from "../header";
 import SideBar from "../header/sidebar";
 import NewDriverPage from "./new-driver-page";
 
+// interface DriverPageProps {
+//   modalName: (titleName: string) => void;
+// }
+
 const DriverPage = () => {
+  // useEffect(() => {
+  //   modalName("new-driver-page");
+  // }, []);
   return (
     <>
-      <Header title="Drivers" name="export" stitle='New Driver' />
+      <Header
+        title="Drivers"
+        name="export"
+        // stitle="New Driver"
+        // onModalChange={}
+      />
+      <NewDriverPage />
       <div className="d-flex">
         <SideBar isOpen={true} />
         <div className="w-100">
@@ -53,8 +66,6 @@ const DriverPage = () => {
           </Table>
         </div>
       </div>
-      <NewDriverPage/>
-
     </>
   );
 };

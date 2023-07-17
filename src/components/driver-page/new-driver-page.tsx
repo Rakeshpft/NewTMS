@@ -141,21 +141,20 @@ const NewDriverPage = () => {
 
   return (
     <div>
-      <Button color="primary" onClick={toggle}>
+      <Button color="primary" onClick={toggle} >
         New Driver
       </Button>
-      <Modal isOpen={modal} toggle={toggle} fullscreen="xl" size="xl">
+      <Modal isOpen={modal} toggle={toggle} fullscreen="xl" size="xl" >
         <ModalHeader toggle={toggle} style={{ backgroundColor: "#B7D1E6" }}>
           New Driver
         </ModalHeader>
-        <ModalBody>
+        <ModalBody className="m-3">
           <Form onSubmit={handleSubmit}>
             <Row>
               <Col>
                 <FormGroup>
                   <Label for="examplefName">FirstName</Label>
                   <Input
-                    // name="firstName"
                     type="text"
                     value={state.firstName}
                     onChange={(e) => {
