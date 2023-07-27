@@ -27,7 +27,7 @@ const TabPage = ({ tabTitles, children }: TabPageProps) => {
           </NavItem>
         ))}
       </Nav>
-      <TabContent activeTab={activeTab} style={{ border: "1px solid #418ECB" }}>
+      <TabContent activeTab={activeTab}>
         {children.map((child: any, index: any) => {
           return (
             <TabPane key={index} tabId={index}>

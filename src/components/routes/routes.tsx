@@ -1,0 +1,16 @@
+export const routes = {
+  login: "/",
+  dashboard: "/dashboard",
+  forgotpassword: "/forgetpassword",
+  registrationform: "/registration-form",
+  driverpageAll: "/driverpage/all",
+  createdriver: "/createdriver",
+  loadpageAll: "/loadpage/all",
+  createload: "/createload",
+  partnersvendorsAll: "/partners/vendors/all",
+  createvendor: "/createvendor",
+  partnerscustomersAll: "/partners/customers/all",
+  createcustomer: "/createcustomer",
+  trucks: "/trucks",
+  trailers: "/trailers",
+};

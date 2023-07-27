@@ -1,4 +1,4 @@
-.dashboard-background {
+.main-dashboard {
   position: relative;
 
   &::before {
@@ -14,8 +14,212 @@
     background-position: center;
     background-size: cover;
   }
+
+  .main-content {
+    .btn:hover img {
+      filter: brightness(0) invert(1);
+    }
+
+    .tile {
+      background: white;
+      color: var(--bs-info);
+      position: relative;
+      z-index: 1;
+      cursor: pointer;
+      overflow: hidden;
+      transition:
+        background-color 0.3s ease-in-out,
+        color 0.3s ease-in-out;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 1.2rem;
+        right: 0;
+        width: 96px;
+        height: 50px;
+        background-color: var(--bs-info);
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+        z-index: -1;
+        transition: all 0.2s ease-in-out;
+      }
+
+      &:hover {
+        // background: var(--bs-info);
+        color: white;
+
+        &::after {
+          width: 100%;
+          top: 0;
+          height: 100%;
+          border-radius: 0;
+        }
+
+        .total-data h5 {
+          color: white;
+        }
+
+        .tile-title {
+          .tile-name {
+            color: white;
+          }
+
+          .tile-icon img {
+            filter: brightness(0) invert(1);
+          }
+        }
+
+        .tile-body .tile-count-item {
+          filter: brightness(0) invert(1);
+        }
+      }
+
+      .tile-title {
+        .tile-icon {
+          position: relative;
+        }
+
+        .tile-name {
+          font-size: 1.25rem;
+        }
+      }
+
+      .total-data h5 {
+        font-size: 2rem;
+        color: white;
+      }
+
+      .tile-body {
+        .tile-count {
+          @mixin tile-pic($name) {
+            .tile-count-item {
+              &.#{$name} {
+                position: relative;
+                padding-left: 2.25rem;
+
+                &::before {
+                  content: "";
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 2rem;
+                  height: 2rem;
+                  background-image: url("../../../public/icons/#{$name}.svg");
+                  background-size: cover;
+                  background-position: center;
+                }
+              }
+
+              p {
+                font-size: 12px;
+                line-height: 1rem;
+
+                &.count {
+                  font-weight: 900;
+                }
+
+                &.name {
+                  font-weight: 500;
+                  white-space: nowrap;
+                }
+              }
+            }
+          }
+
+          @each $name in "delivered", "new", "en-route" {
+            @include tile-pic("loads-" + $name);
+          }
+
+          @each $name in "applicants", "hired", "terminated" {
+            @include tile-pic("drivers-" + $name);
+          }
+
+          @each $name in "customers", "vendors" {
+            @include tile-pic("partners-" + $name);
+          }
+
+          @each $name in "trucks", "trailers" {
+            @include tile-pic("equipments-" + $name);
+          }
+        }
+      }
+    }
+  }
+
+  .medium_tile {
+    min-height: 72px;
+    position: relative;
+
+    &:hover {
+      background-color: unset;
+
+      &::before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: var(--bs-info);
+      }
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background-color: var(--bs-info);
+      z-index: -1;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  .small_tile {
+    position: relative;
+    min-height: 40px;
+    &:hover {
+      background-color: unset;
+
+      &::before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: var(--bs-info);
+      }
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background-color: var(--bs-info);
+      z-index: -1;
+      transition: all 0.3s ease-in-out;
+    }
+  }
 }
-.dashboard-title {
-  color: #418ecb;
-  padding: 15px;
+
+.TilePopUp button:hover img {
+  filter: brightness(0) invert(1);
+}
+
+.text-info {
+  color: var(--bs-info) !important;
+}
+
+.btn-outline-info {
+  background-color: white;
+
+  &:hover {
+    color: white !important;
+    background-color: var(--bs-info);
+  }
+}
+
+.modaltile.btn:hover img {
+  filter: brightness(0) invert(1);
 }

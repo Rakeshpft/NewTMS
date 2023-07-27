@@ -1,26 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdOutgoingMail } from "react-icons/md";
-import { Link } from "react-router-dom";
-import { Form, Input, Button, Table } from "reactstrap";
 import { AiOutlineFileExcel } from "react-icons/ai";
 import { PiFilePdfDuotone } from "react-icons/pi";
-import SideBar from "../../header/sidebar";
-import { Header } from "../../header";
+import { Header, SideBar } from "../../header";
+import { Nav, NavItem, Navbar, NavbarBrand, Table } from "reactstrap";
+import { Link } from "react-router-dom";
+import SearchPage from "../../search-page";
+import Profile from "../../pofile";
 
 const Vendors = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <>
-      <Header title="Vendors" name="export" stitle="New Driver" />
-      <div className="d-flex">
-        <SideBar isOpen={true} />
-        {/* <Form>
-        <div className="d-flex justify-content-between ">
-          <div
-            className="d-flex  align-items-center gap-2 "
-            style={{ width: "250px" }}
-          >
-            <h3> Vendors</h3>
-            <h5 className="mb-1 ms-5"> Export </h5>
+      <Navbar
+        style={{ border: "1px solid #1B56AE" }}
+        color="light"
+        className="py-0"
+      >
+        <Header
+          sidebarToggle={() => {
+            setIsSidebarOpen(!isSidebarOpen);
+          }}
+        />
+        <NavbarBrand>Vendors</NavbarBrand>
+        <Nav className="me-auto" navbar>
+          <div className="d-flex">
+            <NavItem className="px-2">Export</NavItem>
             <Link to={"#!"}>
               <PiFilePdfDuotone className="me-2 text-danger fs-4" />
             </Link>
@@ -31,15 +37,19 @@ const Vendors = () => {
               <MdOutgoingMail className="fs-4" />
             </Link>
           </div>
-          <div className="d-flex gap-2">
-            <Input name="search" type="text" placeholder="Search">
-            </Input>
-            <Button> New Vendor </Button>
-          </div>
+        </Nav>
+        <div className="d-flex align-items-center gap-3">
+          <SearchPage />
+          <Link className="btn btn-secondary " to="/createvendor">
+            New Vendor
+          </Link>
+          <Profile />
         </div>
-      </Form> */}
+      </Navbar>
+      <div className="d-flex">
+        <SideBar isSidebarOpen={!isSidebarOpen} />
         <hr></hr>
-        <Table>
+        <Table responsive borderless>
           <thead>
             <tr>
               <th> # </th>
@@ -50,6 +60,7 @@ const Vendors = () => {
               <th> Email </th>
               <th>type</th>
               <th>Action</th>
+              <th>*</th>
             </tr>
           </thead>
           <tbody>
@@ -62,6 +73,7 @@ const Vendors = () => {
               <td>Otto@mdo</td>
               <td>Animal</td>
               <td>Very Good</td>
+              <td></td>
             </tr>
           </tbody>
         </Table>

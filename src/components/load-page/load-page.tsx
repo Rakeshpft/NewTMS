@@ -1,55 +1,65 @@
-import React from "react";
-import { Button, Form, Input, Table } from "reactstrap";
-import { CiSearch } from "react-icons/ci";
-import { MdOutlineAdd } from "react-icons/md";
-import NewLoadPage from "./new-load-page";
-import SideBar from "../header/sidebar";
-import { Header } from "../header";
+import React, { useState } from "react";
+import { Header, SideBar } from "../header";
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  Nav,
+  Navbar,
+  NavbarBrand,
+  Table,
+} from "reactstrap";
+import SearchPage from "../search-page";
+import Profile from "../pofile";
+import { Link } from "react-router-dom";
 
 const LoadPage = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
+
   return (
     <>
-      <Header title="Laods" name="export" stitle="New Load" />
-      <div className="d-flex">
-        <SideBar isOpen={true} />
-        {/* <Form>
-        <div className="parent d-flex justify-content-between">
-          <div className="child d-flex gap-2 ">
-            <h3>Loads </h3>
-            <h3> All </h3>
+      <Navbar style={{ border: "1px solid #1B56AE" }} color="light" className="py-0">
+        <Header
+          sidebarToggle={() => {
+            setIsSidebarOpen(!isSidebarOpen);
+          }}
+        />
+        <NavbarBrand>Loads</NavbarBrand>
+        <Nav className="me-auto" navbar>
+          <div className="">
+            <span className="x-small fw-bold">Period</span>
+            <Dropdown isOpen={dropdownOpen} toggle={toggle} direction="down">
+              <DropdownToggle
+                variant="secondary"
+                size="sm"
+                className="border-0 p-0 px-2 d-flex column-gap-2 align-items-center"
+              >
+                All
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem>This Year</DropdownItem>
+                <DropdownItem>This Month</DropdownItem>
+                <DropdownItem>This Week</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
           </div>
-
-          <div className="child d-flex gap-2">
-            <Input
-              name="search"
-              type="text"
-              placeholder="Search "
-              style={{ color: "black", border: "2px solid #B7D1E6" }}
-            >
-              <CiSearch style={{ color: "green " }} />
-            </Input>
-            <Button
-            
-              style={{
-                color: "black",
-                border: "2px solid #1E5367",
-                backgroundColor: "#B7D1E6",
-              }}
-            >
-              New Load
-             
-              <MdOutlineAdd />
-            </Button>
-             
-          </div>
-          
+        </Nav>
+        <div className="d-flex align-items-center gap-3">
+          <SearchPage />
+          <Link className="btn btn-secondary " to="/createload">
+            New Load
+          </Link>
+          <Profile />
         </div>
-       
-      </Form> */}
-        <NewLoadPage />
+      </Navbar>
+      <div className="d-flex">
+        <SideBar isSidebarOpen={!isSidebarOpen} />
         <hr></hr>
-
-        <Table borderless hover>
+        <Table borderless>
           <thead>
             <tr>
               <th>Load</th>
@@ -62,6 +72,11 @@ const LoadPage = () => {
               <th>Rate</th>
               <th>Completed</th>
               <th>Status</th>
+              <th>Billing</th>
+              <th>Notes</th>
+              <th>Attachments</th>
+              <th>Actions</th>
+              <th>*</th>
             </tr>
           </thead>
           <tbody>
@@ -72,6 +87,10 @@ const LoadPage = () => {
               <td>@abc</td>
               <td>@jhon</td>
               <td>@kat</td>
+              <td>@mdo</td>
+              <td>@mdo</td>
+              <td>@mdo</td>
+              <td>@mdo</td>
               <td>@mdo</td>
               <td>@mdo</td>
               <td>@mdo</td>

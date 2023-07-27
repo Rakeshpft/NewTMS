@@ -31,11 +31,11 @@ const NavigationBar = () => {
   }
   return (
     <div className="header-section">
-      <Navbar className="px-5">
+      <Navbar className="px-3">
         <Nav>
           <NavItem>
             <Link to={"/dashboard"} className="fs-2 pe-2 link-light">
-              <CompanyLogo height={65}/>
+              <CompanyLogo height={50}/>
             </Link>
           </NavItem>
         </Nav>

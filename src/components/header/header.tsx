@@ -1,35 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import {  Nav, Navbar, NavbarBrand, NavItem } from "reactstrap";
-import SearchPage from "../search-page";
+import { Navbar } from "reactstrap";
 import CompanyLogo from "../company-logo";
 import { GiHamburgerMenu } from "react-icons/gi";
-import NewDriverPage from "../driver-page/new-driver-page";
-import VendorsModal from "../partners/vendors/vendorsModal";
 
 interface HeaderProps {
-  title: string;
-  link?: string;
-  name: string;
-  // stitle: string;
+  sidebarToggle: () => void;
 }
-
-const Header: React.FC<HeaderProps> = ({ title, name }) => {
-  const [isOpen, setIsOpen] = useState(true);
-  // const [modal, setModal] = useState(false);
+const Header = ({ sidebarToggle }: HeaderProps) => {
   const { pathname } = useLocation();
-  // const [modalName, setModalName] = useState<string>();
-
-  // const onModalChange = (titleName: string) => {
-  //   setModalName(titleName);
-  // };
-  // alert(modalName);
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
-
-  // const toggle = () => setModal(!modal);
 
   if (
     pathname === "/" ||
@@ -42,30 +21,15 @@ const Header: React.FC<HeaderProps> = ({ title, name }) => {
 
   return (
     <>
-      <Navbar className="border-bottom" color="light">
+      <Navbar color="light">
         <div
           className="fs-2 toggle-button d-flex align-items-center gap-2"
-          onClick={toggleSidebar}
+          onClick={() => sidebarToggle()}
         >
           <GiHamburgerMenu />
           <Link to="/dashboard">
-            <CompanyLogo height={53} />
+            <CompanyLogo height={50} />
           </Link>
-        </div>
-        <NavbarBrand>{title}</NavbarBrand>
-        <Nav className="me-auto" navbar>
-          <NavItem>{name}</NavItem>
-        </Nav>
-        <div className="d-flex align-items-center gap-5">
-          <SearchPage />
-          {/* <Button
-            onClick={toggle}
-            data-bs-toggle="modal"
-            data-bs-target={`#modal_${stitle}`}
-            // modalName={onModalChange}
-          >
-            {stitle}
-          </Button>
         </div>
       </Navbar>
     </>

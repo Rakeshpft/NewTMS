@@ -1,11 +1,31 @@
 import React from "react";
-import { Input } from "reactstrap";
+import { BsSearch, BsSliders2 } from "react-icons/bs";
+import { Button, Input, InputGroup, InputGroupText } from "reactstrap";
 
 const SearchPage = () => {
+  function searchToggle(): void {
+    console.log("search");
+  }
+
   return (
     <>
-      <div className="mx-2">
-        <Input type="text" placeholder="Search here" />
+      <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
+        <InputGroup className="shadow-sm border-secondary">
+          <InputGroupText className="bg-white">
+            <BsSearch size={16} />
+          </InputGroupText>
+          <Input placeholder="Search" className="border-start-0 border-end-0" />
+          <InputGroupText className="bg-white">
+            <Button
+              variant="link"
+              size="sm"
+              className="p-0"
+              onClick={() => searchToggle()}
+            >
+              <BsSliders2 size={16} />
+            </Button>
+          </InputGroupText>
+        </InputGroup>
       </div>
     </>
   );

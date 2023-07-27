@@ -1,25 +1,29 @@
 import React, { useState } from "react";
-import { MdOutgoingMail } from "react-icons/md";
 import { AiOutlineFileExcel } from "react-icons/ai";
+import { MdOutgoingMail } from "react-icons/md";
 import { PiFilePdfDuotone } from "react-icons/pi";
-import { Nav, Navbar, NavbarBrand, NavItem, Table } from "reactstrap";
-import SearchPage from "../search-page";
 import { Link } from "react-router-dom";
-import { Header, SideBar } from "../header";
-import Profile from "../pofile";
+import { Navbar, NavbarBrand, Nav, NavItem, Table } from "reactstrap";
+// import NewDriverPage from "../../driver-page/new-driver-page";
+import { Header, SideBar } from "../../header";
+import Profile from "../../pofile";
+import SearchPage from "../../search-page";
 
-const DriverPage = () => {
+const TrucksPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+  const [modal, setModal] = useState(true);
+  const toggle = () => {
+    setModal(!modal);
+  };
   return (
     <>
-      <Navbar style={{ border: "1px solid #1B56AE" }} color="light" className="py-0">
+      <Navbar style={{ border: "1px solid #1B56AE" }} color="light">
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand>Driver</NavbarBrand>
+        <NavbarBrand>Trucks</NavbarBrand>
         <Nav className="me-auto" navbar>
           <div className="d-flex">
             <NavItem>Export</NavItem>
@@ -36,9 +40,9 @@ const DriverPage = () => {
         </Nav>
         <div className="d-flex align-items-center gap-3">
           <SearchPage />
-          <Link className="btn btn-secondary " to="/createdriver">
-            New Driver
-          </Link>
+          <div onClick={toggle}>
+            {/* <NewDriverPage /> */}
+          </div>
           <Profile />
         </div>
       </Navbar>
@@ -91,4 +95,4 @@ const DriverPage = () => {
   );
 };
 
-export default DriverPage;
+export default TrucksPage;
