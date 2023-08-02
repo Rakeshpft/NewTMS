@@ -27,7 +27,7 @@ const sidebarData: SidebarItem[] = [
     children: [
       {
         title: "All",
-        path: "/loadpage/all",
+        path: "/loadpage",
       },
       {
         title: "New",
@@ -70,7 +70,7 @@ const sidebarData: SidebarItem[] = [
     children: [
       {
         title: "All",
-        path: "/driverpage/all",
+        path: "/driverpage",
       },
       {
         title: "New",
@@ -102,7 +102,7 @@ const sidebarData: SidebarItem[] = [
         children: [
           {
             title: "All",
-            path: "/partners/customers/all",
+            path: "/partners/customers",
           },
           {
             title: "New",
@@ -117,7 +117,7 @@ const sidebarData: SidebarItem[] = [
         children: [
           {
             title: "All",
-            path: "/partners/vendors/all",
+            path: "/partners/vendors",
           },
           {
             title: "New",
@@ -139,7 +139,7 @@ const sidebarData: SidebarItem[] = [
         children: [
           {
             title: "All",
-            path: "/equipments/trucks/all",
+            path: "/equipments/trucks",
           },
           {
             title: "Active",
@@ -166,7 +166,7 @@ const sidebarData: SidebarItem[] = [
         children: [
           {
             title: "All",
-            path: "/equipments/trailers/all",
+            path: "/equipments/trailers",
           },
           {
             title: "Active",
@@ -200,7 +200,7 @@ const sidebarData: SidebarItem[] = [
         children: [
           {
             title: "All",
-            path: "/fuel/fuelcard/all",
+            path: "/fuel/fuelcard",
           },
           {
             title: "Active",
@@ -227,7 +227,7 @@ const sidebarData: SidebarItem[] = [
         children: [
           {
             title: "All",
-            path: "/fuel/fueltransaction/all",
+            path: "/fuel/fueltransaction",
           },
           {
             title: "Active",
@@ -246,7 +246,7 @@ const sidebarData: SidebarItem[] = [
         children: [
           {
             title: "All",
-            path: "/fuel/fuelimport/all",
+            path: "/fuel/fuelimport",
           },
           {
             title: "Active",
@@ -267,7 +267,7 @@ const sidebarData: SidebarItem[] = [
     children: [
       {
         title: "All",
-        path: "/driverpayroll/all",
+        path: "/driverpayroll",
       },
       {
         title: "Active",
@@ -303,7 +303,7 @@ const sidebarData: SidebarItem[] = [
         children: [
           {
             title: "All",
-            path: "/accounts/billing/all",
+            path: "/accounts/billing",
           },
           {
             title: "Active",
@@ -322,7 +322,7 @@ const sidebarData: SidebarItem[] = [
         children: [
           {
             title: "All",
-            path: "/accounts/vendor/all",
+            path: "/accounts/vendorbalance",
           },
           {
             title: "Active",

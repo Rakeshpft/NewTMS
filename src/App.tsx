@@ -14,10 +14,35 @@ import { DashboardPage } from "./components/dashboard";
 import { DriverPage, NewDriver } from "./components/driver-page";
 import { LoadPage } from "./components/load-page";
 import { Customer, Vendors } from "./components/partenrs";
-import { TrailersPage, TrucksPage } from "./components/equipment-page";
 import VendorNewPage from "./components/partenrs/vendors/vendor-new-page";
 import CustomerNewPage from "./components/partenrs/customer/customer-new-page";
 import LaodNewPage from "./components/load-page/load-new-page";
+import {
+  CreateDriverPayrollPage,
+  DriverPayRoll,
+} from "./components/driverpayroll-page";
+import {
+  BillingPage,
+  CreateBillingPage,
+} from "./components/account-page/billing-page";
+import { VendorBalance } from "./components/account-page/vendor-balance";
+import {
+  CreateFuelPage,
+  FuelPage,
+} from "./components/fuel-page/fuel-card-page";
+import {
+  CreateTruckPage,
+  TrucksPage,
+} from "./components/equipment-page/trucks-page";
+import {
+  CreateTrailerPage,
+  TrailersPage,
+} from "./components/equipment-page/trailers-page";
+import FuelImport from "./components/fuel-page/fuel-import-page";
+import {
+  CreateFuelTransactionPage,
+  FuelTransaction,
+} from "./components/fuel-page/fuel-transaction-page";
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -64,12 +89,39 @@ const App = () => {
               <Route path={routes.createdriver} component={NewDriver} />
               <Route path={routes.loadpageAll} component={LoadPage} />
               <Route path={routes.createload} component={LaodNewPage} />
-              <Route path={routes.partnersvendorsAll} component={Vendors} />
+              <Route path={routes.vendorsAll} component={Vendors} />
               <Route path={routes.createvendor} component={VendorNewPage} />
-              <Route path={routes.partnerscustomersAll} component={Customer} />
+              <Route path={routes.customersAll} component={Customer} />
               <Route path={routes.createcustomer} component={CustomerNewPage} />
+              <Route path={routes.driverpayroll} component={DriverPayRoll} />
+              <Route
+                path={routes.createdriverpayroll}
+                component={CreateDriverPayrollPage}
+              />
+              <Route path={routes.billingpage} component={BillingPage} />
+              <Route
+                path={routes.createbillingpage}
+                component={CreateBillingPage}
+              />
+              <Route path={routes.vendorbalance} component={VendorBalance} />
+              <Route path={routes.fuelpage} component={FuelPage} />
+              <Route path={routes.createfuelpage} component={CreateFuelPage} />
+              <Route path={routes.fuelimport} component={FuelImport} />
+              <Route
+                path={routes.fueltransaction}
+                component={FuelTransaction}
+              />
+              <Route
+                path={routes.createfueltransaction}
+                component={CreateFuelTransactionPage}
+              />
               <Route path={routes.trucks} component={TrucksPage} />
+              <Route path={routes.createnewtruck} component={CreateTruckPage} />
               <Route path={routes.trailers} component={TrailersPage} />
+              <Route
+                path={routes.createnewtrailers}
+                component={CreateTrailerPage}
+              />
             </IdleTimerProvider>
           </Switch>
         </LoginContext.Provider>

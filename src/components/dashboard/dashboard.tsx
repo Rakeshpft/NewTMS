@@ -16,10 +16,11 @@ import {
 } from "reactstrap";
 import NavigationBar from "../navigation-bar";
 import { FiDownload } from "react-icons/fi";
+
 const dashboardTiles = {
   mainTiles: [
     {
-      name: "Loads",
+      title: "Loads",
       data: {
         New: 12,
         "En-Route": 15,
@@ -28,40 +29,51 @@ const dashboardTiles = {
       icon: "/icons/conveyor-belt.svg",
       options: [
         {
-          title: "Create A Load",
-          icon: "/icons/create-a-load.svg",
-          link: "/createload",
-        },
-        {
-          title: "View Existing Loads",
-          icon: "/icons/view-existing-loads.svg",
-          link: "/loadpage",
+          title: null,
+          icon: null,
+          options: [
+            {
+              title: "Create A Load",
+              icon: "/icons/create-a-load.svg",
+              link: "/createload",
+            },
+            {
+              title: "View Existing Loads",
+              icon: "/icons/view-existing-loads.svg",
+              link: "/loadpage",
+            },
+          ],
         },
       ],
     },
     {
-      name: "Drivers",
+      title: "Drivers",
       data: {
-        // Applicants: 12,
         Hired: 83,
         Terminated: 21,
       },
       icon: "/icons/truck-driver.svg",
       options: [
         {
-          title: "Create a Profile",
-          icon: "/icons/create-a-load.svg",
-          link: "/createdriver",
-        },
-        {
-          title: "View Drivers",
-          icon: "/icons/view-existing-loads.svg",
-          link: "/driverpage",
+          title: null,
+          icon: null,
+          options: [
+            {
+              title: "Create a Profile",
+              icon: "/icons/create-a-load.svg",
+              link: "/createdriver",
+            },
+            {
+              title: "View Drivers",
+              icon: "/icons/view-existing-loads.svg",
+              link: "/driverpage",
+            },
+          ],
         },
       ],
     },
     {
-      name: "Partners",
+      title: "Partners",
       data: {
         Customers: 12,
         Vendors: 15,
@@ -71,17 +83,39 @@ const dashboardTiles = {
         {
           title: "Customers",
           icon: "/icons/partners-customers.svg",
-          link: "/partners/customers",
+          options: [
+            {
+              title: "Add New Customer",
+              icon: "/icons/create-a-load.svg",
+              link: "/createcustomer",
+            },
+            {
+              title: "View All Customers",
+              icon: "/icons/view-existing-loads.svg",
+              link: "/partners/customers",
+            },
+          ],
         },
         {
           title: "Vendors",
           icon: "/icons/partners-vendors.svg",
-          link: "/partners/vendors",
+          options: [
+            {
+              title: "Add New Vendor",
+              icon: "/icons/create.svg",
+              link: "/createvendor",
+            },
+            {
+              title: "View All Vendors",
+              icon: "/icons/view-existing-vendors.svg",
+              link: "/partners/vendors",
+            },
+          ],
         },
       ],
     },
     {
-      name: "Equipments",
+      title: "Equipments",
       data: {
         Trucks: 19,
         Trailers: 24,
@@ -91,38 +125,167 @@ const dashboardTiles = {
         {
           title: "Trucks",
           icon: "/icons/create-a-load.svg",
-          link: "/trucks",
+          options: [
+            {
+              title: "Add New Truck",
+              icon: "/icons/create-a-load.svg",
+              link: "/createnewtruck",
+            },
+            {
+              title: "View All Trucks",
+              icon: "/icons/view-existing-loads.svg",
+              link: "/equipments/trucks",
+            },
+          ],
         },
         {
           title: "Trailers",
           icon: "/icons/view-existing-loads.svg",
-          link: "/trailers",
+          options: [
+            {
+              title: "Add New Trailer",
+              icon: "/icons/create.svg",
+              link: "/createnewtrailers",
+            },
+            {
+              title: "View All Trailers",
+              icon: "/icons/view-existing-vendors.svg",
+              link: "/equipments/trailers",
+            },
+          ],
         },
       ],
     },
   ],
   mediumTiles: [
     {
-      name: "Fuel",
+      title: "Fuel",
       icon: "/icons/fuel.svg",
-      link: "/fuel",
+      options: [
+        {
+          title: "Fuel Card",
+          icon: "/icons/create-a-load.svg",
+          options: [
+            {
+              title: "Add New Fuel Card",
+              icon: "/icons/create-a-load.svg",
+              link: "/createfuelpage",
+            },
+            {
+              title: "View All Fuel Card",
+              icon: "/icons/view-existing-loads.svg",
+              link: "/fuel/fuelcard",
+            },
+          ],
+        },
+        {
+          title: "Fuel Transactions",
+          icon: "/icons/create-a-load.svg",
+          options: [
+            {
+              title: "Add New Fuel Transaction",
+              icon: "/icons/create-a-load.svg",
+              link: "/createfueltransaction",
+            },
+            {
+              title: "View All Fuel Transaction",
+              icon: "/icons/view-existing-loads.svg",
+              link: "/fuel/fueltransaction",
+            },
+          ],
+        },
+        {
+          title: "Fuel Import",
+          icon: "/icons/create-a-load.svg",
+          options: [
+            {
+              title: "View All Fuel Import",
+              icon: "/icons/view-existing-loads.svg",
+              link: "/fuel/fuelimport",
+            },
+          ],
+        },
+      ],
     },
     {
-      name: "Driver Payroll",
+      title: "Driver Payroll",
       icon: "/icons/driver-payroll.svg",
-      link: "/driver-payroll",
+      options: [
+        {
+          title: null,
+          icon: null,
+          options: [
+            {
+              title: "Add New Driver Payroll",
+              icon: "/icons/create-a-load.svg",
+              link: "/createdriverpayroll",
+            },
+            {
+              title: "View All Driver Payroll",
+              icon: "/icons/view-existing-loads.svg",
+              link: "/driverpayroll",
+            },
+          ],
+        },
+      ],
     },
     {
-      name: "Accounts",
+      title: "Accounts",
       icon: "/icons/accounts.svg",
-      link: "/accounts",
+      options: [
+        {
+          title: "Billing Entries",
+          icon: "/icons/create-a-load.svg",
+          options: [
+            {
+              title: "Add New Billing Entry",
+              icon: "/icons/create-a-load.svg",
+              link: "/createbillingpage",
+            },
+            {
+              title: "View All Billing Entry",
+              icon: "/icons/view-existing-loads.svg",
+              link: "/accounts/billing",
+            },
+          ],
+        },
+        {
+          title: "Vendor Balances",
+          icon: "/icons/view-existing-loads.svg",
+          options: [
+            {
+              title: "View All Vendor Balance",
+              icon: "/icons/view-existing-loads.svg",
+              link: "/accounts/vendorbalance",
+            },
+          ],
+        },
+      ],
     },
     {
-      name: "Reports",
+      title: "Reports",
       icon: "/icons/reports.svg",
-      link: "/reports",
+      options: [
+        {
+          title: null,
+          icon: null,
+          options: [
+            {
+              title: "Add New Report",
+              icon: "/icons/create-a-load.svg",
+              link: "/",
+            },
+            {
+              title: "View All Report",
+              icon: "/icons/view-existing-loads.svg",
+              link: "/",
+            },
+          ],
+        },
+      ],
     },
   ],
+
   smallTiles: [
     {
       name: "Users",
@@ -146,6 +309,7 @@ const dashboardTiles = {
     },
   ],
 };
+
 export default function DashboardPage() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -194,7 +358,7 @@ export default function DashboardPage() {
           {dashboardTiles.mainTiles.map((tile, index) => (
             <MainTile
               key={index}
-              name={tile.name}
+              title={tile.title}
               icon={tile.icon}
               data={tile.data}
               options={tile.options}
@@ -204,7 +368,6 @@ export default function DashboardPage() {
         <Row>
           <Col md="6">
             <h4 className="text-info fw-bold mb-3">Analytics</h4>
-
             <Card style={{ border: "1px solid #418ecb" }}>
               <Card>
                 <div className="section-header d-flex justify-content-between p-2">
@@ -250,19 +413,12 @@ export default function DashboardPage() {
             <Row className="gy-3 mb-3">
               {dashboardTiles.mediumTiles.map((tile, index) => (
                 <Col md="6" key={index}>
-                  <Link
-                    to={tile.link}
-                    className="btn btn-outline-info px-4 d-flex w-100 align-items-center medium_tile"
-                  >
-                    <img
-                      src={tile.icon}
-                      alt="Image"
-                      width={32}
-                      height={32}
-                      className="me-3"
-                    />
-                    <h5 className="mb-0 fw-bold">{tile.name}</h5>
-                  </Link>
+                  <MediumTiles
+                    key={index}
+                    title={tile.title}
+                    icon={tile.icon}
+                    options={tile.options}
+                  />
                 </Col>
               ))}
             </Row>
@@ -296,12 +452,21 @@ export default function DashboardPage() {
 }
 
 type TileProps = {
-  name: string;
-  data: object;
+  title: string;
+  data?: object;
   icon: string;
-  options?: { title: string; icon: string; link: string }[];
+  link?: string;
+  options?: {
+    title: string | null;
+    icon: string | null;
+    options: {
+      title: string;
+      icon: string;
+      link: string;
+    }[];
+  }[];
 };
-function MainTile({ name, icon, data, options }: TileProps) {
+function MainTile({ title, icon, data, options }: TileProps) {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
@@ -319,55 +484,153 @@ function MainTile({ name, icon, data, options }: TileProps) {
                 <img src={icon} height={32} width={32} alt="Image"></img>
               </div>
               <h5 className="fw-bold tile-name mb-0 ms-2 d-flex align-items-center">
-                {name}
+                {title}
               </h5>
             </div>
             <div className="total-data">
               <h5 className="mb-0 fw-bold">
-                {Object.values(data).reduce(
-                  (acc, curr) => (acc as number) + (curr as number),
-                  0
-                )}
+                {data &&
+                  Object.values(data).reduce(
+                    (acc, curr) => (acc as number) + (curr as number),
+                    0
+                  )}
               </h5>
             </div>
           </div>
           <div className="tile-body pt-4">
             <span className="tile-count d-flex gap-3">
-              {Object.keys(data).map((key, index) => (
-                <div
-                  key={index}
-                  className={`tile-count-item ${name.toLowerCase()}-${key.toLowerCase()}`}
-                >
-                  <p className="mb-0 count">{data[key as keyof object]}</p>
-                  <p className="mb-0 name">{key}</p>
-                </div>
-              ))}
+              {data &&
+                Object.keys(data).map((key, index) => (
+                  <div
+                    key={index}
+                    className={`tile-count-item ${title?.toLowerCase()}-${key.toLowerCase()}`}
+                  >
+                    <p className="mb-0 count">{data[key as keyof object]}</p>
+                    <p className="mb-0 name">{key}</p>
+                  </div>
+                ))}
             </span>
           </div>
         </div>
       </Col>
       <Modal isOpen={modal} toggle={toggle} centered className="TilePopUp">
         <ModalHeader toggle={toggle} className="border-0">
-          {name}
+          {title}
+        </ModalHeader>
+        <ModalBody>
+          <Row className={title.toLowerCase()}>
+            {options?.map((option, index) => (
+              <Col sm="12" key={index} className="mb-3 opt">
+                {option.title && (
+                  <>
+                    <h6 className="mb-0 fw-bold text-info">{option.title}</h6>
+                    <hr className="mt-1" />
+                  </>
+                )}
+                <Row>
+                  {option.options?.map((item) => (
+                    <Col sm="6">
+                      <Link
+                        to={`${item.link}`}
+                        className="w-100 d-flex flex-column btn btn-outline-info modaltile"
+                      >
+                        <img
+                          src={item?.icon}
+                          height={48}
+                          width={48}
+                          alt="Image"
+                          className="mb-4"
+                        ></img>
+
+                        <h6 className="mb-0 text-start fw-bold">
+                          {item.title}
+                        </h6>
+                      </Link>
+                    </Col>
+                  ))}
+                </Row>
+              </Col>
+            ))}
+          </Row>
+        </ModalBody>
+      </Modal>
+    </>
+  );
+}
+
+type MediumTilesProps = {
+  title: string;
+  data?: object;
+  icon: string;
+  link?: string;
+  options?: {
+    title: string | null;
+    icon: string | null;
+    options: {
+      title: string;
+      icon: string;
+      link: string;
+    }[];
+  }[];
+};
+function MediumTiles({ title, icon, options }: MediumTilesProps) {
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
+
+  return (
+    <>
+      <div
+        className="btn btn-outline-info px-4 d-flex w-100 align-items-center medium_tile db"
+        onClick={toggle}
+      >
+        <div className="tile-title d-flex justify-content-between align-items-center">
+          <div className="d-flex">
+            <div className="tile-icon d-flex align-items-center">
+              <img src={icon} height={32} width={32} alt="Image"></img>
+            </div>
+            <div className="fw-bold tile-name mb-0 ms-2 d-flex align-items-center">
+              {title}
+            </div>
+          </div>
+        </div>
+      </div>
+      <Modal isOpen={modal} toggle={toggle} centered className="TilePopUp">
+        <ModalHeader toggle={toggle} className="border-0">
+          {title}
         </ModalHeader>
         <ModalBody>
           <Row>
             {options?.map((option, index) => (
-              <Col sm="6" key={index}>
-                <Link
-                  to={option.link}
-                  className="w-100 d-flex flex-column btn btn-outline-info modaltile"
-                >
-                  <img
-                    src={option.icon}
-                    height={48}
-                    width={48}
-                    alt="Image"
-                    className="mb-4"
-                  ></img>
+              <Col sm="12" key={index} className="mb-3">
+                {option.title && (
+                  <>
+                    <h6 className="mb-0 fw-bold text-info">{option.title}</h6>
+                    <hr className="mt-1" />
+                  </>
+                )}
+                <Row>
+                  {option.options?.map((item) => (
+                    <Col sm="6">
+                      <Link
+                        to={`${item.link}`}
+                        className="w-100 d-flex flex-column btn btn-outline-info modaltile"
+                      >
+                        <img
+                          src={item?.icon}
+                          height={48}
+                          width={48}
+                          alt="Image"
+                          className="mb-4"
+                        ></img>
 
-                  <h6 className="mb-0 text-start fw-bold">{option.title}</h6>
-                </Link>
+                        <h6 className="mb-0 text-start fw-bold">
+                          {item.title}
+                        </h6>
+                      </Link>
+                    </Col>
+                  ))}
+                </Row>
               </Col>
             ))}
           </Row>

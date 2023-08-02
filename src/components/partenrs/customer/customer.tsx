@@ -47,20 +47,20 @@ const Customer = () => {
           <Profile />
         </div>
       </Navbar>
-      <div className="d-flex">
+      <div className="content d-flex">
         <SideBar isSidebarOpen={!isSidebarOpen} />
-        <div className="w-100 container-fluid mt-4">
+        <div className="aria-content container-fluid my-1">
           <TabPage tabTitles={["Brokers", "Shippers/Recivers"]}>
             <TabPane tabId={1} className="m-4">
-              <Table responsive borderless>
+              <Table responsive hover className="table-data text-nowrap">
                 <thead>
                   <tr>
-                    <th> # </th>
-                    <th> Name </th>
-                    <th> Address </th>
-                    <th> MC </th>
-                    <th> Phone </th>
-                    <th> Email </th>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>ddress</th>
+                    <th>MC</th>
+                    <th>Phone</th>
+                    <th>Email</th>
                     <th>type</th>
                     <th>Action</th>
                     <th>*</th>

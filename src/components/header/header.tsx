@@ -1,14 +1,21 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { Navbar } from "reactstrap";
 import CompanyLogo from "../company-logo";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { FiArrowLeft } from "react-icons/fi";
 
 interface HeaderProps {
   sidebarToggle: () => void;
+  showHambuger?: boolean;
 }
-const Header = ({ sidebarToggle }: HeaderProps) => {
+const Header = ({ sidebarToggle, showHambuger = true }: HeaderProps) => {
   const { pathname } = useLocation();
+  const history = useHistory();
+
+  const handleBack = () => {
+    history.goBack();
+  };
 
   if (
     pathname === "/" ||
@@ -22,15 +29,27 @@ const Header = ({ sidebarToggle }: HeaderProps) => {
   return (
     <>
       <Navbar color="light">
-        <div
-          className="fs-2 toggle-button d-flex align-items-center gap-2"
-          onClick={() => sidebarToggle()}
-        >
-          <GiHamburgerMenu />
-          <Link to="/dashboard">
-            <CompanyLogo height={50} />
-          </Link>
-        </div>
+        {showHambuger ? (
+          <div
+            className="fs-2 toggle-button d-flex align-items-center gap-2"
+            onClick={() => sidebarToggle()}
+          >
+            <GiHamburgerMenu />
+            <Link to="/dashboard">
+              <CompanyLogo height={50} />
+            </Link>
+          </div>
+        ) : (
+          <div
+            className="fs-2 toggle-button d-flex align-items-center gap-2"
+            onClick={() => handleBack()}
+          >
+            <FiArrowLeft />
+            <Link to="/dashboard">
+              <CompanyLogo height={50} />
+            </Link>
+          </div>
+        )}
       </Navbar>
     </>
   );

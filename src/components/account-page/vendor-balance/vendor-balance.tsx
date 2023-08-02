@@ -1,32 +1,29 @@
 import React, { useState } from "react";
-import { MdOutgoingMail } from "react-icons/md";
-import { AiOutlineFileExcel } from "react-icons/ai";
-import { PiFilePdfDuotone } from "react-icons/pi";
 import {
-  Button,
+  Navbar,
+  NavbarBrand,
+  Nav,
+  Table,
   Card,
   CardBody,
   Collapse,
-  Form,
-  FormGroup,
+  Button,
   Input,
   InputGroup,
   InputGroupText,
+  FormGroup,
   Label,
-  Nav,
-  Navbar,
-  NavbarBrand,
-  NavItem,
-  Table,
+  Form,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-import { Header, SideBar } from "../header";
-import Profile from "../pofile";
-import { BiCheck } from "react-icons/bi";
+import { Header, SideBar } from "../../header";
+import Profile from "../../pofile";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
+import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
+import { PiFilePdfDuotone } from "react-icons/pi";
+import { Link } from "react-router-dom";
 
-const DriverPage = () => {
+const VendorBalance = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -52,21 +49,8 @@ const DriverPage = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand>Driver</NavbarBrand>
-        <Nav className="me-auto" navbar>
-          <div className="d-flex">
-            <NavItem>Export</NavItem>
-            <Link to={"#!"}>
-              <PiFilePdfDuotone className="me-2 text-danger fs-4" />
-            </Link>
-            <Link to={"#"}>
-              <AiOutlineFileExcel className="text-success fs-4" />
-            </Link>
-            <Link to={"#!"}>
-              <MdOutgoingMail className="fs-4" />
-            </Link>
-          </div>
-        </Nav>
+        <NavbarBrand>Vendor Balance</NavbarBrand>
+        <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
             <InputGroup className="shadow-sm border-secondary">
@@ -89,9 +73,6 @@ const DriverPage = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn btn-secondary " to="/createdriver">
-            New Driver
-          </Link>
           <Profile />
         </div>
       </Navbar>
@@ -107,7 +88,7 @@ const DriverPage = () => {
                       <div className="d-flex align-items-center gap-4">
                         <h3 className="text-info">Search Filter</h3>
                         <FormGroup>
-                          <Label for="exampleSelect">Type</Label>
+                          <Label for="exampleSelect">Vendor Type</Label>
                           <Input
                             id="exampleSelect"
                             name="select"
@@ -126,7 +107,7 @@ const DriverPage = () => {
                           </Input>
                         </FormGroup>
                         <FormGroup>
-                          <Label for="exampleSelect">Status</Label>
+                          <Label for="exampleSelect">Driver Type</Label>
                           <Input
                             id="exampleSelect"
                             name="select"
@@ -173,22 +154,32 @@ const DriverPage = () => {
               </Card>
             </Collapse>
           )}
+          <div className="d-flex gap-4">
+            <Link to={"#!"} style={{ textDecoration: "none" }}>
+              <PiFilePdfDuotone className="me-2 text-danger fs-4" />
+              Downlaod as pdf
+            </Link>
+            <Form>
+              <FormGroup check>
+                <Input type="checkbox" /> <Label check>Show Zero Balance</Label>
+              </FormGroup>
+            </Form>
+          </div>
+
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>
                 <th>#</th>
-                <th>Name</th>
+                <th>Date</th>
                 <th>Type</th>
-                <th>Status</th>
-                <th>Hire Date</th>
-                <th>Term Date</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Truck</th>
-                <th>Trailer</th>
-                <th>Payable To</th>
-                <th>Warnings</th>
-                <th>Driver App</th>
+                <th>Category</th>
+                <th>status</th>
+                <th>Partner</th>
+                <th>Driver</th>
+                <th>Amount</th>
+                <th>Load Number</th>
+                <th>Driver Settlement</th>
+                <th>Notes</th>
                 <th>Actions</th>
                 <th>*</th>
               </tr>
@@ -207,8 +198,6 @@ const DriverPage = () => {
                 <td>@mdo</td>
                 <td>Mark</td>
                 <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
                 <td></td>
               </tr>
             </tbody>
@@ -219,4 +208,4 @@ const DriverPage = () => {
   );
 };
 
-export default DriverPage;
+export default VendorBalance;

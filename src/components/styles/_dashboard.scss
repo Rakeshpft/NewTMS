@@ -46,7 +46,6 @@
       }
 
       &:hover {
-        // background: var(--bs-info);
         color: white;
 
         &::after {
@@ -146,61 +145,6 @@
       }
     }
   }
-
-  .medium_tile {
-    min-height: 72px;
-    position: relative;
-
-    &:hover {
-      background-color: unset;
-
-      &::before {
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-color: var(--bs-info);
-      }
-    }
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      background-color: var(--bs-info);
-      z-index: -1;
-      transition: all 0.3s ease-in-out;
-    }
-  }
-
-  .small_tile {
-    position: relative;
-    min-height: 40px;
-    &:hover {
-      background-color: unset;
-
-      &::before {
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-color: var(--bs-info);
-      }
-    }
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      background-color: var(--bs-info);
-      z-index: -1;
-      transition: all 0.3s ease-in-out;
-    }
-  }
 }
 
 .TilePopUp button:hover img {
@@ -220,6 +164,86 @@
   }
 }
 
-.modaltile.btn:hover img {
-  filter: brightness(0) invert(1);
+.modaltile:hover img {
+  filter: brightness(0) invert(1) !important;
+}
+
+.medium_tile.db {
+  min-height: 55px;
+  position: relative;
+
+  &:hover {
+    background-color: unset;
+
+    &::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-color: var(--bs-info);
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: var(--bs-info);
+    z-index: -1;
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+.small_tile {
+  position: relative;
+  min-height: 35px;
+  &:hover {
+    background-color: unset;
+
+    &::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-color: var(--bs-info);
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: var(--bs-info);
+    z-index: -1;
+    transition: all 0.3s ease-in-out;
+  }
+}
+.modal {
+  :is(.partners, .equipments) .opt:nth-child(2) {
+    .text-info {
+      color: #ff8761 !important;
+    }
+
+    .row .col-sm-6 .modaltile {
+      border: 1px solid #ff8761;
+      color: #ff8761;
+      &:hover {
+        background-color: #ff8761;
+        color: white;
+      }
+    }
+  }
+
+  .medium_tile.db {
+    background-color: white;
+    color: var(--bs-info);
+    &:hover {
+      color: white;
+      background-color: var(--bs-info);
+    }
+  }
 }

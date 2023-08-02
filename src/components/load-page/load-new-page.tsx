@@ -32,6 +32,7 @@ const LaodNewPage = () => {
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
+          showHambuger={false}
         />
         <NavbarBrand>Loads</NavbarBrand>
         <Nav className="me-auto d-flex flex-row gap-2" navbar></Nav>
@@ -40,11 +41,11 @@ const LaodNewPage = () => {
           <Profile />
         </div>
       </Navbar>
-      <Form className="m-4">
+      <Form className="m-2">
         <Container
           fluid
           style={{ backgroundColor: "#E9F3FB" }}
-          className="mt-1 px-5 py-3"
+          className="mt-1 px-5 py-2"
         >
           <Row>
             <Col sm={3}>

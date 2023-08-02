@@ -190,6 +190,7 @@ const NewDriver = () => {
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
+          showHambuger={false}
         />
         <NavbarBrand>Driver</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
@@ -198,11 +199,11 @@ const NewDriver = () => {
           <Profile />
         </div>
       </Navbar>
-      <div className="m-4">
+      <div className="m-2">
         <Container
           fluid
           style={{ backgroundColor: "#E9F3FB" }}
-          className="mt-1 px-5 py-3"
+          className="mt-1 px-5 py-2"
         >
           <h2 style={{ color: "rgb(66 111 177)", fontWeight: "bold" }}>
             Create New Driver
@@ -215,6 +216,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="examplefName">FirstName</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         type="text"
                         value={state.firstName}
@@ -252,7 +254,8 @@ const NewDriver = () => {
                             </>
                           )}
                         </label>
-                        <input
+                        <Input
+                          bsSize="sm"
                           style={{
                             color: "black",
                             border: "1px solid #418ECB",
@@ -271,6 +274,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="examplelName">LastName</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplelName"
                         name="lastName"
@@ -289,6 +293,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="exampledob">D.O.B</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampledob"
                         name="dob"
@@ -309,6 +314,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="examplephone">Phone</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplephone"
                         name="phone"
@@ -327,6 +333,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="exampleemail">Email</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampleemail"
                         name="email"
@@ -345,6 +352,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="examplehiredate">Hire Date</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplehiredate"
                         name="hireDate"
@@ -363,6 +371,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="examplecoDriver">Co-Driver</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplecoDriver"
                         name="coDriver"
@@ -383,6 +392,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="exampleaddressLine1">Address Line 1</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampleaddressLine1"
                         name="address"
@@ -403,6 +413,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="exampleaddressLine1">Address Line 2</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampleaddressLine2"
                         name="address"
@@ -421,6 +432,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="examplecity">City</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplecity"
                         name="city"
@@ -441,6 +453,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="examplestate">State</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplestate"
                         name="state"
@@ -459,6 +472,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="examplezip">Zip</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplezip"
                         name="zip"
@@ -481,6 +495,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="examplestauts">Stauts</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplestauts"
                         name="stauts"
@@ -510,6 +525,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="exampleappdate">Application Date</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampleappdate"
                         name="appDate"
@@ -528,6 +544,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="examplepay">Pay To</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplepay"
                         name="pay to"
@@ -548,6 +565,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="examplehiredate">Hire Date</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplehiredate"
                         name="hireDate"
@@ -566,6 +584,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="examplecoDriver">Co-Driver</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplecoDriver"
                         name="coDriver"
@@ -586,6 +605,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="examplefuleCard">Fule Card #</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampletruck"
                         name="truck"
@@ -604,6 +624,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="exampletruck">Truck</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampletruck"
                         name="truck"
@@ -624,6 +645,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="exampletrailer">Trailer</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampletrailer"
                         name="trailer"
@@ -735,6 +757,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="exampleperMile">Per Mile</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampleperMile"
                         name="perMile"
@@ -753,6 +776,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="exampleperExtraStop">Per Extra Stop</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampleperExtraStop"
                         name="perExtraStop"
@@ -771,6 +795,7 @@ const NewDriver = () => {
                     <FormGroup>
                       <Label for="exampleperEmptyMile">Per Empty Mile</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampleperEmptyMile"
                         name="perEmptyMile"

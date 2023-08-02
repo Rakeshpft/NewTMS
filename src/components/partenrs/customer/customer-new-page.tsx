@@ -142,11 +142,16 @@ const CustomerNewPage = () => {
   };
   return (
     <>
-      <Navbar style={{ border: "1px solid #1B56AE" }} color="light" className="py-0">
+      <Navbar
+        style={{ border: "1px solid #1B56AE" }}
+        color="light"
+        className="py-0"
+      >
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
+          showHambuger={false}
         />
         <NavbarBrand>Customer</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
@@ -155,11 +160,11 @@ const CustomerNewPage = () => {
           <Profile />
         </div>
       </Navbar>
-      <div className="m-4">
+      <div className="m-2">
         <Container
           fluid
           style={{ backgroundColor: "#E9F3FB" }}
-          className="px-5 py-3"
+          className="mt-1 px-5 py-2"
         >
           <h3 style={{ color: "rgb(66 111 177)", fontWeight: "bold" }}>
             Create New Customer
