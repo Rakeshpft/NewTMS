@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AiOutlineFileExcel } from "react-icons/ai";
+import { AiOutlineFileExcel, AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { Navbar, NavbarBrand, Nav, NavItem, Table } from "reactstrap";
 import { Header, SideBar } from "../../header";
@@ -32,8 +32,13 @@ const FuelPage = () => {
         </Nav>
         <div className="d-flex align-items-center gap-3">
           <SearchPage />
-          <Link className="btn btn-secondary " to="/createfuelpage">
+          <Link
+            className="btn btn-secondary"
+            style={{ backgroundColor: "#B7D1E6", color: "black" }}
+            to="/createfuelpage"
+          >
             New Fuel Card
+            <AiOutlinePlus />
           </Link>
           <Profile />
         </div>

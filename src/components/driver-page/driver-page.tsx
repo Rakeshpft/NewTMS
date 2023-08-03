@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MdOutgoingMail } from "react-icons/md";
-import { AiOutlineFileExcel } from "react-icons/ai";
+import { AiOutlineFileExcel, AiOutlinePlus } from "react-icons/ai";
 import { PiFilePdfDuotone } from "react-icons/pi";
 import {
   Button,
@@ -89,8 +89,13 @@ const DriverPage = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn btn-secondary " to="/createdriver">
+          <Link
+            className="btn btn-secondary"
+            style={{ backgroundColor: "#B7D1E6", color: "black" }}
+            to="/createdriver"
+          >
             New Driver
+            <AiOutlinePlus />
           </Link>
           <Profile />
         </div>

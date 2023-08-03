@@ -343,60 +343,69 @@ const CustomerNewPage = () => {
                 </FormGroup>
               </Col>
               <Col>
-                <Label for="checkbox2" size="lg">
-                  Customer Type
-                </Label>
-                <div>
-                  <FormGroup check inline>
-                    <Input
-                      style={{ color: "black", border: "1px solid #418ECB" }}
-                      type="checkbox"
-                      value={formState.cutomerType}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_cutomerType",
-                          payload: e.target.value,
-                        })
-                      }
-                    />
-                    <Label check>Broker</Label>
-                  </FormGroup>
-                </div>
-                <div>
-                  <FormGroup check inline>
-                    <Input
-                      style={{ color: "black", border: "1px solid #418ECB" }}
-                      type="checkbox"
-                      value={formState.cutomerType}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_cutomerType",
-                          payload: e.target.value,
-                        })
-                      }
-                    />
-                    <Label check>Shipper/Reciver</Label>
-                  </FormGroup>
-                </div>
-                <FormGroup tag="fieldset">
-                  <legend>Billing</legend>
-                  <FormGroup check>
-                    <Input
-                      style={{ color: "black", border: "1px solid #418ECB" }}
-                      name="radio1"
-                      type="radio"
-                    />
-                    <Label check>Direct Billing</Label>
-                  </FormGroup>
-                  <FormGroup check>
-                    <Input
-                      style={{ color: "black", border: "1px solid #418ECB" }}
-                      name="radio1"
-                      type="radio"
-                    />
-                    <Label check>Factoring Billing</Label>
-                  </FormGroup>
-                </FormGroup>
+                <Row>
+                  <Col>
+                    <h5>Customer Type</h5>
+                    <FormGroup check inline>
+                      <Input
+                        style={{ color: "black", border: "1px solid #418ECB" }}
+                        type="checkbox"
+                        value={formState.cutomerType}
+                        onChange={(e) =>
+                          dispatch({
+                            type: "SET_cutomerType",
+                            payload: e.target.value,
+                          })
+                        }
+                      />
+                      <Label check>Broker</Label>
+                    </FormGroup>
+                    <FormGroup check inline>
+                      <Input
+                        style={{ color: "black", border: "1px solid #418ECB" }}
+                        type="checkbox"
+                        value={formState.cutomerType}
+                        onChange={(e) =>
+                          dispatch({
+                            type: "SET_cutomerType",
+                            payload: e.target.value,
+                          })
+                        }
+                      />
+                      <Label check>Shipper/Reciver</Label>
+                    </FormGroup>
+                  </Col>
+                  <Col>
+                    <FormGroup tag="fieldset">
+                      <h5>Billing</h5>
+                      <div className="d-flex gap-2">
+                        <FormGroup check>
+                          <Input
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                            }}
+                            name="radio1"
+                            type="radio"
+                          />
+                          <Label check>Direct Billing</Label>
+                        </FormGroup>
+                        <FormGroup check>
+                          <Input
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                            }}
+                            name="radio1"
+                            type="radio"
+                          />
+                          <Label check>Factoring Billing</Label>
+                        </FormGroup>
+                      </div>
+                    </FormGroup>
+                  </Col>
+                </Row>
+
                 <Row>
                   <Col>
                     <FormGroup>

@@ -17,7 +17,7 @@ const SearchPage = () => {
           <Input placeholder="Search" className="border-start-0 border-end-0" />
           <InputGroupText className="bg-white">
             <Button
-              variant="link"
+              color="link"
               size="sm"
               className="p-0"
               onClick={() => searchToggle()}

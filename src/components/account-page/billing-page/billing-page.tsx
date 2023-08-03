@@ -21,6 +21,7 @@ import Profile from "../../pofile";
 import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const BillingPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -72,8 +73,13 @@ const BillingPage = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn btn-secondary " to="/createbillingpage">
+          <Link
+            className="btn btn-secondary"
+            style={{ backgroundColor: "#B7D1E6", color: "black" }}
+            to="/createbillingpage"
+          >
             New Billing Entry
+            <AiOutlinePlus />
           </Link>
           <Profile />
         </div>

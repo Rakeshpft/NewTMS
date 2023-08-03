@@ -323,7 +323,7 @@ export default function DashboardPage() {
             <h4 className="text-info fw-bold mb-0">Dashboard</h4>
             <div className="db-options d-flex gap-2">
               <Button
-                variant="outline-info"
+                color="outline-info"
                 size="sm"
                 className="d-flex align-items-center gap-1 px-3 shadow-lg rounded-pill"
               >
@@ -331,7 +331,7 @@ export default function DashboardPage() {
                 <span>Help</span>
               </Button>
               <Button
-                variant="outline-info"
+                color="outline-info"
                 size="sm"
                 className="d-flex align-items-center gap-1 px-3 shadow-lg rounded-pill"
               >
@@ -339,7 +339,7 @@ export default function DashboardPage() {
                 <span>Safety</span>
               </Button>
               <Button
-                variant="outline-info"
+                color="outline-info"
                 size="sm"
                 className="d-flex align-items-center gap-1 px-3 shadow-lg rounded-pill"
               >

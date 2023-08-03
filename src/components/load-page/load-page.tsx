@@ -25,6 +25,7 @@ import { Link } from "react-router-dom";
 import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const LoadPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -97,8 +98,13 @@ const LoadPage = () => {
             </InputGroup>
           </div>
 
-          <Link className="btn btn-secondary " to="/createload">
+          <Link
+            className="btn btn-secondary"
+            style={{ backgroundColor: "#B7D1E6", color: "black" }}
+            to="/createload"
+          >
             New Load
+            <AiOutlinePlus />
           </Link>
           <Profile />
         </div>
@@ -111,250 +117,342 @@ const LoadPage = () => {
               <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
-                    <div className="align-items-center justify-content-between">
-                      <div className="align-items-center gap-4">
-                        <h3 className="text-info">Search Filter</h3>
-                        <div className="d-flex align-items-center gap-4">
-                          <FormGroup>
-                            <Label for="exampleSelect">Period</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            >
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                            </Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">Broker</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            >
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                            </Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">Driver</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            >
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                            </Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">Dispatcher</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            >
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                            </Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">
-                              Direct Billing/Factoring
-                            </Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            >
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                            </Input>
-                          </FormGroup>
-                        </div>
-                        <div className="d-flex align-items-center gap-4">
-                          <FormGroup>
-                            <Label for="exampleSelect">Pickup Date</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="date"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            ></Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">City</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="text"
-                              type="text"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            ></Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">State</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="text"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            ></Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">Truck</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            >
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                            </Input>
-                          </FormGroup>
-                        </div>
-                        <div className="d-flex align-items-center gap-4">
-                          <FormGroup>
-                            <Label for="exampleSelect">Delivery Date</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="date"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            ></Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">City</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="text"
-                              type="text"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            ></Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">State</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="text"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            ></Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">Trailer</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            >
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                            </Input>
-                          </FormGroup>
+                    <div className="d-flex gap-3">
+                      <div className="flex-item py-3 px-2">
+                        <h4 className="text-info">Search Filter</h4>
+                      </div>
+                      <div className="flex-item">
+                        <FormGroup>
+                          <Label for="exampleSelect">Period</Label>
+                          <Input
+                            id="exampleSelect"
+                            name="select"
+                            type="select"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">Pickup Date</Label>
+                          <Input
+                            id="exampleSelect"
+                            name="select"
+                            type="date"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          ></Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">Delivery Date</Label>
+                          <Input
+                            id="exampleSelect"
+                            name="select"
+                            type="date"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          ></Input>
+                        </FormGroup>
+                      </div>
+                      <div className="flex-item">
+                        <FormGroup>
+                          <Label for="exampleSelect">Broker</Label>
+                          <Input
+                            id="exampleSelect"
+                            name="select"
+                            type="select"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">City</Label>
+                          <Input
+                            id="exampleSelect"
+                            name="text"
+                            type="text"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          ></Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">City</Label>
+                          <Input
+                            id="exampleSelect"
+                            name="text"
+                            type="text"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          ></Input>
+                        </FormGroup>
+                      </div>
+                      <div className="flex-item">
+                        <FormGroup>
+                          <Label for="exampleSelect">Driver</Label>
+                          <Input
+                            id="exampleSelect"
+                            name="select"
+                            type="select"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">State</Label>
+                          <Input
+                            id="exampleSelect"
+                            name="select"
+                            type="text"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          ></Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">State</Label>
+                          <Input
+                            id="exampleSelect"
+                            name="select"
+                            type="text"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          ></Input>
+                        </FormGroup>
+                      </div>
+                      <div className="flex-item">
+                        <FormGroup>
+                          <Label for="exampleSelect">Dispatcher</Label>
+                          <Input
+                            id="exampleSelect"
+                            name="select"
+                            type="select"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">Truck</Label>
+                          <Input
+                            id="exampleSelect"
+                            name="select"
+                            type="select"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">Trailer</Label>
+                          <Input
+                            id="exampleSelect"
+                            name="select"
+                            type="select"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </Input>
+                        </FormGroup>
+                      </div>
+                      <div className="flex-item position-relative">
+                        <FormGroup>
+                          <Label for="exampleSelect">
+                            Direct Billing/Factoring
+                          </Label>
+                          <Input
+                            id="exampleSelect"
+                            name="select"
+                            type="select"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </Input>
+                        </FormGroup>
+                        <div
+                          className="position-absolute"
+                          style={{ bottom: "-90px" }}
+                        >
+                          <Button
+                            className="me-3  ps-3 pe-3"
+                            style={{
+                              color: "black",
+                              border: "1px solid #1E5367",
+                              backgroundColor: "#B7D1E6",
+                            }}
+                          >
+                            <BiCheck fontSize={"24px"} />
+                            Apply
+                          </Button>
+                          <Button
+                            style={{
+                              color: "red",
+                              border: "1px solid red",
+                              backgroundColor: "white",
+                            }}
+                          >
+                            <RxCross2 fontSize={"21px"} color="red" /> Clear
+                          </Button>
                         </div>
                       </div>
+                    </div>
+                    <div style={{ paddingLeft: "12rem" }}>
                       <div>
-                        <Button
-                          className="me-3  ps-3 pe-3"
-                          style={{
-                            color: "black",
-                            border: "1px solid #1E5367",
-                            backgroundColor: "#B7D1E6",
-                          }}
-                        >
-                          <BiCheck fontSize={"24px"} />
-                          Apply
-                        </Button>
-                        <Button
-                          style={{
-                            color: "red",
-                            border: "1px solid red",
-                            backgroundColor: "white",
-                          }}
-                        >
-                          <RxCross2 fontSize={"21px"} color="red" /> Clear
-                        </Button>
+                        <FormGroup className="d-flex gap-3">
+                          <h6 className="fw-bold">Status</h6>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>New</Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>Dispatched</Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>TOUN</Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>Cancelled</Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>En-Route</Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>Picked-up</Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>Delivered</Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>Close</Label>
+                          </FormGroup>
+                        </FormGroup>
+                      </div>
+                      <div>
+                        <FormGroup className="d-flex gap-3">
+                          <h6 className="fw-bold">Billing Status</h6>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>Pending</Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>Cancelled</Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>BOL Received</Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>Invoiced</Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>Sent to Factoring</Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>Funded</Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>Paid</Label>
+                          </FormGroup>
+                        </FormGroup>
+                      </div>
+                      <div>
+                        <FormGroup className="d-flex gap-3">
+                          <h6 className="fw-bold">Location Status</h6>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>No</Label>
+                          </FormGroup>
+                          <FormGroup check>
+                            <Input id="checkbox2" type="checkbox" />
+                            <Label check>Yes</Label>
+                          </FormGroup>
+                        </FormGroup>
                       </div>
                     </div>
                   </Form>

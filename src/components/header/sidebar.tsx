@@ -370,7 +370,7 @@ const SidebarItem: React.FC<{ item: SidebarItem }> = ({ item }) => {
         </div>
       </div>
       {isOpen && item.children && (
-        <ul className="sidebar-submenu list-unstyled">
+        <ul className="sidebar-submenu list-unstyled ps-3">
           {item.children.map((child, index) => (
             <li key={index}>
               <SidebarItem item={child} />

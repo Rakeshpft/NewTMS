@@ -59,13 +59,18 @@ body {
 .aria-content {
   width: 100%;
   height: calc(100vh - 90px);
-  padding: 1rem;
+  padding: 10px;
   overflow-y: auto;
 }
 
 form .form-label {
   margin-bottom: 0;
   font-size: small;
+}
+
+.flex-item {
+  flex-grow: 1;
+  flex-basis: 0;
 }
 
 @import "./login";

@@ -25,6 +25,7 @@ import Profile from "../../pofile";
 import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const Vendors = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -89,8 +90,13 @@ const Vendors = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn btn-secondary " to="/createvendor">
+          <Link
+            className="btn btn-secondary"
+            style={{ backgroundColor: "#B7D1E6", color: "black" }}
+            to="/createvendor"
+          >
             New Vendor
+            <AiOutlinePlus />
           </Link>
           <Profile />
         </div>

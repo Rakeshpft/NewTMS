@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Nav, NavItem, Navbar, NavbarBrand, TabPane, Table } from "reactstrap";
 import { Header, SideBar } from "../../header";
 import { MdOutgoingMail } from "react-icons/md";
-import { AiOutlineFileExcel } from "react-icons/ai";
+import { AiOutlineFileExcel, AiOutlinePlus } from "react-icons/ai";
 import { PiFilePdfDuotone } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import SearchPage from "../../search-page";
@@ -41,8 +41,13 @@ const Customer = () => {
         </Nav>
         <div className="d-flex align-items-center gap-3">
           <SearchPage />
-          <Link className="btn btn-secondary " to="/createcustomer">
+          <Link
+            className="btn btn-secondary"
+            style={{ backgroundColor: "#B7D1E6", color: "black" }}
+            to="/createcustomer"
+          >
             New Customer
+            <AiOutlinePlus />
           </Link>
           <Profile />
         </div>

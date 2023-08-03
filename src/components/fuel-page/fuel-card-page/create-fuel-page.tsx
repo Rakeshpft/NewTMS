@@ -11,10 +11,13 @@ import {
   Label,
   Button,
   Input,
+  Table,
 } from "reactstrap";
 import { Header } from "../../header";
 import Profile from "../../pofile";
 import SearchPage from "../../search-page";
+import { BiCheck } from "react-icons/bi";
+import { RxCross2 } from "react-icons/rx";
 
 type FormState = {
   cardNumber: string;
@@ -194,20 +197,62 @@ const CreateFuelPage = () => {
                   </Col>
                 </Row>
                 <Row>
-                  <Col className="d-flex gap-5">
+                  <Col className="d-flex justify-content-between m-3">
                     <h3>Driver</h3>
                     <Button
-                      className="me-3  ps-3 pe-3 float-right"
+                      className="me-3 ps-3 pe-3"
                       style={{
                         color: "black",
                         border: "1px solid #1E5367",
                         backgroundColor: "#8FF086",
                       }}
                     >
+                      <BiCheck fontSize={"24px"} />
                       Assign Card
                     </Button>
                   </Col>
                 </Row>
+                <Row>
+                  <Col>
+                    <Table responsive hover className="table-data text-nowrap">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Driver</th>
+                          <th>Assign On</th>
+                          <th>Returned On</th>
+                          <th>Equipment Owner</th>
+                          <th>*</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <p>No records</p>
+                      </tbody>
+                    </Table>
+                  </Col>
+                </Row>
+                <div className="d-flex justify-content-end">
+                  <Button
+                    className="me-3  ps-3 pe-3"
+                    style={{
+                      color: "black",
+                      border: "1px solid #1E5367",
+                      backgroundColor: "#B7D1E6",
+                    }}
+                  >
+                    <BiCheck fontSize={"24px"} />
+                    Save
+                  </Button>
+                  <Button
+                    style={{
+                      color: "red",
+                      border: "1px solid red",
+                      backgroundColor: "white",
+                    }}
+                  >
+                    <RxCross2 fontSize={"21px"} color="red" /> Close
+                  </Button>
+                </div>
               </Col>
             </Row>
           </Form>

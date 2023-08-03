@@ -14,12 +14,14 @@ import {
   Collapse,
   FormGroup,
   Label,
+  Form,
 } from "reactstrap";
 import { Header, SideBar } from "../../header";
 import Profile from "../../pofile";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const FuelTransaction = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -27,8 +29,13 @@ const FuelTransaction = () => {
 
   function searchToggle(): void {
     console.log("search");
-    setIsOpen(!isOpen);
+    setIsOpen((isOpen) => !isOpen);
   }
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("search");
+  };
 
   return (
     <>
@@ -66,8 +73,13 @@ const FuelTransaction = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn btn-secondary " to="/createfueltransaction">
+          <Link
+            className="btn btn-secondary"
+            style={{ backgroundColor: "#B7D1E6", color: "black" }}
+            to="/createfueltransaction"
+          >
             New Fuel Transaction
+            <AiOutlinePlus />
           </Link>
           <Profile />
         </div>
@@ -75,168 +87,306 @@ const FuelTransaction = () => {
       <div className="content d-flex">
         <SideBar isSidebarOpen={!isSidebarOpen} />
         <div className="aria-content">
-          <Collapse isOpen={isOpen}>
-            <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
-              <CardBody>
-                <div className="align-items-center justify-content-between">
-                  <div className="align-items-center gap-4">
-                    <h3 className="text-info">Search Filter</h3>
-                    <div className="d-flex align-items-center gap-4">
-                      <FormGroup>
-                        <Label for="exampleSelect">Status</Label>
-                        <Input
-                          id="exampleSelect"
-                          name="select"
-                          type="select"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                            width: "150px",
-                          }}
-                        >
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                        </Input>
-                      </FormGroup>
-                      <FormGroup>
-                        <Label for="exampleSelect">Settlement</Label>
-                        <Input
-                          id="exampleSelect"
-                          name="select"
-                          type="text"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                            width: "150px",
-                          }}
-                        ></Input>
-                      </FormGroup>
-                      <FormGroup>
-                        <Label for="exampleSelect">Amount Range:To</Label>
-                        <Input
-                          id="exampleSelect"
-                          name="select"
-                          type="text"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                            width: "150px",
-                          }}
-                        ></Input>
-                      </FormGroup>
-                      <FormGroup>
-                        <Label for="exampleSelect">Amount Range:Form</Label>
-                        <Input
-                          id="exampleSelect"
-                          name="select"
-                          type="text"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                            width: "150px",
-                          }}
-                        ></Input>
-                      </FormGroup>
-                    </div>
-
-                    <div className="d-flex align-items-center gap-4">
-                      <FormGroup>
-                        <Label for="exampleSelect">Date Range:To</Label>
-                        <Input
-                          id="exampleSelect"
-                          name="select"
-                          type="date"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                            width: "150px",
-                          }}
-                        ></Input>
-                      </FormGroup>
-
-                      <FormGroup>
-                        <Label for="exampleSelect">Date Range:Form</Label>
-                        <Input
-                          id="exampleSelect"
-                          name="select"
-                          type="date"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                            width: "150px",
-                          }}
-                        ></Input>
-                      </FormGroup>
-
-                      <FormGroup>
-                        <Label for="exampleSelect">Partner</Label>
-                        <Input
-                          id="exampleSelect"
-                          name="select"
-                          type="select"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                            width: "150px",
-                          }}
-                        >
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                        </Input>
-                      </FormGroup>
-                      <FormGroup>
-                        <Label for="exampleSelect">Driver</Label>
-                        <Input
-                          id="exampleSelect"
-                          name="select"
-                          type="select"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                            width: "150px",
-                          }}
-                        >
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                        </Input>
-                      </FormGroup>
-                      <div className="align-items-center justify-content-between">
-                        <Button
-                          className="me-3  ps-3 pe-3"
-                          style={{
-                            color: "black",
-                            border: "1px solid #1E5367",
-                            backgroundColor: "#B7D1E6",
-                          }}
-                        >
-                          <BiCheck fontSize={"24px"} />
-                          Apply
-                        </Button>
-                        <Button
-                          style={{
-                            color: "red",
-                            border: "1px solid red",
-                            backgroundColor: "white",
-                          }}
-                        >
-                          <RxCross2 fontSize={"21px"} color="red" /> Clear
-                        </Button>
+          {isOpen && (
+            <Collapse isOpen={isOpen}>
+              <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
+                <CardBody>
+                  <Form onSubmit={handleSearchSubmit}>
+                    <div className="d-flex gap-3">
+                      <div className="flex-item">
+                        <h4 className="text-info">Search Filter</h4>
+                      </div>
+                      <div className="flex-item">
+                        <FormGroup>
+                          <Label for="exampleSelect">Start Date</Label>
+                          <Input
+                            bsSize="sm"
+                            id="exampleSelect"
+                            name="select"
+                            type="date"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          ></Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">Product Code</Label>
+                          <Input
+                            bsSize="sm"
+                            id="exampleSelect"
+                            name="select"
+                            type="text"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          ></Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">Billing</Label>
+                          <Input
+                            bsSize="sm"
+                            id="exampleSelect"
+                            name="select"
+                            type="select"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </Input>
+                        </FormGroup>
+                      </div>
+                      <div className="flex-item">
+                        <FormGroup>
+                          <Label for="exampleSelect">End Date</Label>
+                          <Input
+                            bsSize="sm"
+                            id="exampleSelect"
+                            name="select"
+                            type="date"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          ></Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">Additional Payee</Label>
+                          <Input
+                            bsSize="sm"
+                            id="exampleSelect"
+                            name="text"
+                            type="select"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">
+                            Included in IFTA Calculation
+                          </Label>
+                          <Input
+                            bsSize="sm"
+                            id="exampleSelect"
+                            name="text"
+                            type="text"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          ></Input>
+                        </FormGroup>
+                      </div>
+                      <div className="flex-item">
+                        <FormGroup>
+                          <Label for="exampleSelect">Imported Report</Label>
+                          <Input
+                            bsSize="sm"
+                            id="exampleSelect"
+                            name="select"
+                            type="select"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">Fuel Card</Label>
+                          <Input
+                            bsSize="sm"
+                            id="exampleSelect"
+                            name="select"
+                            type="select"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">Truck</Label>
+                          <Input
+                            bsSize="sm"
+                            id="exampleSelect"
+                            name="select"
+                            type="text"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          ></Input>
+                        </FormGroup>
+                      </div>
+                      <div className="flex-item">
+                        <FormGroup>
+                          <Label for="exampleSelect">Driver</Label>
+                          <Input
+                            bsSize="sm"
+                            id="exampleSelect"
+                            name="select"
+                            type="select"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">State</Label>
+                          <Input
+                            bsSize="sm"
+                            id="exampleSelect"
+                            name="select"
+                            type="select"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">Trailer</Label>
+                          <Input
+                            bsSize="sm"
+                            id="exampleSelect"
+                            name="select"
+                            type="select"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </Input>
+                        </FormGroup>
+                      </div>
+                      <div className="flex-item">
+                        <FormGroup>
+                          <Label for="exampleSelect">Partner</Label>
+                          <Input
+                            bsSize="sm"
+                            id="exampleSelect"
+                            name="select"
+                            type="select"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="exampleSelect">Driver Type</Label>
+                          <Input
+                            bsSize="sm"
+                            id="exampleSelect"
+                            name="select"
+                            type="select"
+                            style={{
+                              color: "black",
+                              border: "1px solid #418ECB",
+                              width: "220px",
+                            }}
+                          >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </Input>
+                        </FormGroup>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </CardBody>
-            </Card>
-          </Collapse>
+                    <div style={{ paddingLeft: "35rem" }}>
+                      <Button
+                        className="me-3  ps-3 pe-3"
+                        style={{
+                          color: "black",
+                          border: "1px solid #1E5367",
+                          backgroundColor: "#B7D1E6",
+                        }}
+                      >
+                        <BiCheck fontSize={"24px"} />
+                        Apply
+                      </Button>
+                      <Button
+                        style={{
+                          color: "red",
+                          border: "1px solid red",
+                          backgroundColor: "white",
+                        }}
+                      >
+                        <RxCross2 fontSize={"21px"} color="red" /> Clear
+                      </Button>
+                    </div>
+                  </Form>
+                </CardBody>
+              </Card>
+            </Collapse>
+          )}
+
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>

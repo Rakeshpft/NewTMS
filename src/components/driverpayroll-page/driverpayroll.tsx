@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AiOutlineFileExcel } from "react-icons/ai";
+import { AiOutlineFileExcel, AiOutlinePlus } from "react-icons/ai";
 import { MdOutgoingMail } from "react-icons/md";
 import { PiFilePdfDuotone } from "react-icons/pi";
 import { Link } from "react-router-dom";
@@ -96,8 +96,13 @@ const DriverPayRoll = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn btn-secondary" to="/createdriverpayroll">
+          <Link
+            className="btn btn-secondary"
+            style={{ backgroundColor: "#B7D1E6", color: "black" }}
+            to="/createdriverpayroll"
+          >
             New Driver Payroll
+            <AiOutlinePlus />
           </Link>
           <Profile />
         </div>
