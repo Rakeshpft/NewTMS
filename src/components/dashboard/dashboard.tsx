@@ -26,7 +26,7 @@ const dashboardTiles = {
         "En-Route": 15,
         Delivered: 21,
       },
-      icon: "/icons/conveyor-belt.svg",
+      icon: "./images/icons/conveyor-belt.svg",
       options: [
         {
           title: null,
@@ -34,12 +34,12 @@ const dashboardTiles = {
           options: [
             {
               title: "Create A Load",
-              icon: "/icons/create-a-load.svg",
+              icon: "./images/icons/create-a-load.svg",
               link: "/createload",
             },
             {
               title: "View Existing Loads",
-              icon: "/icons/view-existing-loads.svg",
+              icon: "./images/icons/view-existing-loads.svg",
               link: "/loadpage",
             },
           ],
@@ -52,7 +52,7 @@ const dashboardTiles = {
         Hired: 83,
         Terminated: 21,
       },
-      icon: "/icons/truck-driver.svg",
+      icon: "./images/icons/truck-driver.svg",
       options: [
         {
           title: null,
@@ -60,12 +60,12 @@ const dashboardTiles = {
           options: [
             {
               title: "Create a Profile",
-              icon: "/icons/create-a-load.svg",
+              icon: "./images/icons/create-a-load.svg",
               link: "/createdriver",
             },
             {
               title: "View Drivers",
-              icon: "/icons/view-existing-loads.svg",
+              icon: "./images/icons/view-existing-loads.svg",
               link: "/driverpage",
             },
           ],
@@ -78,36 +78,36 @@ const dashboardTiles = {
         Customers: 12,
         Vendors: 15,
       },
-      icon: "/icons/partner-exchange-rounded.svg",
+      icon: "./images/icons/partner-exchange-rounded.svg",
       options: [
         {
           title: "Customers",
-          icon: "/icons/partners-customers.svg",
+          icon: "./images/icons/partners-customers.svg",
           options: [
             {
               title: "Add New Customer",
-              icon: "/icons/create-a-load.svg",
+              icon: "./images/icons/create-a-load.svg",
               link: "/createcustomer",
             },
             {
               title: "View All Customers",
-              icon: "/icons/view-existing-loads.svg",
+              icon: "./images/icons/view-existing-loads.svg",
               link: "/partners/customers",
             },
           ],
         },
         {
           title: "Vendors",
-          icon: "/icons/partners-vendors.svg",
+          icon: "./images/icons/partners-vendors.svg",
           options: [
             {
               title: "Add New Vendor",
-              icon: "/icons/create.svg",
+              icon: "./images/icons/create.svg",
               link: "/createvendor",
             },
             {
               title: "View All Vendors",
-              icon: "/icons/view-existing-vendors.svg",
+              icon: "./images/icons/view-existing-vendors.svg",
               link: "/partners/vendors",
             },
           ],
@@ -120,36 +120,36 @@ const dashboardTiles = {
         Trucks: 19,
         Trailers: 24,
       },
-      icon: "/icons/mdi_tools.svg",
+      icon: "./images/icons/mdi_tools.svg",
       options: [
         {
           title: "Trucks",
-          icon: "/icons/create-a-load.svg",
+          icon: "./images/icons/create-a-load.svg",
           options: [
             {
               title: "Add New Truck",
-              icon: "/icons/create-a-load.svg",
+              icon: "./images/icons/create-a-load.svg",
               link: "/createnewtruck",
             },
             {
               title: "View All Trucks",
-              icon: "/icons/view-existing-loads.svg",
+              icon: "./images/icons/view-existing-loads.svg",
               link: "/equipments/trucks",
             },
           ],
         },
         {
           title: "Trailers",
-          icon: "/icons/view-existing-loads.svg",
+          icon: "./images/icons/view-existing-loads.svg",
           options: [
             {
               title: "Add New Trailer",
-              icon: "/icons/create.svg",
+              icon: "./images/icons/create.svg",
               link: "/createnewtrailers",
             },
             {
               title: "View All Trailers",
-              icon: "/icons/view-existing-vendors.svg",
+              icon: "./images/icons/view-existing-vendors.svg",
               link: "/equipments/trailers",
             },
           ],
@@ -160,47 +160,47 @@ const dashboardTiles = {
   mediumTiles: [
     {
       title: "Fuel",
-      icon: "/icons/fuel.svg",
+      icon: "./images/icons/fuel.svg",
       options: [
         {
           title: "Fuel Card",
-          icon: "/icons/create-a-load.svg",
+          icon: "./images/icons/create-a-load.svg",
           options: [
             {
               title: "Add New Fuel Card",
-              icon: "/icons/create-a-load.svg",
+              icon: "./images/icons/create-a-load.svg",
               link: "/createfuelpage",
             },
             {
               title: "View All Fuel Card",
-              icon: "/icons/view-existing-loads.svg",
+              icon: "./images/icons/view-existing-loads.svg",
               link: "/fuel/fuelcard",
             },
           ],
         },
         {
           title: "Fuel Transactions",
-          icon: "/icons/create-a-load.svg",
+          icon: "./images/icons/create-a-load.svg",
           options: [
             {
               title: "Add New Fuel Transaction",
-              icon: "/icons/create-a-load.svg",
+              icon: "./images/icons/create-a-load.svg",
               link: "/createfueltransaction",
             },
             {
               title: "View All Fuel Transaction",
-              icon: "/icons/view-existing-loads.svg",
+              icon: "./images/icons/view-existing-loads.svg",
               link: "/fuel/fueltransaction",
             },
           ],
         },
         {
           title: "Fuel Import",
-          icon: "/icons/create-a-load.svg",
+          icon: "./images/icons/create-a-load.svg",
           options: [
             {
               title: "View All Fuel Import",
-              icon: "/icons/view-existing-loads.svg",
+              icon: "./images/icons/view-existing-loads.svg",
               link: "/fuel/fuelimport",
             },
           ],
@@ -209,7 +209,7 @@ const dashboardTiles = {
     },
     {
       title: "Driver Payroll",
-      icon: "/icons/driver-payroll.svg",
+      icon: "./images/icons/driver-payroll.svg",
       options: [
         {
           title: null,
@@ -217,12 +217,12 @@ const dashboardTiles = {
           options: [
             {
               title: "Add New Driver Payroll",
-              icon: "/icons/create-a-load.svg",
+              icon: "./images/icons/create-a-load.svg",
               link: "/createdriverpayroll",
             },
             {
               title: "View All Driver Payroll",
-              icon: "/icons/view-existing-loads.svg",
+              icon: "./images/icons/view-existing-loads.svg",
               link: "/driverpayroll",
             },
           ],
@@ -231,31 +231,31 @@ const dashboardTiles = {
     },
     {
       title: "Accounts",
-      icon: "/icons/accounts.svg",
+      icon: "./images/icons/accounts.svg",
       options: [
         {
           title: "Billing Entries",
-          icon: "/icons/create-a-load.svg",
+          icon: "./images/icons/create-a-load.svg",
           options: [
             {
               title: "Add New Billing Entry",
-              icon: "/icons/create-a-load.svg",
+              icon: "./images/icons/create-a-load.svg",
               link: "/createbillingpage",
             },
             {
               title: "View All Billing Entry",
-              icon: "/icons/view-existing-loads.svg",
+              icon: "./images/icons/view-existing-loads.svg",
               link: "/accounts/billing",
             },
           ],
         },
         {
           title: "Vendor Balances",
-          icon: "/icons/view-existing-loads.svg",
+          icon: "./images/icons/view-existing-loads.svg",
           options: [
             {
               title: "View All Vendor Balance",
-              icon: "/icons/view-existing-loads.svg",
+              icon: "./images/icons/view-existing-loads.svg",
               link: "/accounts/vendorbalance",
             },
           ],
@@ -264,7 +264,7 @@ const dashboardTiles = {
     },
     {
       title: "Reports",
-      icon: "/icons/reports.svg",
+      icon: "./images/icons/reports.svg",
       options: [
         {
           title: null,
@@ -272,12 +272,12 @@ const dashboardTiles = {
           options: [
             {
               title: "Add New Report",
-              icon: "/icons/create-a-load.svg",
+              icon: "./images/icons/create-a-load.svg",
               link: "/",
             },
             {
               title: "View All Report",
-              icon: "/icons/view-existing-loads.svg",
+              icon: "./images/icons/view-existing-loads.svg",
               link: "/",
             },
           ],
@@ -289,22 +289,22 @@ const dashboardTiles = {
   smallTiles: [
     {
       name: "Users",
-      icon: "/icons/users.svg",
+      icon: "./images/icons/users.svg",
       link: "/users",
     },
     {
       name: "Data Library",
-      icon: "/icons/data-library.svg",
+      icon: "./images/icons/data-library.svg",
       link: "/data-library",
     },
     {
       name: "Doc Exchange",
-      icon: "/icons/docs-exchange.svg",
+      icon: "./images/icons/docs-exchange.svg",
       link: "/docs-exchange",
     },
     {
       name: "IFTA",
-      icon: "/icons/agreement.svg",
+      icon: "./images/icons/agreement.svg",
       link: "/ifta",
     },
   ],
@@ -327,7 +327,12 @@ export default function DashboardPage() {
                 size="sm"
                 className="d-flex align-items-center gap-1 px-3 shadow-lg rounded-pill"
               >
-                <img src="icons/help.svg" alt="" height={24} width={24}></img>
+                <img
+                  src="./images/icons/help.svg"
+                  alt=""
+                  height={24}
+                  width={24}
+                ></img>
                 <span>Help</span>
               </Button>
               <Button
@@ -335,7 +340,12 @@ export default function DashboardPage() {
                 size="sm"
                 className="d-flex align-items-center gap-1 px-3 shadow-lg rounded-pill"
               >
-                <img src="icons/safety.svg" alt="" height={24} width={24}></img>
+                <img
+                  src="./images/icons/safety.svg"
+                  alt=""
+                  height={24}
+                  width={24}
+                ></img>
                 <span>Safety</span>
               </Button>
               <Button
@@ -344,7 +354,7 @@ export default function DashboardPage() {
                 className="d-flex align-items-center gap-1 px-3 shadow-lg rounded-pill"
               >
                 <img
-                  src="icons/settings.svg"
+                  src="./images/icons/settings.svg"
                   alt=""
                   height={24}
                   width={24}
@@ -373,7 +383,7 @@ export default function DashboardPage() {
                 <div className="section-header d-flex justify-content-between p-2">
                   <div className="d-flex align-items-center gap-2">
                     <img
-                      src="./icons/Ic-Overview.svg"
+                      src="../images/icons/Ic-Overview.svg"
                       alt="Image"
                       width={32}
                       height={32}
