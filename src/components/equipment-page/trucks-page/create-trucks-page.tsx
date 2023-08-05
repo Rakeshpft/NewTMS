@@ -14,27 +14,9 @@ import {
 } from "reactstrap";
 import { Header } from "../../header";
 import Profile from "../../pofile";
-import SearchPage from "../../search-page";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
-
-type FormState = {
-  unit: string;
-  vin: string;
-  ELDprovider: string;
-  ELDid: string;
-  year: string;
-  make: string;
-  ownership: string;
-  modal: string;
-  purchaseDate: string;
-  purchasePrice: string;
-  driver: string;
-  plate: string;
-  plateState: string;
-  notes: string;
-  history: string;
-};
+import { truckType } from "../../tms-object/equipmenrs";
 
 type FormAction =
   | { type: "SET_unit"; payload: string }
@@ -53,7 +35,7 @@ type FormAction =
   | { type: "SET_notes"; payload: string }
   | { type: "SET_history"; payload: string };
 
-const formReducer = (state: FormState, action: FormAction) => {
+const formReducer = (state: truckType, action: FormAction): truckType => {
   switch (action.type) {
     case "SET_unit":
       return { ...state, unit: action.payload };
@@ -90,7 +72,7 @@ const formReducer = (state: FormState, action: FormAction) => {
   }
 };
 
-const initialState: FormState = {
+const initialState: truckType = {
   unit: "",
   vin: "",
   ELDprovider: "",
@@ -120,8 +102,7 @@ const CreateTruckPage = () => {
   return (
     <>
       <Navbar
-        style={{ border: "1px solid #1B56AE" }}
-        color="light"
+        style={{ border: "1px solid #1B56AE", backgroundColor: "#E9F3FB" }}
         className="py-0"
       >
         <Header
@@ -130,30 +111,23 @@ const CreateTruckPage = () => {
           }}
           showHambuger={false}
         />
-        <NavbarBrand>New Truck</NavbarBrand>
+        <NavbarBrand className="fw-bold">New Truck</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
-          <SearchPage />
           <Profile />
         </div>
       </Navbar>
-      <div className="m-2">
-        <Container
-          fluid
-          style={{ backgroundColor: "#E9F3FB" }}
-          className="mt-1 px-5 py-2"
-        >
-          <h2 style={{ color: "rgb(66 111 177)", fontWeight: "bold" }}>
-            Create New Truck
-          </h2>
-          <Form onSubmit={handleSubmit}>
+      <div className="py-2 truckitemmain">
+        <Container className="mt-4 px-5 py-2">
+          <Form onSubmit={handleSubmit} className="truckitem">
             <Row>
-              <Col>
+              <Col className="px-5">
                 <Row>
                   <Col sm={3}>
                     <FormGroup>
                       <Label for="exampleunit">Unit</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         type="text"
                         value={state.unit}
@@ -170,6 +144,7 @@ const CreateTruckPage = () => {
                     <FormGroup>
                       <Label>VIN</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         type="text"
                         value={state.vin}
@@ -186,6 +161,7 @@ const CreateTruckPage = () => {
                     <FormGroup>
                       <Label for="exampleSelect">ELD Provider</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         type="select"
                         id="exampleSelect"
@@ -210,6 +186,7 @@ const CreateTruckPage = () => {
                     <FormGroup>
                       <Label>ELD ID</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         type="text"
                         value={state.ELDid}
@@ -228,6 +205,7 @@ const CreateTruckPage = () => {
                     <FormGroup>
                       <Label for="exampleyear">Year</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampleyear"
                         name="year"
@@ -246,6 +224,7 @@ const CreateTruckPage = () => {
                     <FormGroup>
                       <Label for="examplemake">Make</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplemake"
                         name="make"
@@ -264,6 +243,7 @@ const CreateTruckPage = () => {
                     <FormGroup>
                       <Label for="exampleSelect">OwnerShip</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         type="select"
                         id="exampleSelect"
@@ -291,6 +271,7 @@ const CreateTruckPage = () => {
                     <FormGroup>
                       <Label for="examplemodal">Modal</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplemodal"
                         name="modal"
@@ -310,6 +291,7 @@ const CreateTruckPage = () => {
                     <FormGroup>
                       <Label for="examplepurchaseDate">Purchase Date</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplepurchaseDate"
                         name="purchaseDate"
@@ -328,6 +310,7 @@ const CreateTruckPage = () => {
                     <FormGroup>
                       <Label for="examplepurchaseprice">Purchase Price</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplepurchaseprice"
                         name="purchaseprice"
@@ -348,6 +331,7 @@ const CreateTruckPage = () => {
                     <FormGroup>
                       <Label for="exampledriver">Driver</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampledriver"
                         name="driver"
@@ -366,6 +350,7 @@ const CreateTruckPage = () => {
                     <FormGroup>
                       <Label for="exampleSelect">Plate</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         type="select"
                         id="exampleSelect"
@@ -392,6 +377,7 @@ const CreateTruckPage = () => {
                     <FormGroup>
                       <Label for="exampleplateState">Plate State</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampleplateState"
                         name="plateState"
@@ -412,6 +398,7 @@ const CreateTruckPage = () => {
                     <FormGroup>
                       <Label for="examplenotes">Notes</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplenotes"
                         name="notes"
@@ -428,11 +415,12 @@ const CreateTruckPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row>
+                <Row className="d-flex ">
                   <Col md={6}>
                     <FormGroup>
                       <Label for="examplehistory">Histoy</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplehistory"
                         name="history"
@@ -448,30 +436,38 @@ const CreateTruckPage = () => {
                       />
                     </FormGroup>
                   </Col>
+                  <Col md={6}>
+                    <div
+                      className="d-flex justify-content-end "
+                      style={{ marginTop: "65px" }}
+                    >
+                      <Button
+                        size="sm"
+                        className="me-3"
+                        style={{
+                          color: "black",
+                          border: "1px solid #1E5367",
+                          backgroundColor: "#418ECB",
+                        }}
+                      >
+                        <BiCheck fontSize={"16px"} />
+                        Save
+                      </Button>
+                      <Button
+                        size="sm"
+                        style={{
+                          color: "red",
+                          border: "1px solid red",
+                          backgroundColor: "white",
+                        }}
+                      >
+                        <RxCross2 fontSize={"16px"} color="red" /> Cancel
+                      </Button>
+                    </div>
+                  </Col>
                 </Row>
               </Col>
             </Row>
-
-            <Button
-              className="me-3  ps-3 pe-3"
-              style={{
-                color: "black",
-                border: "1px solid #1E5367",
-                backgroundColor: "#B7D1E6",
-              }}
-            >
-              <BiCheck fontSize={"24px"} />
-              Save
-            </Button>
-            <Button
-              style={{
-                color: "red",
-                border: "1px solid red",
-                backgroundColor: "white",
-              }}
-            >
-              <RxCross2 fontSize={"21px"} color="red" /> Cancel
-            </Button>
           </Form>
         </Container>
       </div>

@@ -18,33 +18,7 @@ import { RxCross2 } from "react-icons/rx";
 import { BiCheck } from "react-icons/bi";
 import { Header } from "../header";
 import Profile from "../pofile";
-import SearchPage from "../search-page";
-import { CgProfile } from "react-icons/cg";
-
-type FormState = {
-  firstName: string;
-  Stauts: string;
-  lastName: string;
-  dob: string;
-  appDate: string;
-  payTo: string;
-  phone: string;
-  email: string;
-  hireDate: string;
-  coDriver: string;
-  addressline1: string;
-  addressline2: string;
-  truck: string;
-  city: string;
-  state: string;
-  zip: string;
-  trailer: string;
-  permiles: string;
-  perExtraStop: string;
-  perEmptyMiles: string;
-  ifta: string;
-  fuelCard: string;
-};
+import { driverpage } from "../tms-object/driverpage";
 
 type FormAction =
   | { type: "SET_firstName"; payload: string }
@@ -70,7 +44,7 @@ type FormAction =
   | { type: "SET_ifta"; payload: string }
   | { type: "SET_fuelCard"; payload: string };
 
-const formReducer = (state: FormState, action: FormAction): FormState => {
+const formReducer = (state: driverpage, action: FormAction): driverpage => {
   switch (action.type) {
     case "SET_firstName":
       return { ...state, firstName: action.payload };
@@ -121,7 +95,7 @@ const formReducer = (state: FormState, action: FormAction): FormState => {
   }
 };
 
-const initialState: FormState = {
+const initialState: driverpage = {
   firstName: "",
   Stauts: "",
   lastName: "",
@@ -149,41 +123,17 @@ const initialState: FormState = {
 const NewDriver = () => {
   const [state, dispatch] = useReducer(formReducer, initialState);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [image, setImage] = useState({ preview: "", raw: "" });
+  // const [image, setImage] = useState({ preview: "", raw: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(state);
   };
 
-  const handleChange = (e: any) => {
-    if (e.target.files.length) {
-      setImage({
-        preview: URL.createObjectURL(e.target.files[0]),
-        raw: e.target.files[0],
-      });
-    }
-  };
-
-  const handleUpload = async (e: any) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("image", image.raw);
-
-    await fetch("YOUR_URL", {
-      method: "POST",
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      body: formData,
-    });
-  };
-
   return (
     <>
       <Navbar
-        style={{ border: "1px solid #1B56AE" }}
-        color="light"
+        style={{ border: "1px solid #1B56AE", backgroundColor: "#E9F3FB" }}
         className="py-0"
       >
         <Header
@@ -192,25 +142,17 @@ const NewDriver = () => {
           }}
           showHambuger={false}
         />
-        <NavbarBrand>Driver</NavbarBrand>
+        <NavbarBrand className="fw-bold">New Driver</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
-          <SearchPage />
           <Profile />
         </div>
       </Navbar>
-      <div className="m-2">
-        <Container
-          fluid
-          style={{ backgroundColor: "#E9F3FB" }}
-          className="mt-1 px-5 py-2"
-        >
-          <h2 style={{ color: "rgb(66 111 177)", fontWeight: "bold" }}>
-            Create New Driver
-          </h2>
-          <Form onSubmit={handleSubmit}>
+      <div className="py-2 drivermain">
+        <Container className="mt-4 px-5 py-2">
+          <Form onSubmit={handleSubmit} className="driveritem">
             <Row>
-              <Col>
+              <Col className="px-5">
                 <Row>
                   <Col>
                     <FormGroup>
@@ -229,45 +171,7 @@ const NewDriver = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col>
-                    <FormGroup>
-                      <div>
-                        <label htmlFor="upload-button">
-                          {image.preview ? (
-                            <img
-                              src={image.preview}
-                              alt="dummy"
-                              width="300"
-                              height="300"
-                            />
-                          ) : (
-                            <>
-                              <span className="fa-stack fa-2x mt-3 mb-2">
-                                <CgProfile height={60} />
-                                <p
-                                  className="text-center"
-                                  onClick={handleUpload}
-                                >
-                                  Upload your photo
-                                </p>
-                              </span>
-                            </>
-                          )}
-                        </label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                            display: "none",
-                          }}
-                          type="file"
-                          id="upload-button"
-                          onChange={handleChange}
-                        />
-                      </div>
-                    </FormGroup>
-                  </Col>
+                  <Col></Col>
                 </Row>
                 <Row>
                   <Col>
@@ -342,44 +246,6 @@ const NewDriver = () => {
                         onChange={(e) => {
                           dispatch({
                             type: "SET_email",
-                            payload: e.target.value,
-                          });
-                        }}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col>
-                    <FormGroup>
-                      <Label for="examplehiredate">Hire Date</Label>
-                      <Input
-                        bsSize="sm"
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        id="examplehiredate"
-                        name="hireDate"
-                        type="date"
-                        value={state.hireDate}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_hireDate",
-                            payload: e.target.value,
-                          });
-                        }}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col>
-                    <FormGroup>
-                      <Label for="examplecoDriver">Co-Driver</Label>
-                      <Input
-                        bsSize="sm"
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        id="examplecoDriver"
-                        name="coDriver"
-                        type="text"
-                        value={state.coDriver}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_coDriver",
                             payload: e.target.value,
                           });
                         }}
@@ -489,7 +355,7 @@ const NewDriver = () => {
                   </Col>
                 </Row>
               </Col>
-              <Col>
+              <Col className="px-5">
                 <Row>
                   <Col>
                     <FormGroup>
@@ -516,7 +382,12 @@ const NewDriver = () => {
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         type="checkbox"
                       />
-                      <Label check>Create New Partner</Label>
+                      <Label
+                        check
+                        style={{ marginBottom: "0px", fontSize: "small" }}
+                      >
+                        Create New Partner
+                      </Label>
                     </FormGroup>
                   </Col>
                 </Row>
@@ -641,6 +512,7 @@ const NewDriver = () => {
                   </Col>
                 </Row>
                 <Row>
+                  <Col></Col>
                   <Col>
                     <FormGroup>
                       <Label for="exampletrailer">Trailer</Label>
@@ -660,6 +532,9 @@ const NewDriver = () => {
                       />
                     </FormGroup>
                   </Col>
+                </Row>
+                <Row>
+                  <Col></Col>
                   <Col className="mt-4">
                     <FormGroup check>
                       <Input
@@ -673,166 +548,270 @@ const NewDriver = () => {
                           });
                         }}
                       />
-                      <Label check>IFTA Handled by Company</Label>
+                      <Label
+                        check
+                        style={{ marginBottom: "0px", fontSize: "small" }}
+                      >
+                        IFTA Handled by Company
+                      </Label>
                     </FormGroup>
                   </Col>
                 </Row>
               </Col>
             </Row>
-            <TabPage
-              tabTitles={[
-                "Pay Rates",
-                "Sechedule Payments/Deductions",
-                "Additional Payee",
-                "Notes",
-              ]}
-            >
-              <TabPane tabId={1} className="m-4">
-                <Row>
-                  <Col sm={2}>
-                    <FormGroup check>
-                      <Input
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        name="radio2"
-                        type="radio"
-                      />
-                      <Label check>Company Driver</Label>
-                    </FormGroup>
-                  </Col>
-                  <Col sm={2}>
-                    <FormGroup check>
-                      <Input
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        name="radio2"
-                        type="radio"
-                      />
-                      <Label check>Owner Operator</Label>
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row className="mt-2">
-                  <Col sm={2}>
-                    <FormGroup check>
-                      <Input
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        name="radio1"
-                        type="radio"
-                      />
-                      <Label check>Per Mile</Label>
-                    </FormGroup>
-                  </Col>
-                  <Col sm={2}>
-                    <FormGroup check>
-                      <Input
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        name="radio1"
-                        type="radio"
-                      />
-                      <Label check>Freight %</Label>
-                    </FormGroup>
-                  </Col>
-                  <Col sm={2}>
-                    <FormGroup check>
-                      <Input
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        name="radio1"
-                        type="radio"
-                      />
-                      <Label check>Flat Pay</Label>
-                    </FormGroup>
-                  </Col>
-                  <Col sm={2}>
-                    <FormGroup check>
-                      <Input
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        name="radio1"
-                        type="radio"
-                      />
-                      <Label check>Hourly</Label>
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <FormGroup>
-                      <Label for="exampleperMile">Per Mile</Label>
-                      <Input
-                        bsSize="sm"
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        id="exampleperMile"
-                        name="perMile"
-                        type="text"
-                        value={state.permiles}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_permiles",
-                            payload: e.target.value,
-                          });
-                        }}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col>
-                    <FormGroup>
-                      <Label for="exampleperExtraStop">Per Extra Stop</Label>
-                      <Input
-                        bsSize="sm"
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        id="exampleperExtraStop"
-                        name="perExtraStop"
-                        type="text"
-                        value={state.perExtraStop}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_perExtraStop",
-                            payload: e.target.value,
-                          });
-                        }}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col>
-                    <FormGroup>
-                      <Label for="exampleperEmptyMile">Per Empty Mile</Label>
-                      <Input
-                        bsSize="sm"
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        id="exampleperEmptyMile"
-                        name="perEmptyMile"
-                        type="text"
-                        value={state.perEmptyMiles}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_perEmptyMiles",
-                            payload: e.target.value,
-                          });
-                        }}
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
-              </TabPane>
-            </TabPage>
-            <Button
-              className="me-3  ps-3 pe-3"
-              style={{
-                color: "black",
-                border: "1px solid #1E5367",
-                backgroundColor: "#B7D1E6",
-              }}
-            >
-              <BiCheck fontSize={"24px"} />
-              Save
-            </Button>
-            <Button
-              style={{
-                color: "red",
-                border: "1px solid red",
-                backgroundColor: "white",
-              }}
-            >
-              <RxCross2 fontSize={"21px"} color="red" /> Cancel
-            </Button>
+            <Row className="mt-3">
+              <Col md={8} className="px-5">
+                <TabPage
+                  tabTitles={[
+                    "Pay Rates",
+                    "Sechedule Payments/Deductions",
+                    "Additional Payee",
+                    "Notes",
+                  ]}
+                >
+                  <TabPane
+                    tabId={1}
+                    style={{ color: "black", border: "1px solid #418ECB" }}
+                  >
+                    <Row className="mt-3 px-4">
+                      <Col>
+                        <Row>
+                          <Col sm={3}>
+                            <FormGroup check>
+                              <Input
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                                name="radio2"
+                                type="radio"
+                              />
+                              <Label
+                                check
+                                style={{
+                                  marginBottom: "0px",
+                                  fontSize: "small",
+                                }}
+                              >
+                                Company Driver
+                              </Label>
+                            </FormGroup>
+                          </Col>
+                          <Col sm={3}>
+                            <FormGroup check>
+                              <Input
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                                name="radio2"
+                                type="radio"
+                              />
+                              <Label
+                                check
+                                style={{
+                                  marginBottom: "0px",
+                                  fontSize: "small",
+                                }}
+                              >
+                                Owner Operator
+                              </Label>
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col sm={3}>
+                            <FormGroup check>
+                              <Input
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                                name="radio1"
+                                type="radio"
+                              />
+                              <Label
+                                check
+                                style={{
+                                  marginBottom: "0px",
+                                  fontSize: "small",
+                                }}
+                              >
+                                Per Mile
+                              </Label>
+                            </FormGroup>
+                          </Col>
+                          <Col sm={3}>
+                            <FormGroup check>
+                              <Input
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                                name="radio1"
+                                type="radio"
+                              />
+                              <Label
+                                check
+                                style={{
+                                  marginBottom: "0px",
+                                  fontSize: "small",
+                                }}
+                              >
+                                Freight %
+                              </Label>
+                            </FormGroup>
+                          </Col>
+                          <Col sm={3}>
+                            <FormGroup check>
+                              <Input
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                                name="radio1"
+                                type="radio"
+                              />
+                              <Label
+                                check
+                                style={{
+                                  marginBottom: "0px",
+                                  fontSize: "small",
+                                }}
+                              >
+                                Flat Pay
+                              </Label>
+                            </FormGroup>
+                          </Col>
+                          <Col sm={3}>
+                            <FormGroup check>
+                              <Input
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                                name="radio1"
+                                type="radio"
+                              />
+                              <Label
+                                check
+                                style={{
+                                  marginBottom: "0px",
+                                  fontSize: "small",
+                                }}
+                              >
+                                Hourly
+                              </Label>
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row className="mt-3">
+                          <Col sm={3}>
+                            <FormGroup>
+                              <Label for="exampleperMile">Per Mile</Label>
+                              <Input
+                                bsSize="sm"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                                id="exampleperMile"
+                                name="perMile"
+                                type="text"
+                                value={state.permiles}
+                                onChange={(e) => {
+                                  dispatch({
+                                    type: "SET_permiles",
+                                    payload: e.target.value,
+                                  });
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col sm={3}>
+                            <FormGroup>
+                              <Label for="exampleperExtraStop">
+                                Per Extra Stop
+                              </Label>
+                              <Input
+                                bsSize="sm"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                                id="exampleperExtraStop"
+                                name="perExtraStop"
+                                type="text"
+                                value={state.perExtraStop}
+                                onChange={(e) => {
+                                  dispatch({
+                                    type: "SET_perExtraStop",
+                                    payload: e.target.value,
+                                  });
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col sm={3}>
+                            <FormGroup>
+                              <Label for="exampleperEmptyMile">
+                                Per Empty Mile
+                              </Label>
+                              <Input
+                                bsSize="sm"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                                id="exampleperEmptyMile"
+                                name="perEmptyMile"
+                                type="text"
+                                value={state.perEmptyMiles}
+                                onChange={(e) => {
+                                  dispatch({
+                                    type: "SET_perEmptyMiles",
+                                    payload: e.target.value,
+                                  });
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
+                  </TabPane>
+                </TabPage>
+              </Col>
+              <Col
+                md={4}
+                className="driverbutton d-flex justify-content-end align-self-end"
+                style={{ bottom: "0", right: "0"}}
+              >
+                <Button
+                  className="me-3"
+                  size="sm"
+                  style={{
+                    color: "black",
+                    border: "1px solid #1E5367",
+                    backgroundColor: "#418ECB",
+                  }}
+                >
+                  <BiCheck fontSize={"16px"} />
+                  Save
+                </Button>
+                <Button
+                  size="sm"
+                  className="me-3"
+                  style={{
+                    color: "red",
+                    border: "1px solid red",
+                    backgroundColor: "white",
+                  }}
+                >
+                  <RxCross2 fontSize={"16px"} color="red" /> Cancel
+                </Button>
+              </Col>
+            </Row>
           </Form>
         </Container>
       </div>

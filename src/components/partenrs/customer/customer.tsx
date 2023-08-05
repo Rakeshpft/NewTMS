@@ -46,8 +46,8 @@ const Customer = () => {
             style={{ backgroundColor: "#B7D1E6", color: "black" }}
             to="/createcustomer"
           >
-            New Customer
             <AiOutlinePlus />
+            New Customer
           </Link>
           <Profile />
         </div>

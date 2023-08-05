@@ -28,7 +28,7 @@ const Header = ({ sidebarToggle, showHambuger = true }: HeaderProps) => {
 
   return (
     <>
-      <Navbar color="light" className="py-0">
+      <Navbar className="py-0" style={{ backgroundColor: "#E9F3FB" }}>
         {showHambuger ? (
           <div
             className="fs-2 toggle-button d-flex align-items-center gap-2"

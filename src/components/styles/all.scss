@@ -2,7 +2,7 @@ $primary: #21529d;
 $info: #418ecb;
 
 @import "~bootstrap/scss/bootstrap";
-
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
 :root {
   --bs-primary-rgb: #21529d !important;
   --bs-card-border-radius: 0 !important;
@@ -78,3 +78,9 @@ form .form-label {
 @import "./dashboard";
 @import "./sidebar";
 @import "./loadpage";
+@import "./partnerpage.scss";
+@import "./equipment.scss";
+@import "./fuelpage.scss";
+@import "./accountspage.scss";
+@import "./driverpage.scss";
+@import "./driverpayroll.scss";

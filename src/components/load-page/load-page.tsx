@@ -103,8 +103,8 @@ const LoadPage = () => {
             style={{ backgroundColor: "#B7D1E6", color: "black" }}
             to="/createload"
           >
-            New Load
             <AiOutlinePlus />
+            New Load
           </Link>
           <Profile />
         </div>
@@ -119,7 +119,7 @@ const LoadPage = () => {
                   <Form onSubmit={handleSearchSubmit}>
                     <div className="d-flex gap-3">
                       <div className="flex-item py-3 px-2">
-                        <h4 className="text-info">Search Filter</h4>
+                        <h4 className="text-info mt-2">Search Filter</h4>
                       </div>
                       <div className="flex-item">
                         <FormGroup>

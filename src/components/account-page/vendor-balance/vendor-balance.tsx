@@ -86,7 +86,7 @@ const VendorBalance = () => {
                   <Form onSubmit={handleSearchSubmit}>
                     <div className="d-flex align-items-center justify-content-between">
                       <div className="d-flex align-items-center gap-4">
-                        <h3 className="text-info">Search Filter</h3>
+                        <h4 className="text-info mt-2">Search Filter</h4>
                         <FormGroup>
                           <Label for="exampleSelect">Vendor Type</Label>
                           <Input
@@ -132,7 +132,7 @@ const VendorBalance = () => {
                           style={{
                             color: "black",
                             border: "1px solid #1E5367",
-                            backgroundColor: "#B7D1E6",
+                            backgroundColor: "#418ECB",
                           }}
                         >
                           <BiCheck fontSize={"24px"} />

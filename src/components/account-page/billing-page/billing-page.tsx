@@ -78,8 +78,9 @@ const BillingPage = () => {
             style={{ backgroundColor: "#B7D1E6", color: "black" }}
             to="/createbillingpage"
           >
-            New Billing Entry
             <AiOutlinePlus />
+            New Billing Entry
+            
           </Link>
           <Profile />
         </div>
@@ -94,7 +95,7 @@ const BillingPage = () => {
                   <Form onSubmit={handleSearchSubmit}>
                     <div className="align-items-center justify-content-between">
                       <div className="align-items-center gap-4">
-                        <h3 className="text-info">Search Filter</h3>
+                        <h4 className="text-info mt-2">Search Filter</h4>
                         <div className="d-flex align-items-center gap-4">
                           <FormGroup>
                             <Label for="exampleSelect">Type</Label>
@@ -271,14 +272,14 @@ const BillingPage = () => {
                           </FormGroup>
                           <div className="align-items-center justify-content-between">
                             <Button
-                              className="me-3  ps-3 pe-3"
+                              className="me-3"
                               style={{
                                 color: "black",
                                 border: "1px solid #1E5367",
-                                backgroundColor: "#B7D1E6",
+                                backgroundColor: "#418ECB",
                               }}
                             >
-                              <BiCheck fontSize={"24px"} />
+                              <BiCheck fontSize={"16px"} />
                               Apply
                             </Button>
                             <Button
@@ -288,7 +289,7 @@ const BillingPage = () => {
                                 backgroundColor: "white",
                               }}
                             >
-                              <RxCross2 fontSize={"21px"} color="red" /> Clear
+                              <RxCross2 fontSize={"16px"} color="red" /> Clear
                             </Button>
                           </div>
                         </div>

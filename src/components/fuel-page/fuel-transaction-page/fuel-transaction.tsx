@@ -78,8 +78,9 @@ const FuelTransaction = () => {
             style={{ backgroundColor: "#B7D1E6", color: "black" }}
             to="/createfueltransaction"
           >
+              <AiOutlinePlus />
             New Fuel Transaction
-            <AiOutlinePlus />
+          
           </Link>
           <Profile />
         </div>
@@ -94,7 +95,7 @@ const FuelTransaction = () => {
                   <Form onSubmit={handleSearchSubmit}>
                     <div className="d-flex gap-3">
                       <div className="flex-item">
-                        <h4 className="text-info">Search Filter</h4>
+                        <h4 className="text-info mt-2">Search Filter</h4>
                       </div>
                       <div className="flex-item">
                         <FormGroup>

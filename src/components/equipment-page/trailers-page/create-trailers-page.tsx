@@ -14,25 +14,9 @@ import {
 } from "reactstrap";
 import { Header } from "../../header";
 import Profile from "../../pofile";
-import SearchPage from "../../search-page";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
-
-type FormState = {
-  unit: string;
-  vin: string;
-  year: string;
-  make: string;
-  ownership: string;
-  modal: string;
-  purchaseDate: string;
-  purchasePrice: string;
-  driver: string;
-  plate: string;
-  plateState: string;
-  notes: string;
-  history: string;
-};
+import { trailersTypes } from "../../tms-object/equipmenrs";
 
 type FormAction =
   | { type: "SET_unit"; payload: string }
@@ -49,7 +33,10 @@ type FormAction =
   | { type: "SET_notes"; payload: string }
   | { type: "SET_history"; payload: string };
 
-const formReducer = (state: FormState, action: FormAction) => {
+const formReducer = (
+  state: trailersTypes,
+  action: FormAction
+): trailersTypes => {
   switch (action.type) {
     case "SET_unit":
       return { ...state, unit: action.payload };
@@ -82,7 +69,7 @@ const formReducer = (state: FormState, action: FormAction) => {
   }
 };
 
-const initialState: FormState = {
+const initialState: trailersTypes = {
   unit: "",
   vin: "",
   year: "",
@@ -110,8 +97,7 @@ const CreateTrailerPage = () => {
   return (
     <>
       <Navbar
-        style={{ border: "1px solid #1B56AE" }}
-        color="light"
+        style={{ border: "1px solid #1B56AE", backgroundColor: "#E9F3FB" }}
         className="py-0"
       >
         <Header
@@ -120,30 +106,23 @@ const CreateTrailerPage = () => {
           }}
           showHambuger={false}
         />
-        <NavbarBrand>New Trailer</NavbarBrand>
+        <NavbarBrand className="fw-bold">New Trailer</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
-          <SearchPage />
           <Profile />
         </div>
       </Navbar>
-      <div className="m-2">
-        <Container
-          fluid
-          style={{ backgroundColor: "#E9F3FB" }}
-          className="mt-1 px-5 py-2"
-        >
-          <h2 style={{ color: "rgb(66 111 177)", fontWeight: "bold" }}>
-            Create New Trailer
-          </h2>
-          <Form onSubmit={handleSubmit}>
+      <div className="py-2 traileritemmain">
+        <Container className="mt-3 px-5 py-2">
+          <Form onSubmit={handleSubmit} className="traileritem">
             <Row>
-              <Col>
-                <Row>
-                  <Col md={4}>
+              <Col className="px-5">
+                <Row className="px-5">
+                  <Col md={3} style={{ marginRight: "20px" }}>
                     <FormGroup>
                       <Label for="exampleunit">Unit</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         type="text"
                         value={state.unit}
@@ -156,10 +135,11 @@ const CreateTrailerPage = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col md={4}>
+                  <Col md={3}>
                     <FormGroup>
                       <Label>VIN</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         type="text"
                         value={state.vin}
@@ -172,13 +152,14 @@ const CreateTrailerPage = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col md={4}></Col>
+                  <Col md={3}></Col>
                 </Row>
-                <Row>
-                  <Col md={4}>
+                <Row className="px-5">
+                  <Col md={3} style={{ marginRight: "20px" }}>
                     <FormGroup>
                       <Label for="exampleyear">Year</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampleyear"
                         name="year"
@@ -193,10 +174,11 @@ const CreateTrailerPage = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col md={4}>
+                  <Col md={3}>
                     <FormGroup>
                       <Label for="examplemake">Make</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplemake"
                         name="make"
@@ -211,29 +193,39 @@ const CreateTrailerPage = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col md={4}>
+                  <Col md={3} className="px-5">
                     <FormGroup tag="fieldset">
-                      <legend>OwnerShip</legend>
+                      <h5 className="fw-bold">OwnerShip</h5>
                       <div className="d-flex">
                         <FormGroup check>
                           <Input name="radio1" type="radio" />
-                          <Label check className="me-2">
+                          <Label
+                            check
+                            className="me-2"
+                            style={{ marginBottom: "0px", fontSize: "small" }}
+                          >
                             Owned
                           </Label>
                         </FormGroup>
                         <FormGroup check>
                           <Input name="radio1" type="radio" />
-                          <Label check>Leased</Label>
+                          <Label
+                            check
+                            style={{ marginBottom: "0px", fontSize: "small" }}
+                          >
+                            Leased
+                          </Label>
                         </FormGroup>
                       </div>
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row>
-                  <Col md={4}>
+                <Row className="px-5">
+                  <Col md={3}>
                     <FormGroup>
                       <Label for="examplemodal">Modal</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplemodal"
                         name="modal"
@@ -248,12 +240,15 @@ const CreateTrailerPage = () => {
                       />
                     </FormGroup>
                   </Col>
+                  <Col md={3}></Col>
+                  <Col md={3}> </Col>
                 </Row>
-                <Row>
-                  <Col md={4}>
+                <Row className="px-5">
+                  <Col md={3} style={{ marginRight: "20px" }}>
                     <FormGroup>
                       <Label for="exampledriver">Driver</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampledriver"
                         name="driver"
@@ -268,10 +263,11 @@ const CreateTrailerPage = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col md={4}>
+                  <Col md={3}>
                     <FormGroup>
                       <Label for="exampleSelect">Plate</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         type="select"
                         id="exampleSelect"
@@ -287,15 +283,16 @@ const CreateTrailerPage = () => {
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
-                        <option>4</option>
+                        <option>3</option>
                         <option>5</option>
                       </Input>
                     </FormGroup>
                   </Col>
-                  <Col md={4}>
+                  <Col md={3} className="px-4">
                     <FormGroup>
                       <Label for="examplepurchaseDate">Purchase Date</Label>
                       <Input
+                        bsSize="sm"
                         style={{
                           color: "black",
                           border: "1px solid #418ECB",
@@ -314,11 +311,12 @@ const CreateTrailerPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row>
-                  <Col md={4}>
+                <Row className="px-5">
+                  <Col md={3} style={{ marginRight: "20px" }}>
                     <FormGroup>
                       <Label for="exampleplateState">Plate State</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampleplateState"
                         name="plateState"
@@ -333,11 +331,12 @@ const CreateTrailerPage = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col md={4}></Col>
-                  <Col md={4}>
+                  <Col md={3}></Col>
+                  <Col md={3} className="px-4">
                     <FormGroup>
                       <Label for="examplepurchaseprice">Purchase Price</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplepurchaseprice"
                         name="purchaseprice"
@@ -353,11 +352,12 @@ const CreateTrailerPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row>
-                  <Col md={6}>
+                <Row className="px-5">
+                  <Col md={6} style={{ width: "52%" }}>
                     <FormGroup>
                       <Label for="examplenotes">Notes</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplenotes"
                         name="notes"
@@ -374,11 +374,12 @@ const CreateTrailerPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row>
-                  <Col md={6}>
+                <Row className="px-5">
+                  <Col md={6} style={{ width: "52%", marginRight: "80px" }}>
                     <FormGroup>
                       <Label for="examplehistory">Histoy</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplehistory"
                         name="history"
@@ -394,29 +395,33 @@ const CreateTrailerPage = () => {
                       />
                     </FormGroup>
                   </Col>
+                  <Col md={3} className=" mt-5">
+                    <Button
+                      size="sm"
+                      className="me-3  ps-3 pe-3"
+                      style={{
+                        color: "black",
+                        border: "1px solid #1E5367",
+                        backgroundColor: "#418ECB",
+                      }}
+                    >
+                      <BiCheck fontSize={"16px"} />
+                      Save
+                    </Button>
+                    <Button
+                      size="sm"
+                      style={{
+                        color: "red",
+                        border: "1px solid red",
+                        backgroundColor: "white",
+                      }}
+                    >
+                      <RxCross2 fontSize={"16px"} color="red" /> Cancel
+                    </Button>
+                  </Col>
                 </Row>
               </Col>
             </Row>
-            <Button
-              className="me-3  ps-3 pe-3"
-              style={{
-                color: "black",
-                border: "1px solid #1E5367",
-                backgroundColor: "#B7D1E6",
-              }}
-            >
-              <BiCheck fontSize={"24px"} />
-              Save
-            </Button>
-            <Button
-              style={{
-                color: "red",
-                border: "1px solid red",
-                backgroundColor: "white",
-              }}
-            >
-              <RxCross2 fontSize={"21px"} color="red" /> Cancel
-            </Button>
           </Form>
         </Container>
       </div>

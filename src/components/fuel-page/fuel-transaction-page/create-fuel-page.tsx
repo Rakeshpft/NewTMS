@@ -14,27 +14,9 @@ import {
 } from "reactstrap";
 import { Header } from "../../header";
 import Profile from "../../pofile";
-import SearchPage from "../../search-page";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
-
-type FormState = {
-  driver: string;
-  addnew: string;
-  additionalPayee: string;
-  fuelCard: string;
-  date: string;
-  amount: string;
-  ifta: string;
-  city: string;
-  state: string;
-  unitGallons: string;
-  productCode: string;
-  zip: string;
-  truck: string;
-  trailer: string;
-  notes: string;
-};
+import { fuelTransaction } from "../../tms-object/fuelpage";
 
 type FormAction =
   | { type: "SET_driver"; payload: string }
@@ -53,7 +35,10 @@ type FormAction =
   | { type: "SET_trailer"; payload: string }
   | { type: "SET_notes"; payload: string };
 
-const formReducer = (state: FormState, action: FormAction) => {
+const formReducer = (
+  state: fuelTransaction,
+  action: FormAction
+): fuelTransaction => {
   switch (action.type) {
     case "SET_driver":
       return { ...state, driver: action.payload };
@@ -90,7 +75,7 @@ const formReducer = (state: FormState, action: FormAction) => {
   }
 };
 
-const initialState: FormState = {
+const initialState: fuelTransaction = {
   driver: "",
   addnew: "",
   additionalPayee: "",
@@ -120,8 +105,7 @@ const CreateFuelTransactionPage = () => {
   return (
     <>
       <Navbar
-        style={{ border: "1px solid #1B56AE" }}
-        color="light"
+        style={{ border: "1px solid #1B56AE", backgroundColor: "#E9F3FB" }}
         className="py-0"
       >
         <Header
@@ -130,30 +114,23 @@ const CreateFuelTransactionPage = () => {
           }}
           showHambuger={false}
         />
-        <NavbarBrand>New Fuel Transaction</NavbarBrand>
+        <NavbarBrand className="fw-bold">New Fuel Transaction</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
-          <SearchPage />
           <Profile />
         </div>
       </Navbar>
-      <div className="m-2">
-        <Container
-          fluid
-          style={{ backgroundColor: "#E9F3FB" }}
-          className="mt-1 px-5 py-2"
-        >
-          <h2 style={{ color: "rgb(66 111 177)", fontWeight: "bold" }}>
-            Create New Fuel Transaction
-          </h2>
-          <Form onSubmit={handleSubmit}>
+      <div className="py-2 fuelcardmain">
+        <Container className="mt-4 px-5 py-2">
+          <Form onSubmit={handleSubmit} className="fuelcarditem">
             <Row>
-              <Col>
+              <Col className="px-5">
                 <Row>
                   <Col md={3}>
                     <FormGroup>
                       <Label for="exampledriver">Driver</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         type="text"
                         value={state.driver}
@@ -171,6 +148,7 @@ const CreateFuelTransactionPage = () => {
                     <FormGroup>
                       <Label for="exampleaddnew">Additional Payee</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         type="text"
                         value={state.addnew}
@@ -187,6 +165,7 @@ const CreateFuelTransactionPage = () => {
                     <FormGroup>
                       <Label for="examplefuelCard">Fuel Card</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         type="text"
                         value={state.fuelCard}
@@ -205,6 +184,7 @@ const CreateFuelTransactionPage = () => {
                     <FormGroup>
                       <Label for="exampledate">Date</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampledate"
                         name="date"
@@ -223,6 +203,7 @@ const CreateFuelTransactionPage = () => {
                     <FormGroup>
                       <Label for="exampleamount">Amount, $</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampleamount"
                         name="amount"
@@ -260,6 +241,7 @@ const CreateFuelTransactionPage = () => {
                     <FormGroup>
                       <Label for="examplecity">City</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplecity"
                         name="city"
@@ -278,6 +260,7 @@ const CreateFuelTransactionPage = () => {
                     <FormGroup>
                       <Label for="examplestate">State</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplestate"
                         name="state"
@@ -296,6 +279,7 @@ const CreateFuelTransactionPage = () => {
                     <FormGroup>
                       <Label for="exampleunit">Unit, Gallons</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampleunit"
                         name="unitGallons"
@@ -314,6 +298,7 @@ const CreateFuelTransactionPage = () => {
                     <FormGroup>
                       <Label for="examplecproductCode">Product Code</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplecproductCode"
                         name="productCode"
@@ -334,6 +319,7 @@ const CreateFuelTransactionPage = () => {
                     <FormGroup>
                       <Label for="examplezip">Zip</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplezip"
                         name="zip"
@@ -354,6 +340,7 @@ const CreateFuelTransactionPage = () => {
                     <FormGroup>
                       <Label for="exampletruck">Truck</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampletruck"
                         name="truck"
@@ -372,6 +359,7 @@ const CreateFuelTransactionPage = () => {
                     <FormGroup>
                       <Label for="exampletrailer">Trailer</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="exampletrailer"
                         name="trailer"
@@ -392,6 +380,7 @@ const CreateFuelTransactionPage = () => {
                     <FormGroup>
                       <Label for="examplenotes">Notes</Label>
                       <Input
+                        bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}
                         id="examplenotes"
                         name="notes"
@@ -408,28 +397,34 @@ const CreateFuelTransactionPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
+                <Row>
+                  <Col className="d-flex justify-content-end mt-4">
+                    <Button
+                      className="me-3"
+                      size="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #1E5367",
+                        backgroundColor: "#418ECB",
+                      }}
+                    >
+                      <BiCheck fontSize={"16px"} />
+                      Save
+                    </Button>
+                    <Button
+                      size="sm"
+                      style={{
+                        color: "red",
+                        border: "1px solid red",
+                        backgroundColor: "white",
+                      }}
+                    >
+                      <RxCross2 fontSize={"16px"} color="red" /> Cancel
+                    </Button>
+                  </Col>
+                </Row>
               </Col>
             </Row>
-            <Button
-              className="me-3  ps-3 pe-3"
-              style={{
-                color: "black",
-                border: "1px solid #1E5367",
-                backgroundColor: "#B7D1E6",
-              }}
-            >
-              <BiCheck fontSize={"24px"} />
-              Save
-            </Button>
-            <Button
-              style={{
-                color: "red",
-                border: "1px solid red",
-                backgroundColor: "white",
-              }}
-            >
-              <RxCross2 fontSize={"21px"} color="red" /> Cancel
-            </Button>
           </Form>
         </Container>
       </div>

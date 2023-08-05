@@ -37,8 +37,8 @@ const FuelPage = () => {
             style={{ backgroundColor: "#B7D1E6", color: "black" }}
             to="/createfuelpage"
           >
-            New Fuel Card
             <AiOutlinePlus />
+            New Fuel Card
           </Link>
           <Profile />
         </div>

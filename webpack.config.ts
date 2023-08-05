@@ -64,6 +64,20 @@ export default (_env: Record<string, any>, argv: any): Configuration => ({
         use: ["html-loader"],
       },
       {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "babel-loader"
+          },
+          {
+            loader: "react-svg-loader",
+            options: {
+              jsx: true // true outputs JSX tags
+            }
+          }
+        ]
+      },
+      {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
       },
