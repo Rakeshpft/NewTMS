@@ -26,8 +26,7 @@ const dashboardTiles = {
         "En-Route": 15,
         Delivered: 21,
       },
-      icon: "./assets/conveyor-belt.svg",
-      // icon: "../../assets/conveyor-belt.svg",
+      icon: require("../../../public/assets/conveyor-belt.svg"),
       options: [
         {
           title: null,
@@ -35,13 +34,12 @@ const dashboardTiles = {
           options: [
             {
               title: "Create A Load",
-              icon: "../../../public/assets/create-a-load.svg",
-              // icon:"../../icons/create-a-load.png",
+              icon: require("../../../public/assets/create-a-load.svg"),
               link: "/createload",
             },
             {
               title: "View Existing Loads",
-              icon: "./assets/view-existing-loads.svg",
+              icon: require("../../../public/assets/view-existing-loads.svg"),
               link: "/loadpage",
             },
           ],
@@ -54,7 +52,7 @@ const dashboardTiles = {
         Hired: 83,
         Terminated: 21,
       },
-      icon: "./assets/truck-driver.svg",
+      icon: require("../../../public/assets/truck-driver.svg"),
       options: [
         {
           title: null,
@@ -291,22 +289,22 @@ const dashboardTiles = {
   smallTiles: [
     {
       name: "Users",
-      icon: "./assets/users.svg",
+      icon: require("../../../public/assets/users.svg"),
       link: "/users",
     },
     {
       name: "Data Library",
-      icon: "./assets/data-library.svg",
+      icon: require("../../../public/assets/data-library.svg"),
       link: "/data-library",
     },
     {
       name: "Doc Exchange",
-      icon: "./assets/docs-exchange.svg",
+      icon: require("../../../public/assets/docs-exchange.svg"),
       link: "/docs-exchange",
     },
     {
       name: "IFTA",
-      icon: "./assets/agreement.svg",
+      icon: require("../../../public/assets/agreement.svg"),
       link: "/ifta",
     },
   ],
@@ -330,7 +328,7 @@ export default function DashboardPage() {
                 className="d-flex align-items-center gap-1 px-3 shadow-lg rounded-pill"
               >
                 <img
-                  src="./assets/help.svg"
+                  src={require("../../../public/assets/help.svg")}
                   alt=""
                   height={24}
                   width={24}

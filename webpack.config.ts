@@ -69,13 +69,20 @@ export default (_env: Record<string, any>, argv: any): Configuration => ({
         use: ["html-loader"],
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/,
-        loader: "file-loader",
-      },
-      {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
       },
+      // {
+      //   test: /\.svg$/,
+      //   use: [
+      //     {
+      //       loader: "svg-url-loader", // or 'file-loader' if you chose that
+      //       options: {
+      //         limit: 8192, // You can adjust the limit as per your requirements
+      //       },
+      //     },
+      //   ],
+      // },
       {
         test: /\.less$/,
         use: [
@@ -93,12 +100,10 @@ export default (_env: Record<string, any>, argv: any): Configuration => ({
     extensions: [".tsx", ".ts", ".js"],
   },
   output: {
-    // filename: "bundle.js",
-    // path: path.resolve(__dirname, "dist"),
-    // publicPath: "/",
-    // assetModuleFilename: "images/[hash][ext][query]",
-    filename: "[name].[contenthash].js",
+    filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
+    assetModuleFilename: "images/[hash][ext][query]",
   },
   plugins: [
     new CleanWebpackPlugin(),
