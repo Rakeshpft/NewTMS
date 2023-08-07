@@ -52,7 +52,7 @@ const dashboardTiles = {
         Hired: 83,
         Terminated: 21,
       },
-      icon: require("../../../public/icons//truck-driver.png"),
+      icon: require("../../../public/icons/truck-driver.png"),
       options: [
         {
           title: null,
@@ -60,12 +60,12 @@ const dashboardTiles = {
           options: [
             {
               title: "Create a Profile",
-              icon: "./assets/create-a-load.svg",
+              icon: require("../../../public/icons/create-a-load.png"),
               link: "/createdriver",
             },
             {
               title: "View Drivers",
-              icon: "./assets/view-existing-loads.svg",
+              icon: require("../../../public/icons/view-existing-loads.png"),
               link: "/driverpage",
             },
           ],
@@ -78,36 +78,36 @@ const dashboardTiles = {
         Customers: 12,
         Vendors: 15,
       },
-      icon: "./assets/partner-exchange-rounded.svg",
+      icon: require("../../../public/icons/partner-exchange-rounded.png"),
       options: [
         {
           title: "Customers",
-          icon: "./assets/partners-s.svg",
+          icon: require("../../../public/icons/users.png"),
           options: [
             {
               title: "Add New Customer",
-              icon: "./assets/create-a-load.svg",
+              icon: require("../../../public/icons/create-a-load.png"),
               link: "/createcustomer",
             },
             {
               title: "View All Customers",
-              icon: "./assets/view-existing-loads.svg",
+              icon: require("../../../public/icons/view-existing-loads.png"),
               link: "/partners/customers",
             },
           ],
         },
         {
           title: "Vendors",
-          icon: "./assets/partners-vendors.svg",
+          icon: require("../../../public/icons/partners-vendors.png"),
           options: [
             {
               title: "Add New Vendor",
-              icon: "./assets/create.svg",
+              icon: require("../../../public/icons/create.png"),
               link: "/createvendor",
             },
             {
               title: "View All Vendors",
-              icon: "./assets/view-existing-vendors.svg",
+              icon: require("../../../public/icons/view-existing-vendors.png"),
               link: "/partners/vendors",
             },
           ],
@@ -120,36 +120,36 @@ const dashboardTiles = {
         Trucks: 19,
         Trailers: 24,
       },
-      icon: "./assets/mdi_tools.svg",
+      icon: require("../../../public/icons/mdi_tools.png"),
       options: [
         {
           title: "Trucks",
-          icon: "./assets/create-a-load.svg",
+          icon: require("../../../public/icons/create-a-load.png"),
           options: [
             {
               title: "Add New Truck",
-              icon: "./assets/create-a-load.svg",
+              icon: require("../../../public/icons/create-a-load.png"),
               link: "/createnewtruck",
             },
             {
               title: "View All Trucks",
-              icon: "./assets/view-existing-loads.svg",
+              icon: require("../../../public/icons/view-existing-loads.png"),
               link: "/equipments/trucks",
             },
           ],
         },
         {
           title: "Trailers",
-          icon: "./assets/view-existing-loads.svg",
+          icon: require("../../../public/icons/view-existing-loads.png"),
           options: [
             {
               title: "Add New Trailer",
-              icon: "./assets/create.svg",
+              icon: require("../../../public/icons/create.png"),
               link: "/createnewtrailers",
             },
             {
               title: "View All Trailers",
-              icon: "./assets/view-existing-vendors.svg",
+              icon: require("../../../public/icons/view-existing-vendors.png"),
               link: "/equipments/trailers",
             },
           ],
@@ -160,47 +160,47 @@ const dashboardTiles = {
   mediumTiles: [
     {
       title: "Fuel",
-      icon: "./assets/fuel.svg",
+      icon: require("../../../public/icons/fuel.png"),
       options: [
         {
           title: "Fuel Card",
-          icon: "./assets/create-a-load.svg",
+          icon: require("../../../public/icons/create-a-load.png"),
           options: [
             {
               title: "Add New Fuel Card",
-              icon: "./assets/create-a-load.svg",
+              icon: require("../../../public/icons/create-a-load.png"),
               link: "/createfuelpage",
             },
             {
               title: "View All Fuel Card",
-              icon: "./assets/view-existing-loads.svg",
+              icon: require("../../../public/icons/view-existing-loads.png"),
               link: "/fuel/fuelcard",
             },
           ],
         },
         {
           title: "Fuel Transactions",
-          icon: "./assets/create-a-load.svg",
+          icon: require("../../../public/icons/create-a-load.png"),
           options: [
             {
               title: "Add New Fuel Transaction",
-              icon: "./assets/create-a-load.svg",
+              icon: require("../../../public/icons/create-a-load.png"),
               link: "/createfueltransaction",
             },
             {
               title: "View All Fuel Transaction",
-              icon: "./assets/view-existing-loads.svg",
+              icon: require("../../../public/icons/view-existing-loads.png"),
               link: "/fuel/fueltransaction",
             },
           ],
         },
         {
           title: "Fuel Import",
-          icon: "./assets/create-a-load.svg",
+          icon: require("../../../public/icons/create-a-load.png"),
           options: [
             {
               title: "View All Fuel Import",
-              icon: "./assets/view-existing-loads.svg",
+              icon: require("../../../public/icons/view-existing-loads.png"),
               link: "/fuel/fuelimport",
             },
           ],
@@ -209,7 +209,7 @@ const dashboardTiles = {
     },
     {
       title: "Driver Payroll",
-      icon: "./assets/driver-payroll.svg",
+      icon: require("../../../public/icons/driver-payroll.png"),
       options: [
         {
           title: null,
@@ -217,12 +217,12 @@ const dashboardTiles = {
           options: [
             {
               title: "Add New Driver Payroll",
-              icon: "./assets/create-a-load.svg",
+              icon: require("../../../public/icons/create-a-load.png"),
               link: "/createdriverpayroll",
             },
             {
               title: "View All Driver Payroll",
-              icon: "./assets/view-existing-loads.svg",
+              icon: require("../../../public/icons/view-existing-loads.png"),
               link: "/driverpayroll",
             },
           ],
@@ -231,31 +231,31 @@ const dashboardTiles = {
     },
     {
       title: "Accounts",
-      icon: "./assets/accounts.svg",
+      icon: require("../../../public/icons/accounts.png"),
       options: [
         {
           title: "Billing Entries",
-          icon: "./assets/create-a-load.svg",
+          icon: require("../../../public/icons/create-a-load.png"),
           options: [
             {
               title: "Add New Billing Entry",
-              icon: "./assets/create-a-load.svg",
+              icon: require("../../../public/icons/create-a-load.png"),
               link: "/createbillingpage",
             },
             {
               title: "View All Billing Entry",
-              icon: "./assets/view-existing-loads.svg",
+              icon: require("../../../public/icons/view-existing-loads.png"),
               link: "/accounts/billing",
             },
           ],
         },
         {
           title: "Vendor Balances",
-          icon: "./assets/view-existing-loads.svg",
+          icon: "../../../public/icons/view-existing-loads.png",
           options: [
             {
               title: "View All Vendor Balance",
-              icon: "./assets/view-existing-loads.svg",
+              icon: require("../../../public/icons/view-existing-loads.png"),
               link: "/accounts/vendorbalance",
             },
           ],
@@ -264,7 +264,7 @@ const dashboardTiles = {
     },
     {
       title: "Reports",
-      icon: "./assets/reports.svg",
+      icon: require("../../../public/icons/reports.png"),
       options: [
         {
           title: null,
@@ -272,12 +272,12 @@ const dashboardTiles = {
           options: [
             {
               title: "Add New Report",
-              icon: "./assets/create-a-load.svg",
+              icon: require("../../../public/icons/create-a-load.png"),
               link: "/",
             },
             {
               title: "View All Report",
-              icon: "./assets/view-existing-loads.svg",
+              icon: require("../../../public/icons/view-existing-loads.png"),
               link: "/",
             },
           ],
@@ -341,7 +341,7 @@ export default function DashboardPage() {
                 className="d-flex align-items-center gap-1 px-3 shadow-lg rounded-pill"
               >
                 <img
-                  src="./assets/safety.svg"
+                  src={require("../../../public/icons/safety.png")}
                   alt=""
                   height={24}
                   width={24}
@@ -354,7 +354,7 @@ export default function DashboardPage() {
                 className="d-flex align-items-center gap-1 px-3 shadow-lg rounded-pill"
               >
                 <img
-                  src="./assets/settings.svg"
+                  src={require("../../../public/icons/setting-one.png")}
                   alt=""
                   height={24}
                   width={24}
@@ -383,7 +383,7 @@ export default function DashboardPage() {
                 <div className="section-header d-flex justify-content-between p-2">
                   <div className="d-flex align-items-center gap-2">
                     <img
-                      src="../assets/Ic-Overview.svg"
+                      src={require("../../../public/icons/Ic-Overview.png")}
                       alt="Image"
                       width={32}
                       height={32}
