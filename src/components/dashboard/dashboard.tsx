@@ -35,7 +35,8 @@ const dashboardTiles = {
           options: [
             {
               title: "Create A Load",
-              icon: "../../assets/create-a-load.svg",
+              icon: "../../../public/assets/create-a-load.svg",
+              // icon:"../../icons/create-a-load.png",
               link: "/createload",
             },
             {
@@ -328,7 +329,12 @@ export default function DashboardPage() {
                 size="sm"
                 className="d-flex align-items-center gap-1 px-3 shadow-lg rounded-pill"
               >
-                <img src="./assets/help.svg" alt="" height={24} width={24}></img>
+                <img
+                  src="./assets/help.svg"
+                  alt=""
+                  height={24}
+                  width={24}
+                ></img>
                 <span>Help</span>
               </Button>
               <Button
