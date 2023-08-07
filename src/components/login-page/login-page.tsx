@@ -41,7 +41,7 @@ const reducer = (state: any, action: any) => {
 const LoginPage = ({ loginStatus }: LoginPageProps) => {
   const [state, dispatch] = useReducer(reducer, {
     errordata: { email: "", password: "" },
-    formdata: { email: "", password: "" },
+    formdata: { email: "tms@gmail.com", password: "1234" },
     spinner: false,
   });
 

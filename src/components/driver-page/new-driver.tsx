@@ -123,7 +123,6 @@ const initialState: driverpage = {
 const NewDriver = () => {
   const [state, dispatch] = useReducer(formReducer, initialState);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  // const [image, setImage] = useState({ preview: "", raw: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -171,7 +170,21 @@ const NewDriver = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col></Col>
+                  <Col>
+                    <img
+                      src={require("../../../public/images/user-avatar.png")}
+                      height={50}
+                      width={50}
+                      className="mt-2"
+                    />
+                    <Label>Upload Photo</Label>
+                    <Input
+                      id="exampleFile"
+                      name="file"
+                      type="file"
+                      style={{ display: "none" }}
+                    />
+                  </Col>
                 </Row>
                 <Row>
                   <Col>
@@ -785,7 +798,7 @@ const NewDriver = () => {
               <Col
                 md={4}
                 className="driverbutton d-flex justify-content-end align-self-end"
-                style={{ bottom: "0", right: "0"}}
+                style={{ bottom: "0", right: "0" }}
               >
                 <Button
                   className="me-3"
