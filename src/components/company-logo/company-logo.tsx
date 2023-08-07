@@ -13,16 +13,12 @@ const CompanyLogo = ({ height, shrinkOnSmallScreen }: CompanyLogoProps) => {
     <>
       {below576 && shrinkOnSmallScreen ? (
         <img
-          src="/images/tmslogo.png"
+          src="../../public/images/tmslogo.png"
           alt="company-logo"
           height={height}
         />
       ) : (
-        <img
-          src="/images/tmslogo.png"
-          alt="company-logo"
-          height={height}
-        />
+        <img src="/images/tmslogo.png" alt="company-logo" height={height} />
       )}
     </>
   );

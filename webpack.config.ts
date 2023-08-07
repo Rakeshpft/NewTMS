@@ -44,6 +44,11 @@ export default (_env: Record<string, any>, argv: any): Configuration => ({
         ],
       },
       {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ["@svgr/webpack"],
+      },
+      {
         test: /\.tsx?$/i,
         exclude: /node_modules/,
         use: "ts-loader",
@@ -62,20 +67,6 @@ export default (_env: Record<string, any>, argv: any): Configuration => ({
       {
         test: /\.html$/,
         use: ["html-loader"],
-      },
-      {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: "babel-loader"
-          },
-          {
-            loader: "react-svg-loader",
-            options: {
-              jsx: true // true outputs JSX tags
-            }
-          }
-        ]
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,

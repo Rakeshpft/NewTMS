@@ -23,7 +23,7 @@ const FuelPage = () => {
         />
         <NavbarBrand>Fuel Cards</NavbarBrand>
         <Nav className="me-auto" navbar>
-          <div className="d-flex">
+          <div className="d-flex gap-2">
             <NavItem>Export</NavItem>
             <Link to={"#"}>
               <AiOutlineFileExcel className="text-success fs-4" />

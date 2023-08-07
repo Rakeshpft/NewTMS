@@ -26,17 +26,19 @@ const Customer = () => {
         />
         <NavbarBrand>Customers</NavbarBrand>
         <Nav className="me-auto" navbar>
-          <div className="d-flex">
-            <NavItem className="px-2">Export</NavItem>
-            <Link to={"#!"}>
-              <PiFilePdfDuotone className="me-2 text-danger fs-4" />
-            </Link>
-            <Link to={"#"}>
-              <AiOutlineFileExcel className="text-success fs-4" />
-            </Link>
-            <Link to={"#!"}>
-              <MdOutgoingMail className="fs-4" />
-            </Link>
+          <div className="d-flex gap-2">
+            <NavItem>Export</NavItem>
+            <div className="d-flex justify-content-between gap-2">
+              <Link to={"#!"}>
+                <PiFilePdfDuotone className="text-danger fs-4" />
+              </Link>
+              <Link to={"#"}>
+                <AiOutlineFileExcel className="text-success fs-4" />
+              </Link>
+              <Link to={"#!"}>
+                <MdOutgoingMail className="fs-4" />
+              </Link>
+            </div>
           </div>
         </Nav>
         <div className="d-flex align-items-center gap-3">
