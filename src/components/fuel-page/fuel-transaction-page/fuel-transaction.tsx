@@ -26,6 +26,7 @@ import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlinePlus } from "react-icons/ai";
+import { PiPencilBold } from "react-icons/pi";
 
 const FuelTransaction = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -396,14 +397,26 @@ const FuelTransaction = () => {
           <div>
             <Form>
               <FormGroup check>
-                <Input type="checkbox" />
-                {/* <AiOutlineDown /> */}
+                <Input
+                  type="checkbox"
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    color: "black",
+                    border: "1px solid #418ECB",
+                  }}
+                />
                 <Dropdown
                   isOpen={dropdownOpen}
                   toggle={toggle}
                   className="d-flex gap-2"
                 >
-                  <DropdownToggle style={{ backgroundColor: "#1B56AE" }} caret>
+                  <DropdownToggle
+                    style={{ backgroundColor: "#1B56AE" }}
+                    caret
+                    size="sm"
+                  >
+                    <PiPencilBold fontSize={"13px"} />
                     Generate Driver deductions
                   </DropdownToggle>
                   <DropdownMenu>
@@ -411,7 +424,12 @@ const FuelTransaction = () => {
                     <DropdownItem>Some Action</DropdownItem>
                     <DropdownItem text>Dropdown Item Text</DropdownItem>
                   </DropdownMenu>
-                  <DropdownToggle style={{ backgroundColor: "#0B8E00" }} caret>
+                  <DropdownToggle
+                    style={{ backgroundColor: "#0B8E00" }}
+                    caret
+                    size="sm"
+                  >
+                    <BiCheck fontSize={"20px"} />
                     Marks as 'Included in IFTA'
                   </DropdownToggle>
                   <DropdownMenu>
