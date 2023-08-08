@@ -15,6 +15,10 @@ import {
   FormGroup,
   Label,
   Form,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
 } from "reactstrap";
 import { Header, SideBar } from "../../header";
 import Profile from "../../pofile";
@@ -26,6 +30,9 @@ import { AiOutlinePlus } from "react-icons/ai";
 const FuelTransaction = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   function searchToggle(): void {
     console.log("search");
@@ -78,9 +85,8 @@ const FuelTransaction = () => {
             style={{ backgroundColor: "#B7D1E6", color: "black" }}
             to="/createfueltransaction"
           >
-              <AiOutlinePlus />
+            <AiOutlinePlus />
             New Fuel Transaction
-          
           </Link>
           <Profile />
         </div>
@@ -387,7 +393,36 @@ const FuelTransaction = () => {
               </Card>
             </Collapse>
           )}
-
+          <div>
+            <Form>
+              <FormGroup check>
+                <Input type="checkbox" />
+                {/* <AiOutlineDown /> */}
+                <Dropdown
+                  isOpen={dropdownOpen}
+                  toggle={toggle}
+                  className="d-flex gap-2"
+                >
+                  <DropdownToggle style={{ backgroundColor: "#1B56AE" }} caret>
+                    Generate Driver deductions
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem header>Header</DropdownItem>
+                    <DropdownItem>Some Action</DropdownItem>
+                    <DropdownItem text>Dropdown Item Text</DropdownItem>
+                  </DropdownMenu>
+                  <DropdownToggle style={{ backgroundColor: "#0B8E00" }} caret>
+                    Marks as 'Included in IFTA'
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem header>Header</DropdownItem>
+                    <DropdownItem>Some Action</DropdownItem>
+                    <DropdownItem text>Dropdown Item Text</DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </FormGroup>
+            </Form>
+          </div>
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>

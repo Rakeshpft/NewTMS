@@ -163,7 +163,21 @@ const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps) => {
                         />
                       </FormGroup>
                     </Col>
-                    <Col></Col>
+                    <Col>
+                      <img
+                        src={require("../../../../public/images/user-avatar.png")}
+                        height={50}
+                        width={50}
+                        className="mt-2"
+                      />
+                      <Label>Upload Photo</Label>
+                      <Input
+                        id="exampleFile"
+                        name="file"
+                        type="file"
+                        style={{ display: "none" }}
+                      />
+                    </Col>
                   </Row>
                   <Row>
                     <Col>
