@@ -281,7 +281,7 @@ const DriverPayRoll = () => {
           <Form>
             <FormGroup check>
               <Input type="checkbox" />
-              <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+              <Dropdown isOpen={dropdownOpen} toggle={toggle} size="sm">
                 <DropdownToggle style={{ backgroundColor: "#0B8E00" }} caret>
                   Batch Actions
                 </DropdownToggle>
