@@ -623,7 +623,7 @@ const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps) => {
                 </Col>
               </Row>
               <Row className="mt-3">
-                <Col md={8}>
+                <Col md={10}>
                   <TabPage
                     tabTitles={[
                       "Pay Rates",
@@ -845,7 +845,6 @@ const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps) => {
                     </TabPane>
                   </TabPage>
                 </Col>
-                <Col md={4}></Col>
               </Row>
             </Form>
           </Container>
