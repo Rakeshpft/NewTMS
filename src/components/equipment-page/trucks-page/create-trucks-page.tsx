@@ -269,7 +269,7 @@ const CreateTruckPage = () => {
                 <Row>
                   <Col sm={3}>
                     <FormGroup>
-                      <Label for="examplemodal">Modal</Label>
+                      <Label for="examplemodal">Model</Label>
                       <Input
                         bsSize="sm"
                         style={{ color: "black", border: "1px solid #418ECB" }}

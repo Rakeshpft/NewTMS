@@ -151,7 +151,7 @@ const LoginPage = ({ loginStatus }: LoginPageProps) => {
                           to={"/forgetpassword"}
                           className="px-0 btn btn-link text-decoration-none"
                         >
-                          Forget Password
+                          Forgot Password
                         </Link>
                       </FormGroup>
                       <FormGroup className="text-center">
