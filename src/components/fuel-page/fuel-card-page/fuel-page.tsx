@@ -32,11 +32,7 @@ const FuelPage = () => {
         </Nav>
         <div className="d-flex align-items-center gap-3">
           <SearchPage />
-          <Link
-            className="btn btn-secondary"
-            style={{ backgroundColor: "#B7D1E6", color: "black" }}
-            to="/createfuelpage"
-          >
+          <Link className="btn buttonLink" to="/createfuelpage">
             <AiOutlinePlus />
             New Fuel Card
           </Link>

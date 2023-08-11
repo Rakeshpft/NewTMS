@@ -6,6 +6,7 @@ import {
   Button,
   Card,
   CardBody,
+  Col,
   Collapse,
   Form,
   FormGroup,
@@ -17,6 +18,7 @@ import {
   Navbar,
   NavbarBrand,
   NavItem,
+  Row,
   Table,
 } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -91,11 +93,7 @@ const DriverPage = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link
-            className="btn btn-secondary"
-            style={{ backgroundColor: "#B7D1E6", color: "black" }}
-            to="/createdriver"
-          >
+          <Link className="btn buttonLink" to="/createdriver">
             <AiOutlinePlus />
             New Driver
           </Link>
@@ -107,22 +105,26 @@ const DriverPage = () => {
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>
-              <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
+              <Card style={{ backgroundColor: "#E9F3FB" }}>
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex align-items-center gap-4">
-                        <h4 className="text-info mt-2">Search Filter</h4>
+                    <Row>
+                      <Col sm={2}>
+                        <h5 className="text-info mt-4 fw-bold ">
+                          Search Filter
+                        </h5>
+                      </Col>
+                      <Col sm={2}>
                         <FormGroup>
                           <Label for="exampleSelect">Type</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="select"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           >
                             <option>1</option>
@@ -132,16 +134,18 @@ const DriverPage = () => {
                             <option>5</option>
                           </Input>
                         </FormGroup>
+                      </Col>
+                      <Col sm={2}>
                         <FormGroup>
                           <Label for="exampleSelect">Status</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="select"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           >
                             <option>1</option>
@@ -151,30 +155,32 @@ const DriverPage = () => {
                             <option>5</option>
                           </Input>
                         </FormGroup>
-                      </div>
-                      <div>
+                      </Col>
+                      <Col sm={6} className="mt-4 driver-button">
                         <Button
-                          className="me-3  ps-3 pe-3"
+                          className="me-3"
+                          size="sm"
                           style={{
                             color: "black",
                             border: "1px solid #1E5367",
                             backgroundColor: "#418ECB",
                           }}
                         >
-                          <BiCheck fontSize={"24px"} />
+                          <BiCheck fontSize={"16px"} />
                           Apply
                         </Button>
                         <Button
+                          size="sm"
                           style={{
                             color: "red",
                             border: "1px solid red",
                             backgroundColor: "white",
                           }}
                         >
-                          <RxCross2 fontSize={"21px"} color="red" /> Clear
+                          <RxCross2 fontSize={"16px"} color="red" /> Clear
                         </Button>
-                      </div>
-                    </div>
+                      </Col>
+                    </Row>
                   </Form>
                 </CardBody>
               </Card>

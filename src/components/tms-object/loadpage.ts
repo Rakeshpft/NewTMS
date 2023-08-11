@@ -13,4 +13,5 @@ export interface LoadPage {
   trailer: string;
   rate: string;
   po: string;
+  period?: string;
 }

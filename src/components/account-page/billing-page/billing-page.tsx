@@ -15,6 +15,8 @@ import {
   InputGroupText,
   Label,
   Form,
+  Col,
+  Row,
 } from "reactstrap";
 import { Header, SideBar } from "../../header";
 import Profile from "../../pofile";
@@ -73,14 +75,9 @@ const BillingPage = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link
-            className="btn btn-secondary"
-            style={{ backgroundColor: "#B7D1E6", color: "black" }}
-            to="/createbillingpage"
-          >
+          <Link className="btn buttonLink" to="/createbillingpage">
             <AiOutlinePlus />
             New Billing Entry
-            
           </Link>
           <Profile />
         </div>
@@ -93,196 +90,220 @@ const BillingPage = () => {
               <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
-                    <div className="align-items-center justify-content-between">
-                      <div className="align-items-center gap-4">
-                        <h4 className="text-info mt-2">Search Filter</h4>
-                        <div className="d-flex align-items-center gap-4">
-                          <FormGroup>
-                            <Label for="exampleSelect">Type</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            >
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                            </Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">Status</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            >
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                            </Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">Load#</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="text"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            ></Input>
-                          </FormGroup>
-                        </div>
-
-                        <div className="d-flex align-items-center gap-4">
-                          <FormGroup>
-                            <Label for="exampleSelect">Amount Range:To</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="text"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            ></Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">Amount Range:Form</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="text"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            ></Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">Date Range:To</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="date"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            ></Input>
-                          </FormGroup>
-
-                          <FormGroup>
-                            <Label for="exampleSelect">Date Range:Form</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="date"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            ></Input>
-                          </FormGroup>
-                        </div>
-                        <div className="d-flex align-items-center gap-4">
-                          <FormGroup>
-                            <Label for="exampleSelect">Settlement</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="text"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            ></Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">Category</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="text"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            ></Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">Partner</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            >
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                            </Input>
-                          </FormGroup>
-                          <FormGroup>
-                            <Label for="exampleSelect">Driver</Label>
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                                width: "220px",
-                              }}
-                            >
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                            </Input>
-                          </FormGroup>
-                          <div className="align-items-center justify-content-between">
+                    <Row>
+                      <Col>
+                        <h5 className="fw-bold text-info">Search Filter</h5>
+                        <Row>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Type</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="select"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              >
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                              </Input>
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Status</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="select"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              >
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                              </Input>
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Load#</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="text"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Amount Range:To</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="text"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">
+                                Amount Range:Form
+                              </Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="text"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Date Range:To</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="date"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Date Range:Form</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="date"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Settlement</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="text"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Category</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="text"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Partner</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="select"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              >
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                              </Input>
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Driver</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="select"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              >
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                              </Input>
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2} className="mt-4">
                             <Button
+                              size="sm"
                               className="me-3"
                               style={{
                                 color: "black",
                                 border: "1px solid #1E5367",
-                                backgroundColor: "#418ECB",
+                                backgroundColor: "#B7D1E6",
                               }}
                             >
                               <BiCheck fontSize={"16px"} />
                               Apply
                             </Button>
                             <Button
+                              size="sm"
                               style={{
                                 color: "red",
                                 border: "1px solid red",
@@ -291,10 +312,10 @@ const BillingPage = () => {
                             >
                               <RxCross2 fontSize={"16px"} color="red" /> Clear
                             </Button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
                   </Form>
                 </CardBody>
               </Card>

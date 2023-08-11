@@ -251,12 +251,28 @@ const dashboardTiles = {
         },
         {
           title: "Vendor Balances",
-          icon: "../../../public/icons/view-existing-loads.png",
+          icon: require("../../../public/icons/view-existing-loads.png"),
           options: [
             {
               title: "View All Vendor Balance",
               icon: require("../../../public/icons/view-existing-loads.png"),
               link: "/accounts/vendorbalance",
+            },
+          ],
+        },
+        {
+          title: "Additions/Deductions",
+          icon: require("../../../public/icons/accounts.png"),
+          options: [
+            {
+              title: "Add New Addition/Deduction Entry",
+              icon: require("../../../public/icons/create-a-load.png"),
+              link: "/createadditions",
+            },
+            {
+              title: "View All Additions/Deductions",
+              icon: require("../../../public/icons/view-existing-loads.png"),
+              link: "/accounts/additions",
             },
           ],
         },
@@ -378,44 +394,43 @@ export default function DashboardPage() {
         <Row>
           <Col md="6">
             <h4 className="text-info fw-bold mb-3">Analytics</h4>
-            <Card style={{ border: "1px solid #418ecb" }}>
-              <Card>
-                <div className="section-header d-flex justify-content-between p-2">
-                  <div className="d-flex align-items-center gap-2">
-                    <img
-                      src={require("../../../public/icons/Ic-Overview.png")}
-                      alt="Image"
-                      width={32}
-                      height={32}
-                    />
-                    <h5 className="text-info fw-bold mb-0">Sales Report</h5>
-                  </div>
-
-                  <div className="d-flex gap-3">
-                    <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                      <DropdownToggle
-                        caret
-                        style={{ color: "#418ECB", background: "transparent" }}
-                      >
-                        Monthly
-                      </DropdownToggle>
-                      <DropdownMenu>
-                        <DropdownItem header>Header</DropdownItem>
-                        <DropdownItem>Some Action</DropdownItem>
-                        <DropdownItem text>Dropdown Item Text</DropdownItem>
-                      </DropdownMenu>
-                    </Dropdown>
-                    <Button
-                      style={{ color: "#418ECB", background: "transparent" }}
-                      className="d-flex gap-2 align-items-center"
-                    >
-                      Download Report
-                      <FiDownload />
-                    </Button>
-                  </div>
+            <Card className="dashboard-card">
+              <div className="section-header d-flex justify-content-between p-2">
+                <div className="d-flex align-items-center gap-2">
+                  <img
+                    src={require("../../../public/icons/Ic-Overview.png")}
+                    alt="Image"
+                    width={32}
+                    height={32}
+                  />
+                  <h5 className="text-info fw-bold mb-0">Sales Report</h5>
                 </div>
-                <section style={{ minHeight: "300px" }}></section>
-              </Card>
+
+                <div className="d-flex gap-3">
+                  <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                    <DropdownToggle
+                      caret
+                      className="dropdownDashboard"
+                      color="transparent"
+                    >
+                      Monthly
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <DropdownItem header>Header</DropdownItem>
+                      <DropdownItem>Some Action</DropdownItem>
+                      <DropdownItem text>Dropdown Item Text</DropdownItem>
+                    </DropdownMenu>
+                  </Dropdown>
+                  <Button
+                    color="transparent"
+                    className="d-flex gap-2 align-items-center TilePopUpBtn"
+                  >
+                    Download Report
+                    <FiDownload />
+                  </Button>
+                </div>
+              </div>
+              <section style={{ minHeight: "300px" }}></section>
             </Card>
           </Col>
           <Col md="6">

@@ -43,11 +43,7 @@ const Customer = () => {
         </Nav>
         <div className="d-flex align-items-center gap-3">
           <SearchPage />
-          <Link
-            className="btn btn-secondary"
-            style={{ backgroundColor: "#B7D1E6", color: "black" }}
-            to="/createcustomer"
-          >
+          <Link className="btn buttonLink" to="/createcustomer">
             <AiOutlinePlus />
             New Customer
           </Link>
@@ -64,11 +60,13 @@ const Customer = () => {
                   <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>ddress</th>
-                    <th>MC</th>
+                    <th>address</th>
                     <th>Phone</th>
-                    <th>Email</th>
-                    <th>type</th>
+                    <th>MC</th>
+                    <th>Pay-method</th>
+                    <th>Credit</th>
+                    <th>Avg. DTP</th>
+                    <th>Status</th>
                     <th>Action</th>
                     <th>*</th>
                   </tr>

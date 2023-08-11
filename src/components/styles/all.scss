@@ -73,6 +73,18 @@ form .form-label {
   flex-basis: 0;
 }
 
+.buttonLink {
+  color: black;
+  background-color: #b7d1e6;
+  border: 1px solid black;
+}
+
+.buttonLink:not(.nohover):hover {
+  border: 1px solid black;
+  background-color: #b7d1e6;
+  color: black;
+}
+
 @import "./login";
 @import "./navigation";
 @import "./dashboard";

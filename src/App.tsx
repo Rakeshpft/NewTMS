@@ -43,6 +43,10 @@ import {
   CreateFuelTransactionPage,
   FuelTransaction,
 } from "./components/fuel-page/fuel-transaction-page";
+import {
+  AdditionsPage,
+  CreateAdditionsPage,
+} from "./components/account-page/additions-page";
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -121,6 +125,11 @@ const App = () => {
               <Route
                 path={routes.createnewtrailers}
                 component={CreateTrailerPage}
+              />
+              <Route path={routes.additions} component={AdditionsPage} />
+              <Route
+                path={routes.createadditions}
+                component={CreateAdditionsPage}
               />
             </IdleTimerProvider>
           </Switch>

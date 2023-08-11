@@ -10,3 +10,18 @@
 .itemmain {
   height: calc(100vh - 100px);
 }
+
+.searchRow {
+  padding-left: 14rem;
+}
+
+.button-search {
+  position: absolute;
+  bottom: 30px;
+}
+
+.allsearch-button {
+  background-color: #b7d1e6;
+  color: #000000;
+  border: 1px solid #1e5367;
+}

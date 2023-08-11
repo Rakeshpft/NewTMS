@@ -19,6 +19,8 @@ import {
   InputGroupText,
   Label,
   Form,
+  Col,
+  Row,
 } from "reactstrap";
 import { Header, SideBar } from "../../header";
 import Profile from "../../pofile";
@@ -91,11 +93,7 @@ const TrailersPage = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link
-            className="btn btn-secondary"
-            style={{ backgroundColor: "#B7D1E6", color: "black" }}
-            to="/createnewtrailers"
-          >
+          <Link className="btn buttonLink" to="/createnewtrailers">
             <AiOutlinePlus />
             New Trailer
           </Link>
@@ -110,19 +108,23 @@ const TrailersPage = () => {
               <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex align-items-center gap-4">
-                        <h4 className="text-info mt-2">Search Filter</h4>
+                    <Row>
+                      <Col sm={2}>
+                        <h5 className="text-info mt-4 fw-bold ">
+                          Search Filter
+                        </h5>
+                      </Col>
+                      <Col sm={2}>
                         <FormGroup>
                           <Label for="exampleSelect">Status</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="select"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           >
                             <option>1</option>
@@ -132,16 +134,18 @@ const TrailersPage = () => {
                             <option>5</option>
                           </Input>
                         </FormGroup>
+                      </Col>
+                      <Col sm={2}>
                         <FormGroup>
                           <Label for="exampleSelect">Driver</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="select"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           >
                             <option>1</option>
@@ -151,16 +155,18 @@ const TrailersPage = () => {
                             <option>5</option>
                           </Input>
                         </FormGroup>
+                      </Col>
+                      <Col sm={2}>
                         <FormGroup>
                           <Label for="exampleSelect">OwnerShip</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="select"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           >
                             <option>1</option>
@@ -170,30 +176,32 @@ const TrailersPage = () => {
                             <option>5</option>
                           </Input>
                         </FormGroup>
-                      </div>
-                      <div>
+                      </Col>
+                      <Col sm={4} className="mt-4">
                         <Button
-                          className="me-3  ps-3 pe-3"
+                          size="sm"
+                          className="me-3"
                           style={{
                             color: "black",
                             border: "1px solid #1E5367",
                             backgroundColor: "#B7D1E6",
                           }}
                         >
-                          <BiCheck fontSize={"24px"} />
+                          <BiCheck fontSize={"16px"} />
                           Apply
                         </Button>
                         <Button
+                          size="sm"
                           style={{
                             color: "red",
                             border: "1px solid red",
                             backgroundColor: "white",
                           }}
                         >
-                          <RxCross2 fontSize={"21px"} color="red" /> Clear
+                          <RxCross2 fontSize={"16px"} color="red" /> Clear
                         </Button>
-                      </div>
-                    </div>
+                      </Col>
+                    </Row>
                   </Form>
                 </CardBody>
               </Card>

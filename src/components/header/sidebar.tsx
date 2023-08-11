@@ -38,7 +38,7 @@ const sidebarData: SidebarItem[] = [
         path: "/load/canceled",
       },
       {
-        title: "TOUN",
+        title: "TONU",
         path: "/load/toun",
       },
       {
@@ -58,8 +58,8 @@ const sidebarData: SidebarItem[] = [
         path: "/load/delivered",
       },
       {
-        title: "Close",
-        path: "/load/close",
+        title: "Closed",
+        path: "/load/closed",
       },
     ],
   },
@@ -73,7 +73,7 @@ const sidebarData: SidebarItem[] = [
         path: "/driverpage",
       },
       {
-        title: "New",
+        title: "Applicant",
         path: "/driver/new",
       },
       {
@@ -83,10 +83,6 @@ const sidebarData: SidebarItem[] = [
       {
         title: "Terminated",
         path: "/driver/terminated",
-      },
-      {
-        title: "Closed",
-        path: "/driver/closed",
       },
     ],
   },
@@ -105,8 +101,12 @@ const sidebarData: SidebarItem[] = [
             path: "/partners/customers",
           },
           {
-            title: "New",
-            path: "/partners/customers/new",
+            title: "Approve",
+            path: "/partners/customers/approve",
+          },
+          {
+            title: "Pending",
+            path: "/partners/customers/pending",
           },
         ],
       },
@@ -120,8 +120,16 @@ const sidebarData: SidebarItem[] = [
             path: "/partners/vendors",
           },
           {
-            title: "New",
-            path: "/partners/vendors/new",
+            title: "Dispatcher",
+            path: "/partners/vendors/dispatcher",
+          },
+          {
+            title: "Equipment Owner",
+            path: "/partners/vendors/equipmentowner",
+          },
+          {
+            title: "Repair Shop",
+            path: "/partners/vendors/repairshop",
           },
         ],
       },
@@ -149,14 +157,6 @@ const sidebarData: SidebarItem[] = [
             title: "Inactive",
             path: "/equipments/trucks/inactive",
           },
-          {
-            title: "Closed",
-            path: "/equipments/trucks/closed",
-          },
-          {
-            title: "Blocked",
-            path: "/equipments/trucks/blocked",
-          },
         ],
       },
       {
@@ -175,14 +175,6 @@ const sidebarData: SidebarItem[] = [
           {
             title: "Inactive",
             path: "/equipments/trailers/inactive",
-          },
-          {
-            title: "In-Transit",
-            path: "/equipments/trailers/intransit",
-          },
-          {
-            title: "Unavaliable",
-            path: "/equipments/trailers/unavaliable",
           },
         ],
       },
@@ -210,53 +202,15 @@ const sidebarData: SidebarItem[] = [
             title: "Inactive",
             path: "/fuel/fuelcard/inactive",
           },
-          {
-            title: "Closed",
-            path: "/fuel/fuelcard/closed",
-          },
-          {
-            title: "Blocked",
-            path: "/fuel/fuelcard/blocked",
-          },
         ],
       },
       {
         title: "Fuel Transactions",
-        iconClosed: <RiArrowDownSFill />,
-        iconOpen: <RiArrowUpSFill />,
-        children: [
-          {
-            title: "All",
-            path: "/fuel/fueltransaction",
-          },
-          {
-            title: "Active",
-            path: "/fuel/fueltransaction/active",
-          },
-          {
-            title: "Inactive",
-            path: "/fuel/fueltransaction/inactive",
-          },
-        ],
+        path: "/fuel/fueltransaction",
       },
       {
         title: "Fuel Import",
-        iconClosed: <RiArrowDownSFill />,
-        iconOpen: <RiArrowUpSFill />,
-        children: [
-          {
-            title: "All",
-            path: "/fuel/fuelimport",
-          },
-          {
-            title: "Active",
-            path: "/fuel/fuelimport/active",
-          },
-          {
-            title: "Inactive",
-            path: "/fuel/fuelimport/inactive",
-          },
-        ],
+        path: "/fuel/fuelimport",
       },
     ],
   },
@@ -270,24 +224,16 @@ const sidebarData: SidebarItem[] = [
         path: "/driverpayroll",
       },
       {
-        title: "Active",
-        path: "/driverpayroll/active",
+        title: "Preparing ",
+        path: "/driverpayroll/preparing ",
       },
       {
-        title: "Inactive",
-        path: "/driverpayroll/inactive",
+        title: "Ready for Payment",
+        path: "/driverpayroll/readyforpayment",
       },
       {
-        title: "In-Transit",
-        path: "/driverpayroll/intransit",
-      },
-      {
-        title: "Unavaliable",
-        path: "/driverpayroll/unavaliable",
-      },
-      {
-        title: "N/A",
-        path: "/driverpayroll/na",
+        title: "Paid",
+        path: "/driverpayroll/paid",
       },
     ],
   },
@@ -306,31 +252,62 @@ const sidebarData: SidebarItem[] = [
             path: "/accounts/billing",
           },
           {
-            title: "Active",
-            path: "/accounts/billing/active",
+            title: "New",
+            path: "/accounts/billing/new",
           },
           {
-            title: "Inactive",
-            path: "/accounts/billing/inactive",
+            title: "Applied",
+            path: "/accounts/billing/applied",
           },
         ],
       },
       {
         title: "Vendor Balances",
+        path: "/accounts/vendorbalance",
+      },
+      {
+        title: "Addition/Deduction",
         iconClosed: <RiArrowDownSFill />,
         iconOpen: <RiArrowUpSFill />,
         children: [
           {
             title: "All",
-            path: "/accounts/vendorbalance",
+            path: "/accounts/additions/all",
           },
           {
-            title: "Active",
-            path: "/accounts/vendor/active",
+            title: "Additions",
+            path: "/accounts/additions/additions",
           },
           {
-            title: "Inactive",
-            path: "/accounts/vendor/inactive",
+            title: "Deductions",
+            path: "/accounts/additions/deductions",
+          },
+        ],
+      },
+      {
+        title: "Scheduled Payments",
+        iconClosed: <RiArrowDownSFill />,
+        iconOpen: <RiArrowUpSFill />,
+        children: [
+          {
+            title: "All",
+            path: "/accounts/scheduledpayments/all",
+          },
+          {
+            title: "Additions",
+            path: "/accounts/scheduledpayments/additions",
+          },
+          {
+            title: "Deductions",
+            path: "/accounts/scheduledpayments/deductions",
+          },
+          {
+            title: "Driver Loan",
+            path: "/accounts/scheduledpayments/driverloan",
+          },
+          {
+            title: "Escrow",
+            path: "accounts/scheduledpayments/escrow",
           },
         ],
       },

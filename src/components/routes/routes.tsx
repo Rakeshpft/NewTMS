@@ -25,4 +25,6 @@ export const routes = {
   createnewtruck: "/createnewtruck",
   trailers: "/equipments/trailers",
   createnewtrailers: "/createnewtrailers",
+  additions: "/accounts/additions",
+  createadditions: "/createadditions",
 };

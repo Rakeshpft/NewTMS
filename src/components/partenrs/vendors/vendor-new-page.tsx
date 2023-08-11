@@ -110,63 +110,75 @@ const VendorNewPage = () => {
         <Container className="mt-4 px-5 py-2">
           <Form className="newcustomer" onSubmit={handleSubmit}>
             <Row>
-              <Col md={6} className="px-5">
-                <FormGroup>
-                  <Label for="companyName">Company Name</Label>
-                  <Input
-                    bsSize="sm"
-                    id="companyName"
-                    name="text"
-                    type="text"
-                    value={state.companyName}
-                    onChange={(e) =>
-                      dispatch({
-                        type: "SET_companyName",
-                        payload: e.target.value,
-                      })
-                    }
-                    className="form-control form-control-sm"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="companyAddress">Address Line 1</Label>
-                  <Input
-                    bsSize="sm"
-                    id="companyAddress"
-                    name="text"
-                    type="text"
-                    value={state.addressLine1}
-                    onChange={(e) =>
-                      dispatch({
-                        type: "SET_addressLine1",
-                        payload: e.target.value,
-                      })
-                    }
-                    className="form-control form-control-sm"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="companyAddress">Address Line 2</Label>
-                  <Input
-                    bsSize="sm"
-                    id="companyAddress"
-                    name="text"
-                    type="text"
-                    value={state.addressLine2}
-                    onChange={(e) =>
-                      dispatch({
-                        type: "SET_addressLine2",
-                        payload: e.target.value,
-                      })
-                    }
-                    className="form-control form-control-sm"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  />
-                </FormGroup>
-                <Row>
-                  <Col md={6}>
+              <Col>
+                <Row className="px-5">
+                  <Col>
+                    <FormGroup>
+                      <Label for="companyName">Company Name</Label>
+                      <Input
+                        bsSize="sm"
+                        id="companyName"
+                        name="text"
+                        type="text"
+                        value={state.companyName}
+                        onChange={(e) =>
+                          dispatch({
+                            type: "SET_companyName",
+                            payload: e.target.value,
+                          })
+                        }
+                        className="form-control form-control-sm"
+                        style={{ color: "black", border: "1px solid #418ECB" }}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row className="px-5">
+                  <Col>
+                    <FormGroup>
+                      <Label for="companyAddress">Address Line 1</Label>
+                      <Input
+                        bsSize="sm"
+                        id="companyAddress"
+                        name="text"
+                        type="text"
+                        value={state.addressLine1}
+                        onChange={(e) =>
+                          dispatch({
+                            type: "SET_addressLine1",
+                            payload: e.target.value,
+                          })
+                        }
+                        className="form-control form-control-sm"
+                        style={{ color: "black", border: "1px solid #418ECB" }}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row className="px-5">
+                  <Col>
+                    <FormGroup>
+                      <Label for="companyAddress">Address Line 2</Label>
+                      <Input
+                        bsSize="sm"
+                        id="companyAddress"
+                        name="text"
+                        type="text"
+                        value={state.addressLine2}
+                        onChange={(e) =>
+                          dispatch({
+                            type: "SET_addressLine2",
+                            payload: e.target.value,
+                          })
+                        }
+                        className="form-control form-control-sm"
+                        style={{ color: "black", border: "1px solid #418ECB" }}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row className="px-5">
+                  <Col>
                     <FormGroup>
                       <Label for="phone">Phone</Label>
                       <Input
@@ -189,7 +201,7 @@ const VendorNewPage = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col md={6}>
+                  <Col>
                     <FormGroup>
                       <Label for="companyEmail">Email</Label>
                       <Input
@@ -213,7 +225,7 @@ const VendorNewPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row>
+                <Row className="px-5">
                   <Col md={6}>
                     <FormGroup>
                       <Label for="city">city</Label>
@@ -261,7 +273,7 @@ const VendorNewPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row>
+                <Row className="px-5">
                   <Col md={6}>
                     <FormGroup>
                       <Label for="cityZip">Zip</Label>
@@ -286,7 +298,7 @@ const VendorNewPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row>
+                <Row className="px-5">
                   <Col md={6}>
                     <FormGroup>
                       <Label for="fid">FID/EIN</Label>
@@ -334,95 +346,94 @@ const VendorNewPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
+                <Row className="px-5">
+                  <Col>
+                    <FormGroup>
+                      <Label for="Notes">Notes</Label>
+                      <Input
+                        bsSize="sm"
+                        id="Notes"
+                        name="text"
+                        type="textarea"
+                        value={state.notes}
+                        onChange={(e) =>
+                          dispatch({
+                            type: "SET_notes",
+                            payload: e.target.value,
+                          })
+                        }
+                        className="form-control form-control-sm"
+                        style={{ color: "black", border: "1px solid #418ECB" }}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
               </Col>
               <Col>
-                <Col md={6} className="px-5">
-                  <FormGroup>
-                    <Label for="exampleSelect" className="d-flex">
-                      Vendor Type
-                    </Label>
-                    <Button
-                      size="sm"
-                      style={{
-                        color: "black",
-                        backgroundColor: "#418ECB",
-                        border: "1px solid #1E5367",
-                      }}
-                    >
-                      <GrFormAdd fontSize={"16px"} /> Vendor Type
-                    </Button>
-                  </FormGroup>
-                  <FormGroup className="mt-4">
-                    <h5 className="fw-bold"> Billing </h5>
-                  </FormGroup>
-                  <FormGroup check>
-                    <Input type="checkbox" />
-                    <Label
-                      check
-                      style={{ marginBottom: "0px", fontSize: "small" }}
-                    >
-                      Additional Payee
-                    </Label>
-                  </FormGroup>
-                </Col>
+                <Row className="px-5">
+                  <Col>
+                    <FormGroup>
+                      <Label for="exampleSelect" className="d-flex">
+                        Vendor Type
+                      </Label>
+                      <Button
+                        size="sm"
+                        style={{
+                          color: "black",
+                          backgroundColor: "#418ECB",
+                          border: "1px solid #1E5367",
+                        }}
+                      >
+                        <GrFormAdd fontSize={"16px"} /> Vendor Type
+                      </Button>
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row className="px-5">
+                  <Col>
+                    <FormGroup className="mt-4">
+                      <h5 className="fw-bold"> Billing </h5>
+                    </FormGroup>
+                    <FormGroup check>
+                      <Input type="checkbox" />
+                      <Label
+                        check
+                        style={{ marginBottom: "0px", fontSize: "small" }}
+                      >
+                        Additional Payee
+                      </Label>
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row className="vendorbutton">
+                  <Col>
+                    <FormGroup className="d-flex justify-content-center">
+                      <Button
+                        className="me-3 "
+                        size="sm"
+                        style={{
+                          color: "black",
+                          border: "1px solid #1E5367",
+                          backgroundColor: "#418ECB",
+                        }}
+                      >
+                        <BiCheck fontSize={"16px"} />
+                        Save
+                      </Button>
+                      <Button
+                        size="sm"
+                        style={{
+                          color: "red",
+                          border: "1px solid red",
+                          backgroundColor: "white",
+                        }}
+                      >
+                        <RxCross2 fontSize={"16px"} color="red" /> Cancel
+                      </Button>
+                    </FormGroup>
+                  </Col>
+                </Row>
               </Col>
-              <Row>
-                <Col md={6} className="px-5">
-                  <FormGroup>
-                    <Label for="Notes">Notes</Label>
-                    <Input
-                      bsSize="sm"
-                      id="Notes"
-                      name="text"
-                      type="textarea"
-                      value={state.notes}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_notes",
-                          payload: e.target.value,
-                        })
-                      }
-                      className="form-control form-control-sm"
-                      style={{ color: "black", border: "1px solid #418ECB" }}
-                    />
-                  </FormGroup>
-                </Col>
-
-                <Col
-                  md={6}
-                  className="align-self-start"
-                  style={{ marginTop: "auto" }}
-                >
-                  <FormGroup
-                    className="d-flex justify-content-center
-                    "
-                    style={{ bottom: "0", right: "0" ,marginInlineEnd: "40px"}}
-                  >
-                    <Button
-                      className="me-3 "
-                      size="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #1E5367",
-                        backgroundColor: "#418ECB",
-                      }}
-                    >
-                      <BiCheck fontSize={"16px"} />
-                      Save
-                    </Button>
-                    <Button
-                      size="sm"
-                      style={{
-                        color: "red",
-                        border: "1px solid red",
-                        backgroundColor: "white",
-                      }}
-                    >
-                      <RxCross2 fontSize={"16px"} color="red" /> Cancel
-                    </Button>
-                  </FormGroup>
-                </Col>
-              </Row>
             </Row>
           </Form>
         </Container>

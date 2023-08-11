@@ -4,6 +4,7 @@ import {
   Button,
   Card,
   CardBody,
+  Col,
   Collapse,
   Dropdown,
   DropdownItem,
@@ -18,6 +19,7 @@ import {
   Nav,
   Navbar,
   NavbarBrand,
+  Row,
   Table,
 } from "reactstrap";
 import Profile from "../pofile";
@@ -98,11 +100,7 @@ const LoadPage = () => {
             </InputGroup>
           </div>
 
-          <Link
-            className="btn btn-secondary"
-            style={{ backgroundColor: "#B7D1E6", color: "black" }}
-            to="/createload"
-          >
+          <Link className="btn buttonLink" to="/createload">
             <AiOutlinePlus />
             New Load
           </Link>
@@ -114,24 +112,26 @@ const LoadPage = () => {
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>
-              <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
+              <Card style={{ backgroundColor: "#E9F3FB" }}>
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
-                    <div className="d-flex gap-3">
-                      <div className="flex-item py-3 px-2">
-                        <h4 className="text-info mt-2">Search Filter</h4>
-                      </div>
-                      <div className="flex-item">
+                    <Row>
+                      <Col sm={2}>
+                        <h5 className="text-info mt-2 fw-bold">
+                          Search Filter
+                        </h5>
+                      </Col>
+                      <Col sm={2}>
                         <FormGroup>
                           <Label for="exampleSelect">Period</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="select"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           >
                             <option>1</option>
@@ -144,41 +144,41 @@ const LoadPage = () => {
                         <FormGroup>
                           <Label for="exampleSelect">Pickup Date</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="date"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           ></Input>
                         </FormGroup>
                         <FormGroup>
                           <Label for="exampleSelect">Delivery Date</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="date"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           ></Input>
                         </FormGroup>
-                      </div>
-                      <div className="flex-item">
+                      </Col>
+                      <Col sm={2}>
                         <FormGroup>
                           <Label for="exampleSelect">Broker</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="select"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           >
                             <option>1</option>
@@ -191,41 +191,41 @@ const LoadPage = () => {
                         <FormGroup>
                           <Label for="exampleSelect">City</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="text"
                             type="text"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           ></Input>
                         </FormGroup>
                         <FormGroup>
                           <Label for="exampleSelect">City</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="text"
                             type="text"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           ></Input>
                         </FormGroup>
-                      </div>
-                      <div className="flex-item">
+                      </Col>
+                      <Col sm={2}>
                         <FormGroup>
                           <Label for="exampleSelect">Driver</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="select"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           >
                             <option>1</option>
@@ -238,41 +238,41 @@ const LoadPage = () => {
                         <FormGroup>
                           <Label for="exampleSelect">State</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="text"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           ></Input>
                         </FormGroup>
                         <FormGroup>
                           <Label for="exampleSelect">State</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="text"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           ></Input>
                         </FormGroup>
-                      </div>
-                      <div className="flex-item">
+                      </Col>
+                      <Col sm={2}>
                         <FormGroup>
                           <Label for="exampleSelect">Dispatcher</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="select"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           >
                             <option>1</option>
@@ -285,13 +285,13 @@ const LoadPage = () => {
                         <FormGroup>
                           <Label for="exampleSelect">Truck</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="select"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           >
                             <option>1</option>
@@ -304,13 +304,13 @@ const LoadPage = () => {
                         <FormGroup>
                           <Label for="exampleSelect">Trailer</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="select"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           >
                             <option>1</option>
@@ -320,20 +320,20 @@ const LoadPage = () => {
                             <option>5</option>
                           </Input>
                         </FormGroup>
-                      </div>
-                      <div className="flex-item position-relative">
+                      </Col>
+                      <Col sm={2}>
                         <FormGroup>
                           <Label for="exampleSelect">
                             Direct Billing/Factoring
                           </Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="select"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           >
                             <option>1</option>
@@ -343,118 +343,125 @@ const LoadPage = () => {
                             <option>5</option>
                           </Input>
                         </FormGroup>
-                        <div
-                          className="position-absolute"
-                          style={{ bottom: "-90px" }}
-                        >
+                        <div className="button-search">
                           <Button
-                            className="me-3  ps-3 pe-3"
+                            size="sm"
+                            className="me-3"
                             style={{
                               color: "black",
                               border: "1px solid #1E5367",
                               backgroundColor: "#B7D1E6",
                             }}
                           >
-                            <BiCheck fontSize={"24px"} />
+                            <BiCheck fontSize={"16px"} />
                             Apply
                           </Button>
                           <Button
+                            size="sm"
                             style={{
                               color: "red",
                               border: "1px solid red",
                               backgroundColor: "white",
                             }}
                           >
-                            <RxCross2 fontSize={"21px"} color="red" /> Clear
+                            <RxCross2 fontSize={"16px"} color="red" /> Clear
                           </Button>
                         </div>
-                      </div>
-                    </div>
-                    <div style={{ paddingLeft: "12rem" }}>
-                      <div>
-                        <FormGroup className="d-flex gap-3">
-                          <h6 className="fw-bold">Status</h6>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>New</Label>
-                          </FormGroup>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>Dispatched</Label>
-                          </FormGroup>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>TOUN</Label>
-                          </FormGroup>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>Cancelled</Label>
-                          </FormGroup>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>En-Route</Label>
-                          </FormGroup>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>Picked-up</Label>
-                          </FormGroup>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>Delivered</Label>
-                          </FormGroup>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>Close</Label>
-                          </FormGroup>
-                        </FormGroup>
-                      </div>
-                      <div>
-                        <FormGroup className="d-flex gap-3">
-                          <h6 className="fw-bold">Billing Status</h6>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>Pending</Label>
-                          </FormGroup>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>Cancelled</Label>
-                          </FormGroup>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>BOL Received</Label>
-                          </FormGroup>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>Invoiced</Label>
-                          </FormGroup>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>Sent to Factoring</Label>
-                          </FormGroup>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>Funded</Label>
-                          </FormGroup>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>Paid</Label>
-                          </FormGroup>
-                        </FormGroup>
-                      </div>
-                      <div>
-                        <FormGroup className="d-flex gap-3">
-                          <h6 className="fw-bold">Location Status</h6>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>No</Label>
-                          </FormGroup>
-                          <FormGroup check>
-                            <Input id="checkbox2" type="checkbox" />
-                            <Label check>Yes</Label>
-                          </FormGroup>
-                        </FormGroup>
-                      </div>
-                    </div>
+                      </Col>
+                    </Row>
+                    <Row className="searchRow">
+                      <Col>
+                        <Row>
+                          <Col>
+                            <FormGroup>
+                              <Label className="fw-bold">Status</Label>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>New</Label>
+                              </FormGroup>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>Dispatched</Label>
+                              </FormGroup>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>TOUN</Label>
+                              </FormGroup>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>Cancelled</Label>
+                              </FormGroup>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>En-Route</Label>
+                              </FormGroup>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>Picked-up</Label>
+                              </FormGroup>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>Delivered</Label>
+                              </FormGroup>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>Close</Label>
+                              </FormGroup>
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col>
+                            <FormGroup>
+                              <Label className="fw-bold">Billing Status</Label>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>Pending</Label>
+                              </FormGroup>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>Cancelled</Label>
+                              </FormGroup>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>BOL Received</Label>
+                              </FormGroup>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>Invoiced</Label>
+                              </FormGroup>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>Sent to Factoring</Label>
+                              </FormGroup>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>Funded</Label>
+                              </FormGroup>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>Paid</Label>
+                              </FormGroup>
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col>
+                            <FormGroup>
+                              <Label className="fw-bold">Location Status</Label>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>No</Label>
+                              </FormGroup>
+                              <FormGroup check inline>
+                                <Input id="checkbox2" type="checkbox" />
+                                <Label check>Yes</Label>
+                              </FormGroup>
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
                   </Form>
                 </CardBody>
               </Card>

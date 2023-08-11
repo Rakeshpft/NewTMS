@@ -7,6 +7,7 @@ import {
   Button,
   Card,
   CardBody,
+  Col,
   Collapse,
   Form,
   FormGroup,
@@ -18,6 +19,7 @@ import {
   NavItem,
   Navbar,
   NavbarBrand,
+  Row,
   Table,
 } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -92,11 +94,7 @@ const Vendors = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link
-            className="btn btn-secondary"
-            style={{ backgroundColor: "#B7D1E6", color: "black" }}
-            to="/createvendor"
-          >
+          <Link className="btn buttonLink" to="/createvendor">
             <AiOutlinePlus />
             New Vendor
           </Link>
@@ -111,19 +109,23 @@ const Vendors = () => {
               <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex align-items-center gap-4">
-                        <h4 className="text-info mt-2">Search Filter</h4>
+                    <Row>
+                      <Col sm={2}>
+                        <h5 className="text-info mt-4 fw-bold ">
+                          Search Filter
+                        </h5>
+                      </Col>
+                      <Col sm={2}>
                         <FormGroup>
                           <Label for="exampleSelect">Vendor Type</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="select"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           >
                             <option>1</option>
@@ -133,49 +135,33 @@ const Vendors = () => {
                             <option>5</option>
                           </Input>
                         </FormGroup>
-                        <FormGroup>
-                          <Label for="exampleSelect">Driver Type</Label>
-                          <Input
-                            id="exampleSelect"
-                            name="select"
-                            type="select"
-                            style={{
-                              color: "black",
-                              border: "1px solid #418ECB",
-                              width: "220px",
-                            }}
-                          >
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                          </Input>
-                        </FormGroup>
-                      </div>
-                      <div>
+                      </Col>
+                      <Col sm={8} className="mt-4 vendor-button">
                         <Button
-                          className="me-3  ps-3 pe-3"
-                          style={{
-                            color: "black",
-                            border: "1px solid #1E5367",
-                            backgroundColor: "#B7D1E6",
-                          }}
+                          className="me-3 allsearch-button"
+                          size="sm"
+                          color="transparent"
+                          // style={{
+                          //   color: "black",
+                          //   border: "1px solid #1E5367",
+                          //   backgroundColor: "#418ECB",
+                          // }}
                         >
-                          <BiCheck fontSize={"24px"} />
+                          <BiCheck fontSize={"16px"} />
                           Apply
                         </Button>
                         <Button
+                          size="sm"
                           style={{
                             color: "red",
                             border: "1px solid red",
                             backgroundColor: "white",
                           }}
                         >
-                          <RxCross2 fontSize={"21px"} color="red" /> Clear
+                          <RxCross2 fontSize={"16px"} color="red" /> Clear
                         </Button>
-                      </div>
-                    </div>
+                      </Col>
+                    </Row>
                   </Form>
                 </CardBody>
               </Card>
