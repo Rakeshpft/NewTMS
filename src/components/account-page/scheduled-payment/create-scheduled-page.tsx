@@ -597,6 +597,7 @@ const CreateScheduledPage = () => {
                           <Input
                             name="radio3"
                             type="radio"
+                            checked
                             disabled={selectedOption !== "active"}
                           />
                           <Label
