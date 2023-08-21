@@ -115,7 +115,7 @@ const LoadPage = () => {
               <Card style={{ backgroundColor: "#E9F3FB" }}>
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
-                    <Row>
+                    <Row className="px-5">
                       <Col sm={2}>
                         <h5 className="text-info mt-2 fw-bold">
                           Search Filter
@@ -371,7 +371,7 @@ const LoadPage = () => {
                     </Row>
                     <Row className="searchRow">
                       <Col>
-                        <Row>
+                        <Row className="px-5">
                           <Col>
                             <FormGroup>
                               <Label className="fw-bold">Status</Label>
@@ -410,7 +410,7 @@ const LoadPage = () => {
                             </FormGroup>
                           </Col>
                         </Row>
-                        <Row>
+                        <Row className="px-5">
                           <Col>
                             <FormGroup>
                               <Label className="fw-bold">Billing Status</Label>
@@ -445,7 +445,7 @@ const LoadPage = () => {
                             </FormGroup>
                           </Col>
                         </Row>
-                        <Row>
+                        <Row className="px-5">
                           <Col>
                             <FormGroup>
                               <Label className="fw-bold">Location Status</Label>

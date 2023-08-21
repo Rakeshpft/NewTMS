@@ -230,6 +230,31 @@ const dashboardTiles = {
       ],
     },
     {
+      title: "Reports",
+      icon: require("../../../public/icons/reports.png"),
+      options: [
+        {
+          title: null,
+          icon: null,
+          options: [
+            {
+              title: "Add New Report",
+              icon: require("../../../public/icons/create-a-load.png"),
+              link: "/",
+            },
+            {
+              title: "View All Report",
+              icon: require("../../../public/icons/view-existing-loads.png"),
+              link: "/",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+
+  accountTiles: [
+    {
       title: "Accounts",
       icon: require("../../../public/icons/accounts.png"),
       options: [
@@ -250,6 +275,54 @@ const dashboardTiles = {
           ],
         },
         {
+          title: "Additions/Deductions",
+          icon: require("../../../public/icons/accounts.png"),
+          options: [
+            {
+              title: "Add New Entry",
+              icon: require("../../../public/icons/create-a-load.png"),
+              link: "/createadditions",
+            },
+            {
+              title: "View All Additions/Deductions",
+              icon: require("../../../public/icons/view-existing-loads.png"),
+              link: "/accounts/additions",
+            },
+          ],
+        },
+        {
+          title: "Charts of Accounts",
+          icon: require("../../../public/icons/accounts.png"),
+          options: [
+            {
+              title: "Add New Chart of Account",
+              icon: require("../../../public/icons/create-a-load.png"),
+              link: "/createchartofaccounts",
+            },
+            {
+              title: "View All Chart of Accounts",
+              icon: require("../../../public/icons/view-existing-loads.png"),
+              link: "/accounts/chartofaccounts",
+            },
+          ],
+        },
+        {
+          title: "Factoring Report",
+          icon: require("../../../public/icons/accounts.png"),
+          options: [
+            {
+              title: "Add New Factoring Report",
+              icon: require("../../../public/icons/create-a-load.png"),
+              link: "/createfactoringreport",
+            },
+            {
+              title: "View All Factoring Reports",
+              icon: require("../../../public/icons/view-existing-loads.png"),
+              link: "/accounts/factoringreport",
+            },
+          ],
+        },
+        {
           title: "Vendor Balances",
           icon: require("../../../public/icons/view-existing-loads.png"),
           options: [
@@ -261,40 +334,45 @@ const dashboardTiles = {
           ],
         },
         {
-          title: "Additions/Deductions",
+          title: "Schedule Payments/Dedutions",
           icon: require("../../../public/icons/accounts.png"),
           options: [
             {
-              title: "Add New Addition/Deduction Entry",
+              title: "Add New Schedule Payment/Deduction",
               icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createadditions",
+              link: "/createscheduledpage",
             },
             {
-              title: "View All Additions/Deductions",
+              title: "View All Schedule Payments/Deductions",
               icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/accounts/additions",
+              link: "/accounts/scheduledpage",
             },
           ],
         },
-      ],
-    },
-    {
-      title: "Reports",
-      icon: require("../../../public/icons/reports.png"),
-      options: [
         {
-          title: null,
-          icon: null,
+          title: "Expenses",
+          icon: require("../../../public/icons/view-existing-loads.png"),
           options: [
             {
-              title: "Add New Report",
+              title: "View All Expenses",
+              icon: require("../../../public/icons/view-existing-loads.png"),
+              link: "/accounts/expensespage",
+            },
+          ],
+        },
+        {
+          title: "Payment",
+          icon: require("../../../public/icons/accounts.png"),
+          options: [
+            {
+              title: "Add New Payment",
               icon: require("../../../public/icons/create-a-load.png"),
-              link: "/",
+              link: "/createpaymentspage",
             },
             {
-              title: "View All Report",
+              title: "View All Payments",
               icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/",
+              link: "/accounts/paymentspage",
             },
           ],
         },
@@ -439,6 +517,16 @@ export default function DashboardPage() {
               {dashboardTiles.mediumTiles.map((tile, index) => (
                 <Col md="6" key={index}>
                   <MediumTiles
+                    key={index}
+                    title={tile.title}
+                    icon={tile.icon}
+                    options={tile.options}
+                  />
+                </Col>
+              ))}
+              {dashboardTiles.accountTiles.map((tile, index) => (
+                <Col md="6" key={index}>
+                  <AccountTiles
                     key={index}
                     title={tile.title}
                     icon={tile.icon}
@@ -659,6 +747,91 @@ function MediumTiles({ title, icon, options }: MediumTilesProps) {
               </Col>
             ))}
           </Row>
+        </ModalBody>
+      </Modal>
+    </>
+  );
+}
+
+type AccountTilesProps = {
+  title: string;
+  data?: object;
+  icon: string;
+  link?: string;
+  options?: {
+    title: string | null;
+    icon: string | null;
+    options: {
+      title: string;
+      icon: string;
+      link: string;
+    }[];
+  }[];
+};
+function AccountTiles({ title, icon, options }: AccountTilesProps) {
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
+
+  return (
+    <>
+      <div
+        className="btn btn-outline-info px-4 d-flex w-100 align-items-center medium_tile db"
+        onClick={toggle}
+      >
+        <div className="tile-title d-flex justify-content-between align-items-center">
+          <div className="d-flex">
+            <div className="tile-icon d-flex align-items-center">
+              <img src={icon} height={32} width={32} alt="Image"></img>
+            </div>
+            <div className="fw-bold tile-name mb-0 ms-2 d-flex align-items-center">
+              {title}
+            </div>
+          </div>
+        </div>
+      </div>
+      <Modal
+        isOpen={modal}
+        toggle={toggle}
+        centered
+        className="TilePopUp"
+        size="xl"
+      >
+        <ModalHeader toggle={toggle} className="border-0">
+          {title}
+        </ModalHeader>
+        <ModalBody>
+          <Container>
+            <Row>
+              {options?.map((option, index) => (
+                <Col md={3} key={index} className="mb-3">
+                  {option.title && (
+                    <>
+                      <h6 className="mb-0 fw-bold text-info">{option.title}</h6>
+                      <hr className="mt-1" />
+                    </>
+                  )}
+                  {option.options?.map((item) => (
+                    <Link
+                      to={`${item.link}`}
+                      className="btn btn-outline-info px-4 d-flex w-100 align-items-center mb-3 column-gap-2 medium_tile db"
+                    >
+                      <img
+                        src={item?.icon}
+                        height={32}
+                        width={32}
+                        alt="Image"
+                      ></img>
+
+                      <h6 className="mb-0 text-start fw-bold small">
+                        {item.title}
+                      </h6>
+                    </Link>
+                  ))}
+                </Col>
+              ))}
+            </Row>
+          </Container>
         </ModalBody>
       </Modal>
     </>

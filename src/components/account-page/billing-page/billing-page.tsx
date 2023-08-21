@@ -90,7 +90,7 @@ const BillingPage = () => {
               <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
-                    <Row>
+                    <Row className="px-5">
                       <Col>
                         <h5 className="fw-bold text-info">Search Filter</h5>
                         <Row>

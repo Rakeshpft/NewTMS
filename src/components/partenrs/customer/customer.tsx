@@ -86,6 +86,38 @@ const Customer = () => {
                 </tbody>
               </Table>
             </TabPane>
+            <TabPane tabId={2} className="m-4">
+              <Table responsive hover className="table-data text-nowrap">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>address</th>
+                    <th>Phone</th>
+                    <th>MC</th>
+                    <th>Pay-method</th>
+                    <th>Credit</th>
+                    <th>Avg. DTP</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                    <th>*</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Otto</td>
+                    <td> XYZABC</td>
+                    <td>Dont Know </td>
+                    <td>987654321</td>
+                    <td>Otto@mdo</td>
+                    <td>Animal</td>
+                    <td>Very Good</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </Table>
+            </TabPane>
           </TabPage>
         </div>
       </div>

@@ -272,7 +272,7 @@ const sidebarData: SidebarItem[] = [
         children: [
           {
             title: "All",
-            path: "/accounts/additions/all",
+            path: "/accounts/additions",
           },
           {
             title: "Additions",
@@ -291,7 +291,7 @@ const sidebarData: SidebarItem[] = [
         children: [
           {
             title: "All",
-            path: "/accounts/scheduledpayments/all",
+            path: "/accounts/scheduledpage",
           },
           {
             title: "Additions",
@@ -308,6 +308,66 @@ const sidebarData: SidebarItem[] = [
           {
             title: "Escrow",
             path: "accounts/scheduledpayments/escrow",
+          },
+        ],
+      },
+      {
+        title: "Chart of Accounts",
+        iconClosed: <RiArrowDownSFill />,
+        iconOpen: <RiArrowUpSFill />,
+        children: [
+          {
+            title: "All",
+            path: "/accounts/chartofaccounts",
+          },
+          {
+            title: "Active",
+            path: "/accounts/scheduledpayments/additions",
+          },
+        ],
+      },
+      {
+        title: "Expenses",
+        iconClosed: <RiArrowDownSFill />,
+        iconOpen: <RiArrowUpSFill />,
+        children: [
+          {
+            title: "All",
+            path: "/accounts/expensespage",
+          },
+          {
+            title: "Active",
+            path: "/accounts/scheduledpayments/additions",
+          },
+        ],
+      },
+      {
+        title: "Factoring Report",
+        iconClosed: <RiArrowDownSFill />,
+        iconOpen: <RiArrowUpSFill />,
+        children: [
+          {
+            title: "All",
+            path: "/accounts/factoringreport",
+          },
+          {
+            title: "Active",
+            path: "/accounts/scheduledpayments/additions",
+          },
+        ],
+      },
+      {
+        title: "Payment",
+        iconClosed: <RiArrowDownSFill />,
+        iconOpen: <RiArrowUpSFill />,
+        children: [
+          {
+            title: "All",
+            path: "/accounts/paymentspage",
+          },
+          {
+            title: "Active",
+            path: "/accounts/scheduledpayments/additions",
           },
         ],
       },

@@ -5,3 +5,10 @@
 .accountmain {
   height: calc(100vh - 80px);
 }
+
+.chartofaccountbutton {
+  display: flex;
+  position: relative;
+  justify-content: end;
+  top: 10rem;
+}

@@ -108,7 +108,7 @@ const DriverPage = () => {
               <Card style={{ backgroundColor: "#E9F3FB" }}>
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
-                    <Row>
+                    <Row className="px-5">
                       <Col sm={2}>
                         <h5 className="text-info mt-4 fw-bold ">
                           Search Filter
@@ -156,7 +156,8 @@ const DriverPage = () => {
                           </Input>
                         </FormGroup>
                       </Col>
-                      <Col sm={6} className="mt-4 driver-button">
+                      <Col md={2}></Col>
+                      <Col sm={3} className="mt-4">
                         <Button
                           className="me-3"
                           size="sm"

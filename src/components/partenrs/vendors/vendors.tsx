@@ -109,7 +109,7 @@ const Vendors = () => {
               <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
-                    <Row>
+                    <Row className="px-5">
                       <Col sm={2}>
                         <h5 className="text-info mt-4 fw-bold ">
                           Search Filter
@@ -136,16 +136,16 @@ const Vendors = () => {
                           </Input>
                         </FormGroup>
                       </Col>
-                      <Col sm={8} className="mt-4 vendor-button">
+                      <Col md={3}></Col>
+                      <Col sm={3} className="mt-4">
                         <Button
-                          className="me-3 allsearch-button"
                           size="sm"
-                          color="transparent"
-                          // style={{
-                          //   color: "black",
-                          //   border: "1px solid #1E5367",
-                          //   backgroundColor: "#418ECB",
-                          // }}
+                          className="me-3"
+                          style={{
+                            color: "black",
+                            border: "1px solid #1E5367",
+                            backgroundColor: "#B7D1E6",
+                          }}
                         >
                           <BiCheck fontSize={"16px"} />
                           Apply

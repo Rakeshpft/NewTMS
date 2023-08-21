@@ -47,6 +47,27 @@ import {
   AdditionsPage,
   CreateAdditionsPage,
 } from "./components/account-page/additions-page";
+import {
+  CreateScheduledPage,
+  ScheduledPage,
+} from "./components/account-page/scheduled-payment";
+import {
+  ChartofAccounts,
+  CreateChartofAccounts,
+} from "./components/account-page/chartofAccounts";
+import {
+  ExpansesPage,
+  CreateExpansesPage,
+  CreateExpensesSchedulePage,
+} from "./components/account-page/expenses-page";
+import {
+  FactoringReport,
+  CreateFactoringReport,
+} from "./components/account-page/factoring-reaport";
+import {
+  PaymentsPage,
+  CreatePaymentsPage,
+} from "./components/account-page/payments-page";
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -130,6 +151,41 @@ const App = () => {
               <Route
                 path={routes.createadditions}
                 component={CreateAdditionsPage}
+              />
+              <Route path={routes.scheduledpage} component={ScheduledPage} />
+              <Route
+                path={routes.createscheduledpage}
+                component={CreateScheduledPage}
+              />
+              <Route
+                path={routes.chartofaccounts}
+                component={ChartofAccounts}
+              />
+              <Route
+                path={routes.createchartofaccounts}
+                component={CreateChartofAccounts}
+              />
+              <Route path={routes.expansespage} component={ExpansesPage} />
+              <Route
+                path={routes.createexpansespage}
+                component={CreateExpansesPage}
+              />
+              <Route
+                path={routes.createExpensesSchedulePage}
+                component={CreateExpensesSchedulePage}
+              />
+              <Route
+                path={routes.factoringreport}
+                component={FactoringReport}
+              />
+              <Route
+                path={routes.createfactoringreport}
+                component={CreateFactoringReport}
+              />
+              <Route path={routes.paymentspage} component={PaymentsPage} />
+              <Route
+                path={routes.createpaymentspage}
+                component={CreatePaymentsPage}
               />
             </IdleTimerProvider>
           </Switch>

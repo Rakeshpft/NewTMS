@@ -112,9 +112,9 @@ const CreateTrailerPage = () => {
           <Profile />
         </div>
       </Navbar>
-      <div className="py-2 traileritemmain">
+      <div className="py-2 truckitemmain">
         <Container className="mt-3 px-5 py-2">
-          <Form onSubmit={handleSubmit} className="traileritem">
+          <Form onSubmit={handleSubmit} className="truckitem">
             <Row>
               <Col className="px-5">
                 <Row className="px-5">

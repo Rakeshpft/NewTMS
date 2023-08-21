@@ -244,6 +244,9 @@
     &:hover {
       color: white;
       background-color: var(--bs-info);
+      img {
+        filter: brightness(0) invert(1) !important;
+      }
     }
   }
 }

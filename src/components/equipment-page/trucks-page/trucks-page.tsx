@@ -108,7 +108,7 @@ const TrucksPage = () => {
               <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
-                    <Row>
+                    <Row className="px-5">
                       <Col sm={2}>
                         <h5 className="text-info mt-4 fw-bold ">
                           Search Filter
@@ -177,7 +177,8 @@ const TrucksPage = () => {
                           </Input>
                         </FormGroup>
                       </Col>
-                      <Col sm={4} className="mt-4">
+                      <Col md={2}></Col>
+                      <Col sm={2} className="mt-4">
                         <Button
                           size="sm"
                           className="me-3"

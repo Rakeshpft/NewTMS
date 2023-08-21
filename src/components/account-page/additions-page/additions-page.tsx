@@ -11,12 +11,33 @@ import {
   Input,
   Button,
   Table,
+  Card,
+  CardBody,
+  Col,
+  Collapse,
+  Form,
+  FormGroup,
+  Label,
+  Row,
 } from "reactstrap";
 import { Header, SideBar } from "../../header";
 import Profile from "../../pofile";
+import { BiCheck } from "react-icons/bi";
+import { RxCross2 } from "react-icons/rx";
 
 const AdditionsPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  function searchToggle(): void {
+    console.log("search");
+    setIsOpen((isOpen) => !isOpen);
+  }
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("search");
+  };
 
   return (
     <>
@@ -43,7 +64,12 @@ const AdditionsPage = () => {
                 className="border-start-0 border-end-0"
               />
               <InputGroupText className="bg-white">
-                <Button color="link" size="sm" className="p-0">
+                <Button
+                  color="link"
+                  size="sm"
+                  className="p-0"
+                  onClick={() => searchToggle()}
+                >
                   <BsSliders2 size={16} />
                 </Button>
               </InputGroupText>
@@ -59,6 +85,202 @@ const AdditionsPage = () => {
       <div className="content d-flex">
         <SideBar isSidebarOpen={!isSidebarOpen} />
         <div className="aria-content">
+          {isOpen && (
+            <Collapse isOpen={isOpen}>
+              <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
+                <CardBody>
+                  <Form onSubmit={handleSearchSubmit}>
+                    <Row className="px-5">
+                      <Col>
+                        <h5 className="fw-bold text-info">Search Filter</h5>
+                        <Row>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Amount Range:To</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="text"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">
+                                Amount Range:Form
+                              </Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="text"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Date Range:To</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="date"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Date Range:Form</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="date"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Category</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="text"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Driver</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="select"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              >
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                              </Input>
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Partner</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="select"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              >
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                              </Input>
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Load#</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="text"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Settlement#</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="text"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col md={2}></Col>
+                          <Col md={2}></Col>
+                          <Col sm={2} className="mt-4">
+                            <Button
+                              size="sm"
+                              className="me-3"
+                              style={{
+                                color: "black",
+                                border: "1px solid #1E5367",
+                                backgroundColor: "#B7D1E6",
+                              }}
+                            >
+                              <BiCheck fontSize={"16px"} />
+                              Apply
+                            </Button>
+                            <Button
+                              size="sm"
+                              style={{
+                                color: "red",
+                                border: "1px solid red",
+                                backgroundColor: "white",
+                              }}
+                            >
+                              <RxCross2 fontSize={"16px"} color="red" /> Clear
+                            </Button>
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
+                  </Form>
+                </CardBody>
+              </Card>
+            </Collapse>
+          )}
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>

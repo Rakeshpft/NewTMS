@@ -1,43 +1,33 @@
 import React, { useState } from "react";
-import { AiOutlineFileExcel, AiOutlinePlus } from "react-icons/ai";
-import { MdOutgoingMail } from "react-icons/md";
-import { PiFilePdfDuotone } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import {
   Navbar,
   NavbarBrand,
   Nav,
-  NavItem,
   Table,
   Button,
-  Input,
   Card,
   CardBody,
   Collapse,
   FormGroup,
-  Label,
-  Form,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Col,
-  Row,
+  Input,
   InputGroup,
   InputGroupText,
+  Label,
+  Form,
+  Col,
+  Row,
 } from "reactstrap";
-import { Header, SideBar } from "../header";
-import Profile from "../pofile";
-import { BsSearch, BsSliders2 } from "react-icons/bs";
+import { Header, SideBar } from "../../header";
+import Profile from "../../pofile";
 import { BiCheck } from "react-icons/bi";
+import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
+import { AiOutlinePlus } from "react-icons/ai";
 
-const DriverPayRoll = () => {
+const ScheduledPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   function searchToggle(): void {
     console.log("search");
@@ -48,7 +38,6 @@ const DriverPayRoll = () => {
     e.preventDefault();
     console.log("search");
   };
-
   return (
     <>
       <Navbar
@@ -61,39 +50,19 @@ const DriverPayRoll = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand>Driver Payroll</NavbarBrand>
-        <Nav className="me-auto" navbar>
-          <div className="d-flex gap-2">
-            <NavItem>Export</NavItem>
-            <div className="d-flex justify-content-between gap-2">
-              <Link to={"#!"}>
-                <PiFilePdfDuotone className="text-danger fs-4" />
-              </Link>
-              <Link to={"#"}>
-                <AiOutlineFileExcel className="text-success fs-4" />
-              </Link>
-              <Link to={"#!"}>
-                <MdOutgoingMail className="fs-4" />
-              </Link>
-            </div>
-          </div>
-        </Nav>
+        <NavbarBrand>Scheduled Payment/Deductions</NavbarBrand>
+        <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
-            <InputGroup
-              bssize="sm"
-              Group
-              className="shadow-sm border-secondary"
-            >
-              <InputGroupText bssize="sm" GroupText className="bg-white">
+            <InputGroup className="shadow-sm border-secondary">
+              <InputGroupText className="bg-white">
                 <BsSearch size={16} />
               </InputGroupText>
               <Input
-                bssize="sm"
                 placeholder="Search"
                 className="border-start-0 border-end-0"
               />
-              <InputGroupText bssize="sm" GroupText className="bg-white">
+              <InputGroupText className="bg-white">
                 <Button
                   color="link"
                   size="sm"
@@ -105,9 +74,9 @@ const DriverPayRoll = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn buttonLink" to="/createdriverpayroll">
+          <Link className="btn buttonLink" to="/createscheduledpage">
             <AiOutlinePlus />
-            New Driver Payroll
+            New Scheduled Payment
           </Link>
           <Profile />
         </div>
@@ -126,109 +95,9 @@ const DriverPayRoll = () => {
                         <Row>
                           <Col sm={2}>
                             <FormGroup>
-                              <Label for="exampleSelect">Status</Label>
-                              <Input
-                                bssize="sm"
-                                id="exampleSelect"
-                                name="select"
-                                type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
-                              >
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                              </Input>
-                            </FormGroup>
-                          </Col>
-                          <Col sm={2}>
-                            <FormGroup>
-                              <Label for="exampleSelect">Settlement</Label>
-                              <Input
-                                bssize="sm"
-                                id="exampleSelect"
-                                name="select"
-                                type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
-                              ></Input>
-                            </FormGroup>
-                          </Col>
-                          <Col sm={2}>
-                            <FormGroup>
-                              <Label for="exampleSelect">Amount Range:To</Label>
-                              <Input
-                                bssize="sm"
-                                id="exampleSelect"
-                                name="select"
-                                type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
-                              ></Input>
-                            </FormGroup>
-                          </Col>
-                          <Col sm={2}>
-                            <FormGroup>
-                              <Label for="exampleSelect">
-                                Amount Range:Form
-                              </Label>
-                              <Input
-                                bssize="sm"
-                                id="exampleSelect"
-                                name="select"
-                                type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
-                              ></Input>
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col sm={2}>
-                            <FormGroup>
-                              <Label for="exampleSelect">Date Range:To</Label>
-                              <Input
-                                bssize="sm"
-                                id="exampleSelect"
-                                name="select"
-                                type="date"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
-                              ></Input>
-                            </FormGroup>
-                          </Col>
-                          <Col sm={2}>
-                            <FormGroup>
-                              <Label for="exampleSelect">Date Range:Form</Label>
-                              <Input
-                                bssize="sm"
-                                id="exampleSelect"
-                                name="select"
-                                type="date"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
-                              ></Input>
-                            </FormGroup>
-                          </Col>
-                          <Col sm={2}>
-                            <FormGroup>
                               <Label for="exampleSelect">Partner</Label>
                               <Input
-                                bssize="sm"
+                                bsSize="sm"
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
@@ -249,7 +118,7 @@ const DriverPayRoll = () => {
                             <FormGroup>
                               <Label for="exampleSelect">Driver</Label>
                               <Input
-                                bssize="sm"
+                                bsSize="sm"
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
@@ -264,6 +133,59 @@ const DriverPayRoll = () => {
                                 <option>4</option>
                                 <option>5</option>
                               </Input>
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Type</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="select"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              >
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                              </Input>
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Category</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="text"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col sm={2}>
+                            <FormGroup>
+                              <Label for="exampleSelect">Active</Label>
+                              <Input
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="text"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              />
                             </FormGroup>
                           </Col>
                           <Col sm={2} className="mt-4">
@@ -298,52 +220,39 @@ const DriverPayRoll = () => {
               </Card>
             </Collapse>
           )}
-          <Form>
-            <FormGroup check>
-              <Input
-                bssize="sm"
-                type="checkbox"
-                style={{
-                  width: "20px",
-                  height: "20px",
-                  color: "black",
-                  border: "1px solid #418ECB",
-                }}
-              />
-              <Dropdown isOpen={dropdownOpen} toggle={toggle} size="sm">
-                <DropdownToggle style={{ backgroundColor: "#0B8E00" }} caret>
-                  Batch Actions
-                </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem header>Header</DropdownItem>
-                  <DropdownItem>Some Action</DropdownItem>
-                  <DropdownItem text>Dropdown Item Text</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </FormGroup>
-          </Form>
+
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Date</th>
-                <th>Payable To</th>
+                <th>Id</th>
                 <th>Driver</th>
-                <th>Settlement Total</th>
-                <th>Email</th>
-                <th>Status</th>
+                <th>Payable To</th>
+                <th>Type</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Schedule</th>
+                <th>Last</th>
+                <th>Next</th>
+                <th>status</th>
                 <th>Notes</th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
                 <th>Actions</th>
-                <th>*</th>
               </tr>
             </thead>
             <tbody>
-              <p>No records</p>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Mark</td>
+                <td>Otto</td>
+              </tr>
             </tbody>
           </Table>
         </div>
@@ -352,4 +261,4 @@ const DriverPayRoll = () => {
   );
 };
 
-export default DriverPayRoll;
+export default ScheduledPage;

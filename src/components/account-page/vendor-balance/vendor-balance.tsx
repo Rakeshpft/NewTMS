@@ -14,6 +14,8 @@ import {
   FormGroup,
   Label,
   Form,
+  Col,
+  Row,
 } from "reactstrap";
 import { Header, SideBar } from "../../header";
 import Profile from "../../pofile";
@@ -84,19 +86,23 @@ const VendorBalance = () => {
               <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex align-items-center gap-4">
-                        <h4 className="text-info mt-2">Search Filter</h4>
+                    <Row className="px-5">
+                      <Col md={2}>
+                        <h5 className="fw-bold text-info mt-4">
+                          Search Filter
+                        </h5>
+                      </Col>
+                      <Col md={2}>
                         <FormGroup>
                           <Label for="exampleSelect">Vendor Type</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="select"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           >
                             <option>1</option>
@@ -106,16 +112,18 @@ const VendorBalance = () => {
                             <option>5</option>
                           </Input>
                         </FormGroup>
+                      </Col>
+                      <Col md={2}>
                         <FormGroup>
                           <Label for="exampleSelect">Driver Type</Label>
                           <Input
+                            bsSize="sm"
                             id="exampleSelect"
                             name="select"
                             type="select"
                             style={{
                               color: "black",
                               border: "1px solid #418ECB",
-                              width: "220px",
                             }}
                           >
                             <option>1</option>
@@ -125,30 +133,33 @@ const VendorBalance = () => {
                             <option>5</option>
                           </Input>
                         </FormGroup>
-                      </div>
-                      <div>
+                      </Col>
+                      <Col md={2}></Col>
+                      <Col md={3} className=" mt-4">
                         <Button
-                          className="me-3  ps-3 pe-3"
+                          size="sm"
+                          className="me-3"
                           style={{
                             color: "black",
                             border: "1px solid #1E5367",
-                            backgroundColor: "#418ECB",
+                            backgroundColor: "#B7D1E6",
                           }}
                         >
-                          <BiCheck fontSize={"24px"} />
+                          <BiCheck fontSize={"16px"} />
                           Apply
                         </Button>
                         <Button
+                          size="sm"
                           style={{
                             color: "red",
                             border: "1px solid red",
                             backgroundColor: "white",
                           }}
                         >
-                          <RxCross2 fontSize={"21px"} color="red" /> Clear
+                          <RxCross2 fontSize={"16px"} color="red" /> Clear
                         </Button>
-                      </div>
-                    </div>
+                      </Col>
+                    </Row>
                   </Form>
                 </CardBody>
               </Card>
