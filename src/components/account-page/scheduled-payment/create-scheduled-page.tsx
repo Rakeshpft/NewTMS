@@ -122,11 +122,11 @@ const CreateScheduledPage = () => {
         </div>
       </Navbar>
       <div className="py-2 accountmain">
-        <Container className="mt-4 px-5 py-2">
+        <Container className="mt-4 px-4 py-2">
           <Form onSubmit={handleSubmit} className="accountitem">
             <Row>
               <Col>
-                <Row className="px-5">
+                <Row className="px-4">
                   <Col md={3}>
                     <FormGroup>
                       <Label for="exampleSelect">Driver</Label>
@@ -187,8 +187,11 @@ const CreateScheduledPage = () => {
                   </Col>
                   <Col md={3}>
                     <h6 className="fw-bold">Driver Settlement Description</h6>
+                    <h6 className="fw-bold" style={{ color: "#1B56AE" }}>
+                      What Period is the Deduction For?
+                    </h6>
                   </Col>
-                  <Col md={3}>
+                  <Col md={3} className="px-5">
                     <FormGroup tag="fieldset">
                       <legend className="col-form-label col-sm-2 fw-bold">
                         Status
@@ -233,7 +236,7 @@ const CreateScheduledPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row className="px-5">
+                <Row className="px-4">
                   <Col md={6}>
                     <FormGroup tag="fieldset">
                       <legend className="col-form-label col-sm-2 fw-bold">
@@ -334,9 +337,11 @@ const CreateScheduledPage = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col md={3}>Schedule</Col>
+                  <Col md={3} className="fw-bold mt-3 px-5">
+                    Schedule
+                  </Col>
                 </Row>
-                <Row className="px-5">
+                <Row className="px-4">
                   <Col md={3}>
                     <FormGroup>
                       <Label for="exampleamount">Amount</Label>
@@ -408,7 +413,7 @@ const CreateScheduledPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row className="px-5">
+                <Row className="px-4">
                   <Col md={3}>
                     {showTextBox && (
                       <FormGroup>
@@ -435,8 +440,8 @@ const CreateScheduledPage = () => {
                     )}
                   </Col>
                 </Row>
-                <Row className="px-5">
-                  <Col md={8}>
+                <Row className="px-4">
+                  <Col md={6}>
                     <FormGroup tag="fieldset">
                       <legend className="col-form-label col-sm-2 fw-bold">
                         Schedule
@@ -525,13 +530,17 @@ const CreateScheduledPage = () => {
                       </Col>
                     </FormGroup>
                   </Col>
-                  <Col md={4}>
-                    <h6 className="fw-bold" style={{ color: "#1B56AE" }}>
+                  <Col md={6}>
+                    <span
+                      className="fw-bold small"
+                      style={{ color: "#1B56AE" }}
+                    >
                       Preview of Weekly Settlement Description:
-                    </h6>
+                    </span>
+                    <div className="fw-bold small">Weekly, Every Friday</div>
                   </Col>
                 </Row>
-                <Row className="px-5">
+                <Row className="px-4">
                   <Col md={3}>
                     <FormGroup>
                       <Label for="exampledate">Start On</Label>
@@ -577,7 +586,7 @@ const CreateScheduledPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row className="px-5">
+                <Row className="px-4">
                   <Col md={6}>
                     <FormGroup row tag="fieldset">
                       <legend className="col-form-label col-sm-2 fw-bold">
@@ -679,7 +688,7 @@ const CreateScheduledPage = () => {
                     </Row>
                   )}
                 </Row>
-                <Row className="px-5">
+                <Row className="px-4">
                   <Col className="d-flex justify-content-end me-5 mt-5">
                     <Button
                       size="sm"

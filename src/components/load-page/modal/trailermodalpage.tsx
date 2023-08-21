@@ -103,324 +103,320 @@ const TrailerModalPage = ({ isTrailerOpen, toggle }: TrailerModalPageProps) => {
         </ModalHeader>
         <ModalBody>
           <Container>
-            <Form onSubmit={handleSubmit} className="traileritem">
+            <Form onSubmit={handleSubmit}>
               <Row>
-                <Col>
-                  <Row>
-                    <Col md={4}>
-                      <FormGroup>
-                        <Label for="exampleunit">Unit</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          type="text"
-                          value={state.unit}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_unit",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col md={4}>
-                      <FormGroup>
-                        <Label>VIN</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          type="text"
-                          value={state.vin}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_vin",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col md={4}></Col>
-                  </Row>
-                  <Row>
-                    <Col md={4}>
-                      <FormGroup>
-                        <Label for="exampleyear">Year</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="exampleyear"
-                          name="year"
-                          type="text"
-                          value={state.year}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_year",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col md={4}>
-                      <FormGroup>
-                        <Label for="examplemake">Make</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="examplemake"
-                          name="make"
-                          type="text"
-                          value={state.make}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_make",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col md={4}>
-                      <FormGroup tag="fieldset">
-                        <h5 className="fw-bold">OwnerShip</h5>
-                        <div className="d-flex">
-                          <FormGroup check>
-                            <Input name="radio1" type="radio" />
-                            <Label
-                              check
-                              className="me-2"
-                              style={{ marginBottom: "0px", fontSize: "small" }}
-                            >
-                              Owned
-                            </Label>
-                          </FormGroup>
-                          <FormGroup check>
-                            <Input name="radio1" type="radio" />
-                            <Label
-                              check
-                              style={{ marginBottom: "0px", fontSize: "small" }}
-                            >
-                              Leased
-                            </Label>
-                          </FormGroup>
-                        </div>
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={4}>
-                      <FormGroup>
-                        <Label for="examplemodal">Modal</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="examplemodal"
-                          name="modal"
-                          type="text"
-                          value={state.modal}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_modal",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col md={4}></Col>
-                    <Col md={4}> </Col>
-                  </Row>
-                  <Row>
-                    <Col md={4}>
-                      <FormGroup>
-                        <Label for="exampledriver">Driver</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="exampledriver"
-                          name="driver"
-                          type="text"
-                          value={state.driver}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_driver",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col md={4}>
-                      <FormGroup>
-                        <Label for="exampleSelect">Plate</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          type="select"
-                          id="exampleSelect"
-                          name="select"
-                          value={state.plate}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_plate",
-                              payload: e.target.value,
-                            });
-                          }}
-                        >
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                        </Input>
-                      </FormGroup>
-                    </Col>
-                    <Col md={4}>
-                      <FormGroup>
-                        <Label for="examplepurchaseDate">Purchase Date</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="examplepurchaseDate"
-                          name="purchaseDate"
-                          type="date"
-                          value={state.purchaseDate}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_purchaseDate",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={4}>
-                      <FormGroup>
-                        <Label for="exampleplateState">Plate State</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="exampleplateState"
-                          name="plateState"
-                          type="text"
-                          value={state.plateState}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_plateState",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col md={4}></Col>
-                    <Col md={4}>
-                      <FormGroup>
-                        <Label for="examplepurchaseprice">Purchase Price</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="examplepurchaseprice"
-                          name="purchaseprice"
-                          type="text"
-                          value={state.purchasePrice}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_purchasePrice",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={6}>
-                      <FormGroup>
-                        <Label for="examplenotes">Notes</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="examplenotes"
-                          name="notes"
-                          type="textarea"
-                          rows="3"
-                          value={state.notes}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_notes",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={6}>
-                      <FormGroup>
-                        <Label for="examplehistory">Histoy</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="examplehistory"
-                          name="history"
-                          type="textarea"
-                          rows="3"
-                          value={state.history}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_history",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col md={3}></Col>
-                    <Col md={3} className="mt-5"></Col>
-                  </Row>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="exampleunit">Unit</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      type="text"
+                      value={state.unit}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_unit",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
                 </Col>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label>VIN</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      type="text"
+                      value={state.vin}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_vin",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={3}></Col>
+              </Row>
+              <Row>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="exampleyear">Year</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="exampleyear"
+                      name="year"
+                      type="text"
+                      value={state.year}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_year",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="examplemake">Make</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="examplemake"
+                      name="make"
+                      type="text"
+                      value={state.make}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_make",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={3}>
+                  <FormGroup tag="fieldset">
+                    <h5 className="fw-bold">OwnerShip</h5>
+                    <div className="d-flex">
+                      <FormGroup check>
+                        <Input name="radio1" type="radio" />
+                        <Label
+                          check
+                          className="me-2"
+                          style={{ marginBottom: "0px", fontSize: "small" }}
+                        >
+                          Owned
+                        </Label>
+                      </FormGroup>
+                      <FormGroup check>
+                        <Input name="radio1" type="radio" />
+                        <Label
+                          check
+                          style={{ marginBottom: "0px", fontSize: "small" }}
+                        >
+                          Leased
+                        </Label>
+                      </FormGroup>
+                    </div>
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="examplemodal">Modal</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="examplemodal"
+                      name="modal"
+                      type="text"
+                      value={state.modal}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_modal",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={3}></Col>
+                <Col md={3}> </Col>
+              </Row>
+              <Row>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="exampledriver">Driver</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="exampledriver"
+                      name="driver"
+                      type="text"
+                      value={state.driver}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_driver",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="exampleSelect">Plate</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      type="select"
+                      id="exampleSelect"
+                      name="select"
+                      value={state.plate}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_plate",
+                          payload: e.target.value,
+                        });
+                      }}
+                    >
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>3</option>
+                      <option>5</option>
+                    </Input>
+                  </FormGroup>
+                </Col>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="examplepurchaseDate">Purchase Date</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="examplepurchaseDate"
+                      name="purchaseDate"
+                      type="date"
+                      value={state.purchaseDate}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_purchaseDate",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="exampleplateState">Plate State</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="exampleplateState"
+                      name="plateState"
+                      type="text"
+                      value={state.plateState}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_plateState",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={3}></Col>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="examplepurchaseprice">Purchase Price</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="examplepurchaseprice"
+                      name="purchaseprice"
+                      type="text"
+                      value={state.purchasePrice}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_purchasePrice",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6}>
+                  <FormGroup>
+                    <Label for="examplenotes">Notes</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="examplenotes"
+                      name="notes"
+                      type="textarea"
+                      rows="3"
+                      value={state.notes}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_notes",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6}>
+                  <FormGroup>
+                    <Label for="examplehistory">Histoy</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="examplehistory"
+                      name="history"
+                      type="textarea"
+                      rows="3"
+                      value={state.history}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_history",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={3}></Col>
+                <Col md={3} className="mt-5"></Col>
               </Row>
             </Form>
           </Container>
