@@ -187,7 +187,7 @@ const CreateScheduledPage = () => {
                   </Col>
                   <Col md={3}>
                     <h6 className="fw-bold">Driver Settlement Description</h6>
-                    <h6 className="fw-bold" style={{ color: "#1B56AE" }}>
+                    <h6 className="fw-bold small" style={{ color: "#1B56AE" }}>
                       What Period is the Deduction For?
                     </h6>
                   </Col>
