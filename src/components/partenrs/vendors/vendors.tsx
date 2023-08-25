@@ -55,7 +55,7 @@ const Vendors = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand>Vendors</NavbarBrand>
+        <NavbarBrand className="fw-bold">Vendors</NavbarBrand>
         <Nav className="me-auto" navbar>
           <div className="d-flex gap-2">
             <NavItem>Export</NavItem>
@@ -110,12 +110,12 @@ const Vendors = () => {
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
                     <Row className="px-5">
-                      <Col sm={2}>
+                      <Col lg={2} md={6} sm={12}>
                         <h5 className="text-info mt-4 fw-bold ">
                           Search Filter
                         </h5>
                       </Col>
-                      <Col sm={2}>
+                      <Col lg={2} md={6} sm={12}>
                         <FormGroup>
                           <Label for="exampleSelect">Vendor Type</Label>
                           <Input
@@ -136,15 +136,15 @@ const Vendors = () => {
                           </Input>
                         </FormGroup>
                       </Col>
-                      <Col md={3}></Col>
-                      <Col sm={3} className="mt-4">
+                      <Col lg={3} md={6} sm={12}></Col>
+                      <Col lg={3} md={6} sm={12} className="mt-4">
                         <Button
                           size="sm"
                           className="me-3"
                           style={{
-                            color: "black",
+                            color: "white",
                             border: "1px solid #1E5367",
-                            backgroundColor: "#B7D1E6",
+                            backgroundColor: "#418ECB",
                           }}
                         >
                           <BiCheck fontSize={"16px"} />

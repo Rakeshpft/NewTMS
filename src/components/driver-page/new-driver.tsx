@@ -132,8 +132,11 @@ const NewDriver = () => {
   return (
     <>
       <Navbar
-        style={{ border: "1px solid #1B56AE", backgroundColor: "#E9F3FB" }}
+        style={{
+          borderBottom: "1px solid #1B56AE",
+        }}
         className="py-0"
+        color="light"
       >
         <Header
           sidebarToggle={() => {
@@ -147,13 +150,16 @@ const NewDriver = () => {
           <Profile />
         </div>
       </Navbar>
-      <div className="py-2 drivermain">
-        <Container className="mt-4 px-5 py-2">
-          <Form onSubmit={handleSubmit} className="driveritem">
-            <Row>
-              <Col className="px-5">
+      <div
+        className="py-2 load-itemmain"
+        style={{ backgroundColor: "#E9F3FB" }}
+      >
+        <Container className="mt-4 px-5">
+          <Form onSubmit={handleSubmit} className="load-item">
+            <Row className="px-5">
+              <Col>
                 <Row>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="examplefName">FirstName</Label>
                       <Input
@@ -170,7 +176,7 @@ const NewDriver = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <img
                       src={require("../../../public/images/user-avatar.png")}
                       height={50}
@@ -187,7 +193,7 @@ const NewDriver = () => {
                   </Col>
                 </Row>
                 <Row>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="examplelName">LastName</Label>
                       <Input
@@ -206,7 +212,7 @@ const NewDriver = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="exampledob">D.O.B</Label>
                       <Input
@@ -227,7 +233,7 @@ const NewDriver = () => {
                   </Col>
                 </Row>
                 <Row>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="examplephone">Phone</Label>
                       <Input
@@ -246,7 +252,7 @@ const NewDriver = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="exampleemail">Email</Label>
                       <Input
@@ -267,7 +273,7 @@ const NewDriver = () => {
                   </Col>
                 </Row>
                 <Row>
-                  <Col>
+                  <Col lg={12} md={12} sm={12}>
                     <FormGroup>
                       <Label for="exampleaddressLine1">Address Line 1</Label>
                       <Input
@@ -288,7 +294,7 @@ const NewDriver = () => {
                   </Col>
                 </Row>
                 <Row>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="exampleaddressLine1">Address Line 2</Label>
                       <Input
@@ -307,7 +313,7 @@ const NewDriver = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="examplecity">City</Label>
                       <Input
@@ -328,7 +334,7 @@ const NewDriver = () => {
                   </Col>
                 </Row>
                 <Row>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="examplestate">State</Label>
                       <Input
@@ -347,7 +353,7 @@ const NewDriver = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="examplezip">Zip</Label>
                       <Input
@@ -368,9 +374,9 @@ const NewDriver = () => {
                   </Col>
                 </Row>
               </Col>
-              <Col className="px-5">
+              <Col>
                 <Row>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="examplestauts">Stauts</Label>
                       <Input
@@ -389,7 +395,7 @@ const NewDriver = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col className="mt-4">
+                  <Col lg={6} md={6} sm={12} className="px-3 mt-4">
                     <FormGroup check>
                       <Input
                         style={{ color: "black", border: "1px solid #418ECB" }}
@@ -405,7 +411,7 @@ const NewDriver = () => {
                   </Col>
                 </Row>
                 <Row>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="exampleappdate">Application Date</Label>
                       <Input
@@ -424,7 +430,7 @@ const NewDriver = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="examplepay">Pay To</Label>
                       <Input
@@ -445,7 +451,7 @@ const NewDriver = () => {
                   </Col>
                 </Row>
                 <Row>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="examplehiredate">Hire Date</Label>
                       <Input
@@ -464,7 +470,7 @@ const NewDriver = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="examplecoDriver">Co-Driver</Label>
                       <Input
@@ -485,7 +491,7 @@ const NewDriver = () => {
                   </Col>
                 </Row>
                 <Row>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="examplefuleCard">Fule Card #</Label>
                       <Input
@@ -504,7 +510,7 @@ const NewDriver = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="exampletruck">Truck</Label>
                       <Input
@@ -526,7 +532,7 @@ const NewDriver = () => {
                 </Row>
                 <Row>
                   <Col></Col>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="exampletrailer">Trailer</Label>
                       <Input
@@ -548,7 +554,7 @@ const NewDriver = () => {
                 </Row>
                 <Row>
                   <Col></Col>
-                  <Col className="mt-4">
+                  <Col lg={6} md={6} sm={12} className="px-3 mt-4">
                     <FormGroup check>
                       <Input
                         style={{ color: "black", border: "1px solid #418ECB" }}
@@ -572,8 +578,8 @@ const NewDriver = () => {
                 </Row>
               </Col>
             </Row>
-            <Row className="mt-3">
-              <Col md={8} className="px-5">
+            <Row className="mt-3 px-5">
+              <Col lg={8} md={8} sm={12}>
                 <TabPage
                   tabTitles={[
                     "Pay Rates",
@@ -633,7 +639,7 @@ const NewDriver = () => {
                           </Col>
                         </Row>
                         <Row>
-                          <Col sm={3}>
+                          <Col sm={2}>
                             <FormGroup check>
                               <Input
                                 style={{
@@ -654,7 +660,7 @@ const NewDriver = () => {
                               </Label>
                             </FormGroup>
                           </Col>
-                          <Col sm={3}>
+                          <Col sm={2}>
                             <FormGroup check>
                               <Input
                                 style={{
@@ -675,7 +681,7 @@ const NewDriver = () => {
                               </Label>
                             </FormGroup>
                           </Col>
-                          <Col sm={3}>
+                          <Col sm={2}>
                             <FormGroup check>
                               <Input
                                 style={{
@@ -696,7 +702,7 @@ const NewDriver = () => {
                               </Label>
                             </FormGroup>
                           </Col>
-                          <Col sm={3}>
+                          <Col sm={2}>
                             <FormGroup check>
                               <Input
                                 style={{
@@ -719,7 +725,7 @@ const NewDriver = () => {
                           </Col>
                         </Row>
                         <Row className="mt-3">
-                          <Col sm={3}>
+                          <Col lg={3} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleperMile">Per Mile</Label>
                               <Input
@@ -741,7 +747,7 @@ const NewDriver = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={3}>
+                          <Col lg={3} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleperExtraStop">
                                 Per Extra Stop
@@ -765,7 +771,7 @@ const NewDriver = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={3}>
+                          <Col lg={3} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleperEmptyMile">
                                 Per Empty Mile
@@ -796,8 +802,10 @@ const NewDriver = () => {
                 </TabPage>
               </Col>
               <Col
+                lg={4}
                 md={4}
-                className="driverbutton d-flex justify-content-end align-self-end"
+                sm={12}
+                className=" d-flex justify-content-end align-self-end"
                 style={{ bottom: "0", right: "0" }}
               >
                 <Button

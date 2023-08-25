@@ -65,10 +65,7 @@ const CreateDriverPayrollPage = () => {
 
   return (
     <>
-      <Navbar
-        style={{ border: "1px solid #1B56AE", backgroundColor: "#E9F3FB" }}
-        className="py-0"
-      >
+      <Navbar color="light" className="py-0 formpagenavbar">
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
@@ -81,202 +78,190 @@ const CreateDriverPayrollPage = () => {
           <Profile />
         </div>
       </Navbar>
-      <div className="py-2 driverpayrollmain">
+      <div
+        className="py-2 load-itemmain"
+        style={{ backgroundColor: "#E9F3FB" }}
+      >
         <Container className="mt-4 px-5 py-2">
-          <Form onSubmit={handleSubmit} className="driverpayrollitem">
-            <Row>
-              <Col>
-                <Row className="px-5">
-                  <Col md={3}>
-                    <FormGroup>
-                      <Label for="exampleSelect">Driver</Label>
-                      <Input
-                        name="select"
-                        type="select"
-                        value={formState.driver}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_driver",
-                            payload: e.target.value,
-                          });
-                        }}
-                        style={{
-                          color: "black",
-                          border: "1px solid #418ECB",
-                        }}
-                      >
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </Input>
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row className="px-5">
-                  <Col md={3}>
-                    <FormGroup>
-                      <Label for="exampleSelect">Partner</Label>
-                      <Input
-                        id="exampleSelect"
-                        name="select"
-                        type="select"
-                        value={formState.partner}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_partner",
-                            payload: e.target.value,
-                          });
-                        }}
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                      >
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </Input>
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row className="px-5">
-                  <Col>
-                    <Row className="d-flex justify-content-between mt-4">
-                      <Col md={2}>
-                        <h5
-                          style={{ color: "#5E5E5E" }}
-                          className="fw-bold mt-3"
-                        >
-                          Open Balance
-                        </h5>
-                      </Col>
-                      <Col md={2}>
-                        <FormGroup>
-                          <Label for="exampleDate">Date Range:From</Label>
-                          <Input
-                            id="exampleDate"
-                            type="date"
-                            placeholder="select date"
-                            value={formState.date}
-                            onChange={(e) => {
-                              dispatch({
-                                type: "SET_date",
-                                payload: e.target.value,
-                              });
-                            }}
-                            style={{
-                              color: "black",
-                              border: "1px solid #418ECB",
-                            }}
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col md={2}>
-                        <FormGroup>
-                          <Label for="exampleDate">Date Range:To</Label>
-                          <Input
-                            id="exampleDate"
-                            type="date"
-                            placeholder="select date"
-                            value={formState.date}
-                            onChange={(e) => {
-                              dispatch({
-                                type: "SET_date",
-                                payload: e.target.value,
-                              });
-                            }}
-                            style={{
-                              color: "black",
-                              border: "1px solid #418ECB",
-                            }}
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col md={4} className="d-flex mt-4 gap-3">
-                        <FormGroup check>
-                          <Input
-                            name="radio2"
-                            type="radio"
-                            value={formState.byPickup}
-                            onChange={(e) => {
-                              dispatch({
-                                type: "SET_byPickup",
-                                payload: e.target.value,
-                              });
-                            }}
-                          />
-                          <Label
-                            check
-                            style={{ marginBottom: "0", fontSize: "small" }}
-                          >
-                            By Pickup Date
-                          </Label>
-                        </FormGroup>
-                        <FormGroup check>
-                          <Input
-                            name="radio2"
-                            type="radio"
-                            value={formState.byDelivery}
-                            onChange={(e) => {
-                              dispatch({
-                                type: "SET_byDelivery",
-                                payload: e.target.value,
-                              });
-                            }}
-                          />
-                          <Label
-                            check
-                            style={{ marginBottom: "0", fontSize: "small" }}
-                          >
-                            By Delivery Date
-                          </Label>
-                        </FormGroup>
-                      </Col>
-                      <Col md={2} className="mt-4">
-                        <Button
-                          className="me-3"
-                          size="sm"
-                          style={{
-                            display: "flex",
-                            color: "black",
-                            border: "1px solid #1E5367",
-                            backgroundColor: "#AAF6A4",
-                          }}
-                        >
-                          <BiCheck fontSize={"16px"} />
-                          Apply
-                        </Button>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
+          <Form onSubmit={handleSubmit} className="load-item">
+            <Row className="px-5">
+              <Col lg={3} md={6} sm={12} className="px-3">
+                <FormGroup>
+                  <Label for="exampleSelect">Driver</Label>
+                  <Input
+                    name="select"
+                    type="select"
+                    value={formState.driver}
+                    onChange={(e) => {
+                      dispatch({
+                        type: "SET_driver",
+                        payload: e.target.value,
+                      });
+                    }}
+                    style={{
+                      color: "black",
+                      border: "1px solid #418ECB",
+                    }}
+                  >
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </Input>
+                </FormGroup>
               </Col>
-              <Row className="px-5">
-                <Col className="mt-5">
-                  <Table responsive hover>
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Driver</th>
-                        <th>Assign On</th>
-                        <th>Returned On</th>
-                        <th>Equipment Owner</th>
-                        <th>*</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <p>No records</p>
-                    </tbody>
-                  </Table>
-                </Col>
-              </Row>
-              <div className="d-flex justify-content-end">
+            </Row>
+            <Row className="px-5">
+              <Col lg={3} md={6} sm={12} className="px-3">
+                <FormGroup>
+                  <Label for="exampleSelect">Partner</Label>
+                  <Input
+                    id="exampleSelect"
+                    name="select"
+                    type="select"
+                    value={formState.partner}
+                    onChange={(e) => {
+                      dispatch({
+                        type: "SET_partner",
+                        payload: e.target.value,
+                      });
+                    }}
+                    style={{ color: "black", border: "1px solid #418ECB" }}
+                  >
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </Input>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row className="px-5 mt-3">
+              <Col className="mt-2">
+                <h5 style={{ color: "#5E5E5E" }} className="fw-bold mt-3">
+                  Open Balance
+                </h5>
+              </Col>
+              <Col lg={3} md={6} sm={12} className="px-3">
+                <FormGroup>
+                  <Label for="exampleDate">Date Range:From</Label>
+                  <Input
+                    id="exampleDate"
+                    type="date"
+                    placeholder="select date"
+                    value={formState.date}
+                    onChange={(e) => {
+                      dispatch({
+                        type: "SET_date",
+                        payload: e.target.value,
+                      });
+                    }}
+                    style={{
+                      color: "black",
+                      border: "1px solid #418ECB",
+                    }}
+                  />
+                </FormGroup>
+              </Col>
+              <Col lg={3} md={6} sm={12} className="px-3">
+                <FormGroup>
+                  <Label for="exampleDate">Date Range:To</Label>
+                  <Input
+                    id="exampleDate"
+                    type="date"
+                    placeholder="select date"
+                    value={formState.date}
+                    onChange={(e) => {
+                      dispatch({
+                        type: "SET_date",
+                        payload: e.target.value,
+                      });
+                    }}
+                    style={{
+                      color: "black",
+                      border: "1px solid #418ECB",
+                    }}
+                  />
+                </FormGroup>
+              </Col>
+              <Col lg={3} md={6} sm={12} className="d-flex px-3 mt-4 gap-3">
+                <FormGroup check>
+                  <Input
+                    name="radio2"
+                    type="radio"
+                    value={formState.byPickup}
+                    onChange={(e) => {
+                      dispatch({
+                        type: "SET_byPickup",
+                        payload: e.target.value,
+                      });
+                    }}
+                  />
+                  <Label check style={{ marginBottom: "0", fontSize: "small" }}>
+                    By Pickup Date
+                  </Label>
+                </FormGroup>
+                <FormGroup check>
+                  <Input
+                    name="radio2"
+                    type="radio"
+                    value={formState.byDelivery}
+                    onChange={(e) => {
+                      dispatch({
+                        type: "SET_byDelivery",
+                        payload: e.target.value,
+                      });
+                    }}
+                  />
+                  <Label check style={{ marginBottom: "0", fontSize: "small" }}>
+                    By Delivery Date
+                  </Label>
+                </FormGroup>
+              </Col>
+              <Col lg={1} md={6} sm={12} className="px-2 mt-4">
                 <Button
                   className="me-3"
                   size="sm"
                   style={{
+                    display: "flex",
                     color: "black",
+                    border: "1px solid #1E5367",
+                    backgroundColor: "#AAF6A4",
+                  }}
+                >
+                  <BiCheck fontSize={"16px"} />
+                  Apply
+                </Button>
+              </Col>
+            </Row>
+            <Row className="px-5 mt-4">
+              <Col lg={10} md={10} sm={12}>
+                <Table responsive hover className="table-data text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Driver</th>
+                      <th>Assign On</th>
+                      <th>Returned On</th>
+                      <th>Equipment Owner</th>
+                      <th>*</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <p>No records</p>
+                  </tbody>
+                </Table>
+              </Col>
+            </Row>
+            <Row className="px-5">
+              <Col className="d-flex justify-content-end mt-5 px-3">
+                <Button
+                  size="sm"
+                  className="me-3"
+                  style={{
+                    color: "white",
                     border: "1px solid #1E5367",
                     backgroundColor: "#418ECB",
                   }}
@@ -294,7 +279,7 @@ const CreateDriverPayrollPage = () => {
                 >
                   <RxCross2 fontSize={"16px"} color="red" /> Close
                 </Button>
-              </div>
+              </Col>
             </Row>
           </Form>
         </Container>

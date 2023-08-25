@@ -105,10 +105,7 @@ const CreateScheduledPage = () => {
 
   return (
     <>
-      <Navbar
-        style={{ border: "1px solid #1B56AE", backgroundColor: "#E9F3FB" }}
-        className="py-0"
-      >
+      <Navbar className="py-0 formpagenavbar" color="light">
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
@@ -121,602 +118,598 @@ const CreateScheduledPage = () => {
           <Profile />
         </div>
       </Navbar>
-      <div className="py-2 accountmain">
+      <div
+        className="py-2 load-itemmain"
+        style={{ backgroundColor: "#E9F3FB" }}
+      >
         <Container className="mt-4 px-4 py-2">
-          <Form onSubmit={handleSubmit} className="accountitem">
-            <Row>
-              <Col>
-                <Row className="px-4">
-                  <Col md={3}>
-                    <FormGroup>
-                      <Label for="exampleSelect">Driver</Label>
+          <Form onSubmit={handleSubmit} className="load-item">
+            <Row className="px-5">
+              <Col lg={3} md={6} sm={12} className="px-3">
+                <FormGroup>
+                  <Label for="exampleSelect">Driver</Label>
+                  <Input
+                    bsSize="sm"
+                    disabled={selectedOption !== "active"}
+                    id="exampleSelect"
+                    name="select"
+                    type="select"
+                    value={state.driver}
+                    onChange={(e) => {
+                      dispatch({
+                        type: "SET_driver",
+                        payload: e.target.value,
+                      });
+                    }}
+                    style={{
+                      color: "black",
+                      border: "1px solid #418ECB",
+                    }}
+                  >
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </Input>
+                </FormGroup>
+              </Col>
+              <Col lg={3} md={6} sm={12} className="px-3">
+                <FormGroup>
+                  <Label for="exampleSelect">Vendor</Label>
+                  <Input
+                    bsSize="sm"
+                    disabled={selectedOption !== "active"}
+                    id="exampleSelect"
+                    name="select"
+                    type="select"
+                    value={state.vendor}
+                    onChange={(e) => {
+                      dispatch({
+                        type: "SET_vendor",
+                        payload: e.target.value,
+                      });
+                    }}
+                    style={{
+                      color: "black",
+                      border: "1px solid #418ECB",
+                    }}
+                  >
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </Input>
+                </FormGroup>
+              </Col>
+              <Col lg={3} md={6} sm={12} className="px-3">
+                <h6 className="fw-bold">Driver Settlement Description</h6>
+                <h6 className="fw-bold small" style={{ color: "#1B56AE" }}>
+                  What Period is the Deduction For?
+                </h6>
+              </Col>
+              <Col lg={3} md={6} sm={12} className="px-3">
+                <FormGroup tag="fieldset">
+                  <legend className="col-form-label col-sm-2 fw-bold">
+                    Status
+                  </legend>
+                  <Col sm={10}>
+                    <FormGroup check inline>
                       <Input
-                        bsSize="sm"
-                        disabled={selectedOption !== "active"}
-                        id="exampleSelect"
-                        name="select"
-                        type="select"
-                        value={state.driver}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_driver",
-                            payload: e.target.value,
-                          });
-                        }}
+                        name="radio1"
+                        type="radio"
+                        value="active"
+                        checked={selectedOption === "active"}
+                        onChange={handleActiveRadioChange}
+                      />
+                      <Label
+                        check
                         style={{
-                          color: "black",
-                          border: "1px solid #418ECB",
+                          marginBottom: "0px",
+                          fontSize: "small",
                         }}
                       >
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </Input>
-                    </FormGroup>
-                  </Col>
-                  <Col md={3}>
-                    <FormGroup>
-                      <Label for="exampleSelect">Vendor</Label>
-                      <Input
-                        bsSize="sm"
-                        disabled={selectedOption !== "active"}
-                        id="exampleSelect"
-                        name="select"
-                        type="select"
-                        value={state.vendor}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_vendor",
-                            payload: e.target.value,
-                          });
-                        }}
-                        style={{
-                          color: "black",
-                          border: "1px solid #418ECB",
-                        }}
-                      >
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </Input>
-                    </FormGroup>
-                  </Col>
-                  <Col md={3}>
-                    <h6 className="fw-bold">Driver Settlement Description</h6>
-                    <h6 className="fw-bold small" style={{ color: "#1B56AE" }}>
-                      What Period is the Deduction For?
-                    </h6>
-                  </Col>
-                  <Col md={3} className="px-5">
-                    <FormGroup tag="fieldset">
-                      <legend className="col-form-label col-sm-2 fw-bold">
-                        Status
-                      </legend>
-                      <Col sm={10}>
-                        <FormGroup check inline>
-                          <Input
-                            name="radio1"
-                            type="radio"
-                            value="active"
-                            checked={selectedOption === "active"}
-                            onChange={handleActiveRadioChange}
-                          />
-                          <Label
-                            check
-                            style={{
-                              marginBottom: "0px",
-                              fontSize: "small",
-                            }}
-                          >
-                            Active
-                          </Label>
-                        </FormGroup>
-                        <FormGroup check inline>
-                          <Input
-                            name="radio1"
-                            type="radio"
-                            value="inactive"
-                            onChange={handleActiveRadioChange}
-                          />
-                          <Label
-                            check
-                            style={{
-                              marginBottom: "0px",
-                              fontSize: "small",
-                            }}
-                          >
-                            Inactive
-                          </Label>
-                        </FormGroup>
-                      </Col>
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row className="px-4">
-                  <Col md={6}>
-                    <FormGroup tag="fieldset">
-                      <legend className="col-form-label col-sm-2 fw-bold">
-                        Type
-                      </legend>
-                      <Col sm={12}>
-                        <FormGroup check inline>
-                          <Input
-                            name="radio2"
-                            type="radio"
-                            disabled={selectedOption !== "active"}
-                          />
-                          <Label
-                            check
-                            style={{
-                              marginBottom: "0px",
-                              fontSize: "small",
-                            }}
-                          >
-                            Addition
-                          </Label>
-                        </FormGroup>
-                        <FormGroup check inline>
-                          <Input
-                            name="radio2"
-                            type="radio"
-                            disabled={selectedOption !== "active"}
-                          />
-                          <Label
-                            check
-                            style={{
-                              marginBottom: "0px",
-                              fontSize: "small",
-                            }}
-                          >
-                            Deduction
-                          </Label>
-                        </FormGroup>
-                        <FormGroup check inline>
-                          <Input
-                            name="radio2"
-                            type="radio"
-                            disabled={selectedOption !== "active"}
-                            onChange={handleRadioChange}
-                          />
-                          <Label
-                            check
-                            style={{
-                              marginBottom: "0px",
-                              fontSize: "small",
-                            }}
-                          >
-                            Driver Loan
-                          </Label>
-                        </FormGroup>
-                        <FormGroup check inline>
-                          <Input
-                            name="radio2"
-                            type="radio"
-                            disabled={selectedOption !== "active"}
-                            onChange={handleRadioChange}
-                          />
-                          <Label
-                            check
-                            style={{
-                              marginBottom: "0px",
-                              fontSize: "small",
-                            }}
-                          >
-                            Escrow
-                          </Label>
-                        </FormGroup>
-                      </Col>
-                    </FormGroup>
-                  </Col>
-                  <Col md={3}>
-                    <FormGroup>
-                      <Label for="examplelastDay">
-                        Last Day of the period for this transaction
+                        Active
                       </Label>
-                      <Input
-                        bsSize="sm"
-                        disabled={selectedOption !== "active"}
-                        type="date"
-                        id="examplelastDay"
-                        name="lastDay"
-                        value={state.lastDay}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_lastDay",
-                            payload: e.target.value,
-                          });
-                        }}
-                        style={{
-                          color: "black",
-                          border: "1px solid #418ECB",
-                        }}
-                      />
                     </FormGroup>
-                  </Col>
-                  <Col md={3} className="fw-bold mt-3 px-5">
-                    Schedule
-                  </Col>
-                </Row>
-                <Row className="px-4">
-                  <Col md={3}>
-                    <FormGroup>
-                      <Label for="exampleamount">Amount</Label>
+                    <FormGroup check inline>
                       <Input
-                        bsSize="sm"
-                        disabled={selectedOption !== "active"}
-                        type="text"
-                        value={state.amount}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_amount",
-                            payload: e.target.value,
-                          });
-                        }}
-                        style={{
-                          color: "black",
-                          border: "1px solid #418ECB",
-                        }}
+                        name="radio1"
+                        type="radio"
+                        value="inactive"
+                        onChange={handleActiveRadioChange}
                       />
-                    </FormGroup>
-                  </Col>
-                  <Col md={3}>
-                    <FormGroup>
-                      <Label for="exampleselect">Category</Label>
-                      <Input
-                        bsSize="sm"
-                        disabled={selectedOption !== "active"}
-                        type="select"
-                        value={state.category}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_category",
-                            payload: e.target.value,
-                          });
-                        }}
+                      <Label
+                        check
                         style={{
-                          color: "black",
-                          border: "1px solid #418ECB",
+                          marginBottom: "0px",
+                          fontSize: "small",
                         }}
                       >
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                      </Input>
+                        Inactive
+                      </Label>
                     </FormGroup>
                   </Col>
-                  <Col md={3}>
-                    <FormGroup>
-                      <Label for="exampleNote">Custom Description</Label>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row className="px-5">
+              <Col lg={6} md={6} sm={12} className="px-3">
+                <FormGroup tag="fieldset">
+                  <legend className="col-form-label col-sm-2 fw-bold">
+                    Type
+                  </legend>
+                  <Col sm={12}>
+                    <FormGroup check inline>
                       <Input
-                        bsSize="sm"
+                        name="radio2"
+                        type="radio"
                         disabled={selectedOption !== "active"}
-                        rows="2"
-                        type="textarea"
-                        id="exampleNote"
-                        value={state.customDescription}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_customDescription",
-                            payload: e.target.value,
-                          });
-                        }}
-                        style={{
-                          color: "black",
-                          border: "1px solid #418ECB",
-                        }}
                       />
+                      <Label
+                        check
+                        style={{
+                          marginBottom: "0px",
+                          fontSize: "small",
+                        }}
+                      >
+                        Addition
+                      </Label>
                     </FormGroup>
-                  </Col>
-                </Row>
-                <Row className="px-4">
-                  <Col md={3}>
-                    {showTextBox && (
-                      <FormGroup>
-                        <Label for="examplededuct">Deduct By</Label>
-                        <Input
-                          bsSize="sm"
-                          disabled={selectedOption !== "active"}
-                          type="text"
-                          id="examplededuct"
-                          name="deduct"
-                          value={state.deductBy}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_deductBy",
-                              payload: e.target.value,
-                            });
-                          }}
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                        />
-                      </FormGroup>
-                    )}
-                  </Col>
-                </Row>
-                <Row className="px-4">
-                  <Col md={6}>
-                    <FormGroup tag="fieldset">
-                      <legend className="col-form-label col-sm-2 fw-bold">
-                        Schedule
-                      </legend>
-                      <Col sm={12}>
-                        <FormGroup check inline>
-                          <Input
-                            name="radio3"
-                            type="radio"
-                            disabled={selectedOption !== "active"}
-                          />
-                          <Label
-                            check
-                            style={{
-                              marginBottom: "0px",
-                              fontSize: "small",
-                            }}
-                          >
-                            Every Day
-                          </Label>
-                        </FormGroup>
-                        <FormGroup check inline>
-                          <Input
-                            name="radio3"
-                            type="radio"
-                            disabled={selectedOption !== "active"}
-                          />
-                          <Label
-                            check
-                            style={{
-                              marginBottom: "0px",
-                              fontSize: "small",
-                            }}
-                          >
-                            Every week
-                          </Label>
-                        </FormGroup>
-                        <FormGroup check inline>
-                          <Input
-                            name="radio3"
-                            type="radio"
-                            disabled={selectedOption !== "active"}
-                          />
-                          <Label
-                            check
-                            style={{
-                              marginBottom: "0px",
-                              fontSize: "small",
-                            }}
-                          >
-                            Every Month
-                          </Label>
-                        </FormGroup>
-                        <FormGroup check inline>
-                          <Input
-                            name="radio3"
-                            type="radio"
-                            disabled={selectedOption !== "active"}
-                          />
-                          <Label
-                            check
-                            style={{
-                              marginBottom: "0px",
-                              fontSize: "small",
-                            }}
-                          >
-                            Every Other Week
-                          </Label>
-                        </FormGroup>
-                        <FormGroup check inline>
-                          <Input
-                            name="radio3"
-                            type="radio"
-                            disabled={selectedOption !== "active"}
-                          />
-                          <Label
-                            check
-                            style={{
-                              marginBottom: "0px",
-                              fontSize: "small",
-                            }}
-                          >
-                            Annually
-                          </Label>
-                        </FormGroup>
-                      </Col>
-                    </FormGroup>
-                  </Col>
-                  <Col md={6}>
-                    <span
-                      className="fw-bold small"
-                      style={{ color: "#1B56AE" }}
-                    >
-                      Preview of Weekly Settlement Description:
-                    </span>
-                    <div className="fw-bold small">Weekly, Every Friday</div>
-                  </Col>
-                </Row>
-                <Row className="px-4">
-                  <Col md={3}>
-                    <FormGroup>
-                      <Label for="exampledate">Start On</Label>
+                    <FormGroup check inline>
                       <Input
-                        bsSize="sm"
+                        name="radio2"
+                        type="radio"
                         disabled={selectedOption !== "active"}
-                        type="date"
-                        value={state.startOn}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_startOn",
-                            payload: e.target.value,
-                          });
-                        }}
-                        style={{
-                          color: "black",
-                          border: "1px solid #418ECB",
-                        }}
                       />
+                      <Label
+                        check
+                        style={{
+                          marginBottom: "0px",
+                          fontSize: "small",
+                        }}
+                      >
+                        Deduction
+                      </Label>
                     </FormGroup>
-                  </Col>
-                  <Col md={3}></Col>
-                  <Col md={3}>
-                    <FormGroup>
-                      <Label for="examplenotes">Notes</Label>
+                    <FormGroup check inline>
                       <Input
-                        bsSize="sm"
+                        name="radio2"
+                        type="radio"
                         disabled={selectedOption !== "active"}
-                        type="textarea"
-                        row="3"
-                        value={state.notes}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_notes",
-                            payload: e.target.value,
-                          });
-                        }}
-                        style={{
-                          color: "black",
-                          border: "1px solid #418ECB",
-                        }}
+                        onChange={handleRadioChange}
                       />
+                      <Label
+                        check
+                        style={{
+                          marginBottom: "0px",
+                          fontSize: "small",
+                        }}
+                      >
+                        Driver Loan
+                      </Label>
+                    </FormGroup>
+                    <FormGroup check inline>
+                      <Input
+                        name="radio2"
+                        type="radio"
+                        disabled={selectedOption !== "active"}
+                        onChange={handleRadioChange}
+                      />
+                      <Label
+                        check
+                        style={{
+                          marginBottom: "0px",
+                          fontSize: "small",
+                        }}
+                      >
+                        Escrow
+                      </Label>
                     </FormGroup>
                   </Col>
-                </Row>
-                <Row className="px-4">
-                  <Col md={6}>
-                    <FormGroup row tag="fieldset">
-                      <legend className="col-form-label col-sm-2 fw-bold">
-                        Repeat
-                      </legend>
-                      <Col sm={12}>
-                        <FormGroup check inline>
-                          <Input
-                            name="radio3"
-                            type="radio"
-                            checked
-                            disabled={selectedOption !== "active"}
-                          />
-                          <Label
-                            checked
-                            style={{
-                              marginBottom: "0px",
-                              fontSize: "small",
-                            }}
-                          >
-                            Always
-                          </Label>
-                        </FormGroup>
-                        <FormGroup check inline>
-                          <Input
-                            name="radio3"
-                            type="radio"
-                            disabled={selectedOption !== "active"}
-                            onChange={(event: any) =>
-                              setActiveTime(event.target.value)
-                            }
-                          />
-                          <Label
-                            check
-                            style={{
-                              marginBottom: "0px",
-                              fontSize: "small",
-                            }}
-                          >
-                            No. of Terms
-                          </Label>
-                        </FormGroup>
-
-                        <FormGroup check inline>
-                          <Input
-                            name="radio3"
-                            type="radio"
-                            disabled={selectedOption !== "active"}
-                            onChange={(event: any) =>
-                              setActiveDate(event.target.value)
-                            }
-                          />
-                          <Label
-                            check
-                            style={{
-                              marginBottom: "0px",
-                              fontSize: "small",
-                            }}
-                          >
-                            Until the Date
-                          </Label>
-                        </FormGroup>
-                      </Col>
-                    </FormGroup>
-                  </Col>
-                  {activeTime && (
-                    <Row>
-                      <Col md={3}>
-                        <FormGroup>
-                          <Input
-                            bsSize="sm"
-                            disabled={selectedOption !== "active"}
-                            placeholder="1"
-                            type="text"
-                            style={{
-                              color: "black",
-                              border: "1px solid #418ECB",
-                            }}
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                  )}
-                  {activeDate && (
-                    <Row>
-                      <Col md={3}>
-                        <FormGroup>
-                          <Input
-                            bsSize="sm"
-                            placeholder="1"
-                            disabled={selectedOption !== "active"}
-                            type="date"
-                            style={{
-                              color: "black",
-                              border: "1px solid #418ECB",
-                            }}
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                  )}
-                </Row>
-                <Row className="px-4">
-                  <Col className="d-flex justify-content-end me-5 mt-5">
-                    <Button
-                      size="sm"
+                </FormGroup>
+              </Col>
+              <Col lg={3} md={6} sm={12} className="px-3">
+                <FormGroup>
+                  <Label for="examplelastDay">
+                    Last Day of the period for this transaction
+                  </Label>
+                  <Input
+                    bsSize="sm"
+                    disabled={selectedOption !== "active"}
+                    type="date"
+                    id="examplelastDay"
+                    name="lastDay"
+                    value={state.lastDay}
+                    onChange={(e) => {
+                      dispatch({
+                        type: "SET_lastDay",
+                        payload: e.target.value,
+                      });
+                    }}
+                    style={{
+                      color: "black",
+                      border: "1px solid #418ECB",
+                    }}
+                  />
+                </FormGroup>
+              </Col>
+              <Col lg={3} md={6} sm={12} className="px-3 fw-bold mt-3">
+                Schedule
+              </Col>
+            </Row>
+            <Row className="px-5">
+              <Col lg={3} md={6} sm={12} className="px-3">
+                <FormGroup>
+                  <Label for="exampleamount">Amount</Label>
+                  <Input
+                    bsSize="sm"
+                    disabled={selectedOption !== "active"}
+                    type="text"
+                    value={state.amount}
+                    onChange={(e) => {
+                      dispatch({
+                        type: "SET_amount",
+                        payload: e.target.value,
+                      });
+                    }}
+                    style={{
+                      color: "black",
+                      border: "1px solid #418ECB",
+                    }}
+                  />
+                </FormGroup>
+              </Col>
+              <Col lg={3} md={6} sm={12} className="px-3">
+                <FormGroup>
+                  <Label for="exampleselect">Category</Label>
+                  <Input
+                    bsSize="sm"
+                    disabled={selectedOption !== "active"}
+                    type="select"
+                    value={state.category}
+                    onChange={(e) => {
+                      dispatch({
+                        type: "SET_category",
+                        payload: e.target.value,
+                      });
+                    }}
+                    style={{
+                      color: "black",
+                      border: "1px solid #418ECB",
+                    }}
+                  >
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </Input>
+                </FormGroup>
+              </Col>
+              <Col lg={3} md={6} sm={12} className="px-3">
+                <FormGroup>
+                  <Label for="exampleNote">Custom Description</Label>
+                  <Input
+                    bsSize="sm"
+                    disabled={selectedOption !== "active"}
+                    rows="2"
+                    type="textarea"
+                    id="exampleNote"
+                    value={state.customDescription}
+                    onChange={(e) => {
+                      dispatch({
+                        type: "SET_customDescription",
+                        payload: e.target.value,
+                      });
+                    }}
+                    style={{
+                      color: "black",
+                      border: "1px solid #418ECB",
+                    }}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row className="px-5">
+              <Col lg={3} md={6} sm={12} className="px-3">
+                {showTextBox && (
+                  <FormGroup>
+                    <Label for="examplededuct">Deduct By</Label>
+                    <Input
+                      bsSize="sm"
                       disabled={selectedOption !== "active"}
-                      className="me-3"
+                      type="text"
+                      id="examplededuct"
+                      name="deduct"
+                      value={state.deductBy}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_deductBy",
+                          payload: e.target.value,
+                        });
+                      }}
                       style={{
                         color: "black",
-                        border: "1px solid #1E5367",
-                        backgroundColor: "#418ECB",
+                        border: "1px solid #418ECB",
                       }}
-                    >
-                      <BiCheck fontSize={"16px"} />
-                      Save
-                    </Button>
-                    <Button
-                      size="sm"
-                      disabled={selectedOption !== "active"}
-                      style={{
-                        color: "red",
-                        border: "1px solid red",
-                        backgroundColor: "white",
-                      }}
-                    >
-                      <RxCross2 fontSize={"16px"} color="red" /> Cancel
-                    </Button>
+                    />
+                  </FormGroup>
+                )}
+              </Col>
+            </Row>
+            <Row className="px-5">
+              <Col lg={6} md={6} sm={12} className="px-3">
+                <FormGroup tag="fieldset">
+                  <legend className="col-form-label col-sm-2 fw-bold">
+                    Schedule
+                  </legend>
+                  <Col sm={12}>
+                    <FormGroup check inline>
+                      <Input
+                        name="radio3"
+                        type="radio"
+                        disabled={selectedOption !== "active"}
+                      />
+                      <Label
+                        check
+                        style={{
+                          marginBottom: "0px",
+                          fontSize: "small",
+                        }}
+                      >
+                        Every Day
+                      </Label>
+                    </FormGroup>
+                    <FormGroup check inline>
+                      <Input
+                        name="radio3"
+                        type="radio"
+                        disabled={selectedOption !== "active"}
+                      />
+                      <Label
+                        check
+                        style={{
+                          marginBottom: "0px",
+                          fontSize: "small",
+                        }}
+                      >
+                        Every week
+                      </Label>
+                    </FormGroup>
+                    <FormGroup check inline>
+                      <Input
+                        name="radio3"
+                        type="radio"
+                        disabled={selectedOption !== "active"}
+                      />
+                      <Label
+                        check
+                        style={{
+                          marginBottom: "0px",
+                          fontSize: "small",
+                        }}
+                      >
+                        Every Month
+                      </Label>
+                    </FormGroup>
+                    <FormGroup check inline>
+                      <Input
+                        name="radio3"
+                        type="radio"
+                        disabled={selectedOption !== "active"}
+                      />
+                      <Label
+                        check
+                        style={{
+                          marginBottom: "0px",
+                          fontSize: "small",
+                        }}
+                      >
+                        Every Other Week
+                      </Label>
+                    </FormGroup>
+                    <FormGroup check inline>
+                      <Input
+                        name="radio3"
+                        type="radio"
+                        disabled={selectedOption !== "active"}
+                      />
+                      <Label
+                        check
+                        style={{
+                          marginBottom: "0px",
+                          fontSize: "small",
+                        }}
+                      >
+                        Annually
+                      </Label>
+                    </FormGroup>
+                  </Col>
+                </FormGroup>
+              </Col>
+              <Col lg={6} md={6} sm={12} className="px-3">
+                <span className="fw-bold small" style={{ color: "#1B56AE" }}>
+                  Preview of Weekly Settlement Description:
+                </span>
+                <div className="fw-bold small">Weekly, Every Friday</div>
+              </Col>
+            </Row>
+            <Row className="px-5">
+              <Col lg={3} md={6} sm={12} className="px-3">
+                <FormGroup>
+                  <Label for="exampledate">Start On</Label>
+                  <Input
+                    bsSize="sm"
+                    disabled={selectedOption !== "active"}
+                    type="date"
+                    value={state.startOn}
+                    onChange={(e) => {
+                      dispatch({
+                        type: "SET_startOn",
+                        payload: e.target.value,
+                      });
+                    }}
+                    style={{
+                      color: "black",
+                      border: "1px solid #418ECB",
+                    }}
+                  />
+                </FormGroup>
+              </Col>
+              <Col lg={3} md={6} sm={12} className="px-3"></Col>
+              <Col lg={3} md={6} sm={12} className="px-3">
+                <FormGroup>
+                  <Label for="examplenotes">Notes</Label>
+                  <Input
+                    bsSize="sm"
+                    disabled={selectedOption !== "active"}
+                    type="textarea"
+                    row="3"
+                    value={state.notes}
+                    onChange={(e) => {
+                      dispatch({
+                        type: "SET_notes",
+                        payload: e.target.value,
+                      });
+                    }}
+                    style={{
+                      color: "black",
+                      border: "1px solid #418ECB",
+                    }}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row className="px-5">
+              <Col lg={6} md={6} sm={12} className="px-3">
+                <FormGroup row tag="fieldset">
+                  <legend className="col-form-label col-sm-2 fw-bold">
+                    Repeat
+                  </legend>
+                  <Col sm={12}>
+                    <FormGroup check inline>
+                      <Input
+                        name="radio3"
+                        type="radio"
+                        checked
+                        disabled={selectedOption !== "active"}
+                      />
+                      <Label
+                        checked
+                        style={{
+                          marginBottom: "0px",
+                          fontSize: "small",
+                        }}
+                      >
+                        Always
+                      </Label>
+                    </FormGroup>
+                    <FormGroup check inline>
+                      <Input
+                        name="radio3"
+                        type="radio"
+                        disabled={selectedOption !== "active"}
+                        onChange={(event: any) =>
+                          setActiveTime(event.target.value)
+                        }
+                      />
+                      <Label
+                        check
+                        style={{
+                          marginBottom: "0px",
+                          fontSize: "small",
+                        }}
+                      >
+                        No. of Terms
+                      </Label>
+                    </FormGroup>
+
+                    <FormGroup check inline>
+                      <Input
+                        name="radio3"
+                        type="radio"
+                        disabled={selectedOption !== "active"}
+                        onChange={(event: any) =>
+                          setActiveDate(event.target.value)
+                        }
+                      />
+                      <Label
+                        check
+                        style={{
+                          marginBottom: "0px",
+                          fontSize: "small",
+                        }}
+                      >
+                        Until the Date
+                      </Label>
+                    </FormGroup>
+                  </Col>
+                </FormGroup>
+              </Col>
+              {activeTime && (
+                <Row>
+                  <Col lg={3} md={6} sm={12} className="px-3">
+                    <FormGroup>
+                      <Input
+                        bsSize="sm"
+                        disabled={selectedOption !== "active"}
+                        placeholder="1"
+                        type="text"
+                        style={{
+                          color: "black",
+                          border: "1px solid #418ECB",
+                        }}
+                      />
+                    </FormGroup>
                   </Col>
                 </Row>
+              )}
+              {activeDate && (
+                <Row>
+                  <Col lg={3} md={6} sm={12} className="px-3">
+                    <FormGroup>
+                      <Input
+                        bsSize="sm"
+                        placeholder="1"
+                        disabled={selectedOption !== "active"}
+                        type="date"
+                        style={{
+                          color: "black",
+                          border: "1px solid #418ECB",
+                        }}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
+              )}
+            </Row>
+            <Row className="px-5">
+              <Col className="d-flex justify-content-end me-5 mt-5">
+                <Button
+                  size="sm"
+                  disabled={selectedOption !== "active"}
+                  className="me-3"
+                  style={{
+                    color: "white",
+                    border: "1px solid #1E5367",
+                    backgroundColor: "#418ECB",
+                  }}
+                >
+                  <BiCheck fontSize={"16px"} />
+                  Save
+                </Button>
+                <Button
+                  size="sm"
+                  disabled={selectedOption !== "active"}
+                  style={{
+                    color: "red",
+                    border: "1px solid red",
+                    backgroundColor: "white",
+                  }}
+                >
+                  <RxCross2 fontSize={"16px"} color="red" /> Cancel
+                </Button>
               </Col>
             </Row>
           </Form>

@@ -21,7 +21,7 @@ const TabPage = ({ tabTitles, children, onclick }: TabPageProps) => {
           <NavItem key={index}>
             <NavLink
               style={{ fontSize: "small" }}
-              className={`text-dark py-4 cursor-pointer ${
+              className={`text-dark py-2 cursor-pointer border border-primary ${
                 activeTab === index ? "active fw-bold" : "fw-semibold"
               }`}
               onClick={() => setActiveTab(index)}

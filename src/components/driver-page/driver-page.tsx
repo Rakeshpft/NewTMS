@@ -44,17 +44,13 @@ const DriverPage = () => {
 
   return (
     <>
-      <Navbar
-        style={{ border: "1px solid #1B56AE" }}
-        color="light"
-        className="py-0"
-      >
+      <Navbar color="light" className="py-0 formpagenavbar">
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand>Driver</NavbarBrand>
+        <NavbarBrand className="fw-bold">Driver</NavbarBrand>
         <Nav className="me-auto" navbar>
           <div className="d-flex gap-2">
             <NavItem>Export</NavItem>
@@ -108,13 +104,13 @@ const DriverPage = () => {
               <Card style={{ backgroundColor: "#E9F3FB" }}>
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
-                    <Row className="px-5">
-                      <Col sm={2}>
+                    <Row className="px-5 justify-content-start">
+                      <Col lg={2} md={6} sm={12}>
                         <h5 className="text-info mt-4 fw-bold ">
                           Search Filter
                         </h5>
                       </Col>
-                      <Col sm={2}>
+                      <Col lg={2} md={6} sm={12}>
                         <FormGroup>
                           <Label for="exampleSelect">Type</Label>
                           <Input
@@ -135,7 +131,7 @@ const DriverPage = () => {
                           </Input>
                         </FormGroup>
                       </Col>
-                      <Col sm={2}>
+                      <Col lg={2} md={6} sm={12}>
                         <FormGroup>
                           <Label for="exampleSelect">Status</Label>
                           <Input
@@ -156,13 +152,19 @@ const DriverPage = () => {
                           </Input>
                         </FormGroup>
                       </Col>
-                      <Col md={2}></Col>
-                      <Col sm={3} className="mt-4">
+                      <Col lg={2} md={6} sm={12}></Col>
+                      <Col lg={2} md={6} sm={12}></Col>
+                      <Col
+                        lg={2}
+                        md={6}
+                        sm={12}
+                        className="mt-4 justify-content-end"
+                      >
                         <Button
                           className="me-3"
                           size="sm"
                           style={{
-                            color: "black",
+                            color: "white",
                             border: "1px solid #1E5367",
                             backgroundColor: "#418ECB",
                           }}

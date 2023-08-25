@@ -6,6 +6,7 @@ import {
   Form,
   FormGroup,
   Input,
+  InputGroup,
   Label,
   Nav,
   Navbar,
@@ -113,13 +114,7 @@ const LaodNewPage = () => {
 
   return (
     <>
-      <Navbar
-        style={{
-          border: "1px solid #1B56AE",
-          backgroundColor: "#E9F3FB",
-        }}
-        className="py-0"
-      >
+      <Navbar className="py-0 formpagenavbar" color="light">
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
@@ -132,11 +127,14 @@ const LaodNewPage = () => {
           <Profile />
         </div>
       </Navbar>
-      <div className="py-2 itemmain">
+      <div
+        className="py-2 load-itemmain"
+        style={{ backgroundColor: "#E9F3FB" }}
+      >
         <Container className="mt-4 px-5 py-2">
-          <Form className="item" onSubmit={handleSubmit}>
+          <Form className="load-item" onSubmit={handleSubmit}>
             <Row className="px-5">
-              <Col sm={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <h5 style={{ color: "black" }}> New Load </h5>
                 <FormGroup>
                   <Label for="loadSelect">Status</Label>
@@ -219,7 +217,7 @@ const LaodNewPage = () => {
                 </FormGroup>
               </Col>
 
-              <Col sm={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <h5 style={{ color: "black" }}> Pickup </h5>
 
                 <FormGroup>
@@ -294,9 +292,8 @@ const LaodNewPage = () => {
                 </FormGroup>
               </Col>
 
-              <Col sm={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <h5 style={{ color: "black" }}> Delivery</h5>
-
                 <FormGroup>
                   <Label for="pickupDate">Date</Label>
                   <Input
@@ -368,7 +365,7 @@ const LaodNewPage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col sm={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <h5 style={{ color: "black" }}> Notes </h5>
                 <FormGroup>
                   <Label for="Note">Notes</Label>
@@ -399,15 +396,14 @@ const LaodNewPage = () => {
                 </FormGroup>
               </Col>
             </Row>
-            <Row className="px-5 mt-4">
-              <Col sm={3}> </Col>
-              <Col sm={3}>
+            <Row className="px-5 mt-4 justify-content-end">
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <h5 style={{ color: "black" }}>Broker</h5>
                 <Row>
-                  <Col className="d-flex">
-                    <Col md={11}>
-                      <FormGroup>
-                        <Label for="loadSelect">Broker</Label>
+                  <Col>
+                    <FormGroup>
+                      <Label for="loadSelect">Broker</Label>
+                      <InputGroup>
                         <Input
                           id="loadSelect"
                           name="select"
@@ -434,24 +430,22 @@ const LaodNewPage = () => {
                           <option>Delivered</option>
                           <option>Closed</option>
                         </Input>
-                      </FormGroup>
-                    </Col>
-                    <Col md={1} className="mt-4">
-                      <Button
-                        size="sm"
-                        className="p-1"
-                        style={{ backgroundColor: "#418ECB" }}
-                        onClick={toggleCustomer}
-                      >
-                        <AiOutlinePlus />
-                        <BrokerModalPage
-                          isCustomerOpen={customerModal}
-                          toggle={() => {
-                            setCustomerModal(false);
-                          }}
-                        />
-                      </Button>
-                    </Col>
+                        <Button
+                          size="sm"
+                          className="p-1"
+                          style={{ backgroundColor: "#418ECB" }}
+                          onClick={toggleCustomer}
+                        >
+                          <AiOutlinePlus />
+                          <BrokerModalPage
+                            isCustomerOpen={customerModal}
+                            toggle={() => {
+                              setCustomerModal(false);
+                            }}
+                          />
+                        </Button>
+                      </InputGroup>
+                    </FormGroup>
                   </Col>
                 </Row>
 
@@ -490,13 +484,13 @@ const LaodNewPage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col sm={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <h5 style={{ color: "black" }}> Driver </h5>
                 <Row>
-                  <Col className="d-flex">
-                    <Col md={11}>
-                      <FormGroup>
-                        <Label for="loadSelect">Driver</Label>
+                  <Col>
+                    <FormGroup>
+                      <Label for="loadSelect">Driver</Label>
+                      <InputGroup>
                         <Input
                           id="loadSelect"
                           name="select"
@@ -523,31 +517,29 @@ const LaodNewPage = () => {
                           <option>Delivered</option>
                           <option>Closed</option>
                         </Input>
-                      </FormGroup>
-                    </Col>
-                    <Col md={1} className="mt-4">
-                      <Button
-                        size="sm"
-                        className="p-1"
-                        style={{ backgroundColor: "#418ECB" }}
-                        onClick={toggleDriver}
-                      >
-                        <AiOutlinePlus />
-                        <DriverModalPage
-                          isDriverOpen={driverModal}
-                          toggle={() => {
-                            setDriverModal(false);
-                          }}
-                        />
-                      </Button>
-                    </Col>
+                        <Button
+                          size="sm"
+                          className="p-1"
+                          style={{ backgroundColor: "#418ECB" }}
+                          onClick={toggleDriver}
+                        >
+                          <AiOutlinePlus />
+                          <DriverModalPage
+                            isDriverOpen={driverModal}
+                            toggle={() => {
+                              setDriverModal(false);
+                            }}
+                          />
+                        </Button>
+                      </InputGroup>
+                    </FormGroup>
                   </Col>
                 </Row>
                 <Row>
-                  <Col className="d-flex">
-                    <Col md={11}>
-                      <FormGroup>
-                        <Label for="BillingSelect">Truck</Label>
+                  <Col>
+                    <FormGroup>
+                      <Label for="BillingSelect">Truck</Label>
+                      <InputGroup>
                         <Input
                           id="BillingSelect"
                           name="select"
@@ -574,32 +566,30 @@ const LaodNewPage = () => {
                           <option>Paid</option>
                           <option>Closed</option>
                         </Input>
-                      </FormGroup>
-                    </Col>
-                    <Col md={1} className="mt-4">
-                      <Button
-                        size="sm"
-                        className="p-1"
-                        style={{ backgroundColor: "#418ECB" }}
-                        onClick={toggleTruck}
-                      >
-                        <AiOutlinePlus />
-                        <TruckModalPage
-                          isTruckOpen={truckModal}
-                          toggle={() => {
-                            setTruckModal(false);
-                          }}
-                        />
-                      </Button>
-                    </Col>
+                        <Button
+                          size="sm"
+                          className="p-1"
+                          style={{ backgroundColor: "#418ECB" }}
+                          onClick={toggleTruck}
+                        >
+                          <AiOutlinePlus />
+                          <TruckModalPage
+                            isTruckOpen={truckModal}
+                            toggle={() => {
+                              setTruckModal(false);
+                            }}
+                          />
+                        </Button>
+                      </InputGroup>
+                    </FormGroup>
                   </Col>
                 </Row>
 
                 <Row>
-                  <Col className="d-flex">
-                    <Col md={11}>
-                      <FormGroup>
-                        <Label for="dispatcherSelect">Trailer</Label>
+                  <Col>
+                    <FormGroup>
+                      <Label for="dispatcherSelect">Trailer</Label>
+                      <InputGroup>
                         <Input
                           id="dispatcherSelect"
                           name="select"
@@ -626,28 +616,26 @@ const LaodNewPage = () => {
                           <option>Paid</option>
                           <option>Closed</option>
                         </Input>
-                      </FormGroup>
-                    </Col>
-                    <Col md={1} className="mt-4">
-                      <Button
-                        size="sm"
-                        className="p-1"
-                        style={{ backgroundColor: "#418ECB" }}
-                        onClick={toggleTrailer}
-                      >
-                        <AiOutlinePlus />
-                        <TrailerModalPage
-                          isTrailerOpen={trailerModal}
-                          toggle={() => {
-                            setTrailerModal(false);
-                          }}
-                        />
-                      </Button>
-                    </Col>
+                        <Button
+                          size="sm"
+                          className="p-1"
+                          style={{ backgroundColor: "#418ECB" }}
+                          onClick={toggleTrailer}
+                        >
+                          <AiOutlinePlus />
+                          <TrailerModalPage
+                            isTrailerOpen={trailerModal}
+                            toggle={() => {
+                              setTrailerModal(false);
+                            }}
+                          />
+                        </Button>
+                      </InputGroup>
+                    </FormGroup>
                   </Col>
                 </Row>
               </Col>
-              <Col sm={3} className="align-self-end">
+              <Col lg={3} md={6} sm={12} className="px-3 align-self-end">
                 <FormGroup
                   className="d-flex justify-content-end mb-1"
                   style={{ bottom: "0", right: "0" }}
@@ -656,7 +644,7 @@ const LaodNewPage = () => {
                     className="me-3"
                     size="sm"
                     style={{
-                      color: "black",
+                      color: "white",
                       border: "1px solid #1E5367",
                       backgroundColor: "#418ECB",
                     }}

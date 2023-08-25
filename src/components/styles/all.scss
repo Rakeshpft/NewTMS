@@ -88,6 +88,11 @@ form .form-label {
   color: black;
 }
 
+.card {
+  border-radius: 0;
+  border: none;
+}
+
 @import "./login";
 @import "./navigation";
 @import "./dashboard";
