@@ -9,7 +9,8 @@
 
 .load-itemmain {
   height: 100%;
-  padding-bottom: 3rem !important;
+  min-height: calc(100vh - 75px);
+  // padding-bottom: 3rem !important;
 }
 
 .formpagenavbar {
@@ -29,4 +30,8 @@
   background-color: #b7d1e6;
   color: #000000;
   border: 1px solid #1e5367;
+}
+.form-control, .form-select, textarea{
+  color: black; 
+  border: 1px solid #418ECB;
 }

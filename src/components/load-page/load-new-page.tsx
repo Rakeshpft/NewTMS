@@ -2,7 +2,6 @@ import React, { useReducer, useState } from "react";
 import {
   Button,
   Col,
-  Container,
   Form,
   FormGroup,
   Input,
@@ -113,7 +112,7 @@ const LaodNewPage = () => {
   };
 
   return (
-    <>
+    <main>
       <Navbar className="py-0 formpagenavbar" color="light">
         <Header
           sidebarToggle={() => {
@@ -127,548 +126,555 @@ const LaodNewPage = () => {
           <Profile />
         </div>
       </Navbar>
-      <div
-        className="py-2 load-itemmain"
-        style={{ backgroundColor: "#E9F3FB" }}
-      >
-        <Container className="mt-4 px-5 py-2">
-          <Form className="load-item" onSubmit={handleSubmit}>
-            <Row className="px-5">
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <h5 style={{ color: "black" }}> New Load </h5>
-                <FormGroup>
-                  <Label for="loadSelect">Status</Label>
-                  <Input
-                    id="loadSelect"
-                    name="select"
-                    type="select"
-                    value={formState.status}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_status",
-                        payload: e.target.value,
-                      });
-                    }}
-                    className="form-select form-select-sm"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  >
-                    <option>New</option>
-                    <option>Canceled</option>
-                    <option>TONU</option>
-                    <option>Dispatched</option>
-                    <option>EnRoute</option>
-                    <option>Picked-up</option>
-                    <option>Delivered</option>
-                    <option>Closed</option>
-                  </Input>
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="BillingSelect">Billing Status</Label>
-                  <Input
-                    id="BillingSelect"
-                    name="select"
-                    type="select"
-                    className="form-select form-select-sm"
-                    value={formState.billingStatus}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_billingStatus",
-                        payload: e.target.value,
-                      });
-                    }}
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  >
-                    <option>Pending</option>
-                    <option>Canceled</option>
-                    <option>BOL received</option>
-                    <option>Invoiced</option>
-                    <option>Sent to factoring</option>
-                    <option>Funded</option>
-                    <option>Paid</option>
-                    <option>Closed</option>
-                  </Input>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="dispatcherSelect">Dispatcher</Label>
-                  <Input
-                    id="dispatcherSelect"
-                    name="select"
-                    type="select"
-                    value={formState.dispatcher}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_dispatcher",
-                        payload: e.target.value,
-                      });
-                    }}
-                    className="form-select form-select-sm"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  >
-                    <option>Pending</option>
-                    <option>Canceled</option>
-                    <option>BOL received</option>
-                    <option>Invoiced</option>
-                    <option>Sent to factoring</option>
-                    <option>Funded</option>
-                    <option>Paid</option>
-                    <option>Closed</option>
-                  </Input>
-                </FormGroup>
-              </Col>
-
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <h5 style={{ color: "black" }}> Pickup </h5>
-
-                <FormGroup>
-                  <Label for="pickupDate">Date</Label>
-                  <Input
-                    id="pickDate"
-                    name="date"
-                    type="date"
-                    value={formState.date}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_date",
-                        payload: e.target.value,
-                      });
-                    }}
-                    className="form-control form-control-sm"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="city">City</Label>
-                  <Input
-                    id="city"
-                    name="city"
-                    type="text"
-                    value={formState.city}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_city",
-                        payload: e.target.value,
-                      });
-                    }}
-                    className="form-control form-control-sm"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  />
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="pickupState">State</Label>
-                  <Input
-                    id="pickupState"
-                    name="state"
-                    type="text"
-                    value={formState.state}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_state",
-                        payload: e.target.value,
-                      });
-                    }}
-                    className="form-control form-control-sm"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  />
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="pickupZip">ZIP</Label>
-                  <Input
-                    id="pickupZip"
-                    name="zip"
-                    type="text"
-                    value={formState.zip}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_zip",
-                        payload: e.target.value,
-                      });
-                    }}
-                    className="form-control form-control-sm"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  />
-                </FormGroup>
-              </Col>
-
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <h5 style={{ color: "black" }}> Delivery</h5>
-                <FormGroup>
-                  <Label for="pickupDate">Date</Label>
-                  <Input
-                    id="pickDate"
-                    name="date"
-                    type="date"
-                    value={formState.date}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_date",
-                        payload: e.target.value,
-                      });
-                    }}
-                    className="form-control form-control-sm"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="city">City</Label>
-                  <Input
-                    id="city"
-                    name="city"
-                    type="text"
-                    value={formState.city}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_city",
-                        payload: e.target.value,
-                      });
-                    }}
-                    className="form-control form-control-sm"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  />
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="pickupState">State</Label>
-                  <Input
-                    id="pickupState"
-                    name="state"
-                    type="text"
-                    value={formState.state}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_state",
-                        payload: e.target.value,
-                      });
-                    }}
-                    className="form-control form-control-sm"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  />
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="pickupZip">ZIP</Label>
-                  <Input
-                    id="pickupZip"
-                    name="zip"
-                    type="text"
-                    value={formState.zip}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_zip",
-                        payload: e.target.value,
-                      });
-                    }}
-                    className="form-control form-control-sm"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  />
-                </FormGroup>
-              </Col>
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <h5 style={{ color: "black" }}> Notes </h5>
-                <FormGroup>
-                  <Label for="Note">Notes</Label>
-                  <Input
-                    id="Note"
-                    name="Note"
-                    type="textarea"
-                    rows="3"
-                    value={formState.notes}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_notes",
-                        payload: e.target.value,
-                      });
-                    }}
-                    className="form-control form-control-sm"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="fileAttachment">Attachment</Label>
-                  <Input
-                    id="fileAttachment"
-                    name="file"
-                    type="file"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row className="px-5 mt-4 justify-content-end">
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <h5 style={{ color: "black" }}>Broker</h5>
-                <Row>
-                  <Col>
-                    <FormGroup>
-                      <Label for="loadSelect">Broker</Label>
-                      <InputGroup>
-                        <Input
-                          id="loadSelect"
-                          name="select"
-                          type="select"
-                          value={formState.broker}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_broker",
-                              payload: e.target.value,
-                            });
-                          }}
-                          className="form-select form-select-sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                        >
-                          <option>New</option>
-                          <option>Canceled</option>
-                          <option>TONU</option>
-                          <option>Dispatched</option>
-                          <option>EnRoute</option>
-                          <option>Picked-up</option>
-                          <option>Delivered</option>
-                          <option>Closed</option>
-                        </Input>
-                        <Button
-                          size="sm"
-                          className="p-1"
-                          style={{ backgroundColor: "#418ECB" }}
-                          onClick={toggleCustomer}
-                        >
-                          <AiOutlinePlus />
-                          <BrokerModalPage
-                            isCustomerOpen={customerModal}
-                            toggle={() => {
-                              setCustomerModal(false);
-                            }}
-                          />
-                        </Button>
-                      </InputGroup>
-                    </FormGroup>
-                  </Col>
-                </Row>
-
-                <FormGroup>
-                  <Label for="po">PO #</Label>
-                  <Input
-                    id="po"
-                    name="po"
-                    type="text"
-                    value={formState.po}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_po",
-                        payload: e.target.value,
-                      });
-                    }}
-                    className="form-control form-control-sm"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="rate">Rate</Label>
-                  <Input
-                    id="rate"
-                    name="rate"
-                    type="text"
-                    value={formState.rate}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_rate",
-                        payload: e.target.value,
-                      });
-                    }}
-                    className="form-control form-control-sm"
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  />
-                </FormGroup>
-              </Col>
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <h5 style={{ color: "black" }}> Driver </h5>
-                <Row>
-                  <Col>
-                    <FormGroup>
-                      <Label for="loadSelect">Driver</Label>
-                      <InputGroup>
-                        <Input
-                          id="loadSelect"
-                          name="select"
-                          type="select"
-                          value={formState.driver}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_driver",
-                              payload: e.target.value,
-                            });
-                          }}
-                          className="form-select form-select-sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                        >
-                          <option>New</option>
-                          <option>Canceled</option>
-                          <option>TONU</option>
-                          <option>Dispatched</option>
-                          <option>EnRoute</option>
-                          <option>Picked-up</option>
-                          <option>Delivered</option>
-                          <option>Closed</option>
-                        </Input>
-                        <Button
-                          size="sm"
-                          className="p-1"
-                          style={{ backgroundColor: "#418ECB" }}
-                          onClick={toggleDriver}
-                        >
-                          <AiOutlinePlus />
-                          <DriverModalPage
-                            isDriverOpen={driverModal}
-                            toggle={() => {
-                              setDriverModal(false);
-                            }}
-                          />
-                        </Button>
-                      </InputGroup>
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <FormGroup>
-                      <Label for="BillingSelect">Truck</Label>
-                      <InputGroup>
-                        <Input
-                          id="BillingSelect"
-                          name="select"
-                          type="select"
-                          value={formState.truck}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_truck",
-                              payload: e.target.value,
-                            });
-                          }}
-                          className="form-select form-select-sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                        >
-                          <option>Pending</option>
-                          <option>Canceled</option>
-                          <option>BOL received</option>
-                          <option>Invoiced</option>
-                          <option>Sent to factoring</option>
-                          <option>Funded</option>
-                          <option>Paid</option>
-                          <option>Closed</option>
-                        </Input>
-                        <Button
-                          size="sm"
-                          className="p-1"
-                          style={{ backgroundColor: "#418ECB" }}
-                          onClick={toggleTruck}
-                        >
-                          <AiOutlinePlus />
-                          <TruckModalPage
-                            isTruckOpen={truckModal}
-                            toggle={() => {
-                              setTruckModal(false);
-                            }}
-                          />
-                        </Button>
-                      </InputGroup>
-                    </FormGroup>
-                  </Col>
-                </Row>
-
-                <Row>
-                  <Col>
-                    <FormGroup>
-                      <Label for="dispatcherSelect">Trailer</Label>
-                      <InputGroup>
-                        <Input
-                          id="dispatcherSelect"
-                          name="select"
-                          type="select"
-                          value={formState.trailer}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_trailer",
-                              payload: e.target.value,
-                            });
-                          }}
-                          className="form-select form-select-sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                        >
-                          <option>Pending</option>
-                          <option>Canceled</option>
-                          <option>BOL received</option>
-                          <option>Invoiced</option>
-                          <option>Sent to factoring</option>
-                          <option>Funded</option>
-                          <option>Paid</option>
-                          <option>Closed</option>
-                        </Input>
-                        <Button
-                          size="sm"
-                          className="p-1"
-                          style={{ backgroundColor: "#418ECB" }}
-                          onClick={toggleTrailer}
-                        >
-                          <AiOutlinePlus />
-                          <TrailerModalPage
-                            isTrailerOpen={trailerModal}
-                            toggle={() => {
-                              setTrailerModal(false);
-                            }}
-                          />
-                        </Button>
-                      </InputGroup>
-                    </FormGroup>
-                  </Col>
-                </Row>
-              </Col>
-              <Col lg={3} md={6} sm={12} className="px-3 align-self-end">
-                <FormGroup
-                  className="d-flex justify-content-end mb-1"
-                  style={{ bottom: "0", right: "0" }}
+      <div className="load-itemmain m-2" style={{ backgroundColor: "#E9F3FB" }}>
+        <Form className="load-item container p-5" onSubmit={handleSubmit}>
+          <Row>
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <h5 style={{ color: "black" }}> New Load </h5>
+              <FormGroup>
+                <Label for="loadSelect">Status</Label>
+                <Input
+                  id="loadSelect"
+                  name="select"
+                  type="select"
+                  bsSize="sm"
+                  value={formState.status}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_status",
+                      payload: e.target.value,
+                    });
+                  }}
                 >
-                  <Button
-                    className="me-3"
-                    size="sm"
-                    style={{
-                      color: "white",
-                      border: "1px solid #1E5367",
-                      backgroundColor: "#418ECB",
-                    }}
-                  >
-                    <BiCheck fontSize={"16px"} />
-                    Save
-                  </Button>
-                  <Button
-                    size="sm"
-                    style={{
-                      color: "red",
-                      border: "1px solid red",
-                      backgroundColor: "white",
-                    }}
-                  >
-                    <RxCross2 fontSize={"13px"} color="red" /> Cancel
-                  </Button>
-                </FormGroup>
-              </Col>
-            </Row>
-          </Form>
-        </Container>
+                  <option>New</option>
+                  <option>Canceled</option>
+                  <option>TONU</option>
+                  <option>Dispatched</option>
+                  <option>EnRoute</option>
+                  <option>Picked-up</option>
+                  <option>Delivered</option>
+                  <option>Closed</option>
+                </Input>
+              </FormGroup>
+
+              <FormGroup>
+                <Label for="BillingSelect">Billing Status</Label>
+                <Input
+                  id="BillingSelect"
+                  name="select"
+                  type="select"
+                  bsSize="sm"
+                  value={formState.billingStatus}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_billingStatus",
+                      payload: e.target.value,
+                    });
+                  }}
+                >
+                  <option>Pending</option>
+                  <option>Canceled</option>
+                  <option>BOL received</option>
+                  <option>Invoiced</option>
+                  <option>Sent to factoring</option>
+                  <option>Funded</option>
+                  <option>Paid</option>
+                  <option>Closed</option>
+                </Input>
+              </FormGroup>
+              <FormGroup>
+                <Label for="dispatcherSelect">Dispatcher</Label>
+                <Input
+                  id="dispatcherSelect"
+                  name="select"
+                  type="select"
+                  value={formState.dispatcher}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_dispatcher",
+                      payload: e.target.value,
+                    });
+                  }}
+                  bsSize="sm"
+                >
+                  <option>Pending</option>
+                  <option>Canceled</option>
+                  <option>BOL received</option>
+                  <option>Invoiced</option>
+                  <option>Sent to factoring</option>
+                  <option>Funded</option>
+                  <option>Paid</option>
+                  <option>Closed</option>
+                </Input>
+              </FormGroup>
+            </Col>
+
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <h5 style={{ color: "black" }}> Pickup </h5>
+
+              <FormGroup>
+                <Label for="pickupDate">Date</Label>
+                <Input
+                  id="pickDate"
+                  name="date"
+                  type="date"
+                  value={formState.date}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_date",
+                      payload: e.target.value,
+                    });
+                  }}
+                  className="form-control form-control-sm"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="city">City</Label>
+                <Input
+                  id="city"
+                  name="city"
+                  type="text"
+                  value={formState.city}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_city",
+                      payload: e.target.value,
+                    });
+                  }}
+                  className="form-control form-control-sm"
+                />
+              </FormGroup>
+              <Row>
+                <Col>
+                  <FormGroup>
+                    <Label for="pickupState">State</Label>
+                    <Input
+                      id="pickupState"
+                      bsSize="sm"
+                      name="state"
+                      type="select"
+                      value={formState.state}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_state",
+                          payload: e.target.value,
+                        });
+                      }}
+                      className="form-control form-control-sm"
+                    >
+                      <option>Pending</option>
+                      <option>Canceled</option>
+                      <option>BOL received</option>
+                      <option>Invoiced</option>
+                      <option>Sent to factoring</option>
+                      <option>Funded</option>
+                      <option>Paid</option>
+                      <option>Closed</option>
+                    </Input>
+                  </FormGroup>
+                </Col>
+                <Col>
+                  <FormGroup>
+                    <Label for="pickupZip">ZIP</Label>
+                    <Input
+                      id="pickupZip"
+                      name="zip"
+                      type="text"
+                      value={formState.zip}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_zip",
+                          payload: e.target.value,
+                        });
+                      }}
+                      className="form-control form-control-sm"
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+            </Col>
+
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <h5 style={{ color: "black" }}> Delivery</h5>
+              <FormGroup>
+                <Label for="pickupDate">Date</Label>
+                <Input
+                  id="pickDate"
+                  name="date"
+                  type="date"
+                  value={formState.date}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_date",
+                      payload: e.target.value,
+                    });
+                  }}
+                  className="form-control form-control-sm"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="city">City</Label>
+                <Input
+                  id="city"
+                  name="city"
+                  type="text"
+                  value={formState.city}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_city",
+                      payload: e.target.value,
+                    });
+                  }}
+                  className="form-control form-control-sm"
+                />
+              </FormGroup>
+              <Row>
+                <Col>
+                  {" "}
+                  <FormGroup>
+                    <Label for="pickupState">State</Label>
+                    <Input
+                      id="pickupState"
+                      name="state"
+                      type="select"
+                      bsSize="sm"
+                      value={formState.state}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_state",
+                          payload: e.target.value,
+                        });
+                      }}
+                      className="form-control form-control-sm"
+                    >
+                      <option>Pending</option>
+                      <option>Canceled</option>
+                      <option>BOL received</option>
+                      <option>Invoiced</option>
+                      <option>Sent to factoring</option>
+                      <option>Funded</option>
+                      <option>Paid</option>
+                      <option>Closed</option>
+                    </Input>
+                  </FormGroup>
+                </Col>
+                <Col>
+                  <FormGroup>
+                    <Label for="pickupZip">ZIP</Label>
+                    <Input
+                      id="pickupZip"
+                      name="zip"
+                      type="text"
+                      value={formState.zip}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_zip",
+                          payload: e.target.value,
+                        });
+                      }}
+                      className="form-control form-control-sm"
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+            </Col>
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <h5 style={{ color: "black" }}> Notes </h5>
+              <FormGroup>
+                <Label for="Note">Notes</Label>
+                <Input
+                  id="Note"
+                  name="Note"
+                  type="textarea"
+                  rows="4"
+                  bsSize="sm"
+                  value={formState.notes}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_notes",
+                      payload: e.target.value,
+                    });
+                  }}
+                  className="form-control form-control-sm"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="fileAttachment">Attachment</Label>
+                <Input
+                  id="fileAttachment"
+                  name="file"
+                  type="file"
+                  bsSize="sm"
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row className="mt-4 justify-content-end">
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <h5 style={{ color: "black" }}>Broker</h5>
+              <Row>
+                <Col>
+                  <FormGroup>
+                    <Label for="loadSelect">Broker</Label>
+                    <InputGroup>
+                      <Input
+                        id="loadSelect"
+                        name="select"
+                        type="select"
+                        value={formState.broker}
+                        onChange={(e) => {
+                          dispatch({
+                            type: "SET_broker",
+                            payload: e.target.value,
+                          });
+                        }}
+                        bsSize="sm"
+                        style={{
+                          color: "black",
+                          border: "1px solid #418ECB",
+                        }}
+                      >
+                        <option>New</option>
+                        <option>Canceled</option>
+                        <option>TONU</option>
+                        <option>Dispatched</option>
+                        <option>EnRoute</option>
+                        <option>Picked-up</option>
+                        <option>Delivered</option>
+                        <option>Closed</option>
+                      </Input>
+                      <Button
+                        size="sm"
+                        style={{ backgroundColor: "#418ECB" }}
+                        onClick={toggleCustomer}
+                      >
+                        <AiOutlinePlus />
+                        <BrokerModalPage
+                          isCustomerOpen={customerModal}
+                          toggle={() => {
+                            setCustomerModal(false);
+                          }}
+                        />
+                      </Button>
+                    </InputGroup>
+                  </FormGroup>
+                </Col>
+              </Row>
+
+              <FormGroup>
+                <Label for="po">PO #</Label>
+                <Input
+                  id="po"
+                  name="po"
+                  type="text"
+                  value={formState.po}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_po",
+                      payload: e.target.value,
+                    });
+                  }}
+                  className="form-control form-control-sm"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="rate">Rate</Label>
+                <Input
+                  id="rate"
+                  name="rate"
+                  type="text"
+                  value={formState.rate}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_rate",
+                      payload: e.target.value,
+                    });
+                  }}
+                  className="form-control form-control-sm"
+                />
+              </FormGroup>
+            </Col>
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <h5 style={{ color: "black" }}> Driver </h5>
+              <Row>
+                <Col>
+                  <FormGroup>
+                    <Label for="loadSelect">Driver</Label>
+                    <InputGroup>
+                      <Input
+                        id="loadSelect"
+                        name="select"
+                        type="select"
+                        value={formState.driver}
+                        onChange={(e) => {
+                          dispatch({
+                            type: "SET_driver",
+                            payload: e.target.value,
+                          });
+                        }}
+                        bsSize="sm"
+                        style={{
+                          color: "black",
+                          border: "1px solid #418ECB",
+                        }}
+                      >
+                        <option>New</option>
+                        <option>Canceled</option>
+                        <option>TONU</option>
+                        <option>Dispatched</option>
+                        <option>EnRoute</option>
+                        <option>Picked-up</option>
+                        <option>Delivered</option>
+                        <option>Closed</option>
+                      </Input>
+                      <Button
+                        size="sm"
+                        style={{ backgroundColor: "#418ECB" }}
+                        onClick={toggleDriver}
+                      >
+                        <AiOutlinePlus />
+                        <DriverModalPage
+                          isDriverOpen={driverModal}
+                          toggle={() => {
+                            setDriverModal(false);
+                          }}
+                        />
+                      </Button>
+                    </InputGroup>
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <FormGroup>
+                    <Label for="BillingSelect">Truck</Label>
+                    <InputGroup>
+                      <Input
+                        id="BillingSelect"
+                        name="select"
+                        type="select"
+                        value={formState.truck}
+                        onChange={(e) => {
+                          dispatch({
+                            type: "SET_truck",
+                            payload: e.target.value,
+                          });
+                        }}
+                        bsSize="sm"
+                        style={{
+                          color: "black",
+                          border: "1px solid #418ECB",
+                        }}
+                      >
+                        <option>Pending</option>
+                        <option>Canceled</option>
+                        <option>BOL received</option>
+                        <option>Invoiced</option>
+                        <option>Sent to factoring</option>
+                        <option>Funded</option>
+                        <option>Paid</option>
+                        <option>Closed</option>
+                      </Input>
+                      <Button
+                        size="sm"
+                        style={{ backgroundColor: "#418ECB" }}
+                        onClick={toggleTruck}
+                      >
+                        <AiOutlinePlus />
+                        <TruckModalPage
+                          isTruckOpen={truckModal}
+                          toggle={() => {
+                            setTruckModal(false);
+                          }}
+                        />
+                      </Button>
+                    </InputGroup>
+                  </FormGroup>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col>
+                  <FormGroup>
+                    <Label for="dispatcherSelect">Trailer</Label>
+                    <InputGroup>
+                      <Input
+                        id="dispatcherSelect"
+                        name="select"
+                        type="select"
+                        value={formState.trailer}
+                        onChange={(e) => {
+                          dispatch({
+                            type: "SET_trailer",
+                            payload: e.target.value,
+                          });
+                        }}
+                        bsSize="sm"
+                        style={{
+                          color: "black",
+                          border: "1px solid #418ECB",
+                        }}
+                      >
+                        <option>Pending</option>
+                        <option>Canceled</option>
+                        <option>BOL received</option>
+                        <option>Invoiced</option>
+                        <option>Sent to factoring</option>
+                        <option>Funded</option>
+                        <option>Paid</option>
+                        <option>Closed</option>
+                      </Input>
+                      <Button
+                        size="sm"
+                        style={{ backgroundColor: "#418ECB" }}
+                        onClick={toggleTrailer}
+                      >
+                        <AiOutlinePlus />
+                        <TrailerModalPage
+                          isTrailerOpen={trailerModal}
+                          toggle={() => {
+                            setTrailerModal(false);
+                          }}
+                        />
+                      </Button>
+                    </InputGroup>
+                  </FormGroup>
+                </Col>
+              </Row>
+            </Col>
+            <Col lg={3} md={6} sm={12} className="px-3 align-self-end">
+              <FormGroup
+                className="d-flex justify-content-end mb-1"
+                style={{ bottom: "0", right: "0" }}
+              >
+                <Button
+                  className="me-3"
+                  size="sm"
+                  style={{
+                    color: "white",
+                    border: "1px solid #1E5367",
+                    backgroundColor: "#418ECB",
+                  }}
+                >
+                  <BiCheck fontSize={"16px"} />
+                  Save
+                </Button>
+                <Button
+                  size="sm"
+                  style={{
+                    color: "red",
+                    border: "1px solid red",
+                    backgroundColor: "white",
+                  }}
+                >
+                  <RxCross2 fontSize={"13px"} color="red" /> Cancel
+                </Button>
+              </FormGroup>
+            </Col>
+          </Row>
+        </Form>
       </div>
-    </>
+    </main>
   );
 };
 

@@ -146,7 +146,9 @@
     }
   }
 }
-
+.TilePopUp .modal-content{
+  padding: 0 0.35rem;
+}
 .TilePopUp button:hover img {
   filter: brightness(0) invert(1);
 }

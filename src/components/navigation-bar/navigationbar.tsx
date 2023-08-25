@@ -31,16 +31,16 @@ const NavigationBar = () => {
   }
   return (
     <div className="header-section">
-      <Navbar className="px-3 border-bottom">
+      <Navbar className="px-md-3 px-0 border-bottom">
         <Nav>
           <NavItem>
             <Link to={"/dashboard"} className="fs-2 pe-2 link-light">
-              <CompanyLogo height={64} />
+              <CompanyLogo height={64} shrinkOnSmallScreen />
             </Link>
           </NavItem>
         </Nav>
         <Row>
-          <UncontrolledButtonDropdown flip>
+          <UncontrolledButtonDropdown>
             <DropdownToggle
               caret
               id="userProfileDropdown"
@@ -59,7 +59,7 @@ const NavigationBar = () => {
                       src="/images/user-avatar.png"
                     />
                   </div>
-                  <div className="d-block text-start small">
+                  <div className="d-lg-block d-none text-start small">
                     <div className="fw-bold">TMS User</div>
                     <div>tmsuser@tmsgroup.com</div>
                   </div>
@@ -79,7 +79,7 @@ const NavigationBar = () => {
                 </div>
               </DropdownItem>
             </DropdownMenu>
-            <Col className="d-flex user-dropdown-greeting">
+            <Col className="d-sm-flex d-none user-dropdown-greeting">
               <div className="px-2">
                 <BiMessageDetail className="fs-4 " />
               </div>

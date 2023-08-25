@@ -19,12 +19,15 @@
 .sidebar-item {
   justify-content: space-between;
   align-items: center;
-  height: 40px;
+  // height: 40px;
   padding-left: 18px;
   display: block;
   width: 100%;
   padding: 8px;
   cursor: pointer;
+  &.has-child ~ ul li div{
+    padding-left: 3rem !important;
+  }
   &::after {
     position: absolute;
     right: 1.5rem;
@@ -67,4 +70,16 @@
   padding: 10px;
   outline: none;
   cursor: pointer;
+}
+ul.sidebar-submenu .sidebar-item{
+  &.py-2{
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+  }
+  // height: 32px !important;
+  
+ 
+  &.active{
+    background-color: #91abc1;
+  }
 }
