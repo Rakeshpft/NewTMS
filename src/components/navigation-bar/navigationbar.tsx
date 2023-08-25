@@ -18,7 +18,6 @@ import { BiMessageDetail } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
 import CompanyLogo from "../company-logo/company-logo";
 
-
 const NavigationBar = () => {
   const { pathname } = useLocation();
 
@@ -56,7 +55,7 @@ const NavigationBar = () => {
                       width="40"
                       height="40"
                       className="rounded-circle"
-                      src="/images/user-avatar.png"
+                      src={require("../../../public/images/user-avatar.png")}
                     />
                   </div>
                   <div className="d-block text-start small">
