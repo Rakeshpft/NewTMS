@@ -85,14 +85,13 @@ form .form-label {
   color: black;
 }
 
+.card {
+  border-radius: 0;
+  border: none;
+}
+
 @import "./login";
 @import "./navigation";
 @import "./dashboard";
 @import "./sidebar";
 @import "./loadpage";
-@import "./partnerpage.scss";
-@import "./equipment.scss";
-@import "./fuelpage.scss";
-@import "./accountspage.scss";
-@import "./driverpage.scss";
-@import "./driverpayroll.scss";

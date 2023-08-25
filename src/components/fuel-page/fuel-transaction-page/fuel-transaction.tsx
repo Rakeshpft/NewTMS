@@ -59,7 +59,7 @@ const FuelTransaction = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand>Fuel Transactions</NavbarBrand>
+        <NavbarBrand className="fw-bold">Fuel Transactions</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
@@ -101,12 +101,12 @@ const FuelTransaction = () => {
                     <Row className="px-5">
                       <Col>
                         <Row>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <h5 className="text-info mt-4 fw-bold ">
                               Search Filter
                             </h5>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Start Date</Label>
                               <Input
@@ -121,7 +121,7 @@ const FuelTransaction = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">End Date</Label>
                               <Input
@@ -136,7 +136,7 @@ const FuelTransaction = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Imported Report</Label>
                               <Input
@@ -157,7 +157,7 @@ const FuelTransaction = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Driver</Label>
                               <Input
@@ -178,7 +178,7 @@ const FuelTransaction = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Partner</Label>
                               <Input
@@ -201,8 +201,8 @@ const FuelTransaction = () => {
                           </Col>
                         </Row>
                         <Row>
-                          <Col sm={2}></Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3"></Col>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Product Code</Label>
                               <Input
@@ -217,7 +217,7 @@ const FuelTransaction = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">
                                 Additional Payee
@@ -240,7 +240,7 @@ const FuelTransaction = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Fuel Card</Label>
                               <Input
@@ -261,7 +261,7 @@ const FuelTransaction = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">State</Label>
                               <Input
@@ -282,7 +282,7 @@ const FuelTransaction = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Driver Type</Label>
                               <Input
@@ -305,8 +305,8 @@ const FuelTransaction = () => {
                           </Col>
                         </Row>
                         <Row>
-                          <Col sm={2}></Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3"></Col>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Billing</Label>
                               <Input
@@ -327,7 +327,7 @@ const FuelTransaction = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">
                                 Included in IFTA Calculation
@@ -344,7 +344,7 @@ const FuelTransaction = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Truck</Label>
                               <Input
@@ -359,7 +359,7 @@ const FuelTransaction = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Trailer</Label>
                               <Input
@@ -380,17 +380,21 @@ const FuelTransaction = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}></Col>
                         </Row>
-                        <Row style={{ paddingLeft: "35rem" }}>
-                          <Col>
+                        <Row>
+                          <Col
+                            lg={12}
+                            md={12}
+                            sm={12}
+                            className="px-3 d-flex justify-content-center"
+                          >
                             <Button
                               size="sm"
                               className="me-3"
                               style={{
-                                color: "black",
+                                color: "white",
                                 border: "1px solid #1E5367",
-                                backgroundColor: "#B7D1E6",
+                                backgroundColor: "#418ECB",
                               }}
                             >
                               <BiCheck fontSize={"16px"} />

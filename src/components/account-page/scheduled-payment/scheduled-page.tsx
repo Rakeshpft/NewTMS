@@ -50,7 +50,9 @@ const ScheduledPage = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand>Scheduled Payment/Deductions</NavbarBrand>
+        <NavbarBrand className="fw-bold">
+          Scheduled Payment/Deductions
+        </NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
@@ -93,7 +95,7 @@ const ScheduledPage = () => {
                       <Col>
                         <h5 className="fw-bold text-info">Search Filter</h5>
                         <Row>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Partner</Label>
                               <Input
@@ -114,7 +116,7 @@ const ScheduledPage = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Driver</Label>
                               <Input
@@ -135,7 +137,7 @@ const ScheduledPage = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Type</Label>
                               <Input
@@ -158,7 +160,7 @@ const ScheduledPage = () => {
                           </Col>
                         </Row>
                         <Row>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Category</Label>
                               <Input
@@ -173,7 +175,7 @@ const ScheduledPage = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Active</Label>
                               <Input
@@ -188,14 +190,14 @@ const ScheduledPage = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={2} className="mt-4">
+                          <Col lg={2} md={6} sm={12} className="px-3 mt-4">
                             <Button
                               size="sm"
                               className="me-3"
                               style={{
-                                color: "black",
+                                color: "white",
                                 border: "1px solid #1E5367",
-                                backgroundColor: "#B7D1E6",
+                                backgroundColor: "#418ECB",
                               }}
                             >
                               <BiCheck fontSize={"16px"} />
@@ -209,7 +211,8 @@ const ScheduledPage = () => {
                                 backgroundColor: "white",
                               }}
                             >
-                              <RxCross2 fontSize={"16px"} color="red" /> Clear
+                              <RxCross2 fontSize={"16px"} color="red" />
+                              Clear
                             </Button>
                           </Col>
                         </Row>

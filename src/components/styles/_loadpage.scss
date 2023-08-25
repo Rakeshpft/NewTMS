@@ -1,14 +1,19 @@
-.item {
+.load-item {
   flex-basis: 0;
   flex-grow: 1;
 }
 
-.item .mb-3 {
+.load-item .mb-3 {
   margin-bottom: 0.5rem !important;
 }
 
-.itemmain {
-  height: calc(100vh - 100px);
+.load-itemmain {
+  height: 100%;
+  padding-bottom: 3rem !important;
+}
+
+.formpagenavbar {
+  border-bottom: 1px solid #1b56ae;
 }
 
 .searchRow {

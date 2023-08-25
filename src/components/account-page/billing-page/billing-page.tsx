@@ -51,7 +51,7 @@ const BillingPage = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand>Billing Entries</NavbarBrand>
+        <NavbarBrand className="fw-bold">Billing Entries</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
@@ -94,7 +94,7 @@ const BillingPage = () => {
                       <Col>
                         <h5 className="fw-bold text-info">Search Filter</h5>
                         <Row>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Type</Label>
                               <Input
@@ -115,7 +115,7 @@ const BillingPage = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Status</Label>
                               <Input
@@ -136,7 +136,7 @@ const BillingPage = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Load#</Label>
                               <Input
@@ -153,7 +153,7 @@ const BillingPage = () => {
                           </Col>
                         </Row>
                         <Row>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Amount Range:To</Label>
                               <Input
@@ -168,7 +168,7 @@ const BillingPage = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">
                                 Amount Range:Form
@@ -185,7 +185,7 @@ const BillingPage = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Date Range:To</Label>
                               <Input
@@ -200,7 +200,7 @@ const BillingPage = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Date Range:Form</Label>
                               <Input
@@ -217,7 +217,7 @@ const BillingPage = () => {
                           </Col>
                         </Row>
                         <Row>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Settlement</Label>
                               <Input
@@ -232,7 +232,7 @@ const BillingPage = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Category</Label>
                               <Input
@@ -247,7 +247,7 @@ const BillingPage = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Partner</Label>
                               <Input
@@ -268,7 +268,7 @@ const BillingPage = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Driver</Label>
                               <Input
@@ -289,14 +289,14 @@ const BillingPage = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2} className="mt-4">
+                          <Col lg={2} md={6} sm={12} className="px-3 mt-4">
                             <Button
                               size="sm"
                               className="me-3"
                               style={{
-                                color: "black",
+                                color: "white",
                                 border: "1px solid #1E5367",
-                                backgroundColor: "#B7D1E6",
+                                backgroundColor: "#418ECB",
                               }}
                             >
                               <BiCheck fontSize={"16px"} />
@@ -310,7 +310,8 @@ const BillingPage = () => {
                                 backgroundColor: "white",
                               }}
                             >
-                              <RxCross2 fontSize={"16px"} color="red" /> Clear
+                              <RxCross2 fontSize={"16px"} color="red" />
+                              Clear
                             </Button>
                           </Col>
                         </Row>

@@ -57,7 +57,7 @@ const LoadPage = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand>Loads</NavbarBrand>
+        <NavbarBrand className="fw-bold">Loads</NavbarBrand>
         <Nav className="me-auto" navbar>
           <div className="">
             <span className="x-small fw-bold">Period</span>
@@ -116,12 +116,12 @@ const LoadPage = () => {
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
                     <Row className="px-5">
-                      <Col sm={2}>
+                      <Col lg={2} md={6} sm={12}>
                         <h5 className="text-info mt-2 fw-bold">
                           Search Filter
                         </h5>
                       </Col>
-                      <Col sm={2}>
+                      <Col lg={2} md={6} sm={12}>
                         <FormGroup>
                           <Label for="exampleSelect">Period</Label>
                           <Input
@@ -168,7 +168,7 @@ const LoadPage = () => {
                           ></Input>
                         </FormGroup>
                       </Col>
-                      <Col sm={2}>
+                      <Col lg={2} md={6} sm={12}>
                         <FormGroup>
                           <Label for="exampleSelect">Broker</Label>
                           <Input
@@ -215,7 +215,7 @@ const LoadPage = () => {
                           ></Input>
                         </FormGroup>
                       </Col>
-                      <Col sm={2}>
+                      <Col lg={2} md={6} sm={12}>
                         <FormGroup>
                           <Label for="exampleSelect">Driver</Label>
                           <Input
@@ -262,7 +262,7 @@ const LoadPage = () => {
                           ></Input>
                         </FormGroup>
                       </Col>
-                      <Col sm={2}>
+                      <Col lg={2} md={6} sm={12}>
                         <FormGroup>
                           <Label for="exampleSelect">Dispatcher</Label>
                           <Input
@@ -321,7 +321,7 @@ const LoadPage = () => {
                           </Input>
                         </FormGroup>
                       </Col>
-                      <Col sm={2}>
+                      <Col lg={2} md={6} sm={12}>
                         <FormGroup>
                           <Label for="exampleSelect">
                             Direct Billing/Factoring
@@ -343,30 +343,6 @@ const LoadPage = () => {
                             <option>5</option>
                           </Input>
                         </FormGroup>
-                        <div className="button-search">
-                          <Button
-                            size="sm"
-                            className="me-3"
-                            style={{
-                              color: "black",
-                              border: "1px solid #1E5367",
-                              backgroundColor: "#B7D1E6",
-                            }}
-                          >
-                            <BiCheck fontSize={"16px"} />
-                            Apply
-                          </Button>
-                          <Button
-                            size="sm"
-                            style={{
-                              color: "red",
-                              border: "1px solid red",
-                              backgroundColor: "white",
-                            }}
-                          >
-                            <RxCross2 fontSize={"16px"} color="red" /> Clear
-                          </Button>
-                        </div>
                       </Col>
                     </Row>
                     <Row className="searchRow">
@@ -462,6 +438,28 @@ const LoadPage = () => {
                         </Row>
                       </Col>
                     </Row>
+                    <Button
+                      size="sm"
+                      className="me-3"
+                      style={{
+                        color: "white",
+                        border: "1px solid #1E5367",
+                        backgroundColor: "#418ECB",
+                      }}
+                    >
+                      <BiCheck fontSize={"16px"} />
+                      Apply
+                    </Button>
+                    <Button
+                      size="sm"
+                      style={{
+                        color: "red",
+                        border: "1px solid red",
+                        backgroundColor: "white",
+                      }}
+                    >
+                      <RxCross2 fontSize={"16px"} color="red" /> Clear
+                    </Button>
                   </Form>
                 </CardBody>
               </Card>

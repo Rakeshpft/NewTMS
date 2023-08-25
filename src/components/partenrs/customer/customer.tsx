@@ -24,7 +24,7 @@ const Customer = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand>Customers</NavbarBrand>
+        <NavbarBrand className="fw-bold">Customers</NavbarBrand>
         <Nav className="me-auto" navbar>
           <div className="d-flex gap-2">
             <NavItem>Export</NavItem>

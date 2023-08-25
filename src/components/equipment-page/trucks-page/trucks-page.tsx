@@ -54,7 +54,7 @@ const TrucksPage = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand>Trucks</NavbarBrand>
+        <NavbarBrand className="fw-bold">Trucks</NavbarBrand>
         <Nav className="me-auto" navbar>
           <div className="d-flex gap-2">
             <NavItem>Export</NavItem>
@@ -109,12 +109,12 @@ const TrucksPage = () => {
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
                     <Row className="px-5">
-                      <Col sm={2}>
+                      <Col lg={2} md={6} sm={12}>
                         <h5 className="text-info mt-4 fw-bold ">
                           Search Filter
                         </h5>
                       </Col>
-                      <Col sm={2}>
+                      <Col lg={2} md={6} sm={12}>
                         <FormGroup>
                           <Label for="exampleSelect">Status</Label>
                           <Input
@@ -135,7 +135,7 @@ const TrucksPage = () => {
                           </Input>
                         </FormGroup>
                       </Col>
-                      <Col sm={2}>
+                      <Col lg={2} md={6} sm={12}>
                         <FormGroup>
                           <Label for="exampleSelect">Driver</Label>
                           <Input
@@ -156,7 +156,7 @@ const TrucksPage = () => {
                           </Input>
                         </FormGroup>
                       </Col>
-                      <Col sm={2}>
+                      <Col lg={2} md={6} sm={12}>
                         <FormGroup>
                           <Label for="exampleSelect">OwnerShip</Label>
                           <Input
@@ -178,14 +178,14 @@ const TrucksPage = () => {
                         </FormGroup>
                       </Col>
                       <Col md={2}></Col>
-                      <Col sm={2} className="mt-4">
+                      <Col lg={2} md={6} sm={12} className="mt-4">
                         <Button
                           size="sm"
                           className="me-3"
                           style={{
-                            color: "black",
+                            color: "white",
                             border: "1px solid #1E5367",
-                            backgroundColor: "#B7D1E6",
+                            backgroundColor: "#418ECB",
                           }}
                         >
                           <BiCheck fontSize={"16px"} />

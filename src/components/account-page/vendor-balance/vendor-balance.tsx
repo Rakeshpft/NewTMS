@@ -51,7 +51,7 @@ const VendorBalance = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand>Vendor Balance</NavbarBrand>
+        <NavbarBrand className="fw-bold">Vendor Balance</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
@@ -87,12 +87,12 @@ const VendorBalance = () => {
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
                     <Row className="px-5">
-                      <Col md={2}>
+                      <Col>
                         <h5 className="fw-bold text-info mt-4">
                           Search Filter
                         </h5>
                       </Col>
-                      <Col md={2}>
+                      <Col lg={2} md={6} sm={12} className="px-3">
                         <FormGroup>
                           <Label for="exampleSelect">Vendor Type</Label>
                           <Input
@@ -113,7 +113,7 @@ const VendorBalance = () => {
                           </Input>
                         </FormGroup>
                       </Col>
-                      <Col md={2}>
+                      <Col lg={2} md={6} sm={12} className="px-3">
                         <FormGroup>
                           <Label for="exampleSelect">Driver Type</Label>
                           <Input
@@ -134,7 +134,7 @@ const VendorBalance = () => {
                           </Input>
                         </FormGroup>
                       </Col>
-                      <Col md={2}></Col>
+                      <Col lg={2} md={6} sm={12} className="px-3"></Col>
                       <Col md={3} className=" mt-4">
                         <Button
                           size="sm"

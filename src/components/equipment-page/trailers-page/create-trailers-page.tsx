@@ -96,10 +96,7 @@ const CreateTrailerPage = () => {
 
   return (
     <>
-      <Navbar
-        style={{ border: "1px solid #1B56AE", backgroundColor: "#E9F3FB" }}
-        className="py-0"
-      >
+      <Navbar className="py-0 formpagenavbar" color="light">
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
@@ -112,13 +109,16 @@ const CreateTrailerPage = () => {
           <Profile />
         </div>
       </Navbar>
-      <div className="py-2 truckitemmain">
+      <div
+        className="py-2 load-itemmain"
+        style={{ backgroundColor: "#E9F3FB" }}
+      >
         <Container className="mt-3 px-5 py-2">
-          <Form onSubmit={handleSubmit} className="truckitem">
+          <Form onSubmit={handleSubmit} className="load-item">
             <Row>
-              <Col className="px-5">
+              <Col>
                 <Row className="px-5">
-                  <Col md={3} style={{ marginRight: "20px" }}>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="exampleunit">Unit</Label>
                       <Input
@@ -135,7 +135,7 @@ const CreateTrailerPage = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col md={3}>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label>VIN</Label>
                       <Input
@@ -152,10 +152,9 @@ const CreateTrailerPage = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col md={3}></Col>
                 </Row>
                 <Row className="px-5">
-                  <Col md={3} style={{ marginRight: "20px" }}>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="exampleyear">Year</Label>
                       <Input
@@ -174,7 +173,7 @@ const CreateTrailerPage = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col md={3}>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="examplemake">Make</Label>
                       <Input
@@ -193,7 +192,143 @@ const CreateTrailerPage = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col md={3} className="px-5">
+                </Row>
+                <Row className="px-5">
+                  <Col lg={6} md={6} sm={12} className="px-3">
+                    <FormGroup>
+                      <Label for="examplemodal">Modal</Label>
+                      <Input
+                        bsSize="sm"
+                        style={{ color: "black", border: "1px solid #418ECB" }}
+                        id="examplemodal"
+                        name="modal"
+                        type="text"
+                        value={state.modal}
+                        onChange={(e) => {
+                          dispatch({
+                            type: "SET_modal",
+                            payload: e.target.value,
+                          });
+                        }}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row className="px-5">
+                  <Col lg={6} md={6} sm={12} className="px-3">
+                    <FormGroup>
+                      <Label for="exampledriver">Driver</Label>
+                      <Input
+                        bsSize="sm"
+                        style={{ color: "black", border: "1px solid #418ECB" }}
+                        id="exampledriver"
+                        name="driver"
+                        type="text"
+                        value={state.driver}
+                        onChange={(e) => {
+                          dispatch({
+                            type: "SET_driver",
+                            payload: e.target.value,
+                          });
+                        }}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
+                    <FormGroup>
+                      <Label for="exampleSelect">Plate</Label>
+                      <Input
+                        bsSize="sm"
+                        style={{ color: "black", border: "1px solid #418ECB" }}
+                        type="select"
+                        id="exampleSelect"
+                        name="select"
+                        value={state.plate}
+                        onChange={(e) => {
+                          dispatch({
+                            type: "SET_plate",
+                            payload: e.target.value,
+                          });
+                        }}
+                      >
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>3</option>
+                        <option>5</option>
+                      </Input>
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row className="px-5">
+                  <Col lg={6} md={6} sm={12} className="px-3">
+                    <FormGroup>
+                      <Label for="exampleplateState">Plate State</Label>
+                      <Input
+                        bsSize="sm"
+                        style={{ color: "black", border: "1px solid #418ECB" }}
+                        id="exampleplateState"
+                        name="plateState"
+                        type="text"
+                        value={state.plateState}
+                        onChange={(e) => {
+                          dispatch({
+                            type: "SET_plateState",
+                            payload: e.target.value,
+                          });
+                        }}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row className="px-5">
+                  <Col lg={12} md={12} sm={12} className="px-3">
+                    <FormGroup>
+                      <Label for="examplenotes">Notes</Label>
+                      <Input
+                        bsSize="sm"
+                        style={{ color: "black", border: "1px solid #418ECB" }}
+                        id="examplenotes"
+                        name="notes"
+                        type="textarea"
+                        rows="3"
+                        value={state.notes}
+                        onChange={(e) => {
+                          dispatch({
+                            type: "SET_notes",
+                            payload: e.target.value,
+                          });
+                        }}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row className="px-5">
+                  <Col lg={12} md={12} sm={12} className="px-3">
+                    <FormGroup>
+                      <Label for="examplehistory">Histoy</Label>
+                      <Input
+                        bsSize="sm"
+                        style={{ color: "black", border: "1px solid #418ECB" }}
+                        id="examplehistory"
+                        name="history"
+                        type="textarea"
+                        rows="3"
+                        value={state.history}
+                        onChange={(e) => {
+                          dispatch({
+                            type: "SET_history",
+                            payload: e.target.value,
+                          });
+                        }}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row className="my-5">
+                  <Col lg={3} md={6} sm={12} className="px-3">
                     <FormGroup tag="fieldset">
                       <h5 className="fw-bold">OwnerShip</h5>
                       <div className="d-flex">
@@ -220,75 +355,11 @@ const CreateTrailerPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row className="px-5">
-                  <Col md={3}>
-                    <FormGroup>
-                      <Label for="examplemodal">Modal</Label>
-                      <Input
-                        bsSize="sm"
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        id="examplemodal"
-                        name="modal"
-                        type="text"
-                        value={state.modal}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_modal",
-                            payload: e.target.value,
-                          });
-                        }}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md={3}></Col>
-                  <Col md={3}> </Col>
+                <Row>
+                  <Col></Col>
                 </Row>
-                <Row className="px-5">
-                  <Col md={3} style={{ marginRight: "20px" }}>
-                    <FormGroup>
-                      <Label for="exampledriver">Driver</Label>
-                      <Input
-                        bsSize="sm"
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        id="exampledriver"
-                        name="driver"
-                        type="text"
-                        value={state.driver}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_driver",
-                            payload: e.target.value,
-                          });
-                        }}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md={3}>
-                    <FormGroup>
-                      <Label for="exampleSelect">Plate</Label>
-                      <Input
-                        bsSize="sm"
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        type="select"
-                        id="exampleSelect"
-                        name="select"
-                        value={state.plate}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_plate",
-                            payload: e.target.value,
-                          });
-                        }}
-                      >
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>3</option>
-                        <option>5</option>
-                      </Input>
-                    </FormGroup>
-                  </Col>
-                  <Col md={3} className="px-4">
+                <Row className="mt-4">
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="examplepurchaseDate">Purchase Date</Label>
                       <Input
@@ -311,28 +382,8 @@ const CreateTrailerPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row className="px-5">
-                  <Col md={3} style={{ marginRight: "20px" }}>
-                    <FormGroup>
-                      <Label for="exampleplateState">Plate State</Label>
-                      <Input
-                        bsSize="sm"
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        id="exampleplateState"
-                        name="plateState"
-                        type="text"
-                        value={state.plateState}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_plateState",
-                            payload: e.target.value,
-                          });
-                        }}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md={3}></Col>
-                  <Col md={3} className="px-4">
+                <Row>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="examplepurchaseprice">Purchase Price</Label>
                       <Input
@@ -352,55 +403,13 @@ const CreateTrailerPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row className="px-5">
-                  <Col md={6} style={{ width: "52%" }}>
-                    <FormGroup>
-                      <Label for="examplenotes">Notes</Label>
-                      <Input
-                        bsSize="sm"
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        id="examplenotes"
-                        name="notes"
-                        type="textarea"
-                        rows="3"
-                        value={state.notes}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_notes",
-                            payload: e.target.value,
-                          });
-                        }}
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row className="px-5">
-                  <Col md={6} style={{ width: "52%", marginRight: "80px" }}>
-                    <FormGroup>
-                      <Label for="examplehistory">Histoy</Label>
-                      <Input
-                        bsSize="sm"
-                        style={{ color: "black", border: "1px solid #418ECB" }}
-                        id="examplehistory"
-                        name="history"
-                        type="textarea"
-                        rows="3"
-                        value={state.history}
-                        onChange={(e) => {
-                          dispatch({
-                            type: "SET_history",
-                            payload: e.target.value,
-                          });
-                        }}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md={3} className=" mt-5">
+                <Row>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <Button
                       size="sm"
                       className="me-3  ps-3 pe-3"
                       style={{
-                        color: "black",
+                        color: "white",
                         border: "1px solid #1E5367",
                         backgroundColor: "#418ECB",
                       }}
