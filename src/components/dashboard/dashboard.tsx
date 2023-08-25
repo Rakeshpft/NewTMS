@@ -13,7 +13,9 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
+  CardBody,
 } from "reactstrap";
+
 import NavigationBar from "../navigation-bar";
 import { FiDownload } from "react-icons/fi";
 
@@ -472,43 +474,45 @@ export default function DashboardPage() {
         <Row>
           <Col md="6">
             <h4 className="text-info fw-bold mb-3">Analytics</h4>
-            <Card className="dashboard-card">
-              <div className="section-header d-flex justify-content-between p-2">
-                <div className="d-flex align-items-center gap-2">
-                  <img
-                    src={require("../../../public/icons/Ic-Overview.png")}
-                    alt="Image"
-                    width={32}
-                    height={32}
-                  />
-                  <h5 className="text-info fw-bold mb-0">Sales Report</h5>
-                </div>
+            <Card className="dashboard-card h-100">
+              <CardBody>
+                <div className="section-header d-flex justify-content-between">
+                  <div className="d-flex align-items-center gap-2">
+                    <img
+                      src={require("../../../public/icons/Ic-Overview.png")}
+                      alt="Image"
+                      width={32}
+                      height={32}
+                    />
+                    <h5 className="text-info fw-bold mb-0 ">Sales Report</h5>
+                  </div>
 
-                <div className="d-flex gap-3">
-                  <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                    <DropdownToggle
-                      caret
-                      className="dropdownDashboard"
-                      color="transparent"
+                  <div className="d-flex gap-3">
+                    <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                      <DropdownToggle
+                        caret
+                        className="dropdownDashboard "
+                        color="outline-light"
+                      >
+                        <span className="d-none d-lg-flex">Monthly</span>
+                      </DropdownToggle>
+                      <DropdownMenu>
+                        <DropdownItem header>Header</DropdownItem>
+                        <DropdownItem>Some Action</DropdownItem>
+                        <DropdownItem text>Dropdown Item Text</DropdownItem>
+                      </DropdownMenu>
+                    </Dropdown>
+                    <Button
+                      color="light"
+                      className="d-flex gap-2 align-items-center TilePopUpBtn fw-bold"
                     >
-                      Monthly
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem header>Header</DropdownItem>
-                      <DropdownItem>Some Action</DropdownItem>
-                      <DropdownItem text>Dropdown Item Text</DropdownItem>
-                    </DropdownMenu>
-                  </Dropdown>
-                  <Button
-                    color="transparent"
-                    className="d-flex gap-2 align-items-center TilePopUpBtn"
-                  >
-                    Download Report
-                    <FiDownload />
-                  </Button>
+                      <FiDownload />
+                      <span className=" d-none d-lg-flex">Download Report</span>
+                    </Button>
+                  </div>
                 </div>
-              </div>
-              <section style={{ minHeight: "300px" }}></section>
+                <section></section>
+              </CardBody>
             </Card>
           </Col>
           <Col md="6">
@@ -540,19 +544,19 @@ export default function DashboardPage() {
                 <h4 className="text-info fw-bold mb-0">More</h4>
               </Col>
               {dashboardTiles.smallTiles.map((tile, index) => (
-                <Col md="3" key={index}>
+                <Col md={6} xl={3} key={index}>
                   <Link
                     to={tile.link}
-                    className="btn btn-outline-info d-flex w-100 align-items-center small_tile"
+                    className="btn btn-outline-info d-flex w-100 align-items-center small_tile text-start"
                   >
                     <img
                       src={tile.icon}
                       alt="Image"
                       width={24}
                       height={24}
-                      className="me-1"
+                      className="me-2"
                     />
-                    <h6 className="mb-0">{tile.name}</h6>
+                    <h6 className="mb-0 small">{tile.name}</h6>
                   </Link>
                 </Col>
               ))}
@@ -641,8 +645,8 @@ function MainTile({ title, icon, data, options }: TileProps) {
                   </>
                 )}
                 <Row>
-                  {option.options?.map((item) => (
-                    <Col sm="6">
+                  {option.options?.map((item, index) => (
+                    <Col sm="6" key={index}>
                       <Link
                         to={`${item.link}`}
                         className="w-100 d-flex flex-column btn btn-outline-info modaltile"
@@ -699,10 +703,10 @@ function MediumTiles({ title, icon, options }: MediumTilesProps) {
       >
         <div className="tile-title d-flex justify-content-between align-items-center">
           <div className="d-flex">
-            <div className="tile-icon d-flex align-items-center">
+            <div className="tile-icon d-flex align-items-center me-2">
               <img src={icon} height={32} width={32} alt="Image"></img>
             </div>
-            <div className="fw-bold tile-name mb-0 ms-2 d-flex align-items-center">
+            <div className="fw-bold tile-name mb-0 d-flex align-items-center text-start">
               {title}
             </div>
           </div>
@@ -723,8 +727,8 @@ function MediumTiles({ title, icon, options }: MediumTilesProps) {
                   </>
                 )}
                 <Row>
-                  {option.options?.map((item) => (
-                    <Col sm="6">
+                  {option.options?.map((item, index) => (
+                    <Col sm="6" key={index}>
                       <Link
                         to={`${item.link}`}
                         className="w-100 d-flex flex-column btn btn-outline-info modaltile"
@@ -781,10 +785,10 @@ function AccountTiles({ title, icon, options }: AccountTilesProps) {
       >
         <div className="tile-title d-flex justify-content-between align-items-center">
           <div className="d-flex">
-            <div className="tile-icon d-flex align-items-center">
+            <div className="tile-icon d-flex align-items-center me-2">
               <img src={icon} height={32} width={32} alt="Image"></img>
             </div>
-            <div className="fw-bold tile-name mb-0 ms-2 d-flex align-items-center">
+            <div className="fw-bold tile-name mb-0 d-flex align-items-center text-start">
               {title}
             </div>
           </div>
@@ -811,9 +815,10 @@ function AccountTiles({ title, icon, options }: AccountTilesProps) {
                       <hr className="mt-1" />
                     </>
                   )}
-                  {option.options?.map((item) => (
+                  {option.options?.map((item, index) => (
                     <Link
                       to={`${item.link}`}
+                      key={index}
                       className="btn btn-outline-info px-4 d-flex w-100 align-items-center mb-3 column-gap-2 medium_tile db"
                     >
                       <img

@@ -1,8 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800");
+
+
 $primary: #21529d;
 $info: #418ecb;
-
 @import "~bootstrap/scss/bootstrap";
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
+
+
 :root {
   --bs-primary-rgb: #21529d !important;
   --bs-card-border-radius: 0 !important;
@@ -11,16 +14,16 @@ $info: #418ecb;
   --header-color: #ffffff;
   --body-color: #465e78;
 }
-
+body{
+    font-family: "Manrope", sans-serif;
+    scroll-behavior: smooth;
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: "Manrope", sans-serif;
-}
 
 ::-webkit-scrollbar {
   width: 0.5rem;
@@ -96,3 +99,4 @@ form .form-label {
 @import "./accountspage.scss";
 @import "./driverpage.scss";
 @import "./driverpayroll.scss";
+
