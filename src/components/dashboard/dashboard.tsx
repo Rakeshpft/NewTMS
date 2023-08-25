@@ -494,7 +494,7 @@ export default function DashboardPage() {
                         className="dropdownDashboard "
                         color="outline-light"
                       >
-                        <span className="d-none d-lg-flex">Monthly</span>
+                        <span className="d-none d-lg-inline">Monthly</span>
                       </DropdownToggle>
                       <DropdownMenu>
                         <DropdownItem header>Header</DropdownItem>
@@ -507,7 +507,9 @@ export default function DashboardPage() {
                       className="d-flex gap-2 align-items-center TilePopUpBtn fw-bold"
                     >
                       <FiDownload />
-                      <span className=" d-none d-lg-flex">Download Report</span>
+                      <span className=" d-none d-lg-inline">
+                        Download Report
+                      </span>
                     </Button>
                   </div>
                 </div>

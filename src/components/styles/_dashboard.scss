@@ -1,6 +1,6 @@
 .main-dashboard {
   position: relative;
-
+  min-height: 100vh;
   &::before {
     position: absolute;
     top: 0;
@@ -8,7 +8,7 @@
     content: "";
     width: 100%;
     height: 100%;
-    background-image: url("../../../public/images/bg-trucks.jpg");
+    background-image: url("../../../public/images/trucks.jpg");
     opacity: 0.15;
     z-index: -1;
     background-position: center;

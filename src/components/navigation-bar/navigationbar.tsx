@@ -40,7 +40,7 @@ const NavigationBar = () => {
           </NavItem>
         </Nav>
         <Row>
-          <UncontrolledButtonDropdown direction="down" className="float-right">
+          <UncontrolledButtonDropdown flip>
             <DropdownToggle
               caret
               id="userProfileDropdown"
