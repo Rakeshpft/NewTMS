@@ -8,7 +8,7 @@ import {
   UncontrolledButtonDropdown,
 } from "reactstrap";
 import { handleLogout } from "../auth";
-import { CgProfile } from "react-icons/cg";
+// import { CgProfile } from "react-icons/cg";
 import { FiLogOut } from "react-icons/fi";
 
 const Profile = () => {
@@ -22,7 +22,15 @@ const Profile = () => {
         >
           <Row>
             <Col className="user-dropdown-greeting">
-              <CgProfile className="fs-2 me-2" />
+              <div className="user-avatar me-2">
+                <img
+                  loading="lazy"
+                  width="40"
+                  height="40"
+                  className="rounded-circle"
+                  src="/images/user-avatar.png"
+                />
+              </div>
             </Col>
           </Row>
         </DropdownToggle>

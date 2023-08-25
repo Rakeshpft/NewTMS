@@ -387,8 +387,8 @@ const SidebarItem: React.FC<{ item: SidebarItem }> = ({ item }) => {
       <div
         className={`sidebar-item ps-4 text-start border-0 rounded-0 d-flex align-items-center
       btn btn-outline-secondary w-100 text-decoration-none py-2 ${
-        isOpen && "active"
-      }`}
+        isOpen ? "active" : ""
+      } ${item.children ? "has-child" : ""}`}
         onClick={handleToggle}
       >
         {item.path ? (
@@ -407,7 +407,7 @@ const SidebarItem: React.FC<{ item: SidebarItem }> = ({ item }) => {
         </div>
       </div>
       {isOpen && item.children && (
-        <ul className="sidebar-submenu list-unstyled ps-3">
+        <ul className="sidebar-submenu list-unstyled ">
           {item.children.map((child, index) => (
             <li key={index}>
               <SidebarItem item={child} />
@@ -423,8 +423,8 @@ const Sidebar = ({ isSidebarOpen }: SidebarProps) => {
   return (
     <IconContext.Provider value={{ color: "black", size: "20px" }}>
       {isSidebarOpen && (
-        <div className="Sidebar open py-3 border-end border-info">
-          <ul className="sidebar-menu active list-unstyled">
+        <div className="Sidebar open border-end border-info pt-3">
+          <ul className="sidebar-menu list-unstyled">
             {sidebarData.map((item, index) => (
               <li key={index}>
                 <SidebarItem item={item} />

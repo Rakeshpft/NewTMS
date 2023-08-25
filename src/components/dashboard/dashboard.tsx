@@ -126,7 +126,7 @@ const dashboardTiles = {
       options: [
         {
           title: "Trucks",
-          icon: require("../../../public/icons/create-a-load.png"),
+          icon: require("../../../public/icons/equipments-trucks.png"),
           options: [
             {
               title: "Add New Truck",
@@ -142,7 +142,7 @@ const dashboardTiles = {
         },
         {
           title: "Trailers",
-          icon: require("../../../public/icons/view-existing-loads.png"),
+          icon: require("../../../public/icons/equipments-trailers.png"),
           options: [
             {
               title: "Add New Trailer",
@@ -160,55 +160,6 @@ const dashboardTiles = {
     },
   ],
   mediumTiles: [
-    {
-      title: "Fuel",
-      icon: require("../../../public/icons/fuel.png"),
-      options: [
-        {
-          title: "Fuel Card",
-          icon: require("../../../public/icons/create-a-load.png"),
-          options: [
-            {
-              title: "Add New Fuel Card",
-              icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createfuelpage",
-            },
-            {
-              title: "View All Fuel Card",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/fuel/fuelcard",
-            },
-          ],
-        },
-        {
-          title: "Fuel Transactions",
-          icon: require("../../../public/icons/create-a-load.png"),
-          options: [
-            {
-              title: "Add New Fuel Transaction",
-              icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createfueltransaction",
-            },
-            {
-              title: "View All Fuel Transaction",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/fuel/fueltransaction",
-            },
-          ],
-        },
-        {
-          title: "Fuel Import",
-          icon: require("../../../public/icons/create-a-load.png"),
-          options: [
-            {
-              title: "View All Fuel Import",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/fuel/fuelimport",
-            },
-          ],
-        },
-      ],
-    },
     {
       title: "Driver Payroll",
       icon: require("../../../public/icons/driver-payroll.png"),
@@ -255,6 +206,57 @@ const dashboardTiles = {
     },
   ],
 
+  fuelTiles: [
+    {
+      title: "Fuel",
+      icon: require("../../../public/icons/fuel.png"),
+      options: [
+        {
+          title: "Fuel Card",
+          icon: require("../../../public/icons/create-a-load.png"),
+          options: [
+            {
+              title: "Add New Fuel Card",
+              icon: require("../../../public/icons/create-a-load.png"),
+              link: "/createfuelpage",
+            },
+            {
+              title: "View All Fuel Card",
+              icon: require("../../../public/icons/view-existing-loads.png"),
+              link: "/fuel/fuelcard",
+            },
+          ],
+        },
+        {
+          title: "Fuel Transactions",
+          icon: require("../../../public/icons/create-a-load.png"),
+          options: [
+            {
+              title: "Add New Fuel Txn",
+              icon: require("../../../public/icons/create-a-load.png"),
+              link: "/createfueltransaction",
+            },
+            {
+              title: "View All Fuel Txn",
+              icon: require("../../../public/icons/view-existing-loads.png"),
+              link: "/fuel/fueltransaction",
+            },
+          ],
+        },
+        {
+          title: "Fuel Import",
+          icon: require("../../../public/icons/create-a-load.png"),
+          options: [
+            {
+              title: "View All Fuel Import",
+              icon: require("../../../public/icons/view-existing-loads.png"),
+              link: "/fuel/fuelimport",
+            },
+          ],
+        },
+      ],
+    },
+  ],
   accountTiles: [
     {
       title: "Accounts",
@@ -265,7 +267,7 @@ const dashboardTiles = {
           icon: require("../../../public/icons/create-a-load.png"),
           options: [
             {
-              title: "Add New Billing Entry",
+              title: "New Billing Entry",
               icon: require("../../../public/icons/create-a-load.png"),
               link: "/createbillingpage",
             },
@@ -277,16 +279,16 @@ const dashboardTiles = {
           ],
         },
         {
-          title: "Additions/Deductions",
+          title: "Additions / Deductions",
           icon: require("../../../public/icons/accounts.png"),
           options: [
             {
-              title: "Add New Entry",
+              title: "New Entry",
               icon: require("../../../public/icons/create-a-load.png"),
               link: "/createadditions",
             },
             {
-              title: "View All Additions/Deductions",
+              title: "View All Additions / Deductions",
               icon: require("../../../public/icons/view-existing-loads.png"),
               link: "/accounts/additions",
             },
@@ -297,7 +299,7 @@ const dashboardTiles = {
           icon: require("../../../public/icons/accounts.png"),
           options: [
             {
-              title: "Add New Chart of Account",
+              title: "New Chart of Account",
               icon: require("../../../public/icons/create-a-load.png"),
               link: "/createchartofaccounts",
             },
@@ -313,7 +315,7 @@ const dashboardTiles = {
           icon: require("../../../public/icons/accounts.png"),
           options: [
             {
-              title: "Add New Factoring Report",
+              title: "New Factoring Report",
               icon: require("../../../public/icons/create-a-load.png"),
               link: "/createfactoringreport",
             },
@@ -340,12 +342,12 @@ const dashboardTiles = {
           icon: require("../../../public/icons/accounts.png"),
           options: [
             {
-              title: "Add New Schedule Payment/Deduction",
+              title: "New Schedule Pay./Ded...",
               icon: require("../../../public/icons/create-a-load.png"),
               link: "/createscheduledpage",
             },
             {
-              title: "View All Schedule Payments/Deductions",
+              title: "View All Schedule Paym./Ded...",
               icon: require("../../../public/icons/view-existing-loads.png"),
               link: "/accounts/scheduledpage",
             },
@@ -367,7 +369,7 @@ const dashboardTiles = {
           icon: require("../../../public/icons/accounts.png"),
           options: [
             {
-              title: "Add New Payment",
+              title: "New Payment",
               icon: require("../../../public/icons/create-a-load.png"),
               link: "/createpaymentspage",
             },
@@ -415,13 +417,13 @@ export default function DashboardPage() {
       <NavigationBar />
       <Container className="main-content py-2 px-4" fluid>
         <Row className="mb-3">
-          <Col className="d-flex justify-content-between">
+          <Col className="d-flex justify-content-between align-items-center">
             <h4 className="text-info fw-bold mb-0">Dashboard</h4>
-            <div className="db-options d-flex gap-2">
+            <div className="db-options d-flex gap-2 ">
               <Button
                 color="outline-info"
                 size="sm"
-                className="d-flex align-items-center gap-1 px-3 shadow-lg rounded-pill"
+                className="d-flex align-items-center gap-1 px-md-3 shadow-lg rounded-pill"
               >
                 <img
                   src={require("../../../public/icons//help.png")}
@@ -429,12 +431,12 @@ export default function DashboardPage() {
                   height={24}
                   width={24}
                 ></img>
-                <span>Help</span>
+                <span className="d-none d-md-inline">Help</span>
               </Button>
               <Button
                 color="outline-info"
                 size="sm"
-                className="d-flex align-items-center gap-1 px-3 shadow-lg rounded-pill"
+                className="d-flex align-items-center gap-1 px-md-3 shadow-lg rounded-pill"
               >
                 <img
                   src={require("../../../public/icons/safety.png")}
@@ -442,12 +444,12 @@ export default function DashboardPage() {
                   height={24}
                   width={24}
                 ></img>
-                <span>Safety</span>
+                <span className="d-none d-md-inline">Safety</span>
               </Button>
               <Button
                 color="outline-info"
                 size="sm"
-                className="d-flex align-items-center gap-1 px-3 shadow-lg rounded-pill"
+                className="d-flex align-items-center gap-1 px-md-3 shadow-lg rounded-pill"
               >
                 <img
                   src={require("../../../public/icons/setting-one.png")}
@@ -455,7 +457,7 @@ export default function DashboardPage() {
                   height={24}
                   width={24}
                 ></img>
-                <span>Settings</span>
+                <span className="d-none d-md-inline">Settings</span>
               </Button>
             </div>
           </Col>
@@ -472,9 +474,9 @@ export default function DashboardPage() {
           ))}
         </Row>
         <Row>
-          <Col md="6">
+          <Col md="6" className="order-1 order-md-0">
             <h4 className="text-info fw-bold mb-3">Analytics</h4>
-            <Card className="dashboard-card h-100">
+            <Card className="dashboard-card h-100 rounded">
               <CardBody>
                 <div className="section-header d-flex justify-content-between">
                   <div className="d-flex align-items-center gap-2">
@@ -494,7 +496,7 @@ export default function DashboardPage() {
                         className="dropdownDashboard "
                         color="outline-light"
                       >
-                        <span className="d-none d-lg-flex">Monthly</span>
+                        <span className="d-none d-lg-inline">Monthly</span>
                       </DropdownToggle>
                       <DropdownMenu>
                         <DropdownItem header>Header</DropdownItem>
@@ -507,7 +509,9 @@ export default function DashboardPage() {
                       className="d-flex gap-2 align-items-center TilePopUpBtn fw-bold"
                     >
                       <FiDownload />
-                      <span className=" d-none d-lg-flex">Download Report</span>
+                      <span className=" d-none d-lg-inline">
+                        Download Report
+                      </span>
                     </Button>
                   </div>
                 </div>
@@ -518,8 +522,18 @@ export default function DashboardPage() {
           <Col md="6">
             <h4 className="text-info fw-bold mb-3">Manage</h4>
             <Row className="gy-3 mb-3">
+              {dashboardTiles.fuelTiles.map((tile, index) => (
+                <Col sm="6" key={index}>
+                  <AccountTiles
+                    key={index}
+                    title={tile.title}
+                    icon={tile.icon}
+                    options={tile.options}
+                  />
+                </Col>
+              ))}
               {dashboardTiles.mediumTiles.map((tile, index) => (
-                <Col md="6" key={index}>
+                <Col sm="6" key={index}>
                   <MediumTiles
                     key={index}
                     title={tile.title}
@@ -529,7 +543,7 @@ export default function DashboardPage() {
                 </Col>
               ))}
               {dashboardTiles.accountTiles.map((tile, index) => (
-                <Col md="6" key={index}>
+                <Col sm="6" key={index}>
                   <AccountTiles
                     key={index}
                     title={tile.title}
@@ -539,12 +553,12 @@ export default function DashboardPage() {
                 </Col>
               ))}
             </Row>
-            <Row className="gy-3">
+            <Row className="gy-3 mb-3">
               <Col xs="12">
                 <h4 className="text-info fw-bold mb-0">More</h4>
               </Col>
               {dashboardTiles.smallTiles.map((tile, index) => (
-                <Col md={6} xl={3} key={index}>
+                <Col xs={6} xl={3} key={index}>
                   <Link
                     to={tile.link}
                     className="btn btn-outline-info d-flex w-100 align-items-center small_tile text-start"
@@ -630,38 +644,49 @@ function MainTile({ title, icon, data, options }: TileProps) {
           </div>
         </div>
       </Col>
-      <Modal isOpen={modal} toggle={toggle} centered className="TilePopUp">
-        <ModalHeader toggle={toggle} className="border-0">
-          {title}
+      <Modal isOpen={modal} toggle={toggle} centered className="TilePopUp ">
+        <ModalHeader toggle={toggle} className="border-0 pb-4 fs-5">
+          <div className="d-flex align-items-center gap-2">
+            <img src={icon} alt="" height={32} width={32} />
+            <div className="fw-bold text-info ms-2 fs-4"> {title}</div>
+          </div>
         </ModalHeader>
         <ModalBody>
-          <Row className={title.toLowerCase()}>
+          <Row className={`${title.toLowerCase()} row-gap-4`}>
             {options?.map((option, index) => (
-              <Col sm="12" key={index} className="mb-3 opt">
+              <Col sm="12" key={index} className=" opt">
                 {option.title && (
                   <>
-                    <h6 className="mb-0 fw-bold text-info">{option.title}</h6>
+                    <div className="d-flex gap-1 align-items-center">
+                      <img
+                        src={option.icon as string}
+                        height={24}
+                        width={24}
+                      ></img>
+                      <h6 className="mb-0 fw-bold text-info fs-5">
+                        {option.title}
+                      </h6>
+                    </div>
+
                     <hr className="mt-1" />
                   </>
                 )}
                 <Row>
                   {option.options?.map((item, index) => (
-                    <Col sm="6" key={index}>
+                    <Col sm="6" className="mb-3" key={index}>
                       <Link
                         to={`${item.link}`}
-                        className="w-100 d-flex flex-column btn btn-outline-info modaltile"
+                        className="w-100 d-flex flex-column btn btn-outline-info modaltile p-3 row-gap-3"
                       >
                         <img
                           src={item?.icon}
                           height={48}
                           width={48}
                           alt="Image"
-                          className="mb-4"
+                          className=""
                         ></img>
 
-                        <h6 className="mb-0 text-start fw-bold">
-                          {item.title}
-                        </h6>
+                        <h6 className="mb-0 text-start fs-6">{item.title}</h6>
                       </Link>
                     </Col>
                   ))}
@@ -713,8 +738,11 @@ function MediumTiles({ title, icon, options }: MediumTilesProps) {
         </div>
       </div>
       <Modal isOpen={modal} toggle={toggle} centered className="TilePopUp">
-        <ModalHeader toggle={toggle} className="border-0">
-          {title}
+        <ModalHeader toggle={toggle} className="border-0 pb-4 fs-5">
+          <div className="d-flex align-items-center gap-2">
+            <img src={icon} alt="" height={32} width={32} />
+            <div className="fw-bold text-info ms-2 fs-4"> {title}</div>
+          </div>
         </ModalHeader>
         <ModalBody>
           <Row>
@@ -774,7 +802,7 @@ type AccountTilesProps = {
 };
 function AccountTiles({ title, icon, options }: AccountTilesProps) {
   const [modal, setModal] = useState(false);
-
+  const optionsLength = options?.length;
   const toggle = () => setModal(!modal);
 
   return (
@@ -799,16 +827,25 @@ function AccountTiles({ title, icon, options }: AccountTilesProps) {
         toggle={toggle}
         centered
         className="TilePopUp"
-        size="xl"
+        size={optionsLength == 3 ? "lg" : "xl"}
       >
-        <ModalHeader toggle={toggle} className="border-0">
-          {title}
+        <ModalHeader toggle={toggle} className="border-0 pb-4 fs-5">
+          <div className="d-flex align-items-center gap-2">
+            <img src={icon} alt="" height={32} width={32} />
+            <div className="fw-bold text-info ms-2 fs-4"> {title}</div>
+          </div>
         </ModalHeader>
         <ModalBody>
           <Container>
             <Row>
               {options?.map((option, index) => (
-                <Col md={3} key={index} className="mb-3">
+                <Col
+                  md={6}
+                  xl={optionsLength == 3 ? 4 : 3}
+                  xs={12}
+                  key={index}
+                  className="mb-3"
+                >
                   {option.title && (
                     <>
                       <h6 className="mb-0 fw-bold text-info">{option.title}</h6>
@@ -819,7 +856,7 @@ function AccountTiles({ title, icon, options }: AccountTilesProps) {
                     <Link
                       to={`${item.link}`}
                       key={index}
-                      className="btn btn-outline-info px-4 d-flex w-100 align-items-center mb-3 column-gap-2 medium_tile db"
+                      className="btn btn-outline-info p-2 d-flex w-100 align-items-center mb-3 column-gap-2 medium_tile"
                     >
                       <img
                         src={item?.icon}
@@ -828,9 +865,9 @@ function AccountTiles({ title, icon, options }: AccountTilesProps) {
                         alt="Image"
                       ></img>
 
-                      <h6 className="mb-0 text-start fw-bold small">
+                      <div className="mb-0 text-start fs-6 small">
                         {item.title}
-                      </h6>
+                      </div>
                     </Link>
                   ))}
                 </Col>

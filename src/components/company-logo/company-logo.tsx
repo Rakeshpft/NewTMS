@@ -15,7 +15,7 @@ const CompanyLogo = ({ height, shrinkOnSmallScreen }: CompanyLogoProps) => {
         <img
           src={require("../../../public/images/tmslogo.png")}
           alt="company-logo"
-          height={height}
+          height={48}
         />
       ) : (
         <img
