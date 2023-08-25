@@ -54,7 +54,7 @@ const PaymentsPage = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand>Payments</NavbarBrand>
+        <NavbarBrand className="fw-bold">Payments</NavbarBrand>
         <Nav className="me-auto" navbar>
           <div className="d-flex gap-2">
             <NavItem>Export</NavItem>
@@ -112,7 +112,7 @@ const PaymentsPage = () => {
                       <Col>
                         <h5 className="fw-bold text-info">Search Filter</h5>
                         <Row>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Type</Label>
                               <Input
@@ -133,7 +133,7 @@ const PaymentsPage = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Settlement#</Label>
                               <Input
@@ -154,7 +154,7 @@ const PaymentsPage = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Payment#</Label>
                               <Input
@@ -175,7 +175,7 @@ const PaymentsPage = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Partner</Label>
                               <Input
@@ -196,7 +196,7 @@ const PaymentsPage = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Driver</Label>
                               <Input
@@ -219,7 +219,7 @@ const PaymentsPage = () => {
                           </Col>
                         </Row>
                         <Row>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Amount Range:To</Label>
                               <Input
@@ -234,7 +234,7 @@ const PaymentsPage = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">
                                 Amount Range:Form
@@ -251,7 +251,7 @@ const PaymentsPage = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Date Range:To</Label>
                               <Input
@@ -266,7 +266,7 @@ const PaymentsPage = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Date Range:Form</Label>
                               <Input
@@ -286,7 +286,7 @@ const PaymentsPage = () => {
                               className="me-3"
                               size="sm"
                               style={{
-                                color: "black",
+                                color: "white",
                                 border: "1px solid #1E5367",
                                 backgroundColor: "#418ECB",
                               }}

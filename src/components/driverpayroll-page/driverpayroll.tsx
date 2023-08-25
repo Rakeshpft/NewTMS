@@ -61,7 +61,7 @@ const DriverPayRoll = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand>Driver Payroll</NavbarBrand>
+        <NavbarBrand className="fw-bold">Driver Payroll</NavbarBrand>
         <Nav className="me-auto" navbar>
           <div className="d-flex gap-2">
             <NavItem>Export</NavItem>
@@ -124,7 +124,7 @@ const DriverPayRoll = () => {
                       <Col>
                         <h5 className="fw-bold text-info">Search Filter</h5>
                         <Row>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Status</Label>
                               <Input
@@ -145,7 +145,7 @@ const DriverPayRoll = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Settlement</Label>
                               <Input
@@ -160,7 +160,7 @@ const DriverPayRoll = () => {
                               ></Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Amount Range:To</Label>
                               <Input
@@ -175,7 +175,7 @@ const DriverPayRoll = () => {
                               ></Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">
                                 Amount Range:Form
@@ -194,7 +194,7 @@ const DriverPayRoll = () => {
                           </Col>
                         </Row>
                         <Row>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Date Range:To</Label>
                               <Input
@@ -209,7 +209,7 @@ const DriverPayRoll = () => {
                               ></Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Date Range:Form</Label>
                               <Input
@@ -224,7 +224,7 @@ const DriverPayRoll = () => {
                               ></Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Partner</Label>
                               <Input
@@ -245,7 +245,7 @@ const DriverPayRoll = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
                               <Label for="exampleSelect">Driver</Label>
                               <Input
@@ -266,14 +266,14 @@ const DriverPayRoll = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col sm={2} className="mt-4">
+                          <Col lg={2} md={6} sm={12} className="px-3 mt-4">
                             <Button
                               size="sm"
                               className="me-3"
                               style={{
-                                color: "black",
+                                color: "white",
                                 border: "1px solid #1E5367",
-                                backgroundColor: "#B7D1E6",
+                                backgroundColor: "#418ECB",
                               }}
                             >
                               <BiCheck fontSize={"16px"} />

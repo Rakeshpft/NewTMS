@@ -90,10 +90,7 @@ const VendorNewPage = () => {
 
   return (
     <>
-      <Navbar
-        style={{ border: "1px solid #1B56AE", backgroundColor: "#E9F3FB" }}
-        className="py-0"
-      >
+      <Navbar className="py-0 formpagenavbar" color="light">
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
@@ -106,13 +103,16 @@ const VendorNewPage = () => {
           <Profile />
         </div>
       </Navbar>
-      <div className="py-2 newcustomermain">
+      <div
+        className="py-2 load-itemmain"
+        style={{ backgroundColor: "#E9F3FB" }}
+      >
         <Container className="mt-4 px-5 py-2">
-          <Form className="newcustomer" onSubmit={handleSubmit}>
+          <Form className="load-item" onSubmit={handleSubmit}>
             <Row>
-              <Col>
-                <Row className="px-5">
-                  <Col>
+              <Col className="px-5">
+                <Row>
+                  <Col lg={12} md={12} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="companyName">Company Name</Label>
                       <Input
@@ -133,8 +133,8 @@ const VendorNewPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row className="px-5">
-                  <Col>
+                <Row>
+                  <Col lg={12} md={12} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="companyAddress">Address Line 1</Label>
                       <Input
@@ -155,8 +155,8 @@ const VendorNewPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row className="px-5">
-                  <Col>
+                <Row>
+                  <Col lg={12} md={12} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="companyAddress">Address Line 2</Label>
                       <Input
@@ -177,8 +177,8 @@ const VendorNewPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row className="px-5">
-                  <Col>
+                <Row>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="phone">Phone</Label>
                       <Input
@@ -201,7 +201,7 @@ const VendorNewPage = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="companyEmail">Email</Label>
                       <Input
@@ -225,8 +225,8 @@ const VendorNewPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row className="px-5">
-                  <Col md={6}>
+                <Row>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="city">city</Label>
                       <Input
@@ -249,7 +249,7 @@ const VendorNewPage = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col md={6}>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="state">State</Label>
                       <Input
@@ -273,8 +273,8 @@ const VendorNewPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row className="px-5">
-                  <Col md={6}>
+                <Row>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="cityZip">Zip</Label>
                       <Input
@@ -298,8 +298,8 @@ const VendorNewPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row className="px-5">
-                  <Col md={6}>
+                <Row>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="fid">FID/EIN</Label>
                       <Input
@@ -322,7 +322,7 @@ const VendorNewPage = () => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col md={6}>
+                  <Col lg={6} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="mc">MC</Label>
                       <Input
@@ -346,8 +346,8 @@ const VendorNewPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row className="px-5">
-                  <Col>
+                <Row>
+                  <Col lg={12} md={12} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="Notes">Notes</Label>
                       <Input
@@ -370,8 +370,8 @@ const VendorNewPage = () => {
                 </Row>
               </Col>
               <Col>
-                <Row className="px-5">
-                  <Col>
+                <Row>
+                  <Col lg={12} md={6} sm={12} className="px-3">
                     <FormGroup>
                       <Label for="exampleSelect" className="d-flex">
                         Vendor Type
@@ -389,8 +389,8 @@ const VendorNewPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row className="px-5">
-                  <Col>
+                <Row>
+                  <Col lg={12} md={6} sm={12} className="px-3">
                     <FormGroup className="mt-4">
                       <h5 className="fw-bold"> Billing </h5>
                     </FormGroup>
@@ -405,14 +405,14 @@ const VendorNewPage = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row className="vendorbutton">
-                  <Col>
-                    <FormGroup className="d-flex justify-content-center">
+                <Row className="position-absolute top-5">
+                  <Col lg={12} md={6} sm={12} className="px-3">
+                    <FormGroup>
                       <Button
                         className="me-3 "
                         size="sm"
                         style={{
-                          color: "black",
+                          color: "white",
                           border: "1px solid #1E5367",
                           backgroundColor: "#418ECB",
                         }}

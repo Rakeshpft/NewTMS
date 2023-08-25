@@ -119,10 +119,7 @@ const CustomerNewPage = () => {
   };
   return (
     <>
-      <Navbar
-        style={{ border: "1px solid #1B56AE", backgroundColor: "#E9F3FB" }}
-        className="py-0"
-      >
+      <Navbar className="py-0 formpagenavbar" color="light">
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
@@ -136,12 +133,13 @@ const CustomerNewPage = () => {
         </div>
       </Navbar>
       <div
-        className="py-2 newcustomermain"
+        className="py-2 load-itemmain"
+        style={{ backgroundColor: "#E9F3FB" }}
       >
         <Container className="mt-4 px-5 py-2">
-          <Form onSubmit={handleSubmit} className="newcustomer">
+          <Form onSubmit={handleSubmit} className="load-item">
             <Row className="px-5">
-              <Col md={6}>
+              <Col lg={6} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="companyName">Company Name</Label>
                   <Input
@@ -158,7 +156,7 @@ const CustomerNewPage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <h6 className="fw-bold">Customer Type</h6>
                 <FormGroup check inline>
                   <Input
@@ -205,7 +203,7 @@ const CustomerNewPage = () => {
                   </Label>
                 </FormGroup>
               </Col>
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup tag="fieldset">
                   <h6 className="fw-bold">Billing</h6>
                   <div className="d-flex gap-2">
@@ -246,7 +244,7 @@ const CustomerNewPage = () => {
               </Col>
             </Row>
             <Row className="px-5">
-              <Col md={6}>
+              <Col lg={6} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="addressLine1">Address Line1</Label>
                   <Input
@@ -265,7 +263,7 @@ const CustomerNewPage = () => {
               </Col>
             </Row>
             <Row className="px-5">
-              <Col md={6}>
+              <Col lg={6} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="addressLine2">Address Line2</Label>
                   <Input
@@ -282,7 +280,7 @@ const CustomerNewPage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="quickPayFee">Quick Pay Fee</Label>
                   <Input
@@ -302,7 +300,7 @@ const CustomerNewPage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="factoring">Factoring</Label>
                   <Input
@@ -324,7 +322,7 @@ const CustomerNewPage = () => {
               </Col>
             </Row>
             <Row className="px-5">
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="phone">Phone</Label>
                   <Input
@@ -341,7 +339,7 @@ const CustomerNewPage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="email">Email</Label>
                   <Input
@@ -358,7 +356,7 @@ const CustomerNewPage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="stauts">Status</Label>
                   <Input
@@ -378,7 +376,7 @@ const CustomerNewPage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="credit">Credit</Label>
                   <Input
@@ -400,7 +398,7 @@ const CustomerNewPage = () => {
               </Col>
             </Row>
             <Row className="px-5">
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="city">City</Label>
                   <Input
@@ -417,7 +415,7 @@ const CustomerNewPage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="state">State</Label>
                   <Input
@@ -434,8 +432,8 @@ const CustomerNewPage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}></Col>
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3"></Col>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="payTerms">Pay Terms</Label>
                   <Input
@@ -457,7 +455,7 @@ const CustomerNewPage = () => {
               </Col>
             </Row>
             <Row className="px-5">
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="zip">Zip</Label>
                   <Input
@@ -471,9 +469,9 @@ const CustomerNewPage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}></Col>
-              <Col md={3}></Col>
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3"></Col>
+              <Col lg={3} md={6} sm={12} className="px-3"></Col>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="avgDaysToPay">Avg. Days To Pay</Label>
                   <Input
@@ -495,7 +493,7 @@ const CustomerNewPage = () => {
               </Col>
             </Row>
             <Row className="px-5">
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="fid">FID/EIN</Label>
                   <Input
@@ -512,7 +510,7 @@ const CustomerNewPage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="mc">MC</Label>
                   <Input
@@ -529,11 +527,9 @@ const CustomerNewPage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}></Col>
-              <Col md={3}></Col>
             </Row>
             <Row className="px-5">
-              <Col md={6}>
+              <Col lg={6} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="notes">Notes</Label>
                   <Input
@@ -550,8 +546,7 @@ const CustomerNewPage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}></Col>
-              <Col md={3}>
+              <Col lg={6} md={6} sm={12} className="px-3">
                 <FormGroup
                   className="d-flex justify-content-end align-self-center mt-5"
                   style={{ bottom: "0", right: "0" }}
@@ -560,7 +555,7 @@ const CustomerNewPage = () => {
                     className="me-3"
                     size="sm"
                     style={{
-                      color: "black",
+                      color: "white",
                       border: "1px solid #1E5367",
                       backgroundColor: "#418ECB",
                     }}

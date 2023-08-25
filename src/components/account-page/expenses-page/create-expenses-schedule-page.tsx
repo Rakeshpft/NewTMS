@@ -90,10 +90,7 @@ const CreateExpensesSchedulePage = () => {
   };
   return (
     <>
-      <Navbar
-        style={{ border: "1px solid #1B56AE", backgroundColor: "#E9F3FB" }}
-        className="py-0"
-      >
+      <Navbar className="py-0 formpagenavbar" color="light">
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
@@ -106,11 +103,14 @@ const CreateExpensesSchedulePage = () => {
           <Profile />
         </div>
       </Navbar>
-      <div className="py-2 accountmain">
+      <div
+        className="py-2 load-itemmain"
+        style={{ backgroundColor: "#E9F3FB" }}
+      >
         <Container className="mt-4 px-5 py-2">
-          <Form onSubmit={handleSubmit} className="accountitem">
+          <Form onSubmit={handleSubmit} className="load-item">
             <Row className="px-4">
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="examplescheduleName">Schedule Name</Label>
                   <Input
@@ -132,8 +132,8 @@ const CreateExpensesSchedulePage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col></Col>
-              <Col md={6}>
+              <Col lg={3} md={6} sm={12} className="px-3"></Col>
+              <Col lg={6} md={6} sm={12} className="px-3">
                 <FormGroup row tag="fieldset">
                   <legend className="col-form-label col-sm-2 fw-bold">
                     Schedule
@@ -204,7 +204,7 @@ const CreateExpensesSchedulePage = () => {
               </Col>
             </Row>
             <Row className="px-4">
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="exampleamount">Amount</Label>
                   <Input
@@ -224,7 +224,7 @@ const CreateExpensesSchedulePage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="examplepayTo">Pay To</Label>
                   <Input
@@ -244,7 +244,7 @@ const CreateExpensesSchedulePage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="examplestarton">Start On</Label>
                   <Input
@@ -266,7 +266,7 @@ const CreateExpensesSchedulePage = () => {
               </Col>
             </Row>
             <Row className="px-4">
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="examplecategory">Category</Label>
                   <Input
@@ -286,8 +286,8 @@ const CreateExpensesSchedulePage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}></Col>
-              <Col md={6}>
+              <Col lg={3} md={6} sm={12} className="px-3"></Col>
+              <Col lg={6} md={6} sm={12} className="px-3">
                 <FormGroup tag="fieldset">
                   <legend className="col-form-label col-sm-2 fw-bold">
                     Repeat
@@ -335,7 +335,7 @@ const CreateExpensesSchedulePage = () => {
               </Col>
             </Row>
             <Row className="px-4">
-              <Col md={6}>
+              <Col lg={6} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="exampleotes">Notes</Label>
                   <Input
@@ -355,7 +355,7 @@ const CreateExpensesSchedulePage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="exampledriver">Driver</Label>
                   <Input
@@ -374,7 +374,7 @@ const CreateExpensesSchedulePage = () => {
                   />
                 </FormGroup>
               </Col>
-              <Col md={3}>
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="exampletrailer">Trailer</Label>
                   <Input
@@ -394,10 +394,10 @@ const CreateExpensesSchedulePage = () => {
                 </FormGroup>
               </Col>
             </Row>
-            <Row className="px-4">
-              <Col md={6}></Col>
-              <Col md={3}></Col>
-              <Col md={3}>
+            <Row className="px-4 justify-content-end">
+              {/* <Col lg={6} md={6} sm={12} className="px-3"></Col>
+              <Col lg={3} md={6} sm={12} className="px-3"></Col> */}
+              <Col lg={3} md={6} sm={12} className="px-3">
                 <FormGroup>
                   <Label for="exampletruck">Truck</Label>
                   <Input
@@ -418,7 +418,7 @@ const CreateExpensesSchedulePage = () => {
               </Col>
             </Row>
             <Row className="px-4">
-              <Col>
+              <Col lg={12} md={12} sm={12} className="px-3">
                 <TabPage tabTitles={["Expenses"]}>
                   <TabPane>
                     <span className="fw-bold small">Payments</span>
@@ -453,7 +453,7 @@ const CreateExpensesSchedulePage = () => {
                   size="sm"
                   className="me-3"
                   style={{
-                    color: "black",
+                    color: "white",
                     border: "1px solid #1E5367",
                     backgroundColor: "#418ECB",
                   }}
