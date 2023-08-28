@@ -3,7 +3,6 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   Button,
   Col,
   Container,
@@ -104,15 +103,15 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
 
   return (
     <>
-      <Modal isOpen={isTruckOpen} toggle={toggle} size="lg">
+      <Modal isOpen={isTruckOpen} toggle={toggle} size="xl">
         <ModalHeader toggle={toggle} style={{ backgroundColor: "#E9F3FB" }}>
           New Truck
         </ModalHeader>
         <ModalBody>
           <Container>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} className="new-truck-form">
               <Row>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-3">
                   <FormGroup>
                     <Label
                       for="exampleunit"
@@ -137,7 +136,7 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                     />
                   </FormGroup>
                 </Col>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-3">
                   <FormGroup>
                     <Label style={{ marginBottom: "0", fontSize: "small" }}>
                       VIN
@@ -159,7 +158,7 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                     />
                   </FormGroup>
                 </Col>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-3">
                   <FormGroup>
                     <Label
                       for="exampleSelect"
@@ -192,7 +191,7 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                     </Input>
                   </FormGroup>
                 </Col>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-3">
                   <FormGroup>
                     <Label style={{ marginBottom: "0", fontSize: "small" }}>
                       ELD ID
@@ -216,7 +215,7 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                 </Col>
               </Row>
               <Row>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-3">
                   <FormGroup>
                     <Label
                       style={{ marginBottom: "0", fontSize: "small" }}
@@ -243,7 +242,7 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                     />
                   </FormGroup>
                 </Col>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-3">
                   <FormGroup>
                     <Label
                       style={{ marginBottom: "0", fontSize: "small" }}
@@ -270,7 +269,7 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                     />
                   </FormGroup>
                 </Col>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-3">
                   <FormGroup>
                     <Label
                       for="exampleSelect"
@@ -303,10 +302,10 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                     </Input>
                   </FormGroup>
                 </Col>
-                <Col md={3}></Col>
+                <Col md={6} lg={3} className="px-3"></Col>
               </Row>
               <Row>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-3">
                   <FormGroup>
                     <Label
                       for="examplemodal"
@@ -333,8 +332,8 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                     />
                   </FormGroup>
                 </Col>
-                <Col md={3}></Col>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-3"></Col>
+                <Col md={6} lg={3} className="px-3">
                   <FormGroup>
                     <Label
                       for="examplepurchaseDate"
@@ -361,7 +360,7 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                     />
                   </FormGroup>
                 </Col>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-3">
                   <FormGroup>
                     <Label
                       for="examplepurchaseprice"
@@ -390,7 +389,7 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                 </Col>
               </Row>
               <Row>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-3">
                   <FormGroup>
                     <Label
                       for="exampledriver"
@@ -417,7 +416,7 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                     />
                   </FormGroup>
                 </Col>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-3">
                   <FormGroup>
                     <Label
                       for="exampleSelect"
@@ -452,7 +451,7 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                 </Col>
               </Row>
               <Row>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-3">
                   <FormGroup>
                     <Label
                       for="exampleplateState"
@@ -481,7 +480,7 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                 </Col>
               </Row>
               <Row>
-                <Col md={6}>
+                <Col md={6} className="px-3">
                   <FormGroup>
                     <Label
                       for="examplenotes"
@@ -511,13 +510,13 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                 </Col>
               </Row>
               <Row>
-                <Col md={6}>
+                <Col md={6} className="px-3">
                   <FormGroup>
                     <Label
                       for="examplehistory"
                       style={{ marginBottom: "0px", fontSize: "small" }}
                     >
-                      Histoy
+                      History
                     </Label>
                     <Input
                       bsSize="sm"
@@ -539,37 +538,23 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                     />
                   </FormGroup>
                 </Col>
+                <Col
+                  md={6}
+                  className="d-flex justify-content-end align-items-end px-3"
+                >
+                  <Button color="info" size="sm" className="me-3 text-white">
+                    <BiCheck fontSize={"16px"} />
+                    Save
+                  </Button>
+                  <Button color="outline-danger" size="sm" onClick={toggle}>
+                    <RxCross2 fontSize={"16px"} color="red" />
+                    Close
+                  </Button>
+                </Col>
               </Row>
             </Form>
           </Container>
         </ModalBody>
-        <ModalFooter>
-          <Button
-            color="primary"
-            size="sm"
-            className="me-3"
-            style={{
-              color: "black",
-              border: "1px solid #1E5367",
-              backgroundColor: "#418ECB",
-            }}
-          >
-            <BiCheck fontSize={"16px"} />
-            Save
-          </Button>
-          <Button
-            size="sm"
-            style={{
-              color: "red",
-              border: "1px solid red",
-              backgroundColor: "white",
-            }}
-            onClick={toggle}
-          >
-            <RxCross2 fontSize={"16px"} color="red" />
-            Close
-          </Button>
-        </ModalFooter>
       </Modal>
     </>
   );
