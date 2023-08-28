@@ -11,7 +11,6 @@ import {
   Label,
   Modal,
   ModalBody,
-  ModalFooter,
   ModalHeader,
   Row,
 } from "reactstrap";
@@ -590,38 +589,39 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     />
                   </FormGroup>
                 </Col>
-                <Col md={3} className="px-4"></Col>
-                <Col md={3} className="px-4"></Col>
+                <Col
+                  md={6}
+                  className="px-4 d-flex justify-content-end align-items-end"
+                >
+                  <Button
+                    color="primary"
+                    size="sm"
+                    className="me-3"
+                    style={{
+                      border: "1px solid #1E5367",
+                      backgroundColor: "#418ECB",
+                    }}
+                  >
+                    <BiCheck fontSize={"16px"} />
+                    Save
+                  </Button>
+                  <Button
+                    size="sm"
+                    style={{
+                      color: "red",
+                      border: "1px solid red",
+                      backgroundColor: "white",
+                    }}
+                    onClick={toggle}
+                  >
+                    <RxCross2 fontSize={"16px"} color="red" />
+                    Close
+                  </Button>
+                </Col>
               </Row>
             </Form>
           </Container>
         </ModalBody>
-        <ModalFooter className="px-3">
-          <Button
-            color="primary"
-            size="sm"
-            className="me-3"
-            style={{
-              border: "1px solid #1E5367",
-              backgroundColor: "#418ECB",
-            }}
-          >
-            <BiCheck fontSize={"16px"} />
-            Save
-          </Button>
-          <Button
-            size="sm"
-            style={{
-              color: "red",
-              border: "1px solid red",
-              backgroundColor: "white",
-            }}
-            onClick={toggle}
-          >
-            <RxCross2 fontSize={"16px"} color="red" />
-            Close
-          </Button>
-        </ModalFooter>
       </Modal>
     </>
   );

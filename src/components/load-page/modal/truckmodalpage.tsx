@@ -104,8 +104,12 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
   return (
     <>
       <Modal isOpen={isTruckOpen} toggle={toggle} size="xl">
-        <ModalHeader toggle={toggle} style={{ backgroundColor: "#E9F3FB" }}>
-          New Truck
+        <ModalHeader
+          toggle={toggle}
+          style={{ backgroundColor: "#E9F3FB" }}
+          className="py-2"
+        >
+          <h6 className="fw-bold mb-0"> New Truck</h6>
         </ModalHeader>
         <ModalBody>
           <Container>

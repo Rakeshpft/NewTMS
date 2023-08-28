@@ -13,7 +13,6 @@ import {
   Button,
   Modal,
   ModalBody,
-  ModalFooter,
   ModalHeader,
 } from "reactstrap";
 
@@ -97,15 +96,15 @@ const TrailerModalPage = ({ isTrailerOpen, toggle }: TrailerModalPageProps) => {
   };
   return (
     <>
-      <Modal isOpen={isTrailerOpen} toggle={toggle} size="lg">
-        <ModalHeader toggle={toggle} style={{ backgroundColor: "#E9F3FB" }}>
-          New Trailer
+      <Modal isOpen={isTrailerOpen} toggle={toggle} size="xl">
+        <ModalHeader toggle={toggle} style={{ backgroundColor: "#E9F3FB" }} className="py-2">
+          <h6 className="fw-bold mb-0">New Trailer</h6>
         </ModalHeader>
         <ModalBody>
           <Container>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} className="newTrailerForm">
               <Row>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-4">
                   <FormGroup>
                     <Label for="exampleunit">Unit</Label>
                     <Input
@@ -125,7 +124,7 @@ const TrailerModalPage = ({ isTrailerOpen, toggle }: TrailerModalPageProps) => {
                     />
                   </FormGroup>
                 </Col>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-4">
                   <FormGroup>
                     <Label>VIN</Label>
                     <Input
@@ -145,56 +144,9 @@ const TrailerModalPage = ({ isTrailerOpen, toggle }: TrailerModalPageProps) => {
                     />
                   </FormGroup>
                 </Col>
-                <Col md={3}></Col>
-              </Row>
-              <Row>
-                <Col md={3}>
-                  <FormGroup>
-                    <Label for="exampleyear">Year</Label>
-                    <Input
-                      bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
-                      id="exampleyear"
-                      name="year"
-                      type="text"
-                      value={state.year}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_year",
-                          payload: e.target.value,
-                        });
-                      }}
-                    />
-                  </FormGroup>
-                </Col>
-                <Col md={3}>
-                  <FormGroup>
-                    <Label for="examplemake">Make</Label>
-                    <Input
-                      bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
-                      id="examplemake"
-                      name="make"
-                      type="text"
-                      value={state.make}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_make",
-                          payload: e.target.value,
-                        });
-                      }}
-                    />
-                  </FormGroup>
-                </Col>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-4">
                   <FormGroup tag="fieldset">
-                    <h5 className="fw-bold">OwnerShip</h5>
+                    <h6 className="fw-bold">OwnerShip</h6>
                     <div className="d-flex">
                       <FormGroup check>
                         <Input name="radio1" type="radio" />
@@ -220,7 +172,53 @@ const TrailerModalPage = ({ isTrailerOpen, toggle }: TrailerModalPageProps) => {
                 </Col>
               </Row>
               <Row>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-4">
+                  <FormGroup>
+                    <Label for="exampleyear">Year</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="exampleyear"
+                      name="year"
+                      type="text"
+                      value={state.year}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_year",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={6} lg={3} className="px-4">
+                  <FormGroup>
+                    <Label for="examplemake">Make</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="examplemake"
+                      name="make"
+                      type="text"
+                      value={state.make}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_make",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6} lg={3} className="px-4">
                   <FormGroup>
                     <Label for="examplemodal">Modal</Label>
                     <Input
@@ -242,11 +240,13 @@ const TrailerModalPage = ({ isTrailerOpen, toggle }: TrailerModalPageProps) => {
                     />
                   </FormGroup>
                 </Col>
-                <Col md={3}></Col>
-                <Col md={3}> </Col>
+                <Col md={6} lg={3} className="px-4"></Col>
+                <Col md={6} lg={3} className="px-4">
+                  {" "}
+                </Col>
               </Row>
               <Row>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-4">
                   <FormGroup>
                     <Label for="exampledriver">Driver</Label>
                     <Input
@@ -268,7 +268,7 @@ const TrailerModalPage = ({ isTrailerOpen, toggle }: TrailerModalPageProps) => {
                     />
                   </FormGroup>
                 </Col>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-4">
                   <FormGroup>
                     <Label for="exampleSelect">Plate</Label>
                     <Input
@@ -296,7 +296,7 @@ const TrailerModalPage = ({ isTrailerOpen, toggle }: TrailerModalPageProps) => {
                     </Input>
                   </FormGroup>
                 </Col>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-4">
                   <FormGroup>
                     <Label for="examplepurchaseDate">Purchase Date</Label>
                     <Input
@@ -320,7 +320,7 @@ const TrailerModalPage = ({ isTrailerOpen, toggle }: TrailerModalPageProps) => {
                 </Col>
               </Row>
               <Row>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-4">
                   <FormGroup>
                     <Label for="exampleplateState">Plate State</Label>
                     <Input
@@ -342,8 +342,8 @@ const TrailerModalPage = ({ isTrailerOpen, toggle }: TrailerModalPageProps) => {
                     />
                   </FormGroup>
                 </Col>
-                <Col md={3}></Col>
-                <Col md={3}>
+                <Col md={6} lg={3} className="px-4"></Col>
+                <Col md={6} lg={3} className="px-4">
                   <FormGroup>
                     <Label for="examplepurchaseprice">Purchase Price</Label>
                     <Input
@@ -367,7 +367,7 @@ const TrailerModalPage = ({ isTrailerOpen, toggle }: TrailerModalPageProps) => {
                 </Col>
               </Row>
               <Row>
-                <Col md={6}>
+                <Col md={6} className="px-4">
                   <FormGroup>
                     <Label for="examplenotes">Notes</Label>
                     <Input
@@ -391,10 +391,10 @@ const TrailerModalPage = ({ isTrailerOpen, toggle }: TrailerModalPageProps) => {
                   </FormGroup>
                 </Col>
               </Row>
-              <Row>
-                <Col md={6}>
+              <Row className="mb-3">
+                <Col md={6} className="px-4">
                   <FormGroup>
-                    <Label for="examplehistory">Histoy</Label>
+                    <Label for="examplehistory">History</Label>
                     <Input
                       bsSize="sm"
                       style={{
@@ -415,39 +415,41 @@ const TrailerModalPage = ({ isTrailerOpen, toggle }: TrailerModalPageProps) => {
                     />
                   </FormGroup>
                 </Col>
-                <Col md={3}></Col>
-                <Col md={3} className="mt-5"></Col>
+
+                <Col
+                  md={3}
+                  className="px-4 d-flex justify-content-end align-items-end"
+                >
+                  <Button
+                    color="primary"
+                    size="sm"
+                    className="me-3"
+                    style={{
+                      color: "black",
+                      border: "1px solid #1E5367",
+                      backgroundColor: "#418ECB",
+                    }}
+                  >
+                    <BiCheck fontSize={"16px"} />
+                    Save
+                  </Button>
+                  <Button
+                    size="sm"
+                    style={{
+                      color: "red",
+                      border: "1px solid red",
+                      backgroundColor: "white",
+                    }}
+                    onClick={toggle}
+                  >
+                    <RxCross2 fontSize={"16px"} color="red" />
+                    Close
+                  </Button>
+                </Col>
               </Row>
             </Form>
           </Container>
         </ModalBody>
-        <ModalFooter>
-          <Button
-            color="primary"
-            size="sm"
-            className="me-3"
-            style={{
-              color: "black",
-              border: "1px solid #1E5367",
-              backgroundColor: "#418ECB",
-            }}
-          >
-            <BiCheck fontSize={"16px"} />
-            Save
-          </Button>
-          <Button
-            size="sm"
-            style={{
-              color: "red",
-              border: "1px solid red",
-              backgroundColor: "white",
-            }}
-            onClick={toggle}
-          >
-            <RxCross2 fontSize={"16px"} color="red" />
-            Close
-          </Button>
-        </ModalFooter>
       </Modal>
     </>
   );
