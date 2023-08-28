@@ -21,7 +21,7 @@ const FuelPage = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand className="fw-bold">Fuel Cards</NavbarBrand>
+        <NavbarBrand className="fw-bold ps-4">Fuel Cards</NavbarBrand>
         <Nav className="me-auto" navbar>
           <div className="d-flex gap-2">
             <NavItem>Export</NavItem>

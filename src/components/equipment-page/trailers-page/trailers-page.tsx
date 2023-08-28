@@ -54,7 +54,7 @@ const TrailersPage = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand className="fw-bold">Trailers</NavbarBrand>
+        <NavbarBrand className="fw-bold ps-4">Trailers</NavbarBrand>
         <Nav className="me-auto" navbar>
           <div className="d-flex gap-2">
             <NavItem>Export</NavItem>

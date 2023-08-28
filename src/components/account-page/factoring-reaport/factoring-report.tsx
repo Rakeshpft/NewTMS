@@ -23,7 +23,7 @@ const FactoringReport = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand className="fw-bold">Factoring Reports</NavbarBrand>
+        <NavbarBrand className="fw-bold ps-4">Factoring Reports</NavbarBrand>
         <Nav className="me-auto" navbar>
           <div className="d-flex gap-2">
             <NavItem>Export</NavItem>

@@ -50,7 +50,7 @@ const ScheduledPage = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand className="fw-bold">
+        <NavbarBrand className="fw-bold ps-4">
           Scheduled Payment/Deductions
         </NavbarBrand>
         <Nav className="me-auto" navbar></Nav>

@@ -61,7 +61,7 @@ const DriverPayRoll = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand className="fw-bold">Driver Payroll</NavbarBrand>
+        <NavbarBrand className="fw-bold ps-4">Driver Payroll</NavbarBrand>
         <Nav className="me-auto" navbar>
           <div className="d-flex gap-2">
             <NavItem>Export</NavItem>

@@ -59,7 +59,7 @@ const FuelTransaction = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand className="fw-bold">Fuel Transactions</NavbarBrand>
+        <NavbarBrand className="fw-bold ps-4">Fuel Transactions</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">

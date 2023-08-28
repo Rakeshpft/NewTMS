@@ -57,7 +57,7 @@ const LoadPage = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand className="fw-bold">Loads</NavbarBrand>
+        <NavbarBrand className="fw-bold ps-4">Loads</NavbarBrand>
         <Nav className="me-auto" navbar>
           <div className="">
             <span className="x-small fw-bold">Period</span>

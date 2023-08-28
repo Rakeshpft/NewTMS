@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { Navbar } from "reactstrap";
 import CompanyLogo from "../company-logo";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FiArrowLeft } from "react-icons/fi";
@@ -28,16 +27,16 @@ const Header = ({ sidebarToggle, showHambuger = true }: HeaderProps) => {
 
   return (
     <>
-      <Navbar className="py-0">
+      <div className="header_nav">
         {showHambuger ? (
           <div
             className="fs-2 toggle-button d-flex align-items-center gap-2"
             onClick={() => sidebarToggle()}
           >
-            <GiHamburgerMenu />
             <Link to="/dashboard">
               <CompanyLogo height={50} />
             </Link>
+            <GiHamburgerMenu color="#1B56AE" />
           </div>
         ) : (
           <div
@@ -50,7 +49,7 @@ const Header = ({ sidebarToggle, showHambuger = true }: HeaderProps) => {
             </Link>
           </div>
         )}
-      </Navbar>
+      </div>
     </>
   );
 };

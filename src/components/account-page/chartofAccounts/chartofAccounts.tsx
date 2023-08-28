@@ -21,7 +21,7 @@ const ChartofAccounts = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand className="fw-bold">Charts Of Accounts</NavbarBrand>
+        <NavbarBrand className="fw-bold ps-4">Charts Of Accounts</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <SearchPage />

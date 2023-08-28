@@ -58,7 +58,7 @@ const FuelImport = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand className="fw-bold">Fuel Import</NavbarBrand>
+        <NavbarBrand className="fw-bold ps-4">Fuel Import</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <Profile />

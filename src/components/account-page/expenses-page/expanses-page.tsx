@@ -56,7 +56,7 @@ const ExpansesPage = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand className="fw-bold">Expenses</NavbarBrand>
+        <NavbarBrand className="fw-bold ps-4">Expenses</NavbarBrand>
         <Nav className="me-auto" navbar>
           <div className="d-flex gap-2">
             <NavItem>Export</NavItem>

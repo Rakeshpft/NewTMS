@@ -51,7 +51,7 @@ const AdditionsPage = () => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand className="fw-bold">Additions/Deductions</NavbarBrand>
+        <NavbarBrand className="fw-bold ps-4">Additions/Deductions</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
