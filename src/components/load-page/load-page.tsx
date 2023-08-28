@@ -120,6 +120,7 @@ const tableData = {
     ],
   ],
 };
+
 const LoadPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);

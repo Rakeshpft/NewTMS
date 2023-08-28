@@ -24,6 +24,54 @@ import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlinePlus } from "react-icons/ai";
+import TableSortIcon from "../../load-page/tableSortIcon";
+
+const tableData = {
+  tableHeaders: [
+    "Id",
+    "Driver",
+    "Payable To",
+    "Type",
+    "Category",
+    "Amount",
+    "Schedule",
+    "Last",
+    "Next",
+    "status",
+    "Notes",
+    "Actions",
+  ],
+  tableRowData: [
+    [
+      "1001",
+      "06/14/23",
+      "Load",
+      "Load",
+      "Completed",
+      "Max Payne",
+      "Max Payne",
+      "002063566 ONTARIO",
+      "-",
+      "options",
+      "none",
+      "options",
+    ],
+    [
+      "1001",
+      "06/14/23",
+      "Load",
+      "Load",
+      "Completed",
+      "Max Payne",
+      "Max Payne",
+      "002063566 ONTARIO",
+      "-",
+      "options",
+      "none",
+      "options",
+    ],
+  ],
+};
 
 const ScheduledPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -76,7 +124,10 @@ const ScheduledPage = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn buttonLink" to="/createscheduledpage">
+          <Link
+            className="btn btn-sm btn-outline-primary"
+            to="/createscheduledpage"
+          >
             <AiOutlinePlus />
             New Scheduled Payment
           </Link>
@@ -227,35 +278,23 @@ const ScheduledPage = () => {
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>
-                <th>Id</th>
-                <th>Driver</th>
-                <th>Payable To</th>
-                <th>Type</th>
-                <th>Category</th>
-                <th>Amount</th>
-                <th>Schedule</th>
-                <th>Last</th>
-                <th>Next</th>
-                <th>status</th>
-                <th>Notes</th>
-                <th>Actions</th>
+                {tableData.tableHeaders.map((headeritem, index) => (
+                  <th key={index}>
+                    <span>{headeritem}</span>
+
+                    <TableSortIcon />
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-              </tr>
+              {tableData.tableRowData?.map((row, index) => (
+                <tr key={index}>
+                  {row.map((item, index) => (
+                    <td key={index}>{item}</td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>

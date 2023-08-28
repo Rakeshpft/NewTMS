@@ -856,7 +856,7 @@ function AccountTiles({ title, icon, options }: AccountTilesProps) {
                     <Link
                       to={`${item.link}`}
                       key={index}
-                      className="btn btn-outline-info p-2 d-flex w-100 align-items-center mb-3 column-gap-2 medium_tile"
+                      className="btn btn-outline-info p-2 d-flex w-100 align-items-center mb-3 column-gap-2 medium_tile db"
                     >
                       <img
                         src={item?.icon}

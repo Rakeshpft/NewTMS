@@ -27,6 +27,98 @@ import Profile from "../pofile";
 import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
+import { PiGearDuotone } from "react-icons/pi";
+import TableSortIcon from "../load-page/tableSortIcon";
+
+const tableData = {
+  tableHeaders: [
+    "#",
+    "Name",
+    "Type",
+    "Status",
+    "Hire Date",
+    "Term Date",
+    "Phone",
+    "Email",
+    "Truck",
+    "Trailer",
+    "Payable To",
+    "Warnings",
+    "Driver App",
+    "Actions",
+    <PiGearDuotone />,
+  ],
+  tableRowData: [
+    [
+      "1001",
+      "06/14/23",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "-",
+      "Joliet, IL",
+      "Cameron, IL",
+      "$500.00",
+      "06/25/23",
+      "Delivered - badge",
+      "Invoiced",
+      "Lumper: $50.00 :: Detention: $50.00",
+      "[file-icon]",
+      "Lumper",
+      "[options]",
+    ],
+    [
+      "1002",
+      "06/15/23",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "-",
+      "Joliet, IL",
+      "Cameron, IL",
+      "$500.00",
+      "06/25/23",
+      "Delivered - badge",
+      "Invoiced",
+      "Lumper: $50.00 :: Detention: $50.00",
+      "[file-icon]",
+      "Lumper",
+      "[options]",
+    ],
+    [
+      "1004",
+      "06/14/23",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "-",
+      "Joliet, IL",
+      "Cameron, IL",
+      "$500.00",
+      "06/25/23",
+      "Delivered - badge",
+      "Invoiced",
+      "Lumper: $50.00 :: Detention: $50.00",
+      "[file-icon]",
+      "Lumper",
+      "[options]",
+    ],
+    [
+      "1007",
+      "06/14/23",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "-",
+      "Joliet, IL",
+      "Cameron, IL",
+      "$500.00",
+      "06/25/23",
+      "Delivered - badge",
+      "Invoiced",
+      "Lumper: $50.00 :: Detention: $50.00",
+      "[file-icon]",
+      "Lumper",
+      "[options]",
+    ],
+  ],
+};
 
 const DriverPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -89,7 +181,7 @@ const DriverPage = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn buttonLink" to="/createdriver">
+          <Link className="btn btn-sm btn-outline-primary" to="/createdriver">
             <AiOutlinePlus />
             New Driver
           </Link>
@@ -192,41 +284,23 @@ const DriverPage = () => {
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Status</th>
-                <th>Hire Date</th>
-                <th>Term Date</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Truck</th>
-                <th>Trailer</th>
-                <th>Payable To</th>
-                <th>Warnings</th>
-                <th>Driver App</th>
-                <th>Actions</th>
-                <th>*</th>
+                {tableData.tableHeaders.map((headeritem, index) => (
+                  <th key={index}>
+                    <span>{headeritem}</span>
+
+                    <TableSortIcon />
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td></td>
-              </tr>
+              {tableData.tableRowData?.map((row, index) => (
+                <tr key={index}>
+                  {row.map((item, index) => (
+                    <td key={index}>{item}</td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>

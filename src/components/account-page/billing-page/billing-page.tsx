@@ -24,6 +24,89 @@ import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlinePlus } from "react-icons/ai";
+import { PiGearDuotone } from "react-icons/pi";
+import TableSortIcon from "../../load-page/tableSortIcon";
+
+const tableData = {
+  tableHeaders: [
+    "#",
+    "Date",
+    "Type",
+    "Category",
+    "status",
+    "Partner",
+    "Driver",
+    "Amount",
+    "Load Number",
+    "Driver Settlement",
+    "Notes",
+    "Actions",
+    <PiGearDuotone />,
+    ,
+  ],
+  tableRowData: [
+    [
+      "1",
+      "06/14/23",
+      "Fuel",
+      "Fuel",
+      "options",
+      "Max payne",
+      "Max payne",
+      "100",
+      "100",
+      "options",
+      "options",
+      "options",
+      "options",
+    ],
+    [
+      "1",
+      "06/14/23",
+      "Fuel",
+      "Fuel",
+      "options",
+      "Max payne",
+      "Max payne",
+      "100",
+      "100",
+      "options",
+      "options",
+      "options",
+      "options",
+    ],
+    [
+      "1",
+      "06/14/23",
+      "Fuel",
+      "Fuel",
+      "options",
+      "Max payne",
+      "Max payne",
+      "100",
+      "100",
+      "options",
+      "options",
+      "options",
+      "options",
+    ],
+    [
+      "1",
+      "06/14/23",
+      "Fuel",
+      "Fuel",
+      "options",
+      "Max payne",
+      "Max payne",
+      "100",
+      "100",
+      "options",
+      "options",
+      "options",
+      "options",
+    ],
+  ],
+};
 
 const BillingPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -75,7 +158,10 @@ const BillingPage = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn buttonLink" to="/createbillingpage">
+          <Link
+            className="btn btn-sm btn-outline-primary"
+            to="/createbillingpage"
+          >
             <AiOutlinePlus />
             New Billing Entry
           </Link>
@@ -326,37 +412,23 @@ const BillingPage = () => {
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Date</th>
-                <th>Type</th>
-                <th>Category</th>
-                <th>status</th>
-                <th>Partner</th>
-                <th>Driver</th>
-                <th>Amount</th>
-                <th>Load Number</th>
-                <th>Driver Settlement</th>
-                <th>Notes</th>
-                <th>Actions</th>
-                <th>*</th>
+                {tableData.tableHeaders.map((headeritem, index) => (
+                  <th key={index}>
+                    <span>{headeritem}</span>
+
+                    <TableSortIcon />
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td></td>
-              </tr>
+              {tableData.tableRowData?.map((row, index) => (
+                <tr key={index}>
+                  {row.map((item, index) => (
+                    <td key={index}>{item}</td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>

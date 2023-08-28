@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineFileExcel, AiOutlinePlus } from "react-icons/ai";
 import { MdOutgoingMail } from "react-icons/md";
-import { PiFilePdfDuotone } from "react-icons/pi";
+import { PiFilePdfDuotone, PiGearDuotone } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import {
   Navbar,
@@ -31,6 +31,60 @@ import Profile from "../pofile";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
+import TableSortIcon from "../load-page/tableSortIcon";
+
+const tableData = {
+  tableHeaders: [
+    "#",
+    "Date",
+    "Payable To",
+    "Driver",
+    "Settlement Total",
+    "Email",
+    "Status",
+    "Notes",
+    "Actions",
+    <PiGearDuotone />,
+  ],
+  tableRowData: [
+    [
+      "1",
+      "06/14/23",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "100.00",
+      "Max payne [drv]",
+      "Active",
+      "options",
+      "options",
+      "options",
+    ],
+    [
+      "1",
+      "06/14/23",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "100.00",
+      "Max payne [drv]",
+      "Active",
+      "options",
+      "options",
+      "options",
+    ],
+    [
+      "1",
+      "06/14/23",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "100.00",
+      "Max payne [drv]",
+      "Active",
+      "options",
+      "options",
+      "options",
+    ],
+  ],
+};
 
 const DriverPayRoll = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -105,7 +159,10 @@ const DriverPayRoll = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn buttonLink" to="/createdriverpayroll">
+          <Link
+            className="btn btn-sm btn-outline-primary"
+            to="/createdriverpayroll"
+          >
             <AiOutlinePlus />
             New Driver Payroll
           </Link>
@@ -311,7 +368,11 @@ const DriverPayRoll = () => {
                 }}
               />
               <Dropdown isOpen={dropdownOpen} toggle={toggle} size="sm">
-                <DropdownToggle style={{ backgroundColor: "#0B8E00" }} caret>
+                <DropdownToggle
+                  style={{ backgroundColor: "#0B8E00" }}
+                  caret
+                  size="sm"
+                >
                   Batch Actions
                 </DropdownToggle>
                 <DropdownMenu>
@@ -325,25 +386,23 @@ const DriverPayRoll = () => {
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Date</th>
-                <th>Payable To</th>
-                <th>Driver</th>
-                <th>Settlement Total</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Notes</th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>Actions</th>
-                <th>*</th>
+                {tableData.tableHeaders.map((headeritem, index) => (
+                  <th key={index}>
+                    <span>{headeritem}</span>
+
+                    <TableSortIcon />
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <p>No records</p>
+              {tableData.tableRowData?.map((row, index) => (
+                <tr key={index}>
+                  {row.map((item, index) => (
+                    <td key={index}>{item}</td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>

@@ -24,6 +24,72 @@ import { Header, SideBar } from "../../header";
 import Profile from "../../pofile";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
+import TableSortIcon from "../../load-page/tableSortIcon";
+
+const tableData = {
+  tableHeaders: [
+    "#",
+    "Date",
+    "Amount",
+    "Category",
+    "Partner",
+    "Driver",
+    "Load Number",
+    "Driver Settlement",
+    "Notes",
+    "Actions",
+  ],
+  tableRowData: [
+    [
+      "1",
+      "06/14/23",
+      "100",
+      "Fuel",
+      "Max payne",
+      "Max payne",
+      "100",
+      "100",
+      "options",
+      "options",
+    ],
+    [
+      "1",
+      "06/14/23",
+      "100",
+      "Fuel",
+      "Max payne",
+      "Max payne",
+      "100",
+      "100",
+      "options",
+      "options",
+    ],
+    [
+      "1",
+      "06/14/23",
+      "100",
+      "Fuel",
+      "Max payne",
+      "Max payne",
+      "100",
+      "100",
+      "options",
+      "options",
+    ],
+    [
+      "1",
+      "06/14/23",
+      "100",
+      "Fuel",
+      "Max payne",
+      "Max payne",
+      "100",
+      "100",
+      "options",
+      "options",
+    ],
+  ],
+};
 
 const AdditionsPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -75,7 +141,10 @@ const AdditionsPage = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn buttonLink" to="/createadditions">
+          <Link
+            className="btn btn-sm btn-outline-primary"
+            to="/createadditions"
+          >
             <AiOutlinePlus />
             New Additions/Deductions Entry
           </Link>
@@ -283,31 +352,23 @@ const AdditionsPage = () => {
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Category</th>
-                <th>Partner</th>
-                <th>Driver</th>
-                <th>Load Number</th>
-                <th>Driver Settlement</th>
-                <th>Notes</th>
-                <th>Actions</th>
+                {tableData.tableHeaders.map((headeritem, index) => (
+                  <th key={index}>
+                    <span>{headeritem}</span>
+
+                    <TableSortIcon />
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
+              {tableData.tableRowData?.map((row, index) => (
+                <tr key={index}>
+                  {row.map((item, index) => (
+                    <td key={index}>{item}</td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MdOutgoingMail } from "react-icons/md";
 import { AiOutlineFileExcel } from "react-icons/ai";
-import { PiFilePdfDuotone } from "react-icons/pi";
+import { PiFilePdfDuotone, PiGearDuotone } from "react-icons/pi";
 import { Header, SideBar } from "../../header";
 import {
   Button,
@@ -28,6 +28,56 @@ import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlinePlus } from "react-icons/ai";
+import TableSortIcon from "../../load-page/tableSortIcon";
+
+const tableData = {
+  tableHeaders: [
+    "#",
+    "Name",
+    "Address",
+    "MC",
+    "Phone",
+    "Email",
+    "type",
+    "Action",
+    <PiGearDuotone />,
+  ],
+  tableRowData: [
+    [
+      "1001",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "123456",
+      "1234567890",
+      "demo@gmail.com",
+      "invoice",
+      "best",
+      "Lumper",
+    ],
+    [
+      "1001",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "123456",
+      "1234567890",
+      "demo@gmail.com",
+      "invoice",
+      "best",
+      "Lumper",
+    ],
+    [
+      "1001",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "123456",
+      "1234567890",
+      "demo@gmail.com",
+      "invoice",
+      "best",
+      "Lumper",
+    ],
+  ],
+};
 
 const Vendors = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -94,7 +144,7 @@ const Vendors = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn buttonLink" to="/createvendor">
+          <Link className="btn btn-sm btn-outline-primary" to="/createvendor">
             <AiOutlinePlus />
             New Vendor
           </Link>
@@ -171,29 +221,23 @@ const Vendors = () => {
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>
-                <th> # </th>
-                <th> Name </th>
-                <th> Address </th>
-                <th> MC </th>
-                <th> Phone </th>
-                <th> Email </th>
-                <th>type</th>
-                <th>Action</th>
-                <th>*</th>
+                {tableData.tableHeaders.map((item, index) => (
+                  <th key={index}>
+                    <span>{item}</span>
+
+                    <TableSortIcon />
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Otto</td>
-                <td> XYZABC</td>
-                <td>Dont Know </td>
-                <td>987654321</td>
-                <td>Otto@mdo</td>
-                <td>Animal</td>
-                <td>Very Good</td>
-                <td></td>
-              </tr>
+              {tableData.tableRowData?.map((row, index) => (
+                <tr key={index}>
+                  {row.map((item, index) => (
+                    <td key={index}>{item}</td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>

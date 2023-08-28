@@ -4,7 +4,6 @@ import {
   Navbar,
   NavbarBrand,
   Nav,
-  Container,
   Form,
   Col,
   Row,
@@ -97,384 +96,379 @@ const CreateExpensesSchedulePage = () => {
           }}
           showHambuger={false}
         />
-        <NavbarBrand className="fw-bold">New Schedule</NavbarBrand>
+        <NavbarBrand className="fw-bold ps-4">New Schedule</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <Profile />
         </div>
       </Navbar>
-      <div
-        className="py-2 load-itemmain"
-        style={{ backgroundColor: "#E9F3FB" }}
-      >
-        <Container className="mt-4 px-5 py-2">
-          <Form onSubmit={handleSubmit} className="load-item">
-            <Row className="px-4">
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <FormGroup>
-                  <Label for="examplescheduleName">Schedule Name</Label>
-                  <Input
-                    type="text"
-                    name="scheduleName"
-                    id="examplescheduleName"
-                    bsSize="sm"
-                    value={state.scheduleName}
-                    onChange={(e) =>
-                      dispatch({
-                        type: "SET_scheduleName",
-                        payload: e.target.value,
-                      })
-                    }
-                    style={{
-                      color: "black",
-                      border: "1px solid #418ECB",
-                    }}
-                  />
-                </FormGroup>
-              </Col>
-              <Col lg={3} md={6} sm={12} className="px-3"></Col>
-              <Col lg={6} md={6} sm={12} className="px-3">
-                <FormGroup row tag="fieldset">
-                  <legend className="col-form-label col-sm-2 fw-bold">
-                    Schedule
-                  </legend>
-                  <Col sm={12}>
-                    <FormGroup check inline>
-                      <Input name="radio3" type="radio" />
-                      <Label
-                        check
-                        style={{
-                          marginBottom: "0px",
-                          fontSize: "small",
-                        }}
-                      >
-                        Every Day
-                      </Label>
-                    </FormGroup>
-                    <FormGroup check inline>
-                      <Input name="radio3" type="radio" />
-                      <Label
-                        check
-                        style={{
-                          marginBottom: "0px",
-                          fontSize: "small",
-                        }}
-                      >
-                        Every week
-                      </Label>
-                    </FormGroup>
-                    <FormGroup check inline>
-                      <Input name="radio3" type="radio" />
-                      <Label
-                        check
-                        style={{
-                          marginBottom: "0px",
-                          fontSize: "small",
-                        }}
-                      >
-                        Every Month
-                      </Label>
-                    </FormGroup>
-                    <FormGroup check inline>
-                      <Input name="radio3" type="radio" />
-                      <Label
-                        check
-                        style={{
-                          marginBottom: "0px",
-                          fontSize: "small",
-                        }}
-                      >
-                        Every Other Week
-                      </Label>
-                    </FormGroup>
-                    <FormGroup check inline>
-                      <Input name="radio3" type="radio" />
-                      <Label
-                        check
-                        style={{
-                          marginBottom: "0px",
-                          fontSize: "small",
-                        }}
-                      >
-                        Annually
-                      </Label>
-                    </FormGroup>
-                  </Col>
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row className="px-4">
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <FormGroup>
-                  <Label for="exampleamount">Amount</Label>
-                  <Input
-                    bsSize="sm"
-                    type="text"
-                    value={state.amount}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_amount",
-                        payload: e.target.value,
-                      });
-                    }}
-                    style={{
-                      color: "black",
-                      border: "1px solid #418ECB",
-                    }}
-                  />
-                </FormGroup>
-              </Col>
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <FormGroup>
-                  <Label for="examplepayTo">Pay To</Label>
-                  <Input
-                    bsSize="sm"
-                    type="text"
-                    value={state.payTo}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_payTo",
-                        payload: e.target.value,
-                      });
-                    }}
-                    style={{
-                      color: "black",
-                      border: "1px solid #418ECB",
-                    }}
-                  />
-                </FormGroup>
-              </Col>
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <FormGroup>
-                  <Label for="examplestarton">Start On</Label>
-                  <Input
-                    bsSize="sm"
-                    type="text"
-                    value={state.startOn}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_startOn",
-                        payload: e.target.value,
-                      });
-                    }}
-                    style={{
-                      color: "black",
-                      border: "1px solid #418ECB",
-                    }}
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row className="px-4">
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <FormGroup>
-                  <Label for="examplecategory">Category</Label>
-                  <Input
-                    bsSize="sm"
-                    type="text"
-                    value={state.category}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_category",
-                        payload: e.target.value,
-                      });
-                    }}
-                    style={{
-                      color: "black",
-                      border: "1px solid #418ECB",
-                    }}
-                  />
-                </FormGroup>
-              </Col>
-              <Col lg={3} md={6} sm={12} className="px-3"></Col>
-              <Col lg={6} md={6} sm={12} className="px-3">
-                <FormGroup tag="fieldset">
-                  <legend className="col-form-label col-sm-2 fw-bold">
-                    Repeat
-                  </legend>
-                  <Col sm={12}>
-                    <FormGroup check inline>
-                      <Input name="radio3" type="radio" />
-                      <Label
-                        checked
-                        style={{
-                          marginBottom: "0px",
-                          fontSize: "small",
-                        }}
-                      >
-                        Always
-                      </Label>
-                    </FormGroup>
-                    <FormGroup check inline>
-                      <Input name="radio3" type="radio" />
-                      <Label
-                        check
-                        style={{
-                          marginBottom: "0px",
-                          fontSize: "small",
-                        }}
-                      >
-                        No. of Terms
-                      </Label>
-                    </FormGroup>
-
-                    <FormGroup check inline>
-                      <Input name="radio3" type="radio" />
-                      <Label
-                        check
-                        style={{
-                          marginBottom: "0px",
-                          fontSize: "small",
-                        }}
-                      >
-                        Until the Date
-                      </Label>
-                    </FormGroup>
-                  </Col>
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row className="px-4">
-              <Col lg={6} md={6} sm={12} className="px-3">
-                <FormGroup>
-                  <Label for="exampleotes">Notes</Label>
-                  <Input
-                    type="textarea"
-                    rows="3"
-                    name="notes"
-                    id="examplenotes"
-                    bsSize="sm"
-                    value={state.notes}
-                    onChange={(e) =>
-                      dispatch({ type: "SET_notes", payload: e.target.value })
-                    }
-                    style={{
-                      color: "black",
-                      border: "1px solid #418ECB",
-                    }}
-                  />
-                </FormGroup>
-              </Col>
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <FormGroup>
-                  <Label for="exampledriver">Driver</Label>
-                  <Input
-                    type="text"
-                    name="driver"
-                    id="exampledriver"
-                    bsSize="sm"
-                    value={state.driver}
-                    onChange={(e) =>
-                      dispatch({ type: "SET_driver", payload: e.target.value })
-                    }
-                    style={{
-                      color: "black",
-                      border: "1px solid #418ECB",
-                    }}
-                  />
-                </FormGroup>
-              </Col>
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <FormGroup>
-                  <Label for="exampletrailer">Trailer</Label>
-                  <Input
-                    type="text"
-                    name="trailer"
-                    id="exampletrailer"
-                    bsSize="sm"
-                    value={state.trailer}
-                    onChange={(e) =>
-                      dispatch({ type: "SET_trailer", payload: e.target.value })
-                    }
-                    style={{
-                      color: "black",
-                      border: "1px solid #418ECB",
-                    }}
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row className="px-4 justify-content-end">
-              {/* <Col lg={6} md={6} sm={12} className="px-3"></Col>
-              <Col lg={3} md={6} sm={12} className="px-3"></Col> */}
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <FormGroup>
-                  <Label for="exampletruck">Truck</Label>
-                  <Input
-                    type="text"
-                    name="truck"
-                    id="exampletruck"
-                    bsSize="sm"
-                    value={state.truck}
-                    onChange={(e) =>
-                      dispatch({ type: "SET_truck", payload: e.target.value })
-                    }
-                    style={{
-                      color: "black",
-                      border: "1px solid #418ECB",
-                    }}
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row className="px-4">
-              <Col lg={12} md={12} sm={12} className="px-3">
-                <TabPage tabTitles={["Expenses"]}>
-                  <TabPane>
-                    <span className="fw-bold small">Payments</span>
-                    <Table
-                      responsive
-                      hover
-                      size="sm"
-                      className="table-data text-nowrap"
+      <div className="m-2 load-itemmain" style={{ backgroundColor: "#E9F3FB" }}>
+        <Form onSubmit={handleSubmit} className="load-item container p-4">
+          <Row className="px-4">
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <FormGroup>
+                <Label for="examplescheduleName">Schedule Name</Label>
+                <Input
+                  type="text"
+                  name="scheduleName"
+                  id="examplescheduleName"
+                  bsSize="sm"
+                  value={state.scheduleName}
+                  onChange={(e) =>
+                    dispatch({
+                      type: "SET_scheduleName",
+                      payload: e.target.value,
+                    })
+                  }
+                  style={{
+                    color: "black",
+                    border: "1px solid #418ECB",
+                  }}
+                />
+              </FormGroup>
+            </Col>
+            <Col lg={3} md={6} sm={12} className="px-3"></Col>
+            <Col lg={6} md={6} sm={12} className="px-3">
+              <FormGroup row tag="fieldset">
+                <legend className="col-form-label col-sm-2 fw-bold">
+                  Schedule
+                </legend>
+                <Col sm={12}>
+                  <FormGroup check inline>
+                    <Input name="radio3" type="radio" />
+                    <Label
+                      check
+                      style={{
+                        marginBottom: "0px",
+                        fontSize: "small",
+                      }}
                     >
-                      <thead>
-                        <tr>
-                          <th>Date</th>
-                          <th>Payment#</th>
-                          <th>Description</th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th>Amount</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>No records</tr>
-                      </tbody>
-                    </Table>
-                  </TabPane>
-                </TabPage>
-              </Col>
-            </Row>
-            <Row className="px-4">
-              <Col className="d-flex justify-content-end me-5 mt-5">
-                <Button
-                  size="sm"
-                  className="me-3"
-                  style={{
-                    color: "white",
-                    border: "1px solid #1E5367",
-                    backgroundColor: "#418ECB",
+                      Every Day
+                    </Label>
+                  </FormGroup>
+                  <FormGroup check inline>
+                    <Input name="radio3" type="radio" />
+                    <Label
+                      check
+                      style={{
+                        marginBottom: "0px",
+                        fontSize: "small",
+                      }}
+                    >
+                      Every week
+                    </Label>
+                  </FormGroup>
+                  <FormGroup check inline>
+                    <Input name="radio3" type="radio" />
+                    <Label
+                      check
+                      style={{
+                        marginBottom: "0px",
+                        fontSize: "small",
+                      }}
+                    >
+                      Every Month
+                    </Label>
+                  </FormGroup>
+                  <FormGroup check inline>
+                    <Input name="radio3" type="radio" />
+                    <Label
+                      check
+                      style={{
+                        marginBottom: "0px",
+                        fontSize: "small",
+                      }}
+                    >
+                      Every Other Week
+                    </Label>
+                  </FormGroup>
+                  <FormGroup check inline>
+                    <Input name="radio3" type="radio" />
+                    <Label
+                      check
+                      style={{
+                        marginBottom: "0px",
+                        fontSize: "small",
+                      }}
+                    >
+                      Annually
+                    </Label>
+                  </FormGroup>
+                </Col>
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row className="px-4">
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <FormGroup>
+                <Label for="exampleamount">Amount</Label>
+                <Input
+                  bsSize="sm"
+                  type="text"
+                  value={state.amount}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_amount",
+                      payload: e.target.value,
+                    });
                   }}
-                >
-                  <BiCheck fontSize={"16px"} />
-                  Save
-                </Button>
-                <Button
-                  size="sm"
                   style={{
-                    color: "red",
-                    border: "1px solid red",
-                    backgroundColor: "white",
+                    color: "black",
+                    border: "1px solid #418ECB",
                   }}
-                >
-                  <RxCross2 fontSize={"16px"} color="red" /> Cancel
-                </Button>
-              </Col>
-            </Row>
-          </Form>
-        </Container>
+                />
+              </FormGroup>
+            </Col>
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <FormGroup>
+                <Label for="examplepayTo">Pay To</Label>
+                <Input
+                  bsSize="sm"
+                  type="text"
+                  value={state.payTo}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_payTo",
+                      payload: e.target.value,
+                    });
+                  }}
+                  style={{
+                    color: "black",
+                    border: "1px solid #418ECB",
+                  }}
+                />
+              </FormGroup>
+            </Col>
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <FormGroup>
+                <Label for="examplestarton">Start On</Label>
+                <Input
+                  bsSize="sm"
+                  type="text"
+                  value={state.startOn}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_startOn",
+                      payload: e.target.value,
+                    });
+                  }}
+                  style={{
+                    color: "black",
+                    border: "1px solid #418ECB",
+                  }}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row className="px-4">
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <FormGroup>
+                <Label for="examplecategory">Category</Label>
+                <Input
+                  bsSize="sm"
+                  type="text"
+                  value={state.category}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_category",
+                      payload: e.target.value,
+                    });
+                  }}
+                  style={{
+                    color: "black",
+                    border: "1px solid #418ECB",
+                  }}
+                />
+              </FormGroup>
+            </Col>
+            <Col lg={3} md={6} sm={12} className="px-3"></Col>
+            <Col lg={6} md={6} sm={12} className="px-3">
+              <FormGroup tag="fieldset">
+                <legend className="col-form-label col-sm-2 fw-bold">
+                  Repeat
+                </legend>
+                <Col sm={12}>
+                  <FormGroup check inline>
+                    <Input name="radio3" type="radio" />
+                    <Label
+                      checked
+                      style={{
+                        marginBottom: "0px",
+                        fontSize: "small",
+                      }}
+                    >
+                      Always
+                    </Label>
+                  </FormGroup>
+                  <FormGroup check inline>
+                    <Input name="radio3" type="radio" />
+                    <Label
+                      check
+                      style={{
+                        marginBottom: "0px",
+                        fontSize: "small",
+                      }}
+                    >
+                      No. of Terms
+                    </Label>
+                  </FormGroup>
+
+                  <FormGroup check inline>
+                    <Input name="radio3" type="radio" />
+                    <Label
+                      check
+                      style={{
+                        marginBottom: "0px",
+                        fontSize: "small",
+                      }}
+                    >
+                      Until the Date
+                    </Label>
+                  </FormGroup>
+                </Col>
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row className="px-4">
+            <Col lg={6} md={6} sm={12} className="px-3">
+              <FormGroup>
+                <Label for="exampleotes">Notes</Label>
+                <Input
+                  type="textarea"
+                  rows="3"
+                  name="notes"
+                  id="examplenotes"
+                  bsSize="sm"
+                  value={state.notes}
+                  onChange={(e) =>
+                    dispatch({ type: "SET_notes", payload: e.target.value })
+                  }
+                  style={{
+                    color: "black",
+                    border: "1px solid #418ECB",
+                  }}
+                />
+              </FormGroup>
+            </Col>
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <FormGroup>
+                <Label for="exampledriver">Driver</Label>
+                <Input
+                  type="text"
+                  name="driver"
+                  id="exampledriver"
+                  bsSize="sm"
+                  value={state.driver}
+                  onChange={(e) =>
+                    dispatch({ type: "SET_driver", payload: e.target.value })
+                  }
+                  style={{
+                    color: "black",
+                    border: "1px solid #418ECB",
+                  }}
+                />
+              </FormGroup>
+            </Col>
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <FormGroup>
+                <Label for="exampletrailer">Trailer</Label>
+                <Input
+                  type="text"
+                  name="trailer"
+                  id="exampletrailer"
+                  bsSize="sm"
+                  value={state.trailer}
+                  onChange={(e) =>
+                    dispatch({ type: "SET_trailer", payload: e.target.value })
+                  }
+                  style={{
+                    color: "black",
+                    border: "1px solid #418ECB",
+                  }}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row className="px-4 justify-content-end">
+            {/* <Col lg={6} md={6} sm={12} className="px-3"></Col>
+              <Col lg={3} md={6} sm={12} className="px-3"></Col> */}
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <FormGroup>
+                <Label for="exampletruck">Truck</Label>
+                <Input
+                  type="text"
+                  name="truck"
+                  id="exampletruck"
+                  bsSize="sm"
+                  value={state.truck}
+                  onChange={(e) =>
+                    dispatch({ type: "SET_truck", payload: e.target.value })
+                  }
+                  style={{
+                    color: "black",
+                    border: "1px solid #418ECB",
+                  }}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row className="px-4">
+            <Col lg={12} md={12} sm={12} className="px-3">
+              <TabPage tabTitles={["Expenses"]}>
+                <TabPane>
+                  <span className="fw-bold small">Payments</span>
+                  <Table
+                    responsive
+                    hover
+                    size="sm"
+                    className="table-data text-nowrap"
+                  >
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Payment#</th>
+                        <th>Description</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>No records</tr>
+                    </tbody>
+                  </Table>
+                </TabPane>
+              </TabPage>
+            </Col>
+          </Row>
+          <Row className="px-4">
+            <Col className="d-flex justify-content-end me-5 mt-5">
+              <Button
+                size="sm"
+                className="me-3"
+                style={{
+                  color: "white",
+                  border: "1px solid #1E5367",
+                  backgroundColor: "#418ECB",
+                }}
+              >
+                <BiCheck fontSize={"16px"} />
+                Save
+              </Button>
+              <Button
+                size="sm"
+                style={{
+                  color: "red",
+                  border: "1px solid red",
+                  backgroundColor: "white",
+                }}
+              >
+                <RxCross2 fontSize={"16px"} color="red" /> Cancel
+              </Button>
+            </Col>
+          </Row>
+        </Form>
       </div>
     </>
   );

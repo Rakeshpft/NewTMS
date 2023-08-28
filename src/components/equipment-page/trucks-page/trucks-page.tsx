@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineFileExcel, AiOutlinePlus } from "react-icons/ai";
 import { MdOutgoingMail } from "react-icons/md";
-import { PiFilePdfDuotone } from "react-icons/pi";
+import { PiFilePdfDuotone, PiGearDuotone } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import {
   Navbar,
@@ -27,6 +27,121 @@ import Profile from "../../pofile";
 import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
+import TableSortIcon from "../../load-page/tableSortIcon";
+
+const tableData = {
+  tableHeaders: [
+    "#",
+    "Unit",
+    "Make",
+    "Model",
+    "Vin",
+    "Plate",
+    "Plate State",
+    "Registration Date",
+    "Ownership",
+    "Driver",
+    "ELD Provider",
+    "Loacton",
+    "Warnings",
+    "Status",
+    "Actions",
+    <PiGearDuotone />,
+    ,
+  ],
+  tableRowData: [
+    [
+      "1",
+      "1001",
+      "Ford",
+      "F150",
+      "1234567890",
+      "ABC123",
+      "IL",
+      "06/14/23",
+      "Max payne [drv]",
+      "Max payne",
+      "Max payne",
+      "Joliet, IL",
+      "Cameron, IL",
+      "Cameron, IL",
+      "Cameron, IL",
+      "Cameron, IL",
+    ],
+    [
+      "1",
+      "1001",
+      "Ford",
+      "F150",
+      "1234567890",
+      "ABC123",
+      "IL",
+      "06/14/23",
+      "Max payne [drv]",
+      "Max payne",
+      "Max payne",
+      "Joliet, IL",
+      "Cameron, IL",
+      "Cameron, IL",
+      "Cameron, IL",
+      "Cameron, IL",
+    ],
+    [
+      "1",
+      "1001",
+      "Ford",
+      "F150",
+      "1234567890",
+      "ABC123",
+      "IL",
+      "06/14/23",
+      "Max payne [drv]",
+      "Max payne",
+      "Max payne",
+      "Joliet, IL",
+      "Cameron, IL",
+      "Cameron, IL",
+      "Cameron, IL",
+      "Cameron, IL",
+    ],
+    [
+      "1",
+      "1001",
+      "Ford",
+      "F150",
+      "1234567890",
+      "ABC123",
+      "IL",
+      "06/14/23",
+      "Max payne [drv]",
+      "Max payne",
+      "Max payne",
+      "Joliet, IL",
+      "Cameron, IL",
+      "Cameron, IL",
+      "Cameron, IL",
+      "Cameron, IL",
+    ],
+    [
+      "1",
+      "1001",
+      "Ford",
+      "F150",
+      "1234567890",
+      "ABC123",
+      "IL",
+      "06/14/23",
+      "Max payne [drv]",
+      "Max payne",
+      "Max payne",
+      "Joliet, IL",
+      "Cameron, IL",
+      "Cameron, IL",
+      "Cameron, IL",
+      "Cameron, IL",
+    ],
+  ],
+};
 
 const TrucksPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -93,7 +208,7 @@ const TrucksPage = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn buttonLink" to="/createnewtruck">
+          <Link className="btn btn-sm btn-outline-primary" to="/createnewtruck">
             <AiOutlinePlus />
             New Truck
           </Link>
@@ -211,43 +326,23 @@ const TrucksPage = () => {
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Unit</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Vin</th>
-                <th>Plate</th>
-                <th>Plate State</th>
-                <th>Registration Date</th>
-                <th>Ownership</th>
-                <th>Driver</th>
-                <th>ELD Provider</th>
-                <th>Loacton</th>
-                <th>Warnings</th>
-                <th>Status</th>
-                <th>Actions</th>
-                <th>*</th>
+                {tableData.tableHeaders.map((headeritem, index) => (
+                  <th key={index}>
+                    <span>{headeritem}</span>
+
+                    <TableSortIcon />
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Mark</td>
-                <td></td>
-              </tr>
+              {tableData.tableRowData?.map((row, index) => (
+                <tr key={index}>
+                  {row.map((item, index) => (
+                    <td key={index}>{item}</td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>

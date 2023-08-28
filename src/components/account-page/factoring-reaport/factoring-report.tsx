@@ -7,6 +7,57 @@ import { AiOutlineFileExcel, AiOutlinePlus } from "react-icons/ai";
 import { MdOutgoingMail } from "react-icons/md";
 import { PiFilePdfDuotone } from "react-icons/pi";
 import SearchPage from "../../search-page/search-page";
+import TableSortIcon from "../../load-page/tableSortIcon";
+
+const tableData = {
+  tableHeaders: [
+    "Id",
+    "Date",
+    "Partner",
+    "Amount",
+    "status",
+    "Notes",
+    "Actions",
+  ],
+  tableRowData: [
+    [
+      "1001",
+      "06/14/23",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "Completed",
+      "none",
+      "options",
+    ],
+    [
+      "1001",
+      "06/14/23",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "Completed",
+      "none",
+      "options",
+    ],
+    [
+      "1001",
+      "06/14/23",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "Completed",
+      "none",
+      "options",
+    ],
+    [
+      "1001",
+      "06/14/23",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "Completed",
+      "none",
+      "options",
+    ],
+  ],
+};
 
 const FactoringReport = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -42,7 +93,10 @@ const FactoringReport = () => {
         </Nav>
         <div className="d-flex align-items-center gap-3">
           <SearchPage />
-          <Link className="btn buttonLink" to="/createfactoringreport">
+          <Link
+            className="btn btn-sm btn-outline-primary"
+            to="/createfactoringreport"
+          >
             <AiOutlinePlus />
             New Factoring Report
           </Link>
@@ -55,25 +109,23 @@ const FactoringReport = () => {
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Partner</th>
-                <th>Amount</th>
-                <th>status</th>
-                <th>Notes</th>
-                <th>Actions</th>
+                {tableData.tableHeaders.map((headeritem, index) => (
+                  <th key={index}>
+                    <span>{headeritem}</span>
+
+                    <TableSortIcon />
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
+              {tableData.tableRowData?.map((row, index) => (
+                <tr key={index}>
+                  {row.map((item, index) => (
+                    <td key={index}>{item}</td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>

@@ -5,6 +5,16 @@ import { Header, SideBar } from "../../header";
 import Profile from "../../pofile";
 import { AiOutlinePlus } from "react-icons/ai";
 import SearchPage from "../../search-page/search-page";
+import TableSortIcon from "../../load-page/tableSortIcon";
+
+const tableData = {
+  tableHeaders: ["Name", "Type", "Description", "Active", "Notes", "Actions"],
+  tableRowData: [
+    ["Max Payne", "Driver", "Joliet, IL", "true", "None", "options"],
+    ["Max Payne", "Driver", "Joliet, IL", "true", "None", "options"],
+    ["Max Payne", "Driver", "Joliet, IL", "true", "None", "options"],
+  ],
+};
 
 const ChartofAccounts = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -25,7 +35,10 @@ const ChartofAccounts = () => {
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <SearchPage />
-          <Link className="btn buttonLink" to="/createchartofaccounts">
+          <Link
+            className="btn btn-sm btn-outline-primary"
+            to="/createchartofaccounts"
+          >
             <AiOutlinePlus />
             New Charts Of Account
           </Link>
@@ -38,23 +51,23 @@ const ChartofAccounts = () => {
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Active</th>
-                <th>Notes</th>
-                <th>Actions</th>
+                {tableData.tableHeaders.map((headeritem, index) => (
+                  <th key={index}>
+                    <span>{headeritem}</span>
+
+                    <TableSortIcon />
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
+              {tableData.tableRowData?.map((row, index) => (
+                <tr key={index}>
+                  {row.map((item, index) => (
+                    <td key={index}>{item}</td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>

@@ -5,6 +5,73 @@ import { Navbar, NavbarBrand, Nav, NavItem, Table } from "reactstrap";
 import { Header, SideBar } from "../../header";
 import Profile from "../../pofile";
 import SearchPage from "../../search-page";
+import { PiGearDuotone } from "react-icons/pi";
+import TableSortIcon from "../../load-page/tableSortIcon";
+
+const tableData = {
+  tableHeaders: [
+    "#",
+    "Card Number",
+    "Card Status",
+    "Expiration Date",
+    "Assigned To",
+    "Assigned On",
+    "Truck",
+    "Notes",
+    "Actions",
+    <PiGearDuotone />,
+  ],
+  tableRowData: [
+    [
+      "1",
+      "123456789",
+      "Active",
+      "06/14/23",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "Joliet, IL",
+      "Cameron, IL",
+      "Lumper",
+      "options",
+    ],
+    [
+      "1",
+      "123456789",
+      "Active",
+      "06/14/23",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "Joliet, IL",
+      "Cameron, IL",
+      "Lumper",
+      "options",
+    ],
+    [
+      "1",
+      "123456789",
+      "Active",
+      "06/14/23",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "Joliet, IL",
+      "Cameron, IL",
+      "Lumper",
+      "options",
+    ],
+    [
+      "1",
+      "123456789",
+      "Active",
+      "06/14/23",
+      "Max payne [drv]",
+      "002063566 ONTARIO",
+      "Joliet, IL",
+      "Cameron, IL",
+      "Lumper",
+      "options",
+    ],
+  ],
+};
 
 const FuelPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -32,7 +99,7 @@ const FuelPage = () => {
         </Nav>
         <div className="d-flex align-items-center gap-3">
           <SearchPage />
-          <Link className="btn buttonLink" to="/createfuelpage">
+          <Link className="btn btn-sm btn-outline-primary" to="/createfuelpage">
             <AiOutlinePlus />
             New Fuel Card
           </Link>
@@ -45,31 +112,23 @@ const FuelPage = () => {
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Card Number</th>
-                <th>Card Status</th>
-                <th>Expiration Date</th>
-                <th>Assigned To</th>
-                <th>Assigned On</th>
-                <th>Truck</th>
-                <th>Notes</th>
-                <th>Actions</th>
-                <th>*</th>
+                {tableData.tableHeaders.map((headeritem, index) => (
+                  <th key={index}>
+                    <span>{headeritem}</span>
+
+                    <TableSortIcon />
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td></td>
-              </tr>
+              {tableData.tableRowData?.map((row, index) => (
+                <tr key={index}>
+                  {row.map((item, index) => (
+                    <td key={index}>{item}</td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>

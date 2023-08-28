@@ -266,7 +266,7 @@ const sidebarData: SidebarItem[] = [
         path: "/accounts/vendorbalance",
       },
       {
-        title: "Addition/Deduction",
+        title: "Addition",
         iconClosed: <RiArrowDownSFill />,
         iconOpen: <RiArrowUpSFill />,
         children: [

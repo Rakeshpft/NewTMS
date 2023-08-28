@@ -29,6 +29,56 @@ import { AiOutlineFileExcel, AiOutlinePlus } from "react-icons/ai";
 import { MdOutgoingMail } from "react-icons/md";
 import { PiFilePdfDuotone } from "react-icons/pi";
 import { TabPage } from "../../driver-page";
+import TableSortIcon from "../../load-page/tableSortIcon";
+
+const tableData = {
+  tableHeadersAll: [
+    "#",
+    "Recurring Transaction",
+    "Date",
+    "Amount",
+    "Category",
+    "Payable To",
+    "Driver",
+    "Truck",
+    "Trailer",
+    "Driver Charge",
+    "Notes",
+    "Actions",
+  ],
+
+  tableHeadersRecuring: [
+    "Name",
+    "Created",
+    "Amount",
+    "Category",
+    "Payable To",
+    "Schedule",
+    "Status",
+    "Driver",
+    "Truck",
+    "Trailer",
+    "Notes",
+    "Actions",
+  ],
+
+  tableRowData: [
+    [
+      "1001",
+      "06/14/23",
+      "Load",
+      "Load",
+      "Completed",
+      "Max Payne",
+      "Max Payne",
+      "002063566 ONTARIO",
+      "-",
+      "options",
+      "none",
+      "options",
+    ],
+  ],
+};
 
 const ExpansesPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -96,12 +146,18 @@ const ExpansesPage = () => {
             </InputGroup>
           </div>
           {name === 1 ? (
-            <Link className="btn buttonLink" to="/createexpensesschedulepage">
+            <Link
+              className="btn btn-sm btn-outline-primary"
+              to="/createexpensesschedulepage"
+            >
               <AiOutlinePlus />
               New Schedule
             </Link>
           ) : (
-            <Link className="btn buttonLink" to="/createexpansespage">
+            <Link
+              className="btn btn-sm btn-outline-primary"
+              to="/createexpansespage"
+            >
               <AiOutlinePlus />
               New Expense
             </Link>
@@ -379,35 +435,23 @@ const ExpansesPage = () => {
               <Table responsive hover className="table-data text-nowrap">
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th>Recurring Transaction</th>
-                    <th>Date</th>
-                    <th>Amount</th>
-                    <th>Category</th>
-                    <th>Payable To</th>
-                    <th>Driver</th>
-                    <th>Truck</th>
-                    <th>Trailer</th>
-                    <th>Driver Charge</th>
-                    <th>Notes</th>
-                    <th>Actions</th>
+                    {tableData.tableHeadersAll.map((headeritem, index) => (
+                      <th key={index}>
+                        <span>{headeritem}</span>
+
+                        <TableSortIcon />
+                      </th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                  </tr>
+                  {tableData.tableRowData?.map((row, index) => (
+                    <tr key={index}>
+                      {row.map((item, index) => (
+                        <td key={index}>{item}</td>
+                      ))}
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
             </TabPane>
@@ -600,35 +644,23 @@ const ExpansesPage = () => {
               <Table responsive hover className="table-data text-nowrap">
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Created</th>
-                    <th>Amount</th>
-                    <th>Category</th>
-                    <th>Payable To</th>
-                    <th>Schedule</th>
-                    <th>Status</th>
-                    <th>Driver</th>
-                    <th>Truck</th>
-                    <th>Trailer</th>
-                    <th>Notes</th>
-                    <th>Actions</th>
+                    {tableData.tableHeadersRecuring.map((headeritem, index) => (
+                      <th key={index}>
+                        <span>{headeritem}</span>
+
+                        <TableSortIcon />
+                      </th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                  </tr>
+                  {tableData.tableRowData?.map((row, index) => (
+                    <tr key={index}>
+                      {row.map((item, index) => (
+                        <td key={index}>{item}</td>
+                      ))}
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
             </TabPane>

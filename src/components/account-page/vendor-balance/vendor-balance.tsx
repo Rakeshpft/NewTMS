@@ -22,8 +22,89 @@ import Profile from "../../pofile";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
-import { PiFilePdfDuotone } from "react-icons/pi";
+import { PiFilePdfDuotone, PiGearDuotone } from "react-icons/pi";
 import { Link } from "react-router-dom";
+import TableSortIcon from "../../load-page/tableSortIcon";
+
+const tableData = {
+  tableHeaders: [
+    "#",
+    "Date",
+    "Type",
+    "Category",
+    "status",
+    "Partner",
+    "Driver",
+    "Amount",
+    "Load Number",
+    "Driver Settlement",
+    "Notes",
+    "Actions",
+    <PiGearDuotone />,
+  ],
+  tableRowData: [
+    [
+      "1001",
+      "06/14/23",
+      "Load",
+      "Load",
+      "Completed",
+      "Max Payne",
+      "Max Payne",
+      "002063566 ONTARIO",
+      "-",
+      "options",
+      "none",
+      "options",
+      "options",
+    ],
+    [
+      "1001",
+      "06/14/23",
+      "Load",
+      "Load",
+      "Completed",
+      "Max Payne",
+      "Max Payne",
+      "002063566 ONTARIO",
+      "-",
+      "options",
+      "none",
+      "options",
+      "options",
+    ],
+    [
+      "1001",
+      "06/14/23",
+      "Load",
+      "Load",
+      "Completed",
+      "Max Payne",
+      "Max Payne",
+      "002063566 ONTARIO",
+      "-",
+      "options",
+      "none",
+      "options",
+      "options",
+    ],
+    [
+      "1001",
+      "06/14/23",
+      "Load",
+      "Load",
+      "Completed",
+      "Max Payne",
+      "Max Payne",
+      "002063566 ONTARIO",
+      "-",
+      "options",
+      "none",
+      "options",
+      "options",
+    ],
+  ],
+};
 
 const VendorBalance = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -180,37 +261,23 @@ const VendorBalance = () => {
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Date</th>
-                <th>Type</th>
-                <th>Category</th>
-                <th>status</th>
-                <th>Partner</th>
-                <th>Driver</th>
-                <th>Amount</th>
-                <th>Load Number</th>
-                <th>Driver Settlement</th>
-                <th>Notes</th>
-                <th>Actions</th>
-                <th>*</th>
+                {tableData.tableHeaders.map((headeritem, index) => (
+                  <th key={index}>
+                    <span>{headeritem}</span>
+
+                    <TableSortIcon />
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td></td>
-              </tr>
+              {tableData.tableRowData?.map((row, index) => (
+                <tr key={index}>
+                  {row.map((item, index) => (
+                    <td key={index}>{item}</td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>

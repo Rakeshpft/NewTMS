@@ -4,7 +4,6 @@ import {
   Navbar,
   NavbarBrand,
   Nav,
-  Container,
   Form,
   Row,
   Col,
@@ -68,159 +67,154 @@ const CreateChartofAccounts = () => {
           }}
           showHambuger={false}
         />
-        <NavbarBrand className="fw-bold">New Chart of Account</NavbarBrand>
+        <NavbarBrand className="fw-bold ps-4">New Chart of Account</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <Profile />
         </div>
       </Navbar>
-      <div
-        className="py-2 load-itemmain"
-        style={{ backgroundColor: "#E9F3FB" }}
-      >
-        <Container className="mt-4 px-5 py-2">
-          <Form onSubmit={handleSubmit} className="load-item">
-            <Row className="px-5">
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <FormGroup>
-                  <Label for="exampleSelect">Name</Label>
-                  <Input
-                    bsSize="sm"
-                    id="exampleSelect"
-                    name="select"
-                    type="select"
-                    value={state.name}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_name",
-                        payload: e.target.value,
-                      });
-                    }}
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  >
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </Input>
-                </FormGroup>
-              </Col>
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <FormGroup>
-                  <Label for="exampleSelect">Account Type</Label>
-                  <Input
-                    bsSize="sm"
-                    id="exampleSelect"
-                    name="select"
-                    type="select"
-                    value={state.accountType}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_accountType",
-                        payload: e.target.value,
-                      });
-                    }}
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  >
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </Input>
-                </FormGroup>
-              </Col>
-              <Col lg={3} md={6} sm={12} className="mt-4 px-3">
-                <FormGroup check inline>
-                  <Input
-                    type="checkbox"
-                    value={state.subAccount}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_subAccount",
-                        payload: e.target.value,
-                      });
-                    }}
-                  />
-                  <Label check>It's a Sub-Account</Label>
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row className="px-5">
-              <Col lg={6} md={6} sm={12} className="px-3">
-                <FormGroup>
-                  <Label for="examplenotes">Notes</Label>
-                  <Input
-                    bsSize="sm"
-                    id="examplenotes"
-                    name="notes"
-                    row="3"
-                    type="textarea"
-                    value={state.notes}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_notes",
-                        payload: e.target.value,
-                      });
-                    }}
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  />
-                </FormGroup>
-              </Col>
-              <Col lg={3} md={6} sm={12} className="px-3">
-                <FormGroup>
-                  <Label for="exampleSelect">Parent Account</Label>
-                  <Input
-                    bsSize="sm"
-                    id="exampleSelect"
-                    name="select"
-                    type="select"
-                    value={state.parentAccount}
-                    onChange={(e) => {
-                      dispatch({
-                        type: "SET_parentAccount",
-                        payload: e.target.value,
-                      });
-                    }}
-                    style={{ color: "black", border: "1px solid #418ECB" }}
-                  >
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                  </Input>
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row className="px-5">
-              <Col lg={8} md={8} sm={12} className="d-flex justify-content-end">
-                <Button
-                  size="sm"
-                  className="me-3"
-                  style={{
-                    color: "white",
-                    border: "1px solid #1E5367",
-                    backgroundColor: "#418ECB",
+      <div className="m-2 load-itemmain" style={{ backgroundColor: "#E9F3FB" }}>
+        <Form onSubmit={handleSubmit} className="load-item container p-4">
+          <Row className="px-5">
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <FormGroup>
+                <Label for="exampleSelect">Name</Label>
+                <Input
+                  bsSize="sm"
+                  id="exampleSelect"
+                  name="select"
+                  type="select"
+                  value={state.name}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_name",
+                      payload: e.target.value,
+                    });
                   }}
+                  style={{ color: "black", border: "1px solid #418ECB" }}
                 >
-                  <BiCheck fontSize={"16px"} />
-                  Save
-                </Button>
-                <Button
-                  size="sm"
-                  style={{
-                    color: "red",
-                    border: "1px solid red",
-                    backgroundColor: "white",
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </Input>
+              </FormGroup>
+            </Col>
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <FormGroup>
+                <Label for="exampleSelect">Account Type</Label>
+                <Input
+                  bsSize="sm"
+                  id="exampleSelect"
+                  name="select"
+                  type="select"
+                  value={state.accountType}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_accountType",
+                      payload: e.target.value,
+                    });
                   }}
+                  style={{ color: "black", border: "1px solid #418ECB" }}
                 >
-                  <RxCross2 fontSize={"16px"} color="red" /> Cancel
-                </Button>
-              </Col>
-            </Row>
-          </Form>
-        </Container>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </Input>
+              </FormGroup>
+            </Col>
+            <Col lg={3} md={6} sm={12} className="mt-4 px-3">
+              <FormGroup check inline>
+                <Input
+                  type="checkbox"
+                  value={state.subAccount}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_subAccount",
+                      payload: e.target.value,
+                    });
+                  }}
+                />
+                <Label check>It's a Sub-Account</Label>
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row className="px-5">
+            <Col lg={6} md={6} sm={12} className="px-3">
+              <FormGroup>
+                <Label for="examplenotes">Notes</Label>
+                <Input
+                  bsSize="sm"
+                  id="examplenotes"
+                  name="notes"
+                  row="3"
+                  type="textarea"
+                  value={state.notes}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_notes",
+                      payload: e.target.value,
+                    });
+                  }}
+                  style={{ color: "black", border: "1px solid #418ECB" }}
+                />
+              </FormGroup>
+            </Col>
+            <Col lg={3} md={6} sm={12} className="px-3">
+              <FormGroup>
+                <Label for="exampleSelect">Parent Account</Label>
+                <Input
+                  bsSize="sm"
+                  id="exampleSelect"
+                  name="select"
+                  type="select"
+                  value={state.parentAccount}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "SET_parentAccount",
+                      payload: e.target.value,
+                    });
+                  }}
+                  style={{ color: "black", border: "1px solid #418ECB" }}
+                >
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                </Input>
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row className="px-5">
+            <Col lg={8} md={8} sm={12} className="d-flex justify-content-end">
+              <Button
+                size="sm"
+                className="me-3"
+                style={{
+                  color: "white",
+                  border: "1px solid #1E5367",
+                  backgroundColor: "#418ECB",
+                }}
+              >
+                <BiCheck fontSize={"16px"} />
+                Save
+              </Button>
+              <Button
+                size="sm"
+                style={{
+                  color: "red",
+                  border: "1px solid red",
+                  backgroundColor: "white",
+                }}
+              >
+                <RxCross2 fontSize={"16px"} color="red" /> Cancel
+              </Button>
+            </Col>
+          </Row>
+        </Form>
       </div>
     </>
   );

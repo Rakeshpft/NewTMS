@@ -28,7 +28,99 @@ import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlinePlus } from "react-icons/ai";
-import { PiPencilBold } from "react-icons/pi";
+import { PiGearDuotone, PiPencilBold } from "react-icons/pi";
+import TableSortIcon from "../../load-page/tableSortIcon";
+
+const tableData = {
+  tableHeaders: [
+    "#",
+    "Date",
+    "Driver",
+    "Fuel Card",
+    "Truck",
+    "Trailer",
+    "Location",
+    "Fuel Amount",
+    "Fuel units, Gallons",
+    "Product Code",
+    "Included In IFTA",
+    "Partner",
+    "Billing",
+    "Actions",
+    <PiGearDuotone />,
+    ,
+  ],
+  tableRowData: [
+    [
+      "1",
+      "06/14/23",
+      "Max payne [drv]",
+      "123456789",
+      "Joliet, IL",
+      "Cameron, IL",
+      "Lumper",
+      "$500.00",
+      "$500.00",
+      "Lumper",
+      "Lumper",
+      "Lumper",
+      "Lumper",
+      "Lumper",
+      "Lumper",
+    ],
+    [
+      "1",
+      "06/14/23",
+      "Max payne [drv]",
+      "123456789",
+      "Joliet, IL",
+      "Cameron, IL",
+      "Lumper",
+      "$500.00",
+      "$500.00",
+      "Lumper",
+      "Lumper",
+      "Lumper",
+      "Lumper",
+      "Lumper",
+      "Lumper",
+    ],
+    [
+      "1",
+      "06/14/23",
+      "Max payne [drv]",
+      "123456789",
+      "Joliet, IL",
+      "Cameron, IL",
+      "Lumper",
+      "$500.00",
+      "$500.00",
+      "Lumper",
+      "Lumper",
+      "Lumper",
+      "Lumper",
+      "Lumper",
+      "Lumper",
+    ],
+    [
+      "1",
+      "06/14/23",
+      "Max payne [drv]",
+      "123456789",
+      "Joliet, IL",
+      "Cameron, IL",
+      "Lumper",
+      "$500.00",
+      "$500.00",
+      "Lumper",
+      "Lumper",
+      "Lumper",
+      "Lumper",
+      "Lumper",
+      "Lumper",
+    ],
+  ],
+};
 
 const FuelTransaction = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -83,7 +175,10 @@ const FuelTransaction = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn buttonLink" to="/createfueltransaction">
+          <Link
+            className="btn btn-sm btn-outline-primary"
+            to="/createfueltransaction"
+          >
             <AiOutlinePlus />
             New Fuel Transaction
           </Link>
@@ -469,25 +564,23 @@ const FuelTransaction = () => {
           <Table responsive hover className="table-data text-nowrap">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Date</th>
-                <th>Driver</th>
-                <th>Fuel Card</th>
-                <th>Truck</th>
-                <th>Trailer</th>
-                <th>Location</th>
-                <th>Fuel Amount</th>
-                <th>Fuel units, Gallons</th>
-                <th>Product Code</th>
-                <th>Included In IFTA</th>
-                <th>Partner</th>
-                <th>Billing</th>
-                <th>Actions</th>
-                <th>*</th>
+                {tableData.tableHeaders.map((headeritem, index) => (
+                  <th key={index}>
+                    <span>{headeritem}</span>
+
+                    <TableSortIcon />
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <p>No Records</p>
+              {tableData.tableRowData?.map((row, index) => (
+                <tr key={index}>
+                  {row.map((item, index) => (
+                    <td key={index}>{item}</td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>
