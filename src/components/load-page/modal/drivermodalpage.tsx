@@ -14,7 +14,6 @@ import {
   Input,
   TabPane,
   Button,
-  ModalFooter,
 } from "reactstrap";
 import { TabPage } from "../../driver-page";
 import { driverpage } from "../../tms-object/driverpage";
@@ -133,497 +132,476 @@ const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps) => {
   };
   return (
     <>
-      <Modal isOpen={isDriverOpen} toggle={toggle} size="lg">
-        <ModalHeader toggle={toggle} style={{ backgroundColor: "#E9F3FB" }}>
-          New Driver
+      <Modal isOpen={isDriverOpen} toggle={toggle} size="xl">
+        <ModalHeader
+          toggle={toggle}
+          style={{ backgroundColor: "#E9F3FB" }}
+          className="py-2"
+        >
+          <h6 className="mb-0 fw-bold">New Driver</h6>
         </ModalHeader>
         <ModalBody>
           <Container>
             <Form onSubmit={handleSubmit} className="driveritem">
               <Row>
-                <Col>
-                  <Row>
-                    <Col>
-                      <FormGroup>
-                        <Label for="examplefName">FirstName</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          type="text"
-                          value={state.firstName}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_firstName",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col>
-                      <img
-                        src={require("../../../../public/images/user-avatar.png")}
-                        height={50}
-                        width={50}
-                        className="mt-2"
-                      />
-                      <Label>Upload Photo</Label>
-                      <Input
-                        id="exampleFile"
-                        name="file"
-                        type="file"
-                        style={{ display: "none" }}
-                      />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col>
-                      <FormGroup>
-                        <Label for="examplelName">LastName</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="examplelName"
-                          name="lastName"
-                          type="text"
-                          value={state.lastName}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_lastName",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col>
-                      <FormGroup>
-                        <Label for="exampledob">D.O.B</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="exampledob"
-                          name="dob"
-                          type="date"
-                          value={state.dob}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_dob",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col>
-                      <FormGroup>
-                        <Label for="examplephone">Phone</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="examplephone"
-                          name="phone"
-                          type="text"
-                          value={state.phone}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_phone",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col>
-                      <FormGroup>
-                        <Label for="exampleemail">Email</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="exampleemail"
-                          name="email"
-                          type="email"
-                          value={state.email}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_email",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col>
-                      <FormGroup>
-                        <Label for="exampleaddressLine1">Address Line 1</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="exampleaddressLine1"
-                          name="address"
-                          type="text"
-                          value={state.addressline1}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_addressline1",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col>
-                      <FormGroup>
-                        <Label for="exampleaddressLine1">Address Line 2</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="exampleaddressLine2"
-                          name="address"
-                          type="text"
-                          value={state.addressline2}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_addressline2",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col>
-                      <FormGroup>
-                        <Label for="examplecity">City</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="examplecity"
-                          name="city"
-                          type="text"
-                          value={state.city}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_city",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col>
-                      <FormGroup>
-                        <Label for="examplestate">State</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="examplestate"
-                          name="state"
-                          type="text"
-                          value={state.state}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_state",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col>
-                      <FormGroup>
-                        <Label for="examplezip">Zip</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="examplezip"
-                          name="zip"
-                          type="text"
-                          value={state.zip}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_zip",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="examplefName">FirstName</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      type="text"
+                      value={state.firstName}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_firstName",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
                 </Col>
-                <Col>
-                  <Row>
-                    <Col>
-                      <FormGroup>
-                        <Label for="examplestauts">Stauts</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="examplestauts"
-                          name="stauts"
-                          type="text"
-                          value={state.Stauts}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_Stauts",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="mt-4">
-                      <FormGroup check>
-                        <Input
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          type="checkbox"
-                        />
-                        <Label
-                          check
-                          style={{ marginBottom: "0px", fontSize: "small" }}
-                        >
-                          Create New Partner
-                        </Label>
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col>
-                      <FormGroup>
-                        <Label for="exampleappdate">Application Date</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="exampleappdate"
-                          name="appDate"
-                          type="date"
-                          value={state.appDate}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_appDate",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col>
-                      <FormGroup>
-                        <Label for="examplepay">Pay To</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="examplepay"
-                          name="pay to"
-                          type="text"
-                          value={state.payTo}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_payTo",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col>
-                      <FormGroup>
-                        <Label for="examplehiredate">Hire Date</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="examplehiredate"
-                          name="hireDate"
-                          type="date"
-                          value={state.hireDate}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_hireDate",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col>
-                      <FormGroup>
-                        <Label for="examplecoDriver">Co-Driver</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="examplecoDriver"
-                          name="coDriver"
-                          type="text"
-                          value={state.coDriver}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_coDriver",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col>
-                      <FormGroup>
-                        <Label for="examplefuleCard">Fule Card #</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="exampletruck"
-                          name="truck"
-                          type="text"
-                          value={state.fuelCard}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_fuelCard",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col>
-                      <FormGroup>
-                        <Label for="exampletruck">Truck</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="exampletruck"
-                          name="truck"
-                          type="text"
-                          value={state.truck}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_truck",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col></Col>
-                    <Col>
-                      <FormGroup>
-                        <Label for="exampletrailer">Trailer</Label>
-                        <Input
-                          bsSize="sm"
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          id="exampletrailer"
-                          name="trailer"
-                          type="text"
-                          value={state.trailer}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_trailer",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col></Col>
-                    <Col className="mt-4">
-                      <FormGroup check>
-                        <Input
-                          style={{
-                            color: "black",
-                            border: "1px solid #418ECB",
-                          }}
-                          type="checkbox"
-                          value={state.ifta}
-                          onChange={(e) => {
-                            dispatch({
-                              type: "SET_ifta",
-                              payload: e.target.value,
-                            });
-                          }}
-                        />
-                        <Label
-                          check
-                          style={{ marginBottom: "0px", fontSize: "small" }}
-                        >
-                          IFTA Handled by Company
-                        </Label>
-                      </FormGroup>
-                    </Col>
-                  </Row>
+                <Col md={4} lg={3} sm={6}>
+                  <img
+                    src={require("../../../../public/images/user-avatar.png")}
+                    height={50}
+                    width={50}
+                    className="mt-2"
+                  />
+                  <Label>Upload Photo</Label>
+                  <Input
+                    id="exampleFile"
+                    name="file"
+                    type="file"
+                    style={{ display: "none" }}
+                  />
+                </Col>
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="examplestauts">Status</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="examplestauts"
+                      name="stauts"
+                      type="text"
+                      value={state.Stauts}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_Stauts",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={4} lg={3} sm={6} className="mt-4">
+                  <FormGroup check>
+                    <Input
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      type="checkbox"
+                    />
+                    <Label
+                      check
+                      style={{ marginBottom: "0px", fontSize: "small" }}
+                    >
+                      Create New Partner
+                    </Label>
+                  </FormGroup>
+                </Col>
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="examplelName">LastName</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="examplelName"
+                      name="lastName"
+                      type="text"
+                      value={state.lastName}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_lastName",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="exampledob">D.O.B</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="exampledob"
+                      name="dob"
+                      type="date"
+                      value={state.dob}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_dob",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="exampleappdate">Application Date</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="exampleappdate"
+                      name="appDate"
+                      type="date"
+                      value={state.appDate}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_appDate",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="examplepay">Pay To</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="examplepay"
+                      name="pay to"
+                      type="text"
+                      value={state.payTo}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_payTo",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="examplephone">Phone</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="examplephone"
+                      name="phone"
+                      type="text"
+                      value={state.phone}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_phone",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="exampleemail">Email</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="exampleemail"
+                      name="email"
+                      type="email"
+                      value={state.email}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_email",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="examplehiredate">Hire Date</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="examplehiredate"
+                      name="hireDate"
+                      type="date"
+                      value={state.hireDate}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_hireDate",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="examplecoDriver">Co-Driver</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="examplecoDriver"
+                      name="coDriver"
+                      type="text"
+                      value={state.coDriver}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_coDriver",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={4} lg={6} sm={6}>
+                  <FormGroup>
+                    <Label for="exampleaddressLine1">Address Line 1</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="exampleaddressLine1"
+                      name="address"
+                      type="text"
+                      value={state.addressline1}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_addressline1",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="examplefuleCard">Fuel Card #</Label>
+                    {/* <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="exampletruck"
+                      name="truck"
+                      type="text"
+                      value={state.fuelCard}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_fuelCard",
+                          payload: e.target.value,
+                        });
+                      }}
+                    /> */}
+                  </FormGroup>
+                </Col>
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="exampletruck">Truck</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="exampletruck"
+                      name="truck"
+                      type="text"
+                      value={state.truck}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_truck",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="exampleaddressLine1">Address Line 2</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="exampleaddressLine2"
+                      name="address"
+                      type="text"
+                      value={state.addressline2}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_addressline2",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="examplecity">City</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="examplecity"
+                      name="city"
+                      type="text"
+                      value={state.city}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_city",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={4} lg={3} sm={6}></Col>
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="exampletrailer">Trailer</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="exampletrailer"
+                      name="trailer"
+                      type="text"
+                      value={state.trailer}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_trailer",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="examplestate">State</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="examplestate"
+                      name="state"
+                      type="text"
+                      value={state.state}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_state",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={4} lg={3} sm={6}>
+                  <FormGroup>
+                    <Label for="examplezip">Zip</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      id="examplezip"
+                      name="zip"
+                      type="text"
+                      value={state.zip}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_zip",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={4} lg={3} sm={6}></Col>
+                <Col md={4} lg={3} sm={6} className="mt-4">
+                  <FormGroup check>
+                    <Input
+                      style={{
+                        color: "black",
+                        border: "1px solid #418ECB",
+                      }}
+                      type="checkbox"
+                      value={state.ifta}
+                      onChange={(e) => {
+                        dispatch({
+                          type: "SET_ifta",
+                          payload: e.target.value,
+                        });
+                      }}
+                    />
+                    <Label
+                      check
+                      style={{ marginBottom: "0px", fontSize: "small" }}
+                    >
+                      IFTA Handled by Company
+                    </Label>
+                  </FormGroup>
                 </Col>
               </Row>
+
               <Row className="mt-3">
-                <Col md={10}>
+                <Col md={8}>
                   <TabPage
                     tabTitles={[
                       "Pay Rates",
@@ -632,14 +610,11 @@ const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps) => {
                       "Notes",
                     ]}
                   >
-                    <TabPane
-                      tabId={1}
-                      style={{ color: "black", border: "1px solid #418ECB" }}
-                    >
+                    <TabPane tabId={1}>
                       <Row className="mt-3 px-4">
                         <Col>
                           <Row>
-                            <Col sm={3}>
+                            <Col sm={6} lg={3}>
                               <FormGroup check>
                                 <Input
                                   style={{
@@ -660,7 +635,7 @@ const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps) => {
                                 </Label>
                               </FormGroup>
                             </Col>
-                            <Col sm={3}>
+                            <Col sm={6} lg={3}>
                               <FormGroup check>
                                 <Input
                                   style={{
@@ -683,7 +658,7 @@ const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps) => {
                             </Col>
                           </Row>
                           <Row>
-                            <Col sm={3}>
+                            <Col sm={6} lg={3}>
                               <FormGroup check>
                                 <Input
                                   style={{
@@ -704,7 +679,7 @@ const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps) => {
                                 </Label>
                               </FormGroup>
                             </Col>
-                            <Col sm={3}>
+                            <Col sm={6} lg={3}>
                               <FormGroup check>
                                 <Input
                                   style={{
@@ -725,7 +700,7 @@ const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps) => {
                                 </Label>
                               </FormGroup>
                             </Col>
-                            <Col sm={3}>
+                            <Col sm={6} lg={3}>
                               <FormGroup check>
                                 <Input
                                   style={{
@@ -746,7 +721,7 @@ const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps) => {
                                 </Label>
                               </FormGroup>
                             </Col>
-                            <Col sm={3}>
+                            <Col sm={6} lg={3}>
                               <FormGroup check>
                                 <Input
                                   style={{
@@ -769,7 +744,7 @@ const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps) => {
                             </Col>
                           </Row>
                           <Row className="mt-3">
-                            <Col sm={3}>
+                            <Col sm={6} lg={3}>
                               <FormGroup>
                                 <Label for="exampleperMile">Per Mile</Label>
                                 <Input
@@ -791,7 +766,7 @@ const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps) => {
                                 />
                               </FormGroup>
                             </Col>
-                            <Col sm={3}>
+                            <Col sm={6} lg={3}>
                               <FormGroup>
                                 <Label for="exampleperExtraStop">
                                   Per Extra Stop
@@ -815,7 +790,7 @@ const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps) => {
                                 />
                               </FormGroup>
                             </Col>
-                            <Col sm={3}>
+                            <Col sm={6} lg={3}>
                               <FormGroup>
                                 <Label for="exampleperEmptyMile">
                                   Per Empty Mile
@@ -845,37 +820,31 @@ const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps) => {
                     </TabPane>
                   </TabPage>
                 </Col>
+                <Col
+                  md={4}
+                  className="d-flex justify-content-end align-items-end"
+                >
+                  <Button color="info" size="sm" className="me-3 text-white">
+                    <BiCheck fontSize={"16px"} />
+                    Save
+                  </Button>
+                  <Button
+                    size="sm"
+                    style={{
+                      color: "red",
+                      border: "1px solid red",
+                      backgroundColor: "white",
+                    }}
+                    onClick={toggle}
+                  >
+                    <RxCross2 fontSize={"16px"} color="red" />
+                    Close
+                  </Button>
+                </Col>
               </Row>
             </Form>
           </Container>
         </ModalBody>
-        <ModalFooter>
-          <Button
-            color="primary"
-            size="sm"
-            className="me-3"
-            style={{
-              color: "black",
-              border: "1px solid #1E5367",
-              backgroundColor: "#418ECB",
-            }}
-          >
-            <BiCheck fontSize={"16px"} />
-            Save
-          </Button>
-          <Button
-            size="sm"
-            style={{
-              color: "red",
-              border: "1px solid red",
-              backgroundColor: "white",
-            }}
-            onClick={toggle}
-          >
-            <RxCross2 fontSize={"16px"} color="red" />
-            Close
-          </Button>
-        </ModalFooter>
       </Modal>
     </>
   );

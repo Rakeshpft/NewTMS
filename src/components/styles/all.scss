@@ -92,7 +92,9 @@ form .form-label {
   border-radius: 0;
   border: none;
 }
-
+.modal{
+  zoom: 0.9;
+}
 @import "./login";
 @import "./navigation";
 @import "./dashboard";
