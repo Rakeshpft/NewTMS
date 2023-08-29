@@ -35,7 +35,7 @@
   color: black; 
   border: 1px solid #418ECB;
 }
-.form-control.search{
+.form-control.search, .form-control[placeholder="Search"]{
   border: 1px solid var(--bs-border-color);
   border-left: none;
   border-right: none;

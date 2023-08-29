@@ -81,7 +81,7 @@ const CreateAdditionsPage = () => {
           }}
           showHambuger={false}
         />
-        <NavbarBrand className="fw-bold ps-4">
+        <NavbarBrand className="fw-bold px-4">
           New Additions/Deductions Entry
         </NavbarBrand>
         <Nav className="me-auto" navbar></Nav>

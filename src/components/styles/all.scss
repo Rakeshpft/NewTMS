@@ -69,6 +69,7 @@ body{
 form .form-label {
   margin-bottom: 0;
   font-size: small;
+  font-weight: 500;
 }
 
 .flex-item {
@@ -92,8 +93,24 @@ form .form-label {
   border-radius: 0;
   border: none;
 }
-.modal{
+.modal, form.container{
   zoom: 0.9;
+}
+
+.header_nav{
+  min-width: 215px;
+}
+.navbar-brand{
+  font-size: 1.5rem;
+}
+input[type="checkbox"]{
+      border: 1px solid rgb(65, 142, 203);
+}
+.navbar.bg-light{
+  border-bottom: 1px solid rgb(27, 86, 174);
+}
+.navbar > .container-fluid{
+padding: 0
 }
 @import "./login";
 @import "./navigation";

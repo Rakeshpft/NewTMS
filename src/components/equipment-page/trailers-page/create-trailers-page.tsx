@@ -102,7 +102,7 @@ const CreateTrailerPage = () => {
           }}
           showHambuger={false}
         />
-        <NavbarBrand className="fw-bold ps-4">New Trailer</NavbarBrand>
+        <NavbarBrand className="fw-bold px-4">New Trailer</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <Profile />

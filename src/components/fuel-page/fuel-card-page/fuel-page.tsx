@@ -78,20 +78,16 @@ const FuelPage = () => {
 
   return (
     <>
-      <Navbar
-        style={{ border: "1px solid #1B56AE" }}
-        color="light"
-        className="py-0"
-      >
+      <Navbar color="light" className="py-0">
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand className="fw-bold ps-4">Fuel Cards</NavbarBrand>
+        <NavbarBrand className="fw-bold px-4">Fuel Cards</NavbarBrand>
         <Nav className="me-auto" navbar>
-          <div className="d-flex gap-2">
-            <NavItem>Export</NavItem>
+          <div className="d-flex gap-2 align-items-center">
+            <NavItem className="small h6 mb-0">Export</NavItem>
             <Link to={"#"}>
               <AiOutlineFileExcel className="text-success fs-4" />
             </Link>

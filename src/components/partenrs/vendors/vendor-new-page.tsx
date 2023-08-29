@@ -96,18 +96,22 @@ const VendorNewPage = () => {
           }}
           showHambuger={false}
         />
-        <NavbarBrand className="fw-bold ps-4">New Vendor</NavbarBrand>
+        <NavbarBrand className="fw-bold px-4">New Vendor</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <Profile />
         </div>
       </Navbar>
       <div className="m-2 load-itemmain" style={{ backgroundColor: "#E9F3FB" }}>
-        <Form className="load-item container p-4" onSubmit={handleSubmit}>
+        <Form
+          className="load-item container p-4"
+          onSubmit={handleSubmit}
+          style={{ zoom: "0.9" }}
+        >
           <Row>
-            <Col className="px-5">
+            <Col className="px-5" md="6">
               <Row>
-                <Col lg={12} md={12} sm={12} className="px-3">
+                <Col className="px-3">
                   <FormGroup>
                     <Label for="companyName">Company Name</Label>
                     <Input
@@ -129,7 +133,7 @@ const VendorNewPage = () => {
                 </Col>
               </Row>
               <Row>
-                <Col lg={12} md={12} sm={12} className="px-3">
+                <Col className="px-3">
                   <FormGroup>
                     <Label for="companyAddress">Address Line 1</Label>
                     <Input
@@ -151,7 +155,7 @@ const VendorNewPage = () => {
                 </Col>
               </Row>
               <Row>
-                <Col lg={12} md={12} sm={12} className="px-3">
+                <Col className="px-3">
                   <FormGroup>
                     <Label for="companyAddress">Address Line 2</Label>
                     <Input
@@ -173,7 +177,7 @@ const VendorNewPage = () => {
                 </Col>
               </Row>
               <Row>
-                <Col lg={6} md={6} sm={12} className="px-3">
+                <Col md={6} className="px-3">
                   <FormGroup>
                     <Label for="phone">Phone</Label>
                     <Input
@@ -196,7 +200,7 @@ const VendorNewPage = () => {
                     />
                   </FormGroup>
                 </Col>
-                <Col lg={6} md={6} sm={12} className="px-3">
+                <Col md={6} className="px-3">
                   <FormGroup>
                     <Label for="companyEmail">Email</Label>
                     <Input
@@ -221,7 +225,7 @@ const VendorNewPage = () => {
                 </Col>
               </Row>
               <Row>
-                <Col lg={6} md={6} sm={12} className="px-3">
+                <Col md={6} className="px-3">
                   <FormGroup>
                     <Label for="city">city</Label>
                     <Input
@@ -244,7 +248,7 @@ const VendorNewPage = () => {
                     />
                   </FormGroup>
                 </Col>
-                <Col lg={6} md={6} sm={12} className="px-3">
+                <Col md={6} className="px-3">
                   <FormGroup>
                     <Label for="state">State</Label>
                     <Input
@@ -269,7 +273,7 @@ const VendorNewPage = () => {
                 </Col>
               </Row>
               <Row>
-                <Col lg={6} md={6} sm={12} className="px-3">
+                <Col md={6} className="px-3">
                   <FormGroup>
                     <Label for="cityZip">Zip</Label>
                     <Input
@@ -294,7 +298,7 @@ const VendorNewPage = () => {
                 </Col>
               </Row>
               <Row>
-                <Col lg={6} md={6} sm={12} className="px-3">
+                <Col md={6} className="px-3">
                   <FormGroup>
                     <Label for="fid">FID/EIN</Label>
                     <Input
@@ -317,7 +321,7 @@ const VendorNewPage = () => {
                     />
                   </FormGroup>
                 </Col>
-                <Col lg={6} md={6} sm={12} className="px-3">
+                <Col md={6} className="px-3">
                   <FormGroup>
                     <Label for="mc">MC</Label>
                     <Input
@@ -342,7 +346,7 @@ const VendorNewPage = () => {
                 </Col>
               </Row>
               <Row>
-                <Col lg={12} md={12} sm={12} className="px-3">
+                <Col md={12} className="px-3">
                   <FormGroup>
                     <Label for="Notes">Notes</Label>
                     <Input
@@ -364,44 +368,43 @@ const VendorNewPage = () => {
                 </Col>
               </Row>
             </Col>
-            <Col>
+            <Col md="6" className="d-flex flex-column justify-content-between">
               <Row>
-                <Col lg={12} md={6} sm={12} className="px-3">
-                  <FormGroup>
-                    <Label for="exampleSelect" className="d-flex">
-                      Vendor Type
-                    </Label>
-                    <Button
-                      size="sm"
-                      style={{
-                        color: "black",
-                        backgroundColor: "#418ECB",
-                        border: "1px solid #1E5367",
-                      }}
-                    >
-                      <GrFormAdd fontSize={"16px"} /> Vendor Type
-                    </Button>
-                  </FormGroup>
-                </Col>
+                <Row>
+                  <Col md={6} className="px-3">
+                    <FormGroup>
+                      <Label className="d-flex">Vendor Type</Label>
+                      <Button size="sm" color="outline-primary">
+                        <GrFormAdd fontSize={"16px"} /> Add Vendor Type
+                      </Button>
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col lg={12} md={6} sm={12} className="px-3">
+                    <FormGroup className="mt-4">
+                      <Label className="d-flex fw-bold h5">Billing</Label>
+                    </FormGroup>
+                    <FormGroup check>
+                      <Input type="checkbox" />
+                      <Label
+                        check
+                        style={{ marginBottom: "0px", fontSize: "small" }}
+                      >
+                        Additional Payee
+                      </Label>
+                    </FormGroup>
+                  </Col>
+                </Row>
               </Row>
+
               <Row>
-                <Col lg={12} md={6} sm={12} className="px-3">
-                  <FormGroup className="mt-4">
-                    <h5 className="fw-bold"> Billing </h5>
-                  </FormGroup>
-                  <FormGroup check>
-                    <Input type="checkbox" />
-                    <Label
-                      check
-                      style={{ marginBottom: "0px", fontSize: "small" }}
-                    >
-                      Additional Payee
-                    </Label>
-                  </FormGroup>
-                </Col>
-              </Row>
-              <Row className="position-absolute top-5">
-                <Col lg={12} md={6} sm={12} className="px-3">
+                <Col
+                  lg={12}
+                  md={6}
+                  sm={12}
+                  className="px-3 d-flex justify-content-end"
+                >
                   <FormGroup>
                     <Button
                       className="me-3 "

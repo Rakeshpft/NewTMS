@@ -125,31 +125,39 @@ const CustomerNewPage = () => {
           }}
           showHambuger={false}
         />
-        <NavbarBrand className="fw-bold ps-4">New Customer</NavbarBrand>
+        <NavbarBrand className="fw-bold px-4">New Customer</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <Profile />
         </div>
       </Navbar>
       <div className="m-2 load-itemmain" style={{ backgroundColor: "#E9F3FB" }}>
-        <Form onSubmit={handleSubmit} className="load-item container p-4">
+        <Form
+          onSubmit={handleSubmit}
+          className="load-item container p-4"
+          style={{ zoom: "0.9" }}
+        >
           <Row className="px-5">
             <Col lg={6} md={6} sm={12} className="px-3">
-              <FormGroup>
-                <Label for="companyName">Company Name</Label>
-                <Input
-                  bsSize="sm"
-                  style={{ color: "black", border: "1px solid #418ECB" }}
-                  type="text"
-                  value={formState.companyName}
-                  onChange={(e) =>
-                    dispatch({
-                      type: "SET_companyName",
-                      payload: e.target.value,
-                    })
-                  }
-                />
-              </FormGroup>
+              <Row>
+                <Col md="6">
+                  <FormGroup>
+                    <Label for="companyName">Company Name</Label>
+                    <Input
+                      bsSize="sm"
+                      style={{ color: "black", border: "1px solid #418ECB" }}
+                      type="text"
+                      value={formState.companyName}
+                      onChange={(e) =>
+                        dispatch({
+                          type: "SET_companyName",
+                          payload: e.target.value,
+                        })
+                      }
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <h6 className="fw-bold">Customer Type</h6>

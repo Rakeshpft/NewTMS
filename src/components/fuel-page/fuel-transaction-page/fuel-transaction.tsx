@@ -141,17 +141,13 @@ const FuelTransaction = () => {
 
   return (
     <>
-      <Navbar
-        style={{ border: "1px solid #1B56AE" }}
-        color="light"
-        className="py-0"
-      >
+      <Navbar color="light" className="py-0">
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand className="fw-bold ps-4">Fuel Transactions</NavbarBrand>
+        <NavbarBrand className="fw-bold px-4">Fuel Transactions</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">

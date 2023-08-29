@@ -22,13 +22,14 @@ import {
   Table,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import { Header, SideBar } from "../header";
+import { Header } from "../header";
 import Profile from "../pofile";
 import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { PiGearDuotone } from "react-icons/pi";
 import TableSortIcon from "../load-page/tableSortIcon";
+import Sidebar2 from "../header/sidebar2";
 
 const tableData = {
   tableHeaders: [
@@ -136,16 +137,16 @@ const DriverPage = () => {
 
   return (
     <>
-      <Navbar color="light" className="py-0 formpagenavbar">
+      <Navbar color="light" className="py-0 formpagenavbar" container={false}>
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand className="fw-bold ps-4">Driver</NavbarBrand>
+        <NavbarBrand className="fw-bold px-4">Drivers</NavbarBrand>
         <Nav className="me-auto" navbar>
-          <div className="d-flex gap-2">
-            <NavItem>Export</NavItem>
+          <div className="d-flex gap-2 align-items-center">
+            <NavItem className="small h6 mb-0">Export</NavItem>
             <div className="d-flex justify-content-between gap-2">
               <Link to={"#!"}>
                 <PiFilePdfDuotone className="text-danger fs-4" />
@@ -189,7 +190,7 @@ const DriverPage = () => {
         </div>
       </Navbar>
       <div className="content d-flex">
-        <SideBar isSidebarOpen={!isSidebarOpen} />
+        <Sidebar2 isSidebarOpen={!isSidebarOpen} />
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>

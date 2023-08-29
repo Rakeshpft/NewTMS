@@ -107,7 +107,7 @@ const CreateTruckPage = () => {
           }}
           showHambuger={false}
         />
-        <NavbarBrand className="fw-bold ps-4">New Truck</NavbarBrand>
+        <NavbarBrand className="fw-bold px-4">New Truck</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <Profile />

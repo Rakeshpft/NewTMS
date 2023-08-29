@@ -72,20 +72,16 @@ const Customer = () => {
 
   return (
     <>
-      <Navbar
-        style={{ border: "1px solid #1B56AE" }}
-        color="light"
-        className="py-0"
-      >
+      <Navbar color="light" className="py-0">
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand className="fw-bold ps-4">Customers</NavbarBrand>
+        <NavbarBrand className="fw-bold px-4">Customers</NavbarBrand>
         <Nav className="me-auto" navbar>
-          <div className="d-flex gap-2">
-            <NavItem>Export</NavItem>
+          <div className="d-flex gap-2 align-items-center">
+            <NavItem className="small h6 mb-0">Export</NavItem>
             <div className="d-flex justify-content-between gap-2">
               <Link to={"#!"}>
                 <PiFilePdfDuotone className="text-danger fs-4" />

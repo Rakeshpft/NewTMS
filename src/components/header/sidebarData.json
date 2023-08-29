@@ -1,0 +1,575 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "label": "Dashboard",
+      "link": "/dashboard",
+      "hasSubmenu": false
+    },
+    {
+      "id": 1,
+      "label": "Loads",
+      "link": null,
+      "hasSubmenu": true,
+      "isOpen": true,
+      "submenuItems": [
+        {
+          "id": 0,
+          "label": "All",
+          "link": "/loadpage?filter=all",
+          "hasSubmenu": false
+        },
+        {
+          "id": 1,
+          "label": "New",
+          "link": "/loadpage?filter=new",
+          "hasSubmenu": false
+        },
+        {
+          "id": 2,
+          "label": "Canceled",
+          "link": "/loadpage?filter=canceled",
+          "hasSubmenu": false
+        },
+        {
+          "id": 3,
+          "label": "TONU",
+          "link": "/loadpage?filter=tonu",
+          "hasSubmenu": false
+        },
+        {
+          "id": 4,
+          "label": "Dispatched",
+          "link": "/loadpage?filter=dispatched",
+          "hasSubmenu": false
+        },
+        {
+          "id": 6,
+          "label": "En-Route",
+          "link": "/loadpage?filter=en-route",
+          "hasSubmenu": false
+        },
+        {
+          "id": 7,
+          "label": "Picked-Up",
+          "link": "/loadpage?filter=picked-up",
+          "hasSubmenu": false
+        },
+        {
+          "id": 8,
+          "label": "Delivered",
+          "link": "/loadpage?filter=delivered",
+          "hasSubmenu": false
+        },
+        {
+          "id": 9,
+          "label": "Closed",
+          "link": "/loadpage?filter=closed",
+          "hasSubmenu": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "label": "Drivers",
+      "link": null,
+      "hasSubmenu": true,
+      "isOpen": false,
+      "submenuItems": [
+        {
+          "id": 0,
+          "label": "All",
+          "link": "/driverpage?filter=all",
+          "hasSubmenu": false
+        },
+        {
+          "id": 1,
+          "label": "Applicant",
+          "link": "/driverpage?filter=applicant",
+          "hasSubmenu": false
+        },
+        {
+          "id": 2,
+          "label": "Hired",
+          "link": "/driverpage?filter=hired",
+          "hasSubmenu": false
+        },
+        {
+          "id": 3,
+          "label": "Terminated",
+          "link": "/driverpage?filter=terminated",
+          "hasSubmenu": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "label": "Partners",
+      "link": null,
+      "hasSubmenu": true,
+      "isOpen": false,
+      "submenuItems": [
+        {
+          "id": 0,
+          "label": "Customers",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 0,
+              "label": "All",
+              "link": "/partners/customers?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 1,
+              "label": "Approved",
+              "link": "/partners/customers?filter=approved",
+              "hasSubmenu": false
+            },
+            {
+              "id": 2,
+              "label": "Pending",
+              "link": "/partners/customers?filter=pending",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "label": "Vendors",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 0,
+              "label": "All",
+              "link": "/partners/vendors?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 1,
+              "label": "Dispatcher",
+              "link": "/partners/vendors?filter=dispatcher",
+              "hasSubmenu": false
+            },
+            {
+              "id": 2,
+              "label": "Equipment Owner",
+              "link": "/partners/vendors?filter=equipment-owner",
+              "hasSubmenu": false
+            },
+            {
+              "id": 3,
+              "label": "Repair Shop",
+              "link": "/partners/vendors?filter=repair-shop",
+              "hasSubmenu": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "label": "Equipments",
+      "link": null,
+      "hasSubmenu": true,
+      "isOpen": false,
+      "submenuItems": [
+        {
+          "id": 0,
+          "label": "Trucks",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 0,
+              "label": "All",
+              "link": "/equipments/trucks?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 1,
+              "label": "Active",
+              "link": "/equipments/trucks?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 2,
+              "label": "InActive",
+              "link": "/equipments/trucks?filter=inactive",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "label": "Trailers",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 0,
+              "label": "All",
+              "link": "/equipments/trailers?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 1,
+              "label": "Active",
+              "link": "/equipments/trailers?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 2,
+              "label": "InActive",
+              "link": "/equipments/trailers?filter=inactive",
+              "hasSubmenu": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "label": "Fuel",
+      "link": null,
+      "hasSubmenu": true,
+      "isOpen": false,
+      "submenuItems": [
+        {
+          "id": 0,
+          "label": "Fuel Cards",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 0,
+              "label": "All",
+              "link": "/fuel/fuelcard?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 1,
+              "label": "Active",
+              "link": "/fuel/fuelcard?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 2,
+              "label": "InActive",
+              "link": "/fuel/fuelcard?filter=inactive",
+              "hasSubmenu": false
+            },
+            {
+              "id": 3,
+              "label": "Closed",
+              "link": "/fuel/fuelcard?filter=closed",
+              "hasSubmenu": false
+            },
+            {
+              "id": 4,
+              "label": "Blocked",
+              "link": "/fuel/fuelcard?filter=blocked",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "label": "Fuel Transactions",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 0,
+              "label": "All",
+              "link": "/fuel/fueltransaction?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 1,
+              "label": "Active",
+              "link": "/fuel/fueltransaction?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 2,
+              "label": "InActive",
+              "link": "/fuel/fueltransaction?filter=inactive",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "label": "Fuel Imports",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 0,
+              "label": "All",
+              "link": "/fuel/fuelimport?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 1,
+              "label": "Active",
+              "link": "/fuel/fuelimport?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 2,
+              "label": "InActive",
+              "link": "/fuel/fuelimport?filter=inactive",
+              "hasSubmenu": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "label": "Driver Payroll",
+      "link": null,
+      "hasSubmenu": true,
+      "isOpen": false,
+      "submenuItems": [
+        {
+          "id": 0,
+          "label": "All",
+          "link": "/driverpayroll?filter=all",
+          "hasSubmenu": false
+        },
+        {
+          "id": 1,
+          "label": "Preparing",
+          "link": "/driverpayroll?filter=preparing",
+          "hasSubmenu": false
+        },
+        {
+          "id": 2,
+          "label": "Ready for Payment",
+          "link": "/driverpayroll?filter=ready-for-payment",
+          "hasSubmenu": false
+        },
+        {
+          "id": 3,
+          "label": "Paid",
+          "link": "/driverpayroll?filter=paid",
+          "hasSubmenu": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "label": "Accounts",
+      "link": null,
+      "hasSubmenu": true,
+      "isOpen": false,
+      "submenuItems": [
+        {
+          "id": 0,
+          "label": "Billing Entries",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 0,
+              "label": "All",
+              "link": "/accounts/billing?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 1,
+              "label": "New",
+              "link": "/accounts/billing?filter=new",
+              "hasSubmenu": false
+            },
+            {
+              "id": 2,
+              "label": "Applied",
+              "link": "/accounts/billing?filter=applied",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "label": "Vendor Balances",
+          "link": "/accounts/vendorbalances",
+          "hasSubmenu": false
+        },
+        {
+          "id": 2,
+          "label": "Additions",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 0,
+              "label": "All",
+              "link": "/accounts/additions?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 1,
+              "label": "Additions",
+              "link": "/accounts/additions?filter=additions",
+              "hasSubmenu": false
+            },
+            {
+              "id": 2,
+              "label": "Deductions",
+              "link": "/accounts/additions?filter=deductions",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "label": "Scheduled Payments",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 0,
+              "label": "All",
+              "link": "/accounts/payments?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 1,
+              "label": "Additions",
+              "link": "/accounts/payments?filter=additions",
+              "hasSubmenu": false
+            },
+            {
+              "id": 2,
+              "label": "Deductions",
+              "link": "/accounts/payments?filter=deductions",
+              "hasSubmenu": false
+            },
+            {
+              "id": 3,
+              "label": "Driver Loan",
+              "link": "/accounts/payments?filter=driverloan",
+              "hasSubmenu": false
+            },
+            {
+              "id": 4,
+              "label": "Escrow",
+              "link": "/accounts/payments?filter=escrow",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "label": "Chart of Accounts",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 0,
+              "label": "All",
+              "link": "/accounts/chartofaccounts?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 1,
+              "label": "Active",
+              "link": "/accounts/chartofaccounts?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 2,
+              "label": "Inactive",
+              "link": "/accounts/chartofaccounts?filter=inactive",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "label": "Expenses",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 0,
+              "label": "All",
+              "link": "/accounts/expenses?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 1,
+              "label": "Active",
+              "link": "/accounts/expenses?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 2,
+              "label": "Inactive",
+              "link": "/accounts/expenses?filter=inactive",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "label": "Factoring Reports",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 0,
+              "label": "All",
+              "link": "/accounts/factoringreports?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 1,
+              "label": "Active",
+              "link": "/accounts/factoringreports?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 2,
+              "label": "Inactive",
+              "link": "/accounts/factoringreports?filter=inactive",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "label": "Payments",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 0,
+              "label": "All",
+              "link": "/accounts/payments?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 1,
+              "label": "Active",
+              "link": "/accounts/payments?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 2,
+              "label": "Inactive",
+              "link": "/accounts/payments?filter=inactive",
+              "hasSubmenu": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

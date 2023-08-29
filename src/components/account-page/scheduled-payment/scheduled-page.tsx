@@ -88,17 +88,13 @@ const ScheduledPage = () => {
   };
   return (
     <>
-      <Navbar
-        style={{ border: "1px solid #1B56AE" }}
-        color="light"
-        className="py-0"
-      >
+      <Navbar color="light" className="py-0">
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
         />
-        <NavbarBrand className="fw-bold ps-4">
+        <NavbarBrand className="fw-bold px-4">
           Scheduled Payment/Deductions
         </NavbarBrand>
         <Nav className="me-auto" navbar></Nav>

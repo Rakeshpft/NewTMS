@@ -67,7 +67,7 @@ const CreateChartofAccounts = () => {
           }}
           showHambuger={false}
         />
-        <NavbarBrand className="fw-bold ps-4">New Chart of Account</NavbarBrand>
+        <NavbarBrand className="fw-bold px-4">New Chart of Account</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <Profile />

@@ -120,7 +120,7 @@ const LaodNewPage = () => {
           }}
           showHambuger={false}
         />
-        <NavbarBrand className="fw-bold ps-4">New Load</NavbarBrand>
+        <NavbarBrand className="fw-bold px-4">New Load</NavbarBrand>
         <Nav className="me-auto d-flex flex-row gap-2" navbar></Nav>
         <div className="d-flex  gap-3">
           <Profile />

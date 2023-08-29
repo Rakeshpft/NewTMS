@@ -143,14 +143,18 @@ const NewDriver = () => {
           }}
           showHambuger={false}
         />
-        <NavbarBrand className="fw-bold ps-4">New Driver</NavbarBrand>
+        <NavbarBrand className="fw-bold px-4">New Driver</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-2">
           <Profile />
         </div>
       </Navbar>
       <div className="load-itemmain m-2" style={{ backgroundColor: "#E9F3FB" }}>
-        <Form onSubmit={handleSubmit} className="load-item container p-4">
+        <Form
+          onSubmit={handleSubmit}
+          className="load-item container p-4"
+          style={{ zoom: "0.9" }}
+        >
           <Row className="px-5">
             <Col>
               <Row>
@@ -373,7 +377,7 @@ const NewDriver = () => {
               <Row>
                 <Col lg={6} md={6} sm={12} className="px-3">
                   <FormGroup>
-                    <Label for="examplestauts">Stauts</Label>
+                    <Label for="examplestauts">Status</Label>
                     <Input
                       bsSize="sm"
                       style={{ color: "black", border: "1px solid #418ECB" }}
@@ -390,7 +394,7 @@ const NewDriver = () => {
                     />
                   </FormGroup>
                 </Col>
-                <Col lg={6} md={6} sm={12} className="px-3 mt-4">
+                <Col lg={6} md={6} sm={12} className="px-3 align-self-center">
                   <FormGroup check>
                     <Input
                       style={{ color: "black", border: "1px solid #418ECB" }}
@@ -573,8 +577,8 @@ const NewDriver = () => {
               </Row>
             </Col>
           </Row>
-          <Row className="mt-3 px-5">
-            <Col lg={8} md={8} sm={12}>
+          <Row className="my-3 px-5">
+            <Col md={8} sm={12}>
               <TabPage
                 tabTitles={[
                   "Pay Rates",
@@ -583,14 +587,11 @@ const NewDriver = () => {
                   "Notes",
                 ]}
               >
-                <TabPane
-                  tabId={1}
-                  style={{ color: "black", border: "1px solid #418ECB" }}
-                >
+                <TabPane tabId={1} className="border bg-light">
                   <Row className="mt-3 px-4">
                     <Col>
                       <Row>
-                        <Col sm={3}>
+                        <Col md={3}>
                           <FormGroup check>
                             <Input
                               style={{
@@ -611,7 +612,7 @@ const NewDriver = () => {
                             </Label>
                           </FormGroup>
                         </Col>
-                        <Col sm={3}>
+                        <Col md={3}>
                           <FormGroup check>
                             <Input
                               style={{
@@ -633,8 +634,8 @@ const NewDriver = () => {
                           </FormGroup>
                         </Col>
                       </Row>
-                      <Row>
-                        <Col sm={2}>
+                      <Row className="mt-2">
+                        <Col md="3" sm="6">
                           <FormGroup check>
                             <Input
                               style={{
@@ -655,7 +656,7 @@ const NewDriver = () => {
                             </Label>
                           </FormGroup>
                         </Col>
-                        <Col sm={2}>
+                        <Col md="3" sm="6">
                           <FormGroup check>
                             <Input
                               style={{
@@ -676,7 +677,7 @@ const NewDriver = () => {
                             </Label>
                           </FormGroup>
                         </Col>
-                        <Col sm={2}>
+                        <Col md="3" sm="6">
                           <FormGroup check>
                             <Input
                               style={{
@@ -697,7 +698,7 @@ const NewDriver = () => {
                             </Label>
                           </FormGroup>
                         </Col>
-                        <Col sm={2}>
+                        <Col md="3" sm="6">
                           <FormGroup check>
                             <Input
                               style={{
@@ -719,7 +720,7 @@ const NewDriver = () => {
                           </FormGroup>
                         </Col>
                       </Row>
-                      <Row className="mt-3">
+                      <Row className="my-2">
                         <Col lg={3} md={6} sm={12} className="px-3">
                           <FormGroup>
                             <Label for="exampleperMile">Per Mile</Label>
@@ -800,18 +801,10 @@ const NewDriver = () => {
               lg={4}
               md={4}
               sm={12}
-              className=" d-flex justify-content-end align-self-end"
+              className="d-flex justify-content-end align-self-end"
               style={{ bottom: "0", right: "0" }}
             >
-              <Button
-                className="me-3"
-                size="sm"
-                style={{
-                  color: "black",
-                  border: "1px solid #1E5367",
-                  backgroundColor: "#418ECB",
-                }}
-              >
+              <Button className="me-3 text-white" size="sm" color="info">
                 <BiCheck fontSize={"16px"} />
                 Save
               </Button>
