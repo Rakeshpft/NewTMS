@@ -17,6 +17,8 @@ import Profile from "../pofile";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import { driverpayrollPage } from "../tms-object/driverpayrollpage";
+import { PiGearDuotone } from "react-icons/pi";
+import TableSortIcon from "../load-page/tableSortIcon";
 
 type FormAction =
   | { type: "SET_driver"; payload: string }
@@ -51,6 +53,21 @@ const initialState: driverpayrollPage = {
   date: "",
   byDelivery: "",
   byPickup: "",
+};
+
+const tableData = {
+  tableHeaders: [
+    "#",
+    "Driver",
+    "Assign On",
+    "Returned On",
+    "Equipment Owner",
+    <PiGearDuotone />,
+  ],
+  tableRowData: [
+    ["1", "Max payne", "06/14/23", "06/14/23", "Max payne", "options"],
+    ["1", "Max payne", "06/14/23", "06/14/23", "Max payne", "options"],
+  ],
 };
 
 const CreateDriverPayrollPage = () => {
@@ -236,16 +253,23 @@ const CreateDriverPayrollPage = () => {
               <Table responsive hover className="table-data text-nowrap">
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th>Driver</th>
-                    <th>Assign On</th>
-                    <th>Returned On</th>
-                    <th>Equipment Owner</th>
-                    <th>*</th>
+                    {tableData.tableHeaders.map((headeritem, index) => (
+                      <th key={index}>
+                        <span>{headeritem}</span>
+
+                        <TableSortIcon />
+                      </th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody>
-                  <p>No records</p>
+                  {tableData.tableRowData?.map((row, index) => (
+                    <tr key={index}>
+                      {row.map((item, index) => (
+                        <td key={index}>{item}</td>
+                      ))}
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
             </Col>

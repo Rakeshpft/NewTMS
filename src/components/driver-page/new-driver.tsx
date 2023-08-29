@@ -807,7 +807,7 @@ const NewDriver = () => {
                 className="me-3"
                 size="sm"
                 style={{
-                  color: "black",
+                  color: "white",
                   border: "1px solid #1E5367",
                   backgroundColor: "#418ECB",
                 }}
