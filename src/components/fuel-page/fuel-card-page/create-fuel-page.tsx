@@ -17,6 +17,8 @@ import Profile from "../../pofile";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import { fuelCard } from "../../tms-object/fuelpage";
+import TableSortIcon from "../../load-page/tableSortIcon";
+import { PiGearDuotone } from "react-icons/pi";
 
 type FormAction =
   | { type: "SET_cardNumber"; payload: string }
@@ -48,6 +50,21 @@ const initialState: fuelCard = {
   expirationDate: "",
   truck: "",
   notes: "",
+};
+
+const tableData = {
+  tableHeaders: [
+    "#",
+    "Driver",
+    "Assign On",
+    "Returned On",
+    "Equipment Owner",
+    <PiGearDuotone />,
+  ],
+  tableRowData: [
+    ["1", "Max payne", "06/14/23", "06/14/23", "Max payne", "options"],
+    ["1", "Max payne", "06/14/23", "06/14/23", "Max payne", "options"],
+  ],
 };
 
 const CreateFuelPage = () => {
@@ -213,23 +230,23 @@ const CreateFuelPage = () => {
               >
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th>Driver</th>
-                    <th>Assign On</th>
-                    <th>Returned On</th>
-                    <th>Equipment Owner</th>
-                    <th>*</th>
+                    {tableData.tableHeaders.map((headeritem, index) => (
+                      <th key={index}>
+                        <span>{headeritem}</span>
+
+                        <TableSortIcon />
+                      </th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                  </tr>
+                  {tableData.tableRowData?.map((row, index) => (
+                    <tr key={index}>
+                      {row.map((item, index) => (
+                        <td key={index}>{item}</td>
+                      ))}
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
             </Col>

@@ -673,7 +673,7 @@ function MainTile({ title, icon, data, options }: TileProps) {
                 )}
                 <Row>
                   {option.options?.map((item, index) => (
-                    <Col sm="6" className="mb-3" key={index} >
+                    <Col sm="6" className="mb-3" key={index}>
                       <Link
                         to={`${item.link}`}
                         className="w-100 d-flex flex-column btn btn-outline-info modaltile p-3 row-gap-3"
