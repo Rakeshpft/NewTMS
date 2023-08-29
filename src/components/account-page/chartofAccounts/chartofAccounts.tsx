@@ -42,7 +42,7 @@ const ChartofAccounts = () => {
         </div>
       </Navbar>
       <div className="content d-flex">
-        <SideBar isSidebarOpen={!isSidebarOpen} />
+        <SideBar isSidebarOpen={!isSidebarOpen} activePageId={7} />
         <div className="aria-content">
           <Table responsive hover className="table-data text-nowrap">
             <thead>
