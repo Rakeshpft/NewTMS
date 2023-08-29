@@ -190,7 +190,7 @@ const DriverPage = () => {
         </div>
       </Navbar>
       <div className="content d-flex">
-        <Sidebar2 isSidebarOpen={!isSidebarOpen} />
+        <Sidebar2 isSidebarOpen={!isSidebarOpen} activePageId={2} />
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>

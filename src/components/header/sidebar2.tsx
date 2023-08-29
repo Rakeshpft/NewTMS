@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import sidebarItems from "./sidebarData.json";
 import { Link, useLocation } from "react-router-dom";
-const Sidebar2 = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
-  const [openSubmenuId, setOpenSubmenuId] = useState(null);
-  const [openSubmenuId2, setOpenSubmenuId2] = useState(null);
+
+type Sidebar2Props = {
+  isSidebarOpen: boolean;
+  activePageId?: number;
+};
+
+const Sidebar2 = ({ isSidebarOpen, activePageId }: Sidebar2Props) => {
+  const [openSubmenuId, setOpenSubmenuId] = useState(activePageId);
+  const [openSubmenuId2, setOpenSubmenuId2] = useState(0);
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
+  // const pathname = location.pathname; // Get the path name
   const filter = searchParams.get("filter"); // Get the 'filter' parameter
-  console.log(filter);
+  console.log(location);
   const renderSubmenu = (submenuItems: any) => {
     return submenuItems.map((item: any) => (
       <li
