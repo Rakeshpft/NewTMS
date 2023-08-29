@@ -246,7 +246,12 @@ const CreateBillingPage = () => {
             </Col>
           </Row>
           <Row className="px-5">
-            <Col lg={12} md={12} sm={12} className="px-4 mt-5">
+            <Col
+              lg={12}
+              md={12}
+              sm={12}
+              className="px-4 mt-5 d-flex justify-content-end"
+            >
               <Button
                 size="sm"
                 className="me-3"

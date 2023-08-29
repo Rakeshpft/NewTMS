@@ -189,7 +189,12 @@ const CreateChartofAccounts = () => {
             </Col>
           </Row>
           <Row className="px-5">
-            <Col lg={8} md={8} sm={12} className="d-flex justify-content-end">
+            <Col
+              lg={8}
+              md={8}
+              sm={12}
+              className="px-3 mt-5 d-flex justify-content-end"
+            >
               <Button
                 size="sm"
                 className="me-3"
