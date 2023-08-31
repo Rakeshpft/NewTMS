@@ -4,6 +4,10 @@ export interface fuelCard {
   expirationDate: string;
   truck: string;
   notes: string;
+  driver: string;
+  assignOn: string;
+  returnedOn: string;
+  equipmentOwner: string;
 }
 
 export interface fuelTransaction {
