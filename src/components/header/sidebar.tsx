@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import sidebarItems from "./sidebarData.json";
 import { Link, useLocation } from "react-router-dom";
 
-type Sidebar2Props = {
+type SideBarProps = {
   isSidebarOpen: boolean;
   activePageId?: number;
 };
 
-const Sidebar2 = ({ isSidebarOpen, activePageId }: Sidebar2Props) => {
+const SideBar = ({ isSidebarOpen, activePageId }: SideBarProps) => {
   const [openSubmenuId, setOpenSubmenuId] = useState(activePageId);
   const [openSubmenuId2, setOpenSubmenuId2] = useState(0);
 
@@ -104,4 +104,4 @@ const Sidebar2 = ({ isSidebarOpen, activePageId }: Sidebar2Props) => {
   );
 };
 
-export default Sidebar2;
+export default SideBar;
