@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import sidebarItems from "./sidebarData.json";
 import { Link, useLocation } from "react-router-dom";
 
-type SideBarProps = {
+type Sidebar2Props = {
   isSidebarOpen: boolean;
-  activePageId: number;
+  activePageId?: number;
 };
 
-const SideBar = ({ isSidebarOpen, activePageId }: SideBarProps) => {
+const Sidebar2 = ({ isSidebarOpen, activePageId }: Sidebar2Props) => {
   const [openSubmenuId, setOpenSubmenuId] = useState(activePageId);
   const [openSubmenuId2, setOpenSubmenuId2] = useState(0);
 
@@ -24,15 +24,15 @@ const SideBar = ({ isSidebarOpen, activePageId }: SideBarProps) => {
       >
         {item.hasSubmenu ? (
           <>
-            <a
-              href="#"
-              className={`nav-link ${
+            <Link
+              to="#"
+              className={`nav-link ${item.label.toLowerCase()} ${
                 openSubmenuId2 === item.id ? "active" : ""
               }`}
               onClick={() => toggleSubmenu2(item.id)}
             >
               {item.label}
-            </a>
+            </Link>
             <ul
               className={`submenu list-unstyled collapse ${
                 openSubmenuId2 === item.id ? "show" : ""
@@ -63,15 +63,15 @@ const SideBar = ({ isSidebarOpen, activePageId }: SideBarProps) => {
       >
         {item.hasSubmenu ? (
           <>
-            <a
-              href="#"
-              className={`nav-link ps-4 ${
+            <Link
+              to="#"
+              className={`nav-link ps-4 ${item.label.toLowerCase()} ${
                 openSubmenuId === item.id ? "active" : ""
               }`}
               onClick={() => toggleSubmenu(item.id)}
             >
               {item.label}
-            </a>
+            </Link>
             <ul
               className={`submenu list-unstyled collapse ${
                 openSubmenuId === item.id ? "show" : ""
@@ -104,4 +104,4 @@ const SideBar = ({ isSidebarOpen, activePageId }: SideBarProps) => {
   );
 };
 
-export default SideBar;
+export default Sidebar2;
