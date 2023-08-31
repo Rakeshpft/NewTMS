@@ -83,7 +83,7 @@ ul.sidebar-submenu .sidebar-item {
   }
 }
 
-// Sidebar2 ////
+//~~~~~~~~~~~~~~~~~ Sidebar2 ~~~~~~~~~~~~~~~~~~~~~~`////
 
 .Sidebar .nav-item.has-submenu > .nav-link {
   position: relative;
@@ -133,4 +133,15 @@ ul.sidebar-submenu .sidebar-item {
 .Sidebar .submenu  .submenu .nav-link{
   padding: 0.2rem 0.5rem 0.2rem 3.25rem !important;
   font-size: small;
+}
+.accounts ~ .submenu .nav-link{
+  font-size: 14px;
+}
+.Sidebar {
+  .nav-link{
+  color: currentColor;
+  &[href="/dashboard"]{
+    color: var(--bs-primary);
+  }
+}
 }

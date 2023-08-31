@@ -24,15 +24,15 @@ const Sidebar2 = ({ isSidebarOpen, activePageId }: Sidebar2Props) => {
       >
         {item.hasSubmenu ? (
           <>
-            <a
-              href="#"
-              className={`nav-link ${
+            <Link
+              to="#"
+              className={`nav-link ${item.label.toLowerCase()} ${
                 openSubmenuId2 === item.id ? "active" : ""
               }`}
               onClick={() => toggleSubmenu2(item.id)}
             >
               {item.label}
-            </a>
+            </Link>
             <ul
               className={`submenu list-unstyled collapse ${
                 openSubmenuId2 === item.id ? "show" : ""
@@ -63,15 +63,15 @@ const Sidebar2 = ({ isSidebarOpen, activePageId }: Sidebar2Props) => {
       >
         {item.hasSubmenu ? (
           <>
-            <a
-              href="#"
-              className={`nav-link ps-4 ${
+            <Link
+              to="#"
+              className={`nav-link ps-4 ${item.label.toLowerCase()} ${
                 openSubmenuId === item.id ? "active" : ""
               }`}
               onClick={() => toggleSubmenu(item.id)}
             >
               {item.label}
-            </a>
+            </Link>
             <ul
               className={`submenu list-unstyled collapse ${
                 openSubmenuId === item.id ? "show" : ""
