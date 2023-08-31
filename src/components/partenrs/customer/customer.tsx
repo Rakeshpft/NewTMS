@@ -107,8 +107,8 @@ const Customer = () => {
       <div className="content d-flex">
         <SideBar isSidebarOpen={!isSidebarOpen} activePageId={3} />
         <div className="aria-content container-fluid my-1">
-          <TabPage tabTitles={["Brokers", "Shippers/Recivers"]}>
-            <TabPane tabId={1} className="m-4">
+          <TabPage tabTitles={["Brokers", "Shippers/Receivers"]}>
+            <TabPane tabId={1} className="m-2">
               <Table responsive hover className="table-data text-nowrap">
                 <thead>
                   <tr>
@@ -132,7 +132,7 @@ const Customer = () => {
                 </tbody>
               </Table>
             </TabPane>
-            <TabPane tabId={2} className="m-4">
+            <TabPane tabId={2} className="">
               <Table responsive hover className="table-data text-nowrap">
                 <thead>
                   <tr>

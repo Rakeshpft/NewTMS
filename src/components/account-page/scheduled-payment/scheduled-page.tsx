@@ -144,7 +144,7 @@ const ScheduledPage = () => {
                         <Row>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Partner</Label>
+                              <Label>Partner</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -165,7 +165,7 @@ const ScheduledPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Driver</Label>
+                              <Label>Driver</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -186,7 +186,7 @@ const ScheduledPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Type</Label>
+                              <Label>Type</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -209,7 +209,7 @@ const ScheduledPage = () => {
                         <Row>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Category</Label>
+                              <Label>Category</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -224,7 +224,7 @@ const ScheduledPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Active</Label>
+                              <Label>Active</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -237,7 +237,12 @@ const ScheduledPage = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col lg={2} md={6} sm={12} className="px-3 mt-4">
+                          <Col
+                            lg={2}
+                            md={6}
+                            sm={12}
+                            className="px-3 d-flex justify-content-end align-items-end gap-2 mb-3"
+                          >
                             <Button
                               size="sm"
                               className="me-3"

@@ -127,7 +127,7 @@ const CreateAdditionsPage = () => {
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Driver</Label>
+                <Label>Driver</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"
@@ -152,7 +152,7 @@ const CreateAdditionsPage = () => {
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Vendor</Label>
+                <Label>Vendor</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"
@@ -199,7 +199,7 @@ const CreateAdditionsPage = () => {
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Date</Label>
+                <Label>Date</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"
@@ -218,7 +218,7 @@ const CreateAdditionsPage = () => {
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Category</Label>
+                <Label>Category</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"

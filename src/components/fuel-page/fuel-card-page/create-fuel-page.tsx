@@ -93,7 +93,7 @@ const CreateFuelPage = () => {
       </Navbar>
       <div className="m-2 load-itemmain" style={{ backgroundColor: "#E9F3FB" }}>
         <Form onSubmit={handleSubmit} className="load-item container p-4">
-          <Row>
+          <Row className="px-5">
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
                 <Label for="examplecardNumber">Card Number</Label>
@@ -138,7 +138,7 @@ const CreateFuelPage = () => {
               </FormGroup>
             </Col>
           </Row>
-          <Row>
+          <Row className="px-5">
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
                 <Label for="exampleexpirationDate">Expiration Date</Label>
@@ -182,7 +182,7 @@ const CreateFuelPage = () => {
               </FormGroup>
             </Col>
           </Row>
-          <Row>
+          <Row className="px-5">
             <Col lg={6} md={6} sm={12} className="px-3">
               <FormGroup>
                 <Label for="examplenotes">Notes</Label>
@@ -203,31 +203,18 @@ const CreateFuelPage = () => {
               </FormGroup>
             </Col>
           </Row>
-          <Row>
+          <Row className="px-5">
             <Col className="d-flex justify-content-between mt-4 px-3">
               <h5 className="fw-bold">Driver</h5>
-              <Button
-                size="sm"
-                className="me-3"
-                style={{
-                  color: "black",
-                  border: "1px solid #1E5367",
-                  backgroundColor: "#8FF086",
-                }}
-              >
+              <Button size="sm" color="success">
                 <BiCheck fontSize={"16px"} />
                 Assign Card
               </Button>
             </Col>
           </Row>
-          <Row className="mt-3">
-            <Col lg={10} md={10} sm={12} className="px-3">
-              <Table
-                responsive
-                hover
-                size="sm"
-                className="table-data text-nowrap"
-              >
+          <Row className="px-5 mt-3">
+            <Col sm={12} className="px-3">
+              <Table responsive hover className="table-data text-nowrap">
                 <thead>
                   <tr>
                     {tableData.tableHeaders.map((headeritem, index) => (
@@ -251,7 +238,7 @@ const CreateFuelPage = () => {
               </Table>
             </Col>
           </Row>
-          <Row>
+          <Row className="px-5">
             <Col className="d-flex justify-content-end mt-5 px-3">
               <Button
                 size="sm"

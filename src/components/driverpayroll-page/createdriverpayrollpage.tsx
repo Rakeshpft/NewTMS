@@ -99,7 +99,7 @@ const CreateDriverPayrollPage = () => {
           <Row className="px-5">
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Driver</Label>
+                <Label>Driver</Label>
                 <Input
                   name="select"
                   type="select"
@@ -127,7 +127,7 @@ const CreateDriverPayrollPage = () => {
           <Row className="px-5">
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Partner</Label>
+                <Label>Partner</Label>
                 <Input
                   id="exampleSelect"
                   name="select"
@@ -151,7 +151,7 @@ const CreateDriverPayrollPage = () => {
             </Col>
           </Row>
           <Row className="px-5 mt-3">
-            <Col className="mt-2">
+            <Col lg={2} md={4} className="mt-2">
               <h5 style={{ color: "#5E5E5E" }} className="fw-bold mt-3">
                 Open Balance
               </h5>
@@ -198,7 +198,12 @@ const CreateDriverPayrollPage = () => {
                 />
               </FormGroup>
             </Col>
-            <Col lg={3} md={6} sm={12} className="d-flex px-3 mt-4 gap-3">
+            <Col
+              lg={4}
+              md={6}
+              sm={12}
+              className="d-flex px-3 mt-4 gap-2 align-items-center"
+            >
               <FormGroup check>
                 <Input
                   name="radio2"
@@ -231,25 +236,15 @@ const CreateDriverPayrollPage = () => {
                   By Delivery Date
                 </Label>
               </FormGroup>
-            </Col>
-            <Col lg={1} md={6} sm={12} className="px-2 mt-4">
-              <Button
-                className="me-3"
-                size="sm"
-                style={{
-                  display: "flex",
-                  color: "black",
-                  border: "1px solid #1E5367",
-                  backgroundColor: "#AAF6A4",
-                }}
-              >
+
+              <Button className="me-3" size="sm" color="success">
                 <BiCheck fontSize={"16px"} />
                 Apply
               </Button>
             </Col>
           </Row>
           <Row className="px-5 mt-4">
-            <Col lg={10} md={10} sm={12}>
+            <Col sm={12}>
               <Table responsive hover className="table-data text-nowrap">
                 <thead>
                   <tr>

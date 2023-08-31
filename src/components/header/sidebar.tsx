@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import sidebarItems from "./sidebarData.json";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type SideBarProps = {
   isSidebarOpen: boolean;
@@ -11,11 +11,11 @@ const SideBar = ({ isSidebarOpen, activePageId }: SideBarProps) => {
   const [openSubmenuId, setOpenSubmenuId] = useState(activePageId);
   const [openSubmenuId2, setOpenSubmenuId2] = useState(0);
 
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
+  // const location = useLocation();
+  // const searchParams = new URLSearchParams(location.search);
   // const pathname = location.pathname; // Get the path name
-  const filter = searchParams.get("filter"); // Get the 'filter' parameter
-  console.log(location);
+  // const filter = searchParams.get("filter"); // Get the 'filter' parameter
+  // console.log(window.location.href);
   const renderSubmenu = (submenuItems: any) => {
     return submenuItems.map((item: any) => (
       <li
@@ -24,15 +24,15 @@ const SideBar = ({ isSidebarOpen, activePageId }: SideBarProps) => {
       >
         {item.hasSubmenu ? (
           <>
-            <a
-              href="#"
-              className={`nav-link ${
+            <Link
+              to="#"
+              className={`nav-link ${item.label.toLowerCase()} ${
                 openSubmenuId2 === item.id ? "active" : ""
               }`}
               onClick={() => toggleSubmenu2(item.id)}
             >
               {item.label}
-            </a>
+            </Link>
             <ul
               className={`submenu list-unstyled collapse ${
                 openSubmenuId2 === item.id ? "show" : ""
@@ -45,7 +45,7 @@ const SideBar = ({ isSidebarOpen, activePageId }: SideBarProps) => {
           <Link
             to={item.link || ""}
             className={`nav-link ${
-              item.label.toLowerCase() == filter ? "active" : ""
+              window.location.href.includes(item.link) && "active"
             }`}
           >
             {item.label}
@@ -63,15 +63,15 @@ const SideBar = ({ isSidebarOpen, activePageId }: SideBarProps) => {
       >
         {item.hasSubmenu ? (
           <>
-            <a
-              href="#"
-              className={`nav-link ps-4 ${
+            <Link
+              to="#"
+              className={`nav-link ps-4 ${item.label.toLowerCase()} ${
                 openSubmenuId === item.id ? "active" : ""
               }`}
               onClick={() => toggleSubmenu(item.id)}
             >
               {item.label}
-            </a>
+            </Link>
             <ul
               className={`submenu list-unstyled collapse ${
                 openSubmenuId === item.id ? "show" : ""

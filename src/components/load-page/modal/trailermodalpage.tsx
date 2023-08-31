@@ -97,7 +97,11 @@ const TrailerModalPage = ({ isTrailerOpen, toggle }: TrailerModalPageProps) => {
   return (
     <>
       <Modal isOpen={isTrailerOpen} toggle={toggle} size="xl">
-        <ModalHeader toggle={toggle} style={{ backgroundColor: "#E9F3FB" }} className="py-2">
+        <ModalHeader
+          toggle={toggle}
+          style={{ backgroundColor: "#E9F3FB" }}
+          className="py-2"
+        >
           <h6 className="fw-bold mb-0">New Trailer</h6>
         </ModalHeader>
         <ModalBody>
@@ -270,7 +274,7 @@ const TrailerModalPage = ({ isTrailerOpen, toggle }: TrailerModalPageProps) => {
                 </Col>
                 <Col md={6} lg={3} className="px-4">
                   <FormGroup>
-                    <Label for="exampleSelect">Plate</Label>
+                    <Label>Plate</Label>
                     <Input
                       bsSize="sm"
                       style={{

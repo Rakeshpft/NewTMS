@@ -214,7 +214,7 @@ const TrailersPage = () => {
         </div>
       </Navbar>
       <div className="content d-flex">
-        <SideBar isSidebarOpen={!isSidebarOpen} activePageId={4}/>
+        <SideBar isSidebarOpen={!isSidebarOpen} activePageId={4} />
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>
@@ -229,7 +229,7 @@ const TrailersPage = () => {
                       </Col>
                       <Col lg={2} md={6} sm={12}>
                         <FormGroup>
-                          <Label for="exampleSelect">Status</Label>
+                          <Label>Status</Label>
                           <Input
                             bsSize="sm"
                             id="exampleSelect"
@@ -250,7 +250,7 @@ const TrailersPage = () => {
                       </Col>
                       <Col lg={2} md={6} sm={12}>
                         <FormGroup>
-                          <Label for="exampleSelect">Driver</Label>
+                          <Label>Driver</Label>
                           <Input
                             bsSize="sm"
                             id="exampleSelect"
@@ -271,7 +271,7 @@ const TrailersPage = () => {
                       </Col>
                       <Col lg={2} md={6} sm={12}>
                         <FormGroup>
-                          <Label for="exampleSelect">OwnerShip</Label>
+                          <Label>OwnerShip</Label>
                           <Input
                             bsSize="sm"
                             id="exampleSelect"

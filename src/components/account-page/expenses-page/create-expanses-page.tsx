@@ -96,7 +96,7 @@ const CreateExpansesPage = () => {
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">PayTo</Label>
+                <Label>PayTo</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"
@@ -143,7 +143,7 @@ const CreateExpansesPage = () => {
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Category</Label>
+                <Label>Category</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"

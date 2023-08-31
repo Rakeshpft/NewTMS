@@ -13,9 +13,9 @@ const Sidebar2 = ({ isSidebarOpen, activePageId }: Sidebar2Props) => {
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  // const pathname = location.pathname; // Get the path name
+  const pathname = location.pathname; // Get the path name
   const filter = searchParams.get("filter"); // Get the 'filter' parameter
-  console.log(location);
+  console.log(filter);
   const renderSubmenu = (submenuItems: any) => {
     return submenuItems.map((item: any) => (
       <li
@@ -45,7 +45,7 @@ const Sidebar2 = ({ isSidebarOpen, activePageId }: Sidebar2Props) => {
           <Link
             to={item.link || ""}
             className={`nav-link ${
-              item.label.toLowerCase() == filter ? "active" : ""
+              item.link.includes(pathname && filter) && "active"
             }`}
           >
             {item.label}

@@ -171,7 +171,7 @@ const VendorBalance = () => {
                       </Col>
                       <Col lg={2} md={6} sm={12} className="px-3">
                         <FormGroup>
-                          <Label for="exampleSelect">Vendor Type</Label>
+                          <Label>Vendor Type</Label>
                           <Input
                             bsSize="sm"
                             id="exampleSelect"
@@ -192,7 +192,7 @@ const VendorBalance = () => {
                       </Col>
                       <Col lg={2} md={6} sm={12} className="px-3">
                         <FormGroup>
-                          <Label for="exampleSelect">Driver Type</Label>
+                          <Label>Driver Type</Label>
                           <Input
                             bsSize="sm"
                             id="exampleSelect"
@@ -242,14 +242,17 @@ const VendorBalance = () => {
               </Card>
             </Collapse>
           )}
-          <div className="d-flex gap-4">
+          <div className="d-flex gap-4 mb-3">
             <Link to={"#!"} style={{ textDecoration: "none" }}>
               <PiFilePdfDuotone className="me-2 text-danger fs-4" />
-              Downlaod as pdf
+              <span className="small">Downlaod as pdf</span>
             </Link>
             <Form>
               <FormGroup check>
-                <Input type="checkbox" /> <Label check>Show Zero Balance</Label>
+                <Input type="checkbox" />
+                <Label check className="text-primary">
+                  Show Zero Balance
+                </Label>
               </FormGroup>
             </Form>
           </div>

@@ -152,7 +152,7 @@ const CreateTruckPage = () => {
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">ELD Provider</Label>
+                <Label>ELD Provider</Label>
                 <Input
                   bsSize="sm"
                   style={{ color: "black", border: "1px solid #418ECB" }}
@@ -234,7 +234,7 @@ const CreateTruckPage = () => {
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">OwnerShip</Label>
+                <Label>OwnerShip</Label>
                 <Input
                   bsSize="sm"
                   style={{ color: "black", border: "1px solid #418ECB" }}
@@ -341,7 +341,7 @@ const CreateTruckPage = () => {
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Plate</Label>
+                <Label>Plate</Label>
                 <Input
                   bsSize="sm"
                   style={{ color: "black", border: "1px solid #418ECB" }}
@@ -411,7 +411,7 @@ const CreateTruckPage = () => {
           <Row className="px-5">
             <Col lg={6} md={6} sm={12}>
               <FormGroup>
-                <Label for="examplehistory">Histoy</Label>
+                <Label for="examplehistory">History</Label>
                 <Input
                   bsSize="sm"
                   style={{ color: "black", border: "1px solid #418ECB" }}
@@ -429,10 +429,12 @@ const CreateTruckPage = () => {
                 />
               </FormGroup>
             </Col>
-          </Row>
-          <Row className="px-5">
-            <Col lg={6} md={6} sm={12}></Col>
-            <Col lg={6} md={6} sm={12} className="d-flex justify-content-end">
+            <Col
+              lg={6}
+              md={6}
+              sm={12}
+              className="d-flex justify-content-end align-items-end"
+            >
               <Button
                 size="sm"
                 className="me-3"

@@ -163,7 +163,7 @@ const Vendors = () => {
                       </Col>
                       <Col lg={2} md={6} sm={12}>
                         <FormGroup>
-                          <Label for="exampleSelect">Vendor Type</Label>
+                          <Label>Vendor Type</Label>
                           <Input
                             bsSize="sm"
                             id="exampleSelect"

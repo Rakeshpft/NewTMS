@@ -165,7 +165,7 @@ const ExpansesPage = () => {
         <SideBar isSidebarOpen={!isSidebarOpen} activePageId={7} />
         <div className="aria-content">
           <TabPage tabTitles={["All", "Recurring Schedule"]} onclick={setName}>
-            <TabPane tabId={1} className="m-4">
+            <TabPane tabId={1} className="m-2">
               {isOpen && (
                 <Collapse isOpen={isOpen}>
                   <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
@@ -177,7 +177,7 @@ const ExpansesPage = () => {
                             <Row>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">Partner</Label>
+                                  <Label>Partner</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -198,7 +198,7 @@ const ExpansesPage = () => {
                               </Col>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">Gallery</Label>
+                                  <Label>Gallery</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -219,7 +219,7 @@ const ExpansesPage = () => {
                               </Col>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">Driver</Label>
+                                  <Label>Driver</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -240,7 +240,7 @@ const ExpansesPage = () => {
                               </Col>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">Truck</Label>
+                                  <Label>Truck</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -261,7 +261,7 @@ const ExpansesPage = () => {
                               </Col>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">Trailer</Label>
+                                  <Label>Trailer</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -284,9 +284,7 @@ const ExpansesPage = () => {
                             <Row>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">
-                                    Amount Range:To
-                                  </Label>
+                                  <Label>Amount Range:To</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -301,9 +299,7 @@ const ExpansesPage = () => {
                               </Col>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">
-                                    Amount Range:Form
-                                  </Label>
+                                  <Label>Amount Range:Form</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -318,9 +314,7 @@ const ExpansesPage = () => {
                               </Col>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">
-                                    Date Range:To
-                                  </Label>
+                                  <Label>Date Range:To</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -335,9 +329,7 @@ const ExpansesPage = () => {
                               </Col>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">
-                                    Date Range:Form
-                                  </Label>
+                                  <Label>Date Range:Form</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -354,9 +346,7 @@ const ExpansesPage = () => {
                             <Row>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">
-                                    Recurring Transaction
-                                  </Label>
+                                  <Label>Recurring Transaction</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -377,7 +367,7 @@ const ExpansesPage = () => {
                               </Col>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">Category</Label>
+                                  <Label>Category</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -451,7 +441,7 @@ const ExpansesPage = () => {
                 </tbody>
               </Table>
             </TabPane>
-            <TabPane tabId={2} className="m-4">
+            <TabPane tabId={2} className="m-2">
               {isOpen && (
                 <Collapse isOpen={isOpen}>
                   <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
@@ -463,7 +453,7 @@ const ExpansesPage = () => {
                             <Row>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">Partner</Label>
+                                  <Label>Partner</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -484,7 +474,7 @@ const ExpansesPage = () => {
                               </Col>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">Gallery</Label>
+                                  <Label>Gallery</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -505,7 +495,7 @@ const ExpansesPage = () => {
                               </Col>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">Driver</Label>
+                                  <Label>Driver</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -526,7 +516,7 @@ const ExpansesPage = () => {
                               </Col>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">Truck</Label>
+                                  <Label>Truck</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -547,7 +537,7 @@ const ExpansesPage = () => {
                               </Col>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">Trailer</Label>
+                                  <Label>Trailer</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -570,9 +560,7 @@ const ExpansesPage = () => {
                             <Row>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">
-                                    Amount Range:To
-                                  </Label>
+                                  <Label>Amount Range:To</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"
@@ -587,9 +575,7 @@ const ExpansesPage = () => {
                               </Col>
                               <Col lg={2} md={6} sm={12} className="px-3">
                                 <FormGroup>
-                                  <Label for="exampleSelect">
-                                    Amount Range:Form
-                                  </Label>
+                                  <Label>Amount Range:Form</Label>
                                   <Input
                                     bsSize="sm"
                                     id="exampleSelect"

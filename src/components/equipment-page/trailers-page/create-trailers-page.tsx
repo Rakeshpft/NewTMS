@@ -111,9 +111,9 @@ const CreateTrailerPage = () => {
       <div className="m-2 load-itemmain" style={{ backgroundColor: "#E9F3FB" }}>
         <Form onSubmit={handleSubmit} className="load-item container p-4">
           <Row>
-            <Col>
+            <Col md="6">
               <Row className="px-5">
-                <Col lg={6} md={6} sm={12} className="px-3">
+                <Col lg={6} sm={12} className="px-3">
                   <FormGroup>
                     <Label for="exampleunit">Unit</Label>
                     <Input
@@ -130,7 +130,7 @@ const CreateTrailerPage = () => {
                     />
                   </FormGroup>
                 </Col>
-                <Col lg={6} md={6} sm={12} className="px-3">
+                <Col lg={6} sm={12} className="px-3">
                   <FormGroup>
                     <Label>VIN</Label>
                     <Input
@@ -149,7 +149,7 @@ const CreateTrailerPage = () => {
                 </Col>
               </Row>
               <Row className="px-5">
-                <Col lg={6} md={6} sm={12} className="px-3">
+                <Col lg={6} sm={12} className="px-3">
                   <FormGroup>
                     <Label for="exampleyear">Year</Label>
                     <Input
@@ -168,7 +168,7 @@ const CreateTrailerPage = () => {
                     />
                   </FormGroup>
                 </Col>
-                <Col lg={6} md={6} sm={12} className="px-3">
+                <Col lg={6} sm={12} className="px-3">
                   <FormGroup>
                     <Label for="examplemake">Make</Label>
                     <Input
@@ -189,7 +189,7 @@ const CreateTrailerPage = () => {
                 </Col>
               </Row>
               <Row className="px-5">
-                <Col lg={6} md={6} sm={12} className="px-3">
+                <Col lg={6} sm={12} className="px-3">
                   <FormGroup>
                     <Label for="examplemodal">Modal</Label>
                     <Input
@@ -210,7 +210,7 @@ const CreateTrailerPage = () => {
                 </Col>
               </Row>
               <Row className="px-5">
-                <Col lg={6} md={6} sm={12} className="px-3">
+                <Col lg={6} sm={12} className="px-3">
                   <FormGroup>
                     <Label for="exampledriver">Driver</Label>
                     <Input
@@ -229,9 +229,9 @@ const CreateTrailerPage = () => {
                     />
                   </FormGroup>
                 </Col>
-                <Col lg={6} md={6} sm={12} className="px-3">
+                <Col lg={6} sm={12} className="px-3">
                   <FormGroup>
-                    <Label for="exampleSelect">Plate</Label>
+                    <Label>Plate</Label>
                     <Input
                       bsSize="sm"
                       style={{ color: "black", border: "1px solid #418ECB" }}
@@ -256,7 +256,7 @@ const CreateTrailerPage = () => {
                 </Col>
               </Row>
               <Row className="px-5">
-                <Col lg={6} md={6} sm={12} className="px-3">
+                <Col lg={6} sm={12} className="px-3">
                   <FormGroup>
                     <Label for="exampleplateState">Plate State</Label>
                     <Input
@@ -301,7 +301,7 @@ const CreateTrailerPage = () => {
               <Row className="px-5">
                 <Col lg={12} md={12} sm={12} className="px-3">
                   <FormGroup>
-                    <Label for="examplehistory">Histoy</Label>
+                    <Label for="examplehistory">History</Label>
                     <Input
                       bsSize="sm"
                       style={{ color: "black", border: "1px solid #418ECB" }}
@@ -321,12 +321,12 @@ const CreateTrailerPage = () => {
                 </Col>
               </Row>
             </Col>
-            <Col>
-              <Row className="my-5">
-                <Col lg={3} md={6} sm={12} className="px-3">
-                  <FormGroup tag="fieldset">
-                    <h5 className="fw-bold">OwnerShip</h5>
-                    <div className="d-flex">
+            <Col md="6" className="d-flex flex-column justify-content-between">
+              <Row>
+                <Row>
+                  <Col lg={3} sm={12} className="px-3">
+                    <h6 className="fw-bold">OwnerShip</h6>
+                    <div className="d-flex mb-2">
                       <FormGroup check>
                         <Input name="radio1" type="radio" />
                         <Label
@@ -347,64 +347,58 @@ const CreateTrailerPage = () => {
                         </Label>
                       </FormGroup>
                     </div>
-                  </FormGroup>
-                </Col>
+                  </Col>
+                </Row>
+
+                <Row style={{ marginTop: "3.9rem !important" }}>
+                  <Col lg={6} sm={12} className="px-3">
+                    <FormGroup>
+                      <Label for="examplepurchaseDate">Purchase Date</Label>
+                      <Input
+                        bsSize="sm"
+                        style={{
+                          color: "black",
+                          border: "1px solid #418ECB",
+                        }}
+                        id="examplepurchaseDate"
+                        name="purchaseDate"
+                        type="date"
+                        value={state.purchaseDate}
+                        onChange={(e) => {
+                          dispatch({
+                            type: "SET_purchaseDate",
+                            payload: e.target.value,
+                          });
+                        }}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col lg={6} sm={12} className="px-3">
+                    <FormGroup>
+                      <Label for="examplepurchaseprice">Purchase Price</Label>
+                      <Input
+                        bsSize="sm"
+                        style={{ color: "black", border: "1px solid #418ECB" }}
+                        id="examplepurchaseprice"
+                        name="purchaseprice"
+                        type="text"
+                        value={state.purchasePrice}
+                        onChange={(e) => {
+                          dispatch({
+                            type: "SET_purchasePrice",
+                            payload: e.target.value,
+                          });
+                        }}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
               </Row>
-              <Row>
-                <Col></Col>
-              </Row>
-              <Row className="mt-4">
-                <Col lg={6} md={6} sm={12} className="px-3">
-                  <FormGroup>
-                    <Label for="examplepurchaseDate">Purchase Date</Label>
-                    <Input
-                      bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
-                      id="examplepurchaseDate"
-                      name="purchaseDate"
-                      type="date"
-                      value={state.purchaseDate}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_purchaseDate",
-                          payload: e.target.value,
-                        });
-                      }}
-                    />
-                  </FormGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col lg={6} md={6} sm={12} className="px-3">
-                  <FormGroup>
-                    <Label for="examplepurchaseprice">Purchase Price</Label>
-                    <Input
-                      bsSize="sm"
-                      style={{ color: "black", border: "1px solid #418ECB" }}
-                      id="examplepurchaseprice"
-                      name="purchaseprice"
-                      type="text"
-                      value={state.purchasePrice}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_purchasePrice",
-                          payload: e.target.value,
-                        });
-                      }}
-                    />
-                  </FormGroup>
-                </Col>
-              </Row>
-              <Row className="px-5" style={{ marginTop: "11rem" }}>
-                <Col
-                  lg={6}
-                  md={6}
-                  sm={12}
-                  className="px-3 d-flex justify-content-end"
-                >
+
+              <Row className="px-5">
+                <Col sm={12} className="px-3 d-flex justify-content-end">
                   <Button
                     size="sm"
                     className="me-3  ps-3 pe-3"

@@ -77,7 +77,7 @@ const CreateFactoringReport = () => {
           <Row className="px-5">
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Partner</Label>
+                <Label>Partner</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"
@@ -104,7 +104,7 @@ const CreateFactoringReport = () => {
           <Row className="px-5">
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Factoring Report Status</Label>
+                <Label>Factoring Report Status</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"

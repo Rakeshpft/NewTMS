@@ -142,7 +142,7 @@ const AdditionsPage = () => {
             to="/createadditions"
           >
             <AiOutlinePlus />
-            New Additions/Deductions Entry
+            New Entry
           </Link>
           <Profile />
         </div>
@@ -161,7 +161,7 @@ const AdditionsPage = () => {
                         <Row>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Amount Range:To</Label>
+                              <Label>Amount Range:To</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -176,9 +176,7 @@ const AdditionsPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">
-                                Amount Range:Form
-                              </Label>
+                              <Label>Amount Range:Form</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -193,7 +191,7 @@ const AdditionsPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Date Range:To</Label>
+                              <Label>Date Range:To</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -208,7 +206,7 @@ const AdditionsPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Date Range:Form</Label>
+                              <Label>Date Range:Form</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -225,7 +223,7 @@ const AdditionsPage = () => {
                         <Row>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Category</Label>
+                              <Label>Category</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -240,7 +238,7 @@ const AdditionsPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Driver</Label>
+                              <Label>Driver</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -261,7 +259,7 @@ const AdditionsPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Partner</Label>
+                              <Label>Partner</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -284,7 +282,7 @@ const AdditionsPage = () => {
                         <Row>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Load#</Label>
+                              <Label>Load#</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -299,7 +297,7 @@ const AdditionsPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Settlement#</Label>
+                              <Label>Settlement#</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -313,28 +311,22 @@ const AdditionsPage = () => {
                             </FormGroup>
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3"></Col>
-                          <Col lg={2} md={6} sm={12} className="px-3 mt-4">
+                          <Col
+                            lg={2}
+                            md={6}
+                            sm={12}
+                            className="px-3 gap-3 d-flex justify-content-center mb-3 align-items-end"
+                          >
                             <Button
                               size="sm"
-                              className="me-3"
-                              style={{
-                                color: "white",
-                                border: "1px solid #1E5367",
-                                backgroundColor: "#418ECB",
-                              }}
+                              color="info"
+                              className="text-white"
                             >
                               <BiCheck fontSize={"16px"} />
                               Apply
                             </Button>
-                            <Button
-                              size="sm"
-                              style={{
-                                color: "red",
-                                border: "1px solid red",
-                                backgroundColor: "white",
-                              }}
-                            >
-                              <RxCross2 fontSize={"16px"} color="red" /> Clear
+                            <Button size="sm" color="outline-danger">
+                              <RxCross2 fontSize={"16px"} /> Clear
                             </Button>
                           </Col>
                         </Row>

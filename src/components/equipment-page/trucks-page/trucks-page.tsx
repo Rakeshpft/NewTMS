@@ -227,7 +227,7 @@ const TrucksPage = () => {
                       </Col>
                       <Col lg={2} md={6} sm={12}>
                         <FormGroup>
-                          <Label for="exampleSelect">Status</Label>
+                          <Label>Status</Label>
                           <Input
                             bsSize="sm"
                             id="exampleSelect"
@@ -248,7 +248,7 @@ const TrucksPage = () => {
                       </Col>
                       <Col lg={2} md={6} sm={12}>
                         <FormGroup>
-                          <Label for="exampleSelect">Driver</Label>
+                          <Label>Driver</Label>
                           <Input
                             bsSize="sm"
                             id="exampleSelect"
@@ -269,7 +269,7 @@ const TrucksPage = () => {
                       </Col>
                       <Col lg={2} md={6} sm={12}>
                         <FormGroup>
-                          <Label for="exampleSelect">OwnerShip</Label>
+                          <Label>OwnerShip</Label>
                           <Input
                             bsSize="sm"
                             id="exampleSelect"

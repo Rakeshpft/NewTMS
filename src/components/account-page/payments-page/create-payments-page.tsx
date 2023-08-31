@@ -82,7 +82,7 @@ const CreatePaymentsPage = () => {
           <Row className="px-5">
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Date</Label>
+                <Label>Date</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"
@@ -101,7 +101,7 @@ const CreatePaymentsPage = () => {
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Payee</Label>
+                <Label>Payee</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"
@@ -126,7 +126,7 @@ const CreatePaymentsPage = () => {
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Pay To</Label>
+                <Label>Pay To</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"
@@ -153,7 +153,7 @@ const CreatePaymentsPage = () => {
           <Row className="px-5">
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Type</Label>
+                <Label>Type</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"

@@ -178,7 +178,7 @@ const BillingPage = () => {
                         <Row>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Type</Label>
+                              <Label>Type</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -199,7 +199,7 @@ const BillingPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Status</Label>
+                              <Label>Status</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -220,7 +220,7 @@ const BillingPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Load#</Label>
+                              <Label>Load#</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -237,7 +237,7 @@ const BillingPage = () => {
                         <Row>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Amount Range:To</Label>
+                              <Label>Amount Range:To</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -252,9 +252,7 @@ const BillingPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">
-                                Amount Range:Form
-                              </Label>
+                              <Label>Amount Range:Form</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -269,7 +267,7 @@ const BillingPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Date Range:To</Label>
+                              <Label>Date Range:To</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -284,7 +282,7 @@ const BillingPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Date Range:Form</Label>
+                              <Label>Date Range:Form</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -301,7 +299,7 @@ const BillingPage = () => {
                         <Row>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Settlement</Label>
+                              <Label>Settlement</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -316,7 +314,7 @@ const BillingPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Category</Label>
+                              <Label>Category</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -331,7 +329,7 @@ const BillingPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Partner</Label>
+                              <Label>Partner</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"
@@ -352,7 +350,7 @@ const BillingPage = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Driver</Label>
+                              <Label>Driver</Label>
                               <Input
                                 bsSize="sm"
                                 id="exampleSelect"

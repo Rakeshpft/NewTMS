@@ -84,9 +84,9 @@ const CreateBillingPage = () => {
       <div className="m-2 load-itemmain" style={{ backgroundColor: "#E9F3FB" }}>
         <Form onSubmit={handleSubmit} className="load-item container p-4">
           <Row className="px-5">
-            <Col lg={4} md={6} sm={12} className="px-4">
+            <Col lg={3} md={6} sm={12} className="px-4">
               <FormGroup>
-                <Label for="exampleSelect">Partner</Label>
+                <Label>Partner</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"
@@ -109,9 +109,9 @@ const CreateBillingPage = () => {
                 </Input>
               </FormGroup>
             </Col>
-            <Col lg={4} md={6} sm={12} className="px-4">
+            <Col lg={3} md={6} sm={12} className="px-4">
               <FormGroup>
-                <Label for="exampleSelect">Driver</Label>
+                <Label>Driver</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"
@@ -134,9 +134,9 @@ const CreateBillingPage = () => {
                 </Input>
               </FormGroup>
             </Col>
-            <Col lg={4} md={6} sm={12} className="px-4">
+            <Col lg={3} md={6} sm={12} className="px-4">
               <FormGroup>
-                <Label for="exampleSelect">Date</Label>
+                <Label>Date</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"
@@ -155,7 +155,7 @@ const CreateBillingPage = () => {
             </Col>
           </Row>
           <Row className="px-5">
-            <Col lg={4} md={6} sm={12} className="px-4">
+            <Col lg={3} md={6} sm={12} className="px-4">
               <FormGroup>
                 <Label for="exampleAmount">Amount</Label>
                 <Input
@@ -175,9 +175,9 @@ const CreateBillingPage = () => {
                 />
               </FormGroup>
             </Col>
-            <Col lg={4} md={6} sm={12} className="px-4">
+            <Col lg={3} md={6} sm={12} className="px-4">
               <FormGroup>
-                <Label for="exampleSelect">Category</Label>
+                <Label>Category</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"
@@ -207,7 +207,7 @@ const CreateBillingPage = () => {
                 <Label for="exampleSettlement">Settlement Description</Label>
                 <Input
                   bsSize="sm"
-                  rows="2"
+                  rows="3"
                   type="textarea"
                   id="exampleSettlement"
                   name="settlement"
@@ -229,7 +229,7 @@ const CreateBillingPage = () => {
                 <Label for="exampleNote">Notes</Label>
                 <Input
                   bsSize="sm"
-                  rows="2"
+                  rows="3"
                   type="textarea"
                   id="exampleNote"
                   name="note"
@@ -244,13 +244,11 @@ const CreateBillingPage = () => {
                 />
               </FormGroup>
             </Col>
-          </Row>
-          <Row className="px-5">
             <Col
-              lg={12}
-              md={12}
+              lg={6}
+              md={6}
               sm={12}
-              className="px-4 mt-5 d-flex justify-content-end"
+              className="px-4 mt-5 d-flex justify-content-end align-items-end"
             >
               <Button
                 size="sm"

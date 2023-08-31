@@ -164,10 +164,7 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                 </Col>
                 <Col md={6} lg={3} className="px-3">
                   <FormGroup>
-                    <Label
-                      for="exampleSelect"
-                      style={{ marginBottom: "0", fontSize: "small" }}
-                    >
+                    <Label style={{ marginBottom: "0", fontSize: "small" }}>
                       ELD Provider
                     </Label>
                     <Input
@@ -275,10 +272,7 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                 </Col>
                 <Col md={6} lg={3} className="px-3">
                   <FormGroup>
-                    <Label
-                      for="exampleSelect"
-                      style={{ marginBottom: "0", fontSize: "small" }}
-                    >
+                    <Label style={{ marginBottom: "0", fontSize: "small" }}>
                       OwnerShip
                     </Label>
                     <Input
@@ -422,10 +416,7 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                 </Col>
                 <Col md={6} lg={3} className="px-3">
                   <FormGroup>
-                    <Label
-                      for="exampleSelect"
-                      style={{ marginBottom: "0", fontSize: "small" }}
-                    >
+                    <Label style={{ marginBottom: "0", fontSize: "small" }}>
                       Plate
                     </Label>
                     <Input

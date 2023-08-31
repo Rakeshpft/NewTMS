@@ -17,7 +17,6 @@ import {
   FormGroup,
   Label,
   Form,
-  Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
@@ -25,6 +24,7 @@ import {
   Row,
   InputGroup,
   InputGroupText,
+  UncontrolledDropdown,
 } from "reactstrap";
 import { Header, SideBar } from "../header";
 import Profile from "../pofile";
@@ -131,19 +131,19 @@ const DriverPayRoll = () => {
         <div className="d-flex align-items-center gap-3">
           <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
             <InputGroup
-              bssize="sm"
+              bsSize="sm"
               Group
               className="shadow-sm border-secondary"
             >
-              <InputGroupText bssize="sm" GroupText className="bg-white">
+              <InputGroupText bsSize="sm" GroupText className="bg-white">
                 <BsSearch size={16} />
               </InputGroupText>
               <Input
-                bssize="sm"
+                bsSize="sm"
                 placeholder="Search"
                 className="border-start-0 border-end-0"
               />
-              <InputGroupText bssize="sm" GroupText className="bg-white">
+              <InputGroupText bsSize="sm" GroupText className="bg-white">
                 <Button
                   color="link"
                   size="sm"
@@ -174,22 +174,15 @@ const DriverPayRoll = () => {
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
                     <Row className="px-5">
-                      <Col>
+                      <Col xs="12">
                         <h5 className="fw-bold text-info">Search Filter</h5>
+                      </Col>
+                      <Col>
                         <Row>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Status</Label>
-                              <Input
-                                bssize="sm"
-                                id="exampleSelect"
-                                name="select"
-                                type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
-                              >
+                              <Label>Status</Label>
+                              <Input bsSize="sm" type="select">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -197,61 +190,10 @@ const DriverPayRoll = () => {
                                 <option>5</option>
                               </Input>
                             </FormGroup>
-                          </Col>
-                          <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Settlement</Label>
+                              <Label>Date Range:Form</Label>
                               <Input
-                                bssize="sm"
-                                id="exampleSelect"
-                                name="select"
-                                type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
-                              ></Input>
-                            </FormGroup>
-                          </Col>
-                          <Col lg={2} md={6} sm={12} className="px-3">
-                            <FormGroup>
-                              <Label for="exampleSelect">Amount Range:To</Label>
-                              <Input
-                                bssize="sm"
-                                id="exampleSelect"
-                                name="select"
-                                type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
-                              ></Input>
-                            </FormGroup>
-                          </Col>
-                          <Col lg={2} md={6} sm={12} className="px-3">
-                            <FormGroup>
-                              <Label for="exampleSelect">
-                                Amount Range:Form
-                              </Label>
-                              <Input
-                                bssize="sm"
-                                id="exampleSelect"
-                                name="select"
-                                type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
-                              ></Input>
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col lg={2} md={6} sm={12} className="px-3">
-                            <FormGroup>
-                              <Label for="exampleSelect">Date Range:To</Label>
-                              <Input
-                                bssize="sm"
+                                bsSize="sm"
                                 id="exampleSelect"
                                 name="select"
                                 type="date"
@@ -264,9 +206,22 @@ const DriverPayRoll = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Date Range:Form</Label>
+                              <Label>Settlement</Label>
                               <Input
-                                bssize="sm"
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="text"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              ></Input>
+                            </FormGroup>{" "}
+                            <FormGroup>
+                              <Label>Date Range:To</Label>
+                              <Input
+                                bsSize="sm"
                                 id="exampleSelect"
                                 name="select"
                                 type="date"
@@ -279,9 +234,22 @@ const DriverPayRoll = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Partner</Label>
+                              <Label>Amount Range:From</Label>
                               <Input
-                                bssize="sm"
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="text"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              ></Input>
+                            </FormGroup>
+                            <FormGroup>
+                              <Label>Partner</Label>
+                              <Input
+                                bsSize="sm"
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
@@ -300,9 +268,22 @@ const DriverPayRoll = () => {
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3">
                             <FormGroup>
-                              <Label for="exampleSelect">Driver</Label>
+                              <Label>Amount Range:To</Label>
                               <Input
-                                bssize="sm"
+                                bsSize="sm"
+                                id="exampleSelect"
+                                name="select"
+                                type="text"
+                                style={{
+                                  color: "black",
+                                  border: "1px solid #418ECB",
+                                }}
+                              ></Input>
+                            </FormGroup>
+                            <FormGroup>
+                              <Label>Driver</Label>
+                              <Input
+                                bsSize="sm"
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
@@ -319,7 +300,13 @@ const DriverPayRoll = () => {
                               </Input>
                             </FormGroup>
                           </Col>
-                          <Col lg={2} md={6} sm={12} className="px-3 mt-4">
+
+                          <Col
+                            lg={2}
+                            md={6}
+                            sm={12}
+                            className="px-3 align-items-end d-flex mb-3"
+                          >
                             <Button
                               size="sm"
                               className="me-3"
@@ -351,33 +338,24 @@ const DriverPayRoll = () => {
               </Card>
             </Collapse>
           )}
-          <Form>
+          <Form className="d-flex">
             <FormGroup check>
-              <Input
-                bssize="sm"
-                type="checkbox"
-                style={{
-                  width: "20px",
-                  height: "20px",
-                  color: "black",
-                  border: "1px solid #418ECB",
-                }}
-              />
-              <Dropdown isOpen={dropdownOpen} toggle={toggle} size="sm">
-                <DropdownToggle
-                  style={{ backgroundColor: "#0B8E00" }}
-                  caret
-                  size="sm"
-                >
-                  Batch Actions
-                </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem header>Header</DropdownItem>
-                  <DropdownItem>Some Action</DropdownItem>
-                  <DropdownItem text>Dropdown Item Text</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
+              <Input type="checkbox" />
             </FormGroup>
+            <UncontrolledDropdown
+              isOpen={dropdownOpen}
+              toggle={toggle}
+              size="sm"
+            >
+              <DropdownToggle className="py-0" color="success" caret size="sm">
+                <span className="small"> Batch Actions</span>
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem header>Header</DropdownItem>
+                <DropdownItem>Some Action</DropdownItem>
+                <DropdownItem text>Dropdown Item Text</DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
           </Form>
           <Table responsive hover className="table-data text-nowrap">
             <thead>

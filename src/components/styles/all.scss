@@ -66,7 +66,7 @@ body{
   overflow-y: auto;
 }
 
-form .form-label {
+form .form-label, form .form-check-label {
   margin-bottom: 0;
   font-size: small;
   font-weight: 500;
@@ -103,7 +103,7 @@ form .form-label {
 .navbar-brand{
   font-size: 1.5rem;
 }
-input[type="checkbox"]{
+input[type="checkbox"],input[type="radio"]{
       border: 1px solid rgb(65, 142, 203);
 }
 .navbar.bg-light{

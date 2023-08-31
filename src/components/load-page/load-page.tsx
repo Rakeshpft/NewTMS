@@ -214,7 +214,7 @@ const LoadPage = () => {
                       <Row className="mb-2">
                         <Col lg={2} md={4} sm={12}>
                           <FormGroup>
-                            <Label for="exampleSelect">Period</Label>
+                            <Label>Period</Label>
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
@@ -233,7 +233,7 @@ const LoadPage = () => {
                             </Input>
                           </FormGroup>
                           <FormGroup>
-                            <Label for="exampleSelect">Pickup Date</Label>
+                            <Label>Pickup Date</Label>
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
@@ -246,7 +246,7 @@ const LoadPage = () => {
                             ></Input>
                           </FormGroup>
                           <FormGroup>
-                            <Label for="exampleSelect">Delivery Date</Label>
+                            <Label>Delivery Date</Label>
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
@@ -261,7 +261,7 @@ const LoadPage = () => {
                         </Col>
                         <Col lg={2} md={4} sm={12}>
                           <FormGroup>
-                            <Label for="exampleSelect">Broker</Label>
+                            <Label>Broker</Label>
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
@@ -280,7 +280,7 @@ const LoadPage = () => {
                             </Input>
                           </FormGroup>
                           <FormGroup>
-                            <Label for="exampleSelect">City</Label>
+                            <Label>City</Label>
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
@@ -293,7 +293,7 @@ const LoadPage = () => {
                             ></Input>
                           </FormGroup>
                           <FormGroup>
-                            <Label for="exampleSelect">City</Label>
+                            <Label>City</Label>
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
@@ -308,7 +308,7 @@ const LoadPage = () => {
                         </Col>
                         <Col lg={2} md={4} sm={12}>
                           <FormGroup>
-                            <Label for="exampleSelect">Driver</Label>
+                            <Label>Driver</Label>
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
@@ -327,7 +327,7 @@ const LoadPage = () => {
                             </Input>
                           </FormGroup>
                           <FormGroup>
-                            <Label for="exampleSelect">State</Label>
+                            <Label>State</Label>
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
@@ -340,7 +340,7 @@ const LoadPage = () => {
                             ></Input>
                           </FormGroup>
                           <FormGroup>
-                            <Label for="exampleSelect">State</Label>
+                            <Label>State</Label>
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
@@ -355,7 +355,7 @@ const LoadPage = () => {
                         </Col>
                         <Col lg={2} md={4} sm={12}>
                           <FormGroup>
-                            <Label for="exampleSelect">Dispatcher</Label>
+                            <Label>Dispatcher</Label>
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
@@ -374,7 +374,7 @@ const LoadPage = () => {
                             </Input>
                           </FormGroup>
                           <FormGroup>
-                            <Label for="exampleSelect">Truck</Label>
+                            <Label>Truck</Label>
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
@@ -393,7 +393,7 @@ const LoadPage = () => {
                             </Input>
                           </FormGroup>
                           <FormGroup>
-                            <Label for="exampleSelect">Trailer</Label>
+                            <Label>Trailer</Label>
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
@@ -414,9 +414,7 @@ const LoadPage = () => {
                         </Col>
                         <Col lg={2} md={4} sm={12}>
                           <FormGroup>
-                            <Label for="exampleSelect">
-                              Direct Billing/Factoring
-                            </Label>
+                            <Label>Direct Billing/Factoring</Label>
                             <Input
                               bsSize="sm"
                               id="exampleSelect"

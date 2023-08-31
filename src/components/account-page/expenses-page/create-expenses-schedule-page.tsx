@@ -96,7 +96,9 @@ const CreateExpensesSchedulePage = () => {
           }}
           showHambuger={false}
         />
-        <NavbarBrand className="fw-bold px-4">New Schedule</NavbarBrand>
+        <NavbarBrand className="fw-bold px-4">
+          New Recurring Schedule
+        </NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           <Profile />
@@ -416,28 +418,38 @@ const CreateExpensesSchedulePage = () => {
             <Col lg={12} md={12} sm={12} className="px-3">
               <TabPage tabTitles={["Expenses"]}>
                 <TabPane>
-                  <span className="fw-bold small">Payments</span>
-                  <Table
-                    responsive
-                    hover
-                    size="sm"
-                    className="table-data text-nowrap"
-                  >
-                    <thead>
-                      <tr>
-                        <th>Date</th>
-                        <th>Payment#</th>
-                        <th>Description</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th>Amount</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>No records</tr>
-                    </tbody>
-                  </Table>
+                  <div className="fw-bold small my-3">Payments</div>
+                  <div className="bg-white p-3">
+                    <Table
+                      responsive
+                      hover
+                      size="sm"
+                      className="table-data text-nowrap"
+                    >
+                      <thead>
+                        <tr className="text-capitalize">
+                          <th>Date</th>
+                          <th>Payment#</th>
+                          <th>Description</th>
+
+                          <th>Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td colSpan={4} align="center">
+                            No records
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colSpan={3}>Balance DUE</td>
+                          <td align="right">0.00</td>
+                        </tr>
+                      </tfoot>
+                    </Table>
+                  </div>
                 </TabPane>
               </TabPage>
             </Col>

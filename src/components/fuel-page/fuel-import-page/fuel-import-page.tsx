@@ -62,50 +62,55 @@ const FuelImport = () => {
       </Navbar>
       <div className="content d-flex">
         <SideBar isSidebarOpen={!isSidebarOpen} activePageId={5} />
-        <div>
-          <Container className="m-4">
-            <Form>
-              <Row>
-                <Col md={4}>
-                  <FormGroup>
-                    <Label for="exampleSelect">Select Template</Label>
-                    <Input
-                      style={{ color: "black", border: "1px solid #418ECB" }}
-                      type="select"
-                      value={state.template}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_template",
-                          payload: e.target.value,
-                        })
-                      }
-                    >
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                    </Input>
-                  </FormGroup>
-                </Col>
-                <Col md={4} className="py-4">
-                  <FormGroup>
-                    <Input type="file" placeholder="No File Selected" />
-                  </FormGroup>
-                </Col>
-                <Col md={4} className="py-4">
-                  <Button
-                    onSubmit={handleSubmit}
-                    className="border border-inf0 rounded"
-                    style={{ backgroundColor: "#8FF086", color: "#000000" }}
+
+        <Container>
+          <Form className="m-2">
+            <Row>
+              <Col md={6} lg={3}>
+                <FormGroup>
+                  <Label>Select Template</Label>
+                  <Input
+                    style={{ color: "black", border: "1px solid #418ECB" }}
+                    type="select"
+                    bsSize="sm"
+                    value={state.template}
+                    onChange={(e) =>
+                      dispatch({
+                        type: "SET_template",
+                        payload: e.target.value,
+                      })
+                    }
                   >
-                    Upload
-                  </Button>
-                </Col>
-              </Row>
-            </Form>
-          </Container>
-        </div>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </Input>
+                </FormGroup>
+              </Col>
+              <Col md={6} lg={5} className="py-4">
+                <FormGroup>
+                  <Input
+                    type="file"
+                    placeholder="No File Selected"
+                    bsSize="sm"
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={6} lg={4} className="py-4">
+                <Button
+                  onSubmit={handleSubmit}
+                  className="border border-info rounded"
+                  size="sm"
+                  color="success"
+                >
+                  Upload
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </Container>
       </div>
     </>
   );

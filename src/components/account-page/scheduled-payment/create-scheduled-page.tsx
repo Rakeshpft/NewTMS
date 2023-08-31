@@ -119,10 +119,10 @@ const CreateScheduledPage = () => {
       </Navbar>
       <div className="m-2 load-itemmain" style={{ backgroundColor: "#E9F3FB" }}>
         <Form onSubmit={handleSubmit} className="load-item container p-4">
-          <Row className="px-5">
+          <Row>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Driver</Label>
+                <Label>Driver</Label>
                 <Input
                   bsSize="sm"
                   disabled={selectedOption !== "active"}
@@ -151,7 +151,7 @@ const CreateScheduledPage = () => {
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Vendor</Label>
+                <Label>Vendor</Label>
                 <Input
                   bsSize="sm"
                   disabled={selectedOption !== "active"}
@@ -186,123 +186,117 @@ const CreateScheduledPage = () => {
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup tag="fieldset">
-                <legend className="col-form-label col-sm-2 fw-bold">
-                  Status
-                </legend>
-                <Col sm={10}>
-                  <FormGroup check inline>
-                    <Input
-                      name="radio1"
-                      type="radio"
-                      value="active"
-                      checked={selectedOption === "active"}
-                      onChange={handleActiveRadioChange}
-                    />
-                    <Label
-                      check
-                      style={{
-                        marginBottom: "0px",
-                        fontSize: "small",
-                      }}
-                    >
-                      Active
-                    </Label>
-                  </FormGroup>
-                  <FormGroup check inline>
-                    <Input
-                      name="radio1"
-                      type="radio"
-                      value="inactive"
-                      onChange={handleActiveRadioChange}
-                    />
-                    <Label
-                      check
-                      style={{
-                        marginBottom: "0px",
-                        fontSize: "small",
-                      }}
-                    >
-                      Inactive
-                    </Label>
-                  </FormGroup>
-                </Col>
+                <h6 className="fw-bold">Status</h6>
+
+                <FormGroup check inline>
+                  <Input
+                    name="radio1"
+                    type="radio"
+                    value="active"
+                    checked={selectedOption === "active"}
+                    onChange={handleActiveRadioChange}
+                  />
+                  <Label
+                    check
+                    style={{
+                      marginBottom: "0px",
+                      fontSize: "small",
+                    }}
+                  >
+                    Active
+                  </Label>
+                </FormGroup>
+                <FormGroup check inline>
+                  <Input
+                    name="radio1"
+                    type="radio"
+                    value="inactive"
+                    onChange={handleActiveRadioChange}
+                  />
+                  <Label
+                    check
+                    style={{
+                      marginBottom: "0px",
+                      fontSize: "small",
+                    }}
+                  >
+                    Inactive
+                  </Label>
+                </FormGroup>
               </FormGroup>
             </Col>
           </Row>
-          <Row className="px-5">
+          <Row>
             <Col lg={6} md={6} sm={12} className="px-3">
               <FormGroup tag="fieldset">
-                <legend className="col-form-label col-sm-2 fw-bold">
-                  Type
-                </legend>
-                <Col sm={12}>
-                  <FormGroup check inline>
-                    <Input
-                      name="radio2"
-                      type="radio"
-                      disabled={selectedOption !== "active"}
-                    />
-                    <Label
-                      check
-                      style={{
-                        marginBottom: "0px",
-                        fontSize: "small",
-                      }}
-                    >
-                      Addition
-                    </Label>
-                  </FormGroup>
-                  <FormGroup check inline>
-                    <Input
-                      name="radio2"
-                      type="radio"
-                      disabled={selectedOption !== "active"}
-                    />
-                    <Label
-                      check
-                      style={{
-                        marginBottom: "0px",
-                        fontSize: "small",
-                      }}
-                    >
-                      Deduction
-                    </Label>
-                  </FormGroup>
-                  <FormGroup check inline>
-                    <Input
-                      name="radio2"
-                      type="radio"
-                      disabled={selectedOption !== "active"}
-                      onChange={handleRadioChange}
-                    />
-                    <Label
-                      check
-                      style={{
-                        marginBottom: "0px",
-                        fontSize: "small",
-                      }}
-                    >
-                      Driver Loan
-                    </Label>
-                  </FormGroup>
-                  <FormGroup check inline>
-                    <Input
-                      name="radio2"
-                      type="radio"
-                      disabled={selectedOption !== "active"}
-                      onChange={handleRadioChange}
-                    />
-                    <Label
-                      check
-                      style={{
-                        marginBottom: "0px",
-                        fontSize: "small",
-                      }}
-                    >
-                      Escrow
-                    </Label>
-                  </FormGroup>
-                </Col>
+                <h6 className="fw-bold">Type</h6>
+
+                <FormGroup check inline>
+                  <Input
+                    name="radio2"
+                    type="radio"
+                    disabled={selectedOption !== "active"}
+                  />
+                  <Label
+                    check
+                    style={{
+                      marginBottom: "0px",
+                      fontSize: "small",
+                    }}
+                  >
+                    Addition
+                  </Label>
+                </FormGroup>
+                <FormGroup check inline>
+                  <Input
+                    name="radio2"
+                    type="radio"
+                    disabled={selectedOption !== "active"}
+                  />
+                  <Label
+                    check
+                    style={{
+                      marginBottom: "0px",
+                      fontSize: "small",
+                    }}
+                  >
+                    Deduction
+                  </Label>
+                </FormGroup>
+                <FormGroup check inline>
+                  <Input
+                    name="radio2"
+                    type="radio"
+                    disabled={selectedOption !== "active"}
+                    onChange={handleRadioChange}
+                  />
+                  <Label
+                    check
+                    style={{
+                      marginBottom: "0px",
+                      fontSize: "small",
+                    }}
+                  >
+                    Driver Loan
+                  </Label>
+                </FormGroup>
+                <FormGroup check inline>
+                  <Input
+                    name="radio2"
+                    type="radio"
+                    disabled={selectedOption !== "active"}
+                    onChange={handleRadioChange}
+                  />
+                  <Label
+                    check
+                    style={{
+                      marginBottom: "0px",
+                      fontSize: "small",
+                    }}
+                  >
+                    Escrow
+                  </Label>
+                </FormGroup>
               </FormGroup>
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
@@ -334,7 +328,7 @@ const CreateScheduledPage = () => {
               Schedule
             </Col>
           </Row>
-          <Row className="px-5">
+          <Row>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
                 <Label for="exampleamount">Amount</Label>
@@ -406,7 +400,7 @@ const CreateScheduledPage = () => {
               </FormGroup>
             </Col>
           </Row>
-          <Row className="px-5">
+          <Row>
             <Col lg={3} md={6} sm={12} className="px-3">
               {showTextBox && (
                 <FormGroup>
@@ -433,7 +427,7 @@ const CreateScheduledPage = () => {
               )}
             </Col>
           </Row>
-          <Row className="px-5">
+          <Row>
             <Col lg={6} md={6} sm={12} className="px-3">
               <FormGroup tag="fieldset">
                 <legend className="col-form-label col-sm-2 fw-bold">
@@ -530,7 +524,7 @@ const CreateScheduledPage = () => {
               <div className="fw-bold small">Weekly, Every Friday</div>
             </Col>
           </Row>
-          <Row className="px-5">
+          <Row>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
                 <Label for="exampledate">Start On</Label>
@@ -576,7 +570,7 @@ const CreateScheduledPage = () => {
               </FormGroup>
             </Col>
           </Row>
-          <Row className="px-5">
+          <Row>
             <Col lg={6} md={6} sm={12} className="px-3">
               <FormGroup row tag="fieldset">
                 <legend className="col-form-label col-sm-2 fw-bold">
@@ -679,7 +673,7 @@ const CreateScheduledPage = () => {
               </Row>
             )}
           </Row>
-          <Row className="px-5">
+          <Row>
             <Col className="d-flex justify-content-end me-5 mt-5">
               <Button
                 size="sm"

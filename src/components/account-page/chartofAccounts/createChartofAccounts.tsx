@@ -78,7 +78,7 @@ const CreateChartofAccounts = () => {
           <Row className="px-5">
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Name</Label>
+                <Label>Name</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"
@@ -103,7 +103,7 @@ const CreateChartofAccounts = () => {
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Account Type</Label>
+                <Label>Account Type</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"
@@ -165,7 +165,7 @@ const CreateChartofAccounts = () => {
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
-                <Label for="exampleSelect">Parent Account</Label>
+                <Label>Parent Account</Label>
                 <Input
                   bsSize="sm"
                   id="exampleSelect"
@@ -189,12 +189,7 @@ const CreateChartofAccounts = () => {
             </Col>
           </Row>
           <Row className="px-5">
-            <Col
-              lg={8}
-              md={8}
-              sm={12}
-              className="px-3 mt-5 d-flex justify-content-end"
-            >
+            <Col sm={12} className="px-3 mt-5 d-flex justify-content-end">
               <Button
                 size="sm"
                 className="me-3"
