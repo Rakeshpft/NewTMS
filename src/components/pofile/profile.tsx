@@ -28,7 +28,7 @@ const Profile = () => {
                   width="40"
                   height="40"
                   className="rounded-circle"
-                  src="/images/user-avatar.png"
+                  src={require("../../../public/images/user-avatar.png")}
                 />
               </div>
             </Col>
