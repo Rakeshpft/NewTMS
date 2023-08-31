@@ -139,25 +139,21 @@ const CustomerNewPage = () => {
         >
           <Row className="px-5">
             <Col lg={6} md={6} sm={12} className="px-3">
-              <Row>
-                <Col md="6">
-                  <FormGroup>
-                    <Label for="companyName">Company Name</Label>
-                    <Input
-                      bsSize="sm"
-                      style={{ color: "black", border: "1px solid #418ECB" }}
-                      type="text"
-                      value={formState.companyName}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_companyName",
-                          payload: e.target.value,
-                        })
-                      }
-                    />
-                  </FormGroup>
-                </Col>
-              </Row>
+              <FormGroup>
+                <Label for="companyName">Company Name</Label>
+                <Input
+                  bsSize="sm"
+                  style={{ color: "black", border: "1px solid #418ECB" }}
+                  type="text"
+                  value={formState.companyName}
+                  onChange={(e) =>
+                    dispatch({
+                      type: "SET_companyName",
+                      payload: e.target.value,
+                    })
+                  }
+                />
+              </FormGroup>
             </Col>
             <Col lg={3} md={6} sm={12} className="px-3">
               <h6 className="fw-bold">Customer Type</h6>
