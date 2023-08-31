@@ -248,7 +248,7 @@ const CreateBillingPage = () => {
               lg={6}
               md={6}
               sm={12}
-              className="px-4 mt-5 d-flex justify-content-end align-items-end"
+              className="px-4 mt-5 d-flex justify-content-center align-items-end"
             >
               <Button
                 size="sm"
