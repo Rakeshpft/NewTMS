@@ -61,7 +61,7 @@ const FuelImport = () => {
         </div>
       </Navbar>
       <div className="content d-flex">
-        <SideBar isSidebarOpen={!isSidebarOpen} />
+        <SideBar isSidebarOpen={!isSidebarOpen} activePageId={5} />
         <div>
           <Container className="m-4">
             <Form>

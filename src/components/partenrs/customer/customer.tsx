@@ -105,7 +105,7 @@ const Customer = () => {
         </div>
       </Navbar>
       <div className="content d-flex">
-        <SideBar isSidebarOpen={!isSidebarOpen} />
+        <SideBar isSidebarOpen={!isSidebarOpen} activePageId={3} />
         <div className="aria-content container-fluid my-1">
           <TabPage tabTitles={["Brokers", "Shippers/Recivers"]}>
             <TabPane tabId={1} className="m-4">

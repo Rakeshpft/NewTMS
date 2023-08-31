@@ -148,7 +148,7 @@ const Vendors = () => {
         </div>
       </Navbar>
       <div className="content d-flex">
-        <SideBar isSidebarOpen={!isSidebarOpen} />
+        <SideBar isSidebarOpen={!isSidebarOpen} activePageId={3} />
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>

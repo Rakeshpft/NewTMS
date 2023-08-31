@@ -182,7 +182,7 @@ const FuelTransaction = () => {
         </div>
       </Navbar>
       <div className="content d-flex">
-        <SideBar isSidebarOpen={!isSidebarOpen} />
+        <SideBar isSidebarOpen={!isSidebarOpen} activePageId={5} />
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>

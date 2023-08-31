@@ -22,14 +22,13 @@ import {
   Table,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import { Header } from "../header";
+import { Header, SideBar } from "../header";
 import Profile from "../pofile";
 import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { PiGearDuotone } from "react-icons/pi";
 import TableSortIcon from "../load-page/tableSortIcon";
-import Sidebar2 from "../header/sidebar2";
 
 const tableData = {
   tableHeaders: [
@@ -190,7 +189,7 @@ const DriverPage = () => {
         </div>
       </Navbar>
       <div className="content d-flex">
-        <Sidebar2 isSidebarOpen={!isSidebarOpen} activePageId={2} />
+        <SideBar isSidebarOpen={!isSidebarOpen} activePageId={2} />
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>

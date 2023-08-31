@@ -398,8 +398,13 @@ const CreateTrailerPage = () => {
                   </FormGroup>
                 </Col>
               </Row>
-              <Row>
-                <Col lg={6} md={6} sm={12} className="px-3">
+              <Row className="px-5" style={{ marginTop: "11rem" }}>
+                <Col
+                  lg={6}
+                  md={6}
+                  sm={12}
+                  className="px-3 d-flex justify-content-end"
+                >
                   <Button
                     size="sm"
                     className="me-3  ps-3 pe-3"
