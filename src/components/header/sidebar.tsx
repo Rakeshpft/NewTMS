@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 type SideBarProps = {
   isSidebarOpen: boolean;
-  activePageId: number;
+  activePageId?: number;
 };
 
 const SideBar = ({ isSidebarOpen, activePageId }: SideBarProps) => {

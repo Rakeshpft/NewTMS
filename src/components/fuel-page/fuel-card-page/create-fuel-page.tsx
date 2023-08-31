@@ -19,13 +19,18 @@ import { RxCross2 } from "react-icons/rx";
 import { fuelCard } from "../../tms-object/fuelpage";
 import TableSortIcon from "../../load-page/tableSortIcon";
 import { PiGearDuotone } from "react-icons/pi";
+import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 
 type FormAction =
   | { type: "SET_cardNumber"; payload: string }
   | { type: "SET_active"; payload: string }
   | { type: "SET_expirationDate"; payload: string }
   | { type: "SET_truck"; payload: string }
-  | { type: "SET_notes"; payload: string };
+  | { type: "SET_notes"; payload: string }
+  | { type: "SET_driver"; payload: string }
+  | { type: "SET_assignOn"; payload: string }
+  | { type: "SET_returnedOn"; payload: string }
+  | { type: "SET_equipmentOwner"; payload: string };
 
 const formReducer = (state: fuelCard, action: FormAction): fuelCard => {
   switch (action.type) {
@@ -39,6 +44,14 @@ const formReducer = (state: fuelCard, action: FormAction): fuelCard => {
       return { ...state, truck: action.payload };
     case "SET_notes":
       return { ...state, notes: action.payload };
+    case "SET_driver":
+      return { ...state, driver: action.payload };
+    case "SET_assignOn":
+      return { ...state, assignOn: action.payload };
+    case "SET_returnedOn":
+      return { ...state, returnedOn: action.payload };
+    case "SET_equipmentOwner":
+      return { ...state, equipmentOwner: action.payload };
     default:
       return state;
   }
@@ -50,6 +63,10 @@ const initialState: fuelCard = {
   expirationDate: "",
   truck: "",
   notes: "",
+  driver: "",
+  assignOn: "",
+  returnedOn: "",
+  equipmentOwner: "",
 };
 
 const tableData = {
@@ -61,19 +78,35 @@ const tableData = {
     "Equipment Owner",
     <PiGearDuotone />,
   ],
-  tableRowData: [
-    ["1", "Max payne", "06/14/23", "06/14/23", "Max payne", "options"],
-    ["1", "Max payne", "06/14/23", "06/14/23", "Max payne", "options"],
-  ],
 };
 
 const CreateFuelPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [formState, dispatch] = useReducer(formReducer, initialState);
+  const [edit, setEdit] = useState(false);
+  const [rows, setRows] = useState([initialState]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(formState);
+  };
+
+  const handleEdit = () => {
+    setEdit(true);
+    console.log(edit);
+  };
+
+  const handleDelete = (i: any) => {
+    const list = [...rows];
+    list.splice(i, 1);
+    setRows(list);
+    console.log(list);
+  };
+
+  const handlesave = () => {
+    setEdit(false);
+    setRows(rows);
+    console.log(rows);
   };
 
   return (
@@ -206,10 +239,21 @@ const CreateFuelPage = () => {
           <Row className="px-5">
             <Col className="d-flex justify-content-between mt-4 px-3">
               <h5 className="fw-bold">Driver</h5>
-              <Button size="sm" color="success">
-                <BiCheck fontSize={"16px"} />
-                Assign Card
-              </Button>
+              {!edit && (
+                <Button
+                  size="sm"
+                  className="me-3"
+                  style={{
+                    color: "black",
+                    border: "1px solid #1E5367",
+                    backgroundColor: "#8FF086",
+                  }}
+                  onClick={handleEdit}
+                >
+                  <BiCheck fontSize={"16px"} />
+                  Assign Card
+                </Button>
+              )}
             </Col>
           </Row>
           <Row className="px-5 mt-3">
@@ -227,13 +271,134 @@ const CreateFuelPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {tableData.tableRowData?.map((row, index) => (
-                    <tr key={index}>
-                      {row.map((item, index) => (
-                        <td key={index}>{item}</td>
-                      ))}
+                  {!edit ? (
+                    <tr>
+                      <td>1</td>
+                      <td>Mark</td>
+                      <td>01/01/2023</td>
+                      <td>02/03/1999</td>
+                      <td>Power</td>
+                      <td>
+                        <Button
+                          size="sm"
+                          onClick={handlesave}
+                          className="me-3"
+                          color="success"
+                          outline
+                        >
+                          <AiFillEdit fontSize={"16px"} />
+                        </Button>
+                        <Button
+                          size="sm"
+                          color="danger"
+                          outline
+                          onClick={(index) => handleDelete(index)}
+                        >
+                          <AiFillDelete fontSize={"16px"} />
+                        </Button>
+                      </td>
                     </tr>
-                  ))}
+                  ) : (
+                    <tr>
+                      <td></td>
+                      <td>
+                        <Input
+                          bsSize="sm"
+                          style={{
+                            color: "black",
+                            border: "1px solid #418ECB",
+                          }}
+                          type="select"
+                          name="driver"
+                          value={formState.driver}
+                          onChange={(e) =>
+                            dispatch({
+                              type: "SET_driver",
+                              payload: e.target.value,
+                            })
+                          }
+                        >
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                        </Input>
+                      </td>
+                      <td>
+                        <Input
+                          bsSize="sm"
+                          style={{
+                            color: "black",
+                            border: "1px solid #418ECB",
+                          }}
+                          type="date"
+                          name="assignOn"
+                          value={formState.assignOn}
+                          onChange={(e) =>
+                            dispatch({
+                              type: "SET_assignOn",
+                              payload: e.target.value,
+                            })
+                          }
+                        />
+                      </td>
+                      <td>
+                        <Input
+                          bsSize="sm"
+                          style={{
+                            color: "black",
+                            border: "1px solid #418ECB",
+                          }}
+                          type="date"
+                          name="returnedOn"
+                          value={formState.returnedOn}
+                          onChange={(e) =>
+                            dispatch({
+                              type: "SET_returnedOn",
+                              payload: e.target.value,
+                            })
+                          }
+                        />
+                      </td>
+                      <td>
+                        <Input
+                          bsSize="sm"
+                          style={{
+                            color: "black",
+                            border: "1px solid #418ECB",
+                          }}
+                          type="text"
+                          name="equipmentOwner"
+                          value={formState.equipmentOwner}
+                          onChange={(e) =>
+                            dispatch({
+                              type: "SET_equipmentOwner",
+                              payload: e.target.value,
+                            })
+                          }
+                        />
+                      </td>
+                      <td>
+                        <Button
+                          size="sm"
+                          className="me-2"
+                          color="success"
+                          outline
+                          onClick={handlesave}
+                        >
+                          <BiCheck fontSize={"16px"} />
+                        </Button>
+                        <Button
+                          size="sm"
+                          color="danger"
+                          outline
+                          onClick={(index) => handleDelete(index)}
+                        >
+                          <RxCross2 fontSize={"16px"} />
+                        </Button>
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </Table>
             </Col>
