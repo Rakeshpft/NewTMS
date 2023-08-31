@@ -190,11 +190,12 @@ const CreateExpansesPage = () => {
             </Col>
           </Row>
           <Row className="px-5">
+            <Col lg={6} md={6} sm={12}></Col>
             <Col
-              lg={12}
-              md={12}
+              lg={6}
+              md={6}
               sm={12}
-              className="px-3 d-flex justify-content-end"
+              className="px-3 d-flex justify-content-center mt-5"
             >
               <Button
                 size="sm"
