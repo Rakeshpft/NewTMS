@@ -155,7 +155,7 @@ const CreateFactoringReport = () => {
                   bsSize="sm"
                   id="examplenotes"
                   name="notes"
-                  row="3"
+                  rows="3"
                   type="textarea"
                   value={state.notes}
                   onChange={(e) => {
@@ -170,11 +170,12 @@ const CreateFactoringReport = () => {
             </Col>
           </Row>
           <Row className="px-5">
+            <Col lg={6} md={6} sm={12}></Col>
             <Col
-              lg={12}
-              md={12}
+              lg={6}
+              md={6}
               sm={12}
-              className="d-flex justify-content-end px-3"
+              className="d-flex justify-content-center"
             >
               <Button
                 size="sm"
