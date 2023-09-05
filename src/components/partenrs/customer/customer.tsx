@@ -132,7 +132,7 @@ const Customer = () => {
                 </tbody>
               </Table>
             </TabPane>
-            <TabPane tabId={2} className="">
+            <TabPane tabId={2} className="m-2">
               <Table responsive hover className="table-data text-nowrap">
                 <thead>
                   <tr>

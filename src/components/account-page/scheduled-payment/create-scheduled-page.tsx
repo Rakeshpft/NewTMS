@@ -579,10 +579,14 @@ const CreateScheduledPage = () => {
                 <Col sm={12}>
                   <FormGroup check inline>
                     <Input
-                      name="radio3"
+                      name="radio4"
                       type="radio"
                       checked
                       disabled={selectedOption !== "active"}
+                      onClick={() => {
+                        setActiveTime(false);
+                        setActiveDate(false);
+                      }}
                     />
                     <Label
                       checked
@@ -596,12 +600,13 @@ const CreateScheduledPage = () => {
                   </FormGroup>
                   <FormGroup check inline>
                     <Input
-                      name="radio3"
+                      name="radio4"
                       type="radio"
                       disabled={selectedOption !== "active"}
-                      onChange={(event: any) =>
-                        setActiveTime(event.target.value)
-                      }
+                      onClick={() => {
+                        setActiveDate(false);
+                        setActiveTime(true);
+                      }}
                     />
                     <Label
                       check
@@ -610,18 +615,19 @@ const CreateScheduledPage = () => {
                         fontSize: "small",
                       }}
                     >
-                      No. of Terms
+                      No. of Times
                     </Label>
                   </FormGroup>
 
                   <FormGroup check inline>
                     <Input
-                      name="radio3"
+                      name="radio4"
                       type="radio"
                       disabled={selectedOption !== "active"}
-                      onChange={(event: any) =>
-                        setActiveDate(event.target.value)
-                      }
+                      onClick={() => {
+                        setActiveDate(true);
+                        setActiveTime(false);
+                      }}
                     />
                     <Label
                       check

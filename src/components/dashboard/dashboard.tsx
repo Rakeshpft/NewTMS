@@ -553,7 +553,7 @@ export default function DashboardPage() {
                 </Col>
               ))}
             </Row>
-            <Row className="gy-3 mb-3">
+            <Row className="gy-3 mb-3 mt-5">
               <Col xs="12">
                 <h4 className="text-info fw-bold mb-0">More</h4>
               </Col>
