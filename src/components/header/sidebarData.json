@@ -570,6 +570,223 @@
           ]
         }
       ]
+    },
+    {
+      "id": 8,
+      "label": "Reports",
+      "link": null,
+      "hasSubmenu": true,
+      "isOpen": false,
+      "submenuItems": [
+        {
+          "id": 8.1,
+          "label": "Driver Payments",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 8.11,
+              "label": "All",
+              "link": "/reports/driverpaymentspage?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 8.12,
+              "label": "Active",
+              "link": "/reports/driverpaymentspage?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 8.13,
+              "label": "Inactive",
+              "link": "/reports/driverpaymentspage?filter=inactive",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 8.2,
+          "label": "Revenue by Dispatcher",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 8.21,
+              "label": "All",
+              "link": "/reports/revenuedispatcherpage?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 8.22,
+              "label": "Active",
+              "link": "/reports/revenuedispatcherpage?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 8.23,
+              "label": "Inactive",
+              "link": "/reports/revenuedispatcherpage?filter=inactive",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 8.3,
+          "label": "Gross Profit Report",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 8.31,
+              "label": "All",
+              "link": "/reports/grossprofitreportpage?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 8.32,
+              "label": "Active",
+              "link": "/reports/grossprofitreportpage?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 8.33,
+              "label": "Inactive",
+              "link": "/reports/grossprofitreportpage?filter=inactive",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 8.4,
+          "label": "Gross Profit Per Load",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 8.41,
+              "label": "All",
+              "link": "/reports/grossprofitloadpage?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 8.42,
+              "label": "Active",
+              "link": "/reports/grossprofitloadpage?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 8.43,
+              "label": "Inactive",
+              "link": "/reports/grossprofitloadpage?filter=inactive",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 8.5,
+          "label": "Profit and Loss Report",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 8.51,
+              "label": "All",
+              "link": "/reports/profitlossreportpage?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 8.52,
+              "label": "Active",
+              "link": "/reports/profitlossreportpage?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 8.53,
+              "label": "Inactive",
+              "link": "/reports/profitlossreportpage?filter=inactive",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 8.6,
+          "label": "Rate Par Mile Report",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 8.61,
+              "label": "All",
+              "link": "/reports/ratemilereportpage?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 8.62,
+              "label": "Active",
+              "link": "/reports/ratemilereportpage?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 8.63,
+              "label": "Inactive",
+              "link": "/reports/ratemilereportpage?filter=inactive",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 8.7,
+          "label": "Expenses Report",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 8.71,
+              "label": "All",
+              "link": "/reports/expensesreportpage?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 8.72,
+              "label": "Active",
+              "link": "/reports/expensesreportpage?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 8.73,
+              "label": "Inactive",
+              "link": "/reports/expensesreportpage?filter=inactive",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 8.8,
+          "label": "Total Revenue",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 8.81,
+              "label": "All",
+              "link": "/reports/totalrevenuepage?filter=all",
+              "hasSubmenu": false
+            },
+            {
+              "id": 8.82,
+              "label": "Active",
+              "link": "/reports/totalrevenuepage?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 8.83,
+              "label": "Inactive",
+              "link": "/reports/totalrevenuepage?filter=inactive",
+              "hasSubmenu": false
+            }
+          ]
+        }
+      ]
     }
   ]
 }

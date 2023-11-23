@@ -6,412 +6,79 @@ import {
   Col,
   Button,
   Card,
-  Dropdown,
+  // Dropdown,
   Modal,
   ModalBody,
   ModalHeader,
+  // DropdownItem,
+  // DropdownMenu,
+  // DropdownToggle,
+  CardBody,
+  Table,
+  DropdownToggle,
   DropdownItem,
   DropdownMenu,
-  DropdownToggle,
-  CardBody,
+  UncontrolledDropdown,
 } from "reactstrap";
-
 import NavigationBar from "../navigation-bar";
-import { FiDownload } from "react-icons/fi";
+import { FaUserCircle, FaRegCalendar } from "react-icons/fa";
+import { dashboardTiles } from "./dashboard-Title";
+import { routes } from "../routes/routes";
+import { initialDispatchData } from "../dispatched-board/dispatched-board-page";
+import { PiCaretUpDownFill } from "react-icons/pi";
+import { BsExclamationCircle } from "react-icons/bs";
+import { CiViewList } from "react-icons/ci";
+import moment from "moment";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-const dashboardTiles = {
-  mainTiles: [
-    {
-      title: "Loads",
-      data: {
-        New: 12,
-        "En-Route": 15,
-        Delivered: 21,
-      },
-      icon: require("../../../public/icons/conveyor-belt.png"),
-      options: [
-        {
-          title: null,
-          icon: null,
-          options: [
-            {
-              title: "Create A Load",
-              icon: require("../../../public/icons//create-a-load.png"),
-              link: "/createload",
-            },
-            {
-              title: "View Existing Loads",
-              icon: require("../../../public/icons//view-existing-loads.png"),
-              link: "/loadpage",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: "Drivers",
-      data: {
-        Hired: 83,
-        Terminated: 21,
-      },
-      icon: require("../../../public/icons/truck-driver.png"),
-      options: [
-        {
-          title: null,
-          icon: null,
-          options: [
-            {
-              title: "Create a Profile",
-              icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createdriver",
-            },
-            {
-              title: "View Drivers",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/driverpage",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: "Partners",
-      data: {
-        Customers: 12,
-        Vendors: 15,
-      },
-      icon: require("../../../public/icons/partner-exchange-rounded.png"),
-      options: [
-        {
-          title: "Customers",
-          icon: require("../../../public/icons/users.png"),
-          options: [
-            {
-              title: "Add New Customer",
-              icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createcustomer",
-            },
-            {
-              title: "View All Customers",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/partners/customers",
-            },
-          ],
-        },
-        {
-          title: "Vendors",
-          icon: require("../../../public/icons/partners-vendors.png"),
-          options: [
-            {
-              title: "Add New Vendor",
-              icon: require("../../../public/icons/create.png"),
-              link: "/createvendor",
-            },
-            {
-              title: "View All Vendors",
-              icon: require("../../../public/icons/view-existing-vendors.png"),
-              link: "/partners/vendors",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: "Equipments",
-      data: {
-        Trucks: 19,
-        Trailers: 24,
-      },
-      icon: require("../../../public/icons/mdi_tools.png"),
-      options: [
-        {
-          title: "Trucks",
-          icon: require("../../../public/icons/equipments-trucks.png"),
-          options: [
-            {
-              title: "Add New Truck",
-              icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createnewtruck",
-            },
-            {
-              title: "View All Trucks",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/equipments/trucks",
-            },
-          ],
-        },
-        {
-          title: "Trailers",
-          icon: require("../../../public/icons/equipments-trailers.png"),
-          options: [
-            {
-              title: "Add New Trailer",
-              icon: require("../../../public/icons/create.png"),
-              link: "/createnewtrailers",
-            },
-            {
-              title: "View All Trailers",
-              icon: require("../../../public/icons/view-existing-vendors.png"),
-              link: "/equipments/trailers",
-            },
-          ],
-        },
-      ],
-    },
-  ],
-  mediumTiles: [
-    {
-      title: "Driver Payroll",
-      icon: require("../../../public/icons/driver-payroll.png"),
-      options: [
-        {
-          title: null,
-          icon: null,
-          options: [
-            {
-              title: "Add New Driver Payroll",
-              icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createdriverpayroll",
-            },
-            {
-              title: "View All Driver Payroll",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/driverpayroll",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: "Reports",
-      icon: require("../../../public/icons/reports.png"),
-      options: [
-        {
-          title: null,
-          icon: null,
-          options: [
-            {
-              title: "Add New Report",
-              icon: require("../../../public/icons/create-a-load.png"),
-              link: "/",
-            },
-            {
-              title: "View All Report",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/",
-            },
-          ],
-        },
-      ],
-    },
-  ],
-
-  fuelTiles: [
-    {
-      title: "Fuel",
-      icon: require("../../../public/icons/fuel.png"),
-      options: [
-        {
-          title: "Fuel Card",
-          icon: require("../../../public/icons/create-a-load.png"),
-          options: [
-            {
-              title: "Add New Fuel Card",
-              icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createfuelpage",
-            },
-            {
-              title: "View All Fuel Card",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/fuel/fuelcard",
-            },
-          ],
-        },
-        {
-          title: "Fuel Transactions",
-          icon: require("../../../public/icons/create-a-load.png"),
-          options: [
-            {
-              title: "Add New Fuel Txn",
-              icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createfueltransaction",
-            },
-            {
-              title: "View All Fuel Txn",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/fuel/fueltransaction",
-            },
-          ],
-        },
-        {
-          title: "Fuel Import",
-          icon: require("../../../public/icons/create-a-load.png"),
-          options: [
-            {
-              title: "View All Fuel Import",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/fuel/fuelimport",
-            },
-          ],
-        },
-      ],
-    },
-  ],
-  accountTiles: [
-    {
-      title: "Accounts",
-      icon: require("../../../public/icons/accounts.png"),
-      options: [
-        {
-          title: "Billing Entries",
-          icon: require("../../../public/icons/create-a-load.png"),
-          options: [
-            {
-              title: "New Billing Entry",
-              icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createbillingpage",
-            },
-            {
-              title: "View All Billing Entry",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/accounts/billing",
-            },
-          ],
-        },
-        {
-          title: "Additions / Deductions",
-          icon: require("../../../public/icons/accounts.png"),
-          options: [
-            {
-              title: "New Entry",
-              icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createadditions",
-            },
-            {
-              title: "View All Additions / Deductions",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/accounts/additions",
-            },
-          ],
-        },
-        {
-          title: "Charts of Accounts",
-          icon: require("../../../public/icons/accounts.png"),
-          options: [
-            {
-              title: "New Chart of Account",
-              icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createchartofaccounts",
-            },
-            {
-              title: "View All Chart of Accounts",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/accounts/chartofaccounts",
-            },
-          ],
-        },
-        {
-          title: "Factoring Report",
-          icon: require("../../../public/icons/accounts.png"),
-          options: [
-            {
-              title: "New Factoring Report",
-              icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createfactoringreport",
-            },
-            {
-              title: "View All Factoring Reports",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/accounts/factoringreport",
-            },
-          ],
-        },
-        {
-          title: "Vendor Balances",
-          icon: require("../../../public/icons/view-existing-loads.png"),
-          options: [
-            {
-              title: "View All Vendor Balance",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/accounts/vendorbalance",
-            },
-          ],
-        },
-        {
-          title: "Schedule Payments/Dedutions",
-          icon: require("../../../public/icons/accounts.png"),
-          options: [
-            {
-              title: "New Schedule Pay./Ded...",
-              icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createscheduledpage",
-            },
-            {
-              title: "View All Schedule Paym./Ded...",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/accounts/scheduledpage",
-            },
-          ],
-        },
-        {
-          title: "Expenses",
-          icon: require("../../../public/icons/view-existing-loads.png"),
-          options: [
-            {
-              title: "View All Expenses",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/accounts/expensespage",
-            },
-          ],
-        },
-        {
-          title: "Payment",
-          icon: require("../../../public/icons/accounts.png"),
-          options: [
-            {
-              title: "New Payment",
-              icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createpaymentspage",
-            },
-            {
-              title: "View All Payments",
-              icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/accounts/paymentspage",
-            },
-          ],
-        },
-      ],
-    },
-  ],
-
-  smallTiles: [
-    {
-      name: "Users",
-      icon: require("../../../public/icons//users.png"),
-      link: "/users",
-    },
-    {
-      name: "Data Library",
-      icon: require("../../../public/icons//data-library.png"),
-      link: "/data-library",
-    },
-    {
-      name: "Doc Exchange",
-      icon: require("../../../public/icons//docs-exchange.png"),
-      link: "/docs-exchange",
-    },
-    {
-      name: "IFTA",
-      icon: require("../../../public/icons//agreement.png"),
-      link: "/ifta",
-    },
-  ],
-};
+const DispatchedHeaders = [
+  "Driver Name",
+  "Container #",
+  "Truck Type",
+  "Load",
+  "Status",
+  "Date",
+];
 
 export default function DashboardPage() {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [sortKey, setSortKey] = useState<string | null>(null);
+  const [filteredData, setFilteredData] = useState([
+    ...initialDispatchData.slice(0, 5),
+  ]);
+  const [selectedDate, setSelectedDate] = useState<Date | any>("");
+  const [modal, setModal] = useState(false);
 
-  const toggle = () => setDropdownOpen((prevState) => !prevState);
+  const toggle = () => setModal(!modal);
+
+  const handleSort = (key: any) => {
+    const sortedData = [...filteredData].sort((a, b) =>
+      a[key as keyof object] > b[key as keyof object] ? 1 : -1
+    );
+    setFilteredData(sortedData);
+    setSortKey(key);
+  };
+
+  const handleDateChange = (date: Date | null) => {
+    if (date) {
+      const filtered = initialDispatchData.filter((item) => {
+        return item.date === moment(date).format("DD/MM/YYYY");
+      });
+
+      setFilteredData(filtered);
+    } else {
+      setFilteredData(initialDispatchData);
+    }
+    setSelectedDate(date);
+  };
+
+  const handleButtonFilter = (category: string) => {
+    const filteredData = initialDispatchData.filter(
+      (item) => item.status === category
+    );
+    setFilteredData(filteredData);
+  };
+
   return (
     <section className="main-dashboard">
       <NavigationBar />
@@ -475,11 +142,253 @@ export default function DashboardPage() {
         </Row>
         <Row>
           <Col md="6" className="order-1 order-md-0">
-            <h4 className="text-info fw-bold mb-3">Analytics</h4>
-            <Card className="dashboard-card h-100 rounded">
+            <h4 className="text-info fw-bold mb-3">Dispatch Board</h4>
+            <Card className="dashboard-card rounded">
               <CardBody>
-                <div className="section-header d-flex justify-content-between">
-                  <div className="d-flex align-items-center gap-2">
+                <div className="section-header">
+                  <div className="container-fluid d-flex flex-wrap justify-content-between align-items-center">
+                    <div className="d-flex flex-row gap-3">
+                      <span>
+                        <UncontrolledDropdown>
+                          <DropdownToggle
+                            caret
+                            color="transparent"
+                            className="p-0"
+                          >
+                            <FaUserCircle size={18} color="#418ECB" />
+                          </DropdownToggle>
+                          <DropdownMenu bottom="true" size={"sm"}>
+                            <DropdownItem
+                              onClick={() => {
+                                handleSort("asc");
+                              }}
+                            >
+                              Driver's Name
+                            </DropdownItem>
+                            <DropdownItem
+                              onClick={() => {
+                                handleSort("desc");
+                              }}
+                            >
+                              Driver's Name
+                            </DropdownItem>
+                            <DropdownItem
+                              onClick={() => {
+                                handleSort("asc");
+                              }}
+                            >
+                              Unit Number
+                            </DropdownItem>
+                            <DropdownItem
+                              onClick={() => {
+                                handleSort("desc");
+                              }}
+                            >
+                              Unit Number
+                            </DropdownItem>
+                            <DropdownItem
+                              onClick={() => {
+                                handleSort("asc");
+                              }}
+                            >
+                              Delivery Date
+                            </DropdownItem>
+                            <DropdownItem
+                              onClick={() => {
+                                handleSort("desc");
+                              }}
+                            >
+                              Delivery Date
+                            </DropdownItem>
+                          </DropdownMenu>
+                        </UncontrolledDropdown>
+                      </span>
+                      <span>
+                        <UncontrolledDropdown>
+                          <DropdownToggle
+                            caret
+                            color="transparent"
+                            className="p-0"
+                          >
+                            <FaRegCalendar size={18} color="#418ECB" />
+                          </DropdownToggle>
+                          <DropdownMenu bottom="true" size={"sm"}>
+                            <DatePicker
+                              selected={selectedDate}
+                              onChange={handleDateChange}
+                            />
+                          </DropdownMenu>
+                        </UncontrolledDropdown>
+                      </span>
+                    </div>
+                    <div className="d-flex gap-2 align-items-center">
+                      <Button
+                        size="sm"
+                        outline
+                        className="form-control dispatch-load-button text-nowrap"
+                        style={{ borderRadius: "30px" }}
+                      >
+                        <span className="fw-bold" style={{ color: "#418ECB" }}>
+                          New Load
+                        </span>
+                      </Button>
+                      <Button
+                        size="sm"
+                        outline
+                        className="form-control dispatch-deliverd-button text-nowrap"
+                        style={{ borderRadius: "30px" }}
+                        onClick={() => handleButtonFilter("Delivered")}
+                      >
+                        <span style={{ color: "#0b8e00" }} className="fw-bold">
+                          Deliverd
+                        </span>
+                      </Button>
+
+                      <Button
+                        size="sm"
+                        className="form-control dispatch-enRoute-button text-nowrap"
+                        outline
+                        style={{ borderRadius: "30px" }}
+                        onClick={() => handleButtonFilter("En-Route")}
+                      >
+                        <span className="fw-bold" style={{ color: "#FF8761" }}>
+                          En-Route
+                        </span>
+                      </Button>
+                    </div>
+                  </div>
+                  <div>
+                    <Table
+                      responsive
+                      hover
+                      className="table-data text-nowrap py-3"
+                    >
+                      <thead>
+                        <tr>
+                          {DispatchedHeaders.map((item, index) => (
+                            <th key={index}>
+                              {item}
+                              <span
+                                onClick={() => handleSort(item)}
+                                style={{ cursor: "pointer" }}
+                              >
+                                {sortKey === "name" ? (
+                                  <PiCaretUpDownFill />
+                                ) : (
+                                  <PiCaretUpDownFill />
+                                )}
+                              </span>
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {filteredData.map((item, index) => (
+                          <tr key={index}>
+                            <td
+                              className="fw-bold"
+                              style={{ color: "#418ECB" }}
+                            >
+                              <FaUserCircle size={18} /> {item.driverName}
+                              <span onClick={toggle} className="px-2">
+                                <BsExclamationCircle />
+                              </span>
+                            </td>
+                            <td
+                              className="fw-bold"
+                              style={{ color: "#418ECB" }}
+                            >
+                              {item.Container}
+                            </td>
+                            <td>
+                              {item.truckType === "Today Truck" ? (
+                                <img
+                                  src={require("../../../public/icons/equipments-trucks.png")}
+                                />
+                              ) : (
+                                <img
+                                  src={require("../../../public/icons/equipments-trailers.png")}
+                                  height={32}
+                                  width={32}
+                                />
+                              )}
+                            </td>
+                            <td
+                              className="fw-bold"
+                              style={{
+                                color:
+                                  item.load === "Unassigned"
+                                    ? "#FF8761"
+                                    : item.load === "Ready now"
+                                    ? "#0B8E00"
+                                    : "#418ECB",
+                              }}
+                            >
+                              {item.load}
+                            </td>
+
+                            <td
+                              className="fw-bold"
+                              style={{
+                                color:
+                                  item.status === "Delivered"
+                                    ? "#0B8E00"
+                                    : "#FF8761",
+                              }}
+                            >
+                              {item.status}
+                            </td>
+                            <td
+                              className="fw-bold"
+                              style={{ color: "#418ECB" }}
+                            >
+                              {item.date.toString()}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </div>
+                  <Modal isOpen={modal} toggle={toggle} size="lg">
+                    <ModalHeader toggle={toggle}>John Doe (Drv)</ModalHeader>
+                    <ModalBody>
+                      <Table
+                        responsive
+                        hover
+                        className="table-data text-nowrap"
+                      >
+                        <thead>
+                          <tr>
+                            <th>PERIOD</th>
+                            <th>TOTAL REVENUE</th>
+                            <th>RATE PER MILE</th>
+                            <th>LOADED,MI</th>
+                            <th>EMPTY,MI</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>January</td>
+                            <td>$100</td>
+                            <td>$10</td>
+                            <td>$100</td>
+                            <td>$100</td>
+                          </tr>
+                        </tbody>
+                      </Table>
+                    </ModalBody>
+                  </Modal>
+                  <span className="d-flex justify-content-end">
+                    <Link
+                      to={routes.dispatchedBoard}
+                      style={{ color: "#418ECB" }}
+                    >
+                      <CiViewList size={20} />
+                      View all
+                    </Link>
+                  </span>
+
+                  {/* <div className="d-flex align-items-center gap-2">
                     <img
                       src={require("../../../public/icons/Ic-Overview.png")}
                       alt="Image"
@@ -487,9 +396,9 @@ export default function DashboardPage() {
                       height={32}
                     />
                     <h5 className="text-info fw-bold mb-0 ">Sales Report</h5>
-                  </div>
+                  </div> */}
 
-                  <div className="d-flex gap-3">
+                  {/* <div className="d-flex gap-3">
                     <Dropdown isOpen={dropdownOpen} toggle={toggle}>
                       <DropdownToggle
                         caret
@@ -513,9 +422,8 @@ export default function DashboardPage() {
                         Download Report
                       </span>
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
-                <section></section>
               </CardBody>
             </Card>
           </Col>
@@ -535,6 +443,16 @@ export default function DashboardPage() {
               {dashboardTiles.mediumTiles.map((tile, index) => (
                 <Col sm="6" key={index}>
                   <MediumTiles
+                    key={index}
+                    title={tile.title}
+                    icon={tile.icon}
+                    options={tile.options}
+                  />
+                </Col>
+              ))}
+              {dashboardTiles.reportTiles.map((tile, index) => (
+                <Col sm="6" key={index}>
+                  <ReportTiles
                     key={index}
                     title={tile.title}
                     icon={tile.icon}
@@ -801,6 +719,101 @@ type AccountTilesProps = {
   }[];
 };
 function AccountTiles({ title, icon, options }: AccountTilesProps) {
+  const [modal, setModal] = useState(false);
+  const optionsLength = options?.length;
+  const toggle = () => setModal(!modal);
+
+  return (
+    <>
+      <div
+        className="btn btn-outline-info px-4 d-flex w-100 align-items-center medium_tile db"
+        onClick={toggle}
+      >
+        <div className="tile-title d-flex justify-content-between align-items-center">
+          <div className="d-flex">
+            <div className="tile-icon d-flex align-items-center me-2">
+              <img src={icon} height={32} width={32} alt="Image"></img>
+            </div>
+            <div className="fw-bold tile-name mb-0 d-flex align-items-center text-start">
+              {title}
+            </div>
+          </div>
+        </div>
+      </div>
+      <Modal
+        isOpen={modal}
+        toggle={toggle}
+        centered
+        className="TilePopUp"
+        size={optionsLength == 3 ? "lg" : "xl"}
+      >
+        <ModalHeader toggle={toggle} className="border-0 pb-4 fs-5">
+          <div className="d-flex align-items-center gap-2">
+            <img src={icon} alt="" height={32} width={32} />
+            <div className="fw-bold text-info ms-2 fs-4"> {title}</div>
+          </div>
+        </ModalHeader>
+        <ModalBody>
+          <Container>
+            <Row>
+              {options?.map((option, index) => (
+                <Col
+                  md={6}
+                  xl={optionsLength == 3 ? 4 : 3}
+                  xs={12}
+                  key={index}
+                  className="mb-3"
+                >
+                  {option.title && (
+                    <>
+                      <h6 className="mb-0 fw-bold text-info">{option.title}</h6>
+                      <hr className="mt-1" />
+                    </>
+                  )}
+                  {option.options?.map((item, index) => (
+                    <Link
+                      to={`${item.link}`}
+                      key={index}
+                      className="btn btn-outline-info p-2 d-flex w-100 align-items-center mb-3 column-gap-2 medium_tile db"
+                    >
+                      <img
+                        src={item?.icon}
+                        height={32}
+                        width={32}
+                        alt="Image"
+                      ></img>
+
+                      <div className="mb-0 text-start fs-6 small">
+                        {item.title}
+                      </div>
+                    </Link>
+                  ))}
+                </Col>
+              ))}
+            </Row>
+          </Container>
+        </ModalBody>
+      </Modal>
+    </>
+  );
+}
+
+type ReportTilesProps = {
+  title: string;
+  data?: object;
+  icon: string;
+  link?: string;
+  options?: {
+    title: string | null;
+    icon: string | null;
+    options: {
+      title: string;
+      icon: string;
+      link: string;
+    }[];
+  }[];
+};
+function ReportTiles({ title, icon, options }: ReportTilesProps) {
   const [modal, setModal] = useState(false);
   const optionsLength = options?.length;
   const toggle = () => setModal(!modal);

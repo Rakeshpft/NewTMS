@@ -8,7 +8,6 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  Table,
   Button,
   Card,
   CardBody,
@@ -27,124 +26,82 @@ import Profile from "../../pofile";
 import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
-import TableSortIcon from "../../load-page/tableSortIcon";
+import { routes } from "../../routes/routes";
+import { GenericTable } from "../../table";
 
-const tableData = {
-  tableHeaders: [
-    "#",
-    "Unit",
-    "Make",
-    "Model",
-    "Vin",
-    "Plate",
-    "Plate State",
-    "Registration Date",
-    "Ownership",
-    "Driver",
-    "ELD Provider",
-    "Loacton",
-    "Warnings",
-    "Status",
-    "Actions",
-    <PiGearDuotone />,
-  ],
-  tableRowData: [
-    [
-      "1",
-      "1001",
-      "Ford",
-      "F150",
-      "1234567890",
-      "ABC123",
-      "IL",
-      "06/14/23",
-      "Max payne [drv]",
-      "Max payne",
-      "Max payne",
-      "Joliet, IL",
-      "Cameron, IL",
-      "Cameron, IL",
-      "Cameron, IL",
-      "Cameron, IL",
-    ],
-    [
-      "1",
-      "1001",
-      "Ford",
-      "F150",
-      "1234567890",
-      "ABC123",
-      "IL",
-      "06/14/23",
-      "Max payne [drv]",
-      "Max payne",
-      "Max payne",
-      "Joliet, IL",
-      "Cameron, IL",
-      "Cameron, IL",
-      "Cameron, IL",
-      "Cameron, IL",
-    ],
-    [
-      "1",
-      "1001",
-      "Ford",
-      "F150",
-      "1234567890",
-      "ABC123",
-      "IL",
-      "06/14/23",
-      "Max payne [drv]",
-      "Max payne",
-      "Max payne",
-      "Joliet, IL",
-      "Cameron, IL",
-      "Cameron, IL",
-      "Cameron, IL",
-      "Cameron, IL",
-    ],
-    [
-      "1",
-      "1001",
-      "Ford",
-      "F150",
-      "1234567890",
-      "ABC123",
-      "IL",
-      "06/14/23",
-      "Max payne [drv]",
-      "Max payne",
-      "Max payne",
-      "Joliet, IL",
-      "Cameron, IL",
-      "Cameron, IL",
-      "Cameron, IL",
-      "Cameron, IL",
-    ],
-    [
-      "1",
-      "1001",
-      "Ford",
-      "F150",
-      "1234567890",
-      "ABC123",
-      "IL",
-      "06/14/23",
-      "Max payne [drv]",
-      "Max payne",
-      "Max payne",
-      "Joliet, IL",
-      "Cameron, IL",
-      "Cameron, IL",
-      "Cameron, IL",
-      "Cameron, IL",
-    ],
-  ],
-};
+const tableHeaders = [
+  "#",
+  "Unit",
+  "Make",
+  "Model",
+  "Vin",
+  "Plate",
+  "Plate State",
+  "Registration Date",
+  "Ownership",
+  "Driver",
+  "ELD Provider",
+  "Location",
+  "Warnings",
+  "Status",
+  "Actions",
+  <PiGearDuotone />,
+];
+const tableRowData = [
+  {
+    "#": 1,
+    Unit: "Unit 1",
+    Make: "Make 1",
+    Model: "Model 1",
+    Vin: "Vin 1",
+    Plate: "Plate 1",
+    "Plate State": "Plate State 1",
+    "Registration Date": "Registration Date 1",
+    Ownership: "Ownership 1",
+    Driver: "Driver 1",
+    "ELD Provider": "ELD Provider 1",
+    Location: "Location 1",
+    Warnings: "Warnings 1",
+    Status: "Status 1",
+    Actions: "icon",
+  },
+  {
+    "#": 2,
+    Unit: "Unit 2",
+    Make: "Make 1",
+    Model: "Model 1",
+    Vin: "Vin 1",
+    Plate: "Plate 1",
+    "Plate State": "Plate State 1",
+    "Registration Date": "Registration Date 1",
+    Ownership: "Ownership 1",
+    Driver: "Driver 1",
+    "ELD Provider": "ELD Provider 1",
+    Location: "Location 1",
+    Warnings: "Warnings 1",
+    Status: "Status 1",
+    Actions: "icon",
+  },
+];
 
 const TrailersPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [filteredData, setFilteredData] = useState(tableRowData);
+  const [filter, setFilter] = useState("");
+
+  const handleSearchFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toLowerCase();
+    const filteredData = tableRowData.filter((item) => {
+      return tableHeaders.some((column) =>
+        String(item[column as keyof object])
+          .toLowerCase()
+          .includes(value)
+      );
+    });
+    setFilter(value);
+    setFilteredData(filteredData);
+  };
 
   function searchToggle(): void {
     console.log("search");
@@ -166,7 +123,7 @@ const TrailersPage = () => {
         />
         <NavbarBrand className="fw-bold px-4">Trailers</NavbarBrand>
         <Nav className="me-auto" navbar>
-          <div className="d-flex gap-2">
+          <div className="d-flex gap-2 align-items-center">
             <NavItem className="small h6 mb-0">Export</NavItem>
             <div className="d-flex justify-content-between gap-2">
               <Link to={"#!"}>
@@ -189,7 +146,9 @@ const TrailersPage = () => {
               </InputGroupText>
               <Input
                 placeholder="Search"
-                className="border-start-0 border-end-0"
+                className="border-start-0 border-end-0 search"
+                value={filter}
+                onChange={handleSearchFilterChange}
               />
               <InputGroupText className="bg-white">
                 <Button
@@ -205,7 +164,7 @@ const TrailersPage = () => {
           </div>
           <Link
             className="btn btn-sm btn-outline-primary"
-            to="/createnewtrailers"
+            to={routes.createNewTailers}
           >
             <AiOutlinePlus />
             New Trailer
@@ -218,7 +177,7 @@ const TrailersPage = () => {
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>
-              <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
+              <Card className="card-search mb-3">
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
                     <Row className="px-5">
@@ -235,10 +194,7 @@ const TrailersPage = () => {
                             id="exampleSelect"
                             name="select"
                             type="select"
-                            style={{
-                              color: "black",
-                              border: "1px solid #418ECB",
-                            }}
+                            className="form-control form-control-sm"
                           >
                             <option>1</option>
                             <option>2</option>
@@ -256,10 +212,7 @@ const TrailersPage = () => {
                             id="exampleSelect"
                             name="select"
                             type="select"
-                            style={{
-                              color: "black",
-                              border: "1px solid #418ECB",
-                            }}
+                            className="form-control form-control-sm"
                           >
                             <option>1</option>
                             <option>2</option>
@@ -277,10 +230,7 @@ const TrailersPage = () => {
                             id="exampleSelect"
                             name="select"
                             type="select"
-                            style={{
-                              color: "black",
-                              border: "1px solid #418ECB",
-                            }}
+                            className="form-control form-control-sm"
                           >
                             <option>1</option>
                             <option>2</option>
@@ -292,26 +242,11 @@ const TrailersPage = () => {
                       </Col>
                       <Col lg={2} md={6} sm={12}></Col>
                       <Col lg={2} md={6} sm={12} className="mt-4">
-                        <Button
-                          size="sm"
-                          className="me-3"
-                          style={{
-                            color: "white",
-                            border: "1px solid #1E5367",
-                            backgroundColor: "#418ECB",
-                          }}
-                        >
+                        <Button size="sm" className="me-3 save-button">
                           <BiCheck fontSize={"16px"} />
                           Apply
                         </Button>
-                        <Button
-                          size="sm"
-                          style={{
-                            color: "red",
-                            border: "1px solid red",
-                            backgroundColor: "white",
-                          }}
-                        >
+                        <Button size="sm" className="cancel-button">
                           <RxCross2 fontSize={"16px"} color="red" /> Clear
                         </Button>
                       </Col>
@@ -321,28 +256,11 @@ const TrailersPage = () => {
               </Card>
             </Collapse>
           )}
-          <Table responsive hover className="table-data text-nowrap">
-            <thead>
-              <tr>
-                {tableData.tableHeaders.map((headeritem, index) => (
-                  <th key={index}>
-                    <span>{headeritem}</span>
-
-                    <TableSortIcon />
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.tableRowData?.map((row, index) => (
-                <tr key={index}>
-                  {row.map((item, index) => (
-                    <td key={index}>{item}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <GenericTable
+            tableHeaders={tableHeaders}
+            tableData={filteredData}
+            defaultSortColumn="Unit"
+          />
         </div>
       </div>
     </>

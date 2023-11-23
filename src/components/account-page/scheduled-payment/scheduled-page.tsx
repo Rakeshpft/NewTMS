@@ -4,7 +4,6 @@ import {
   Navbar,
   NavbarBrand,
   Nav,
-  Table,
   Button,
   Card,
   CardBody,
@@ -24,58 +23,73 @@ import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlinePlus } from "react-icons/ai";
-import TableSortIcon from "../../load-page/tableSortIcon";
+import { routes } from "../../routes/routes";
+import { GenericTable } from "../../table";
 
-const tableData = {
-  tableHeaders: [
-    "Id",
-    "Driver",
-    "Payable To",
-    "Type",
-    "Category",
-    "Amount",
-    "Schedule",
-    "Last",
-    "Next",
-    "status",
-    "Notes",
-    "Actions",
-  ],
-  tableRowData: [
-    [
-      "1001",
-      "06/14/23",
-      "Load",
-      "Load",
-      "Completed",
-      "Max Payne",
-      "Max Payne",
-      "002063566 ONTARIO",
-      "-",
-      "options",
-      "none",
-      "options",
-    ],
-    [
-      "1001",
-      "06/14/23",
-      "Load",
-      "Load",
-      "Completed",
-      "Max Payne",
-      "Max Payne",
-      "002063566 ONTARIO",
-      "-",
-      "options",
-      "none",
-      "options",
-    ],
-  ],
-};
+const tableHeaders = [
+  "Id",
+  "Driver",
+  "Payable To",
+  "Type",
+  "Category",
+  "Amount",
+  "Schedule",
+  "Last",
+  "Next",
+  "status",
+  "Notes",
+  "Actions",
+];
+
+const tableData = [
+  {
+    Id: "1001",
+    Driver: "Max",
+    "Payable To": "Max",
+    Type: "Max",
+    Category: "Max",
+    Amount: "100",
+    Schedule: "1/1/2021",
+    Last: "1/1/2021",
+    Next: "1/1/2021",
+    status: "true",
+    Notes: "Max",
+    Actions: "abcd",
+  },
+  {
+    Id: "1002",
+    Driver: "Max",
+    "Payable To": "Max",
+    Type: "Max",
+    Category: "Max",
+    Amount: "100",
+    Schedule: "1/1/2021",
+    Last: "1/1/2021",
+    Next: "1/1/2021",
+    status: "true",
+    Notes: "Max",
+    Actions: "abc",
+  },
+];
 
 const ScheduledPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [filteredData, setFilteredData] = useState(tableData);
+  const [filter, setFilter] = useState("");
+
+  const handleSearchFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toLowerCase();
+    const filteredData = tableData.filter((item) => {
+      return tableHeaders.some((column) =>
+        String(item[column as keyof object])
+          .toLowerCase()
+          .includes(value)
+      );
+    });
+    setFilter(value);
+    setFilteredData(filteredData);
+  };
 
   function searchToggle(): void {
     console.log("search");
@@ -107,6 +121,8 @@ const ScheduledPage = () => {
               <Input
                 placeholder="Search"
                 className="border-start-0 border-end-0"
+                value={filter}
+                onChange={handleSearchFilterChange}
               />
               <InputGroupText className="bg-white">
                 <Button
@@ -122,7 +138,7 @@ const ScheduledPage = () => {
           </div>
           <Link
             className="btn btn-sm btn-outline-primary"
-            to="/createscheduledpage"
+            to={routes.createNewScheduledPage}
           >
             <AiOutlinePlus />
             New Scheduled Payment
@@ -135,7 +151,7 @@ const ScheduledPage = () => {
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>
-              <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
+              <Card className="card-search mb-3">
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
                     <Row className="px-5">
@@ -150,10 +166,7 @@ const ScheduledPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -171,10 +184,7 @@ const ScheduledPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -192,10 +202,7 @@ const ScheduledPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -215,10 +222,7 @@ const ScheduledPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                           </Col>
@@ -230,10 +234,7 @@ const ScheduledPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                           </Col>
@@ -245,7 +246,6 @@ const ScheduledPage = () => {
                           >
                             <Button
                               size="sm"
-                              className="me-3"
                               style={{
                                 color: "white",
                                 border: "1px solid #1E5367",
@@ -276,28 +276,11 @@ const ScheduledPage = () => {
             </Collapse>
           )}
 
-          <Table responsive hover className="table-data text-nowrap">
-            <thead>
-              <tr>
-                {tableData.tableHeaders.map((headeritem, index) => (
-                  <th key={index}>
-                    <span>{headeritem}</span>
-
-                    <TableSortIcon />
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.tableRowData?.map((row, index) => (
-                <tr key={index}>
-                  {row.map((item, index) => (
-                    <td key={index}>{item}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <GenericTable
+            tableData={filteredData}
+            tableHeaders={tableHeaders}
+            defaultSortColumn="Driver"
+          />
         </div>
       </div>
     </>

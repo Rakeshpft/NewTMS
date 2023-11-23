@@ -11,11 +11,6 @@ const SideBar = ({ isSidebarOpen, activePageId }: SideBarProps) => {
   const [openSubmenuId, setOpenSubmenuId] = useState(activePageId);
   const [openSubmenuId2, setOpenSubmenuId2] = useState(0);
 
-  // const location = useLocation();
-  // const searchParams = new URLSearchParams(location.search);
-  // const pathname = location.pathname; // Get the path name
-  // const filter = searchParams.get("filter"); // Get the 'filter' parameter
-  // console.log(window.location.href);
   const renderSubmenu = (submenuItems: any) => {
     return submenuItems.map((item: any) => (
       <li

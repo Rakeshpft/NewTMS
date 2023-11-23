@@ -1,7 +1,15 @@
 export interface driverpayrollPage {
   driver: string;
   partner: string;
-  date: string;
-  byDelivery: string;
-  byPickup: string;
+  dateRangeTo: string;
+  dateRangeFrom: string;
+  radiovalue: string;
 }
+
+export const initialDriverPayRollPageState: driverpayrollPage = {
+  driver: "",
+  partner: "",
+  dateRangeTo: "",
+  dateRangeFrom: "",
+  radiovalue: "",
+};

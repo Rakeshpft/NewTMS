@@ -16,6 +16,24 @@ export interface truckType {
   history: string;
 }
 
+export const initialTruckState: truckType = {
+  unit: "",
+  vin: "",
+  ELDprovider: "",
+  ELDid: "",
+  year: "",
+  make: "",
+  ownership: "",
+  modal: "",
+  purchaseDate: "",
+  purchasePrice: "",
+  driver: "",
+  plate: "",
+  plateState: "",
+  notes: "",
+  history: "",
+};
+
 export interface trailersTypes {
   unit: string;
   vin: string;
@@ -31,3 +49,19 @@ export interface trailersTypes {
   notes: string;
   history: string;
 }
+
+export const initialTrailerState: trailersTypes = {
+  unit: "",
+  vin: "",
+  year: "",
+  make: "",
+  ownership: "",
+  modal: "",
+  purchaseDate: "",
+  purchasePrice: "",
+  driver: "",
+  plate: "",
+  plateState: "",
+  notes: "",
+  history: "",
+};

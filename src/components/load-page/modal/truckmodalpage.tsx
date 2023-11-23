@@ -12,7 +12,7 @@ import {
   Label,
   Row,
 } from "reactstrap";
-import { truckType } from "../../tms-object/equipmenrs";
+import { initialTruckState, truckType } from "../../tms-object/equipmenrs";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 
@@ -70,119 +70,76 @@ const formReducer = (state: truckType, action: FormAction): truckType => {
   }
 };
 
-const initialState: truckType = {
-  unit: "",
-  vin: "",
-  ELDprovider: "",
-  ELDid: "",
-  year: "",
-  make: "",
-  ownership: "",
-  modal: "",
-  purchaseDate: "",
-  purchasePrice: "",
-  driver: "",
-  plate: "",
-  plateState: "",
-  notes: "",
-  history: "",
-};
-
 interface TruckModalPageProps {
   isTruckOpen: boolean;
   toggle: () => void;
 }
 
 const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
-  const [state, dispatch] = useReducer(formReducer, initialState);
+  const [state, dispatch] = useReducer(formReducer, initialTruckState);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleInput =
+    (type: FormAction["type"]) =>
+    (
+      event: React.ChangeEvent<
+        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+      >
+    ) => {
+      dispatch({ type, payload: event.target.value });
+    };
+
+  const handleTruckSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(state);
   };
 
   return (
     <>
-      <Modal isOpen={isTruckOpen} toggle={toggle} size="xl">
-        <ModalHeader
-          toggle={toggle}
-          style={{ backgroundColor: "#E9F3FB" }}
-          className="py-2"
-        >
+      <Modal isOpen={isTruckOpen} toggle={toggle} size="xl" backdrop="static">
+        <ModalHeader toggle={toggle} className="py-2">
           <h6 className="fw-bold mb-0"> New Truck</h6>
         </ModalHeader>
         <ModalBody>
           <Container>
-            <Form onSubmit={handleSubmit} className="new-truck-form">
+            <Form className="new-truck-form">
               <Row>
                 <Col md={6} lg={3} className="px-3">
                   <FormGroup>
-                    <Label
-                      for="exampleunit"
-                      style={{ marginBottom: "0", fontSize: "small" }}
-                    >
-                      Unit
-                    </Label>
+                    <Label for="exampleunit">Unit</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
+                      name="unit"
                       value={state.unit}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_unit",
-                          payload: e.target.value,
-                        });
-                      }}
+                      onChange={handleInput("SET_unit")}
                     />
                   </FormGroup>
                 </Col>
                 <Col md={6} lg={3} className="px-3">
                   <FormGroup>
-                    <Label style={{ marginBottom: "0", fontSize: "small" }}>
-                      VIN
-                    </Label>
+                    <Label>VIN</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
+                      name="vin"
                       value={state.vin}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_vin",
-                          payload: e.target.value,
-                        });
-                      }}
+                      onChange={handleInput("SET_vin")}
                     />
                   </FormGroup>
                 </Col>
                 <Col md={6} lg={3} className="px-3">
                   <FormGroup>
-                    <Label style={{ marginBottom: "0", fontSize: "small" }}>
-                      ELD Provider
-                    </Label>
+                    <Label>ELD Provider</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="select"
                       id="exampleSelect"
-                      name="select"
+                      name="ELDprovider"
                       value={state.ELDprovider}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_ELDprovider",
-                          payload: e.target.value,
-                        });
-                      }}
+                      onChange={handleInput("SET_ELDprovider")}
                     >
                       <option>1</option>
                       <option>2</option>
@@ -194,23 +151,14 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                 </Col>
                 <Col md={6} lg={3} className="px-3">
                   <FormGroup>
-                    <Label style={{ marginBottom: "0", fontSize: "small" }}>
-                      ELD ID
-                    </Label>
+                    <Label>ELD ID</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
+                      name="ELDid"
                       value={state.ELDid}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_ELDid",
-                          payload: e.target.value,
-                        });
-                      }}
+                      onChange={handleInput("SET_ELDid")}
                     />
                   </FormGroup>
                 </Col>
@@ -218,79 +166,43 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
               <Row>
                 <Col md={6} lg={3} className="px-3">
                   <FormGroup>
-                    <Label
-                      style={{ marginBottom: "0", fontSize: "small" }}
-                      for="exampleyear"
-                    >
-                      Year
-                    </Label>
+                    <Label for="exampleyear">Year</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       id="exampleyear"
                       name="year"
                       type="text"
                       value={state.year}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_year",
-                          payload: e.target.value,
-                        });
-                      }}
+                      onChange={handleInput("SET_year")}
                     />
                   </FormGroup>
                 </Col>
                 <Col md={6} lg={3} className="px-3">
                   <FormGroup>
-                    <Label
-                      style={{ marginBottom: "0", fontSize: "small" }}
-                      for="examplemake"
-                    >
-                      Make
-                    </Label>
+                    <Label for="examplemake">Make</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       id="examplemake"
                       name="make"
                       type="text"
                       value={state.make}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_make",
-                          payload: e.target.value,
-                        });
-                      }}
+                      onChange={handleInput("SET_make")}
                     />
                   </FormGroup>
                 </Col>
                 <Col md={6} lg={3} className="px-3">
                   <FormGroup>
-                    <Label style={{ marginBottom: "0", fontSize: "small" }}>
-                      OwnerShip
-                    </Label>
+                    <Label>OwnerShip</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="select"
                       id="exampleSelect"
-                      name="select"
+                      name="ownership"
                       value={state.ownership}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_ownership",
-                          payload: e.target.value,
-                        });
-                      }}
+                      onChange={handleInput("SET_ownership")}
                     >
                       <option>1</option>
                       <option>2</option>
@@ -305,83 +217,44 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
               <Row>
                 <Col md={6} lg={3} className="px-3">
                   <FormGroup>
-                    <Label
-                      for="examplemodal"
-                      style={{ marginBottom: "0", fontSize: "small" }}
-                    >
-                      Modal
-                    </Label>
+                    <Label for="examplemodal">Modal</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       id="examplemodal"
                       name="modal"
                       type="text"
                       value={state.modal}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_modal",
-                          payload: e.target.value,
-                        });
-                      }}
+                      onChange={handleInput("SET_modal")}
                     />
                   </FormGroup>
                 </Col>
                 <Col md={6} lg={3} className="px-3"></Col>
                 <Col md={6} lg={3} className="px-3">
                   <FormGroup>
-                    <Label
-                      for="examplepurchaseDate"
-                      style={{ marginBottom: "0", fontSize: "small" }}
-                    >
-                      Purchase Date
-                    </Label>
+                    <Label for="examplepurchaseDate">Purchase Date</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       id="examplepurchaseDate"
                       name="purchaseDate"
                       type="date"
                       value={state.purchaseDate}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_purchaseDate",
-                          payload: e.target.value,
-                        });
-                      }}
+                      onChange={handleInput("SET_purchaseDate")}
                     />
                   </FormGroup>
                 </Col>
                 <Col md={6} lg={3} className="px-3">
                   <FormGroup>
-                    <Label
-                      for="examplepurchaseprice"
-                      style={{ marginBottom: "0", fontSize: "small" }}
-                    >
-                      Purchase Price
-                    </Label>
+                    <Label for="examplepurchaseprice">Purchase Price</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       id="examplepurchaseprice"
-                      name="purchaseprice"
+                      name="purchasePrice"
                       type="text"
                       value={state.purchasePrice}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_purchasePrice",
-                          payload: e.target.value,
-                        });
-                      }}
+                      onChange={handleInput("SET_purchasePrice")}
                     />
                   </FormGroup>
                 </Col>
@@ -389,52 +262,29 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
               <Row>
                 <Col md={6} lg={3} className="px-3">
                   <FormGroup>
-                    <Label
-                      for="exampledriver"
-                      style={{ marginBottom: "0", fontSize: "small" }}
-                    >
-                      Driver
-                    </Label>
+                    <Label for="exampledriver">Driver</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       id="exampledriver"
                       name="driver"
                       type="text"
                       value={state.driver}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_driver",
-                          payload: e.target.value,
-                        });
-                      }}
+                      onChange={handleInput("SET_driver")}
                     />
                   </FormGroup>
                 </Col>
                 <Col md={6} lg={3} className="px-3">
                   <FormGroup>
-                    <Label style={{ marginBottom: "0", fontSize: "small" }}>
-                      Plate
-                    </Label>
+                    <Label>Plate</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="select"
                       id="exampleSelect"
-                      name="select"
+                      name="plate"
                       value={state.plate}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_plate",
-                          payload: e.target.value,
-                        });
-                      }}
+                      onChange={handleInput("SET_plate")}
                     >
                       <option>1</option>
                       <option>2</option>
@@ -448,28 +298,15 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
               <Row>
                 <Col md={6} lg={3} className="px-3">
                   <FormGroup>
-                    <Label
-                      for="exampleplateState"
-                      style={{ marginBottom: "0", fontSize: "small" }}
-                    >
-                      Plate State
-                    </Label>
+                    <Label for="exampleplateState">Plate State</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       id="exampleplateState"
                       name="plateState"
                       type="text"
                       value={state.plateState}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_plateState",
-                          payload: e.target.value,
-                        });
-                      }}
+                      onChange={handleInput("SET_plateState")}
                     />
                   </FormGroup>
                 </Col>
@@ -477,29 +314,16 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
               <Row>
                 <Col md={6} className="px-3">
                   <FormGroup>
-                    <Label
-                      for="examplenotes"
-                      style={{ marginBottom: "0", fontSize: "small" }}
-                    >
-                      Notes
-                    </Label>
+                    <Label for="examplenotes">Notes</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       id="examplenotes"
                       name="notes"
                       type="textarea"
                       rows="3"
                       value={state.notes}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_notes",
-                          payload: e.target.value,
-                        });
-                      }}
+                      onChange={handleInput("SET_notes")}
                     />
                   </FormGroup>
                 </Col>
@@ -507,29 +331,16 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
               <Row>
                 <Col md={6} className="px-3">
                   <FormGroup>
-                    <Label
-                      for="examplehistory"
-                      style={{ marginBottom: "0px", fontSize: "small" }}
-                    >
-                      History
-                    </Label>
+                    <Label for="examplehistory">History</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       id="examplehistory"
                       name="history"
                       type="textarea"
                       rows="3"
                       value={state.history}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_history",
-                          payload: e.target.value,
-                        });
-                      }}
+                      onChange={handleInput("SET_history")}
                     />
                   </FormGroup>
                 </Col>
@@ -537,11 +348,22 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
                   md={6}
                   className="d-flex justify-content-end align-items-end px-3"
                 >
-                  <Button color="info" size="sm" className="me-3 text-white">
+                  <Button
+                    color="info"
+                    size="sm"
+                    className="me-3 save-button"
+                    onClick={handleTruckSubmit}
+                    type="submit"
+                  >
                     <BiCheck fontSize={"16px"} />
                     Save
                   </Button>
-                  <Button color="outline-danger" size="sm" onClick={toggle}>
+                  <Button
+                    color="outline-danger"
+                    size="sm"
+                    onClick={toggle}
+                    className="cancel-button"
+                  >
                     <RxCross2 fontSize={"16px"} color="red" />
                     Close
                   </Button>

@@ -19,7 +19,6 @@
 .sidebar-item {
   justify-content: space-between;
   align-items: center;
-  // height: 40px;
   padding-left: 18px;
   display: block;
   width: 100%;
@@ -83,14 +82,14 @@ ul.sidebar-submenu .sidebar-item {
   }
 }
 
-//~~~~~~~~~~~~~~~~~ Sidebar2 ~~~~~~~~~~~~~~~~~~~~~~`////
+//~~~~~~~~~~~~~~~~~ Sidebar ~~~~~~~~~~~~~~~~~~~~~~`////
 
 .Sidebar .nav-item.has-submenu > .nav-link {
   position: relative;
   &:after {
     position: absolute;
     right: 1.5rem;
-        top: 50%;
+    top: 50%;
     bottom: 50%;
     transform: translate(0, -50%);
     content: "";
@@ -103,7 +102,7 @@ ul.sidebar-submenu .sidebar-item {
   &.active::after {
     position: absolute;
     right: 1.5rem;
-        top: 50%;
+    top: 50%;
     bottom: 50%;
     transform: translate(0, -50%);
     content: "";
@@ -120,28 +119,35 @@ ul.sidebar-submenu .sidebar-item {
     color: var(--primary);
     font-weight: bold;
     & ~ ul.show.submenu {
-       background-color: #b7d1e6;
-       .nav-link{
-        padding: 0.2rem 0.5rem 0.2rem 2.5rem;
-        &.active{
+      background-color: #b7d1e6;
+      .nav-link {
+        padding: 0.2rem 2.25rem 0.2rem 2.5rem;
+        &.active {
           background-color: #91abc1;
         }
-       }
+      }
     }
   }
 }
-.Sidebar .submenu  .submenu .nav-link{
+
+.Sidebar .submenu .submenu .nav-link {
   padding: 0.2rem 0.5rem 0.2rem 3.25rem !important;
   font-size: small;
 }
-.accounts ~ .submenu .nav-link{
-  font-size: 14px;
-}
+
+// .accounts ~ .submenu .nav-link {
+//   font-size: 14px;
+// }
+
+// .reports ~ .submenu .nav-link {
+//   font-size: 13px;
+// }
+
 .Sidebar {
-  .nav-link{
-  color: currentColor;
-  &[href="/dashboard"]{
-    color: var(--bs-primary);
+  .nav-link {
+    color: currentColor;
+    &[href="/dashboard"] {
+      color: var(--bs-primary);
+    }
   }
-}
 }

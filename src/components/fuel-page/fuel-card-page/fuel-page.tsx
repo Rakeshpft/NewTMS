@@ -1,80 +1,76 @@
 import React, { useState } from "react";
 import { AiOutlineFileExcel, AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { Navbar, NavbarBrand, Nav, NavItem, Table } from "reactstrap";
+import {
+  Navbar,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  Input,
+  InputGroup,
+  InputGroupText,
+} from "reactstrap";
 import { Header, SideBar } from "../../header";
 import Profile from "../../pofile";
-import SearchPage from "../../search-page";
 import { PiGearDuotone } from "react-icons/pi";
-import TableSortIcon from "../../load-page/tableSortIcon";
+import { routes } from "../../routes/routes";
+import { BsSearch } from "react-icons/bs";
+import { GenericTable } from "../../table";
 
-const tableData = {
-  tableHeaders: [
-    "#",
-    "Card Number",
-    "Card Status",
-    "Expiration Date",
-    "Assigned To",
-    "Assigned On",
-    "Truck",
-    "Notes",
-    "Actions",
-    <PiGearDuotone />,
-  ],
-  tableRowData: [
-    [
-      "1",
-      "123456789",
-      "Active",
-      "06/14/23",
-      "Max payne [drv]",
-      "002063566 ONTARIO",
-      "Joliet, IL",
-      "Cameron, IL",
-      "Lumper",
-      "options",
-    ],
-    [
-      "1",
-      "123456789",
-      "Active",
-      "06/14/23",
-      "Max payne [drv]",
-      "002063566 ONTARIO",
-      "Joliet, IL",
-      "Cameron, IL",
-      "Lumper",
-      "options",
-    ],
-    [
-      "1",
-      "123456789",
-      "Active",
-      "06/14/23",
-      "Max payne [drv]",
-      "002063566 ONTARIO",
-      "Joliet, IL",
-      "Cameron, IL",
-      "Lumper",
-      "options",
-    ],
-    [
-      "1",
-      "123456789",
-      "Active",
-      "06/14/23",
-      "Max payne [drv]",
-      "002063566 ONTARIO",
-      "Joliet, IL",
-      "Cameron, IL",
-      "Lumper",
-      "options",
-    ],
-  ],
-};
+const tableHeaders = [
+  "#",
+  "Card Number",
+  "Card Status",
+  "Expiration Date",
+  "Assigned To",
+  "Assigned On",
+  "Truck",
+  "Notes",
+  "Actions",
+  <PiGearDuotone />,
+];
+const tableRowData = [
+  {
+    "#": "1001",
+    "Card Number": "1111-2222-3333-4444",
+    "Card Status": "Active",
+    "Expiration Date": "01/01/2021",
+    "Assigned To": "Max Payne",
+    "Assigned On": "01/01/2021",
+    Truck: "Truck 1",
+    Notes: "Notes",
+    Actions: "icon",
+  },
+  {
+    "#": "1002",
+    "Card Number": "1111-2222-3333-4445",
+    "Card Status": "InActive",
+    "Expiration Date": "01/01/2021",
+    "Assigned To": "Max Payne",
+    "Assigned On": "01/01/2021",
+    Truck: "Truck 1",
+    Notes: "Notes",
+    Actions: "icon",
+  },
+];
 
 const FuelPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [filteredData, setFilteredData] = useState(tableRowData);
+  const [filter, setFilter] = useState("");
+
+  const handleSearchFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toLowerCase();
+    const filteredData = tableRowData.filter((item) => {
+      return tableHeaders.some((column) =>
+        String(item[column as keyof object])
+          .toLowerCase()
+          .includes(value)
+      );
+    });
+    setFilter(value);
+    setFilteredData(filteredData);
+  };
 
   return (
     <>
@@ -94,8 +90,23 @@ const FuelPage = () => {
           </div>
         </Nav>
         <div className="d-flex align-items-center gap-3">
-          <SearchPage />
-          <Link className="btn btn-sm btn-outline-primary" to="/createfuelpage">
+          <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
+            <InputGroup className="shadow-sm border-secondary">
+              <InputGroupText className="bg-white">
+                <BsSearch size={16} />
+              </InputGroupText>
+              <Input
+                placeholder="Search"
+                className="border-start-0 border-end-0 search"
+                value={filter}
+                onChange={handleSearchFilterChange}
+              />
+            </InputGroup>
+          </div>
+          <Link
+            className="btn btn-sm btn-outline-primary"
+            to={routes.createNewFuelPage}
+          >
             <AiOutlinePlus />
             New Fuel Card
           </Link>
@@ -105,28 +116,11 @@ const FuelPage = () => {
       <div className="content d-flex">
         <SideBar isSidebarOpen={!isSidebarOpen} activePageId={5} />
         <div className="aria-content">
-          <Table responsive hover className="table-data text-nowrap">
-            <thead>
-              <tr>
-                {tableData.tableHeaders.map((headeritem, index) => (
-                  <th key={index}>
-                    <span>{headeritem}</span>
-
-                    <TableSortIcon />
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.tableRowData?.map((row, index) => (
-                <tr key={index}>
-                  {row.map((item, index) => (
-                    <td key={index}>{item}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <GenericTable
+            tableHeaders={tableHeaders}
+            tableData={filteredData}
+            defaultSortColumn="Card Status"
+          />
         </div>
       </div>
     </>

@@ -1,12 +1,22 @@
-export interface accountPage {
+export interface billingEntryPage {
   partner: string;
   driver: string;
   date: string;
-  amount: string;
+  amount: number;
   category: string;
   notes: string;
   settlement: string;
 }
+
+export const initialBillingState: billingEntryPage = {
+  partner: "",
+  driver: "",
+  date: "",
+  amount: 0,
+  category: "",
+  notes: "",
+  settlement: "",
+};
 
 export interface additionsPage {
   type: string;
@@ -18,6 +28,17 @@ export interface additionsPage {
   notes: string;
   settlement: string;
 }
+
+export const initialAdditionsPageState: additionsPage = {
+  type: "",
+  vendor: "",
+  driver: "",
+  date: "",
+  amount: "",
+  category: "",
+  notes: "",
+  settlement: "",
+};
 
 export interface schedulePage {
   driver: string;
@@ -33,15 +54,43 @@ export interface schedulePage {
   lastDay: string;
   customDescription: string;
   notes: string;
+  numberOfTimes: string;
+  untilDate: string;
 }
+
+export const initialSchedulePageState: schedulePage = {
+  driver: "",
+  vendor: "",
+  type: "",
+  amount: "",
+  category: "",
+  deductBy: "",
+  schedule: "",
+  startOn: "",
+  repeat: "Always",
+  status: "",
+  lastDay: "",
+  customDescription: "",
+  notes: "",
+  numberOfTimes: "",
+  untilDate: "",
+};
 
 export interface Chartofaccount {
   accountType: string;
   parentAccount: string;
   notes: string;
   name: string;
-  subAccount: string;
+  subAccount: boolean;
 }
+
+export const initialChartofaccountState: Chartofaccount = {
+  accountType: "",
+  parentAccount: "",
+  notes: "",
+  name: "",
+  subAccount: false,
+};
 
 export interface factoringReport {
   partner: string;
@@ -49,6 +98,13 @@ export interface factoringReport {
   notes: string;
   date: string;
 }
+
+export const initialFactoringReportState: factoringReport = {
+  partner: "",
+  factoringreportstatus: "",
+  notes: "",
+  date: "",
+};
 
 export interface payments {
   payee: string;
@@ -59,6 +115,15 @@ export interface payments {
   amount: string;
 }
 
+export const initialPaymentState: payments = {
+  payee: "",
+  payto: "",
+  date: "",
+  description: "",
+  type: "",
+  amount: "",
+};
+
 export interface expenses {
   date: string;
   payto: string;
@@ -66,6 +131,14 @@ export interface expenses {
   category: string;
   notes: string;
 }
+
+export const initialExpensesState: expenses = {
+  payto: "",
+  date: "",
+  notes: "",
+  category: "",
+  amount: "",
+};
 
 export interface ExpensesSchedulePage {
   driver: string;
@@ -80,3 +153,17 @@ export interface ExpensesSchedulePage {
   truck: string;
   notes: string;
 }
+
+export const initialExpensesSchedulePageState: ExpensesSchedulePage = {
+  driver: "",
+  scheduleName: "",
+  payTo: "",
+  category: "",
+  amount: "",
+  notes: "",
+  trailer: "",
+  truck: "",
+  startOn: "",
+  repeat: "",
+  schedule: "",
+};

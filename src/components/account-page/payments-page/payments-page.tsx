@@ -19,7 +19,6 @@ import {
   NavbarBrand,
   NavItem,
   Row,
-  Table,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Header, SideBar } from "../../header";
@@ -27,56 +26,61 @@ import Profile from "../../pofile";
 import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
-import TableSortIcon from "../../load-page/tableSortIcon";
+import { routes } from "../../routes/routes";
+import { GenericTable } from "../../table";
 
-const tableData = {
-  tableHeaders: [
-    "#",
-    "Date",
-    "Driver",
-    "Payable To",
-    "Amount",
-    "Author",
-    "Description",
-    "Actions",
-  ],
-  tableRowData: [
-    [
-      "1001",
-      "06/14/23",
-      "Load",
-      "Load",
-      "Completed",
-      "Max Payne",
-      "Max Payne",
-      "002063566 ONTARIO",
-    ],
-    [
-      "1001",
-      "06/14/23",
-      "Load",
-      "Load",
-      "Completed",
-      "Max Payne",
-      "Max Payne",
-      "002063566 ONTARIO",
-    ],
-    [
-      "1001",
-      "06/14/23",
-      "Load",
-      "Load",
-      "Completed",
-      "Max Payne",
-      "Max Payne",
-      "002063566 ONTARIO",
-    ],
-  ],
-};
+const tableHeaders = [
+  "#",
+  "Date",
+  "Driver",
+  "Payable To",
+  "Amount",
+  "Author",
+  "Description",
+  "Actions",
+];
+
+const tableData = [
+  {
+    "#": "1001",
+    Date: "1/1/2021",
+    Driver: "Max",
+    "Payable To": "Max",
+    Amount: "100",
+    Author: "Max",
+    Description: "Max",
+    Actions: "abcd",
+  },
+  {
+    "#": "1002",
+    Date: "1/1/2021",
+    Driver: "Max",
+    "Payable To": "Max",
+    Amount: "100",
+    Author: "Max",
+    Description: "Max",
+    Actions: "abc",
+  },
+];
 
 const PaymentsPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [filteredData, setFilteredData] = useState(tableData);
+  const [filter, setFilter] = useState("");
+
+  const handleSearchFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toLowerCase();
+    const filteredData = tableData.filter((item) => {
+      return tableHeaders.some((column) =>
+        String(item[column as keyof object])
+          .toLowerCase()
+          .includes(value)
+      );
+    });
+    setFilter(value);
+    setFilteredData(filteredData);
+  };
 
   function searchToggle(): void {
     console.log("search");
@@ -122,6 +126,8 @@ const PaymentsPage = () => {
               <Input
                 placeholder="Search"
                 className="border-start-0 border-end-0"
+                value={filter}
+                onChange={handleSearchFilterChange}
               />
               <InputGroupText className="bg-white">
                 <Button
@@ -137,7 +143,7 @@ const PaymentsPage = () => {
           </div>
           <Link
             className="btn btn-sm btn-outline-primary"
-            to="/createpaymentspage"
+            to={routes.createNewPaymentsPage}
           >
             <AiOutlinePlus />
             New Payment
@@ -150,7 +156,7 @@ const PaymentsPage = () => {
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>
-              <Card style={{ backgroundColor: "#E9F3FB" }}>
+              <Card className="card-search mb-3">
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
                     <Row className="px-5">
@@ -165,10 +171,7 @@ const PaymentsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -186,10 +189,7 @@ const PaymentsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -207,10 +207,7 @@ const PaymentsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -228,10 +225,7 @@ const PaymentsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -249,10 +243,7 @@ const PaymentsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -272,10 +263,7 @@ const PaymentsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                           </Col>
@@ -287,10 +275,7 @@ const PaymentsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                           </Col>
@@ -302,10 +287,7 @@ const PaymentsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="date"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                           </Col>
@@ -317,38 +299,18 @@ const PaymentsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="date"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                           </Col>
-                          <Col
-                            md={2}
-                            className="mb-3 d-flex justify-content-end align-items-end"
-                          >
-                            <Button
-                              className="me-3"
-                              size="sm"
-                              style={{
-                                color: "white",
-                                border: "1px solid #1E5367",
-                                backgroundColor: "#418ECB",
-                              }}
-                            >
+                          <Col lg={2} md={6} sm={12} className="px-3 mt-4">
+                            <Button size="sm" className="me-3 save-button">
                               <BiCheck fontSize={"16px"} />
                               Apply
                             </Button>
-                            <Button
-                              size="sm"
-                              style={{
-                                color: "red",
-                                border: "1px solid red",
-                                backgroundColor: "white",
-                              }}
-                            >
-                              <RxCross2 fontSize={"16px"} color="red" /> Clear
+                            <Button size="sm" className="cancel-button">
+                              <RxCross2 fontSize={"16px"} color="red" />
+                              Clear
                             </Button>
                           </Col>
                         </Row>
@@ -359,31 +321,11 @@ const PaymentsPage = () => {
               </Card>
             </Collapse>
           )}
-          <Table responsive hover className="table-data text-nowrap">
-            <thead>
-              <tr></tr>
-            </thead>
-            <thead>
-              <tr>
-                {tableData.tableHeaders.map((headeritem, index) => (
-                  <th key={index}>
-                    <span>{headeritem}</span>
-
-                    <TableSortIcon />
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.tableRowData?.map((row, index) => (
-                <tr key={index}>
-                  {row.map((item, index) => (
-                    <td key={index}>{item}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <GenericTable
+            tableData={filteredData}
+            tableHeaders={tableHeaders}
+            defaultSortColumn="Partner"
+          />
         </div>
       </div>
     </>

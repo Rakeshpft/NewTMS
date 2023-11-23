@@ -10,7 +10,6 @@ import {
   InputGroupText,
   Input,
   Button,
-  Table,
   Card,
   CardBody,
   Col,
@@ -24,76 +23,67 @@ import { Header, SideBar } from "../../header";
 import Profile from "../../pofile";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
-import TableSortIcon from "../../load-page/tableSortIcon";
+import { routes } from "../../routes/routes";
+import { GenericTable } from "../../table";
 
-const tableData = {
-  tableHeaders: [
-    "#",
-    "Date",
-    "Amount",
-    "Category",
-    "Partner",
-    "Driver",
-    "Load Number",
-    "Driver Settlement",
-    "Notes",
-    "Actions",
-  ],
-  tableRowData: [
-    [
-      "1",
-      "06/14/23",
-      "100",
-      "Fuel",
-      "Max payne",
-      "Max payne",
-      "100",
-      "100",
-      "options",
-      "options",
-    ],
-    [
-      "1",
-      "06/14/23",
-      "100",
-      "Fuel",
-      "Max payne",
-      "Max payne",
-      "100",
-      "100",
-      "options",
-      "options",
-    ],
-    [
-      "1",
-      "06/14/23",
-      "100",
-      "Fuel",
-      "Max payne",
-      "Max payne",
-      "100",
-      "100",
-      "options",
-      "options",
-    ],
-    [
-      "1",
-      "06/14/23",
-      "100",
-      "Fuel",
-      "Max payne",
-      "Max payne",
-      "100",
-      "100",
-      "options",
-      "options",
-    ],
-  ],
-};
+const tableHeaders = [
+  "#",
+  "Date",
+  "Amount",
+  "Category",
+  "Partner",
+  "Driver",
+  "Load Number",
+  "Driver Settlement",
+  "Notes",
+  "Actions",
+];
+
+const tableData = [
+  {
+    "#": "1001",
+    Date: "01/01/2021",
+    Amount: "$100.00",
+    Category: "Loading",
+    Partner: "Max Payne",
+    Driver: "Max Payne",
+    "Load Number": "123456",
+    "Driver Settlement": "$100.00",
+    Notes: "Notes",
+    Actions: "Actions",
+  },
+  {
+    "#": "1002",
+    Date: "01/01/2021",
+    Amount: "$100.00",
+    Category: "Loading",
+    Partner: "Max Payne",
+    Driver: "Max Payne",
+    "Load Number": "123456",
+    "Driver Settlement": "$100.00",
+    Notes: "Notes",
+    Actions: "Actions",
+  },
+];
 
 const AdditionsPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [filteredData, setFilteredData] = useState(tableData);
+  const [filter, setFilter] = useState("");
+
+  const handleSearchFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toLowerCase();
+    const filteredData = tableData.filter((item) => {
+      return tableHeaders.some((column) =>
+        String(item[column as keyof object])
+          .toLowerCase()
+          .includes(value)
+      );
+    });
+    setFilter(value);
+    setFilteredData(filteredData);
+  };
 
   function searchToggle(): void {
     console.log("search");
@@ -124,6 +114,8 @@ const AdditionsPage = () => {
               <Input
                 placeholder="Search"
                 className="border-start-0 border-end-0"
+                value={filter}
+                onChange={handleSearchFilterChange}
               />
               <InputGroupText className="bg-white">
                 <Button
@@ -139,7 +131,7 @@ const AdditionsPage = () => {
           </div>
           <Link
             className="btn btn-sm btn-outline-primary"
-            to="/createadditions"
+            to={routes.createNewAdditions}
           >
             <AiOutlinePlus />
             New Entry
@@ -152,7 +144,7 @@ const AdditionsPage = () => {
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>
-              <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
+              <Card className="card-search mb-3">
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
                     <Row className="px-5">
@@ -167,10 +159,7 @@ const AdditionsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                           </Col>
@@ -182,10 +171,7 @@ const AdditionsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                           </Col>
@@ -197,10 +183,7 @@ const AdditionsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="date"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                           </Col>
@@ -212,10 +195,7 @@ const AdditionsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="date"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                           </Col>
@@ -229,10 +209,7 @@ const AdditionsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                           </Col>
@@ -244,10 +221,7 @@ const AdditionsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -265,10 +239,7 @@ const AdditionsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -288,10 +259,7 @@ const AdditionsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                           </Col>
@@ -303,30 +271,19 @@ const AdditionsPage = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                           </Col>
                           <Col lg={2} md={6} sm={12} className="px-3"></Col>
-                          <Col
-                            lg={2}
-                            md={6}
-                            sm={12}
-                            className="px-3 gap-3 d-flex justify-content-center mb-3 align-items-end"
-                          >
-                            <Button
-                              size="sm"
-                              color="info"
-                              className="text-white"
-                            >
+                          <Col lg={2} md={6} sm={12} className="px-3 mt-4">
+                            <Button size="sm" className="me-3 save-button">
                               <BiCheck fontSize={"16px"} />
                               Apply
                             </Button>
-                            <Button size="sm" color="outline-danger">
-                              <RxCross2 fontSize={"16px"} /> Clear
+                            <Button size="sm" className="cancel-button">
+                              <RxCross2 fontSize={"16px"} color="red" />
+                              Clear
                             </Button>
                           </Col>
                         </Row>
@@ -337,28 +294,11 @@ const AdditionsPage = () => {
               </Card>
             </Collapse>
           )}
-          <Table responsive hover className="table-data text-nowrap">
-            <thead>
-              <tr>
-                {tableData.tableHeaders.map((headeritem, index) => (
-                  <th key={index}>
-                    <span>{headeritem}</span>
-
-                    <TableSortIcon />
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.tableRowData?.map((row, index) => (
-                <tr key={index}>
-                  {row.map((item, index) => (
-                    <td key={index}>{item}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <GenericTable
+            tableData={filteredData}
+            tableHeaders={tableHeaders}
+            defaultSortColumn="Name"
+          />
         </div>
       </div>
     </>

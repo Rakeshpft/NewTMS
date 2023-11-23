@@ -30,6 +30,7 @@ import { MdOutgoingMail } from "react-icons/md";
 import { PiFilePdfDuotone } from "react-icons/pi";
 import { TabPage } from "../../driver-page";
 import TableSortIcon from "../../load-page/tableSortIcon";
+import { routes } from "../../routes/routes";
 
 const tableData = {
   tableHeadersAll: [
@@ -144,7 +145,7 @@ const ExpansesPage = () => {
           {name === 1 ? (
             <Link
               className="btn btn-sm btn-outline-primary"
-              to="/createexpensesschedulepage"
+              to={routes.createNewExpensesSchedulePage}
             >
               <AiOutlinePlus />
               New Schedule
@@ -152,7 +153,7 @@ const ExpansesPage = () => {
           ) : (
             <Link
               className="btn btn-sm btn-outline-primary"
-              to="/createexpansespage"
+              to={routes.createNewExpansesPage}
             >
               <AiOutlinePlus />
               New Expense
@@ -168,7 +169,7 @@ const ExpansesPage = () => {
             <TabPane tabId={1} className="m-2">
               {isOpen && (
                 <Collapse isOpen={isOpen}>
-                  <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
+                  <Card className="card-search mb-3">
                     <CardBody>
                       <Form onSubmit={handleSearchSubmit}>
                         <Row className="px-5">
@@ -386,27 +387,12 @@ const ExpansesPage = () => {
                               <Col lg={2} md={6} sm={12} className="px-3"></Col>
                               <Col lg={2} md={6} sm={12} className="px-3"></Col>
                               <Col lg={2} md={6} sm={12} className="px-3 mt-4">
-                                <Button
-                                  size="sm"
-                                  className="me-3"
-                                  style={{
-                                    color: "white",
-                                    border: "1px solid #1E5367",
-                                    backgroundColor: "#418ECB",
-                                  }}
-                                >
+                                <Button size="sm" className="me-3 save-button">
                                   <BiCheck fontSize={"16px"} />
                                   Apply
                                 </Button>
-                                <Button
-                                  size="sm"
-                                  style={{
-                                    color: "red",
-                                    border: "1px solid red",
-                                    backgroundColor: "white",
-                                  }}
-                                >
-                                  <RxCross2 fontSize={"16px"} color="red" />{" "}
+                                <Button size="sm" className="cancel-button">
+                                  <RxCross2 fontSize={"16px"} color="red" />
                                   Clear
                                 </Button>
                               </Col>
@@ -444,7 +430,7 @@ const ExpansesPage = () => {
             <TabPane tabId={2} className="m-2">
               {isOpen && (
                 <Collapse isOpen={isOpen}>
-                  <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
+                  <Card className="card-search mb-3">
                     <CardBody>
                       <Form onSubmit={handleSearchSubmit}>
                         <Row className="px-5">
@@ -591,27 +577,12 @@ const ExpansesPage = () => {
                               <Col lg={2} md={6} sm={12} className="px-3"></Col>
                               <Col lg={2} md={6} sm={12} className="px-3"></Col>
                               <Col lg={2} md={6} sm={12} className="px-3 mt-4">
-                                <Button
-                                  size="sm"
-                                  className="me-3"
-                                  style={{
-                                    color: "white",
-                                    border: "1px solid #1E5367",
-                                    backgroundColor: "#418ECB",
-                                  }}
-                                >
+                                <Button size="sm" className="me-3 save-button">
                                   <BiCheck fontSize={"16px"} />
                                   Apply
                                 </Button>
-                                <Button
-                                  size="sm"
-                                  style={{
-                                    color: "red",
-                                    border: "1px solid red",
-                                    backgroundColor: "white",
-                                  }}
-                                >
-                                  <RxCross2 fontSize={"16px"} color="red" />{" "}
+                                <Button size="sm" className="cancel-button">
+                                  <RxCross2 fontSize={"16px"} color="red" />
                                   Clear
                                 </Button>
                               </Col>

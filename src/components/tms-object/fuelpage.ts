@@ -10,6 +10,18 @@ export interface fuelCard {
   equipmentOwner: string;
 }
 
+export const initialFuelCardState: fuelCard = {
+  cardNumber: "",
+  active: "",
+  expirationDate: "",
+  truck: "",
+  notes: "",
+  driver: "",
+  assignOn: "",
+  returnedOn: "",
+  equipmentOwner: "",
+};
+
 export interface fuelTransaction {
   driver: string;
   addnew: string;
@@ -17,7 +29,7 @@ export interface fuelTransaction {
   fuelCard: string;
   date: string;
   amount: string;
-  ifta: string;
+  ifta: boolean;
   city: string;
   state: string;
   unitGallons: string;
@@ -27,3 +39,21 @@ export interface fuelTransaction {
   trailer: string;
   notes: string;
 }
+
+export const initialFuelTransactionState: fuelTransaction = {
+  driver: "",
+  addnew: "",
+  additionalPayee: "",
+  fuelCard: "",
+  date: "",
+  amount: "",
+  ifta: false,
+  city: "",
+  state: "",
+  unitGallons: "",
+  productCode: "",
+  zip: "",
+  truck: "",
+  trailer: "",
+  notes: "",
+};

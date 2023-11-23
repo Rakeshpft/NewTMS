@@ -70,7 +70,7 @@ const FuelImport = () => {
                 <FormGroup>
                   <Label>Select Template</Label>
                   <Input
-                    style={{ color: "black", border: "1px solid #418ECB" }}
+                    className="form-control form-control-sm"
                     type="select"
                     bsSize="sm"
                     value={state.template}

@@ -4,7 +4,6 @@ import {
   Navbar,
   NavbarBrand,
   Nav,
-  Table,
   Button,
   Input,
   InputGroup,
@@ -29,105 +28,80 @@ import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlinePlus } from "react-icons/ai";
 import { PiGearDuotone, PiPencilBold } from "react-icons/pi";
-import TableSortIcon from "../../load-page/tableSortIcon";
+import { routes } from "../../routes/routes";
+import { GenericTable } from "../../table";
 
-const tableData = {
-  tableHeaders: [
-    "#",
-    "Date",
-    "Driver",
-    "Fuel Card",
-    "Truck",
-    "Trailer",
-    "Location",
-    "Fuel Amount",
-    "Fuel units, Gallons",
-    "Product Code",
-    "Included In IFTA",
-    "Partner",
-    "Billing",
-    "Actions",
-    <PiGearDuotone />,
-    ,
-  ],
-  tableRowData: [
-    [
-      "1",
-      "06/14/23",
-      "Max payne [drv]",
-      "123456789",
-      "Joliet, IL",
-      "Cameron, IL",
-      "Lumper",
-      "$500.00",
-      "$500.00",
-      "Lumper",
-      "Lumper",
-      "Lumper",
-      "Lumper",
-      "Lumper",
-      "Lumper",
-    ],
-    [
-      "1",
-      "06/14/23",
-      "Max payne [drv]",
-      "123456789",
-      "Joliet, IL",
-      "Cameron, IL",
-      "Lumper",
-      "$500.00",
-      "$500.00",
-      "Lumper",
-      "Lumper",
-      "Lumper",
-      "Lumper",
-      "Lumper",
-      "Lumper",
-    ],
-    [
-      "1",
-      "06/14/23",
-      "Max payne [drv]",
-      "123456789",
-      "Joliet, IL",
-      "Cameron, IL",
-      "Lumper",
-      "$500.00",
-      "$500.00",
-      "Lumper",
-      "Lumper",
-      "Lumper",
-      "Lumper",
-      "Lumper",
-      "Lumper",
-    ],
-    [
-      "1",
-      "06/14/23",
-      "Max payne [drv]",
-      "123456789",
-      "Joliet, IL",
-      "Cameron, IL",
-      "Lumper",
-      "$500.00",
-      "$500.00",
-      "Lumper",
-      "Lumper",
-      "Lumper",
-      "Lumper",
-      "Lumper",
-      "Lumper",
-    ],
-  ],
-};
+const tableHeaders = [
+  "#",
+  "Date",
+  "Driver",
+  "Fuel Card",
+  "Truck",
+  "Trailer",
+  "Location",
+  "Fuel Amount",
+  "Fuel units, Gallons",
+  "Product Code",
+  "Included In IFTA",
+  "Partner",
+  "Billing",
+  "Actions",
+  <PiGearDuotone />,
+];
+
+const tableRowData = [
+  {
+    "#": "1001",
+    Date: "01/01/2021",
+    Driver: "Max Payne",
+    "Fuel Card": "1111-2222-3333-4444",
+    Truck: "Truck 1",
+    Trailer: "Trailer 1",
+    Location: "Location 1",
+    "Fuel Amount": "100",
+    "Fuel units, Gallons": "100",
+    "Product Code": "Product Code 1",
+    "Included In IFTA": "Yes",
+    Partner: "Partner 1",
+    Billing: "Billing 1",
+    Actions: "icon",
+  },
+  {
+    "#": "1002",
+    Date: "01/01/2021",
+    Driver: "Max",
+    "Fuel Card": "1111-2222-3333-4445",
+    Truck: "Truck 2",
+    Trailer: "Trailer 2",
+    Location: "Location 2",
+    "Fuel Amount": "200",
+    "Fuel units, Gallons": "200",
+    "Product Code": "Product Code 2",
+    "Included In IFTA": "No",
+    Partner: "Partner 2",
+    Billing: "Billing 2",
+    Actions: "icon",
+  },
+];
 
 const FuelTransaction = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  // const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [filteredData, setFilteredData] = useState(tableRowData);
+  const [filter, setFilter] = useState("");
 
-  // const toggle = () => setDropdownOpen((prevState) => !prevState);
+  const handleSearchFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toLowerCase();
+    const filteredData = tableRowData.filter((item) => {
+      return tableHeaders.some((column) =>
+        String(item[column as keyof object])
+          .toLowerCase()
+          .includes(value)
+      );
+    });
+    setFilter(value);
+    setFilteredData(filteredData);
+  };
 
   function searchToggle(): void {
     console.log("search");
@@ -157,7 +131,9 @@ const FuelTransaction = () => {
               </InputGroupText>
               <Input
                 placeholder="Search"
-                className="border-start-0 border-end-0"
+                className="border-start-0 border-end-0 search"
+                value={filter}
+                onChange={handleSearchFilterChange}
               />
               <InputGroupText className="bg-white">
                 <Button
@@ -173,7 +149,7 @@ const FuelTransaction = () => {
           </div>
           <Link
             className="btn btn-sm btn-outline-primary"
-            to="/createfueltransaction"
+            to={routes.createNewFuelTransaction}
           >
             <AiOutlinePlus />
             New Fuel Transaction
@@ -186,7 +162,7 @@ const FuelTransaction = () => {
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>
-              <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
+              <Card className="card-search mb-3">
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
                     <Row className="px-5">
@@ -207,10 +183,7 @@ const FuelTransaction = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="date"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                             <FormGroup>
@@ -220,10 +193,7 @@ const FuelTransaction = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
 
@@ -234,10 +204,7 @@ const FuelTransaction = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -255,10 +222,7 @@ const FuelTransaction = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="date"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                             <FormGroup>
@@ -268,10 +232,7 @@ const FuelTransaction = () => {
                                 id="exampleSelect"
                                 name="text"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -287,10 +248,7 @@ const FuelTransaction = () => {
                                 id="exampleSelect"
                                 name="text"
                                 type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                           </Col>
@@ -302,10 +260,7 @@ const FuelTransaction = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -321,10 +276,7 @@ const FuelTransaction = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -340,15 +292,11 @@ const FuelTransaction = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="text"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               />
                             </FormGroup>
                           </Col>
                           <Col lg="2" md="6">
-                            {" "}
                             <FormGroup>
                               <Label>Driver</Label>
                               <Input
@@ -356,10 +304,7 @@ const FuelTransaction = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -367,7 +312,7 @@ const FuelTransaction = () => {
                                 <option>4</option>
                                 <option>5</option>
                               </Input>
-                            </FormGroup>{" "}
+                            </FormGroup>
                             <FormGroup>
                               <Label>State</Label>
                               <Input
@@ -375,10 +320,7 @@ const FuelTransaction = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -386,7 +328,7 @@ const FuelTransaction = () => {
                                 <option>4</option>
                                 <option>5</option>
                               </Input>
-                            </FormGroup>{" "}
+                            </FormGroup>
                             <FormGroup>
                               <Label>Trailer</Label>
                               <Input
@@ -394,10 +336,7 @@ const FuelTransaction = () => {
                                 id="exampleSelect"
                                 name="select"
                                 type="select"
-                                style={{
-                                  color: "black",
-                                  border: "1px solid #418ECB",
-                                }}
+                                className="form-control form-control-sm"
                               >
                                 <option>1</option>
                                 <option>2</option>
@@ -420,10 +359,7 @@ const FuelTransaction = () => {
                                   id="exampleSelect"
                                   name="select"
                                   type="select"
-                                  style={{
-                                    color: "black",
-                                    border: "1px solid #418ECB",
-                                  }}
+                                  className="form-control form-control-sm"
                                 >
                                   <option>1</option>
                                   <option>2</option>
@@ -439,10 +375,7 @@ const FuelTransaction = () => {
                                   id="exampleSelect"
                                   name="select"
                                   type="select"
-                                  style={{
-                                    color: "black",
-                                    border: "1px solid #418ECB",
-                                  }}
+                                  className="form-control form-control-sm"
                                 >
                                   <option>1</option>
                                   <option>2</option>
@@ -454,26 +387,11 @@ const FuelTransaction = () => {
                             </div>
 
                             <FormGroup className="align-self-end">
-                              <Button
-                                size="sm"
-                                className="me-3"
-                                style={{
-                                  color: "white",
-                                  border: "1px solid #1E5367",
-                                  backgroundColor: "#418ECB",
-                                }}
-                              >
+                              <Button size="sm" className="me-3 save-button">
                                 <BiCheck fontSize={"16px"} />
                                 Apply
                               </Button>
-                              <Button
-                                size="sm"
-                                style={{
-                                  color: "red",
-                                  border: "1px solid red",
-                                  backgroundColor: "white",
-                                }}
-                              >
+                              <Button size="sm" className="cancel-button">
                                 <RxCross2 fontSize={"16px"} color="red" /> Clear
                               </Button>
                             </FormGroup>
@@ -525,28 +443,11 @@ const FuelTransaction = () => {
               </UncontrolledDropdown>
             </Form>
           </div>
-          <Table responsive hover className="table-data text-nowrap">
-            <thead>
-              <tr>
-                {tableData.tableHeaders.map((headeritem, index) => (
-                  <th key={index}>
-                    <span>{headeritem}</span>
-
-                    <TableSortIcon />
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.tableRowData?.map((row, index) => (
-                <tr key={index}>
-                  {row.map((item, index) => (
-                    <td key={index}>{item}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <GenericTable
+            tableHeaders={tableHeaders}
+            tableData={filteredData}
+            defaultSortColumn="Card Status"
+          />
         </div>
       </div>
     </>

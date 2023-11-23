@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import { Header, SideBar } from "../header";
 import {
   Button,
@@ -29,114 +29,169 @@ import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlinePlus } from "react-icons/ai";
 import { PiGearDuotone } from "react-icons/pi";
-import TableSortIcon from "./tableSortIcon";
+import { SearchLoadPage, initialSearchState } from "../tms-object/loadpage";
+import { routes } from "../routes/routes";
+import { GenericTable } from "../table";
 
-const tableData = {
-  tableHeaders: [
-    "Load",
-    "Date",
-    "Driver",
-    "Broker",
-    "PO#",
-    "Pickup",
-    "Delivery",
-    "Rate",
-    "Completed",
-    "Status",
-    "Billing",
-    "Notes",
-    "Attachments",
-    "Actions",
-    <PiGearDuotone />,
-  ],
-  tableRowData: [
-    [
-      "1001",
-      "06/14/23",
-      "Max payne [drv]",
-      "002063566 ONTARIO",
-      "-",
-      "Joliet, IL",
-      "Cameron, IL",
-      "$500.00",
-      "06/25/23",
-      "Delivered - badge",
-      "Invoiced",
-      "Lumper: $50.00 :: Detention: $50.00",
-      "[file-icon]",
-      "Lumper",
-      "[options]",
-    ],
-    [
-      "1002",
-      "06/15/23",
-      "Max payne [drv]",
-      "002063566 ONTARIO",
-      "-",
-      "Joliet, IL",
-      "Cameron, IL",
-      "$500.00",
-      "06/25/23",
-      "Delivered - badge",
-      "Invoiced",
-      "Lumper: $50.00 :: Detention: $50.00",
-      "[file-icon]",
-      "Lumper",
-      "[options]",
-    ],
-    [
-      "1004",
-      "06/14/23",
-      "Max payne [drv]",
-      "002063566 ONTARIO",
-      "-",
-      "Joliet, IL",
-      "Cameron, IL",
-      "$500.00",
-      "06/25/23",
-      "Delivered - badge",
-      "Invoiced",
-      "Lumper: $50.00 :: Detention: $50.00",
-      "[file-icon]",
-      "Lumper",
-      "[options]",
-    ],
-    [
-      "1007",
-      "06/14/23",
-      "Max payne [drv]",
-      "002063566 ONTARIO",
-      "-",
-      "Joliet, IL",
-      "Cameron, IL",
-      "$500.00",
-      "06/25/23",
-      "Delivered - badge",
-      "Invoiced",
-      "Lumper: $50.00 :: Detention: $50.00",
-      "[file-icon]",
-      "Lumper",
-      "[options]",
-    ],
-  ],
+const columns = [
+  "Load",
+  "Date",
+  "Driver",
+  "Broker",
+  "PO#",
+  "Pickup",
+  "Delivery",
+  "Rate",
+  "Completed",
+  "Status",
+  "Billing",
+  "Notes",
+  "Attachments",
+  "Actions",
+  <PiGearDuotone />,
+];
+
+const Tabledata = [
+  {
+    Load: 1001,
+    Date: "07/14/23",
+    Driver: "Shyam payne [drv]",
+    Broker: "002063564 ONTARIO",
+    "PO#": "-",
+    Pickup: "Joliet, ILL",
+    Delivery: "Cameron, ILT",
+    Rate: "$500.00",
+    Completed: "23/06/2023",
+    Status: "Delivered - badge",
+    Billing: "Invoiced",
+    Notes: "Lumper: $50.00 :: Detention: $50.00",
+    Attachments: "[file-icon]",
+    Actions: "Lumper",
+  },
+  {
+    Load: 1002,
+    Date: "08/12/23",
+    Driver: "Sita payne [drv]",
+    Broker: "002063563 ONTARIO",
+    "PO#": "-",
+    Pickup: "Joliet",
+    Delivery: "Cameron",
+    Rate: "$500.00",
+    Completed: "24/06/2023",
+    Status: "Delivered - badge",
+    Billing: "Invoiced",
+    Notes: "Lumper: $50.00 :: Detention: $50.00",
+    Attachments: "[file-icon]",
+    Actions: "Lumper",
+  },
+  {
+    Load: 1003,
+    Date: "08/12/23",
+    Driver: "Ram payne [drv]",
+    Broker: "002063563 ONTARIO",
+    "PO#": "-",
+    Pickup: "Joliet-T",
+    Delivery: "Cameron",
+    Rate: "$500.00",
+    Completed: "25/06/2023",
+    Status: "Delivered - badge",
+    Billing: "Invoiced",
+    Notes: "Lumper: $50.00 :: Detention: $50.00",
+    Attachments: "[file-icon]",
+    Actions: "Lumper",
+  },
+];
+
+type ActionTypes =
+  | { type: "SET_PERIOD"; payload: string }
+  | { type: "SET_PICKUPDATE"; payload: string }
+  | { type: "SET_DEVIVERYDATE"; payload: string }
+  | { type: "SET_BROKER"; payload: string }
+  | { type: "SET_CITY"; payload: string }
+  | { type: "SET_STATE"; payload: string }
+  | { type: "SET_DRIVER"; payload: string }
+  | { type: "SET_DISPATCHER"; payload: string }
+  | { type: "SET_TRUCK"; payload: string }
+  | { type: "SET_TRAILER"; payload: string }
+  | { type: "SET_DIRECTBILLING"; payload: string };
+
+const filterformReducer = (
+  state: SearchLoadPage,
+  action: ActionTypes
+): SearchLoadPage => {
+  switch (action.type) {
+    case "SET_PERIOD":
+      return { ...state, period: action.payload };
+    case "SET_PICKUPDATE":
+      return { ...state, pickupDate: action.payload };
+    case "SET_DEVIVERYDATE":
+      return { ...state, deviveryDate: action.payload };
+    case "SET_BROKER":
+      return { ...state, broker: action.payload };
+    case "SET_CITY":
+      return { ...state, city: action.payload };
+    case "SET_STATE":
+      return { ...state, state: action.payload };
+    case "SET_DRIVER":
+      return { ...state, driver: action.payload };
+    case "SET_DISPATCHER":
+      return { ...state, dispatcher: action.payload };
+    case "SET_TRUCK":
+      return { ...state, truck: action.payload };
+    case "SET_TRAILER":
+      return { ...state, trailer: action.payload };
+    case "SET_DIRECTBILLING":
+      return { ...state, directBilling: action.payload };
+    default:
+      return state;
+  }
 };
 
 const LoadPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [filteredData, setFilteredData] = useState(Tabledata);
+  const [filter, setFilter] = useState("");
+  const [formState, dispatch] = useReducer(
+    filterformReducer,
+    initialSearchState
+  );
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
-  function searchToggle(): void {
-    console.log("search");
+  const handleSearchFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toLowerCase();
+    const filteredData = Tabledata.filter((item) => {
+      return columns.some((column) =>
+        String(item[column as keyof object])
+          .toLowerCase()
+          .includes(value)
+      );
+    });
+    setFilter(value);
+    setFilteredData(filteredData);
+  };
+
+  const searchToggle = (): void => {
     setIsOpen((isOpen) => !isOpen);
-  }
+  };
+
+  const handleFilterInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = event.target;
+    dispatch({
+      type: `SET_${name.toUpperCase()}` as ActionTypes["type"],
+      payload: value,
+    });
+  };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("search");
+    console.log(formState);
   };
+
   return (
     <>
       <Navbar color="light" className="py-0">
@@ -171,7 +226,12 @@ const LoadPage = () => {
               <InputGroupText className="bg-white">
                 <BsSearch size={16} />
               </InputGroupText>
-              <Input placeholder="Search" className=" search" />
+              <Input
+                placeholder="Search"
+                className="border-start-0 border-end-0 search"
+                value={filter}
+                onChange={handleSearchFilterChange}
+              />
               <InputGroupText className="bg-white">
                 <Button
                   color="link"
@@ -185,7 +245,10 @@ const LoadPage = () => {
             </InputGroup>
           </div>
 
-          <Link className="btn btn-sm btn-outline-primary" to="/createload">
+          <Link
+            className="btn btn-sm btn-outline-primary"
+            to={routes.createNewLoad}
+          >
             <AiOutlinePlus />
             New Load
           </Link>
@@ -197,7 +260,7 @@ const LoadPage = () => {
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>
-              <Card style={{ backgroundColor: "#E9F3FB" }}>
+              <Card className="card-search mb-3">
                 <CardBody>
                   <Form
                     onSubmit={handleSearchSubmit}
@@ -218,12 +281,11 @@ const LoadPage = () => {
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
-                              name="select"
+                              name="period"
                               type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                              }}
+                              className="form-control form-control-sm"
+                              value={formState.period}
+                              onChange={handleFilterInputChange}
                             >
                               <option>1</option>
                               <option>2</option>
@@ -237,26 +299,24 @@ const LoadPage = () => {
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
-                              name="select"
                               type="date"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                              }}
-                            ></Input>
+                              className="form-control form-control-sm"
+                              name="pickupDate"
+                              value={formState.pickupDate}
+                              onChange={handleFilterInputChange}
+                            />
                           </FormGroup>
                           <FormGroup>
                             <Label>Delivery Date</Label>
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
-                              name="select"
                               type="date"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                              }}
-                            ></Input>
+                              name="deliveryDate"
+                              className="form-control form-control-sm"
+                              value={formState.deviveryDate}
+                              onChange={handleFilterInputChange}
+                            />
                           </FormGroup>
                         </Col>
                         <Col lg={2} md={4} sm={12}>
@@ -265,12 +325,11 @@ const LoadPage = () => {
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
-                              name="select"
+                              name="broker"
                               type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                              }}
+                              className="form-control form-control-sm"
+                              value={formState.broker}
+                              onChange={handleFilterInputChange}
                             >
                               <option>1</option>
                               <option>2</option>
@@ -283,27 +342,25 @@ const LoadPage = () => {
                             <Label>City</Label>
                             <Input
                               bsSize="sm"
-                              id="exampleSelect"
-                              name="text"
+                              id="exampleCity"
+                              name="city"
                               type="text"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                              }}
-                            ></Input>
+                              className="form-control form-control-sm"
+                              value={formState.city}
+                              onChange={handleFilterInputChange}
+                            />
                           </FormGroup>
                           <FormGroup>
                             <Label>City</Label>
                             <Input
                               bsSize="sm"
-                              id="exampleSelect"
-                              name="text"
+                              id="exampleCity"
+                              name="city"
                               type="text"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                              }}
-                            ></Input>
+                              className="form-control form-control-sm"
+                              value={formState.city}
+                              onChange={handleFilterInputChange}
+                            />
                           </FormGroup>
                         </Col>
                         <Col lg={2} md={4} sm={12}>
@@ -312,12 +369,11 @@ const LoadPage = () => {
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
-                              name="select"
+                              name="driver"
                               type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                              }}
+                              className="form-control form-control-sm"
+                              value={formState.driver}
+                              onChange={handleFilterInputChange}
                             >
                               <option>1</option>
                               <option>2</option>
@@ -330,27 +386,25 @@ const LoadPage = () => {
                             <Label>State</Label>
                             <Input
                               bsSize="sm"
-                              id="exampleSelect"
-                              name="select"
+                              id="exampleState"
+                              name="state"
                               type="text"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                              }}
-                            ></Input>
+                              className="form-control form-control-sm"
+                              value={formState.state}
+                              onChange={handleFilterInputChange}
+                            />
                           </FormGroup>
                           <FormGroup>
                             <Label>State</Label>
                             <Input
                               bsSize="sm"
-                              id="exampleSelect"
-                              name="select"
+                              id="exampleState"
+                              name="state"
                               type="text"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                              }}
-                            ></Input>
+                              className="form-control form-control-sm"
+                              value={formState.state}
+                              onChange={handleFilterInputChange}
+                            />
                           </FormGroup>
                         </Col>
                         <Col lg={2} md={4} sm={12}>
@@ -359,12 +413,11 @@ const LoadPage = () => {
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
-                              name="select"
+                              name="dispatcher"
                               type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                              }}
+                              className="form-control form-control-sm"
+                              value={formState.dispatcher}
+                              onChange={handleFilterInputChange}
                             >
                               <option>1</option>
                               <option>2</option>
@@ -378,12 +431,11 @@ const LoadPage = () => {
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
-                              name="select"
+                              name="truck"
                               type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                              }}
+                              className="form-control form-control-sm"
+                              value={formState.truck}
+                              onChange={handleFilterInputChange}
                             >
                               <option>1</option>
                               <option>2</option>
@@ -397,12 +449,11 @@ const LoadPage = () => {
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
-                              name="select"
+                              name="trailer"
                               type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                              }}
+                              className="form-control form-control-sm"
+                              value={formState.trailer}
+                              onChange={handleFilterInputChange}
                             >
                               <option>1</option>
                               <option>2</option>
@@ -418,12 +469,11 @@ const LoadPage = () => {
                             <Input
                               bsSize="sm"
                               id="exampleSelect"
-                              name="select"
+                              name="directBilling"
                               type="select"
-                              style={{
-                                color: "black",
-                                border: "1px solid #418ECB",
-                              }}
+                              className="form-control form-control-sm"
+                              value={formState.directBilling}
+                              onChange={handleFilterInputChange}
                             >
                               <option>1</option>
                               <option>2</option>
@@ -464,7 +514,7 @@ const LoadPage = () => {
                                   </FormGroup>
                                   <FormGroup check inline>
                                     <Input id="checkbox2" type="checkbox" />
-                                    <Label check>Cancelled</Label>
+                                    <Label check>cancel-buttonled</Label>
                                   </FormGroup>
                                   <FormGroup check inline>
                                     <Input id="checkbox2" type="checkbox" />
@@ -497,7 +547,7 @@ const LoadPage = () => {
                                   </FormGroup>
                                   <FormGroup check inline>
                                     <Input id="checkbox2" type="checkbox" />
-                                    <Label check>Cancelled</Label>
+                                    <Label check>cancel-buttonled</Label>
                                   </FormGroup>
                                   <FormGroup check inline>
                                     <Input id="checkbox2" type="checkbox" />
@@ -547,26 +597,11 @@ const LoadPage = () => {
                               md="6"
                               className="d-flex justify-content-end align-items-end"
                             >
-                              <Button
-                                size="sm"
-                                className="me-3"
-                                style={{
-                                  color: "white",
-                                  border: "1px solid #1E5367",
-                                  backgroundColor: "#418ECB",
-                                }}
-                              >
+                              <Button size="sm" className="me-3 save-button">
                                 <BiCheck fontSize={"16px"} />
                                 Apply
                               </Button>
-                              <Button
-                                size="sm"
-                                style={{
-                                  color: "red",
-                                  border: "1px solid red",
-                                  backgroundColor: "white",
-                                }}
-                              >
+                              <Button className="cancel-button" size="sm">
                                 <RxCross2 fontSize={"16px"} color="red" /> Clear
                               </Button>
                             </Col>
@@ -579,28 +614,11 @@ const LoadPage = () => {
               </Card>
             </Collapse>
           )}
-          <Table responsive hover className="table-data text-nowrap">
-            <thead>
-              <tr>
-                {tableData.tableHeaders.map((headeritem, index) => (
-                  <th key={index}>
-                    <span>{headeritem}</span>
-
-                    <TableSortIcon />
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.tableRowData?.map((row, index) => (
-                <tr key={index}>
-                  {row.map((item, index) => (
-                    <td key={index}>{item}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <GenericTable
+            tableData={filteredData}
+            tableHeaders={columns}
+            defaultSortColumn="Load"
+          />
         </div>
       </div>
     </>

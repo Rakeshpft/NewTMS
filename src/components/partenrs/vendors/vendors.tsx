@@ -20,7 +20,6 @@ import {
   Navbar,
   NavbarBrand,
   Row,
-  Table,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import Profile from "../../pofile";
@@ -28,60 +27,62 @@ import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlinePlus } from "react-icons/ai";
-import TableSortIcon from "../../load-page/tableSortIcon";
+import { routes } from "../../routes/routes";
+import { GenericTable } from "../../table";
 
-const tableData = {
-  tableHeaders: [
-    "#",
-    "Name",
-    "Address",
-    "MC",
-    "Phone",
-    "Email",
-    "type",
-    "Action",
-    <PiGearDuotone />,
-  ],
-  tableRowData: [
-    [
-      "1001",
-      "Max payne [drv]",
-      "002063566 ONTARIO",
-      "123456",
-      "1234567890",
-      "demo@gmail.com",
-      "invoice",
-      "best",
-      "Lumper",
-    ],
-    [
-      "1001",
-      "Max payne [drv]",
-      "002063566 ONTARIO",
-      "123456",
-      "1234567890",
-      "demo@gmail.com",
-      "invoice",
-      "best",
-      "Lumper",
-    ],
-    [
-      "1001",
-      "Max payne [drv]",
-      "002063566 ONTARIO",
-      "123456",
-      "1234567890",
-      "demo@gmail.com",
-      "invoice",
-      "best",
-      "Lumper",
-    ],
-  ],
-};
+const tableHeaders = [
+  "#",
+  "Name",
+  "Address",
+  "MC",
+  "Phone",
+  "Email",
+  "type",
+  "Action",
+  <PiGearDuotone />,
+];
+
+const tableRowData = [
+  {
+    "#": "1001",
+    Name: "Max payne",
+    Address: "XYZABC",
+    MC: "1234",
+    Phone: "1234567890",
+    Email: "demo@gmail.com",
+    type: "[options]",
+    Action: "[options]",
+  },
+  {
+    "#": "1002",
+    Name: "Max payne",
+    Address: "XYZABC",
+    MC: "1234",
+    Phone: "1234567890",
+    Email: "demo@gmail.com",
+    type: "[options]",
+    Action: "[options]",
+  },
+];
 
 const Vendors = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [filter, setFilter] = useState("");
+  const [filteredData, setFilteredData] = useState(tableRowData);
+
+  const handleSearchFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toLowerCase();
+    const filteredData = tableRowData.filter((item) => {
+      return tableHeaders.some((column) =>
+        String(item[column as keyof object])
+          .toLowerCase()
+          .includes(value)
+      );
+    });
+    setFilter(value);
+    setFilteredData(filteredData);
+  };
 
   function searchToggle(): void {
     console.log("search");
@@ -127,6 +128,8 @@ const Vendors = () => {
               <Input
                 placeholder="Search"
                 className="border-start-0 border-end-0"
+                value={filter}
+                onChange={handleSearchFilterChange}
               />
               <InputGroupText className="bg-white">
                 <Button
@@ -140,7 +143,10 @@ const Vendors = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn btn-sm btn-outline-primary" to="/createvendor">
+          <Link
+            className="btn btn-sm btn-outline-primary"
+            to={routes.createNewVendor}
+          >
             <AiOutlinePlus />
             New Vendor
           </Link>
@@ -152,7 +158,7 @@ const Vendors = () => {
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>
-              <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
+              <Card className="card-search mb-3">
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
                     <Row className="px-5">
@@ -169,10 +175,7 @@ const Vendors = () => {
                             id="exampleSelect"
                             name="select"
                             type="select"
-                            style={{
-                              color: "black",
-                              border: "1px solid #418ECB",
-                            }}
+                            className="form-control form-control-sm"
                           >
                             <option>1</option>
                             <option>2</option>
@@ -184,26 +187,11 @@ const Vendors = () => {
                       </Col>
                       <Col lg={3} md={6} sm={12}></Col>
                       <Col lg={3} md={6} sm={12} className="mt-4">
-                        <Button
-                          size="sm"
-                          className="me-3"
-                          style={{
-                            color: "white",
-                            border: "1px solid #1E5367",
-                            backgroundColor: "#418ECB",
-                          }}
-                        >
+                        <Button size="sm" className="me-3 save-button">
                           <BiCheck fontSize={"16px"} />
                           Apply
                         </Button>
-                        <Button
-                          size="sm"
-                          style={{
-                            color: "red",
-                            border: "1px solid red",
-                            backgroundColor: "white",
-                          }}
-                        >
+                        <Button size="sm" className="cancel-button">
                           <RxCross2 fontSize={"16px"} color="red" /> Clear
                         </Button>
                       </Col>
@@ -214,28 +202,11 @@ const Vendors = () => {
             </Collapse>
           )}
 
-          <Table responsive hover className="table-data text-nowrap">
-            <thead>
-              <tr>
-                {tableData.tableHeaders.map((item, index) => (
-                  <th key={index}>
-                    <span>{item}</span>
-
-                    <TableSortIcon />
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.tableRowData?.map((row, index) => (
-                <tr key={index}>
-                  {row.map((item, index) => (
-                    <td key={index}>{item}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <GenericTable
+            tableData={filteredData}
+            tableHeaders={tableHeaders}
+            defaultSortColumn={"Name"}
+          />
         </div>
       </div>
     </>

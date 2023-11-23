@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import { MdOutgoingMail } from "react-icons/md";
 import { AiOutlineFileExcel, AiOutlinePlus } from "react-icons/ai";
 import { PiFilePdfDuotone } from "react-icons/pi";
@@ -19,7 +19,6 @@ import {
   NavbarBrand,
   NavItem,
   Row,
-  Table,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Header, SideBar } from "../header";
@@ -28,101 +27,129 @@ import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { PiGearDuotone } from "react-icons/pi";
-import TableSortIcon from "../load-page/tableSortIcon";
+import {
+  initialSearchDriverState,
+  searchDriverPage,
+} from "../tms-object/driverpage";
+import { routes } from "../routes/routes";
+import { GenericTable } from "../table";
 
-const tableData = {
-  tableHeaders: [
-    "#",
-    "Name",
-    "Type",
-    "Status",
-    "Hire Date",
-    "Term Date",
-    "Phone",
-    "Email",
-    "Truck",
-    "Trailer",
-    "Payable To",
-    "Warnings",
-    "Driver App",
-    "Actions",
-    <PiGearDuotone />,
-  ],
-  tableRowData: [
-    [
-      "1001",
-      "06/14/23",
-      "Max payne [drv]",
-      "002063566 ONTARIO",
-      "-",
-      "Joliet, IL",
-      "Cameron, IL",
-      "$500.00",
-      "06/25/23",
-      "Delivered - badge",
-      "Invoiced",
-      "Lumper: $50.00 :: Detention: $50.00",
-      "[file-icon]",
-      "Lumper",
-      "[options]",
-    ],
-    [
-      "1002",
-      "06/15/23",
-      "Max payne [drv]",
-      "002063566 ONTARIO",
-      "-",
-      "Joliet, IL",
-      "Cameron, IL",
-      "$500.00",
-      "06/25/23",
-      "Delivered - badge",
-      "Invoiced",
-      "Lumper: $50.00 :: Detention: $50.00",
-      "[file-icon]",
-      "Lumper",
-      "[options]",
-    ],
-    [
-      "1004",
-      "06/14/23",
-      "Max payne [drv]",
-      "002063566 ONTARIO",
-      "-",
-      "Joliet, IL",
-      "Cameron, IL",
-      "$500.00",
-      "06/25/23",
-      "Delivered - badge",
-      "Invoiced",
-      "Lumper: $50.00 :: Detention: $50.00",
-      "[file-icon]",
-      "Lumper",
-      "[options]",
-    ],
-    [
-      "1007",
-      "06/14/23",
-      "Max payne [drv]",
-      "002063566 ONTARIO",
-      "-",
-      "Joliet, IL",
-      "Cameron, IL",
-      "$500.00",
-      "06/25/23",
-      "Delivered - badge",
-      "Invoiced",
-      "Lumper: $50.00 :: Detention: $50.00",
-      "[file-icon]",
-      "Lumper",
-      "[options]",
-    ],
-  ],
+const tableHeaders = [
+  "#",
+  "Name",
+  "Type",
+  "Status",
+  "Hire Date",
+  "Term Date",
+  "Phone",
+  "Email",
+  "Truck",
+  "Trailer",
+  "Payable To",
+  "Warnings",
+  "Driver App",
+  "Actions",
+  <PiGearDuotone />,
+];
+
+const tableData = [
+  {
+    "#": "1001",
+    Name: "Max payne [drv]",
+    Type: "driver",
+    Status: "Delivered - badge",
+    "Hire Date": "14/07/2023",
+    "Term Date": "23/06/2023",
+    Phone: "1234567890",
+    Email: "demo@gmail.com",
+    Truck: "Delivered - badge",
+    Trailer: "Delivered",
+    "Payable To": "Invoiced",
+    Warnings: "Lumper: $50.00 :: Detention: $50.00",
+    "Driver App": "Lumper",
+    Actions: "Lumper",
+  },
+  {
+    "#": "1002",
+    Name: "Max payne [drv]",
+    Type: "driver",
+    Status: "Delivered - badge",
+    "Hire Date": "14/07/2023",
+    "Term Date": "23/06/2023",
+    Phone: "1234567890",
+    Email: "demo@gmail.com",
+    Truck: "Delivered - badge",
+    Trailer: "Delivered",
+    "Payable To": "Invoiced",
+    Warnings: "Lumper: $50.00 :: Detention: $50.00",
+    "Driver App": "Lumper",
+    Actions: "Lumper",
+  },
+  {
+    "#": "1003",
+    Name: "Max payne [drv]",
+    Type: "driver",
+    Status: "Delivered - badge",
+    "Hire Date": "14/07/2023",
+    "Term Date": "23/06/2023",
+    Phone: "1234567890",
+    Email: "demo@gmail.com",
+    Truck: "Delivered - badge",
+    Trailer: "Delivered",
+    "Payable To": "Invoiced",
+    Warnings: "Lumper: $50.00 :: Detention: $50.00",
+    "Driver App": "Lumper",
+    Actions: "Lumper",
+  },
+];
+
+type FormAction =
+  | { type: "SET_TYPE"; payload: string }
+  | { type: "SET_STATUS"; payload: string };
+
+const filteredSearchForm = (state: searchDriverPage, action: FormAction) => {
+  switch (action.type) {
+    case "SET_TYPE":
+      return { ...state, type: action.payload };
+    case "SET_STATUS":
+      return { ...state, status: action.payload };
+    default:
+      return state;
+  }
 };
 
 const DriverPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [filteredData, setFilteredData] = useState(tableData);
+  const [filter, setFilter] = useState("");
+  const [formState, dispatch] = useReducer(
+    filteredSearchForm,
+    initialSearchDriverState
+  );
+
+  const handleSearchInput =
+    (type: FormAction["type"], dispatch: React.Dispatch<FormAction>) =>
+    (
+      event: React.ChangeEvent<
+        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+      >
+    ) => {
+      dispatch({ type, payload: event.target.value });
+    };
+
+  const handleSearchFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toLowerCase();
+    const filteredData = tableData.filter((item) => {
+      return tableHeaders.some((column) =>
+        String(item[column as keyof object])
+          .toLowerCase()
+          .includes(value)
+      );
+    });
+    setFilter(value);
+    setFilteredData(filteredData);
+  };
 
   function searchToggle(): void {
     console.log("search");
@@ -131,12 +158,12 @@ const DriverPage = () => {
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("search");
+    console.log(formState);
   };
 
   return (
     <>
-      <Navbar color="light" className="py-0 formpagenavbar" container={false}>
+      <Navbar color="light" className="formpagenavbar" container={false}>
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
@@ -168,6 +195,8 @@ const DriverPage = () => {
               <Input
                 placeholder="Search"
                 className="border-start-0 border-end-0"
+                value={filter}
+                onChange={handleSearchFilterChange}
               />
               <InputGroupText className="bg-white">
                 <Button
@@ -181,7 +210,10 @@ const DriverPage = () => {
               </InputGroupText>
             </InputGroup>
           </div>
-          <Link className="btn btn-sm btn-outline-primary" to="/createdriver">
+          <Link
+            className="btn btn-sm btn-outline-primary"
+            to={routes.createNewDriver}
+          >
             <AiOutlinePlus />
             New Driver
           </Link>
@@ -193,7 +225,7 @@ const DriverPage = () => {
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>
-              <Card style={{ backgroundColor: "#E9F3FB" }}>
+              <Card className="card-search mb-3">
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
                     <Row className="px-5 justify-content-start">
@@ -208,12 +240,11 @@ const DriverPage = () => {
                           <Input
                             bsSize="sm"
                             id="exampleSelect"
-                            name="select"
+                            name="type"
                             type="select"
-                            style={{
-                              color: "black",
-                              border: "1px solid #418ECB",
-                            }}
+                            className="form-control form-control-sm"
+                            value={formState.type}
+                            onChange={handleSearchInput("SET_TYPE", dispatch)}
                           >
                             <option>1</option>
                             <option>2</option>
@@ -229,12 +260,11 @@ const DriverPage = () => {
                           <Input
                             bsSize="sm"
                             id="exampleSelect"
-                            name="select"
+                            name="status"
                             type="select"
-                            style={{
-                              color: "black",
-                              border: "1px solid #418ECB",
-                            }}
+                            className="form-control form-control-sm"
+                            value={formState.status}
+                            onChange={handleSearchInput("SET_STATUS", dispatch)}
                           >
                             <option>1</option>
                             <option>2</option>
@@ -252,26 +282,11 @@ const DriverPage = () => {
                         sm={12}
                         className="mt-4 justify-content-end"
                       >
-                        <Button
-                          className="me-3"
-                          size="sm"
-                          style={{
-                            color: "white",
-                            border: "1px solid #1E5367",
-                            backgroundColor: "#418ECB",
-                          }}
-                        >
+                        <Button className="me-3 save-button" size="sm">
                           <BiCheck fontSize={"16px"} />
                           Apply
                         </Button>
-                        <Button
-                          size="sm"
-                          style={{
-                            color: "red",
-                            border: "1px solid red",
-                            backgroundColor: "white",
-                          }}
-                        >
+                        <Button size="sm" className="cancel-button">
                           <RxCross2 fontSize={"16px"} color="red" /> Clear
                         </Button>
                       </Col>
@@ -281,28 +296,11 @@ const DriverPage = () => {
               </Card>
             </Collapse>
           )}
-          <Table responsive hover className="table-data text-nowrap">
-            <thead>
-              <tr>
-                {tableData.tableHeaders.map((headeritem, index) => (
-                  <th key={index}>
-                    <span>{headeritem}</span>
-
-                    <TableSortIcon />
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.tableRowData?.map((row, index) => (
-                <tr key={index}>
-                  {row.map((item, index) => (
-                    <td key={index}>{item}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <GenericTable
+            tableData={filteredData}
+            tableHeaders={tableHeaders}
+            defaultSortColumn="Name"
+          />
         </div>
       </div>
     </>

@@ -12,7 +12,6 @@ import {
 } from "reactstrap";
 import { Link, useLocation } from "react-router-dom";
 import { handleLogout } from "../auth";
-// import { CgProfile } from "react-icons/cg";
 import { BsBell, BsGear } from "react-icons/bs";
 import { BiMessageDetail } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
@@ -28,6 +27,7 @@ const NavigationBar = () => {
   ) {
     return null;
   }
+  
   return (
     <div className="header-section">
       <Navbar className="px-md-3 px-0 border-bottom">
@@ -48,7 +48,6 @@ const NavigationBar = () => {
             >
               <Row>
                 <Col className="user-dropdown-greeting">
-                  {/* <CgProfile className="fs-2 me-2" /> */}
                   <div className="user-avatar me-2">
                     <img
                       loading="lazy"

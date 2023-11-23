@@ -16,10 +16,33 @@ export interface customer {
   credit: string;
   payTerms: string;
   avgDaysToPay: string;
-  cutomerType: string;
-  directBilling: boolean;
-  factoringBilling: boolean;
+  broker: boolean;
+  shipperOrReceiver: boolean;
+  radiovalue: string;
 }
+
+export const initialCustomerState: customer = {
+  companyName: "",
+  addressLine1: "",
+  addressLine2: "",
+  city: "",
+  state: "",
+  zip: "",
+  phone: "",
+  email: "",
+  mc: "",
+  fid: "",
+  notes: "",
+  stauts: "",
+  quickPayFee: "",
+  factoring: "",
+  credit: "",
+  payTerms: "",
+  avgDaysToPay: "",
+  broker: false,
+  shipperOrReceiver: false,
+  radiovalue: "",
+};
 
 export interface vendor {
   companyName: string;
@@ -33,5 +56,20 @@ export interface vendor {
   fid: string;
   mc: string;
   notes: string;
-  additonalPayee: string;
+  additonalPayee: boolean;
 }
+
+export const initialVendorState: vendor = {
+  companyName: "",
+  addressLine1: "",
+  addressLine2: "",
+  phone: "",
+  email: "",
+  city: "",
+  state: "",
+  zip: "",
+  fid: "",
+  mc: "",
+  notes: "",
+  additonalPayee: false,
+};

@@ -3,7 +3,6 @@ import {
   Navbar,
   NavbarBrand,
   Nav,
-  Table,
   Card,
   CardBody,
   Collapse,
@@ -24,91 +23,73 @@ import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import { PiFilePdfDuotone, PiGearDuotone } from "react-icons/pi";
 import { Link } from "react-router-dom";
-import TableSortIcon from "../../load-page/tableSortIcon";
+import { GenericTable } from "../../table";
 
-const tableData = {
-  tableHeaders: [
-    "#",
-    "Date",
-    "Type",
-    "Category",
-    "status",
-    "Partner",
-    "Driver",
-    "Amount",
-    "Load Number",
-    "Driver Settlement",
-    "Notes",
-    "Actions",
-    <PiGearDuotone />,
-  ],
-  tableRowData: [
-    [
-      "1001",
-      "06/14/23",
-      "Load",
-      "Load",
-      "Completed",
-      "Max Payne",
-      "Max Payne",
-      "002063566 ONTARIO",
-      "-",
-      "options",
-      "none",
-      "options",
-      "options",
-    ],
-    [
-      "1001",
-      "06/14/23",
-      "Load",
-      "Load",
-      "Completed",
-      "Max Payne",
-      "Max Payne",
-      "002063566 ONTARIO",
-      "-",
-      "options",
-      "none",
-      "options",
-      "options",
-    ],
-    [
-      "1001",
-      "06/14/23",
-      "Load",
-      "Load",
-      "Completed",
-      "Max Payne",
-      "Max Payne",
-      "002063566 ONTARIO",
-      "-",
-      "options",
-      "none",
-      "options",
-      "options",
-    ],
-    [
-      "1001",
-      "06/14/23",
-      "Load",
-      "Load",
-      "Completed",
-      "Max Payne",
-      "Max Payne",
-      "002063566 ONTARIO",
-      "-",
-      "options",
-      "none",
-      "options",
-      "options",
-    ],
-  ],
-};
+const tableHeaders = [
+  "#",
+  "Date",
+  "Type",
+  "Category",
+  "status",
+  "Partner",
+  "Driver",
+  "Amount",
+  "Load Number",
+  "Driver Settlement",
+  "Notes",
+  "Actions",
+  <PiGearDuotone />,
+];
+
+const tableData = [
+  {
+    "#": "1001",
+    Date: "1/1/2021",
+    Type: "Load",
+    Category: "Load",
+    status: "true",
+    Partner: "Max",
+    Driver: "Max",
+    Amount: "100",
+    "Load Number": "1001",
+    "Driver Settlement": "100",
+    Notes: "Max",
+    Actions: "abcd",
+  },
+  {
+    "#": "1002",
+    Date: "1/1/2021",
+    Type: "Load",
+    Category: "Load",
+    status: "true",
+    Partner: "Max",
+    Driver: "Max",
+    Amount: "100",
+    "Load Number": "1001",
+    "Driver Settlement": "100",
+    Notes: "Max",
+    Actions: "abc",
+  },
+];
 
 const VendorBalance = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [filteredData, setFilteredData] = useState(tableData);
+  const [filter, setFilter] = useState("");
+
+  const handleSearchFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toLowerCase();
+    const filteredData = tableData.filter((item) => {
+      return tableHeaders.some((column) =>
+        String(item[column as keyof object])
+          .toLowerCase()
+          .includes(value)
+      );
+    });
+    setFilter(value);
+    setFilteredData(filteredData);
+  };
 
   function searchToggle(): void {
     console.log("search");
@@ -139,6 +120,8 @@ const VendorBalance = () => {
               <Input
                 placeholder="Search"
                 className="border-start-0 border-end-0"
+                onChange={handleSearchFilterChange}
+                value={filter}
               />
               <InputGroupText className="bg-white">
                 <Button
@@ -160,7 +143,7 @@ const VendorBalance = () => {
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>
-              <Card style={{ backgroundColor: "#E9F3FB" }} className="mb-3">
+              <Card className="card-search mb-3">
                 <CardBody>
                   <Form onSubmit={handleSearchSubmit}>
                     <Row className="px-5">
@@ -213,26 +196,11 @@ const VendorBalance = () => {
                       </Col>
                       <Col lg={2} md={6} sm={12} className="px-3"></Col>
                       <Col md={3} className=" mt-4">
-                        <Button
-                          size="sm"
-                          className="me-3"
-                          style={{
-                            color: "black",
-                            border: "1px solid #1E5367",
-                            backgroundColor: "#B7D1E6",
-                          }}
-                        >
+                        <Button size="sm" className="me-3 save-button">
                           <BiCheck fontSize={"16px"} />
                           Apply
                         </Button>
-                        <Button
-                          size="sm"
-                          style={{
-                            color: "red",
-                            border: "1px solid red",
-                            backgroundColor: "white",
-                          }}
-                        >
+                        <Button size="sm" className="cancel-button">
                           <RxCross2 fontSize={"16px"} color="red" /> Clear
                         </Button>
                       </Col>
@@ -257,28 +225,11 @@ const VendorBalance = () => {
             </Form>
           </div>
 
-          <Table responsive hover className="table-data text-nowrap">
-            <thead>
-              <tr>
-                {tableData.tableHeaders.map((headeritem, index) => (
-                  <th key={index}>
-                    <span>{headeritem}</span>
-
-                    <TableSortIcon />
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.tableRowData?.map((row, index) => (
-                <tr key={index}>
-                  {row.map((item, index) => (
-                    <td key={index}>{item}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <GenericTable
+            tableData={filteredData}
+            tableHeaders={tableHeaders}
+            defaultSortColumn="Partner"
+          />
         </div>
       </div>
     </>

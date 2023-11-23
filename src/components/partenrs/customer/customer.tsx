@@ -1,74 +1,83 @@
 import React, { useState } from "react";
-import { Nav, NavItem, Navbar, NavbarBrand, TabPane, Table } from "reactstrap";
+import {
+  Input,
+  InputGroup,
+  InputGroupText,
+  Nav,
+  NavItem,
+  Navbar,
+  NavbarBrand,
+  TabPane,
+} from "reactstrap";
 import { Header, SideBar } from "../../header";
 import { MdOutgoingMail } from "react-icons/md";
 import { AiOutlineFileExcel, AiOutlinePlus } from "react-icons/ai";
 import { PiFilePdfDuotone, PiGearDuotone } from "react-icons/pi";
 import { Link } from "react-router-dom";
-import SearchPage from "../../search-page";
 import Profile from "../../pofile";
 import { TabPage } from "../../driver-page";
-import TableSortIcon from "../../load-page/tableSortIcon";
+import { routes } from "../../routes/routes";
+import { BsSearch } from "react-icons/bs";
+import { GenericTable } from "../../table";
 
-const tableData = {
-  tableHeaders: [
-    "#",
-    "Name",
-    "address",
-    "Phone",
-    "MC",
-    "Pay-method",
-    "Credit",
-    "Avg. DTP",
-    "Status",
-    "Action",
-    <PiGearDuotone />,
-  ],
-  tableRowData: [
-    [
-      "1001",
-      "Max payne",
-      "XYZABC",
-      "1234567890",
-      "1234",
-      "credit",
-      "12345",
-      "best",
-      "Lumper",
-      "Invoiced",
-      "[options]",
-    ],
-    [
-      "1001",
-      "Max payne",
-      "XYZABC",
-      "1234567890",
-      "1234",
-      "credit",
-      "12345",
-      "best",
-      "Lumper",
-      "Invoiced",
-      "[options]",
-    ],
-    [
-      "1001",
-      "Max payne",
-      "XYZABC",
-      "1234567890",
-      "1234",
-      "credit",
-      "12345",
-      "best",
-      "Lumper",
-      "Invoiced",
-      "[options]",
-    ],
-  ],
-};
+const tableHeaders = [
+  "#",
+  "Name",
+  "address",
+  "Phone",
+  "MC",
+  "Pay-method",
+  "Credit",
+  "Avg. DTP",
+  "Status",
+  "Action",
+  <PiGearDuotone />,
+];
+
+const tableRowData = [
+  {
+    "#": "1001",
+    Name: "Max payne",
+    address: "XYZABC",
+    Phone: "1234567890",
+    MC: "1234",
+    "Pay-method": "credit",
+    Credit: "12345",
+    "Avg. DTP": "best",
+    Status: "Lumper",
+    Action: "[options]",
+  },
+  {
+    "#": "1002",
+    Name: "Max payne",
+    address: "XYZABC",
+    Phone: "1234567890",
+    MC: "1234",
+    "Pay-method": "credit",
+    Credit: "12345",
+    "Avg. DTP": "best",
+    Status: "Lumper",
+    Action: "[options]",
+  },
+];
 
 const Customer = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [filter, setFilter] = useState("");
+  const [filteredData, setFilteredData] = useState(tableRowData);
+
+  const handleSearchFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toLowerCase();
+    const filteredData = tableRowData.filter((item) => {
+      return tableHeaders.some((column) =>
+        String(item[column as keyof object])
+          .toLowerCase()
+          .includes(value)
+      );
+    });
+    setFilter(value);
+    setFilteredData(filteredData);
+  };
 
   return (
     <>
@@ -96,8 +105,23 @@ const Customer = () => {
           </div>
         </Nav>
         <div className="d-flex align-items-center gap-3">
-          <SearchPage />
-          <Link className="btn btn-sm btn-outline-primary" to="/createcustomer">
+          <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
+            <InputGroup className="shadow-sm border-secondary">
+              <InputGroupText className="bg-white">
+                <BsSearch size={16} />
+              </InputGroupText>
+              <Input
+                placeholder="Search"
+                className="border-start-0 border-end-0 search"
+                value={filter}
+                onChange={handleSearchFilterChange}
+              />
+            </InputGroup>
+          </div>
+          <Link
+            className="btn btn-sm btn-outline-primary"
+            to={routes.createNewCustomer}
+          >
             <AiOutlinePlus />
             New Customer
           </Link>
@@ -109,52 +133,18 @@ const Customer = () => {
         <div className="aria-content container-fluid my-1">
           <TabPage tabTitles={["Brokers", "Shippers/Receivers"]}>
             <TabPane tabId={1} className="m-2">
-              <Table responsive hover className="table-data text-nowrap">
-                <thead>
-                  <tr>
-                    {tableData.tableHeaders.map((item, index) => (
-                      <th key={index}>
-                        <span>{item}</span>
-
-                        <TableSortIcon />
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {tableData.tableRowData?.map((row, index) => (
-                    <tr key={index}>
-                      {row.map((item, index) => (
-                        <td key={index}>{item}</td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
+              <GenericTable
+                tableHeaders={tableHeaders}
+                tableData={filteredData}
+                defaultSortColumn="Name"
+              />
             </TabPane>
             <TabPane tabId={2} className="m-2">
-              <Table responsive hover className="table-data text-nowrap">
-                <thead>
-                  <tr>
-                    {tableData.tableHeaders.map((item, index) => (
-                      <th key={index}>
-                        <span>{item}</span>
-
-                        <TableSortIcon />
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {tableData.tableRowData?.map((row, index) => (
-                    <tr key={index}>
-                      {row.map((item, index) => (
-                        <td key={index}>{item}</td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
+              <GenericTable
+                tableHeaders={tableHeaders}
+                tableData={filteredData}
+                defaultSortColumn="Name"
+              />
             </TabPane>
           </TabPage>
         </div>

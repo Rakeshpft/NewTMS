@@ -44,9 +44,9 @@ const Header = ({ sidebarToggle, showHambuger = true }: HeaderProps) => {
             onClick={() => handleBack()}
           >
             <FiArrowLeft />
-            <Link to="/dashboard">
+            {/* <Link to="/dashboard"> */}
               <CompanyLogo height={50} />
-            </Link>
+            {/* </Link> */}
           </div>
         )}
       </div>

@@ -11,63 +11,60 @@ import { LoginContext, PrivateRoute } from "./components/private-routes";
 import { IdleTimerProvider } from "react-idle-timer";
 import { handleLogout, session_Time_Logout } from "./components/auth";
 import { DashboardPage } from "./components/dashboard";
-import { DriverPage, NewDriver } from "./components/driver-page";
-import { LoadPage } from "./components/load-page";
-import { Customer, Vendors } from "./components/partenrs";
-import VendorNewPage from "./components/partenrs/vendors/vendor-new-page";
-import CustomerNewPage from "./components/partenrs/customer/customer-new-page";
-import LaodNewPage from "./components/load-page/load-new-page";
+import { DriverPage, CreateNewDriverPage } from "./components/driver-page";
+import { LoadPage, CreateNewLaodPage } from "./components/load-page";
 import {
-  CreateDriverPayrollPage,
+  Customer,
+  Vendors,
+  CreateNewCustomerPage,
+  CreateNewVendorPage,
+} from "./components/partenrs";
+import {
+  CreateNewDriverPayrollPage,
   DriverPayRoll,
 } from "./components/driverpayroll-page";
 import {
-  BillingPage,
-  CreateBillingPage,
-} from "./components/account-page/billing-page";
-import { VendorBalance } from "./components/account-page/vendor-balance";
-import {
-  CreateFuelPage,
-  FuelPage,
-} from "./components/fuel-page/fuel-card-page";
-import {
-  CreateTruckPage,
   TrucksPage,
-} from "./components/equipment-page/trucks-page";
-import {
-  CreateTrailerPage,
+  CreateNewTruckPage,
   TrailersPage,
-} from "./components/equipment-page/trailers-page";
-import FuelImport from "./components/fuel-page/fuel-import-page";
+  CreateNewTrailerPage,
+} from "./components/equipment-page";
 import {
-  CreateFuelTransactionPage,
+  FuelPage,
+  CreateNewFuelPage,
+  FuelImport,
   FuelTransaction,
-} from "./components/fuel-page/fuel-transaction-page";
+  CreateNewFuelTransactionPage,
+} from "./components/fuel-page";
 import {
   AdditionsPage,
-  CreateAdditionsPage,
-} from "./components/account-page/additions-page";
-import {
-  CreateScheduledPage,
-  ScheduledPage,
-} from "./components/account-page/scheduled-payment";
-import {
+  CreateNewAdditionsPage,
+  BillingPage,
+  CreateNewBillingPage,
   ChartofAccounts,
-  CreateChartofAccounts,
-} from "./components/account-page/chartofAccounts";
-import {
+  CreateNewChartofAccounts,
   ExpansesPage,
-  CreateExpansesPage,
-  CreateExpensesSchedulePage,
-} from "./components/account-page/expenses-page";
-import {
+  CreateNewExpansesPage,
+  CreateNewExpensesSchedulePage,
   FactoringReport,
-  CreateFactoringReport,
-} from "./components/account-page/factoring-reaport";
-import {
+  CreateNewFactoringReport,
   PaymentsPage,
-  CreatePaymentsPage,
-} from "./components/account-page/payments-page";
+  CreateNewPaymentsPage,
+  ScheduledPage,
+  CreateNewScheduledPage,
+  VendorBalance,
+} from "./components/account-page";
+import {
+  DriverPaymentsPage,
+  ExpensesReportPage,
+  GrossProfitLoadPage,
+  GrossProfitReportPage,
+  ProfitLossReportPage,
+  RateMileReportPage,
+  RevenueDispatcherPage,
+  TotalRevenuePage,
+} from "./components/reports-page";
+import { DispatchedBoardPage } from "./components/dispatched-board";
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -105,87 +102,141 @@ const App = () => {
               <Route exact={true} path={routes.login}>
                 <LoginPage loginStatus={setLogin} />
               </Route>
-              <Route path={routes.forgotpassword} component={ForgetPassword} />
+              <Route path={routes.forgotPassword} component={ForgetPassword} />
               <Route
-                path={routes.registrationform}
+                path={routes.registrationForm}
                 component={RagistrationPage}
               />
               <Route path={routes.driverpageAll} component={DriverPage} />
-              <Route path={routes.createdriver} component={NewDriver} />
+              <Route
+                path={routes.createNewDriver}
+                component={CreateNewDriverPage}
+              />
               <Route path={routes.loadpageAll} component={LoadPage} />
-              <Route path={routes.createload} component={LaodNewPage} />
+              <Route
+                path={routes.createNewLoad}
+                component={CreateNewLaodPage}
+              />
               <Route path={routes.vendorsAll} component={Vendors} />
-              <Route path={routes.createvendor} component={VendorNewPage} />
+              <Route
+                path={routes.createNewVendor}
+                component={CreateNewVendorPage}
+              />
               <Route path={routes.customersAll} component={Customer} />
-              <Route path={routes.createcustomer} component={CustomerNewPage} />
-              <Route path={routes.driverpayroll} component={DriverPayRoll} />
               <Route
-                path={routes.createdriverpayroll}
-                component={CreateDriverPayrollPage}
+                path={routes.createNewCustomer}
+                component={CreateNewCustomerPage}
               />
-              <Route path={routes.billingpage} component={BillingPage} />
+              <Route path={routes.driverPayRoll} component={DriverPayRoll} />
               <Route
-                path={routes.createbillingpage}
-                component={CreateBillingPage}
+                path={routes.createNewDriverPayRoll}
+                component={CreateNewDriverPayrollPage}
               />
-              <Route path={routes.vendorbalance} component={VendorBalance} />
-              <Route path={routes.fuelpage} component={FuelPage} />
-              <Route path={routes.createfuelpage} component={CreateFuelPage} />
-              <Route path={routes.fuelimport} component={FuelImport} />
+              <Route path={routes.billingPage} component={BillingPage} />
               <Route
-                path={routes.fueltransaction}
+                path={routes.createNewBillingPage}
+                component={CreateNewBillingPage}
+              />
+              <Route path={routes.vendorBalance} component={VendorBalance} />
+              <Route path={routes.fuelPage} component={FuelPage} />
+              <Route
+                path={routes.createNewFuelPage}
+                component={CreateNewFuelPage}
+              />
+              <Route path={routes.fuelImport} component={FuelImport} />
+              <Route
+                path={routes.fuelTransaction}
                 component={FuelTransaction}
               />
               <Route
-                path={routes.createfueltransaction}
-                component={CreateFuelTransactionPage}
+                path={routes.createNewFuelTransaction}
+                component={CreateNewFuelTransactionPage}
               />
               <Route path={routes.trucks} component={TrucksPage} />
-              <Route path={routes.createnewtruck} component={CreateTruckPage} />
+              <Route
+                path={routes.createNewTruck}
+                component={CreateNewTruckPage}
+              />
               <Route path={routes.trailers} component={TrailersPage} />
               <Route
-                path={routes.createnewtrailers}
-                component={CreateTrailerPage}
+                path={routes.createNewTailers}
+                component={CreateNewTrailerPage}
               />
               <Route path={routes.additions} component={AdditionsPage} />
               <Route
-                path={routes.createadditions}
-                component={CreateAdditionsPage}
+                path={routes.createNewAdditions}
+                component={CreateNewAdditionsPage}
               />
-              <Route path={routes.scheduledpage} component={ScheduledPage} />
+              <Route path={routes.scheduledPage} component={ScheduledPage} />
               <Route
-                path={routes.createscheduledpage}
-                component={CreateScheduledPage}
+                path={routes.createNewScheduledPage}
+                component={CreateNewScheduledPage}
               />
               <Route
-                path={routes.chartofaccounts}
+                path={routes.chartOfAccounts}
                 component={ChartofAccounts}
               />
               <Route
-                path={routes.createchartofaccounts}
-                component={CreateChartofAccounts}
+                path={routes.createNewChartOfAccounts}
+                component={CreateNewChartofAccounts}
               />
-              <Route path={routes.expansespage} component={ExpansesPage} />
+              <Route path={routes.expansesPage} component={ExpansesPage} />
               <Route
-                path={routes.createexpansespage}
-                component={CreateExpansesPage}
-              />
-              <Route
-                path={routes.createExpensesSchedulePage}
-                component={CreateExpensesSchedulePage}
+                path={routes.createNewExpansesPage}
+                component={CreateNewExpansesPage}
               />
               <Route
-                path={routes.factoringreport}
+                path={routes.createNewExpensesSchedulePage}
+                component={CreateNewExpensesSchedulePage}
+              />
+              <Route
+                path={routes.factoringReport}
                 component={FactoringReport}
               />
               <Route
-                path={routes.createfactoringreport}
-                component={CreateFactoringReport}
+                path={routes.createNewFactoringReport}
+                component={CreateNewFactoringReport}
               />
-              <Route path={routes.paymentspage} component={PaymentsPage} />
+              <Route path={routes.paymentsPage} component={PaymentsPage} />
               <Route
-                path={routes.createpaymentspage}
-                component={CreatePaymentsPage}
+                path={routes.createNewPaymentsPage}
+                component={CreateNewPaymentsPage}
+              />
+              <Route
+                path={routes.driverPaymentsPage}
+                component={DriverPaymentsPage}
+              />
+              <Route
+                path={routes.expensesReportPage}
+                component={ExpensesReportPage}
+              />
+              <Route
+                path={routes.grossProfitLoadPage}
+                component={GrossProfitLoadPage}
+              />
+              <Route
+                path={routes.grossProfitReportPage}
+                component={GrossProfitReportPage}
+              />
+              <Route
+                path={routes.profitLossReportPage}
+                component={ProfitLossReportPage}
+              />
+              <Route
+                path={routes.rateMileReportPage}
+                component={RateMileReportPage}
+              />
+              <Route
+                path={routes.revenueDispatcherPage}
+                component={RevenueDispatcherPage}
+              />
+              <Route
+                path={routes.totalRevenuePage}
+                component={TotalRevenuePage}
+              />
+              <Route
+                path={routes.dispatchedBoard}
+                component={DispatchedBoardPage}
               />
             </IdleTimerProvider>
           </Switch>

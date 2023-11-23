@@ -1,10 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800");
 
-
 $primary: #21529d;
 $info: #418ecb;
 @import "~bootstrap/scss/bootstrap";
-
 
 :root {
   --bs-primary-rgb: #21529d !important;
@@ -14,16 +12,17 @@ $info: #418ecb;
   --header-color: #ffffff;
   --body-color: #465e78;
 }
-body{
-    font-family: "Manrope", sans-serif;
-    scroll-behavior: smooth;
+
+body {
+  font-family: "Manrope", sans-serif;
+  scroll-behavior: smooth;
 }
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 
 ::-webkit-scrollbar {
   width: 0.5rem;
@@ -41,10 +40,12 @@ body{
 ::-webkit-scrollbar-corner {
   background: #000000;
 }
+
 :focus {
   outline: none;
   box-shadow: none !important;
 }
+
 .x-small {
   font-size: 0.675rem;
 }
@@ -54,6 +55,7 @@ body{
   font-weight: 700;
   vertical-align: top;
 }
+
 .table-data tbody tr td {
   font-size: small;
   font-weight: 400;
@@ -66,7 +68,8 @@ body{
   overflow-y: auto;
 }
 
-form .form-label, form .form-check-label {
+form .form-label,
+form .form-check-label {
   margin-bottom: 0;
   font-size: small;
   font-weight: 500;
@@ -77,45 +80,40 @@ form .form-label, form .form-check-label {
   flex-basis: 0;
 }
 
-// .buttonLink {
-//   color: black;
-//   background-color: #b7d1e6;
-//   border: 1px solid black;
-// }
-
-// .buttonLink:not(.nohover):hover {
-//   border: 1px solid black;
-//   background-color: #b7d1e6;
-//   color: black;
-// }
-
 .card {
   border-radius: 0;
   border: none;
 }
-.modal, form.container{
+
+.modal,
+form.container {
   zoom: 0.9;
 }
 
-.header_nav{
+.header_nav {
   min-width: 215px;
 }
-.navbar-brand{
+
+.navbar-brand {
   font-size: 1.5rem;
 }
-input[type="checkbox"],input[type="radio"]{
-      border: 1px solid rgb(65, 142, 203);
+
+input[type="checkbox"],
+input[type="radio"] {
+  border: 1px solid rgb(65, 142, 203);
 }
-.navbar.bg-light{
+
+.navbar.bg-light {
   border-bottom: 1px solid rgb(27, 86, 174);
 }
-.navbar > .container-fluid{
-padding: 0
+
+.navbar > .container-fluid {
+  padding: 0;
 }
+
 @import "./login";
 @import "./navigation";
 @import "./dashboard";
 @import "./sidebar";
 @import "./loadpage";
-
-
+@import "./pagination";

@@ -146,9 +146,11 @@
     }
   }
 }
-.TilePopUp .modal-content{
+
+.TilePopUp .modal-content {
   padding: 0 0.35rem;
 }
+
 .TilePopUp button:hover img {
   filter: brightness(0) invert(1);
 }
@@ -225,6 +227,7 @@
     transition: all 0.3s ease-in-out;
   }
 }
+
 .modal {
   :is(.partners, .equipments) .opt:nth-child(2) {
     .text-info {
@@ -264,4 +267,52 @@
 
 .dashboard-card {
   border: 1px solid #418ecb;
+}
+
+.dispatch-deliverd-button {
+  color: #0b8e00;
+  border: 1px solid #0b8e00;
+  background-color: #f9f9f9;
+}
+
+.dispatch-deliverd-button:not(.nohover):hover {
+  color: #0b8e00;
+  border: 1px solid #0b8e00;
+  background-color: #f9f9f9;
+}
+
+.dispatch-load-button {
+  color: #418ecb;
+  border: 1px solid #418ecb;
+  background-color: #f9f9f9;
+}
+
+.dispatch-load-button:not(.nohover):hover {
+  color: #418ecb;
+  border: 1px solid #418ecb;
+  background-color: #f9f9f9;
+}
+
+.dispatch-enRoute-button {
+  color: #ff8761;
+  border: 1px solid #ff8761;
+  background-color: #f9f9f9;
+}
+
+.dispatch-enRoute-button:not(.nohover):hover {
+  color: #ff8761;
+  border: 1px solid #ff8761;
+  background-color: #f9f9f9;
+}
+
+.box-container {
+  display: flex;
+  gap: 2px;
+}
+
+.color-box {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  cursor: pointer;
 }

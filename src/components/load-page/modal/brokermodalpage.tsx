@@ -14,9 +14,9 @@ import {
   ModalHeader,
   Row,
 } from "reactstrap";
-import { customer } from "../../tms-object/partners";
+import { customer, initialCustomerState } from "../../tms-object/partners";
 
-type FormAction =
+type FormInput =
   | { type: "SET_companyName"; payload: string }
   | { type: "SET_addressLine1"; payload: string }
   | { type: "SET_addressLine2"; payload: string }
@@ -34,11 +34,11 @@ type FormAction =
   | { type: "SET_credit"; payload: string }
   | { type: "SET_payTerms"; payload: string }
   | { type: "SET_avgDaysToPay"; payload: string }
-  | { type: "SET_cutomerType"; payload: string }
-  | { type: "SET_directBilling"; payload: boolean }
-  | { type: "SET_factoringBilling"; payload: boolean };
+  | { type: "SET_radiovalue"; payload: string }
+  | { type: "SET_broker"; payload: boolean }
+  | { type: "SET_shipperOrReceiver"; payload: boolean };
 
-const formReducer = (state: customer, action: FormAction): customer => {
+const formReducer = (state: customer, action: FormInput): customer => {
   switch (action.type) {
     case "SET_companyName":
       return { ...state, companyName: action.payload };
@@ -74,38 +74,15 @@ const formReducer = (state: customer, action: FormAction): customer => {
       return { ...state, payTerms: action.payload };
     case "SET_avgDaysToPay":
       return { ...state, avgDaysToPay: action.payload };
-    case "SET_cutomerType":
-      return { ...state, cutomerType: action.payload };
-    case "SET_directBilling":
-      return { ...state, directBilling: action.payload };
-    case "SET_factoringBilling":
-      return { ...state, factoringBilling: action.payload };
+    case "SET_radiovalue":
+      return { ...state, radiovalue: action.payload };
+    case "SET_shipperOrReceiver":
+      return { ...state, shipperOrReceiver: !state.shipperOrReceiver };
+    case "SET_broker":
+      return { ...state, broker: !state.broker };
     default:
       return state;
   }
-};
-
-const initialState: customer = {
-  companyName: "",
-  addressLine1: "",
-  addressLine2: "",
-  city: "",
-  state: "",
-  zip: "",
-  phone: "",
-  email: "",
-  mc: "",
-  fid: "",
-  notes: "",
-  stauts: "",
-  quickPayFee: "",
-  factoring: "",
-  credit: "",
-  payTerms: "",
-  avgDaysToPay: "",
-  cutomerType: "",
-  directBilling: false,
-  factoringBilling: false,
 };
 
 interface BrokerModalPageProps {
@@ -114,43 +91,51 @@ interface BrokerModalPageProps {
 }
 
 const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
-  const [formState, dispatch] = useReducer(formReducer, initialState);
+  const [formState, dispatch] = useReducer(formReducer, initialCustomerState);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleInput =
+    (type: FormInput["type"]) =>
+    (
+      event: React.ChangeEvent<
+        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+      >
+    ) => {
+      dispatch({ type, payload: event.target.value } as FormInput);
+    };
+
+  const handleCheckboxChange =
+    (type: FormInput["type"]) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch({
+        type,
+        payload: event.target.checked,
+      } as FormInput);
+    };
+  const handleCustomerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(formState);
   };
   return (
     <>
-      <Modal isOpen={isCustomerOpen} toggle={toggle} size="xl">
-        <ModalHeader
-          toggle={toggle}
-          style={{ backgroundColor: "#E9F3FB" }}
-          className="py-2"
-        >
+      <Modal isOpen={isCustomerOpen} toggle={toggle} size="xl" backdrop="static">
+        <ModalHeader toggle={toggle} className="py-2">
           <h6 className="mb-0 fw-bold">New Customer</h6>
         </ModalHeader>
         <ModalBody>
           <Container>
-            <Form onSubmit={handleSubmit} className="newcustomer">
+            <Form className="newcustomer">
               <Row className="px-3">
                 <Col md={6} className="px-4">
                   <FormGroup>
                     <Label for="companyName">Company Name</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
+                      name="companyName"
+                      id="companyName"
                       value={formState.companyName}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_companyName",
-                          payload: e.target.value,
-                        })
-                      }
+                      onChange={handleInput("SET_companyName")}
                     />
                   </FormGroup>
                 </Col>
@@ -158,53 +143,21 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                   <h6 className="fw-bold">Customer Type</h6>
                   <FormGroup check inline>
                     <Input
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
                       type="checkbox"
-                      value={formState.cutomerType}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_cutomerType",
-                          payload: e.target.value,
-                        })
-                      }
+                      checked={formState.broker}
+                      name="broker"
+                      onChange={handleCheckboxChange("SET_broker")}
                     />
-                    <Label
-                      check
-                      style={{
-                        marginBottom: "0px",
-                        fontSize: "small",
-                      }}
-                    >
-                      Broker
-                    </Label>
+                    <Label check>Broker</Label>
                   </FormGroup>
                   <FormGroup check inline>
                     <Input
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
                       type="checkbox"
-                      value={formState.cutomerType}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_cutomerType",
-                          payload: e.target.value,
-                        })
-                      }
+                      checked={formState.shipperOrReceiver}
+                      name="shipperOrReceiver"
+                      onChange={handleCheckboxChange("SET_shipperOrReceiver")}
                     />
-                    <Label
-                      check
-                      style={{
-                        marginBottom: "0px",
-                        fontSize: "small",
-                      }}
-                    >
-                      Shipper/Receiver
-                    </Label>
+                    <Label check>Shipper/Receiver</Label>
                   </FormGroup>
                 </Col>
                 <Col md={3} className="px-4">
@@ -212,41 +165,23 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <h6 className="fw-bold">Billing</h6>
                     <FormGroup check>
                       <Input
-                        style={{
-                          color: "black",
-                          border: "1px solid #418ECB",
-                        }}
                         name="radio1"
                         type="radio"
+                        value={"Direct Billing"}
+                        checked={formState.radiovalue === "Direct Billing"}
+                        onChange={handleInput("SET_radiovalue")}
                       />
-                      <Label
-                        check
-                        style={{
-                          marginBottom: "0px",
-                          fontSize: "small",
-                        }}
-                      >
-                        Direct Billing
-                      </Label>
+                      <Label check>Direct Billing</Label>
                     </FormGroup>
                     <FormGroup check>
                       <Input
-                        style={{
-                          color: "black",
-                          border: "1px solid #418ECB",
-                        }}
                         name="radio1"
                         type="radio"
+                        value={"Factoring"}
+                        checked={formState.radiovalue === "Factoring"}
+                        onChange={handleInput("SET_radiovalue")}
                       />
-                      <Label
-                        check
-                        style={{
-                          marginBottom: "0px",
-                          fontSize: "small",
-                        }}
-                      >
-                        Factoring
-                      </Label>
+                      <Label check>Factoring</Label>
                     </FormGroup>
                   </FormGroup>
                 </Col>
@@ -257,18 +192,12 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <Label for="addressLine1">Address Line1</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
+                      name="addressLine1"
+                      id="addressLine1"
                       value={formState.addressLine1}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_addressLine1",
-                          payload: e.target.value,
-                        })
-                      }
+                      onChange={handleInput("SET_addressLine1")}
                     />
                   </FormGroup>
                 </Col>
@@ -279,18 +208,12 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <Label for="addressLine2">Address Line2</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
+                      name="addressLine2"
+                      id="addressLine2"
                       value={formState.addressLine2}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_addressLine2",
-                          payload: e.target.value,
-                        })
-                      }
+                      onChange={handleInput("SET_addressLine2")}
                     />
                   </FormGroup>
                 </Col>
@@ -299,18 +222,12 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <Label for="quickPayFee">Quick Pay Fee</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
                       value={formState.quickPayFee}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_quickPayFee",
-                          payload: e.target.value,
-                        })
-                      }
+                      name="quickPayFee"
+                      id="quickPayFee"
+                      onChange={handleInput("SET_quickPayFee")}
                     />
                   </FormGroup>
                 </Col>
@@ -319,18 +236,12 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <Label for="factoring">Factoring</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
                       value={formState.factoring}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_factoring",
-                          payload: e.target.value,
-                        })
-                      }
+                      name="factoring"
+                      id="factoring"
+                      onChange={handleInput("SET_factoring")}
                     />
                   </FormGroup>
                 </Col>
@@ -341,18 +252,12 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <Label for="phone">Phone</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
                       value={formState.phone}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_phone",
-                          payload: e.target.value,
-                        })
-                      }
+                      name="phone"
+                      id="phone"
+                      onChange={handleInput("SET_phone")}
                     />
                   </FormGroup>
                 </Col>
@@ -361,18 +266,12 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <Label for="email">Email</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="email"
                       value={formState.email}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_email",
-                          payload: e.target.value,
-                        })
-                      }
+                      name="email"
+                      id="email"
+                      onChange={handleInput("SET_email")}
                     />
                   </FormGroup>
                 </Col>
@@ -381,18 +280,12 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <Label for="stauts">Status</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
                       value={formState.stauts}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_stauts",
-                          payload: e.target.value,
-                        })
-                      }
+                      name="stauts"
+                      id="stauts"
+                      onChange={handleInput("SET_stauts")}
                     />
                   </FormGroup>
                 </Col>
@@ -401,18 +294,12 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <Label for="credit">Credit</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
                       value={formState.credit}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_credit",
-                          payload: e.target.value,
-                        })
-                      }
+                      name="credit"
+                      id="credit"
+                      onChange={handleInput("SET_credit")}
                     />
                   </FormGroup>
                 </Col>
@@ -423,18 +310,12 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <Label for="city">City</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
                       value={formState.city}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_city",
-                          payload: e.target.value,
-                        })
-                      }
+                      name="city"
+                      id="city"
+                      onChange={handleInput("SET_city")}
                     />
                   </FormGroup>
                 </Col>
@@ -443,18 +324,12 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <Label for="state">State</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
                       value={formState.state}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_state",
-                          payload: e.target.value,
-                        })
-                      }
+                      name="state"
+                      id="state"
+                      onChange={handleInput("SET_state")}
                     />
                   </FormGroup>
                 </Col>
@@ -464,18 +339,12 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <Label for="payTerms">Pay Terms</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
                       value={formState.payTerms}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_payTerms",
-                          payload: e.target.value,
-                        })
-                      }
+                      name="payTerms"
+                      id="payTerms"
+                      onChange={handleInput("SET_payTerms")}
                     />
                   </FormGroup>
                 </Col>
@@ -486,18 +355,12 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <Label for="zip">Zip</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
                       value={formState.zip}
-                      onChange={(e) => {
-                        dispatch({
-                          type: "SET_zip",
-                          payload: e.target.value,
-                        });
-                      }}
+                      name="zip"
+                      id="zip"
+                      onChange={handleInput("SET_zip")}
                     />
                   </FormGroup>
                 </Col>
@@ -508,18 +371,12 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <Label for="avgDaysToPay">Avg. Days To Pay</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
                       value={formState.avgDaysToPay}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_avgDaysToPay",
-                          payload: e.target.value,
-                        })
-                      }
+                      name="avgDaysToPay"
+                      id="avgDaysToPay"
+                      onChange={handleInput("SET_avgDaysToPay")}
                     />
                   </FormGroup>
                 </Col>
@@ -530,18 +387,12 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <Label for="fid">FID/EIN</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
                       value={formState.fid}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_fid",
-                          payload: e.target.value,
-                        })
-                      }
+                      name="fid"
+                      id="fid"
+                      onChange={handleInput("SET_fid")}
                     />
                   </FormGroup>
                 </Col>
@@ -550,18 +401,12 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <Label for="mc">MC</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="text"
                       value={formState.mc}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_mc",
-                          payload: e.target.value,
-                        })
-                      }
+                      name="mc"
+                      id="mc"
+                      onChange={handleInput("SET_mc")}
                     />
                   </FormGroup>
                 </Col>
@@ -574,18 +419,12 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                     <Label for="notes">Notes</Label>
                     <Input
                       bsSize="sm"
-                      style={{
-                        color: "black",
-                        border: "1px solid #418ECB",
-                      }}
+                      className="form-control form-control-sm"
                       type="textarea"
                       value={formState.notes}
-                      onChange={(e) =>
-                        dispatch({
-                          type: "SET_notes",
-                          payload: e.target.value,
-                        })
-                      }
+                      name="notes"
+                      id="notes"
+                      onChange={handleInput("SET_notes")}
                     />
                   </FormGroup>
                 </Col>
@@ -596,24 +435,14 @@ const BrokerModalPage = ({ isCustomerOpen, toggle }: BrokerModalPageProps) => {
                   <Button
                     color="primary"
                     size="sm"
-                    className="me-3"
-                    style={{
-                      border: "1px solid #1E5367",
-                      backgroundColor: "#418ECB",
-                    }}
+                    className="me-3 save-button"
+                    onClick={handleCustomerSubmit}
+                    type="submit"
                   >
                     <BiCheck fontSize={"16px"} />
                     Save
                   </Button>
-                  <Button
-                    size="sm"
-                    style={{
-                      color: "red",
-                      border: "1px solid red",
-                      backgroundColor: "white",
-                    }}
-                    onClick={toggle}
-                  >
+                  <Button className="cancel-button" size="sm" onClick={toggle}>
                     <RxCross2 fontSize={"16px"} color="red" />
                     Close
                   </Button>

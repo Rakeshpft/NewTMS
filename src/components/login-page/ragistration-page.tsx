@@ -85,17 +85,7 @@ const RagistrationPage = () => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    console.log("McNumber:", state.mcNumber);
-    console.log("Comapny:", state.company);
-    console.log("Title:", state.title);
-    console.log("FirstName:", state.firstName);
-    console.log("LastName:", state.lastName);
-    console.log("Email:", state.email);
-    console.log("AlternateEmail:", state.alternateEmail);
-    console.log("Website:", state.website);
-    console.log("Fax:", state.fax);
-    console.log("Mobile:", state.mobile);
-    console.log("Phone:", state.phone);
+    console.log(state);
   };
   return (
     <>
