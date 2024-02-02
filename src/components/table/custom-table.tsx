@@ -6,17 +6,22 @@ import {
   Table,
 } from "reactstrap";
 import { BsSortDown, BsSortUp } from "react-icons/bs";
-
+import { FaRegEdit } from "react-icons/fa";
+import { PiGearDuotone } from "react-icons/pi";
 interface TableProps<T> {
   tableData: any[];
   tableHeaders: any[];
   defaultSortColumn: keyof T;
+  canEditRow?: boolean;
+  editRow?: (row: any) => void;
 }
 
 function GenericTable<T>({
   tableData,
   tableHeaders,
   defaultSortColumn,
+  canEditRow,
+  editRow,
 }: TableProps<T>) {
   const itemsPerPage = 10;
   const [sortColumn, setSortColumn] = useState<keyof T>(defaultSortColumn);
@@ -72,6 +77,12 @@ function GenericTable<T>({
                   </span>
                 </th>
               ))}
+              {canEditRow && (
+                <th id="edit">
+                  {" "}
+                  Actions <PiGearDuotone />{" "}
+                </th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -82,6 +93,17 @@ function GenericTable<T>({
                     {tableHeaders.map((header, headerIndex) => (
                       <td key={headerIndex}>{row[header]}</td>
                     ))}
+                    {canEditRow && editRow && (
+                      <td>
+                        <FaRegEdit
+                          style={{
+                            cursor: "pointer",
+                            backgroundColor: "#8FF086",
+                          }}
+                          onClick={() => editRow(row)}
+                        />
+                      </td>
+                    )}
                   </tr>
                 ))}
               </>

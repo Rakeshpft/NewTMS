@@ -17,7 +17,7 @@ import { GrFormAdd } from "react-icons/gr";
 import { Header } from "../../header";
 import Profile from "../../pofile";
 import { initialVendorState, vendor } from "../../tms-object/partners";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { routes } from "../../routes/routes";
 
 type FormAction =
@@ -66,7 +66,7 @@ const formReducer = (state: vendor, action: FormAction): vendor => {
 };
 
 const CreateNewVendorPage = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [state, dispatch] = useReducer(formReducer, initialVendorState);
 
@@ -95,10 +95,13 @@ const CreateNewVendorPage = () => {
   };
 
   const handleCancleButton = () => {
+    // {
+    //   history.location.pathname === routes.dashboard
+    //     ? history.push(routes.vendorsAll)
+    //     : history.goBack();
+    // }
     {
-      history.location.pathname === routes.dashboard
-        ? history.push(routes.vendorsAll)
-        : history.goBack();
+      navigate(routes.vendorsAll);
     }
   };
 

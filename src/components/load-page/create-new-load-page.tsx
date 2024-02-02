@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Col,
@@ -16,7 +16,7 @@ import Profile from "../pofile";
 import { Header } from "../header";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
-import { LoadPage, initialLoadState } from "../tms-object/loadpage";
+//  import { LoadPage, initialLoadState } from "../tms-object/loadpage";
 import { AiOutlinePlus } from "react-icons/ai";
 import {
   BrokerModalPage,
@@ -24,108 +24,135 @@ import {
   TrailerModalPage,
   TruckModalPage,
 } from "./modal";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { routes } from "../routes/routes";
+import { useLoadContext } from "../context/Load/load.reducer";
 
-type FormAction =
-  | { type: "SET_status"; payload: string }
-  | { type: "SET_pickupDate"; payload: string }
-  | { type: "SET_deliveryDate"; payload: string }
-  | { type: "SET_notes"; payload: string }
-  | { type: "SET_billingStatus"; payload: string }
-  | { type: "SET_pickupCity"; payload: string }
-  | { type: "SET_deliveryCity"; payload: string }
-  | { type: "SET_dispatcher"; payload: string }
-  | { type: "SET_pickupState"; payload: string }
-  | { type: "SET_deliveryState"; payload: string }
-  | { type: "SET_pickupZip"; payload: string }
-  | { type: "SET_deliveryZip"; payload: string }
-  | { type: "SET_broker"; payload: string }
-  | { type: "SET_driver"; payload: string }
-  | { type: "SET_truck"; payload: string }
-  | { type: "SET_trailer"; payload: string }
-  | { type: "SET_rate"; payload: string }
-  | { type: "SET_po"; payload: string };
+// type FormAction =
+//   | { type: "SET_status"; payload: string }
+//   | { type: "SET_pickupDate"; payload: string }
+//   | { type: "SET_deliveryDate"; payload: string }
+//   | { type: "SET_notes"; payload: string }
+//   | { type: "SET_billingStatus"; payload: string }
+//   | { type: "SET_pickupCity"; payload: string }
+//   | { type: "SET_deliveryCity"; payload: string }
+//   | { type: "SET_dispatcher"; payload: string }
+//   | { type: "SET_pickupState"; payload: string }
+//   | { type: "SET_deliveryState"; payload: string }
+//   | { type: "SET_pickupZip"; payload: string }
+//   | { type: "SET_deliveryZip"; payload: string }
+//   | { type: "SET_broker"; payload: string }
+//   | { type: "SET_driver"; payload: string }
+//   | { type: "SET_truck"; payload: string }
+//   | { type: "SET_trailer"; payload: string }
+//   | { type: "SET_rate"; payload: string }
+//   | { type: "SET_po"; payload: string };
 
-const formReducer = (state: LoadPage, action: FormAction): LoadPage => {
-  switch (action.type) {
-    case "SET_status":
-      return { ...state, status: action.payload };
-    case "SET_pickupDate":
-      return { ...state, pickupDate: action.payload };
-    case "SET_deliveryDate":
-      return { ...state, deliveryDate: action.payload };
-    case "SET_notes":
-      return { ...state, notes: action.payload };
-    case "SET_billingStatus":
-      return { ...state, billingStatus: action.payload };
-    case "SET_pickupCity":
-      return { ...state, pickupCity: action.payload };
-    case "SET_deliveryCity":
-      return { ...state, deliveryCity: action.payload };
-    case "SET_dispatcher":
-      return { ...state, dispatcher: action.payload };
-    case "SET_pickupState":
-      return { ...state, pickupState: action.payload };
-    case "SET_deliveryState":
-      return { ...state, deliveryState: action.payload };
-    case "SET_pickupZip":
-      return { ...state, pickupZip: action.payload };
-    case "SET_deliveryZip":
-      return { ...state, deliveryZip: action.payload };
-    case "SET_broker":
-      return { ...state, broker: action.payload };
-    case "SET_driver":
-      return { ...state, driver: action.payload };
-    case "SET_truck":
-      return { ...state, truck: action.payload };
-    case "SET_trailer":
-      return { ...state, trailer: action.payload };
-    case "SET_rate":
-      return { ...state, rate: action.payload };
-    case "SET_po":
-      return { ...state, po: action.payload };
-    default:
-      return state;
-  }
-};
+// const formReducer = (state: LoadPage, action: FormAction): LoadPage => {
+//   switch (action.type) {
+//     case "SET_status":
+//       return { ...state, status: action.payload };
+//     case "SET_pickupDate":
+//       return { ...state, pickupDate: action.payload };
+//     case "SET_deliveryDate":
+//       return { ...state, deliveryDate: action.payload };
+//     case "SET_notes":
+//       return { ...state, notes: action.payload };
+//     case "SET_billingStatus":
+//       return { ...state, billingStatus: action.payload };
+//     case "SET_pickupCity":
+//       return { ...state, pickupCity: action.payload };
+//     case "SET_deliveryCity":
+//       return { ...state, deliveryCity: action.payload };
+//     case "SET_dispatcher":
+//       return { ...state, dispatcher: action.payload };
+//     case "SET_pickupState":
+//       return { ...state, pickupState: action.payload };
+//     case "SET_deliveryState":
+//       return { ...state, deliveryState: action.payload };
+//     case "SET_pickupZip":
+//       return { ...state, pickupZip: action.payload };
+//     case "SET_deliveryZip":
+//       return { ...state, deliveryZip: action.payload };
+//     case "SET_broker":
+//       return { ...state, broker: action.payload };
+//     case "SET_driver":
+//       return { ...state, driver: action.payload };
+//     case "SET_truck":
+//       return { ...state, truck: action.payload };
+//     case "SET_trailer":
+//       return { ...state, trailer: action.payload };
+//     case "SET_rate":
+//       return { ...state, rate: action.payload };
+//     case "SET_po":
+//       return { ...state, po: action.payload };
+//     default:
+//       return state;
+//   }
+// };
 
 const CreateNewLaodPage = () => {
-  const history = useHistory();
+  const {
+    getStatusList,
+    loadStatus,
+    getBillingStatusList,
+    loadBillingStatus,
+    getDispatcherStatusList,
+    loadDispatcherStatus,
+    getStateStatusList,
+    loadStateStatus,
+  } = useLoadContext();
+
+  console.log("load status ", loadStatus);
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [formState, dispatch] = useReducer(formReducer, initialLoadState);
+  // const [formState, dispatch] = useReducer(formReducer, initialLoadState);
   const [customerModal, setCustomerModal] = useState(false);
   const [driverModal, setDriverModal] = useState(false);
   const [trailerModal, setTrailerModal] = useState(false);
   const [truckModal, setTruckModal] = useState(false);
+  // const [statusData , setStatusData] = useState<LoadPage>( initialLoadState);
 
   const toggleCustomer = () => setCustomerModal(!customerModal);
   const toggleDriver = () => setDriverModal(true);
   const toggleTrailer = () => setTrailerModal(!trailerModal);
   const toggleTruck = () => setTruckModal(!truckModal);
 
-  const handleInput =
-    (type: FormAction["type"]) =>
-    (
-      event: React.ChangeEvent<
-        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-      >
-    ) => {
-      dispatch({ type, payload: event.target.value });
-    };
+  // const handleInput =
+  //   (type: FormAction["type"]) =>
+  //   (
+  //     event: React.ChangeEvent<
+  //       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+  //     >
+  //   ) => {
+  //     dispatch({ type, payload: event.target.value });
+  //   };
 
+  // const handleLoadInput = (prop: keyof LoadPage) => (event: React.ChangeEvent<HTMLInputElement>) => (
+  //   setStatusData({ ...statusData, [prop]: event.target.value })
+  // )
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formState);
+    // getStatusList();
+    // console.log(formState);
   };
 
   const handleCancleButton = () => {
+    // {
+    //   history.location.pathname === routes.dashboard
+    //     ? history.push(routes.loadpageAll)
+    //     : history.goBack();
+    // }
     {
-      history.location.pathname === routes.dashboard
-        ? history.push(routes.loadpageAll)
-        : history.goBack();
+      navigate(routes.loadpageAll);
     }
   };
+  useEffect(() => {
+    getStatusList();
+    getBillingStatusList();
+    getDispatcherStatusList();
+    getStateStatusList();
+  }, []);
 
   return (
     <main>
@@ -154,17 +181,20 @@ const CreateNewLaodPage = () => {
                   name="status"
                   type="select"
                   bsSize="sm"
-                  value={formState.status}
-                  onChange={handleInput("SET_status")}
+                  //  value={statusData.status}
+                  //  onChange={handleLoadInput("status")}
                 >
-                  <option>New</option>
-                  <option>cancel-buttoned</option>
-                  <option>TONU</option>
-                  <option>Dispatched</option>
-                  <option>EnRoute</option>
-                  <option>Picked-up</option>
-                  <option>Delivered</option>
-                  <option>Closed</option>
+                  <option value="">Select Status</option>
+                  {loadStatus?.map((item) => {
+                    return (
+                      <option
+                        key={item.load_status_id}
+                        // value={item.load_status_id}
+                      >
+                        {item.load_status_name}
+                      </option>
+                    );
+                  })}
                 </Input>
               </FormGroup>
 
@@ -175,17 +205,20 @@ const CreateNewLaodPage = () => {
                   name="billingStatus"
                   type="select"
                   bsSize="sm"
-                  value={formState.billingStatus}
-                  onChange={handleInput("SET_billingStatus")}
+                  // value={formState.billingStatus}
+                  // onChange={handleInput("SET_billingStatus")}
                 >
-                  <option>Pending</option>
-                  <option>cancel-buttoned</option>
-                  <option>BOL received</option>
-                  <option>Invoiced</option>
-                  <option>Sent to factoring</option>
-                  <option>Funded</option>
-                  <option>Paid</option>
-                  <option>Closed</option>
+                  <option value="">Select Billing Status</option>
+                  {loadBillingStatus?.map((item) => {
+                    return (
+                      <option
+                        key={item.load_billing_status_id}
+                        value={item.load_billing_status_id}
+                      >
+                        {item.load_billing_status_name}
+                      </option>
+                    );
+                  })}
                 </Input>
               </FormGroup>
               <FormGroup>
@@ -195,17 +228,20 @@ const CreateNewLaodPage = () => {
                   name="dispatcher"
                   type="select"
                   bsSize="sm"
-                  value={formState.dispatcher}
-                  onChange={handleInput("SET_dispatcher")}
+                  // value={formState.dispatcher}
+                  // onChange={handleInput("SET_dispatcher")}
                 >
-                  <option>Pending</option>
-                  <option>cancel-buttoned</option>
-                  <option>BOL received</option>
-                  <option>Invoiced</option>
-                  <option>Sent to factoring</option>
-                  <option>Funded</option>
-                  <option>Paid</option>
-                  <option>Closed</option>
+                  <option value="">Select Dispatcher</option>
+                  {loadDispatcherStatus?.map((item) => {
+                    return (
+                      <option
+                        key={item.load_dispatcher_id}
+                        // value={item.load_dispatcher_id}
+                      >
+                        {item.load_dispatcher_name}
+                      </option>
+                    );
+                  })}
                 </Input>
               </FormGroup>
             </Col>
@@ -219,8 +255,8 @@ const CreateNewLaodPage = () => {
                   name="pickupDate"
                   type="date"
                   className="form-control form-control-sm"
-                  value={formState.pickupDate}
-                  onChange={handleInput("SET_pickupDate")}
+                  // value={formState.pickupDate}
+                  // onChange={handleInput("SET_pickupDate")}
                 />
               </FormGroup>
               <FormGroup>
@@ -230,8 +266,8 @@ const CreateNewLaodPage = () => {
                   name="pickupCity"
                   type="text"
                   className="form-control form-control-sm"
-                  value={formState.pickupCity}
-                  onChange={handleInput("SET_pickupCity")}
+                  // value={formState.pickupCity}
+                  // onChange={handleInput("SET_pickupCity")}
                 />
               </FormGroup>
               <Row>
@@ -244,17 +280,17 @@ const CreateNewLaodPage = () => {
                       name="pickupState"
                       type="select"
                       className="form-control form-control-sm"
-                      value={formState.pickupState}
-                      onChange={handleInput("SET_pickupState")}
+                      // value={formState.pickupState}
+                      // onChange={handleInput("SET_pickupState")}
                     >
-                      <option>Pending</option>
-                      <option>cancel-buttoned</option>
-                      <option>BOL received</option>
-                      <option>Invoiced</option>
-                      <option>Sent to factoring</option>
-                      <option>Funded</option>
-                      <option>Paid</option>
-                      <option>Closed</option>
+                      <option value="">Select State</option>
+                      {loadStateStatus?.map((item) => {
+                        return (
+                          <option key={item.state_id} value={item.state_id}>
+                            {item.state_name}
+                          </option>
+                        );
+                      })}
                     </Input>
                   </FormGroup>
                 </Col>
@@ -266,8 +302,8 @@ const CreateNewLaodPage = () => {
                       name="pickupZip"
                       type="text"
                       className="form-control form-control-sm"
-                      value={formState.pickupZip}
-                      onChange={handleInput("SET_pickupZip")}
+                      // value={formState.pickupZip}
+                      // onChange={handleInput("SET_pickupZip")}
                     />
                   </FormGroup>
                 </Col>
@@ -282,9 +318,9 @@ const CreateNewLaodPage = () => {
                   id="deliveryDate"
                   name="deliveryDate"
                   type="date"
-                  value={formState.deliveryDate}
+                  // value={formState.deliveryDate}
                   className="form-control form-control-sm"
-                  onChange={handleInput("SET_deliveryDate")}
+                  // onChange={handleInput("SET_deliveryDate")}
                 />
               </FormGroup>
               <FormGroup>
@@ -294,8 +330,8 @@ const CreateNewLaodPage = () => {
                   name="deliveryCity"
                   type="text"
                   className="form-control form-control-sm"
-                  value={formState.deliveryCity}
-                  onChange={handleInput("SET_deliveryCity")}
+                  // value={formState.deliveryCity}
+                  // onChange={handleInput("SET_deliveryCity")}
                 />
               </FormGroup>
               <Row>
@@ -308,8 +344,8 @@ const CreateNewLaodPage = () => {
                       type="select"
                       bsSize="sm"
                       className="form-control form-control-sm"
-                      value={formState.deliveryState}
-                      onChange={handleInput("SET_deliveryState")}
+                      // value={formState.deliveryState}
+                      // onChange={handleInput("SET_deliveryState")}
                     >
                       <option>Pending</option>
                       <option>cancel-buttoned</option>
@@ -330,8 +366,8 @@ const CreateNewLaodPage = () => {
                       name="deliveryZip"
                       bsSize="sm"
                       type="text"
-                      value={formState.deliveryZip}
-                      onChange={handleInput("SET_deliveryZip")}
+                      // value={formState.deliveryZip}
+                      // onChange={handleInput("SET_deliveryZip")}
                       className="form-control form-control-sm"
                     />
                   </FormGroup>
@@ -348,8 +384,8 @@ const CreateNewLaodPage = () => {
                   type="textarea"
                   rows="4"
                   bsSize="sm"
-                  value={formState.notes}
-                  onChange={handleInput("SET_notes")}
+                  // value={formState.notes}
+                  // onChange={handleInput("SET_notes")}
                   className="form-control form-control-sm"
                 />
               </FormGroup>
@@ -377,8 +413,8 @@ const CreateNewLaodPage = () => {
                         id="loadSelect"
                         name="broker"
                         type="select"
-                        value={formState.broker}
-                        onChange={handleInput("SET_broker")}
+                        // value={formState.broker}
+                        // onChange={handleInput("SET_broker")}
                         bsSize="sm"
                         className="form-control form-control-sm"
                       >
@@ -415,8 +451,8 @@ const CreateNewLaodPage = () => {
                   id="po"
                   name="po"
                   type="text"
-                  value={formState.po}
-                  onChange={handleInput("SET_po")}
+                  // value={formState.po}
+                  // onChange={handleInput("SET_po")}
                   className="form-control form-control-sm"
                 />
               </FormGroup>
@@ -426,8 +462,8 @@ const CreateNewLaodPage = () => {
                   id="rate"
                   name="rate"
                   type="text"
-                  value={formState.rate}
-                  onChange={handleInput("SET_rate")}
+                  // value={formState.rate}
+                  // onChange={handleInput("SET_rate")}
                   className="form-control form-control-sm"
                 />
               </FormGroup>
@@ -443,8 +479,8 @@ const CreateNewLaodPage = () => {
                         id="driver"
                         name="driver"
                         type="select"
-                        value={formState.driver}
-                        onChange={handleInput("SET_driver")}
+                        // value={formState.driver}
+                        // onChange={handleInput("SET_driver")}
                         bsSize="sm"
                         className="form-control form-control-sm"
                       >
@@ -483,8 +519,8 @@ const CreateNewLaodPage = () => {
                         id="truck"
                         name="truck"
                         type="select"
-                        value={formState.truck}
-                        onChange={handleInput("SET_truck")}
+                        // value={formState.truck}
+                        // onChange={handleInput("SET_truck")}
                         bsSize="sm"
                         className="form-control form-control-sm"
                       >
@@ -524,8 +560,8 @@ const CreateNewLaodPage = () => {
                         id="trailer"
                         name="select"
                         type="select"
-                        value={formState.trailer}
-                        onChange={handleInput("SET_trailer")}
+                        // value={formState.trailer}
+                        // onChange={handleInput("SET_trailer")}
                         bsSize="sm"
                         className="form-control form-control-sm"
                       >

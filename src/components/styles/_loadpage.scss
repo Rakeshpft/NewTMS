@@ -96,6 +96,7 @@ form.newTrailerForm {
   background-color: #418ecb;
 }
 
+
 .save-button:not(.nohover):hover {
   border: 1px solid #1e5367;
   background-color: #418ecb;
@@ -120,4 +121,11 @@ form.newTrailerForm {
 
 .custom-file-upload-label {
   cursor: pointer;
+}
+
+.approve-button {
+  color: black;
+  border: 1px solid #1e5367;
+  background-color: #8FF086;
+  margin-left: 30px;
 }

@@ -1,7 +1,10 @@
 export const routes = {
+  default: "/*",
   login: "/",
   dashboard: "/dashboard",
   forgotPassword: "/forgetpassword",
+  resetPassword: "/resetpassword",
+  emailVerification: "/verify-email/:id",
   registrationForm: "/registration-form",
   driverpageAll: "/driverpage",
   createNewDriver: "/createnewdriver",
@@ -47,4 +50,11 @@ export const routes = {
   revenueDispatcherPage: "/reports/revenuedispatcherpage",
   totalRevenuePage: "/reports/totalrevenuepage",
   dispatchedBoard: "/dispatchedboard",
+  UsersPage: "/userpage",
+  docExchange: "/docexchange",
+  dataLibrary: "/datalibrary",
+  reportPage: "/reportpage",
+  taxRateByStatePage: "/taxratebystatepage",
+  safetyPage: "/safety",
+  settingPage: "/settings",
 };

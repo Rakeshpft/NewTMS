@@ -442,22 +442,22 @@ export const dashboardTiles = {
     {
       name: "Users",
       icon: require("../../../public/icons//users.png"),
-      link: "/users",
+      link: "/UserPage",
     },
     {
       name: "Data Library",
       icon: require("../../../public/icons//data-library.png"),
-      link: "/data-library",
+      link: "/DataLibrary",
     },
     {
       name: "Doc Exchange",
       icon: require("../../../public/icons//docs-exchange.png"),
-      link: "/docs-exchange",
+      link: "/DocExchange",
     },
     {
       name: "IFTA",
       icon: require("../../../public/icons//agreement.png"),
-      link: "/ifta",
+      link: "/ReportPage",
     },
   ],
 };

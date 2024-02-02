@@ -19,7 +19,8 @@ import {
   additionsPage,
   initialAdditionsPageState,
 } from "../../tms-object/accountspage";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { routes } from "../../routes/routes";
 
 type FormAction =
@@ -59,7 +60,8 @@ const formReducer = (
 };
 
 const CreateNewAdditionsPage = () => {
-  const history = useHistory();
+  // const history = useHistory();
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [state, dispatch] = useReducer(formReducer, initialAdditionsPageState);
 
@@ -79,10 +81,13 @@ const CreateNewAdditionsPage = () => {
   };
 
   const handleCancleButton = () => {
+    // {
+    //   history.location.pathname === routes.dashboard
+    //     ? history.push(routes.additions)
+    //     : history.goBack();
+    // }
     {
-      history.location.pathname === routes.dashboard
-        ? history.push(routes.additions)
-        : history.goBack();
+      navigate(routes.additions);
     }
   };
 

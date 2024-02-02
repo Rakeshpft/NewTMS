@@ -19,7 +19,8 @@ import {
   initialTrailerState,
   trailersTypes,
 } from "../../tms-object/equipmenrs";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { routes } from "../../routes/routes";
 
 type FormAction =
@@ -74,7 +75,8 @@ const formReducer = (
 };
 
 const CreateNewTrailerPage = () => {
-  const history = useHistory();
+  // const history = useHistory();
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [state, dispatch] = useReducer(formReducer, initialTrailerState);
 
@@ -94,10 +96,13 @@ const CreateNewTrailerPage = () => {
   };
 
   const handleCancleButton = () => {
+    // {
+    //   history.location.pathname === routes.dashboard
+    //     ? history.push(routes.trailers)
+    //     : history.goBack();
+    // }
     {
-      history.location.pathname === routes.dashboard
-        ? history.push(routes.trailers)
-        : history.goBack();
+      navigate(routes.trailers);
     }
   };
 

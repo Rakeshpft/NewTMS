@@ -23,7 +23,7 @@ import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import { TabPage } from "../../driver-page";
 import { routes } from "../../routes/routes";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 type FormAction =
   | { type: "SET_driver"; payload: string }
@@ -71,7 +71,8 @@ const formReducer = (
 };
 
 const CreateNewExpensesSchedulePage = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [state, dispatch] = useReducer(
     formReducer,
@@ -94,7 +95,7 @@ const CreateNewExpensesSchedulePage = () => {
   };
 
   const handleCancleButton = () => {
-    history.push(routes.expansesPage);
+    navigate(routes.expansesPage);
   };
 
   return (

@@ -31,6 +31,8 @@ import { CiViewList } from "react-icons/ci";
 import moment from "moment";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from 'react-router-dom';
+
 
 const DispatchedHeaders = [
   "Driver Name",
@@ -48,9 +50,10 @@ export default function DashboardPage() {
   ]);
   const [selectedDate, setSelectedDate] = useState<Date | any>("");
   const [modal, setModal] = useState(false);
+ 
 
   const toggle = () => setModal(!modal);
-
+ 
   const handleSort = (key: any) => {
     const sortedData = [...filteredData].sort((a, b) =>
       a[key as keyof object] > b[key as keyof object] ? 1 : -1
@@ -78,6 +81,15 @@ export default function DashboardPage() {
     );
     setFilteredData(filteredData);
   };
+  const navigate = useNavigate();
+
+ const  handleSafety = () => {
+  navigate(routes.safetyPage)
+  }
+  
+  const handleSetting = () => {
+    navigate(routes.settingPage)
+  }
 
   return (
     <section className="main-dashboard">
@@ -104,6 +116,8 @@ export default function DashboardPage() {
                 color="outline-info"
                 size="sm"
                 className="d-flex align-items-center gap-1 px-md-3 shadow-lg rounded-pill"
+               
+                onClick={handleSafety}
               >
                 <img
                   src={require("../../../public/icons/safety.png")}
@@ -112,11 +126,14 @@ export default function DashboardPage() {
                   width={24}
                 ></img>
                 <span className="d-none d-md-inline">Safety</span>
+                
+                
               </Button>
               <Button
                 color="outline-info"
                 size="sm"
                 className="d-flex align-items-center gap-1 px-md-3 shadow-lg rounded-pill"
+                onClick={handleSetting}
               >
                 <img
                   src={require("../../../public/icons/setting-one.png")}

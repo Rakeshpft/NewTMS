@@ -1,5 +1,5 @@
-import React, { useReducer } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Button,
   Col,
@@ -10,58 +10,86 @@ import {
   InputGroup,
   InputGroupText,
   Row,
-  Spinner,
+  
 } from "reactstrap";
 import CompanyLogo from "../company-logo";
+import { useRegContext } from "../context/Auth/auth.reducer";
 
-interface LoginPageProps {
-  loginStatus: (data: boolean) => void;
+// import { routes } from "../routes/routes";
+
+//  interface LoginPageProps {
+//    loginStatus: (data: boolean) => void;
+//  }
+// interface LoginStatusProp {
+
+//      loginStatus : (data : boolean) => void
+// }
+// const reducer = (state: any, action: any) => {
+//   switch (action.type) {
+//     case "setFormData":
+//       return {
+//         ...state,
+//         formdata: action.payload,
+//       };
+//     case "setErrorData":
+//       return {
+//         ...state,
+//         errordata: action.payload,
+//       };
+//     case "setSpinnerData":
+//       return {
+//         ...state,
+//         spinner: action.payload,
+//       };
+//     default:
+//       return state;
+//   }
+// };
+
+export interface LoginFormSate {
+ email: string;
+ password: string;
 }
-const reducer = (state: any, action: any) => {
-  switch (action.type) {
-    case "setFormData":
-      return {
-        ...state,
-        formdata: action.payload,
-      };
-    case "setErrorData":
-      return {
-        ...state,
-        errordata: action.payload,
-      };
-    case "setSpinnerData":
-      return {
-        ...state,
-        spinner: action.payload,
-      };
-    default:
-      return state;
-  }
-};
-const LoginPage = ({ loginStatus }: LoginPageProps) => {
-  const [state, dispatch] = useReducer(reducer, {
-    errordata: { email: "", password: "" },
-    formdata: { email: "tms@gmail.com", password: "1234" },
-    spinner: false,
-  });
 
-  const history = useHistory();
-  const handleLogin = (event: any) => {
-    history.push("/dashboard");
+
+
+const LoginPage = (  ) => {
+  
+ 
+const initialFormState = {
+  email: "",
+  password:"",
+}
+
+const { login  } = useRegContext();
+
+const [ logInData , setLogInData] = useState<LoginFormSate>(initialFormState)
+
+
+  
+  const handleLoginInput = (prop : keyof LoginFormSate) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLogInData( {...logInData, [prop]: event.target.value})
+  }
+  const handleLogin = (event: { preventDefault: () => void }) => {
+    
     event.preventDefault();
-    if (state.formdata.email && state.formdata.password) {
-      loginStatus(true);
-      dispatch({ type: "setSpinnerData", payload: true });
-    } else {
-      dispatch({
-        type: "setErrorData",
-        payload: {
-          email: "Invalid Credentials",
-          password: "Invalid Credentials",
-        },
-      });
-      dispatch({ type: "setSpinnerData", payload: false });
-    }
+    login(logInData)
+    
+    // loginStatus(true);
+    // if (state.formdata.email && state.formdata.password) {
+    //   
+    //   dispatch({ type: "setSpinnerData", payload: true });
+    // } else {
+    //   dispatch({
+    //     type: "setErrorData",
+    //     payload: {
+    //       email: "Invalid Credentials",
+    //       password: "Invalid Credentials",
+    //     },
+    //   });
+    //   dispatch({ type: "setSpinnerData", payload: false });
+    // }
+    
   };
   return (
     <>
@@ -100,24 +128,14 @@ const LoginPage = ({ loginStatus }: LoginPageProps) => {
                           <Input
                             type="email"
                             name="email"
-                            value={state.formdata.email}
-                            onChange={(e) =>
-                              dispatch({
-                                type: "setFormData",
-                                payload: {
-                                  ...state.formdata,
-                                  email: e.target.value,
-                                },
-                              })
-                            }
+                            required
+                           value={logInData.email}
+                           onChange={handleLoginInput("email")}
                             placeholder="Enter Your Email"
                           />
                         </InputGroup>
-                        {state.errordata.email && (
-                          <label className="error">
-                            {state.errordata.email}
-                          </label>
-                        )}
+                       
+                      
                       </FormGroup>
                       <FormGroup>
                         <InputGroup>
@@ -127,24 +145,14 @@ const LoginPage = ({ loginStatus }: LoginPageProps) => {
                           <Input
                             type="password"
                             name="password"
-                            value={state.formdata.password}
-                            onChange={(e) =>
-                              dispatch({
-                                type: "setFormData",
-                                payload: {
-                                  ...state.formdata,
-                                  password: e.target.value,
-                                },
-                              })
-                            }
+                            required
+                            value={logInData.password}
+                            onChange={handleLoginInput("password")}
                             placeholder="Enter Your Password"
                           />
                         </InputGroup>
-                        {state.errordata.password && (
-                          <label className="error">
-                            {state.errordata.password}
-                          </label>
-                        )}
+                        
+                       
                       </FormGroup>
                       <FormGroup className="text-end">
                         <Link
@@ -159,16 +167,17 @@ const LoginPage = ({ loginStatus }: LoginPageProps) => {
                           color="primary"
                           className="px-5 py-2 shadow"
                           type="submit"
-                          disabled={state.spinner}
+                          // disabled={state.spinner}
                         >
-                          {state.spinner ? (
+                          {/* {state.spinner ? (
                             <>
                               <Spinner size="sm">Loading...</Spinner>
                               Logging In
                             </>
                           ) : (
                             "Login"
-                          )}
+                          )} */}
+                          LOGIN
                         </Button>
                       </FormGroup>
                       <FormGroup className="d-flex justify-content-center">

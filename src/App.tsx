@@ -1,16 +1,17 @@
-import React, { Suspense, useState } from "react";
+import React from "react";
 import { routes } from "./components/routes/routes";
 import {
   ForgetPassword,
-  RagistrationPage,
   LoginPage,
+  RagistrationPage,
+  // LoginPage,
+  ResetPassword,
 } from "./components/login-page";
-import { Route, Switch } from "react-router-dom";
-import Cookies from "js-cookie";
-import { LoginContext, PrivateRoute } from "./components/private-routes";
-import { IdleTimerProvider } from "react-idle-timer";
-import { handleLogout, session_Time_Logout } from "./components/auth";
-import { DashboardPage } from "./components/dashboard";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+// import { PrivateRoute } from "./components/private-routes";
+// import { IdleTimerProvider } from "react-idle-timer";
+// import { handleLogout, session_Time_Logout } from "./components/auth";
+// import { DashboardPage } from "./components/dashboard";
 import { DriverPage, CreateNewDriverPage } from "./components/driver-page";
 import { LoadPage, CreateNewLaodPage } from "./components/load-page";
 import {
@@ -65,184 +66,207 @@ import {
   TotalRevenuePage,
 } from "./components/reports-page";
 import { DispatchedBoardPage } from "./components/dispatched-board";
+import UserPage from "./components/user-page/user-page";
+import DocExchange from "./components/doc-exchange-page/docExchange";
+import DataLibrary from "./components/data-library-page/dataLibrary";
+import ReportPage from "./components/ift-report-page/reportPage";
+import TaxRateByState from "./components/ift-report-page/taxRateByStatePage";
+import SafetyPage from "./components/safety-page/safetyPage";
+import SettingPage from "./components/setting-page/settingPage";
+import { ContextProvider } from "./components/context/ContextProvider";
+import { DashboardPage } from "./components/dashboard";
+import { PrivateRoute } from "./components/routes/PrivateRoute";
 
 const App = () => {
-  const [loading, setLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    JSON.parse(Cookies.get("loggedIn") || "false")
-  );
-
-  const setLogin = (data: boolean) => {
-    const status = data.toString();
-    Cookies.set("loggedIn", status);
-    setIsLoggedIn(data);
-  };
-
   return (
-    <>
-      <Suspense fallback="Loading...">
-        <LoginContext.Provider
-          value={{
-            isLoggedIn,
-            setIsLoggedIn,
-            loading,
-            setLoading,
-          }}
-        >
-          <Switch>
-            <IdleTimerProvider
-              timeout={session_Time_Logout}
-              onIdle={handleLogout}
-            >
-              <PrivateRoute
-                exact={true}
-                path={routes.dashboard}
-                component={DashboardPage}
-              />
-              <Route exact={true} path={routes.login}>
-                <LoginPage loginStatus={setLogin} />
-              </Route>
-              <Route path={routes.forgotPassword} component={ForgetPassword} />
-              <Route
-                path={routes.registrationForm}
-                component={RagistrationPage}
-              />
-              <Route path={routes.driverpageAll} component={DriverPage} />
-              <Route
-                path={routes.createNewDriver}
-                component={CreateNewDriverPage}
-              />
-              <Route path={routes.loadpageAll} component={LoadPage} />
-              <Route
-                path={routes.createNewLoad}
-                component={CreateNewLaodPage}
-              />
-              <Route path={routes.vendorsAll} component={Vendors} />
-              <Route
-                path={routes.createNewVendor}
-                component={CreateNewVendorPage}
-              />
-              <Route path={routes.customersAll} component={Customer} />
-              <Route
-                path={routes.createNewCustomer}
-                component={CreateNewCustomerPage}
-              />
-              <Route path={routes.driverPayRoll} component={DriverPayRoll} />
-              <Route
-                path={routes.createNewDriverPayRoll}
-                component={CreateNewDriverPayrollPage}
-              />
-              <Route path={routes.billingPage} component={BillingPage} />
-              <Route
-                path={routes.createNewBillingPage}
-                component={CreateNewBillingPage}
-              />
-              <Route path={routes.vendorBalance} component={VendorBalance} />
-              <Route path={routes.fuelPage} component={FuelPage} />
-              <Route
-                path={routes.createNewFuelPage}
-                component={CreateNewFuelPage}
-              />
-              <Route path={routes.fuelImport} component={FuelImport} />
-              <Route
-                path={routes.fuelTransaction}
-                component={FuelTransaction}
-              />
-              <Route
-                path={routes.createNewFuelTransaction}
-                component={CreateNewFuelTransactionPage}
-              />
-              <Route path={routes.trucks} component={TrucksPage} />
-              <Route
-                path={routes.createNewTruck}
-                component={CreateNewTruckPage}
-              />
-              <Route path={routes.trailers} component={TrailersPage} />
-              <Route
-                path={routes.createNewTailers}
-                component={CreateNewTrailerPage}
-              />
-              <Route path={routes.additions} component={AdditionsPage} />
-              <Route
-                path={routes.createNewAdditions}
-                component={CreateNewAdditionsPage}
-              />
-              <Route path={routes.scheduledPage} component={ScheduledPage} />
-              <Route
-                path={routes.createNewScheduledPage}
-                component={CreateNewScheduledPage}
-              />
-              <Route
-                path={routes.chartOfAccounts}
-                component={ChartofAccounts}
-              />
-              <Route
-                path={routes.createNewChartOfAccounts}
-                component={CreateNewChartofAccounts}
-              />
-              <Route path={routes.expansesPage} component={ExpansesPage} />
-              <Route
-                path={routes.createNewExpansesPage}
-                component={CreateNewExpansesPage}
-              />
-              <Route
-                path={routes.createNewExpensesSchedulePage}
-                component={CreateNewExpensesSchedulePage}
-              />
-              <Route
-                path={routes.factoringReport}
-                component={FactoringReport}
-              />
-              <Route
-                path={routes.createNewFactoringReport}
-                component={CreateNewFactoringReport}
-              />
-              <Route path={routes.paymentsPage} component={PaymentsPage} />
-              <Route
-                path={routes.createNewPaymentsPage}
-                component={CreateNewPaymentsPage}
-              />
-              <Route
-                path={routes.driverPaymentsPage}
-                component={DriverPaymentsPage}
-              />
-              <Route
-                path={routes.expensesReportPage}
-                component={ExpensesReportPage}
-              />
-              <Route
-                path={routes.grossProfitLoadPage}
-                component={GrossProfitLoadPage}
-              />
-              <Route
-                path={routes.grossProfitReportPage}
-                component={GrossProfitReportPage}
-              />
-              <Route
-                path={routes.profitLossReportPage}
-                component={ProfitLossReportPage}
-              />
-              <Route
-                path={routes.rateMileReportPage}
-                component={RateMileReportPage}
-              />
-              <Route
-                path={routes.revenueDispatcherPage}
-                component={RevenueDispatcherPage}
-              />
-              <Route
-                path={routes.totalRevenuePage}
-                component={TotalRevenuePage}
-              />
-              <Route
-                path={routes.dispatchedBoard}
-                component={DispatchedBoardPage}
-              />
-            </IdleTimerProvider>
-          </Switch>
-        </LoginContext.Provider>
-      </Suspense>
-    </>
+    <ContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<LoginPage />} path={routes.login} />
+          <Route path={routes.forgotPassword} element={<ForgetPassword />} />
+          <Route
+            element={<ResetPassword />}
+            path={`${routes.emailVerification}`}
+          />
+          <Route
+            path={routes.registrationForm}
+            element={<RagistrationPage />}
+          />
+          <Route path={routes.resetPassword} element={<ResetPassword />} />
+
+          <Route
+            path={routes.default}
+            element={
+              <PrivateRoute>
+                <Routes>
+                <Route element={<Navigate to={routes.dashboard} />} path={routes.default} />
+                  <Route element={<DashboardPage />} path={routes.dashboard} />
+
+                  <Route path={routes.driverpageAll} element={<DriverPage />} />
+                  <Route
+                    path={routes.createNewDriver}
+                    element={<CreateNewDriverPage />}
+                  />
+                  <Route path={routes.loadpageAll} element={<LoadPage />} />
+                  <Route
+                    path={routes.createNewLoad}
+                    element={<CreateNewLaodPage />}
+                  />
+                  <Route path={routes.vendorsAll} element={<Vendors />} />
+                  <Route
+                    path={routes.createNewVendor}
+                    element={<CreateNewVendorPage />}
+                  />
+                  <Route path={routes.customersAll} element={<Customer />} />
+                  <Route
+                    path={routes.createNewCustomer}
+                    element={<CreateNewCustomerPage />}
+                  />
+                  <Route
+                    path={routes.driverPayRoll}
+                    element={<DriverPayRoll />}
+                  />
+                  <Route
+                    path={routes.createNewDriverPayRoll}
+                    element={<CreateNewDriverPayrollPage />}
+                  />
+                  <Route path={routes.billingPage} element={<BillingPage />} />
+                  <Route
+                    path={routes.createNewBillingPage}
+                    element={<CreateNewBillingPage />}
+                  />
+                  <Route
+                    path={routes.vendorBalance}
+                    element={<VendorBalance />}
+                  />
+                  <Route path={routes.fuelPage} element={<FuelPage />} />
+                  <Route
+                    path={routes.createNewFuelPage}
+                    element={<CreateNewFuelPage />}
+                  />
+                  <Route path={routes.fuelImport} element={<FuelImport />} />
+                  <Route
+                    path={routes.fuelTransaction}
+                    element={<FuelTransaction />}
+                  />
+                  <Route
+                    path={routes.createNewFuelTransaction}
+                    element={<CreateNewFuelTransactionPage />}
+                  />
+                  <Route path={routes.trucks} element={<TrucksPage />} />
+                  <Route
+                    path={routes.createNewTruck}
+                    element={<CreateNewTruckPage />}
+                  />
+                  <Route path={routes.trailers} element={<TrailersPage />} />
+                  <Route
+                    path={routes.createNewTailers}
+                    element={<CreateNewTrailerPage />}
+                  />
+                  <Route path={routes.additions} element={<AdditionsPage />} />
+                  <Route
+                    path={routes.createNewAdditions}
+                    element={<CreateNewAdditionsPage />}
+                  />
+                  <Route
+                    path={routes.scheduledPage}
+                    element={<ScheduledPage />}
+                  />
+                  <Route
+                    path={routes.createNewScheduledPage}
+                    element={<CreateNewScheduledPage />}
+                  />
+                  <Route
+                    path={routes.chartOfAccounts}
+                    element={<ChartofAccounts />}
+                  />
+                  <Route
+                    path={routes.createNewChartOfAccounts}
+                    element={<CreateNewChartofAccounts />}
+                  />
+                  <Route
+                    path={routes.expansesPage}
+                    element={<ExpansesPage />}
+                  />
+                  <Route
+                    path={routes.createNewExpansesPage}
+                    element={<CreateNewExpansesPage />}
+                  />
+                  <Route
+                    path={routes.createNewExpensesSchedulePage}
+                    element={<CreateNewExpensesSchedulePage />}
+                  />
+                  <Route
+                    path={routes.factoringReport}
+                    element={<FactoringReport />}
+                  />
+                  <Route
+                    path={routes.createNewFactoringReport}
+                    element={<CreateNewFactoringReport />}
+                  />
+                  <Route
+                    path={routes.paymentsPage}
+                    element={<PaymentsPage />}
+                  />
+                  <Route
+                    path={routes.createNewPaymentsPage}
+                    element={<CreateNewPaymentsPage />}
+                  />
+                  <Route
+                    path={routes.driverPaymentsPage}
+                    element={<DriverPaymentsPage />}
+                  />
+                  <Route
+                    path={routes.expensesReportPage}
+                    element={<ExpensesReportPage />}
+                  />
+                  <Route
+                    path={routes.grossProfitLoadPage}
+                    element={<GrossProfitLoadPage />}
+                  />
+                  <Route
+                    path={routes.grossProfitReportPage}
+                    element={<GrossProfitReportPage />}
+                  />
+                  <Route
+                    path={routes.profitLossReportPage}
+                    element={<ProfitLossReportPage />}
+                  />
+                  <Route
+                    path={routes.rateMileReportPage}
+                    element={<RateMileReportPage />}
+                  />
+                  <Route
+                    path={routes.revenueDispatcherPage}
+                    element={<RevenueDispatcherPage />}
+                  />
+                  <Route
+                    path={routes.totalRevenuePage}
+                    element={<TotalRevenuePage />}
+                  />
+                  <Route
+                    path={routes.dispatchedBoard}
+                    element={<DispatchedBoardPage />}
+                  />
+                  <Route path={routes.UsersPage} element={<UserPage />} />
+
+                  <Route path={routes.docExchange} element={<DocExchange />} />
+
+                  <Route path={routes.dataLibrary} element={<DataLibrary />} />
+                  <Route path={routes.reportPage} element={<ReportPage />} />
+                  <Route
+                    path={routes.taxRateByStatePage}
+                    element={<TaxRateByState />}
+                  />
+                  <Route path={routes.safetyPage} element={<SafetyPage />} />
+                  <Route path={routes.settingPage} element={<SettingPage />} />
+                </Routes>
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </ContextProvider>
   );
 };
 

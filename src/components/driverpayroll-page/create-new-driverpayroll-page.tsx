@@ -20,7 +20,8 @@ import {
   initialDriverPayRollPageState,
 } from "../tms-object/driverpayrollpage";
 import { PiGearDuotone } from "react-icons/pi";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { routes } from "../routes/routes";
 import { GenericTable } from "../table";
 
@@ -78,7 +79,8 @@ const tableData = [
 ];
 
 const CreateNewDriverPayrollPage = () => {
-  const history = useHistory();
+  // const history = useHistory();
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [formState, dispatch] = useReducer(
     formReducer,
@@ -101,10 +103,13 @@ const CreateNewDriverPayrollPage = () => {
   };
 
   const handleCancleButton = () => {
+    // {
+    //   history.location.pathname === routes.dashboard
+    //     ? history.push(routes.driverPayRoll)
+    //     : history.goBack();
+    // }
     {
-      history.location.pathname === routes.dashboard
-        ? history.push(routes.driverPayRoll)
-        : history.goBack();
+      navigate(routes.driverPayRoll);
     }
   };
 

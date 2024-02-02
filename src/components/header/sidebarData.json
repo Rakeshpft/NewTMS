@@ -787,6 +787,120 @@
           ]
         }
       ]
+    },
+    {
+      "id": 9,
+      "label": "More",
+      "link": null,
+      "hasSubmenu": true,
+      "isOpen": false,
+      "submenuItems": [
+        {
+          "id": 9.1,
+          "label": "User",
+          "link": null,
+          "hasSubmenu": true ,
+          "submenuItems": [
+            {
+              "id": 9.11,
+              "label":"All",
+              "link": "/users",
+              "hasSubmenu": false
+            },
+            {
+              "id": 9.12,
+              "label":"Active",
+              "link": "/users?filter=active",
+              "hasSubmenu": false
+            },
+            {
+              "id": 9.13,
+              "label":"InActive",
+              "link": "/users?filter=active",
+              "hasSubmenu": false
+            }
+          ]
+        },
+        {
+          "id": 9.2,
+          "label": "Data Library",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 9.21,
+              "labe": "Brokers",
+              "link": "/data/brokers",
+              "hasSubmenu": false
+            },
+            {
+              "id": 9.22,
+              "label": "Factoring Companies",
+              "link": "/data/factoringcompanies",
+              "hasSubmenu": false
+            },
+            {
+              "id": 9.23,
+              "label": "Shippers/Receiver",
+              "link": "/data/currencies",
+              "hasSubmenu": false
+            },
+            {
+              "id": 9.24,
+              "label": "Trailer/Types",
+              "link": "",
+              "hasSubmenu": false
+            }
+            
+          ]
+        },
+
+        {
+           
+          "id": 9.3,
+          "label":"Documnet Exchange",
+          "link":"",
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 9.31,
+              "label":"Doc Exchange",
+              "link": "/documentexchange",
+              "hasSubmenu": false
+            }
+          ]
+
+        } ,
+        {
+          "id": 9.4,
+          "label": "IFTA",
+          "link": null,
+          "hasSubmenu": true,
+          "submenuItems": [
+            {
+              "id": 9.41,
+              "label": "Reports",
+              "link": "/ReportPage",
+              "hasSubmenu": false
+
+            },
+            {
+              "id": 9.42,
+              "label": "Tax Rate by State ",
+              "link": "/ReportPage",
+              "hasSubmenu": false
+            },
+            {
+              "id": 9.43,
+              "label": "Miles By State",
+              "link": "/ReportPage",
+              "hasSubmenu": false
+            }
+
+
+          ]
+        }
+      ]
     }
   ]
 }

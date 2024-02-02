@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useState } from "react";
 import {
   Button,
   Col,
@@ -11,88 +11,50 @@ import {
 } from "reactstrap";
 import CompanyLogo from "../company-logo";
 import { Link } from "react-router-dom";
+import {
+  IRegistration,
+  initialRegistrationState,
+  salutationOptions,
+} from "../context/Auth/auth.types";
+import { useRegContext } from "../context/Auth/auth.reducer";
 
-type Action =
-  | { type: "setMcNumber"; payload: string }
-  | { type: "setCompany"; payload: string }
-  | { type: "setTitle"; payload: string }
-  | { type: "setFirstName"; payload: string }
-  | { type: "setLastName"; payload: string }
-  | { type: "setEmail"; payload: string }
-  | { type: "setAlternateEmail"; payload: string }
-  | { type: "setWebsite"; payload: string }
-  | { type: "setFax"; payload: string }
-  | { type: "setMobile"; payload: string }
-  | { type: "setPhone"; payload: string };
-
-type State = {
-  mcNumber: string;
-  company: string;
-  title: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  alternateEmail: string;
-  website: string;
-  fax: string;
-  mobile: string;
-  phone: string;
-};
-
-const initialState: State = {
-  mcNumber: "",
-  company: "",
-  title: "",
-  firstName: "",
-  lastName: "",
-  email: "",
-  alternateEmail: "",
-  website: "",
-  fax: "",
-  mobile: "",
-  phone: "",
-};
-const reducer = (state: State, action: Action): State => {
-  switch (action.type) {
-    case "setMcNumber":
-      return { ...state, mcNumber: action.payload };
-    case "setCompany":
-      return { ...state, company: action.payload };
-    case "setTitle":
-      return { ...state, title: action.payload };
-    case "setFirstName":
-      return { ...state, firstName: action.payload };
-    case "setLastName":
-      return { ...state, lastName: action.payload };
-    case "setEmail":
-      return { ...state, email: action.payload };
-    case "setAlternateEmail":
-      return { ...state, alternateEmail: action.payload };
-    case "setWebsite":
-      return { ...state, website: action.payload };
-    case "setFax":
-      return { ...state, fax: action.payload };
-    case "setMobile":
-      return { ...state, mobile: action.payload };
-    case "setPhone":
-      return { ...state, phone: action.payload };
-    default:
-      return state;
-  }
-};
 const RagistrationPage = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const { regist } = useRegContext();
 
-  const handleSubmit = (event: any) => {
+  const [regDetails, setregDetails] = useState<IRegistration>(
+    initialRegistrationState
+  );
+  const [apiResponseMsg, setApiResponseMsg] = useState("");
+  const [showRegistrationMessage, setShowPasswordMessage] = useState(false);
+
+  const handleInputChange =
+    (prop: keyof IRegistration) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setregDetails({ ...regDetails, [prop]: event.target.value });
+    };
+  const handleRegistration = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    console.log(state);
+    regist(regDetails).then((res) => {
+      setApiResponseMsg(`${res}`);
+      setShowPasswordMessage(true);
+
+      console.log(`${res}`);
+      // alert(`${res}`)
+    });
+
+    // .then(res =>{
+    //   setApiResponseMsg(res.message)
+    //   setShowPasswordMessage(true)
+    // } )
+
+    //  console.log(regDetails);
   };
   return (
     <>
       <div className="login">
         <Container>
           <Row>
-            <Col className="vh-100 mx-auto d-flex align-items-center">
+            <Col className="vh-100 mx-auto d-flex align-items-center" md={8} >
               <Container className="login-form py-4 shadow rounded my-5">
                 <Row>
                   <Col className="border-bottom">
@@ -106,244 +68,250 @@ const RagistrationPage = () => {
                     <div className="text-center my-4">
                       <h3 className="fw-bold ">Registration Form</h3>
                     </div>
-                    <Form className="mt-5" onSubmit={handleSubmit}>
-                      <Row>
-                        <Col md={4}>
+                    {showRegistrationMessage ? (
+                      <div className="text-center">
+                        <h5 className="text-success text-center mb-3">{apiResponseMsg}</h5>
+                        <Link
+                          to={"/"}
+                          className="btn btn-outline-primary text-decoration-none mx-3 text-center"
+                          type="button"
+                        >
+                          Back to Login
+                        </Link>
+                      </div>
+                    ) : (
+                      <Form className="mt-5" onSubmit={handleRegistration}>
+                        <Row>
+                          <Col md={4}>
+                            <FormGroup>
+                              <Label
+                                for="title"
+                                className="d-block d-sm-inline fw-bold"
+                              >
+                                Title
+                              </Label>
+                              <Input
+                                type="select"
+                                id="title"
+                                name="text"
+                                value={regDetails.salutation_id}
+                                onChange={handleInputChange("salutation_id")}
+                              >
+                                {salutationOptions.map((item) => (
+                                  <option
+                                    key={item.salutation_id}
+                                    value={item.salutation_id.toString()}
+                                  >
+                                    {item.salutation_name}
+                                  </option>
+                                ))}
+                              </Input>
+                            </FormGroup>
+                          </Col>
+                          <Col md={4}>
+                            <FormGroup>
+                              <Label
+                                for="first_name"
+                                className="d-block d-sm-inline fw-bold"
+                              >
+                                First Name
+                              </Label>
+                              <Input
+                                type="text"
+                                id="first_name"
+                                name="text"
+                                value={regDetails.first_name}
+                                onChange={handleInputChange("first_name")}
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col md={4}>
+                            <FormGroup>
+                              <Label
+                                for="last_name"
+                                className="d-block d-sm-inline fw-bold"
+                              >
+                                Last Name
+                              </Label>
+                              <Input
+                                type="text"
+                                id="last_name"
+                                name="text"
+                                value={regDetails.last_name}
+                                onChange={handleInputChange("last_name")}
+                                placeholder="Enter Your Last Name"
+                              />
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col md={6}>
+                            <FormGroup>
+                              <Label
+                                for="mc_number"
+                                className="d-block d-sm-inline fw-bold"
+                              >
+                                MC Number
+                              </Label>
+                              <Input
+                                type="text"
+                                name="text"
+                                id="mc_number"
+                                required
+                                value={regDetails.mc_number}
+                                onChange={handleInputChange("mc_number")}
+                                placeholder="Enter Your Mc Number"
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col md={6}>
+                            <FormGroup>
+                              <Label
+                                for="company_name"
+                                className="d-block d-sm-inline fw-bold"
+                              >
+                                Company
+                              </Label>
+                              <Input
+                                type="text"
+                                name="text"
+                                id="company_name"
+                                required
+                                value={regDetails.company_name}
+                                onChange={handleInputChange("company_name")}
+                                placeholder="Enter Your Company"
+                              />
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col md={6}>
+                            <FormGroup>
+                              <Label
+                                for="email"
+                                className="d-block d-sm-inline fw-bold"
+                              >
+                                Email
+                              </Label>
+                              <Input
+                                type="email"
+                                required
+                                name="email"
+                                id="email"
+                                value={regDetails.email}
+                                onChange={handleInputChange("email")}
+                                placeholder="Enter Your Email"
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col md={6}>
+                            <FormGroup>
+                              <Label
+                                for="email"
+                                className="d-block d-sm-inline fw-bold"
+                              >
+                                Alertnate Email
+                              </Label>
+                              <Input
+                                type="email"
+                                name="email"
+                                id="email"
+                                value={regDetails.email}
+                                onChange={handleInputChange("email")}
+                                placeholder="Enter Your Alternate Email"
+                              />
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col md={6}>
+                            <FormGroup>
+                              <Label
+                                for="website"
+                                className="d-block d-sm-inline fw-bold"
+                              >
+                                Website
+                              </Label>
+                              <Input
+                                type="text"
+                                name="text"
+                                id="website"
+                                value={regDetails.website}
+                                onChange={handleInputChange("website")}
+                                placeholder="Enter Your Website"
+                              />
+                            </FormGroup>
+                          </Col>
+                          <Col md={6}>
+                            <FormGroup>
+                              <Label
+                                for="fax"
+                                className="d-block d-sm-inline fw-bold"
+                              >
+                                Fax
+                              </Label>
+                              <Input
+                                type="text"
+                                name="text"
+                                id="fax"
+                                value={regDetails.email}
+                                placeholder="Enter Your Fax"
+                              />
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          {/* <Col md={6}>
                           <FormGroup>
-                            <Label className="d-block d-sm-inline fw-bold">
-                              Title
-                            </Label>
-                            <Input
-                              type="select"
-                              name="text"
-                              value={state.title}
-                              onChange={(event) =>
-                                dispatch({
-                                  type: "setTitle",
-                                  payload: event.target.value,
-                                })
-                              }
-                            >
-                              <option>select</option>
-                            </Input>
-                          </FormGroup>
-                        </Col>
-                        <Col md={4}>
-                          <FormGroup>
-                            <Label className="d-block d-sm-inline fw-bold">
-                              First Name
-                            </Label>
-                            <Input
-                              type="text"
-                              name="text"
-                              value={state.firstName}
-                              onChange={(event) =>
-                                dispatch({
-                                  type: "setFirstName",
-                                  payload: event.target.value,
-                                })
-                              }
-                              placeholder="Enter Your FirstName"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col md={4}>
-                          <FormGroup>
-                            <Label className="d-block d-sm-inline fw-bold">
-                              Last Name
-                            </Label>
-                            <Input
-                              type="text"
-                              name="text"
-                              value={state.lastName}
-                              onChange={(event) =>
-                                dispatch({
-                                  type: "setLastName",
-                                  payload: event.target.value,
-                                })
-                              }
-                              placeholder="Enter Your Last Name"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col md={6}>
-                          <FormGroup>
-                            <Label className="d-block d-sm-inline fw-bold">
-                              MC Number
-                            </Label>
-                            <Input
-                              type="text"
-                              name="text"
-                              value={state.mcNumber}
-                              onChange={(event) =>
-                                dispatch({
-                                  type: "setMcNumber",
-                                  payload: event.target.value,
-                                })
-                              }
-                              placeholder="Enter Your Mc Number"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col md={6}>
-                          <FormGroup>
-                            <Label className="d-block d-sm-inline fw-bold">
-                              Company
-                            </Label>
-                            <Input
-                              type="text"
-                              name="text"
-                              value={state.company}
-                              onChange={(event) =>
-                                dispatch({
-                                  type: "setCompany",
-                                  payload: event.target.value,
-                                })
-                              }
-                              placeholder="Enter Your Company"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col md={6}>
-                          <FormGroup>
-                            <Label className="d-block d-sm-inline fw-bold">
-                              Email
-                            </Label>
-                            <Input
-                              type="email"
-                              name="email"
-                              value={state.email}
-                              onChange={(event) =>
-                                dispatch({
-                                  type: "setEmail",
-                                  payload: event.target.value,
-                                })
-                              }
-                              placeholder="Enter Your Email"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col md={6}>
-                          <FormGroup>
-                            <Label className="d-block d-sm-inline fw-bold">
-                              Alertnate Email
-                            </Label>
-                            <Input
-                              type="email"
-                              name="email"
-                              value={state.alternateEmail}
-                              onChange={(event) =>
-                                dispatch({
-                                  type: "setAlternateEmail",
-                                  payload: event.target.value,
-                                })
-                              }
-                              placeholder="Enter Your Alternate Email"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col md={6}>
-                          <FormGroup>
-                            <Label className="d-block d-sm-inline fw-bold">
-                              Website
-                            </Label>
-                            <Input
-                              type="text"
-                              name="text"
-                              value={state.website}
-                              onChange={(event) =>
-                                dispatch({
-                                  type: "setWebsite",
-                                  payload: event.target.value,
-                                })
-                              }
-                              placeholder="Enter Your Website"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col md={6}>
-                          <FormGroup>
-                            <Label className="d-block d-sm-inline fw-bold">
-                              Fax
-                            </Label>
-                            <Input
-                              type="text"
-                              name="text"
-                              value={state.fax}
-                              onChange={(event) =>
-                                dispatch({
-                                  type: "setFax",
-                                  payload: event.target.value,
-                                })
-                              }
-                              placeholder="Enter Your Fax"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col md={6}>
-                          <FormGroup>
-                            <Label className="d-block d-sm-inline fw-bold">
+                            <Label for="mobile" className="d-block d-sm-inline fw-bold">
                               Mobile
                             </Label>
                             <Input
                               type="text"
                               name="text"
-                              value={state.mobile}
-                              onChange={(event) =>
-                                dispatch({
-                                  type: "setMobile",
-                                  payload: event.target.value,
-                                })
-                              }
+                              id="mobile"
+                              value={regDetails.mobile}
                               placeholder="Enter Your Mobile"
                             />
                           </FormGroup>
-                        </Col>
-                        <Col md={6}>
-                          <FormGroup>
-                            <Label className="d-block d-sm-inline fw-bold">
-                              Phone
-                            </Label>
-                            <Input
-                              type="text"
-                              name="text"
-                              value={state.phone}
-                              onChange={(event) =>
-                                dispatch({
-                                  type: "setPhone",
-                                  payload: event.target.value,
-                                })
-                              }
-                              placeholder="Enter Your Phone"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <FormGroup className="text-center mt-3">
-                        <Link
-                          to={"/"}
-                          className="btn btn-outline-primary text-decoration-none mx-3"
-                          type="button"
-                        >
-                          Back to Login
-                        </Link>
-                        <Button
-                          color="primary"
-                          className="px-5 py-2 shadow"
-                          type="submit"
-                        >
-                          Register
-                        </Button>
-                      </FormGroup>
-                    </Form>
+                        </Col> */}
+                          <Col md={6}>
+                            <FormGroup>
+                              <Label
+                                for="mobile"
+                                className="d-block d-sm-inline fw-bold"
+                              >
+                                Mobile
+                              </Label>
+                              <Input
+                                type="text"
+                                name="text"
+                                id="mobile"
+                                value={regDetails.mobile}
+                                onChange={handleInputChange("mobile")}
+                                placeholder="Enter Your Mobile"
+                              />
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <FormGroup className="text-center mt-3">
+                          <Link
+                            to={"/"}
+                            className="btn btn-outline-primary text-decoration-none mx-3"
+                            type="button"
+                          >
+                            Back to Login
+                          </Link>
+                          <Button
+                            color="primary"
+                            className="px-5 py-2 shadow"
+                            type="submit"
+                          >
+                            Register
+                          </Button>
+                        </FormGroup>
+                      </Form>
+                    )}
                   </Col>
                 </Row>
               </Container>

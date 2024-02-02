@@ -17,7 +17,7 @@ export default (_env: Record<string, any>, argv: any): Configuration => ({
     host: "localhost",
     compress: true,
     static: path.join(__dirname, "public"),
-    server: "https",
+    server: "http",
     port: 4100,
     historyApiFallback: true,
   },

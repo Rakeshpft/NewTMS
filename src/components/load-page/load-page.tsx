@@ -618,6 +618,7 @@ const LoadPage = () => {
             tableData={filteredData}
             tableHeaders={columns}
             defaultSortColumn="Load"
+            
           />
         </div>
       </div>

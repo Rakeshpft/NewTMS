@@ -19,7 +19,8 @@ import {
 } from "reactstrap";
 import { Header } from "../../header";
 import Profile from "../../pofile";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { routes } from "../../routes/routes";
 
 type FormAction =
@@ -47,7 +48,8 @@ const formReducer = (
 };
 
 const CreateNewFactoringReport = () => {
-  const history = useHistory();
+  // const history = useHistory();
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [state, dispatch] = useReducer(
     formReducer,
@@ -70,10 +72,13 @@ const CreateNewFactoringReport = () => {
   };
 
   const handleCancleButton = () => {
+    // {
+    //   history.location.pathname === routes.dashboard
+    //     ? history.push(routes.factoringReport)
+    //     : history.goBack();
+    // }
     {
-      history.location.pathname === routes.dashboard
-        ? history.push(routes.factoringReport)
-        : history.goBack();
+      navigate(routes.factoringReport);
     }
   };
 

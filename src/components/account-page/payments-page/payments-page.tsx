@@ -325,6 +325,7 @@ const PaymentsPage = () => {
             tableData={filteredData}
             tableHeaders={tableHeaders}
             defaultSortColumn="Partner"
+            
           />
         </div>
       </div>

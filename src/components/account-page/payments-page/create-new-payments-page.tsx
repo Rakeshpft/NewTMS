@@ -16,8 +16,9 @@ import {
 import { Header } from "../../header";
 import Profile from "../../pofile";
 import { initialPaymentState, payments } from "../../tms-object/accountspage";
-import { routes } from "../../routes/routes";
-import { useHistory } from "react-router-dom";
+// import { routes } from "../../routes/routes";
+// import { useHistory } from "react-router-dom";
+import {  useNavigate } from 'react-router-dom';
 
 type FormAction =
   | { type: "SET_payee"; payload: string }
@@ -47,7 +48,9 @@ const formReducer = (state: payments, action: FormAction): payments => {
 };
 
 const CreateNewPaymentsPage = () => {
-  const history = useHistory();
+  // const history = useHistory();
+  const navigate = useNavigate();
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [state, dispatch] = useReducer(formReducer, initialPaymentState);
 
@@ -67,10 +70,14 @@ const CreateNewPaymentsPage = () => {
   };
 
   const handleCancleButton = () => {
+    // {
+    //   history.location.pathname === routes.dashboard
+    //     ? history.push(routes.paymentsPage)
+    //     : history.goBack();
+    // }
     {
-      history.location.pathname === routes.dashboard
-        ? history.push(routes.paymentsPage)
-        : history.goBack();
+      
+      navigate(-1);
     }
   };
 

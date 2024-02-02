@@ -16,7 +16,7 @@ import { RxCross2 } from "react-icons/rx";
 import { Header } from "../../header";
 import Profile from "../../pofile";
 import { customer, initialCustomerState } from "../../tms-object/partners";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { routes } from "../../routes/routes";
 
 type FormInput =
@@ -89,7 +89,7 @@ const formReducer = (state: customer, action: FormInput): customer => {
 };
 
 const CreateNewCustomerPage = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [formState, dispatch] = useReducer(formReducer, initialCustomerState);
 
@@ -118,10 +118,14 @@ const CreateNewCustomerPage = () => {
   };
 
   const handleCancleButton = () => {
+    // {
+    //   history.location.pathname === routes.dashboard
+    //     ? history.push(routes.customersAll)
+    //     : history.goBack();
+    // }
     {
-      history.location.pathname === routes.dashboard
-        ? history.push(routes.customersAll)
-        : history.goBack();
+      
+       navigate(routes.customersAll) 
     }
   };
 

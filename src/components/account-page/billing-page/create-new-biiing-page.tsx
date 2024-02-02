@@ -19,7 +19,8 @@ import {
   billingEntryPage,
   initialBillingState,
 } from "../../tms-object/accountspage";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { routes } from "../../routes/routes";
 
 type FormAction =
@@ -56,7 +57,8 @@ const formReducer = (
 };
 
 const CreateNewBillingPage = () => {
-  const history = useHistory();
+  // const history = useHistory();
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [state, dispatch] = useReducer(formReducer, initialBillingState);
 
@@ -76,10 +78,13 @@ const CreateNewBillingPage = () => {
   };
 
   const handleCancleButton = () => {
+    // {
+    //   history.location.pathname === routes.dashboard
+    //     ? history.push(routes.billingPage)
+    //     : history.goBack();
+    // }
     {
-      history.location.pathname === routes.dashboard
-        ? history.push(routes.billingPage)
-        : history.goBack();
+      navigate(routes.billingPage);
     }
   };
 

@@ -11,8 +11,8 @@ const SideBar = ({ isSidebarOpen, activePageId }: SideBarProps) => {
   const [openSubmenuId, setOpenSubmenuId] = useState(activePageId);
   const [openSubmenuId2, setOpenSubmenuId2] = useState(0);
 
-  const renderSubmenu = (submenuItems: any) => {
-    return submenuItems.map((item: any) => (
+  const renderSubmenu = (submenuItems:any) => {
+    return submenuItems.map((item:any) => (
       <li
         key={item.id}
         className={`nav-item ${item.hasSubmenu ? "has-submenu" : ""}`}

@@ -19,7 +19,8 @@ import {
   fuelTransaction,
   initialFuelTransactionState,
 } from "../../tms-object/fuelpage";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes/routes";
 
 type FormAction =
@@ -80,7 +81,8 @@ const formReducer = (
 };
 
 const CreateNewFuelTransactionPage = () => {
-  const history = useHistory();
+  // const history = useHistory();
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [state, dispatch] = useReducer(
     formReducer,
@@ -112,11 +114,15 @@ const CreateNewFuelTransactionPage = () => {
   };
 
   const handleCancleButton = () => {
+    // {
+    //   history.location.pathname === routes.dashboard
+    //     ? history.push(routes.fuelTransaction)
+    //     : history.goBack();
+    // }
     {
-      history.location.pathname === routes.dashboard
-        ? history.push(routes.fuelTransaction)
-        : history.goBack();
+      navigate(routes.fuelTransaction);
     }
+    
   };
 
   return (

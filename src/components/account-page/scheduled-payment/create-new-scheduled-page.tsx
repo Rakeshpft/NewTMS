@@ -20,7 +20,8 @@ import { Header } from "../../header";
 import Profile from "../../pofile";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { routes } from "../../routes/routes";
 
 type FormAction =
@@ -78,7 +79,8 @@ const formReducer = (state: schedulePage, action: FormAction) => {
 };
 
 const CreateNewScheduledPage = () => {
-  const history = useHistory();
+  // const history = useHistory();
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [state, dispatch] = useReducer(formReducer, initialSchedulePageState);
   const [showTextBox, setShowTextBox] = useState(false);
@@ -110,10 +112,13 @@ const CreateNewScheduledPage = () => {
   };
 
   const handleCancleButton = () => {
+    // {
+    //   history.location.pathname === routes.dashboard
+    //     ? history.push(routes.scheduledPage)
+    //     : history.goBack();
+    // }
     {
-      history.location.pathname === routes.dashboard
-        ? history.push(routes.scheduledPage)
-        : history.goBack();
+      navigate(routes.scheduledPage);
     }
   };
 

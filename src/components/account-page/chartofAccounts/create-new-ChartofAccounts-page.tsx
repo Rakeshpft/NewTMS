@@ -19,7 +19,8 @@ import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import { Header } from "../../header";
 import Profile from "../../pofile";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { routes } from "../../routes/routes";
 
 type FormAction =
@@ -47,7 +48,8 @@ const formReducer = (state: Chartofaccount, action: FormAction) => {
 };
 
 const CreateNewChartofAccounts = () => {
-  const history = useHistory();
+  // const history = useHistory();
+    const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [state, dispatch] = useReducer(formReducer, initialChartofaccountState);
 
@@ -76,10 +78,9 @@ const CreateNewChartofAccounts = () => {
   };
 
   const handleCancleButton = () => {
+    
     {
-      history.location.pathname === routes.dashboard
-        ? history.push(routes.chartOfAccounts)
-        : history.goBack();
+      navigate(routes.chartOfAccounts);
     }
   };
 

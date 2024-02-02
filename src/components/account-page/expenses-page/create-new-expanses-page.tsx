@@ -16,7 +16,7 @@ import { Header } from "../../header";
 import Profile from "../../pofile";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { routes } from "../../routes/routes";
 
 type FormAction =
@@ -44,7 +44,7 @@ const formReducer = (state: expenses, action: FormAction): expenses => {
 };
 
 const CreateNewExpansesPage = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [expenses, dispatch] = useReducer(formReducer, initialExpensesState);
 
@@ -64,7 +64,7 @@ const CreateNewExpansesPage = () => {
   };
 
   const handleCancleButton = () => {
-    history.push(routes.expansesPage);
+    navigate(routes.expansesPage);
   };
 
   return (

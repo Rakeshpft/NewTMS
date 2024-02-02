@@ -18,8 +18,10 @@ import { BiCheck } from "react-icons/bi";
 import { Header } from "../header";
 import Profile from "../pofile";
 import { driverpage, initialDriverState } from "../tms-object/driverpage";
-import { routes } from "../routes/routes";
-import { useHistory } from "react-router-dom";
+// import { routes } from "../routes/routes";
+import {  useNavigate } from 'react-router-dom';
+
+// import { useHistory } from "react-router-dom";
 
 type FormAction =
   | { type: "SET_firstName"; payload: string }
@@ -109,7 +111,8 @@ const formReducer = (state: driverpage, action: FormAction): driverpage => {
 };
 
 const CreateNewDriverPage = () => {
-  const history = useHistory();
+  // const history = useHistory();
+  const navigate = useNavigate();
   const [state, dispatch] = useReducer(formReducer, initialDriverState);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -152,10 +155,13 @@ const CreateNewDriverPage = () => {
   };
 
   const handleCancleButton = () => {
+    // {
+    //   history.location.pathname === routes.dashboard
+    //     ? history.push(routes.driverpageAll)
+    //     : history.goBack();
+    // }
     {
-      history.location.pathname === routes.dashboard
-        ? history.push(routes.driverpageAll)
-        : history.goBack();
+      navigate(-1);
     }
   };
 

@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link,  useLocation } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import CompanyLogo from "../company-logo";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FiArrowLeft } from "react-icons/fi";
@@ -9,11 +10,13 @@ interface HeaderProps {
   showHambuger?: boolean;
 }
 const Header = ({ sidebarToggle, showHambuger = true }: HeaderProps) => {
+  const navigate = useNavigate();
   const { pathname } = useLocation();
-  const history = useHistory();
+  
+  // const history = useHistory();
 
   const handleBack = () => {
-    history.goBack();
+    navigate(-1);
   };
 
   if (

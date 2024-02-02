@@ -19,7 +19,7 @@ export interface LoadPage {
   po: string;
 }
 
-export const initialLoadState: LoadPage = {
+export const initialLoadState = {
   status: "",
   pickupDate: "",
   deliveryDate: "",

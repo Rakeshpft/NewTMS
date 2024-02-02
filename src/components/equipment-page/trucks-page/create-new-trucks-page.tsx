@@ -16,7 +16,8 @@ import Profile from "../../pofile";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import { initialTruckState, truckType } from "../../tms-object/equipmenrs";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { routes } from "../../routes/routes";
 
 type FormAction =
@@ -74,7 +75,8 @@ const formReducer = (state: truckType, action: FormAction): truckType => {
 };
 
 const CreateNewTruckPage = () => {
-  const history = useHistory();
+  // const history = useHistory();
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [state, dispatch] = useReducer(formReducer, initialTruckState);
 
@@ -94,10 +96,13 @@ const CreateNewTruckPage = () => {
   };
 
   const handleCancleButton = () => {
+    // {
+    //   history.location.pathname === routes.dashboard
+    //     ? history.push(routes.trucks)
+    //     : history.goBack();
+    // }
     {
-      history.location.pathname === routes.dashboard
-        ? history.push(routes.trucks)
-        : history.goBack();
+      navigate(routes.trucks);
     }
   };
 
