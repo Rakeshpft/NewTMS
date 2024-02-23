@@ -8,6 +8,8 @@ export const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   const { auth } = useRegContext();
 
   const authSession = !auth.access_token ? lscache.get("auth") : auth;
+  console.log('authSession value is',authSession);
+  
   const authenticated = authSession !== null;
   return authenticated ? children : <Navigate to={routes.login} replace />;
 };

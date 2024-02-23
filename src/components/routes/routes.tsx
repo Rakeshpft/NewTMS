@@ -1,5 +1,5 @@
 export const routes = {
-  default: "/*",
+  default: "*",
   login: "/",
   dashboard: "/dashboard",
   forgotPassword: "/forgetpassword",
@@ -57,4 +57,5 @@ export const routes = {
   taxRateByStatePage: "/taxratebystatepage",
   safetyPage: "/safety",
   settingPage: "/settings",
+  profileForm: "/profileform",
 };

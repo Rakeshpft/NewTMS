@@ -63,7 +63,9 @@ export const useRegContext = () => {
     console.log(newreg);
     try {
       const regData = await API.post(API_REG.registration, newreg);
-      return regData;
+      return regData ;
+      
+
     } catch (error: any) {
         
       console.log(error);

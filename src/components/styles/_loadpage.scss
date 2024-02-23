@@ -13,6 +13,7 @@
   flex-grow: 1;
 }
 
+
 .formpagenavbar {
   border-bottom: 1px solid #1b56ae;
   padding-top: 0;
@@ -77,30 +78,73 @@ form.newTrailerForm {
     margin-bottom: 0.4rem !important;
   }
 }
+.add-button {
+  color: black;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 0%;
+}
+.edit-load-color {
+  color: #1e5367;
+}
 
 .cancel-button {
   color: red;
   border: 1px solid red;
   background-color: white;
+  border-radius: 0%;
+}
+.editText {
+  font-size: smaller;
+}
+.update-text {
+  span {
+    font-size: 12px !important;
+    height: 24px; border-radius: 0;
+  }
+  .form-control-sm, .form-select {
+    font-size: 12px !important;
+    height: 24px; border: 1px solid #d4d4d4; border-radius: 0;
+  }
+}
+.edit-dropdown {
+  height: 24px;
+}
+.edit-button {
+  color: #0b8e00;
+  border: 1px solid #0b8e00;
+  background-color: white;
+  border-radius: 0%;
 }
 
 .cancel-button:not(.nohover):hover {
   color: red;
   border: 1px solid red;
   background-color: white;
+  border-radius: 0%;
 }
 
 .save-button {
   color: white;
   border: 1px solid #1e5367;
   background-color: #418ecb;
+  border-radius: 0%;
+}
+.save-preview-button { 
+  border-radius: 0%;
 }
 
+
+
+.map-margin {
+  margin-bottom: 316px;
+}
 
 .save-button:not(.nohover):hover {
   border: 1px solid #1e5367;
   background-color: #418ecb;
   color: white;
+  border-radius: 0%;
 }
 
 .card-search {
@@ -126,6 +170,18 @@ form.newTrailerForm {
 .approve-button {
   color: black;
   border: 1px solid #1e5367;
-  background-color: #8FF086;
+  background-color: #8ff086;
   margin-left: 30px;
+}
+
+
+.map-container {
+  height: 250px;
+}
+.map-container{
+  height: 240px;
+}
+
+.form-label{
+  margin-bottom: 0.25rem !important;
 }

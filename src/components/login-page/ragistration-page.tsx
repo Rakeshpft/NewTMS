@@ -17,6 +17,7 @@ import {
   salutationOptions,
 } from "../context/Auth/auth.types";
 import { useRegContext } from "../context/Auth/auth.reducer";
+// import { Notification } from "../../services/notification/Notification";
 
 const RagistrationPage = () => {
   const { regist } = useRegContext();
@@ -54,7 +55,7 @@ const RagistrationPage = () => {
       <div className="login">
         <Container>
           <Row>
-            <Col className="vh-100 mx-auto d-flex align-items-center" md={8} >
+            <Col className="vh-100 mx-auto d-flex align-items-center" md={8}>
               <Container className="login-form py-4 shadow rounded my-5">
                 <Row>
                   <Col className="border-bottom">
@@ -70,7 +71,14 @@ const RagistrationPage = () => {
                     </div>
                     {showRegistrationMessage ? (
                       <div className="text-center">
-                        <h5 className="text-success text-center mb-3">{apiResponseMsg}</h5>
+                        <h5 className="text-success text-center mb-3">
+                          {apiResponseMsg}
+                        </h5>
+                        {/* <Notification
+                              type="info"
+                              message="Contact Updated"
+                              closeAlert={() => setShowPasswordMessage(false)}
+                            /> */}
                         <Link
                           to={"/"}
                           className="btn btn-outline-primary text-decoration-none mx-3 text-center"
@@ -151,7 +159,7 @@ const RagistrationPage = () => {
                                 for="mc_number"
                                 className="d-block d-sm-inline fw-bold"
                               >
-                                MC Number
+                                MC Number<span className="text-danger">*</span>
                               </Label>
                               <Input
                                 type="text"
@@ -170,7 +178,7 @@ const RagistrationPage = () => {
                                 for="company_name"
                                 className="d-block d-sm-inline fw-bold"
                               >
-                                Company
+                                Company<span className="text-danger">*</span>
                               </Label>
                               <Input
                                 type="text"
@@ -191,7 +199,7 @@ const RagistrationPage = () => {
                                 for="email"
                                 className="d-block d-sm-inline fw-bold"
                               >
-                                Email
+                                Email<span className="text-danger">*</span>
                               </Label>
                               <Input
                                 type="email"
@@ -207,18 +215,21 @@ const RagistrationPage = () => {
                           <Col md={6}>
                             <FormGroup>
                               <Label
-                                for="email"
+                                for="mobile"
                                 className="d-block d-sm-inline fw-bold"
                               >
-                                Alertnate Email
+                                Contact Number
                               </Label>
                               <Input
-                                type="email"
-                                name="email"
-                                id="email"
-                                value={regDetails.email}
-                                onChange={handleInputChange("email")}
-                                placeholder="Enter Your Alternate Email"
+                                type="text"
+                                name="text"
+                                id="mobile"
+                                onKeyDown={(event) => {
+                                  return event.key >= "0" && event.key <= "9";
+                                }}
+                                value={regDetails.mobile}
+                                onChange={handleInputChange("mobile")}
+                                placeholder="Enter Your Mobile"
                               />
                             </FormGroup>
                           </Col>
@@ -242,7 +253,7 @@ const RagistrationPage = () => {
                               />
                             </FormGroup>
                           </Col>
-                          <Col md={6}>
+                          {/* <Col md={6}>
                             <FormGroup>
                               <Label
                                 for="fax"
@@ -258,7 +269,7 @@ const RagistrationPage = () => {
                                 placeholder="Enter Your Fax"
                               />
                             </FormGroup>
-                          </Col>
+                          </Col> */}
                         </Row>
                         <Row>
                           {/* <Col md={6}>
@@ -275,7 +286,7 @@ const RagistrationPage = () => {
                             />
                           </FormGroup>
                         </Col> */}
-                          <Col md={6}>
+                          {/* <Col md={6}>
                             <FormGroup>
                               <Label
                                 for="mobile"
@@ -292,7 +303,7 @@ const RagistrationPage = () => {
                                 placeholder="Enter Your Mobile"
                               />
                             </FormGroup>
-                          </Col>
+                          </Col> */}
                         </Row>
                         <FormGroup className="text-center mt-3">
                           <Link
@@ -307,6 +318,7 @@ const RagistrationPage = () => {
                             className="px-5 py-2 shadow"
                             type="submit"
                           >
+                            
                             Register
                           </Button>
                         </FormGroup>

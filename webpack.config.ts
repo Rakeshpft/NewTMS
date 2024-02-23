@@ -106,6 +106,7 @@ export default (_env: Record<string, any>, argv: any): Configuration => ({
     assetModuleFilename: "images/[hash][ext][query]",
   },
   plugins: [
+  
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: "Caching",
@@ -116,5 +117,6 @@ export default (_env: Record<string, any>, argv: any): Configuration => ({
     new MiniCssExtractPlugin({
       filename: "all.css",
     }),
+    
   ],
 });

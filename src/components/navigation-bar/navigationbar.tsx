@@ -16,7 +16,7 @@ import { BsBell, BsGear } from "react-icons/bs";
 import { BiMessageDetail } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
 import CompanyLogo from "../company-logo/company-logo";
-
+import lscache from "lscache";
 const NavigationBar = () => {
   const { pathname } = useLocation();
 
@@ -27,6 +27,10 @@ const NavigationBar = () => {
   ) {
     return null;
   }
+//  const { auth} =  useRegContext()
+//  console.log( 'auth value ',auth )
+const username = lscache.get('auth').data.user_name
+console.log('username',username)
   
   return (
     <div className="header-section">
@@ -59,7 +63,7 @@ const NavigationBar = () => {
                   </div>
                   <div className="d-lg-block d-none text-start small">
                     <div className="fw-bold">TMS User</div>
-                    <div>tmsuser@tmsgroup.com</div>
+                    <div>{username}</div>
                   </div>
                 </Col>
               </Row>

@@ -6,8 +6,9 @@ import {
   Table,
 } from "reactstrap";
 import { BsSortDown, BsSortUp } from "react-icons/bs";
-import { FaRegEdit } from "react-icons/fa";
+// import { FaRegEdit } from "react-icons/fa";
 import { PiGearDuotone } from "react-icons/pi";
+import { Link } from "react-router-dom";
 interface TableProps<T> {
   tableData: any[];
   tableHeaders: any[];
@@ -90,18 +91,28 @@ function GenericTable<T>({
               <>
                 {sortedData.slice(startIndex, endIndex).map((row, rowIndex) => (
                   <tr key={rowIndex}>
+                    
                     {tableHeaders.map((header, headerIndex) => (
+                     editRow && (header === "Load" ||  header === "Broker"  )   ? 
+
+                      <td key={headerIndex}> <Link onClick={() => editRow(row)} to={""}> {row[header]}</Link></td> :
+
                       <td key={headerIndex}>{row[header]}</td>
                     ))}
+
+
                     {canEditRow && editRow && (
                       <td>
-                        <FaRegEdit
+                        {/* <FaRegEdit
                           style={{
                             cursor: "pointer",
                             backgroundColor: "#8FF086",
                           }}
                           onClick={() => editRow(row)}
-                        />
+                        /> */}
+                        < Link to={""} onClick={()  => editRow(row)}>
+                        Lumper
+                         </Link>
                       </td>
                     )}
                   </tr>

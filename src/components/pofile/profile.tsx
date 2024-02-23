@@ -10,8 +10,17 @@ import {
 import { handleLogout } from "../auth";
 // import { CgProfile } from "react-icons/cg";
 import { FiLogOut } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+ import { routes } from "../routes/routes";
 
 const Profile = () => {
+
+  const navigate = useNavigate()
+
+const navigateToProfile = () => {
+   navigate(routes.profileForm)
+}
+
   return (
     <>
       <UncontrolledButtonDropdown direction="down" className="float-right">
@@ -37,7 +46,7 @@ const Profile = () => {
         <DropdownMenu>
           <DropdownItem className="border-bottom">
             <div className="d-flex justify-content-between text-align-center">
-              <span className="text-dark">Profile</span>
+              <span className="text-dark" onClick={ () =>navigateToProfile()}  >Profile</span>
             </div>
           </DropdownItem>
           <DropdownItem className="border-bottom">

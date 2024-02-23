@@ -110,7 +110,9 @@ input[type="radio"] {
 .navbar > .container-fluid {
   padding: 0;
 }
-
+input,select,textarea{
+  border-radius: 0 !important;
+}
 @import "./login";
 @import "./navigation";
 @import "./dashboard";

@@ -14,6 +14,7 @@ import {
 } from "reactstrap";
 import CompanyLogo from "../company-logo";
 import { useRegContext } from "../context/Auth/auth.reducer";
+// import { Notification } from "../../services/notification/Notification";
 
 // import { routes } from "../routes/routes";
 
@@ -169,6 +170,7 @@ const [ logInData , setLogInData] = useState<LoginFormSate>(initialFormState)
                           type="submit"
                           // disabled={state.spinner}
                         >
+                          {/* <Notification type="success" message="Login Success" closeAlert={() => {}}} /> */}
                           {/* {state.spinner ? (
                             <>
                               <Spinner size="sm">Loading...</Spinner>
@@ -177,6 +179,7 @@ const [ logInData , setLogInData] = useState<LoginFormSate>(initialFormState)
                           ) : (
                             "Login"
                           )} */}
+                       
                           LOGIN
                         </Button>
                       </FormGroup>

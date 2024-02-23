@@ -76,6 +76,7 @@ import SettingPage from "./components/setting-page/settingPage";
 import { ContextProvider } from "./components/context/ContextProvider";
 import { DashboardPage } from "./components/dashboard";
 import { PrivateRoute } from "./components/routes/PrivateRoute";
+import { ProfileForm } from "./components/pofile";
 
 const App = () => {
   return (
@@ -99,9 +100,9 @@ const App = () => {
             element={
               <PrivateRoute>
                 <Routes>
-                <Route element={<Navigate to={routes.dashboard} />} path={routes.default} />
+                <Route element={<Navigate to={routes.dashboard} />} path={'*'} />
                   <Route element={<DashboardPage />} path={routes.dashboard} />
-
+                  <Route path= {routes.profileForm} element={<ProfileForm/>}/>
                   <Route path={routes.driverpageAll} element={<DriverPage />} />
                   <Route
                     path={routes.createNewDriver}
@@ -120,7 +121,7 @@ const App = () => {
                   <Route path={routes.customersAll} element={<Customer />} />
                   <Route
                     path={routes.createNewCustomer}
-                    element={<CreateNewCustomerPage />}
+                    element={<CreateNewCustomerPage  />}
                   />
                   <Route
                     path={routes.driverPayRoll}

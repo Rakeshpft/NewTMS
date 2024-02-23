@@ -28,10 +28,11 @@ import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlinePlus } from "react-icons/ai";
-import { PiGearDuotone } from "react-icons/pi";
+// import { PiGearDuotone } from "react-icons/pi";
 import { SearchLoadPage, initialSearchState } from "../tms-object/loadpage";
 import { routes } from "../routes/routes";
 import { GenericTable } from "../table";
+import EditLoadModal from "./editLoadModal";
 
 const columns = [
   "Load",
@@ -47,8 +48,8 @@ const columns = [
   "Billing",
   "Notes",
   "Attachments",
-  "Actions",
-  <PiGearDuotone />,
+  // "Actions",
+  // <PiGearDuotone />,
 ];
 
 const Tabledata = [
@@ -66,7 +67,7 @@ const Tabledata = [
     Billing: "Invoiced",
     Notes: "Lumper: $50.00 :: Detention: $50.00",
     Attachments: "[file-icon]",
-    Actions: "Lumper",
+   
   },
   {
     Load: 1002,
@@ -82,7 +83,7 @@ const Tabledata = [
     Billing: "Invoiced",
     Notes: "Lumper: $50.00 :: Detention: $50.00",
     Attachments: "[file-icon]",
-    Actions: "Lumper",
+   
   },
   {
     Load: 1003,
@@ -98,7 +99,7 @@ const Tabledata = [
     Billing: "Invoiced",
     Notes: "Lumper: $50.00 :: Detention: $50.00",
     Attachments: "[file-icon]",
-    Actions: "Lumper",
+   
   },
 ];
 
@@ -152,6 +153,7 @@ const LoadPage = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [filteredData, setFilteredData] = useState(Tabledata);
+  const [editLoadModal , setEditLoadModal] = useState(false)
   const [filter, setFilter] = useState("");
   const [formState, dispatch] = useReducer(
     filterformReducer,
@@ -172,6 +174,10 @@ const LoadPage = () => {
     setFilter(value);
     setFilteredData(filteredData);
   };
+
+  const handleEditLoad = () => {
+    setEditLoadModal(true)
+  }
 
   const searchToggle = (): void => {
     setIsOpen((isOpen) => !isOpen);
@@ -257,6 +263,7 @@ const LoadPage = () => {
       </Navbar>
       <div className="content d-flex">
         <SideBar isSidebarOpen={!isSidebarOpen} activePageId={1} />
+
         <div className="aria-content">
           {isOpen && (
             <Collapse isOpen={isOpen}>
@@ -614,12 +621,17 @@ const LoadPage = () => {
               </Card>
             </Collapse>
           )}
+           <EditLoadModal  isOpen={editLoadModal} toggle={() => setEditLoadModal(false)}  />
+
           <GenericTable
             tableData={filteredData}
             tableHeaders={columns}
             defaultSortColumn="Load"
+            canEditRow = {true}
+            editRow={handleEditLoad}
             
           />
+          
         </div>
       </div>
     </>

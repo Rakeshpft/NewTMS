@@ -1,110 +1,98 @@
-import React, { useReducer, useState } from "react";
-import {
-  Navbar,
-  NavbarBrand,
-  Nav,
-  Button,
-  Col,
-  Form,
-  FormGroup,
-  Input,
-  Label,
-  Row,
-} from "reactstrap";
+import React, { useState } from "react";
+import { Navbar, NavbarBrand, Nav } from "reactstrap";
 import { Header } from "../../header";
 import Profile from "../../pofile";
-import { BiCheck } from "react-icons/bi";
-import { RxCross2 } from "react-icons/rx";
-import { initialTruckState, truckType } from "../../tms-object/equipmenrs";
+import CreateNewTruckForm from "./createNewTruckForm";
+
+// import { initialTruckState, truckType } from "../../tms-object/equipmenrs";
 // import { useHistory } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
-import { routes } from "../../routes/routes";
 
-type FormAction =
-  | { type: "SET_unit"; payload: string }
-  | { type: "SET_vin"; payload: string }
-  | { type: "SET_ELDprovider"; payload: string }
-  | { type: "SET_ELDid"; payload: string }
-  | { type: "SET_year"; payload: string }
-  | { type: "SET_make"; payload: string }
-  | { type: "SET_ownership"; payload: string }
-  | { type: "SET_modal"; payload: string }
-  | { type: "SET_purchaseDate"; payload: string }
-  | { type: "SET_purchasePrice"; payload: string }
-  | { type: "SET_driver"; payload: string }
-  | { type: "SET_plate"; payload: string }
-  | { type: "SET_plateState"; payload: string }
-  | { type: "SET_notes"; payload: string }
-  | { type: "SET_history"; payload: string };
+// type FormAction =
+//   | { type: "SET_unit"; payload: string }
+//   | { type: "SET_vin"; payload: string }
+//   | { type: "SET_ELDprovider"; payload: string }
+//   | { type: "SET_ELDid"; payload: string }
+//   | { type: "SET_year"; payload: string }
+//   | { type: "SET_make"; payload: string }
+//   | { type: "SET_ownership"; payload: string }
+//   | { type: "SET_modal"; payload: string }
+//   | { type: "SET_purchaseDate"; payload: string }
+//   | { type: "SET_purchasePrice"; payload: string }
+//   | { type: "SET_driver"; payload: string }
+//   | { type: "SET_plate"; payload: string }
+//   | { type: "SET_plateState"; payload: string }
+//   | { type: "SET_notes"; payload: string }
+//   | { type: "SET_history"; payload: string };
 
-const formReducer = (state: truckType, action: FormAction): truckType => {
-  switch (action.type) {
-    case "SET_unit":
-      return { ...state, unit: action.payload };
-    case "SET_vin":
-      return { ...state, vin: action.payload };
-    case "SET_ELDprovider":
-      return { ...state, ELDprovider: action.payload };
-    case "SET_ELDid":
-      return { ...state, ELDid: action.payload };
-    case "SET_year":
-      return { ...state, year: action.payload };
-    case "SET_make":
-      return { ...state, make: action.payload };
-    case "SET_ownership":
-      return { ...state, ownership: action.payload };
-    case "SET_modal":
-      return { ...state, modal: action.payload };
-    case "SET_purchaseDate":
-      return { ...state, purchaseDate: action.payload };
-    case "SET_purchasePrice":
-      return { ...state, purchasePrice: action.payload };
-    case "SET_driver":
-      return { ...state, driver: action.payload };
-    case "SET_plate":
-      return { ...state, plate: action.payload };
-    case "SET_plateState":
-      return { ...state, plateState: action.payload };
-    case "SET_notes":
-      return { ...state, notes: action.payload };
-    case "SET_history":
-      return { ...state, history: action.payload };
-    default:
-      return state;
-  }
-};
+// const formReducer = (state: truckType, action: FormAction): truckType => {
+//   switch (action.type) {
+//     case "SET_unit":
+//       return { ...state, unit: action.payload };
+//     case "SET_vin":
+//       return { ...state, vin: action.payload };
+//     case "SET_ELDprovider":
+//       return { ...state, ELDprovider: action.payload };
+//     case "SET_ELDid":
+//       return { ...state, ELDid: action.payload };
+//     case "SET_year":
+//       return { ...state, year: action.payload };
+//     case "SET_make":
+//       return { ...state, make: action.payload };
+//     case "SET_ownership":
+//       return { ...state, ownership: action.payload };
+//     case "SET_modal":
+//       return { ...state, modal: action.payload };
+//     case "SET_purchaseDate":
+//       return { ...state, purchaseDate: action.payload };
+//     case "SET_purchasePrice":
+//       return { ...state, purchasePrice: action.payload };
+//     case "SET_driver":
+//       return { ...state, driver: action.payload };
+//     case "SET_plate":
+//       return { ...state, plate: action.payload };
+//     case "SET_plateState":
+//       return { ...state, plateState: action.payload };
+//     case "SET_notes":
+//       return { ...state, notes: action.payload };
+//     case "SET_history":
+//       return { ...state, history: action.payload };
+//     default:
+//       return state;
+//   }
+// };
 
-const CreateNewTruckPage = () => {
+const CreateNewTruckPage = ( toggle : any) => {
   // const history = useHistory();
-  const navigate = useNavigate();
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [state, dispatch] = useReducer(formReducer, initialTruckState);
 
-  const handleInput =
-    (type: FormAction["type"]) =>
-    (
-      event: React.ChangeEvent<
-        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-      >
-    ) => {
-      dispatch({ type, payload: event.target.value });
-    };
+  // const [state, dispatch] = useReducer(formReducer, initialTruckState);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log(state);
-  };
+  //const handleInput =
+  // (type: FormAction["type"]) =>
+  // (
+  //   event: React.ChangeEvent<
+  //     HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+  //   >
+  // ) => {
+  //   dispatch({ type, payload: event.target.value });
+  // };
 
-  const handleCancleButton = () => {
-    // {
-    //   history.location.pathname === routes.dashboard
-    //     ? history.push(routes.trucks)
-    //     : history.goBack();
-    // }
-    {
-      navigate(routes.trucks);
-    }
-  };
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   console.log(state);
+  // };
+
+  // const handleCancleButton = () => {
+  //   // {
+  //   //   history.location.pathname === routes.dashboard
+  //   //     ? history.push(routes.trucks)
+  //   //     : history.goBack();
+  //   // }
+  //   {
+  //     navigate(routes.trucks);
+  //   }
+  // };
 
   return (
     <>
@@ -122,7 +110,13 @@ const CreateNewTruckPage = () => {
         </div>
       </Navbar>
       <div className="m-2 load-itemmain">
-        <Form onSubmit={handleSubmit} className="load-item container p-4">
+         
+         <CreateNewTruckForm
+         isFromTruckPage = {true }
+         toggle = {toggle}
+         />
+
+        {/* <Form onSubmit={handleSubmit} className="load-item container p-4">
           <Row className="px-5">
             <Col lg={3} md={6} sm={12} className="px-3">
               <FormGroup>
@@ -389,7 +383,7 @@ const CreateNewTruckPage = () => {
               </Button>
             </Col>
           </Row>
-        </Form>
+        </Form> */}
       </div>
     </>
   );

@@ -38,3 +38,24 @@ export const API_LOAD = {
   dispatcherLoadList: "/LoadDispatchers",
   stateLoadList: "/State",
 };
+
+export const API_CUSTOMER = {
+  // House CUSTOMER API endpoints here
+
+  addCustomer: "/Partners",
+};
+
+export const API_DRIVER = {
+  // House Driver API endpoints here
+  addDriver: "/Driver",
+};
+
+export const API_TRUCK = {
+  // House Truck API endpoints here
+  addTruck: "/Trucks",
+};
+
+export const API_TRAILER = {
+  // House Trailer API endpoints here
+  addTrailer: "/Trailers",
+};

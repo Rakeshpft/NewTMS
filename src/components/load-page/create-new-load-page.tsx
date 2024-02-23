@@ -347,14 +347,14 @@ const CreateNewLaodPage = () => {
                       // value={formState.deliveryState}
                       // onChange={handleInput("SET_deliveryState")}
                     >
-                      <option>Pending</option>
-                      <option>cancel-buttoned</option>
-                      <option>BOL received</option>
-                      <option>Invoiced</option>
-                      <option>Sent to factoring</option>
-                      <option>Funded</option>
-                      <option>Paid</option>
-                      <option>Closed</option>
+                      <option value="">Select State</option>
+                      {loadStateStatus?.map((item) => {
+                        return (
+                          <option key={item.state_id} value={item.state_id}>
+                            {item.state_name}
+                          </option>
+                        );
+                      })}
                     </Input>
                   </FormGroup>
                 </Col>
@@ -433,13 +433,9 @@ const CreateNewLaodPage = () => {
                         onClick={toggleCustomer}
                       >
                         <AiOutlinePlus />
-                        <BrokerModalPage
-                          isCustomerOpen={customerModal}
-                          toggle={() => {
-                            setCustomerModal(false);
-                          }}
-                        />
+                       
                       </Button>
+                      
                     </InputGroup>
                   </FormGroup>
                 </Col>
@@ -612,6 +608,13 @@ const CreateNewLaodPage = () => {
             </Col>
           </Row>
         </Form>
+        <BrokerModalPage
+                          isCustomerOpen={customerModal}
+                          toggle={() => {
+                            setCustomerModal(false);
+                          }}
+                          
+                        />
       </div>
     </main>
   );
