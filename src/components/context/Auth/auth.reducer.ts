@@ -62,7 +62,7 @@ export const useRegContext = () => {
 
     console.log(newreg);
     try {
-      const regData = await API.post(API_REG.registration, newreg);
+      const regData = await API.post(API_REG.postRegistration, newreg);
       return regData ;
       
 
@@ -81,9 +81,9 @@ export const useRegContext = () => {
     setState((draft) => {
       draft.regLoading = true;
     });
-    console.log(`${API_REG.companyVerify}/${id}`)
+    console.log(`${API_REG.getCompanyVerify}/${id}`)
     try {
-      const veriData = await API.get(`${API_REG.companyVerify}/${id}`);  
+      const veriData = await API.get(`${API_REG.getCompanyVerify}/${id}`);  
       return veriData;
     } catch (error: any) {
       console.log(error);

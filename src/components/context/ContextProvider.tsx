@@ -5,6 +5,7 @@ import { CustomerAddProvider } from "./Customer/customer.context";
 import { TruckStatusProvider } from "./Truck/truck.context";
 import { TrailerStatusProvider } from "./Trailer/trailer.context";
 import { DriverAddProvider } from "./Driver/driver.context";
+import { ProfileProvider } from "./Profile/profileContext";
 
 export const ContextProvider = ({
   children,
@@ -16,7 +17,9 @@ export const ContextProvider = ({
       <CustomerAddProvider>
         <TruckStatusProvider>
           <TrailerStatusProvider>
-            <DriverAddProvider>{children}</DriverAddProvider>
+            <DriverAddProvider>
+              <ProfileProvider> {children}</ProfileProvider>
+            </DriverAddProvider>
           </TrailerStatusProvider>
         </TruckStatusProvider>
       </CustomerAddProvider>

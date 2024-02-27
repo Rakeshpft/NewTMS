@@ -54,6 +54,7 @@ const navigateToProfile = () => {
               <span className="text-dark">Setting</span>
             </div>
           </DropdownItem>
+          
           <DropdownItem className="border-bottom" onClick={handleLogout}>
             <div className="d-flex justify-content-between text-align-center">
               <span className="text-dark">Logout</span>

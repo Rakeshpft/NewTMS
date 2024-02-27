@@ -33,19 +33,17 @@ const ResetPassword = () => {
     confirmPassword: "",
   };
   const { rePass, verifyFirstPass } = useRegContext();
-  const [showEmail, setShowEmail] = useState("");
+ 
   const [apiResponseMsg, setApiResponseMsg] = useState("");
-  const [showRegistrationMessage, setShowPasswordMessage] = useState(false);
+  const [showRegistrationMessage, setShowRegistrationMessage] = useState(false);
+  const [emailStatus, setEmailStatus] = useState(null);
 
   const [verifyPass, setVerifyPass] =
     useState<IResetPassword>(initialVerifyPass);
 
   const params = useParams();
-  console.log("params", params);
-  const company_guid = params.id;
-  console.log("para", company_guid);
 
-  console.log("id value", company_guid);
+  const company_guid = params.id;
 
   const handleVerifyInput =
     (prop: keyof IResetPassword) =>
@@ -54,10 +52,11 @@ const ResetPassword = () => {
     };
 
   useEffect(() => {
-    rePass(company_guid).then((data: any) => console.log(data));
+    // rePass(company_guid).then((data: any) => console.log(data));
 
     rePass(company_guid).then((data) => {
-      setShowEmail(`${data[0].email}`);
+      console.log("showEmail", data);
+      data && setEmailStatus(data.value);
     });
     //         console.log(data)
 
@@ -76,10 +75,9 @@ const ResetPassword = () => {
     event.preventDefault();
 
     verifyFirstPass(verifyPass, company_guid).then((data) => {
-      console.log("data", data);
       setVerifyPass(initialVerifyPass);
+      setShowRegistrationMessage(true);
       setApiResponseMsg(`${data}`);
-      setShowPasswordMessage(true);
     });
   };
 
@@ -124,80 +122,98 @@ const ResetPassword = () => {
                   <>
                     <Row>
                       <Col sm={10} className="mx-auto">
-                        <div className="text-center my-4">
-                          <p>
-                            Email <span className=" fw-bold">{showEmail}</span>{" "}
-                            is verified succesfully. Please set password to
-                            continue.
-                          </p>
-                        </div>
-                        <Form className="mt-5" onSubmit={handleVerifyPassword}>
-                          <FormGroup>
-                            <InputGroup>
-                              <InputGroupText className="d-block d-sm-inline fw-bold resetPassword">
-                                Password
-                              </InputGroupText>
-                              <Input
-                                type="password"
-                                required
-                                name="verifyPass.password"
-                                value={verifyPass.password}
-                                onChange={handleVerifyInput("password")}
-                                placeholder="Enter Your Password"
-                                autoComplete="off"
-                                // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                        {emailStatus ? (
+                          <>
+                            <div className="text-center my-4">
+                              <p>
+                                
+                                is verified succesfully. Please set password to
+                                continue.
+                              </p>
+                            </div>
+                            <FormGroup className="text-center">
+                              <Link
+                                to={"/"}
+                                className="px-0 btn btn-link text-decoration-none fw-bold "
                               >
-                                <AiOutlineEyeInvisible />
-                              </Input>
+                                Back to Login
+                              </Link>
+                            </FormGroup>
+                          </>
+                        ) : (
+                          <Form
+                            className="mt-5"
+                            onSubmit={handleVerifyPassword}
+                          >
+                            <FormGroup>
+                              <InputGroup>
+                                <InputGroupText className="d-block d-sm-inline fw-bold resetPassword">
+                                  Password
+                                </InputGroupText>
+                                <Input
+                                  type="password"
+                                  required
+                                  name="verifyPass.password"
+                                  value={verifyPass.password}
+                                  onChange={handleVerifyInput("password")}
+                                  placeholder="Enter Your Password"
+                                  autoComplete="off"
+                                  // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                >
+                                  <AiOutlineEyeInvisible />
+                                </Input>
 
-                              <FormText color="danger">
-                                Password must be at least 8 characters
-                              </FormText>
-                            </InputGroup>
-                          </FormGroup>
-                          <FormGroup>
-                            <InputGroup>
-                              <InputGroupText className="d-block d-sm-inline fw-bold ">
-                                Confirm Password&nbsp;
-                              </InputGroupText>
-                              <Input
-                                type="password"
-                                required
-                                name="confirm password"
-                                value={verifyPass.confirmPassword}
-                                onChange={handleVerifyInput("confirmPassword")}
-                                placeholder="Enter Your Confirm Password"
-                              />
-                            </InputGroup>
-                          </FormGroup>
+                                <FormText color="danger">
+                                  Password must be at least 8 characters
+                                </FormText>
+                              </InputGroup>
+                            </FormGroup>
+                            <FormGroup>
+                              <InputGroup>
+                                <InputGroupText className="d-block d-sm-inline fw-bold ">
+                                  Confirm Password&nbsp;
+                                </InputGroupText>
+                                <Input
+                                  type="password"
+                                  required
+                                  name="confirm password"
+                                  value={verifyPass.confirmPassword}
+                                  onChange={handleVerifyInput(
+                                    "confirmPassword"
+                                  )}
+                                  placeholder="Enter Your Confirm Password"
+                                />
+                              </InputGroup>
+                            </FormGroup>
 
-                          <FormGroup className="text-center">
-                            <Button
-                              color="primary"
-                              className="px-3 py-2  mt-3 shadow"
-                              type="submit"
-                              //   disabled={verifyPass.password ===  verifyPass.confirmPassword ? true : false}
-                              disabled={
-                                !every(
-                                  verifyPass,
-                                  (data) =>
-                                    data !== "" &&
-                                    data === verifyPass.confirmPassword
-                                )
-                              }
-                            >
-                              Save Password
-                            </Button>
-                          </FormGroup>
-                          <FormGroup className="text-center">
-                            <Link
-                              to={"/"}
-                              className="px-0 btn btn-link text-decoration-none fw-bold "
-                            >
-                              Back to Login
-                            </Link>
-                          </FormGroup>
-                        </Form>
+                            <FormGroup className="text-center">
+                              <Button
+                                color="primary"
+                                className="px-3 py-2  mt-3 shadow"
+                                type="submit"
+                                //   disabled={verifyPass.password ===  verifyPass.confirmPassword ? true : false}
+                                disabled={
+                                  !every(
+                                    verifyPass,
+                                    (data) =>
+                                      data !== "" &&
+                                      data === verifyPass.confirmPassword
+                                  )
+                                }
+                              >
+                                Save Password
+                              </Button>
+                            </FormGroup>
+                            <FormGroup className="text-center">
+                              <Link
+                                to={"/"}
+                                className="px-0 btn btn-link text-decoration-none fw-bold "
+                              >
+                                Back to Login
+                              </Link>
+                            </FormGroup>
+                          </Form>
+                        )}
                       </Col>
                     </Row>
                   </>

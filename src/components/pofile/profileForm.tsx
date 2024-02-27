@@ -20,6 +20,8 @@ import { BiCheck } from "react-icons/bi";
 
 const ProfileForm = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  // const [profileData, setProfileData] = useState(" Rakesh Singh");
+  const [resetPasswordData, setResetPasswordData] = useState("");
 
   // const navigate = useNavigate();
   // const handleCancleButton = () => {
@@ -32,6 +34,17 @@ const ProfileForm = () => {
   //     navigate(routes.loadpageAll);
   //   }
   // };
+   const handleProfileInputChange = (  ) => ( event: React.ChangeEvent<HTMLInputElement>)  => {
+         setResetPasswordData(event.target.value );
+
+   }
+
+  const handleProfileSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
+  const handlePasswordSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
   return (
     <>
       <Navbar color="light" className="py-0">
@@ -41,25 +54,7 @@ const ProfileForm = () => {
           }}
         />
         <NavbarBrand className="fw-bold px-4">Profile</NavbarBrand>
-        <Nav className="me-auto" navbar>
-          <div className="d-flex gap-1 align-items-center">
-            {/* <div className="x-small fw-bold">Period</div> */}
-            {/* <Dropdown isOpen={dropdownOpen} toggle={toggle} direction="down">
-                  <DropdownToggle
-                    variant="secondary"
-                    size="sm"
-                    className="border-0 p-0 px-2 d-flex column-gap-2 align-items-center"
-                  >
-                    All ▼
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem>This Year</DropdownItem>
-                    <DropdownItem>This Month</DropdownItem>
-                    <DropdownItem>This Week</DropdownItem>
-                  </DropdownMenu>
-                </Dropdown> */}
-          </div>
-        </Nav>
+        <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
           {/* <Button color="primary" onClick={() => setModalState(true)}>
                 Invite User
@@ -73,7 +68,7 @@ const ProfileForm = () => {
 
         <div className="aria-content ps-4 ">
           <h3 className=" settingTittle mb-3"> General </h3>
-          <Form>
+          <Form onSubmit={handleProfileSubmit}>
             <Row>
               <Col md={3}>
                 <FormGroup>
@@ -86,12 +81,12 @@ const ProfileForm = () => {
                     type="text"
                     className="form-control form-control-sm"
                     value={""}
-                    onChange={() => {}}
-                  ></Input>
+                    onChange={handleProfileInputChange()}
+                  />
                 </FormGroup>
                 <FormGroup>
                   <Label for="email" className="mb-0">
-                    Email{" "}
+                    Email
                   </Label>
                   <Input
                     id="email"
@@ -100,7 +95,7 @@ const ProfileForm = () => {
                     type="email"
                     className="form-control form-control-sm"
                     value={""}
-                    onChange={() => {}}
+                    onChange={handleProfileInputChange()}
                   ></Input>
                 </FormGroup>
               </Col>
@@ -115,7 +110,7 @@ const ProfileForm = () => {
                     type="text"
                     className="form-control form-control-sm"
                     value={""}
-                    onChange={() => {}}
+                    onChange={handleProfileInputChange()}
                   ></Input>
                 </FormGroup>
                 <FormGroup>
@@ -128,7 +123,7 @@ const ProfileForm = () => {
                     type="text"
                     className="form-control form-control-sm"
                     value={""}
-                    onChange={() => {}}
+                    onChange={handleProfileInputChange()}
                   ></Input>
                 </FormGroup>
               </Col>
@@ -166,10 +161,10 @@ const ProfileForm = () => {
             </Row>
             <hr />
           </Form>
-          <Form>
+          <Form onSubmit={handlePasswordSubmit}>
             <Row>
               <Col>
-                <h3 className=" settingTittle mb-3 "> Password </h3>
+                <h3 className=" settingTittle mb-3 "> Reset Password </h3>
                 <Row>
                   <Col md={3}>
                     <FormGroup>
@@ -181,7 +176,7 @@ const ProfileForm = () => {
                         name="password"
                         type="password"
                         className="form-control form-control-sm"
-                        value={""}
+                        value={resetPasswordData}
                         onChange={() => {}}
                       ></Input>
                     </FormGroup>
@@ -196,7 +191,7 @@ const ProfileForm = () => {
                         name="confirmPassword"
                         type="password"
                         className="form-control form-control-sm"
-                        value={""}
+                        value={resetPasswordData}
                         onChange={() => {}}
                       ></Input>
                     </FormGroup>

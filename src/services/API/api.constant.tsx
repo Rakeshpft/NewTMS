@@ -25,12 +25,15 @@ export const API_DEFAULT_OPTIONS = {
 
 export const API_REG = {
   // House Registration and Login Request API endpoints here
-  registration: "/Company",
-  companyVerify: "/CompanyVerify",
-  companyVerifyPassword: "/CompanyLogin",
+  postRegistration: "/Registration",
+  getCompanyVerify: "/Verification",
+  companyVerifyPassword: "/Verification",
   comapanyLogin: "/Login",
 };
-
+export const API_PROFILE = {
+  getProfile: "/Profile",
+  postProfile: "/ProfileUpdate",
+};
 export const API_LOAD = {
   // House Create Load API endpoints here
   loadStatus: "/LoadStatus",

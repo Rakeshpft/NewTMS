@@ -17,6 +17,7 @@ import {
   salutationOptions,
 } from "../context/Auth/auth.types";
 import { useRegContext } from "../context/Auth/auth.reducer";
+// import { every } from "lodash";
 // import { Notification } from "../../services/notification/Notification";
 
 const RagistrationPage = () => {
@@ -69,6 +70,7 @@ const RagistrationPage = () => {
                     <div className="text-center my-4">
                       <h3 className="fw-bold ">Registration Form</h3>
                     </div>
+
                     {showRegistrationMessage ? (
                       <div className="text-center">
                         <h5 className="text-success text-center mb-3">
@@ -317,8 +319,17 @@ const RagistrationPage = () => {
                             color="primary"
                             className="px-5 py-2 shadow"
                             type="submit"
+                            // disabled={
+                            //   !every(
+                            //     [
+                            //       regDetails.company_name,
+                            //       regDetails.email,
+                            //       regDetails.mc_number,
+                            //     ],
+                            //     Boolean
+                            //   )
+                            // }
                           >
-                            
                             Register
                           </Button>
                         </FormGroup>
