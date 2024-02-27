@@ -10,13 +10,14 @@ import {
   Row,
   UncontrolledButtonDropdown,
 } from "reactstrap";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { handleLogout } from "../auth";
 import { BsBell, BsGear } from "react-icons/bs";
 import { BiMessageDetail } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
 import CompanyLogo from "../company-logo/company-logo";
 import lscache from "lscache";
+import { routes } from "../routes/routes";
 const NavigationBar = () => {
   const { pathname } = useLocation();
 
@@ -32,6 +33,11 @@ const NavigationBar = () => {
 const username = lscache.get('auth').data.user_name
 console.log('username',username)
   
+const navigate = useNavigate()
+
+const navigateToProfile = () => {
+   navigate(routes.profileForm)
+}
   return (
     <div className="header-section">
       <Navbar className="px-md-3 px-0 border-bottom">
@@ -71,7 +77,7 @@ console.log('username',username)
             <DropdownMenu>
               <DropdownItem className="border-bottom">
                 <div className="d-flex justify-content-between text-align-center">
-                  <span className="text-dark">Profile</span>
+                  <span className="text-dark" onClick={ () =>navigateToProfile()}>Profile</span>
                 </div>
               </DropdownItem>
               <DropdownItem className="border-bottom" onClick={handleLogout}>
