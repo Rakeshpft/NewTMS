@@ -37,7 +37,7 @@ const RagistrationPage = () => {
   const handleRegistration = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     regist(regDetails).then((res) => {
-      setApiResponseMsg(`${res}`);
+      setApiResponseMsg(`${res.message}`);
       setShowPasswordMessage(true);
 
       console.log(`${res}`);
@@ -310,14 +310,14 @@ const RagistrationPage = () => {
                         <FormGroup className="text-center mt-3">
                           <Link
                             to={"/"}
-                            className="btn btn-outline-primary text-decoration-none mx-3"
+                            className="btn btn-outline-primary text-decoration-none mx-3 save-button"
                             type="button"
                           >
                             Back to Login
                           </Link>
                           <Button
                             color="primary"
-                            className="px-5 py-2 shadow"
+                            className="px-5 py-2 shadow save-button"
                             type="submit"
                             // disabled={
                             //   !every(

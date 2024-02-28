@@ -12,7 +12,7 @@ import { Header, SideBar } from "../header";
 import { BsSearch } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
 import Profile from "../pofile";
-import { PiGearDuotone } from "react-icons/pi";
+// import { PiGearDuotone } from "react-icons/pi";
 import GenericTable from "../table/custom-table";
 import InviteUserModal from "./inviteusermodal";
 
@@ -22,8 +22,7 @@ const columns = [
   "Email",
   "Phone",
   "Status",
-  "Actions",
-  <PiGearDuotone />,
+  
 ];
 
 const Tabledata = [
@@ -33,7 +32,7 @@ const Tabledata = [
     Email: "abc@mGmail.com",
     Phone: "002063564 ONTARIO",
     Status: "Active",
-    Actions: "Lumper",
+    
   },
   {
     '#': 1002,
@@ -41,7 +40,7 @@ const Tabledata = [
     Email: "abc@mGmail.com",
     Phone: "002063564 ONTARIO",
     Status: "Active",
-    Actions: "Lumper",
+   
   },
   {
     '#': 1003,
@@ -49,7 +48,7 @@ const Tabledata = [
     Email: "abc@mGmail.com",
     Phone: "002063564 ONTARIO",
     Status: "InActive",
-    Actions: "Lumper",
+ 
   },
 ];
 const UserPage = () => {
@@ -61,6 +60,12 @@ const UserPage = () => {
 
   // const toggle = () => setDropdownOpen((prevState) => !prevState);
 
+  const handleEditbroker = ( ) => {
+    setModalState(true);
+    //  setInitialRow(row);
+    
+
+  };
   const handleSearchFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toLowerCase();
     const filteredData = Tabledata.filter((item) => {
@@ -148,6 +153,8 @@ const UserPage = () => {
           tableData={filteredData}
           tableHeaders={columns}
           defaultSortColumn="Name"
+          canEditRow={true}
+            editRow={handleEditbroker}
           
         />
         </div>

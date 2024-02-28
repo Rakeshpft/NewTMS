@@ -37,6 +37,36 @@ const InviteUserModal = ({ isOpen, toggle }: InviteUserModalProps) => {
               <Row>
                 <Col md={6}>
                   <FormGroup>
+                    <Label for="name" className="fw-bold">First Name</Label>
+                    <Input
+                      bsSize="sm"
+                      className="form-control form-control-sm"
+                      id="name"
+                      name="name"
+                      type="text"
+                      value={""}
+                      onChange={() => {}}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={6}>
+                  <FormGroup>
+                    <Label for="name" className="fw-bold">Last Name</Label>
+                    <Input
+                      bsSize="sm"
+                      className="form-control form-control-sm"
+                      id="name"
+                      name="name"
+                      type="text"
+                      value={""}
+                      onChange={() => {}}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+              <Col md={6}>
+                  <FormGroup>
                     <Label for="Email" className="fw-bold">Email</Label>
                     <Input
                       bsSize="sm"
@@ -44,6 +74,21 @@ const InviteUserModal = ({ isOpen, toggle }: InviteUserModalProps) => {
                       id="Email"
                       name="email"
                       type="email"
+                      value={""}
+                      onChange={() => {}}
+                    />
+                  </FormGroup>
+                </Col>
+                
+                <Col md={6}>
+                  <FormGroup>
+                    <Label for="phone" className="fw-bold">Phone</Label>
+                    <Input
+                      bsSize="sm"
+                      className="form-control form-control-sm"
+                      id="phone"
+                      name="phone"
+                      type="text"
                       value={""}
                       onChange={() => {}}
                     />

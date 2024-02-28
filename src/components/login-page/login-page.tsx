@@ -166,7 +166,7 @@ const [ logInData , setLogInData] = useState<LoginFormSate>(initialFormState)
                       <FormGroup className="text-center">
                         <Button
                           color="primary"
-                          className="px-5 py-2 shadow"
+                          className="px-5 py-2 shadow save-button"
                           type="submit"
                           // disabled={state.spinner}
                         >

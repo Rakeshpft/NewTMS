@@ -113,8 +113,8 @@ const ForgetPassword = () => {
                       </FormGroup>
 
                       <FormGroup className=" text-center">
-                        <Button color="primary" onClick={handleForgetPassword}>
-                          Reset Password
+                        <Button color="primary save-button" onClick={handleForgetPassword}>
+                          Forget Password
                         </Button>
                       </FormGroup>
                     </Form>

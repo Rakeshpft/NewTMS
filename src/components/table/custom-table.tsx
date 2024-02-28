@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import {
   Pagination as BootstrapPagination,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
   PaginationItem,
   PaginationLink,
   Table,
+  UncontrolledButtonDropdown,
 } from "reactstrap";
 import { BsSortDown, BsSortUp } from "react-icons/bs";
 // import { FaRegEdit } from "react-icons/fa";
 import { PiGearDuotone } from "react-icons/pi";
 import { Link } from "react-router-dom";
+import { HiOutlinePencilAlt } from "react-icons/hi";
 interface TableProps<T> {
   tableData: any[];
   tableHeaders: any[];
@@ -79,10 +84,15 @@ function GenericTable<T>({
                 </th>
               ))}
               {canEditRow && (
+                <>
                 <th id="edit">
-                  {" "}
-                  Actions <PiGearDuotone />{" "}
+                 
+                  Actions 
                 </th>
+                <th>
+                <PiGearDuotone />
+                </th>
+                </>
               )}
             </tr>
           </thead>
@@ -91,17 +101,22 @@ function GenericTable<T>({
               <>
                 {sortedData.slice(startIndex, endIndex).map((row, rowIndex) => (
                   <tr key={rowIndex}>
-                    
-                    {tableHeaders.map((header, headerIndex) => (
-                     editRow && (header === "Load" ||  header === "Broker"  )   ? 
-
-                      <td key={headerIndex}> <Link onClick={() => editRow(row)} to={""}> {row[header]}</Link></td> :
-
-                      <td key={headerIndex}>{row[header]}</td>
-                    ))}
-
+                    {tableHeaders.map((header, headerIndex) =>
+                      editRow && (header === "Load" || header === "Broker") ? (
+                        <td key={headerIndex}>
+                          {" "}
+                          <Link onClick={() => editRow(row)} to={""}>
+                            {" "}
+                            {row[header]}
+                          </Link>
+                        </td>
+                      ) : (
+                        <td key={headerIndex}>{row[header]}</td>
+                      )
+                    )}
 
                     {canEditRow && editRow && (
+                      <>
                       <td>
                         {/* <FaRegEdit
                           style={{
@@ -110,10 +125,45 @@ function GenericTable<T>({
                           }}
                           onClick={() => editRow(row)}
                         /> */}
-                        < Link to={""} onClick={()  => editRow(row)}>
-                        Lumper
-                         </Link>
+                        <div role="button" onClick={() => editRow(row)}>
+                          <HiOutlinePencilAlt />
+                        </div>
+
                       </td>
+                      <td>
+                      <UncontrolledButtonDropdown>
+                      <DropdownToggle
+              caret
+              id="userProfileDropdown"
+              color="transparent"
+              className="user-dropdown__icon d-flex align-items-center" 
+            >
+               <DropdownMenu>
+                <DropdownItem >
+                <div className="d-flex justify-content-between text-align-center">
+                  <span className="text-dark" >Edit</span>
+                </div>
+                </DropdownItem>
+                <DropdownItem>
+                <div className="d-flex justify-content-between text-align-center">
+                  <span className="text-dark" >Delete</span>
+                </div>
+                </DropdownItem>
+                <DropdownItem>
+                <div className="d-flex justify-content-between text-align-center">
+                  <span className="text-dark" >Resend Invitation</span>
+                </div>
+                </DropdownItem>
+                
+               </DropdownMenu>
+              </DropdownToggle>
+
+                        
+                      </UncontrolledButtonDropdown>
+
+                      </td>
+                      </>
+
                     )}
                   </tr>
                 ))}

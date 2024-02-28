@@ -33,10 +33,11 @@ const ResetPassword = () => {
     confirmPassword: "",
   };
   const { rePass, verifyFirstPass } = useRegContext();
- 
+
   const [apiResponseMsg, setApiResponseMsg] = useState("");
   const [showRegistrationMessage, setShowRegistrationMessage] = useState(false);
   const [emailStatus, setEmailStatus] = useState(null);
+  const [emailMessage, setEmailMessage] = useState("");
 
   const [verifyPass, setVerifyPass] =
     useState<IResetPassword>(initialVerifyPass);
@@ -57,6 +58,7 @@ const ResetPassword = () => {
     rePass(company_guid).then((data) => {
       console.log("showEmail", data);
       data && setEmailStatus(data.value);
+      data && setEmailMessage(data.message);
     });
     //         console.log(data)
 
@@ -125,11 +127,7 @@ const ResetPassword = () => {
                         {emailStatus ? (
                           <>
                             <div className="text-center my-4">
-                              <p>
-                                
-                                is verified succesfully. Please set password to
-                                continue.
-                              </p>
+                              <p className="fw-bold">{emailMessage}</p>
                             </div>
                             <FormGroup className="text-center">
                               <Link
