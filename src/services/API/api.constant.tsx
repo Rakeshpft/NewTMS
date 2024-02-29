@@ -31,6 +31,7 @@ export const API_REG = {
   comapanyLogin: "/Login",
 };
 export const API_PROFILE = {
+  // House Profile API endpoints here
   getProfile: "/Profile",
   postProfile: "/ProfileUpdate",
   postProfilePassword: "/ResetPassword",

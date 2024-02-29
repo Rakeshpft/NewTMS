@@ -29,9 +29,8 @@ const ProfileForm = () => {
     confirmPassword: "",
   };
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [resetPasswordData, setResetPasswordData] = useState<IProfilePassword>(
-    initialIProfilePassword
-  );
+  const [resetPasswordData, setResetPasswordData] = useState<IProfilePassword>(initialIProfilePassword);
+  // const [editProfileDetails, setEditProfileDetails] = useState();
 
   const handleProfilePasswordInput =
     (prop: keyof IProfilePassword) =>
@@ -48,6 +47,7 @@ const ProfileForm = () => {
   const handlePasswordSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     profileResetPass(resetPasswordData);
+    setResetPasswordData(initialIProfilePassword);
   };
   return (
     <>
