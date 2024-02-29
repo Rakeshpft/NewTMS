@@ -107,11 +107,7 @@ const ResetPassword = () => {
                     <h5 className="text-success text-center mb-3">
                       {apiResponseMsg}
                     </h5>
-                    {/* <Notification
-                              type="info"
-                              message="Contact Updated"
-                              closeAlert={() => setShowPasswordMessage(false)}
-                            /> */}
+
                     <Link
                       to={"/"}
                       className="btn btn-outline-primary text-decoration-none mx-3 text-center"

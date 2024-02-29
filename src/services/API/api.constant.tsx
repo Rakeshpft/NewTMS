@@ -9,7 +9,7 @@ let environment = "Prod";
 export const getAPIConfig = () => {
   const config = {
     headers: {
-      Token: lscache.get("auth")?.data.access_token,
+      Authorization: "Bearer " + lscache.get("auth")?.data.access_token,
     },
   };
   return config;
@@ -33,6 +33,7 @@ export const API_REG = {
 export const API_PROFILE = {
   getProfile: "/Profile",
   postProfile: "/ProfileUpdate",
+  postProfilePassword: "/ResetPassword",
 };
 export const API_LOAD = {
   // House Create Load API endpoints here

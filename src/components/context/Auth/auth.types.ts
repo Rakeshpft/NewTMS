@@ -6,7 +6,11 @@ export interface IAuthObject {
   company_uuid: string;
   access_token: string;
   logged_in_user_id: number;
+  email_verified: boolean;
+  massage: string;
+  status: boolean
 }
+
 
 export interface IRegistration {
   company_name: string;
@@ -28,6 +32,7 @@ export const initialRegistrationState = {
   first_name: "",
   last_name: "",
   salutation_id: 0,
+ 
 };
 
 export const authInitialState = {
@@ -38,8 +43,9 @@ export const authInitialState = {
   company_id: 0,
   company_uuid: "",
   logged_in_user_id: 0, 
-
-
+  email_verified: false,
+  massage : "",
+  status : false
 };
 
 export const salutationOptions = [

@@ -62,7 +62,7 @@ const initialFormState = {
   password:"",
 }
 
-const { login  } = useRegContext();
+const { login ,auth  } = useRegContext();
 
 const [ logInData , setLogInData] = useState<LoginFormSate>(initialFormState)
 
@@ -71,10 +71,14 @@ const [ logInData , setLogInData] = useState<LoginFormSate>(initialFormState)
   const handleLoginInput = (prop : keyof LoginFormSate) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setLogInData( {...logInData, [prop]: event.target.value})
   }
+
+  console.log( 'email data' , auth)
+  
   const handleLogin = (event: { preventDefault: () => void }) => {
     
     event.preventDefault();
     login(logInData)
+
     
     // loginStatus(true);
     // if (state.formdata.email && state.formdata.password) {
@@ -112,6 +116,7 @@ const [ logInData , setLogInData] = useState<LoginFormSate>(initialFormState)
                     </div>
                   </Col>
                 </Row>
+                 { !auth.status && <p className="text-center text-danger">{auth.massage}</p>} 
                 <Row>
                   <Col sm={10} className="mx-auto">
                     <div className="text-center my-4">

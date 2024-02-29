@@ -1,16 +1,18 @@
 import React, { createContext } from "react";
 import { Draft } from "immer";
-import { IProfileDetails } from "./profileTypes";
+import { IProfileDetails, IProfileResetPassword } from "./profileTypes";
 import { useImmer } from "use-immer";
 
 export interface IProfileAccount {
   profileDetails: IProfileDetails[] | null;
   profileLoading: boolean;
+  profileResetPassword : IProfileResetPassword | null
 }
 
 const initialState: IProfileAccount = {
   profileDetails: null,
   profileLoading: false,
+  profileResetPassword : null
 };
 
 type ProfileUpdateContextType = {

@@ -25,6 +25,7 @@ export const useRegContext = () => {
         user_name :userData.email,
         password: userData.password
     };
+    
     try{
         const authData : IAuthObject  = await  API.post(API_REG.comapanyLogin, loginObject);
         
@@ -33,26 +34,36 @@ export const useRegContext = () => {
         setState(draft => {
             draft.regLoading = false;
           });
+          
+
     } catch (error: any) {
-        console.log(error);
+
+        console.log("resonese error " , error.massage);
+        
         setState(draft => {
+          draft.auth = error
             draft.regLoading = false;
+           
           });
+        
         }
   };
 
   const setAuthSession = ( data : IAuthObject ) => {
-      const  authenticated = data.access_token !== '';
-
+   
+     const  authenticated = data.access_token !== '' && data.access_token !== null ;
+      console.log('login ',authenticated)
       setState(draft => {
           draft.auth = data;
           draft.authenticated = authenticated;
           draft.regLoading = false;
       });
 
-   
-    lscache.set('auth', { authenticated, data });
+      authenticated ? lscache.set('auth', { authenticated, data }) :  lscache.flush();
+    // lscache.set('auth', { authenticated, data });
+
   }
+  
 
 
   const regist = async (newreg: IRegistration) => {
