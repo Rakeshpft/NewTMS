@@ -70,9 +70,10 @@ const ForgotResetPassword = () => {
     event.preventDefault();
 
     postForgotPassword(verifyPass, company_guid).then(( data ) => {
+        console.log(data)
       setVerifyPass(initialForgotVerifyPass);
       setShowRegistrationMessage(true);
-      setApiResponseMsg(`${data}`);
+      setApiResponseMsg(`${data.message}`);
     });
   };
 //   const navigateToLogin = () => {

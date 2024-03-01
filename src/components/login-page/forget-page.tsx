@@ -23,12 +23,17 @@ const ForgetPassword = () => {
  const { getForgotPass  } = useRegContext();
 
   const [forgetPassword, setForgetPassword] = useState<IForgetPassword>(initialForgetPasswordState)
+  // const [ setForgotApiMessage] = useState<string | null>(null)
+  
   const  handleForgetInput = (prop : keyof IForgetPassword) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setForgetPassword({...forgetPassword, [prop]: event.target.value})
   }
   const handleForgetSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    getForgotPass(forgetPassword.email)
+    getForgotPass(forgetPassword.email).then(() => {
+      setForgetPassword(initialForgetPasswordState)
+ 
+    })
   }
   return (
     <>
