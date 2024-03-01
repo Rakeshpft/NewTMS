@@ -10,19 +10,18 @@ import {
   Row,
 } from "reactstrap";
 import CompanyLogo from "../company-logo";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   IRegistration,
   initialRegistrationState,
   salutationOptions,
 } from "../context/Auth/auth.types";
 import { useRegContext } from "../context/Auth/auth.reducer";
-// import { every } from "lodash";
-// import { Notification } from "../../services/notification/Notification";
 
 const RagistrationPage = () => {
   const { regist } = useRegContext();
 
+  const navigate = useNavigate();
   const [regDetails, setregDetails] = useState<IRegistration>(
     initialRegistrationState
   );
@@ -39,17 +38,11 @@ const RagistrationPage = () => {
     regist(regDetails).then((res) => {
       setApiResponseMsg(`${res.message}`);
       setShowPasswordMessage(true);
-
-      console.log(`${res}`);
-      // alert(`${res}`)
     });
+  };
 
-    // .then(res =>{
-    //   setApiResponseMsg(res.message)
-    //   setShowPasswordMessage(true)
-    // } )
-
-    //  console.log(regDetails);
+  const navigateToLogin = () => {
+    navigate("/");
   };
   return (
     <>
@@ -76,18 +69,14 @@ const RagistrationPage = () => {
                         <h5 className="text-success text-center mb-3">
                           {apiResponseMsg}
                         </h5>
-                        {/* <Notification
-                              type="info"
-                              message="Contact Updated"
-                              closeAlert={() => setShowPasswordMessage(false)}
-                            /> */}
-                        <Link
-                          to={"/"}
-                          className="btn btn-outline-primary text-decoration-none mx-3 text-center"
-                          type="button"
+
+                        <Button
+                          color="primary"
+                          className="px-4 py-2 shadow save-button mx-3"
+                          onClick={navigateToLogin}
                         >
                           Back to Login
-                        </Link>
+                        </Button>
                       </div>
                     ) : (
                       <Form className="mt-5" onSubmit={handleRegistration}>
@@ -255,69 +244,19 @@ const RagistrationPage = () => {
                               />
                             </FormGroup>
                           </Col>
-                          {/* <Col md={6}>
-                            <FormGroup>
-                              <Label
-                                for="fax"
-                                className="d-block d-sm-inline fw-bold"
-                              >
-                                Fax
-                              </Label>
-                              <Input
-                                type="text"
-                                name="text"
-                                id="fax"
-                                value={regDetails.email}
-                                placeholder="Enter Your Fax"
-                              />
-                            </FormGroup>
-                          </Col> */}
                         </Row>
-                        <Row>
-                          {/* <Col md={6}>
-                          <FormGroup>
-                            <Label for="mobile" className="d-block d-sm-inline fw-bold">
-                              Mobile
-                            </Label>
-                            <Input
-                              type="text"
-                              name="text"
-                              id="mobile"
-                              value={regDetails.mobile}
-                              placeholder="Enter Your Mobile"
-                            />
-                          </FormGroup>
-                        </Col> */}
-                          {/* <Col md={6}>
-                            <FormGroup>
-                              <Label
-                                for="mobile"
-                                className="d-block d-sm-inline fw-bold"
-                              >
-                                Mobile
-                              </Label>
-                              <Input
-                                type="text"
-                                name="text"
-                                id="mobile"
-                                value={regDetails.mobile}
-                                onChange={handleInputChange("mobile")}
-                                placeholder="Enter Your Mobile"
-                              />
-                            </FormGroup>
-                          </Col> */}
-                        </Row>
-                        <FormGroup className="text-center mt-3">
-                          <Link
-                            to={"/"}
-                            className="btn btn-outline-primary text-decoration-none mx-3 save-button"
-                            type="button"
-                          >
-                            Back to Login
-                          </Link>
+
+                        <FormGroup className="text-center mt-3 align-items-center">
                           <Button
                             color="primary"
-                            className="px-5 py-2 shadow save-button"
+                            className="px-4 py-2 shadow save-button mx-3"
+                            onClick={navigateToLogin}
+                          >
+                            Back to Login
+                          </Button>
+                          <Button
+                            color="primary"
+                            className="px-4 py-2 shadow save-button"
                             type="submit"
                             // disabled={
                             //   !every(

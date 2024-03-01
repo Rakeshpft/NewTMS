@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import React, {  useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import {
   Button,
   Col,
@@ -17,67 +17,67 @@ import { useRegContext } from "../context/Auth/auth.reducer";
 import { every } from "lodash";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 
-export interface IResetPassword {
+// export interface IResetPassword {
+//   password: string;
+//   confirmPassword: string;
+// }
+
+export interface IForgotResetPassword {
   password: string;
   confirmPassword: string;
 }
+const ForgotResetPassword = () => {
 
-export interface IResetPassword {
-  password: string;
-  confirmPassword: string;
-}
-const ResetPassword = () => {
-
-  const initialVerifyPass = {
+  const initialForgotVerifyPass = {
     password: "",
     confirmPassword: "",
   };
 
-  const { rePass, verifyFirstPass } = useRegContext();
-  const navigate = useNavigate();
+  const {  postForgotPassword } = useRegContext();
+//   const navigate = useNavigate();
   const [apiResponseMsg, setApiResponseMsg] = useState("");
   const [showRegistrationMessage, setShowRegistrationMessage] = useState(false);
-  const [emailStatus, setEmailStatus] = useState(null);
-  const [emailMessage, setEmailMessage] = useState("");
+//   const [emailStatus, setEmailStatus] = useState(null);
+//   const [emailMessage, setEmailMessage] = useState("");
 
   const [verifyPass, setVerifyPass] =
-    useState<IResetPassword>(initialVerifyPass);
+    useState<IForgotResetPassword>(initialForgotVerifyPass);
 
   const params = useParams();
 
   const company_guid = params.id;
  
   const handleVerifyInput =
-    (prop: keyof IResetPassword) =>
+    (prop: keyof IForgotResetPassword) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setVerifyPass({ ...verifyPass, [prop]: event.target.value });
     };
 
-  useEffect(() => {
+//   useEffect(() => {
    
 
-    rePass(company_guid).then((data) => {
-      console.log("showEmail", data);
-      data && setEmailStatus(data.value);
-      data && setEmailMessage(data.message);
-    });
+//     rePass(company_guid).then((data) => {
+//       console.log("showEmail", data);
+//       data && setEmailStatus(data.value);
+//       data && setEmailMessage(data.message);
+//     });
    
 
     
-  }, [company_guid]);
+//   }, [company_guid]);
   const handleVerifyPassword = (event: { preventDefault: () => void }) => {
     
     event.preventDefault();
 
-    verifyFirstPass(verifyPass, company_guid).then((data) => {
-      setVerifyPass(initialVerifyPass);
+    postForgotPassword(verifyPass, company_guid).then(( data ) => {
+      setVerifyPass(initialForgotVerifyPass);
       setShowRegistrationMessage(true);
       setApiResponseMsg(`${data}`);
     });
   };
-  const navigateToLogin = () => {
-    navigate("/");
-  };
+//   const navigateToLogin = () => {
+//     navigate("/");
+//   };
 
   return (
     <>
@@ -116,22 +116,7 @@ const ResetPassword = () => {
                   <>
                     <Row>
                       <Col sm={10} className="mx-auto">
-                        {emailStatus ? (
-                          <>
-                            <div className="text-center my-4">
-                              <p className="fw-bold">{emailMessage}</p>
-                            </div>
-                            <FormGroup className="text-center">
-                            <Button
-                            color="primary"
-                            className="px-4 py-2 shadow save-button mx-3"
-                            onClick={navigateToLogin}
-                          >
-                            Back to Login
-                          </Button>
-                            </FormGroup>
-                          </>
-                        ) : (
+                       
                           <Form
                             className="mt-5"
                             onSubmit={handleVerifyPassword}
@@ -201,7 +186,7 @@ const ResetPassword = () => {
                               </Link>
                             </FormGroup>
                           </Form>
-                        )}
+                     
                       </Col>
                     </Row>
                   </>
@@ -215,4 +200,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default ForgotResetPassword;

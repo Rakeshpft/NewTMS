@@ -9,6 +9,7 @@ import lscache from "lscache";
 import { useNavigate } from 'react-router-dom';
 
 import { routes } from "../../routes/routes";
+import { IForgotResetPassword } from "../../login-page/forgetResetPassword";
 
 export const useRegContext = () => {
     
@@ -95,6 +96,7 @@ export const useRegContext = () => {
     console.log(`${API_REG.getCompanyVerify}/${id}`)
     try {
       const veriData = await API.get(`${API_REG.getCompanyVerify}/${id}`);  
+      // const veriData = await API.get(`${API_REG.getCompanyVerify}?email=${id}`); 
       return veriData;
     } catch (error: any) {
       console.log(error);
@@ -131,6 +133,48 @@ export const useRegContext = () => {
 
   }
 
+  const getForgotPass = async ( email: string ) => {
+
+    setState((draft) => {
+      draft.regLoading = true ;  
+    });
+    try{
+        const forgotPass = await API.get( `${API_REG.getForgotPassword}?email=${email}`  );
+   return forgotPass ;
+    }catch (error: any) {
+      console.log(error);
+    }
+    setState((draft) => {
+      draft.regLoading = false;
+    });
+  }
+
+  const postForgotPassword = async (initialForgotPass: IForgotResetPassword  , id?: any) => {
+    setState((draft) => {
+      draft.regLoading = true ;  
+    });
+    if(id){
+        const forgotPasswordObject  = {
+            password:initialForgotPass.password,
+            confirm_password:initialForgotPass.confirmPassword,
+            company_guid:id
+        };
+        console.log( 'verifyPass', forgotPasswordObject) ;
+        try {
+            const latestForgotPass = await API.post( API_REG.postForgotPassword , forgotPasswordObject );
+            return latestForgotPass ; 
+        
+        } catch (error: any) {
+            console.log(error);
+          }
+          setState((draft) => {
+            draft.regLoading = false;
+          });
+    }
+
+
+  }
+
    const logout = () => {
     lscache.flush();
     clearState();
@@ -152,5 +196,7 @@ export const useRegContext = () => {
     verifyFirstPass,
     login,
     logout,
+    getForgotPass,
+    postForgotPassword
   };
 };

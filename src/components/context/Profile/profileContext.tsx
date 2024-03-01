@@ -1,10 +1,10 @@
 import React, { createContext } from "react";
 import { Draft } from "immer";
-import { IProfileDetails, IProfileResetPassword } from "./profileTypes";
+import {  IProfileDetailsResponse, IProfileResetPassword } from "./profileTypes";
 import { useImmer } from "use-immer";
 
 export interface IProfileAccount {
-  profileDetails: IProfileDetails[] | null;
+  profileDetails: IProfileDetailsResponse | null;
   profileLoading: boolean;
   profileResetPassword : IProfileResetPassword | null
 }

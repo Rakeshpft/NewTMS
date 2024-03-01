@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -12,47 +12,24 @@ import {
   Row,
 } from "reactstrap";
 import CompanyLogo from "../company-logo";
-const reducer = (state: any, action: any) => {
-  switch (action.type) {
-    case "setFormData":
-      return {
-        ...state,
-        formdata: action.payload,
-      };
-    case "setErrorData":
-      return {
-        ...state,
-        errordata: action.payload,
-      };
-    case "setSpinnerData":
-      return {
-        ...state,
-        spinner: action.payload,
-      };
-  }
-};
+import { useRegContext } from "../context/Auth/auth.reducer";
+export interface IForgetPassword {
+  email : string
+}
 const ForgetPassword = () => {
-  const [state, dispatch] = useReducer(reducer, {
-    errordata: { email: "" },
-    formdata: { email: "" },
-    spinner: false,
-  });
+ const  initialForgetPasswordState = {
+   email : ''
+ }
+ const { getForgotPass  } = useRegContext();
 
-  const handleForgetPassword = (event: any) => {
+  const [forgetPassword, setForgetPassword] = useState<IForgetPassword>(initialForgetPasswordState)
+  const  handleForgetInput = (prop : keyof IForgetPassword) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    setForgetPassword({...forgetPassword, [prop]: event.target.value})
+  }
+  const handleForgetSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (state.formdata.email) {
-      dispatch({ type: "setSpinnerData", payload: true });
-    } else {
-      dispatch({
-        type: "setErrorData",
-        payload: {
-          email: "Invalid Credentials",
-        },
-      });
-    }
-    dispatch({ type: "setSpinnerData", payload: false });
-  };
-
+    getForgotPass(forgetPassword.email)
+  }
   return (
     <>
       <div className="login">
@@ -82,7 +59,7 @@ const ForgetPassword = () => {
                       </p>
                     </div>
 
-                    <Form className="mt-5">
+                    <Form className="mt-5" onSubmit={handleForgetSubmit}>
                       <FormGroup>
                         <Label for="email" className="d-block d-sm-none">
                           Email
@@ -91,13 +68,8 @@ const ForgetPassword = () => {
                           <Input
                             type="email"
                             name="email"
-                            value={state.formdata.email}
-                            onChange={(e) =>
-                              dispatch({
-                                type: "setFormData",
-                                payload: e.target.value,
-                              })
-                            }
+                           value={forgetPassword.email}
+                           onChange={handleForgetInput('email')}
                             placeholder="EmailAddress"
                             required
                           />
@@ -113,7 +85,7 @@ const ForgetPassword = () => {
                       </FormGroup>
 
                       <FormGroup className=" text-center">
-                        <Button color="primary save-button" onClick={handleForgetPassword}>
+                        <Button color="primary save-button" type="submit" >
                           Forget Password
                         </Button>
                       </FormGroup>

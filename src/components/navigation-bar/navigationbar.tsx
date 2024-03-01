@@ -31,6 +31,7 @@ const NavigationBar = () => {
 //  const { auth} =  useRegContext()
 //  console.log( 'auth value ',auth )
 const username = lscache.get('auth').data.user_name
+const companyName = lscache.get('auth').data.commpany_name
 console.log('username',username)
   
 const navigate = useNavigate()
@@ -68,16 +69,16 @@ const navigateToProfile = () => {
                     />
                   </div>
                   <div className="d-lg-block d-none text-start small">
-                    <div className="fw-bold">TMS User</div>
+                    <div className="fw-bold">{companyName}</div>
                     <div>{username}</div>
                   </div>
                 </Col>
               </Row>
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem className="border-bottom">
-                <div className="d-flex justify-content-between text-align-center">
-                  <span className="text-dark" onClick={ () =>navigateToProfile()}>Profile</span>
+              <DropdownItem className="border-bottom" onClick={ () =>navigateToProfile()}>
+                <div className="d-flex justify-content-between text-align-center" >
+                  <span className="text-dark" >Profile</span>
                 </div>
               </DropdownItem>
               <DropdownItem className="border-bottom" onClick={handleLogout}>

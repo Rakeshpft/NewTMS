@@ -29,13 +29,17 @@ export const API_REG = {
   getCompanyVerify: "/Verification",
   companyVerifyPassword: "/Verification",
   comapanyLogin: "/Login",
+  getForgotPassword: "/ForgotPassword",
+  postForgotPassword: "/ForgotPassword",
 };
+
 export const API_PROFILE = {
   // House Profile API endpoints here
-  getProfile: "/Profile",
-  postProfile: "/ProfileUpdate",
+  getProfile: "/User",
+  postProfile: "/User",
   postProfilePassword: "/ResetPassword",
 };
+
 export const API_LOAD = {
   // House Create Load API endpoints here
   loadStatus: "/LoadStatus",

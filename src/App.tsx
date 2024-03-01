@@ -77,6 +77,7 @@ import { ContextProvider } from "./components/context/ContextProvider";
 import { DashboardPage } from "./components/dashboard";
 import { PrivateRoute } from "./components/routes/PrivateRoute";
 import { ProfileForm } from "./components/pofile";
+import ForgotResetPassword from "./components/login-page/forgetResetPassword";
 
 const App = () => {
   return (
@@ -94,7 +95,7 @@ const App = () => {
             element={<RagistrationPage />}
           />
           <Route path={routes.resetPassword} element={<ResetPassword />} />
-
+          <Route element={<ForgotResetPassword/>} path={routes.forgotResetPassword}/>
           <Route
             path={routes.default}
             element={

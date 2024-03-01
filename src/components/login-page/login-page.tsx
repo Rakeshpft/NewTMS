@@ -116,10 +116,10 @@ const [ logInData , setLogInData] = useState<LoginFormSate>(initialFormState)
                     </div>
                   </Col>
                 </Row>
-                 { !auth.status && <p className="text-center text-danger">{auth.massage}</p>} 
+                 { !auth.status && <p className="text-center text-danger mt-3">{auth.massage}</p>} 
                 <Row>
                   <Col sm={10} className="mx-auto">
-                    <div className="text-center my-4">
+                    <div className="text-center my-1">
                       <h3 className="fw-bold">Welcome</h3>
                       <p className="small text-black-50 fw-semibold ">
                         Please Sign In Your Account
@@ -163,7 +163,7 @@ const [ logInData , setLogInData] = useState<LoginFormSate>(initialFormState)
                       <FormGroup className="text-end">
                         <Link
                           to={"/forgetpassword"}
-                          className="px-0 btn btn-link text-decoration-none"
+                          className="px-0 py-0 btn btn-link text-decoration-none"
                         >
                           Forgot Password
                         </Link>

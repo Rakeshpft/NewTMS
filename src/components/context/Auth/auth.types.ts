@@ -54,3 +54,7 @@ export const salutationOptions = [
   { salutation_id: 3, salutation_name: "Ms." },
   { salutation_id: 4, salutation_name: "Dr." },
 ];
+
+export interface IForget {
+  email: string;
+}

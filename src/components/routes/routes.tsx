@@ -5,6 +5,7 @@ export const routes = {
   forgotPassword: "/forgetpassword",
   resetPassword: "/resetpassword",
   emailVerification: "/verify-email/:id",
+  forgotResetPassword: "/forgot-reset-password/:id",
   registrationForm: "/registration-form",
   driverpageAll: "/driverpage",
   createNewDriver: "/createnewdriver",
