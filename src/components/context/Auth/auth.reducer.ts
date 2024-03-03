@@ -24,7 +24,8 @@ export const useRegContext = () => {
     
     const loginObject = {
         user_name :userData.email,
-        password: userData.password
+        password: userData.password,
+        platform_id: 1
     };
     
     try{

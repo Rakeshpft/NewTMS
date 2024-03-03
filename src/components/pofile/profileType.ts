@@ -14,5 +14,6 @@ export const initialProfileUpdateState: IProfileUpdate = {
   last_name: "",
   contact_number: "",
   image_url: "",
-  image_name: "",
+  image_name:"",
+  image_File: new File([], ""),
 };

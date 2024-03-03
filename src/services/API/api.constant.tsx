@@ -3,7 +3,7 @@ import lscache from "lscache";
 
 // const env = window.location.href;
 
-export let apiURL = "http://tms-api.eduxus.com/api";
+export let apiURL =  "http://tms-api.eduxus.com/api";//"http://localhost:53207/api";
 let environment = "Prod";
 
 export const getAPIConfig = () => {
@@ -38,6 +38,7 @@ export const API_PROFILE = {
   getProfile: "/User",
   postProfile: "/User",
   postProfilePassword: "/ResetPassword",
+  postProfileImage:"/user/image"
 };
 
 export const API_LOAD = {
@@ -68,3 +69,6 @@ export const API_TRAILER = {
   // House Trailer API endpoints here
   addTrailer: "/Trailers",
 };
+export const API_USER = {
+  getUser: "/Staff"
+}

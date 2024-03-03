@@ -23,7 +23,7 @@ export interface IProfilePassword {
 }
 
 const ProfileForm = () => {
-  const { profileResetPass, getProfileDetails, postProfileDetails } =
+  const { profileResetPass, getProfileDetails, postProfileDetails, postProfileImage } =
     useProfileContext();
   const initialIProfilePassword = {
     password: "",
@@ -37,27 +37,28 @@ const ProfileForm = () => {
   const [editProfileDetails, setEditProfileDetails] = useState<IProfileUpdate>(
     initialProfileUpdateState
   );
-  const [imageFile, setImageFile] = useState<string >(editProfileDetails.image_url || "/images/user-avatar.png");
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
     if (event.target.files) {
-      setEditProfileDetails({
-        ...editProfileDetails,
-        image_name: URL.createObjectURL(event.target.files[0]),
-      });
-       setImageFile(URL.createObjectURL(event.target.files[0]));
+      await postProfileImage(event.target.files[0]).then(
+        (data) =>{
+          console.log("getdata",data)    
+          data?.value &&
+          setEditProfileDetails({
+            ...editProfileDetails,
+            image_url: data.value,
+          })}
+      );
     }
-  // event.target.files  setImageFile(URL.createObjectURL(event.target.files[0]));
-
-     console.log( "imageFile", event.target.files);
+    //event.target.files  setImageFile(URL.createObjectURL(event.target.files[0]));
+    console.log( "imageFile", event.target.files);
   };
 
   useEffect(() => {
-    getProfileDetails().then(
-      
+    getProfileDetails().then(      
       (data) =>{
-        console.log("getdata",data)
-    
+        console.log("getdata",data)    
         data?.value &&
         data?.value.length == 1 &&
         setEditProfileDetails({
@@ -67,7 +68,7 @@ const ProfileForm = () => {
           email: data.value[0].email,
           contact_number: data.value[0].contact_number,
           image_name: data.value[0].image_name,
-          image_url: data.value[0].image_url
+          image_url: data.value[0].image_url,
         })}
     );
   }, []);
@@ -173,7 +174,7 @@ const ProfileForm = () => {
 
         <div className="aria-content ps-4 ">
           <h3 className=" settingTittle mb-3"> General </h3>
-          <Form onSubmit={handleProfileSubmit}>
+          <Form onSubmit={handleProfileSubmit} encType="multipart/form-data">
             <Row>
               <Col md={3}>
                 <FormGroup>
@@ -239,13 +240,15 @@ const ProfileForm = () => {
                       width="120"
                       height="120"
                       className="rounded-circle"
-                      src={imageFile}
+                      src={editProfileDetails.image_url}
                     />
                   </div>
                   <FormGroup>
                     <Input
                       type="file"
                       name="file"
+                      id="file"
+                      accept="image/*"
                       onChange={handleImageChange}
                     />
                   </FormGroup>

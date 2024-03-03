@@ -40,7 +40,8 @@ export const useProfileContext = () => {
       draft.profileLoading = true;
     });
     try {
-      const profileDetails : IProfileDetailsResponse = await API.get( API_PROFILE.getProfile );
+      
+      const profileDetails : IProfileDetailsResponse = await API.get(API_PROFILE.getProfile);
        return profileDetails ;
       // setState(draft => {
       //   draft.profileDetails = profileDetails;
@@ -56,22 +57,14 @@ export const useProfileContext = () => {
 
   }
 
-const postProfileDetails = async ( profileDetails : IProfileUpdate ) => {
+const postProfileDetails = async (profileDetails : IProfileUpdate ) => {
   setState(draft => {
     draft.profileLoading = true;
   })
-   const formData = new FormData();
-   formData.append('first_name', profileDetails.first_name);
-   formData.append('last_name', profileDetails.last_name);
-   formData.append('email', profileDetails.email);
-   formData.append('contact_number', profileDetails.contact_number);
-   formData.append('image_File', profileDetails.image_name);
-   debugger;
   try {
-    const updateProfileDetails = await API.post( API_PROFILE.postProfile , formData );
+    const updateProfileDetails = await API.post( API_PROFILE.postProfile, profileDetails);
     setState(draft => {
-      draft.profileDetails = updateProfileDetails;
-     
+      draft.profileDetails = updateProfileDetails;     
       draft.profileLoading = false;
     })
   } catch (error: any) {
@@ -81,31 +74,32 @@ const postProfileDetails = async ( profileDetails : IProfileUpdate ) => {
     });
   }
 }
+const postProfileImage = async ( file : File ) => {
+  setState(draft => {
+    draft.profileLoading = true;
+  })
+  const formData = new FormData();
+  file && formData.append('file', file);
+  
+  try {
+    const response = await API.postFormData(API_PROFILE.postProfileImage ,formData);
+    response.value = response && response.value && response.value+'?id='+Math.random()
+    return response;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.profileLoading = false;
+    });
+  }
+}
 
-//   if(id){
-//     const verifyPasswordObject  = {
-//         password:initialVerifyPass.password,
-//         confirm_password:initialVerifyPass.confirmPassword,
-//         company_guid:id
 
-//     };
-//     console.log( 'verifyPass', verifyPasswordObject) ;
-//     try {
-//         const latestPass = await API.post( API_REG.companyVerifyPassword , verifyPasswordObject );
-//         return latestPass ; 
-    
-//     } catch (error: any) {
-//         console.log(error);
-//       }
-//       setState((draft) => {
-//         draft.regLoading = false;
-//       });
-// }
 
   return {
     ...state,
     profileResetPass,
     getProfileDetails,
-    postProfileDetails
+    postProfileDetails,
+    postProfileImage
   }
 };
