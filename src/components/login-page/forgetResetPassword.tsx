@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,  useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Button,
@@ -33,12 +33,12 @@ const ForgotResetPassword = () => {
     confirmPassword: "",
   };
 
-  const {  postForgotPassword, verifyForgotPasswordLink } = useRegContext();
-
+  const {  postForgotPassword , verifyForgotPasswordLink } = useRegContext();
    const navigate = useNavigate();
   const [apiResponseMsg, setApiResponseMsg] = useState("");
   const [showRegistrationMessage, setShowRegistrationMessage] = useState(false);
-  const [linkStatus, setLinkStatus] = useState(Boolean);
+     const [linkStatus, setLinkStatus] = useState(false);
+
 //   const [emailStatus, setEmailStatus] = useState(null);
 //   const [emailMessage, setEmailMessage] = useState("");
 
@@ -49,25 +49,22 @@ const ForgotResetPassword = () => {
 
   const company_guid = params.id;
  
-  
-
   const handleVerifyInput =
     (prop: keyof IForgotResetPassword) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setVerifyPass({ ...verifyPass, [prop]: event.target.value });
     };
 
-useEffect(() => {
+    
    
-  useEffect(() => {
-    verifyForgotPasswordLink(company_guid).then((data) => {
-      console.log("showEmail", data);
-      data && !data.status && setLinkStatus(true);
-      data && setApiResponseMsg(data.message)
-    });
-  }, [company_guid]);
-
-const handleVerifyPassword = (event: { preventDefault: () => void }) => {
+      useEffect(() => {
+        verifyForgotPasswordLink(company_guid).then((data) => {
+          console.log("showEmail", data);
+          data && !data.status && setLinkStatus(true);
+          data && setApiResponseMsg(data.message)
+        });
+      }, [company_guid]);
+  const handleVerifyPassword = (event: { preventDefault: () => void }) => {
     
     event.preventDefault();
 
@@ -107,6 +104,7 @@ const navigateToLogin = () => {
                     <h5 className="text-success text-center my-3">
                       {apiResponseMsg}
                     </h5>
+
                     <Button
                             color="primary"
                             className="px-4 py-2 shadow save-button mx-3"

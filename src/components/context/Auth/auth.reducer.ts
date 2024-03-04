@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { RegContext } from "./auth.contxt";
 import { IAuthObject, IRegistration, authInitialState } from "./auth.types";
 import { API } from "../../../services/API/api.services";
-import { API_REG } from "../../../services/API/api.constant";
+import { API_REG, platformId } from "../../../services/API/api.constant";
 import { IResetPassword } from "../../login-page/resetPassword";
 import { LoginFormSate } from "../../login-page/login-page";
 import lscache from "lscache";
@@ -25,7 +25,7 @@ export const useRegContext = () => {
     const loginObject = {
         user_name :userData.email,
         password: userData.password,
-        platform_id: 1
+        platform_id: platformId
     };
     
     try{

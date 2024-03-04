@@ -5,7 +5,7 @@ import lscache from "lscache";
 
 export let apiURL =  "http://tms-api.eduxus.com/api";//"http://localhost:53207/api";//
 let environment = "Prod";
-
+export const platformId = 1;
 export const getAPIConfig = () => {
   const config = {
     headers: {
