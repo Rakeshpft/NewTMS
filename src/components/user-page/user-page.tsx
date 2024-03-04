@@ -21,16 +21,16 @@ import { BasicTable } from "../../services/Table/BasicTable";
 import { tableCells, tableHeadCells } from "./user.constants";
 
 const UserPage = () => {
-  const {getUserDetails , userDetails  , userLoading} = useUserContext();
+  const {getUserDetails , userDetails  ,getIdividualUserDetails, userLoading} = useUserContext();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [filteredData, setFilteredData] = useState<IUserDetails[] | any>([]);
-  const [noContacts, setNoContacts] = useState(false);
-  const [modalState, setModalState] = useState(false);
+  const [noUser, setNoUser] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   
 
-  
+ 
 
   const handleSearchFilterChange = debounce((searchValue: string) => {
     const searchResults =
@@ -48,22 +48,38 @@ const UserPage = () => {
     searchResults && setFilteredData(searchResults);
   }, 500);
 
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  }
+
+  const handleEditContact = (user: IUserDetails) => {   
+    getIdividualUserDetails(user.staff_id);
+    setModalOpen(true);
+  };
+
+
   useEffect(() => {
     if (!userLoading && userDetails) {
       setFilteredData(userDetails);
-      setNoContacts(isEmpty(userDetails));
+      setNoUser(isEmpty(userDetails));
     }
   }, [userLoading, userDetails]);
 
   useEffect(() => {
     if (isEmpty(filteredData)) {
-      setNoContacts(true);
+      setNoUser(true);
     } else {
-      setNoContacts(false);
+      setNoUser(false);
     }
   }, [filteredData]);
+
   useEffect(() => {
-    getUserDetails();
+    getUserDetails().then(( data) => {
+      console.log("data",data)
+     data && setFilteredData(data)
+    });
+    console.log("user details",userDetails)
+    console.log("loading",)
   }, []);
 
   return (
@@ -82,7 +98,7 @@ const UserPage = () => {
               <InputGroupText className="bg-white">
                 <BsSearch size={16} />
               </InputGroupText>
-              <div className="user-info-refresh">{!noContacts && <CiSearch onClick={() => handleSearchFilterChange("")} />}</div>
+              <div className="user-info-refresh">{!noUser && <CiSearch onClick={() => handleSearchFilterChange("")} />}</div>
 
               <Input
                 placeholder="Search"
@@ -93,10 +109,10 @@ const UserPage = () => {
             </InputGroup>
           </div>
           <InviteUserModal
-            isOpen={modalState}
-            toggle={() => setModalState(false)}
+            modalOpen={modalOpen}
+            closeModal={handleCloseModal}
           />
-          <Button color="primary" onClick={() => setModalState(true)}>
+          <Button color="primary" onClick={() => setModalOpen(true)}>
             Invite User
             <AiOutlinePlus />
           </Button>
@@ -108,13 +124,14 @@ const UserPage = () => {
         <div className="aria-content">
 
         <BasicTable 
-        emptyState={noContacts}
+        emptyState={noUser}
         tableData={filteredData} 
         tableHeadCells={tableHeadCells}
         loading={userLoading}
         tableCells={tableCells}
-
-
+        canEditRow={true}
+        editRow={handleEditContact}
+        
 
         />
         </div>
@@ -124,3 +141,4 @@ const UserPage = () => {
 };
 
 export default UserPage;
+

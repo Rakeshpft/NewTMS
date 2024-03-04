@@ -1,18 +1,20 @@
 import React, { createContext }   from "react";
 import { Draft } from "immer";
-import { IUserDetailsResponse } from "./user.types";
+import { IInviteUserDetails, IUserDetailsResponse } from "./user.types";
 import { useImmer } from "use-immer";
 
 
 export interface IUserData {
    userDetails : IUserDetailsResponse[] | null 
    userLoading : boolean;
+   slectedUser : IInviteUserDetails | null
 
 }
 
 const InitialState : IUserData = {
     userDetails : null,
-    userLoading : false
+    userLoading : false,
+    slectedUser : null
 }
 
 type UserUpdateContextType = {

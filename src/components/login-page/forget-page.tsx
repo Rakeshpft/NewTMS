@@ -14,27 +14,31 @@ import {
 import CompanyLogo from "../company-logo";
 import { useRegContext } from "../context/Auth/auth.reducer";
 export interface IForgetPassword {
-  email : string
+  email: string;
 }
 const ForgetPassword = () => {
- const  initialForgetPasswordState = {
-   email : ''
- }
- const { getForgotPass  } = useRegContext();
+  const initialForgetPasswordState = {
+    email: "",
+  };
+  const { getForgotPass } = useRegContext();
 
-  const [forgetPassword, setForgetPassword] = useState<IForgetPassword>(initialForgetPasswordState)
-  // const [ setForgotApiMessage] = useState<string | null>(null)
-  
-  const  handleForgetInput = (prop : keyof IForgetPassword) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setForgetPassword({...forgetPassword, [prop]: event.target.value})
-  }
+  const [forgetPassword, setForgetPassword] = useState<IForgetPassword>(
+    initialForgetPasswordState
+  );
+  const [forgetApiResponse , setForgetApiResponse] = useState("")
+
+  const handleForgetInput =
+    (prop: keyof IForgetPassword) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setForgetPassword({ ...forgetPassword, [prop]: event.target.value });
+    };
   const handleForgetSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    getForgotPass(forgetPassword.email).then(() => {
-      setForgetPassword(initialForgetPasswordState)
- 
-    })
-  }
+    getForgotPass(forgetPassword.email).then((data) => {
+    data &&  setForgetApiResponse(data.message)
+      setForgetPassword(initialForgetPasswordState);
+    });
+  };
   return (
     <>
       <div className="login">
@@ -63,7 +67,7 @@ const ForgetPassword = () => {
                         Reset Password
                       </p>
                     </div>
-
+                    <p className="text-center text-danger mt-3">{forgetApiResponse}</p>
                     <Form className="mt-5" onSubmit={handleForgetSubmit}>
                       <FormGroup>
                         <Label for="email" className="d-block d-sm-none">
@@ -73,9 +77,9 @@ const ForgetPassword = () => {
                           <Input
                             type="email"
                             name="email"
-                           value={forgetPassword.email}
-                           onChange={handleForgetInput('email')}
-                            placeholder="EmailAddress"
+                            value={forgetPassword.email}
+                            onChange={handleForgetInput("email")}
+                            placeholder="Email Address"
                             required
                           />
                         </InputGroup>
@@ -85,12 +89,12 @@ const ForgetPassword = () => {
                           to={"/"}
                           className="btn btn-link text-decoration-none"
                         >
-                          Return To Login
+                          Back To Login
                         </Link>
                       </FormGroup>
 
                       <FormGroup className=" text-center">
-                        <Button color="primary save-button" type="submit" >
+                        <Button color="primary save-button" type="submit">
                           Forget Password
                         </Button>
                       </FormGroup>

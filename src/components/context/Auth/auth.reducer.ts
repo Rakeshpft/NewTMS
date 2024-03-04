@@ -140,7 +140,21 @@ export const useRegContext = () => {
       draft.regLoading = true ;  
     });
     try{
-        const forgotPass = await API.get( `${API_REG.getForgotPassword}?email=${email}`  );
+        const forgotPass = await API.get( `${API_REG.getForgotPassword}/${email}`  );
+   return forgotPass ;
+    }catch (error: any) {
+      console.log(error);
+    }
+    setState((draft) => {
+      draft.regLoading = false;
+    });
+  }
+  const verifyForgotPasswordLink = async ( id?: any ) => {
+    setState((draft) => {
+      draft.regLoading = true ;  
+    });
+    try{
+        const forgotPass = await API.get( `${API_REG.getForgotPassword}/${id}`  );
    return forgotPass ;
     }catch (error: any) {
       console.log(error);
@@ -198,6 +212,7 @@ export const useRegContext = () => {
     login,
     logout,
     getForgotPass,
-    postForgotPassword
+    postForgotPassword,
+    verifyForgotPasswordLink
   };
 };

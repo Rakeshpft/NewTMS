@@ -10,91 +10,36 @@ import {
   InputGroup,
   InputGroupText,
   Row,
-  
 } from "reactstrap";
 import CompanyLogo from "../company-logo";
 import { useRegContext } from "../context/Auth/auth.reducer";
-// import { Notification } from "../../services/notification/Notification";
-
-// import { routes } from "../routes/routes";
-
-//  interface LoginPageProps {
-//    loginStatus: (data: boolean) => void;
-//  }
-// interface LoginStatusProp {
-
-//      loginStatus : (data : boolean) => void
-// }
-// const reducer = (state: any, action: any) => {
-//   switch (action.type) {
-//     case "setFormData":
-//       return {
-//         ...state,
-//         formdata: action.payload,
-//       };
-//     case "setErrorData":
-//       return {
-//         ...state,
-//         errordata: action.payload,
-//       };
-//     case "setSpinnerData":
-//       return {
-//         ...state,
-//         spinner: action.payload,
-//       };
-//     default:
-//       return state;
-//   }
-// };
 
 export interface LoginFormSate {
- email: string;
- password: string;
+  email: string;
+  password: string;
 }
 
+const LoginPage = () => {
+  const initialFormState = {
+    email: "",
+    password: "",
+  };
 
+  const { login, auth } = useRegContext();
 
-const LoginPage = (  ) => {
-  
- 
-const initialFormState = {
-  email: "",
-  password:"",
-}
+  const [logInData, setLogInData] = useState<LoginFormSate>(initialFormState);
 
-const { login ,auth  } = useRegContext();
+  const handleLoginInput =
+    (prop: keyof LoginFormSate) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setLogInData({ ...logInData, [prop]: event.target.value });
+    };
 
-const [ logInData , setLogInData] = useState<LoginFormSate>(initialFormState)
+  console.log("email data", auth);
 
-
-  
-  const handleLoginInput = (prop : keyof LoginFormSate) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLogInData( {...logInData, [prop]: event.target.value})
-  }
-
-  console.log( 'email data' , auth)
-  
   const handleLogin = (event: { preventDefault: () => void }) => {
-    
     event.preventDefault();
-    login(logInData)
-
-    
-    // loginStatus(true);
-    // if (state.formdata.email && state.formdata.password) {
-    //   
-    //   dispatch({ type: "setSpinnerData", payload: true });
-    // } else {
-    //   dispatch({
-    //     type: "setErrorData",
-    //     payload: {
-    //       email: "Invalid Credentials",
-    //       password: "Invalid Credentials",
-    //     },
-    //   });
-    //   dispatch({ type: "setSpinnerData", payload: false });
-    // }
-    
+    login(logInData);
   };
   return (
     <>
@@ -116,7 +61,9 @@ const [ logInData , setLogInData] = useState<LoginFormSate>(initialFormState)
                     </div>
                   </Col>
                 </Row>
-                 { !auth.status && <p className="text-center text-danger mt-3">{auth.massage}</p>} 
+                {!auth.status && (
+                  <p className="text-center text-danger mt-3">{auth.massage}</p>
+                )}
                 <Row>
                   <Col sm={10} className="mx-auto">
                     <div className="text-center my-1">
@@ -135,13 +82,11 @@ const [ logInData , setLogInData] = useState<LoginFormSate>(initialFormState)
                             type="email"
                             name="email"
                             required
-                           value={logInData.email}
-                           onChange={handleLoginInput("email")}
+                            value={logInData.email}
+                            onChange={handleLoginInput("email")}
                             placeholder="Enter Your Email"
                           />
                         </InputGroup>
-                       
-                      
                       </FormGroup>
                       <FormGroup>
                         <InputGroup>
@@ -157,8 +102,6 @@ const [ logInData , setLogInData] = useState<LoginFormSate>(initialFormState)
                             placeholder="Enter Your Password"
                           />
                         </InputGroup>
-                        
-                       
                       </FormGroup>
                       <FormGroup className="text-end">
                         <Link
@@ -173,18 +116,7 @@ const [ logInData , setLogInData] = useState<LoginFormSate>(initialFormState)
                           color="primary"
                           className="px-5 py-2 shadow save-button"
                           type="submit"
-                          // disabled={state.spinner}
                         >
-                          {/* <Notification type="success" message="Login Success" closeAlert={() => {}}} /> */}
-                          {/* {state.spinner ? (
-                            <>
-                              <Spinner size="sm">Loading...</Spinner>
-                              Logging In
-                            </>
-                          ) : (
-                            "Login"
-                          )} */}
-                       
                           LOGIN
                         </Button>
                       </FormGroup>

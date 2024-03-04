@@ -1,0 +1,102 @@
+.items-table-container {
+    .MuiTable-root {
+      .items-column-heading {
+        background: rgba(217, 217, 217, 0.35);
+        border-bottom: 2px solid #aaaaaa;
+  
+        svg {
+          cursor: pointer;
+          color: #0068b8;
+        }
+  
+        .MuiTableRow-root {
+          height: 38px;
+        }
+  
+        .items-column-row {
+          .created_by_name {
+            text-transform: capitalize;
+          }
+  
+          .MuiTableCell-sizeMedium {
+            padding: 0px 8px 0px 16px;
+            color: black;
+            font-family: Inter;
+            font-size: 10px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+            text-transform: uppercase;
+          }
+        }
+      }
+  
+      .MuiTableBody-root {
+        .selected-table-row {
+          background: rgba(0, 171, 255, 0.1);
+        }
+  
+        .MuiTableRow-root {
+          border-top: 1px solid #aaa;
+          border-bottom: 1px solid #aaa;
+  
+          .MuiTableCell-root[data-active='Active'] {
+            color: #30a558;
+          }
+  
+          .created_by_name {
+            text-transform: capitalize;
+          }
+  
+          .MuiTableCell-sizeMedium {
+            padding: 16px 8px 16px 16px;
+            color: black;
+            font-family: Inter;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 0;
+  
+            .MuiCheckbox-root {
+              padding: 0px;
+            }
+  
+            svg {
+              cursor: pointer;
+              color: #0068b8;
+            }
+          }
+  
+          .clickable-data {
+            color: var(--factor-blue, #0068b8);
+            font-family: Inter;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 20px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  
+    .items-table-pagination {
+      border-bottom: none;
+      .MuiTablePagination-toolbar {
+        display: inline-flex;
+        padding-left: 16px;
+      }
+    }
+  
+    .empty-items {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 35px;
+    }
+  }
+  

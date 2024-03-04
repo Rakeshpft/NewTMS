@@ -58,6 +58,7 @@ const navigateToProfile = () => {
               className="user-dropdown__icon d-flex align-items-center"
             >
               <Row>
+                
                 <Col className="user-dropdown-greeting">
                   <div className="user-avatar me-2">
                     <img

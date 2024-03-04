@@ -1,5 +1,5 @@
 export interface IUserDetailsResponse {
-  value: IUserDetails[] | [];
+  value: IUserDetails[] | [] ;
    exception?: Exception;
    is_error?: boolean;
    success?: boolean;
@@ -26,4 +26,19 @@ export interface IUserDetails {
   contact_number: string;
   status: boolean;
   logged_in_user_id : number
+  role_id: number
+  staff_id : number;
 }
+
+export interface IInviteUserDetails  {
+  staff_id : number;
+  email: string;
+  role_id: number;
+  salutation_id: number;
+  first_name: string;
+  last_name: string;
+  contact_number: string;
+
+}
+
+

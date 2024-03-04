@@ -113,10 +113,13 @@ input[type="radio"] {
 input,select,textarea{
   border-radius: 0 !important;
 }
+
+
 @import "./login";
 @import "./navigation";
 @import "./dashboard";
 @import "./sidebar";
 @import "./loadpage";
 @import "./pagination";
-@import "./modalStyle"
+@import "./modalStyle";
+@import "./basictable";

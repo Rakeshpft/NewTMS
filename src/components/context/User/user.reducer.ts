@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { UserUpdateContext } from "./user.context";
 import { API } from "../../../services/API/api.services";
 import { API_USER } from "../../../services/API/api.constant";
-import { IUserDetailsResponse } from "./user.types";
+import { IInviteUserDetails, IUserDetailsResponse } from "./user.types";
 
 export const useUserContext = () => {
   const { state, setState } = useContext(UserUpdateContext);
@@ -33,8 +33,30 @@ export const useUserContext = () => {
     });
   };
 
+  const getIdividualUserDetails = async (userId: number) => {
+    setState((draft) => {
+      draft.userLoading = true;
+    })
+    debugger ;
+    try {
+      const IdividualUserDetails : IInviteUserDetails = await API.get(`${API_USER.getIndividualUser}/${userId}`); 
+     console.log("datauser",IdividualUserDetails)
+     
+      setState ((draft) => {
+        draft.slectedUser = IdividualUserDetails
+        draft.userLoading = false
+      })
+    }catch (error: any) {
+      console.log(error)
+      setState((draft) => {
+        draft.userLoading = false
+      })
+    }
+  };
+
   return {
     ...state,
     getUserDetails,
+    getIdividualUserDetails
   };
 };

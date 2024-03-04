@@ -236,7 +236,7 @@ export const BasicTable = (props: BasicTableProps) => {
           {('no')} {tabLocation} {('added')}
         </div>
       )}
-      {loading && emptyState && <div className="empty-items">{'No Data'}...</div>}
+      {loading && emptyState && <div className="empty-items">{'Loading'}...</div>}
     </TableContainer>
   );
 };

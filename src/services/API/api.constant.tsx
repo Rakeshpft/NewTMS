@@ -3,7 +3,7 @@ import lscache from "lscache";
 
 // const env = window.location.href;
 
-export let apiURL =  "http://tms-api.eduxus.com/api";//"http://localhost:53207/api";
+export let apiURL =  "http://tms-api.eduxus.com/api";//"http://localhost:53207/api";//
 let environment = "Prod";
 
 export const getAPIConfig = () => {
@@ -25,19 +25,19 @@ export const API_DEFAULT_OPTIONS = {
 
 export const API_REG = {
   // House Registration and Login Request API endpoints here
-  postRegistration: "/Registration",
-  getCompanyVerify: "/Verification",
-  companyVerifyPassword: "/Verification",
-  comapanyLogin: "/Login",
-  getForgotPassword: "/ForgotPassword",
-  postForgotPassword: "/ForgotPassword",
+  postRegistration: "/registration",
+  getCompanyVerify: "/login/verification",
+  companyVerifyPassword: "/login/Verification",
+  comapanyLogin: "/login",
+  getForgotPassword: "/login/forgot-password",  
+  postForgotPassword: "login/forgot-password",
 };
 
 export const API_PROFILE = {
   // House Profile API endpoints here
-  getProfile: "/User",
-  postProfile: "/User",
-  postProfilePassword: "/ResetPassword",
+  getProfile: "/user",
+  postProfile: "/user",
+  postProfilePassword: "/user/reset-password",
   postProfileImage:"/user/image"
 };
 
@@ -70,5 +70,7 @@ export const API_TRAILER = {
   addTrailer: "/Trailers",
 };
 export const API_USER = {
-  getUser: "/Staff"
+  // House Staff API endpoints here
+  getUser: "/Staff",
+  getIndividualUser : "/Staff"
 }

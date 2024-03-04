@@ -1,4 +1,4 @@
-import React from "react";
+import React, {  useEffect, useState } from "react";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import {
@@ -14,26 +14,58 @@ import {
   ModalHeader,
   Row,
 } from "reactstrap";
+import { IUserFormState, IUserManagementProps, initialUserFormState } from "./user.types";
+import { useUserContext } from "../context/User/user.reducer";
 
-interface InviteUserModalProps {
-  isOpen: boolean;
-  toggle: () => void;
+
+const InviteUserModal = ( props: IUserManagementProps) => {
+
+
+  const { modalOpen,closeModal  } = props
+ const {slectedUser  }= useUserContext();
+
+  const [userDetails , setUserDetails] = useState<IUserFormState>(initialUserFormState);
+
+  const handleInputChange = (prop : keyof IUserFormState) => (event: React.ChangeEvent<HTMLInputElement>) => {
+     setUserDetails({ ...userDetails, [prop]: event.target.value });
+    
+  }
+  const handleCancelModal = () => {
+    closeModal();
+  }
+const handleSaveUser = (event: { preventDefault: () => void }) => {
+  event.preventDefault();
+  console.log(userDetails)
 }
-const InviteUserModal = ({ isOpen, toggle }: InviteUserModalProps) => {
+
+useEffect (() => {
+  if(slectedUser){
+    setUserDetails({
+      ...slectedUser ,
+      
+
+    })
+  }
+  
+} , [slectedUser])
+
+
+
   const closeBtn = (
-    <button className="border-0 bg-transparent"  onClick={toggle} type="button">
+    <button className="border-0 bg-transparent"  onClick={closeModal} type="button">
         <RxCross2 />  
   </button>
   )
+console.log( "slectedUser",slectedUser)
   return (
     <div>
-      <Modal isOpen={isOpen} toggle={() => toggle()}  >
-        <ModalHeader toggle={() => toggle()} close={closeBtn} className="modalColor" >
+      <Modal isOpen={modalOpen} onClose={() => closeModal()}  >
+        <ModalHeader onClose={() => closeModal()} close={closeBtn} className="modalColor" >
           <h6 className="mb-0 fw-bold "> Invite User </h6>
         </ModalHeader>
         <ModalBody>
           <Container>
-            <Form>
+            <Form onSubmit={handleSaveUser}>
               <Row>
                 <Col md={6}>
                   <FormGroup>
@@ -44,8 +76,8 @@ const InviteUserModal = ({ isOpen, toggle }: InviteUserModalProps) => {
                       id="name"
                       name="name"
                       type="text"
-                      value={""}
-                      onChange={() => {}}
+                      value={userDetails.first_name}
+                      onChange={handleInputChange("first_name")}
                     />
                   </FormGroup>
                 </Col>
@@ -58,8 +90,8 @@ const InviteUserModal = ({ isOpen, toggle }: InviteUserModalProps) => {
                       id="name"
                       name="name"
                       type="text"
-                      value={""}
-                      onChange={() => {}}
+                      value={userDetails.last_name}
+                      onChange={handleInputChange("last_name")}
                     />
                   </FormGroup>
                 </Col>
@@ -74,8 +106,9 @@ const InviteUserModal = ({ isOpen, toggle }: InviteUserModalProps) => {
                       id="Email"
                       name="email"
                       type="email"
-                      value={""}
-                      onChange={() => {}}
+                      disabled
+                      value={userDetails.email}
+                     
                     />
                   </FormGroup>
                 </Col>
@@ -89,8 +122,8 @@ const InviteUserModal = ({ isOpen, toggle }: InviteUserModalProps) => {
                       id="phone"
                       name="phone"
                       type="text"
-                      value={""}
-                      onChange={() => {}}
+                      value={userDetails.contact_number}
+                      onChange={handleInputChange("contact_number")}
                     />
                   </FormGroup>
                 </Col>
@@ -152,7 +185,7 @@ const InviteUserModal = ({ isOpen, toggle }: InviteUserModalProps) => {
                   <Button
                     className="cancel-button"
                     size="sm"
-                    onClick={() => {}}
+                    onClick={() => handleCancelModal()}
                   >
                     <RxCross2 fontSize={"16px"} color="red" />
                     Close
@@ -168,3 +201,5 @@ const InviteUserModal = ({ isOpen, toggle }: InviteUserModalProps) => {
 };
 
 export default InviteUserModal;
+
+

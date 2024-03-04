@@ -23,8 +23,12 @@ export interface IProfilePassword {
 }
 
 const ProfileForm = () => {
-  const { profileResetPass, getProfileDetails, postProfileDetails, postProfileImage } =
-    useProfileContext();
+  const {
+    profileResetPass,
+    getProfileDetails,
+    postProfileDetails,
+    postProfileImage,
+  } = useProfileContext();
   const initialIProfilePassword = {
     password: "",
     confirmPassword: "",
@@ -38,28 +42,10 @@ const ProfileForm = () => {
     initialProfileUpdateState
   );
 
-  const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    if (event.target.files) {
-      await postProfileImage(event.target.files[0]).then(
-        (data) =>{
-          console.log("getdata",data)    
-          data?.value &&
-          setEditProfileDetails({
-            ...editProfileDetails,
-            image_url: data.value,
-          })}
-      );
-    }
-    //event.target.files  setImageFile(URL.createObjectURL(event.target.files[0]));
-    console.log( "imageFile", event.target.files);
-  };
-
   useEffect(() => {
-    getProfileDetails().then(      
-      (data) =>{
-        console.log("getdata",data)    
-        data?.value &&
+    getProfileDetails().then((data) => {
+      console.log("getdata", data);
+      data?.value &&
         data?.value.length == 1 &&
         setEditProfileDetails({
           ...editProfileDetails,
@@ -69,55 +55,9 @@ const ProfileForm = () => {
           contact_number: data.value[0].contact_number,
           image_name: data.value[0].image_name,
           image_url: data.value[0].image_url,
-        })}
-    );
+        });
+    });
   }, []);
-
-  // useEffect(() => {
-  //   if (!profileLoading && profileDetails) {
-  //     setEditProfileDetails({
-  //       ...profileDetails,
-  //       first_name: profileDetails.first_name,
-  //       last_name: profileDetails.last_name,
-  //       email: profileDetails.email,
-  //       contact_number: profileDetails.contact_number,
-  //       image_name: profileDetails.image_name,
-  //       image_url: profileDetails.image_url,
-  //     });
-  //   }
-  // }, [profileDetails]);
-  // console.log( 'proffile' ,profileDetails)
-
-  // useEffect(() => {
-  //   if (!userInfoLoading && personalDetails) {
-  //     setUserDetails({
-  //       user_id: personalDetails.user_id,
-  //       salutation_id: personalDetails.salutation_id.toString(),
-  //       first_name: personalDetails.first_name,
-  //       last_name: personalDetails.last_name,
-  //       title: personalDetails.title,
-  //       department: personalDetails.department,
-  //       pers_email: personalDetails.pers_email,
-  //       pers_home_ph: personalDetails.pers_home_ph,
-  //       pers_fax: personalDetails.pers_fax,
-  //       pers_mobile: personalDetails.pers_mobile,
-  //     });
-  //   }
-  // }, [personalDetails]);
-
-  // const [file, setFile] = useState();
-  //   function handleChange(e) {
-  //       console.log(e.target.files);
-  //       setFile(URL.createObjectURL(e.target.files[0]));
-  //   }
-
-  //   return (
-  //       <div className="App">
-  //           <h2>Add Image:</h2>
-  //           <input type="file" onChange={handleChange} />
-  //           <img src={file} />
-  //       </div>
-  //   );
 
   const handleProfileInput =
     (prop: keyof IProfileUpdate) =>
@@ -141,14 +81,31 @@ const ProfileForm = () => {
   ) => {
     event.preventDefault();
     await postProfileDetails(editProfileDetails);
-
   };
-  console.log('postdata' , editProfileDetails )
-  
+  console.log("postdata", editProfileDetails);
+
   const handlePasswordSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     profileResetPass(resetPasswordData);
     setResetPasswordData(initialIProfilePassword);
+  };
+
+  const handleImageChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    event.preventDefault();
+    if (event.target.files) {
+      await postProfileImage(event.target.files[0]).then((data) => {
+        console.log("getdata", data);
+        data?.value &&
+          setEditProfileDetails({
+            ...editProfileDetails,
+            image_url: data.value,
+          });
+      });
+    }
+
+    console.log("imageFile", event.target.files);
   };
 
   return (
@@ -162,10 +119,6 @@ const ProfileForm = () => {
         <NavbarBrand className="fw-bold px-4">Profile</NavbarBrand>
         <Nav className="me-auto" navbar></Nav>
         <div className="d-flex align-items-center gap-3">
-          {/* <Button color="primary" onClick={() => setModalState(true)}>
-                Invite User
-                <AiOutlinePlus />
-              </Button> */}
           <Profile />
         </div>
       </Navbar>
@@ -308,7 +261,6 @@ const ProfileForm = () => {
                   </Col>
                 </Row>
                 <Button size="sm" className="me-3 save-button mt-4">
-                  {/* <BiCheck fontSize={"16px"} /> */}
                   Reset Password
                 </Button>
               </Col>
