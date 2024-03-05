@@ -3,7 +3,7 @@ import React from 'react';
 
 interface NotificationProps {
   type: 'error' | 'info' | 'success' | 'warning';
-  message: string;
+  message: string | any
    closeAlert: () => void;
 }
 

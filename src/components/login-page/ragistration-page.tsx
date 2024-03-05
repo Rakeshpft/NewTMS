@@ -17,16 +17,19 @@ import {
   salutationOptions,
 } from "../context/Auth/auth.types";
 import { useRegContext } from "../context/Auth/auth.reducer";
+//  import { Notification } from "../../services/notification/Notification";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RagistrationPage = () => {
-  const { regist } = useRegContext();
+  const { regist ,regLoading } = useRegContext();
 
   const navigate = useNavigate();
   const [regDetails, setregDetails] = useState<IRegistration>(
     initialRegistrationState
   );
   const [apiResponseMsg, setApiResponseMsg] = useState("");
-  const [showRegistrationMessage, setShowPasswordMessage] = useState(false);
+  // const [showRegistrationMessage, setShowPasswordMessage] = useState(false);
 
   const handleInputChange =
     (prop: keyof IRegistration) =>
@@ -37,13 +40,29 @@ const RagistrationPage = () => {
     event.preventDefault();
     regist(regDetails).then((res) => {
       setApiResponseMsg(`${res.message}`);
-      setShowPasswordMessage(true);
+      
+      toast(apiResponseMsg, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+        transition: Bounce,
+      });
     });
+    setregDetails(initialRegistrationState);
   };
+  console.log("api res", apiResponseMsg);
+  // const handleCloseAlert = () => {
+  //   setShowPasswordMessage(false);
+  // }
 
   const navigateToLogin = () => {
     navigate("/");
   };
+
   return (
     <>
       <div className="login">
@@ -64,12 +83,189 @@ const RagistrationPage = () => {
                       <h3 className="fw-bold ">Registration Form</h3>
                     </div>
 
-                    {showRegistrationMessage ? (
-                      <div className="text-center">
-                        <h5 className="text-success text-center mb-3">
-                          {apiResponseMsg}
-                        </h5>
+                    {/* <div className="text-center">
+                      <h5 className="text-success text-center mb-3">
+                        {apiResponseMsg}
+                      </h5>
 
+                      <Button
+                        color="primary"
+                        className="px-4 py-2 shadow save-button mx-3"
+                        onClick={navigateToLogin}
+                      >
+                        Back to Login
+                      </Button>
+                    </div> */}
+
+                    { !regLoading && <ToastContainer position="top-center" />}
+                    <Form className="mt-5" onSubmit={handleRegistration}>
+                      <Row>
+                        <Col md={4}>
+                          <FormGroup>
+                            <Label
+                              for="title"
+                              className="d-block d-sm-inline fw-bold"
+                            >
+                              Title
+                            </Label>
+                            <Input
+                              type="select"
+                              id="title"
+                              name="text"
+                              value={regDetails.salutation_id}
+                              onChange={handleInputChange("salutation_id")}
+                            >
+                              {salutationOptions.map((item) => (
+                                <option
+                                  key={item.salutation_id}
+                                  value={item.salutation_id.toString()}
+                                >
+                                  {item.salutation_name}
+                                </option>
+                              ))}
+                            </Input>
+                          </FormGroup>
+                        </Col>
+                        <Col md={4}>
+                          <FormGroup>
+                            <Label
+                              for="first_name"
+                              className="d-block d-sm-inline fw-bold"
+                            >
+                              First Name
+                            </Label>
+                            <Input
+                              type="text"
+                              id="first_name"
+                              name="text"
+                              value={regDetails.first_name}
+                              onChange={handleInputChange("first_name")}
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col md={4}>
+                          <FormGroup>
+                            <Label
+                              for="last_name"
+                              className="d-block d-sm-inline fw-bold"
+                            >
+                              Last Name
+                            </Label>
+                            <Input
+                              type="text"
+                              id="last_name"
+                              name="text"
+                              value={regDetails.last_name}
+                              onChange={handleInputChange("last_name")}
+                              placeholder="Enter Your Last Name"
+                            />
+                          </FormGroup>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col md={6}>
+                          <FormGroup>
+                            <Label
+                              for="mc_number"
+                              className="d-block d-sm-inline fw-bold"
+                            >
+                              MC Number<span className="text-danger">*</span>
+                            </Label>
+                            <Input
+                              type="text"
+                              name="text"
+                              id="mc_number"
+                              required
+                              value={regDetails.mc_number}
+                              onChange={handleInputChange("mc_number")}
+                              placeholder="Enter Your Mc Number"
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col md={6}>
+                          <FormGroup>
+                            <Label
+                              for="company_name"
+                              className="d-block d-sm-inline fw-bold"
+                            >
+                              Company<span className="text-danger">*</span>
+                            </Label>
+                            <Input
+                              type="text"
+                              name="text"
+                              id="company_name"
+                              required
+                              value={regDetails.company_name}
+                              onChange={handleInputChange("company_name")}
+                              placeholder="Enter Your Company"
+                            />
+                          </FormGroup>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col md={6}>
+                          <FormGroup>
+                            <Label
+                              for="email"
+                              className="d-block d-sm-inline fw-bold"
+                            >
+                              Email<span className="text-danger">*</span>
+                            </Label>
+                            <Input
+                              type="email"
+                              required
+                              name="email"
+                              id="email"
+                              value={regDetails.email}
+                              onChange={handleInputChange("email")}
+                              placeholder="Enter Your Email"
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col md={6}>
+                          <FormGroup>
+                            <Label
+                              for="mobile"
+                              className="d-block d-sm-inline fw-bold"
+                            >
+                              Contact Number
+                            </Label>
+                            <Input
+                              type="text"
+                              name="text"
+                              id="mobile"
+                              onKeyDown={(event) => {
+                                return event.key >= "0" && event.key <= "9";
+                              }}
+                              value={regDetails.mobile}
+                              onChange={handleInputChange("mobile")}
+                              placeholder="Enter Your Mobile"
+                            />
+                          </FormGroup>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col md={6}>
+                          <FormGroup>
+                            <Label
+                              for="website"
+                              className="d-block d-sm-inline fw-bold"
+                            >
+                              Website
+                            </Label>
+                            <Input
+                              type="text"
+                              name="text"
+                              id="website"
+                              value={regDetails.website}
+                              onChange={handleInputChange("website")}
+                              placeholder="Enter Your Website"
+                            />
+                          </FormGroup>
+                        </Col>
+                      </Row>
+
+                      <FormGroup className="text-center mt-3 align-items-center">
                         <Button
                           color="primary"
                           className="px-4 py-2 shadow save-button mx-3"
@@ -77,203 +273,25 @@ const RagistrationPage = () => {
                         >
                           Back to Login
                         </Button>
-                      </div>
-                    ) : (
-                      <Form className="mt-5" onSubmit={handleRegistration}>
-                        <Row>
-                          <Col md={4}>
-                            <FormGroup>
-                              <Label
-                                for="title"
-                                className="d-block d-sm-inline fw-bold"
-                              >
-                                Title
-                              </Label>
-                              <Input
-                                type="select"
-                                id="title"
-                                name="text"
-                                value={regDetails.salutation_id}
-                                onChange={handleInputChange("salutation_id")}
-                              >
-                                {salutationOptions.map((item) => (
-                                  <option
-                                    key={item.salutation_id}
-                                    value={item.salutation_id.toString()}
-                                  >
-                                    {item.salutation_name}
-                                  </option>
-                                ))}
-                              </Input>
-                            </FormGroup>
-                          </Col>
-                          <Col md={4}>
-                            <FormGroup>
-                              <Label
-                                for="first_name"
-                                className="d-block d-sm-inline fw-bold"
-                              >
-                                First Name
-                              </Label>
-                              <Input
-                                type="text"
-                                id="first_name"
-                                name="text"
-                                value={regDetails.first_name}
-                                onChange={handleInputChange("first_name")}
-                              />
-                            </FormGroup>
-                          </Col>
-                          <Col md={4}>
-                            <FormGroup>
-                              <Label
-                                for="last_name"
-                                className="d-block d-sm-inline fw-bold"
-                              >
-                                Last Name
-                              </Label>
-                              <Input
-                                type="text"
-                                id="last_name"
-                                name="text"
-                                value={regDetails.last_name}
-                                onChange={handleInputChange("last_name")}
-                                placeholder="Enter Your Last Name"
-                              />
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col md={6}>
-                            <FormGroup>
-                              <Label
-                                for="mc_number"
-                                className="d-block d-sm-inline fw-bold"
-                              >
-                                MC Number<span className="text-danger">*</span>
-                              </Label>
-                              <Input
-                                type="text"
-                                name="text"
-                                id="mc_number"
-                                required
-                                value={regDetails.mc_number}
-                                onChange={handleInputChange("mc_number")}
-                                placeholder="Enter Your Mc Number"
-                              />
-                            </FormGroup>
-                          </Col>
-                          <Col md={6}>
-                            <FormGroup>
-                              <Label
-                                for="company_name"
-                                className="d-block d-sm-inline fw-bold"
-                              >
-                                Company<span className="text-danger">*</span>
-                              </Label>
-                              <Input
-                                type="text"
-                                name="text"
-                                id="company_name"
-                                required
-                                value={regDetails.company_name}
-                                onChange={handleInputChange("company_name")}
-                                placeholder="Enter Your Company"
-                              />
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col md={6}>
-                            <FormGroup>
-                              <Label
-                                for="email"
-                                className="d-block d-sm-inline fw-bold"
-                              >
-                                Email<span className="text-danger">*</span>
-                              </Label>
-                              <Input
-                                type="email"
-                                required
-                                name="email"
-                                id="email"
-                                value={regDetails.email}
-                                onChange={handleInputChange("email")}
-                                placeholder="Enter Your Email"
-                              />
-                            </FormGroup>
-                          </Col>
-                          <Col md={6}>
-                            <FormGroup>
-                              <Label
-                                for="mobile"
-                                className="d-block d-sm-inline fw-bold"
-                              >
-                                Contact Number
-                              </Label>
-                              <Input
-                                type="text"
-                                name="text"
-                                id="mobile"
-                                onKeyDown={(event) => {
-                                  return event.key >= "0" && event.key <= "9";
-                                }}
-                                value={regDetails.mobile}
-                                onChange={handleInputChange("mobile")}
-                                placeholder="Enter Your Mobile"
-                              />
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col md={6}>
-                            <FormGroup>
-                              <Label
-                                for="website"
-                                className="d-block d-sm-inline fw-bold"
-                              >
-                                Website
-                              </Label>
-                              <Input
-                                type="text"
-                                name="text"
-                                id="website"
-                                value={regDetails.website}
-                                onChange={handleInputChange("website")}
-                                placeholder="Enter Your Website"
-                              />
-                            </FormGroup>
-                          </Col>
-                        </Row>
-
-                        <FormGroup className="text-center mt-3 align-items-center">
-                          <Button
-                            color="primary"
-                            className="px-4 py-2 shadow save-button mx-3"
-                            onClick={navigateToLogin}
-                          >
-                            Back to Login
-                          </Button>
-                          <Button
-                            color="primary"
-                            className="px-4 py-2 shadow save-button"
-                            type="submit"
-                            // disabled={
-                            //   !every(
-                            //     [
-                            //       regDetails.company_name,
-                            //       regDetails.email,
-                            //       regDetails.mc_number,
-                            //     ],
-                            //     Boolean
-                            //   )
-                            // }
-                          >
-                            Register
-                          </Button>
-                        </FormGroup>
-                      </Form>
-                    )}
+                        <Button
+                          color="primary"
+                          className="px-4 py-2 shadow save-button"
+                          type="submit"
+                          // disabled={
+                          //   !every(
+                          //     [
+                          //       regDetails.company_name,
+                          //       regDetails.email,
+                          //       regDetails.mc_number,
+                          //     ],
+                          //     Boolean
+                          //   )
+                          // }
+                        >
+                          Register
+                        </Button>
+                      </FormGroup>
+                    </Form>
                   </Col>
                 </Row>
               </Container>

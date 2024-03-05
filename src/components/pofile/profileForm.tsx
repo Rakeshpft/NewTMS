@@ -13,7 +13,6 @@ import {
 } from "reactstrap";
 import { Header, SideBar } from "../header";
 import Profile from "./profile";
-import { BiCheck } from "react-icons/bi";
 import { useProfileContext } from "../context/Profile/profile.Reducer";
 import { IProfileUpdate, initialProfileUpdateState } from "./profileType";
 
@@ -126,7 +125,7 @@ const ProfileForm = () => {
         <SideBar isSidebarOpen={!isSidebarOpen} />
 
         <div className="aria-content ps-4 ">
-          <h3 className=" settingTittle mb-3"> General </h3>
+          <h6 className=" settingTittle mb-3"> General </h6>
           <Form onSubmit={handleProfileSubmit} encType="multipart/form-data">
             <Row>
               <Col md={3}>
@@ -216,7 +215,7 @@ const ProfileForm = () => {
               >
                 <div>
                   <Button className="me-3 save-button" size="sm" type="submit">
-                    <BiCheck fontSize={"16px"} />
+                   
                     Update
                   </Button>
                 </div>
@@ -227,12 +226,12 @@ const ProfileForm = () => {
           <Form onSubmit={handlePasswordSubmit}>
             <Row>
               <Col>
-                <h3 className=" settingTittle mb-3 "> Reset Password </h3>
+                <h6 className=" settingTittle mb-3 "> Reset Password </h6>
                 <Row>
                   <Col md={3}>
                     <FormGroup>
                       <Label for="password" className="mb-0">
-                        Password
+                       Reset Password
                       </Label>
                       <Input
                         id="password"
