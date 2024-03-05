@@ -14,7 +14,7 @@ export const useProfileContext = () => {
     throw new Error("Must have setState defined");
   }
 
-  const profileResetPass  = async ( profilePassword : IProfilePassword ) => {
+  const profileResetPass  =  ( profilePassword : IProfilePassword ) => {
     setState((draft) => {
       draft.profileLoading = true ;  
     });
@@ -23,7 +23,7 @@ export const useProfileContext = () => {
       password : profilePassword.password
     }
     try {
-      const profilePass = await API.post( API_PROFILE.postProfilePassword ,profilePassObject );
+      const profilePass =  API.post( API_PROFILE.postProfilePassword ,profilePassObject );
       return profilePass ;
     }catch (error: any) {
               console.log(error);
@@ -57,16 +57,15 @@ export const useProfileContext = () => {
 
   }
 
-const postProfileDetails = async (profileDetails : IProfileUpdate ) => {
+const postProfileDetails =  (profileDetails : IProfileUpdate ) => {
   setState(draft => {
     draft.profileLoading = true;
   })
   try {
-    const updateProfileDetails = await API.post( API_PROFILE.postProfile, profileDetails);
-    setState(draft => {
-      draft.profileDetails = updateProfileDetails;     
-      draft.profileLoading = false;
-    })
+    const updateProfileDetails =  API.post( API_PROFILE.postProfile, profileDetails);
+    
+    return updateProfileDetails;
+    
   } catch (error: any) {
     console.log(error);
     setState((draft) => {

@@ -22,13 +22,13 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const RagistrationPage = () => {
-  const { regist ,regLoading } = useRegContext();
+  const { regist  } = useRegContext();
 
   const navigate = useNavigate();
   const [regDetails, setregDetails] = useState<IRegistration>(
     initialRegistrationState
   );
-  const [apiResponseMsg, setApiResponseMsg] = useState("");
+  // const [apiResponseMsg, setApiResponseMsg] = useState("");
   // const [showRegistrationMessage, setShowPasswordMessage] = useState(false);
 
   const handleInputChange =
@@ -39,10 +39,10 @@ const RagistrationPage = () => {
   const handleRegistration = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     regist(regDetails).then((res) => {
-      setApiResponseMsg(`${res.message}`);
+      //setApiResponseMsg(`${res.message}`);
       
-      toast(apiResponseMsg, {
-        position: "top-right",
+      toast(res.message, {
+        position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -52,9 +52,9 @@ const RagistrationPage = () => {
         transition: Bounce,
       });
     });
-    setregDetails(initialRegistrationState);
+     setregDetails(initialRegistrationState);
   };
-  console.log("api res", apiResponseMsg);
+  // console.log("api res", apiResponseMsg);
   // const handleCloseAlert = () => {
   //   setShowPasswordMessage(false);
   // }
@@ -97,7 +97,7 @@ const RagistrationPage = () => {
                       </Button>
                     </div> */}
 
-                    { !regLoading && <ToastContainer position="top-center" />}
+                    {  <ToastContainer position="top-center" />}
                     <Form className="mt-5" onSubmit={handleRegistration}>
                       <Row>
                         <Col md={4}>

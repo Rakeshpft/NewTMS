@@ -15,6 +15,8 @@ import { Header, SideBar } from "../header";
 import Profile from "./profile";
 import { useProfileContext } from "../context/Profile/profile.Reducer";
 import { IProfileUpdate, initialProfileUpdateState } from "./profileType";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+// import { Bounce, ToastContainer, toast } from "react-toastify";
 
 export interface IProfilePassword {
   password: string;
@@ -27,6 +29,7 @@ const ProfileForm = () => {
     getProfileDetails,
     postProfileDetails,
     postProfileImage,
+
   } = useProfileContext();
   const initialIProfilePassword = {
     password: "",
@@ -75,17 +78,43 @@ const ProfileForm = () => {
       });
     };
 
-  const handleProfileSubmit = async (
+  const handleProfileSubmit =  (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-    await postProfileDetails(editProfileDetails);
+     postProfileDetails(editProfileDetails)?.then((data) => {
+      toast(data.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+        transition: Bounce,
+      });
+       
+     });
+   
   };
   console.log("postdata", editProfileDetails);
 
   const handlePasswordSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    profileResetPass(resetPasswordData);
+    profileResetPass(resetPasswordData)?.then((data) => {
+      toast(data.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+        transition: Bounce,
+      });
+    })
+   
+    
     setResetPasswordData(initialIProfilePassword);
   };
 
@@ -131,7 +160,7 @@ const ProfileForm = () => {
               <Col md={3}>
                 <FormGroup>
                   <Label for="firstName" className="mb-0">
-                    First Name{" "}
+                    First Name
                   </Label>
                   <Input
                     id="firstName"
@@ -231,7 +260,7 @@ const ProfileForm = () => {
                   <Col md={3}>
                     <FormGroup>
                       <Label for="password" className="mb-0">
-                       Reset Password
+                       New Password
                       </Label>
                       <Input
                         id="password"
@@ -265,6 +294,7 @@ const ProfileForm = () => {
               </Col>
             </Row>
           </Form>
+          {  <ToastContainer position="top-center" />}
         </div>
       </div>
     </>
