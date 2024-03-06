@@ -119,7 +119,14 @@ input,select,textarea{
 //   box-shadow: 0 0 5px rgba(0,0,0,0.8);
 
 // } 
-
+.btn{
+  border-radius: 0%;
+}
+.btn-primary{
+  border: 1px solid #1e5367;
+  background-color: #418ecb;
+  color: white;
+}
 @import "./login";
 @import "./navigation";
 @import "./dashboard";
