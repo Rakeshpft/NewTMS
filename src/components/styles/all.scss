@@ -114,10 +114,11 @@ input,select,textarea{
   border-radius: 0 !important;
 }
 
-[type=button]:hover
-{
-  box-shadow: 0 0 5px rgba(0,0,0,0.5);
-} 
+// [type=button]:not(.nohover):hover
+// {
+//   box-shadow: 0 0 5px rgba(0,0,0,0.8);
+
+// } 
 
 @import "./login";
 @import "./navigation";

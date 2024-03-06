@@ -33,6 +33,7 @@ export interface IUserDetails {
 export interface IInviteUserDetails  {
   [x: string]: any;
   staff_id : number;
+  full_name: string;
   email: string;
   role_id: number;
   salutation_id: number;

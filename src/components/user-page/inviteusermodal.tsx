@@ -104,7 +104,7 @@ const InviteUserModal = (props: IUserManagementProps) => {
                       name="email"
                       type="email"
                       value={userNewDetails.email}
-                      disabled={title ? false : true}
+                      disabled={!title}
                       onChange={handleInputChange("email")}
                     />
                   </FormGroup>

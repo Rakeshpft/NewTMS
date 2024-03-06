@@ -2,6 +2,7 @@ import { IInviteUserDetails } from "../context/User/user.types";
 
 export interface IUserFormState {
   first_name: string;
+  full_name: string;
   last_name: string;
   email: string;
   contact_number: string;
@@ -12,6 +13,7 @@ export interface IUserFormState {
 export const initialUserFormState : IUserFormState = {
   first_name: "",
   last_name: "",
+  full_name: "",
   email: "",
   contact_number: "",
   role_id: 0,

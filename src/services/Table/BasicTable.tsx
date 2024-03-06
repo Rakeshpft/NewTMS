@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import { includes } from 'lodash';
 import { HiOutlinePencilAlt } from 'react-icons/hi';
+import { Col, Input, Row } from 'reactstrap';
 // import { useTranslation } from 'react-i18next';
 
 // import { ReactComponent as EditIcon } from '../../assets/images/edit-icon.svg';
@@ -129,8 +130,24 @@ export const BasicTable = (props: BasicTableProps) => {
 
   return (
     <TableContainer className="items-table-container">
+      <Row className='mb-2'>
+        <Col sm={3}>
+          <div className='d-flex align-items-center '>
+            <div className='me-1'>Rows per Page : </div>
+        
+        <Input bsSize='sm' className='w-25' type="select" name="select" id="select" value={rowsPerPage} onChange={handleChangeRowsPerPage}>
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+        </Input>
+      </div>
+        </Col>
+      </Row>
+      
       <Table>
+      
         <TableHead className="items-column-heading">
+       
           <TableRow className="items-column-row">
             {canSelectRows && selectedTableRows && setSelectionTableRows && (
               <TableCell align="center" style={{ width: '5%' }}>
@@ -161,7 +178,7 @@ export const BasicTable = (props: BasicTableProps) => {
                 </TableSortLabel>
               </TableCell>
             ))}
-            {canEditRow && <TableCell id="edit" style={{ width: '5%' }}></TableCell>}
+            {canEditRow && <TableCell id="edit" style={{ width: '5%' }}> Action</TableCell>}
           </TableRow>
         </TableHead>
         {!emptyState ? (
@@ -201,7 +218,7 @@ export const BasicTable = (props: BasicTableProps) => {
                   {canEditRow && editRow && (
                     <TableCell>
                       {/* <EditIcon onClick={() => editRow(item)} /> */}
-                      <HiOutlinePencilAlt onClick={() => editRow(item)} />
+                      <HiOutlinePencilAlt size={20} onClick={() => editRow(item)} />
                     </TableCell>
                   )}
                 </TableRow>

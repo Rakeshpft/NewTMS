@@ -228,7 +228,7 @@ const RagistrationPage = () => {
                               for="mobile"
                               className="d-block d-sm-inline fw-bold"
                             >
-                              Contact Number
+                              Contact Number<span className="text-danger">*</span>
                             </Label>
                             <Input
                               type="text"
@@ -275,7 +275,7 @@ const RagistrationPage = () => {
                         </Button>
                         <Button
                           color="primary"
-                          className="px-4 py-2 shadow save-button"
+                          className="px-4 py-2 shadow save-button "
                           type="submit"
                           // disabled={
                           //   !every(

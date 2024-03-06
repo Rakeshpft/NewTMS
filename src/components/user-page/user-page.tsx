@@ -59,8 +59,10 @@ const UserPage = () => {
     if (slectedUser) {
       setNewUserDetails({
         ...userDetails,
+        
         first_name: slectedUser.first_name,
         last_name: slectedUser.last_name,
+        full_name: slectedUser.full_name,
         email: slectedUser.email,
         contact_number: slectedUser.contact_number,
         role_id: slectedUser.role_id,
@@ -76,7 +78,7 @@ const UserPage = () => {
       userDetails.filter((user) => {
         if (
           includes(
-            user.value[0].first_name.toLowerCase(),
+            user.value[0].full_name.toLowerCase(),
             searchValue.toLowerCase()
           )
         ) {
@@ -144,11 +146,12 @@ const UserPage = () => {
 
   const handleSaveUser = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    await saveUser(userNewDetails);
-    getUserDetails().then((data) => {
-      data && setFilteredData(data);
+    await saveUser(userNewDetails).then((data) => {         
+      data?.success &&  setModalOpen(data.success);
     });
-    setModalOpen(false);
+    getUserDetails().then((data) => {
+      data && setFilteredData(data);      
+    }); 
   };
 
   return (

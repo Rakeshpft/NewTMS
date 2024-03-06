@@ -21,12 +21,14 @@ export const useUserContext = () => {
 
       const newUserContacts = userList.value.map((user) => {
           user.full_name = `${user.first_name} ${user.last_name}`;
+          console.log(user.full_name)
           return user;
       })
-      return newUserContacts
-    //   setState((draft) => {
-    //     draft.userDetails   = newUserContacts;
-    //   });
+      
+      // setState((draft) => {
+      //   draft.userDetails   = newUserContacts;
+      // });
+    return newUserContacts
     } catch (error: any) {
       console.log(error);
     }
@@ -65,14 +67,13 @@ export const useUserContext = () => {
     clearSuccessAndFailure();
     try{
       const response : IAPIResponse = await API.post(API_USER.postNewUserData, newUser);
-      
+
        setState(draft => {
         draft.is_error = response.is_error ? true : false
           draft.saveUserSuccess = response.success ? true : false
-      
-       
         draft.slectedUser = null;
       });
+      return response ;
 
     } catch (error: any) {
       console.log(error);
@@ -89,7 +90,6 @@ export const useUserContext = () => {
 
     try{
       userToDeleted.forEach(user => {
-
         API.post(`${API_USER.deleteUsers}/${user.staff_id}`);
       })
       
