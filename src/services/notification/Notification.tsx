@@ -3,16 +3,16 @@ import React from 'react';
 
 interface NotificationProps {
   type: 'error' | 'info' | 'success' | 'warning';
-  message: string | any
+  message: string 
    closeAlert: () => void;
 }
 
-export const Notification = (props: NotificationProps) => {
+const  Notification = (props: NotificationProps) => {
   const { type, message , closeAlert } = props;
 
   return (
     <Snackbar
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       className="notification-snackbar"
       open={message !== ''}
       autoHideDuration={4000}
@@ -21,7 +21,10 @@ export const Notification = (props: NotificationProps) => {
       <Alert
         className={type === 'success' ? 'notification' : 'notification-error'}
         variant="outlined"
-        severity={type}
+        severity={ type }
+      
+
+      
          onClose={closeAlert}
       >
         {message}
@@ -29,3 +32,5 @@ export const Notification = (props: NotificationProps) => {
     </Snackbar>
   );
 };
+
+export default Notification

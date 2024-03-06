@@ -7,13 +7,19 @@ import { useImmer } from "use-immer";
 export interface IUserData {
    userDetails : IUserDetailsResponse[] | null 
    userLoading : boolean;
+   is_error : boolean;
+   saveUserSuccess : boolean;
+   saveUserFailed : boolean;
    slectedUser : IInviteUserDetails | null
 
 }
 
 const InitialState : IUserData = {
     userDetails : null,
+    is_error : false,
     userLoading : false,
+    saveUserSuccess : false,
+    saveUserFailed : false,
     slectedUser : null
 }
 

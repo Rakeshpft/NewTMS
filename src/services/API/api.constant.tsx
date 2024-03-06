@@ -72,5 +72,7 @@ export const API_TRAILER = {
 export const API_USER = {
   // House Staff API endpoints here
   getUser: "/Staff",
-  getIndividualUser : "/Staff"
+  getIndividualUser : "/Staff",
+  postNewUserData: "/Staff",
+  deleteUsers: "/Staff",
 }

@@ -1,3 +1,5 @@
+import { IInviteUserDetails } from "../context/User/user.types";
+
 export interface IUserFormState {
   first_name: string;
   last_name: string;
@@ -19,6 +21,13 @@ export const initialUserFormState : IUserFormState = {
 export interface  IUserManagementProps  {
     modalOpen: boolean;
     closeModal: () => void;
+    slectedUser: IInviteUserDetails | null;
+    userNewDetails: IUserFormState;
+    setUserDetails : React.Dispatch<React.SetStateAction<IUserFormState>>
+    handleInputChange: (prop: keyof IUserFormState) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleSaveUser: (event: { preventDefault: () => void }) => void;
+    title: Boolean;
+  
 }
     
 

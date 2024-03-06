@@ -14,8 +14,9 @@ const post = async (endpoint: string, payload?: any) => {
 }
 
 const put = async ( endpoint : string , payload : any ) => {
+  
     const res : AxiosResponse = await axios.put(`${API_DEFAULT_OPTIONS.apiURL}${endpoint}`, payload, getAPIConfig());
-    return res.data ;
+    return res.data  ;
 }
 const postFormData = async ( endpoint : string , payload : any) => {
   const res : AxiosResponse = await axios.post(`${API_DEFAULT_OPTIONS.apiURL}${endpoint}`, payload, {
