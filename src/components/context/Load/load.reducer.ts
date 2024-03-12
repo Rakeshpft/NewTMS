@@ -1,107 +1,73 @@
 import { useContext } from "react"
 import { LoadContext } from "./load.context"
-import { API } from "../../../services/API/api.services";
-import { API_LOAD } from "../../../services/API/api.constant";
-import { IDispatcherLoadObject, ILoadStatusObject, IStateObject } from "./load.type";
-import { IBillingLoadObject } from "../BiliingLoad/billing.types";
-
-
-
+import { API } from "../../../services/api-helper/api.services";
+import { API_LOAD } from "../../../services/api-helper/api.constant";
+import { IAPIResponse } from "../../../services/tms-objects/response.types";
 
 export const useLoadContext = () => {
-    const {state , setState} = useContext(LoadContext)
+  const { state, setState } = useContext(LoadContext)
 
-    if (setState === undefined) {
-        throw new Error("Must have setState defined");
-      }
+  if (setState === undefined) {
+    throw new Error("Must have setState defined");
+  }
 
-      const getStatusList = async () => {
-        setState(draft => {
-            draft.statusLoading = true;            
-          });
-          try{
-            const dataLoad : ILoadStatusObject[] = await API.get(API_LOAD.loadStatus );
+  const getStatusList = async () => {
+    setState(draft => { draft.statusLoading = true; });
+    try {
+      const dataLoad: IAPIResponse = await API.get(API_LOAD.loadStatus);
+      setState(draft => { draft.loadStatus = dataLoad.value; });
+      //console.log( 'status list : ',dataLoad)
+    } catch (error: any) {
+      console.log(error);
+    } finally {
+      setState((draft) => { draft.statusLoading = false; });
+    }
+  }
 
-            setState(draft => {
-                draft.loadStatus = dataLoad;
-                draft.statusLoading = false;
-              }); 
-              console.log( 'status data ',dataLoad)
+  const getBillingStatusList = async () => {
+    setState(draft => { draft.statusLoading = true; });
+    try {
+      const billingList: IAPIResponse = await API.get(API_LOAD.billingStatusList);
+      setState(draft => { draft.loadBillingStatus = billingList.value; });
+      //console.log( 'billing status list : ', billingList)
+    } catch (error: any) {
+      console.log(error);
+    } finally {
+      setState((draft) => { draft.statusLoading = false; });
+    }
+  }
 
-          }catch (error: any) {
-            console.log(error);
-          }
-          setState((draft) => {
-            draft.statusLoading = false;
-          });
-       } 
+  const getDispatcherStatusList = async () => {
+    setState(draft => { draft.statusLoading = true; });
+    try {
+      const dispatcherList: IAPIResponse = await API.get(API_LOAD.dispatcherLoadList);
+      setState(draft => { draft.loadDispatcherStatus = dispatcherList.value; });
+      //console.log( 'dispatcher list : ', dispatcherList)
+    } catch (error: any) {
+      console.log(error);
+    } finally {
+      setState((draft) => { draft.statusLoading = false; });
+    }
+  }
 
+  const getStateStatusList = async () => {
+    setState(draft => { draft.statusLoading = true; });
+    try {
+      const stateList: IAPIResponse = await API.get(API_LOAD.stateLoadList);
+      setState(draft => { draft.loadStateStatus = stateList.value; });
+      //console.log( 'state list : ', stateList)
+    } catch (error: any) {
+      console.log(error);
+    } finally {
+      setState((draft) => { draft.statusLoading = false; });
+    }
+  }
 
-       const getBillingStatusList = async () => {
-        setState(draft => {
-          draft.statusLoading = true;            
-        });
-        try{
-          const billingList : IBillingLoadObject[] = await API.get(API_LOAD.billingStatusList );
-          setState(draft => {
-              draft.loadBillingStatus = billingList;
-              draft.statusLoading = false;
-          }) ;
-          console.log( 'status biiling ', billingList)
-
-        }catch (error: any) {
-          console.log(error);
-        }
-        setState((draft) => {
-          draft.statusLoading = false;
-        });
-       }
-
-       const getDispatcherStatusList = async () => {
-        setState(draft => {
-          draft.statusLoading = true;            
-        });
-        try{
-          const dispatcherList : IDispatcherLoadObject[] = await API.get(API_LOAD.dispatcherLoadList );
-          setState(draft => {
-              draft.loadDispatcherStatus = dispatcherList;
-              draft.statusLoading = false;
-          }) ;
-          console.log( 'status biiling ', dispatcherList)
-
-        }catch (error: any) {
-          console.log(error);
-        }
-        setState((draft) => {
-          draft.statusLoading = false;
-        });
-       }
-       const getStateStatusList = async () => {
-        setState(draft => {
-          draft.statusLoading = true;            
-        });
-        try{
-          const stateList : IStateObject[] = await API.get(API_LOAD.stateLoadList );
-          setState(draft => {
-              draft.loadStateStatus = stateList;
-              draft.statusLoading = false;
-          }) ;
-          console.log( 'status biiling ', stateList)
-
-        }catch (error: any) {
-          console.log(error);
-        }
-        setState((draft) => {
-          draft.statusLoading = false;
-        });
-       }
-
-     return {
-        ...state,
-        getStatusList,
-        getBillingStatusList,
-        getDispatcherStatusList,
-        getStateStatusList
-
-     } 
+  return {
+    ...state,
+    getStatusList,
+    getBillingStatusList,
+    getDispatcherStatusList,
+    getStateStatusList
+  }
 }

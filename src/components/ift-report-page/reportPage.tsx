@@ -287,15 +287,15 @@ const ReportPage = () => {
 
           <Row>
             <Col lg={3} md={6} sm={12} className="px-3">
-              <FormGroup check>
-                <Input
-                  type="checkbox"
-                  //   checked={formState.broker}
-                  name="broker"
-                  //   onChange={handleCheckboxChange("SET_broker")}
-                />
-                <Label check> Show Totals Only </Label>
-              </FormGroup>
+                <FormGroup check>
+                  <Input
+                    type="checkbox"
+                    //   checked={formState.broker}
+                    name="broker"
+                    //   onChange={handleCheckboxChange("SET_broker")}
+                  />
+                  <Label check> Show Totals Only </Label>
+                </FormGroup>
               <FormGroup check>
                 <Input
                   type="checkbox"

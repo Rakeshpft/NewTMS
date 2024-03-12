@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CustomerAddContext } from "./customer.context";
-import { API } from "../../../services/API/api.services";
-import { API_CUSTOMER } from "../../../services/API/api.constant";
+import { API } from "../../../services/api-helper/api.services";
+import { API_CUSTOMER } from "../../../services/api-helper/api.constant";
 import { ICustomerObject } from "./customer.types";
 
 

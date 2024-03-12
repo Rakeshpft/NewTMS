@@ -4,6 +4,7 @@ $primary: #21529d;
 $info: #418ecb;
 @import "~bootstrap/scss/bootstrap";
 
+
 :root {
   --bs-primary-rgb: #21529d !important;
   --bs-card-border-radius: 0 !important;
@@ -110,16 +111,13 @@ input[type="radio"] {
 .navbar > .container-fluid {
   padding: 0;
 }
-input,select,textarea{
-  border-radius: 0 !important;
-}
 
 // [type=button]:not(.nohover):hover
 // {
 //   box-shadow: 0 0 5px rgba(0,0,0,0.8);
 
 // } 
-.btn{
+.btn,.form-control,.form-select{
   border-radius: 0%;
 }
 .btn-primary{
@@ -127,6 +125,45 @@ input,select,textarea{
   background-color: #418ecb;
   color: white;
 }
+
+.form-switch .form-check-input {
+  width: 3em!important;
+  height: 1.5em!important;
+  border-radius: 1.25em!important;
+}
+
+
+//*********** New Page Layout
+.page-title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: #d5554d;
+  margin-bottom: 16px;
+  font-family: Manrope;
+  letter-spacing: 0em;
+}
+.page-subtitle {
+  font-family: Manrope;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: 0em;
+  color: #d5554d;
+}
+.page-content {
+  font-family: Manrope;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #5e5e5e;
+}
+
+//
+
+
 @import "./login";
 @import "./navigation";
 @import "./dashboard";
@@ -137,3 +174,5 @@ input,select,textarea{
 @import "./basictable";
 @import "./contactModal";
 @import "./userInfo";
+@import "./driverPage";
+@import "./loadpage";

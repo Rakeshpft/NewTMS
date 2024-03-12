@@ -7,6 +7,7 @@ export interface IProfileAccount {
   profileDetails: IProfileDetailsResponse | null;
   profileLoading: boolean;
   profileResetPassword : IProfileResetPassword | null
+  
 }
 
 const initialState: IProfileAccount = {

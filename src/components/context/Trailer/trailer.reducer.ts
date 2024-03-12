@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { TrailerAddContext } from "./trailer.context"
-import { API } from "../../../services/API/api.services";
-import { API_TRAILER } from "../../../services/API/api.constant";
+import { API } from "../../../services/api-helper/api.services";
+import { API_TRAILER } from "../../../services/api-helper/api.constant";
 
 
 

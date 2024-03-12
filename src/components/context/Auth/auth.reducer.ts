@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { RegContext } from "./auth.contxt";
 import { IAuthObject, IRegistration, authInitialState } from "./auth.types";
-import { API } from "../../../services/API/api.services";
-import { API_REG, platformId } from "../../../services/API/api.constant";
+import { API } from "../../../services/api-helper/api.services";
+// import { API_REG, platformId } from "../../../services/API/api.constant";
 import { IResetPassword } from "../../login-page/resetPassword";
 import { LoginFormSate } from "../../login-page/login-page";
 import lscache from "lscache";
@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { routes } from "../../routes/routes";
 import { IForgotResetPassword } from "../../login-page/forgetResetPassword";
+import { API_REG, platformId } from "../../../services/api-helper/api.constant";
 
 export const useRegContext = () => {
     

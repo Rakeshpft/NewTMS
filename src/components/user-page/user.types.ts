@@ -1,4 +1,4 @@
-import { IInviteUserDetails } from "../context/User/user.types";
+import { IInviteUserDetails, IUserRole } from "../context/User/user.types";
 
 export interface IUserFormState {
   first_name: string;
@@ -8,6 +8,8 @@ export interface IUserFormState {
   contact_number: string;
   role_id: number;
   staff_id: number;
+  active: boolean ;    
+  
 }
 
 export const initialUserFormState : IUserFormState = {
@@ -17,7 +19,8 @@ export const initialUserFormState : IUserFormState = {
   email: "",
   contact_number: "",
   role_id: 0,
-  staff_id: 0
+  staff_id: 0,
+  active: true
 }
 
 export interface  IUserManagementProps  {
@@ -29,7 +32,9 @@ export interface  IUserManagementProps  {
     handleInputChange: (prop: keyof IUserFormState) => (event: React.ChangeEvent<HTMLInputElement>) => void;
     handleSaveUser: (event: { preventDefault: () => void }) => void;
     title: Boolean;
-  
+    userRole: IUserRole[] | null;
+    handleCheckBox: () => void;
+    
 }
     
 

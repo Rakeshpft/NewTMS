@@ -20,7 +20,7 @@ import {
   DropdownMenu,
   UncontrolledDropdown,
 } from "reactstrap";
-import NavigationBar from "../navigation-bar";
+// import NavigationBar from "../navigation-bar";
 import { FaUserCircle, FaRegCalendar } from "react-icons/fa";
 import { dashboardTiles } from "./dashboard-Title";
 import { routes } from "../routes/routes";
@@ -32,6 +32,7 @@ import moment from "moment";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from 'react-router-dom';
+import CommonLayOut from "../../layout";
 
 
 const DispatchedHeaders = [
@@ -92,8 +93,10 @@ export default function DashboardPage() {
   }
 
   return (
+   
+    <CommonLayOut>
     <section className="main-dashboard">
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <Container className="main-content py-2 px-4" fluid>
         <Row className="mb-3">
           <Col className="d-flex justify-content-between align-items-center">
@@ -514,7 +517,9 @@ export default function DashboardPage() {
         </Row>
       </Container>
     </section>
+    </CommonLayOut>
   );
+
 }
 
 type TileProps = {

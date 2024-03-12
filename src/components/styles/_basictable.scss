@@ -84,9 +84,14 @@
     .items-table-pagination {
       border-bottom: none;
       .MuiTablePagination-toolbar {
-        display: inline-flex;
+        // display: inline-flex;
         padding-left: 16px;
       }
+      .MuiTablePagination-selectLabel {
+        margin-top: 13px;
+    }
+    .MuiTablePagination-displayedRows {
+      margin-top: 15px;
     }
   
     .empty-items {
@@ -96,4 +101,4 @@
       margin-top: 35px;
     }
   }
-  
+}

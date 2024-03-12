@@ -1,7 +1,8 @@
 .header-section {
   justify-content: space-between;
   align-items: center;
-  background-color: var(--header-color);
+  // background-color: var(--header-color);
+  background-color:#FCFCFC;
 }
 
 .user-dropdown-greeting {
@@ -15,7 +16,8 @@
 }
 
 .header_nav {
-  border-right: 1px solid #1b56ae;
+  // border-right: 1px solid #1b56ae;
   padding-top: 0;
   padding-bottom: 0;
+  background-color:#FCFCFC;
 }

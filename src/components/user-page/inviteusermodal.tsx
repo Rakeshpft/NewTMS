@@ -1,4 +1,4 @@
-import React from "react";
+import React  from "react";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import {
@@ -20,17 +20,19 @@ const InviteUserModal = (props: IUserManagementProps) => {
   const {
     modalOpen,
     closeModal,
-    slectedUser,
     userNewDetails,
     handleInputChange,
     handleSaveUser,
     title,
+    handleCheckBox,
+    userRole,
   } = props;
 
   const handleCancelModal = () => {
     closeModal();
   };
 
+  
   const closeBtn = (
     <button
       className="border-0 bg-transparent"
@@ -41,7 +43,6 @@ const InviteUserModal = (props: IUserManagementProps) => {
     </button>
   );
 
-  console.log("slectedUser", slectedUser);
   return (
     <div>
       <Modal isOpen={modalOpen} onClose={() => closeModal()}>
@@ -128,46 +129,47 @@ const InviteUserModal = (props: IUserManagementProps) => {
                 </Col>
               </Row>
               <Row className="mb-4">
-                <Col>
+                <Col md={6}>
                   <Label className="fw-bold"> User Role </Label>
                   <br />
-                  <FormGroup check inline>
+                  <FormGroup>
                     <Input
-                      type="checkbox"
-                      checked={false}
-                      name="Admin"
-                      onChange={() => {}}
-                    />
-                    <Label check>Broker</Label>
-                  </FormGroup>
-                  <FormGroup check inline>
-                    <Input
-                      type="checkbox"
-                      checked={false}
-                      name="Dispatcher"
-                      onChange={() => {}}
-                    />
-                    <Label check>Dispatcher</Label>
-                  </FormGroup>
-                  <FormGroup check inline>
-                    <Input
-                      type="checkbox"
-                      checked={false}
-                      name="Accountant"
-                      onChange={() => {}}
-                    />
-                    <Label check>Accountant</Label>
-                  </FormGroup>
-                  <FormGroup check inline>
-                    <Input
-                      type="checkbox"
-                      checked={false}
-                      name="Safety"
-                      onChange={() => {}}
-                    />
-                    <Label check>Safety</Label>
+                      bsSize="sm"
+                      className="form-control form-control-sm"
+                      type="select"
+                      id="user"
+                      name="user"
+                      value={userNewDetails.role_id}
+                      onChange={handleInputChange("role_id")}
+                    >
+                      {userRole?.map((item) => {
+                        return (
+                          <option key={item.role_id} value={item.role_id}>
+                            {item.role_name}
+                          </option>
+                        );
+                      })}
+                    </Input>
+                   
                   </FormGroup>
                 </Col>
+                { !title &&
+                  <Col md={6}>
+                  <Label for="Active" className="fw-bold">
+                    Active
+                  </Label>
+                  <FormGroup switch>
+                    <Input
+                      type="switch"
+                      checked={userNewDetails.active}
+                      onChange= {handleCheckBox}
+                    
+                    
+                    />
+                  </FormGroup>
+                </Col>
+                }
+                
               </Row>
               <Row>
                 <Col className=" d-flex justify-content-end align-items-end">

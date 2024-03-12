@@ -8,7 +8,7 @@ const MapPage = () => {
      libraries: ["places"] ,
   });
   if (!isLoaded) return <div>Loading</div>;
- console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
+//  console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
   return (
     <div>
 

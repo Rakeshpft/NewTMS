@@ -10,8 +10,6 @@ export interface IDriverObject {
   state_id: number;
   city: string;
   zipcode: string;
-  application_date: string;
-  hire_date: string;
   fuel_card: string;
   create_new_factor: string;
   pay_to_id: number;
@@ -19,12 +17,9 @@ export interface IDriverObject {
   truck_id: number;
   trailer_id: number;
   is_IFTA_handled_by_company: number;
-  company_id: number;
-  created_by_id: number;
-  created_date: string;
-  modified_by_id: number;
-  modified_date: string;
   status_id: boolean;
+  note: string;
+  driver_images: string;
 }
 
 export const initialStateDriver = {
@@ -39,8 +34,6 @@ export const initialStateDriver = {
   state_id: 0,
   city: "",
   zipcode: "",
-  application_date: "",
-  hire_date: "",
   fuel_card: "",
   create_new_factor: "",
   pay_to_id: 0,
@@ -48,10 +41,7 @@ export const initialStateDriver = {
   truck_id: 0,
   trailer_id: 0,
   is_IFTA_handled_by_company: 0,
-  company_id: 0,
-  created_by_id: 0,
-  created_date: "",
-  modified_by_id: 0,
-  modified_date: "",
   status_id: false,
+  note: "",
+  driver_images: "",
 };

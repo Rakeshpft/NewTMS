@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { Nav, Navbar, NavbarBrand } from "reactstrap";
+import React from "react";
+// import { Nav, Navbar, NavbarBrand } from "reactstrap";
 // import TabPage from "./tab-page";
 // import { RxCross2 } from "react-icons/rx";
 // import { BiCheck } from "react-icons/bi";
-import { Header } from "../header";
-import Profile from "../pofile";
+// import { Header } from "../header";
+// import Profile from "../pofile";
 import CreateNewDriverForm from "./createNewDriverForm";
+import CommonLayOut from "../../layout";
 // import CreateNewDriverForm from "./createNewDriverForm";
 // import { driverpage, initialDriverState } from "../tms-object/driverpage";
 // import { routes } from "../routes/routes";
@@ -101,11 +102,11 @@ import CreateNewDriverForm from "./createNewDriverForm";
 //   }
 // };
 
-const CreateNewDriverPage = (toggle: any) => {
+const CreateNewDriverPage = () => {
   // const history = useHistory();
 
   // const [state, dispatch] = useReducer(formReducer, initialDriverState);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  // const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
@@ -159,7 +160,8 @@ const CreateNewDriverPage = (toggle: any) => {
 
   return (
     <>
-      <Navbar
+    <CommonLayOut>
+      {/* <Navbar
         style={{
           borderBottom: "1px solid #1B56AE",
         }}
@@ -177,10 +179,15 @@ const CreateNewDriverPage = (toggle: any) => {
         <div className="d-flex align-items-center gap-2">
           <Profile />
         </div>
-      </Navbar>
-      <div className="m-2 load-itemmain">
-        <CreateNewDriverForm isDriverFormOpen={true} toggle={toggle} />
-      </div>
+      </Navbar> */}
+      
+
+      <CreateNewDriverForm 
+      
+      
+      />
+     
+     </CommonLayOut>
     </>
   );
 };

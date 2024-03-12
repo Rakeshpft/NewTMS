@@ -30,7 +30,8 @@ export const API_REG = {
   companyVerifyPassword: "/login/Verification",
   comapanyLogin: "/login",
   getForgotPassword: "/login/forgot-password",  
-  postForgotPassword: "login/forgot-password",
+  postForgotPassword: "/login/forgot-password",
+  leftMenuList:"/menu",
 };
 
 export const API_PROFILE = {
@@ -57,7 +58,7 @@ export const API_CUSTOMER = {
 
 export const API_DRIVER = {
   // House Driver API endpoints here
-  addDriver: "/Driver",
+  getDriver: "/Driver",
 };
 
 export const API_TRUCK = {
@@ -75,4 +76,12 @@ export const API_USER = {
   getIndividualUser : "/Staff",
   postNewUserData: "/Staff",
   deleteUsers: "/Staff",
+  userRoleList: "/Role",
+}
+export const API_USER_Role = {
+  // House Staff API endpoints here
+  getUserRole: "/Role",
+  getIndividualUserRole : "/Role",
+  postNewUserRoleData: "/Role",
+  deleteUsersRole: "/Role",
 }

@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { truckAddContext } from "./truck.context";
-import { API } from "../../../services/API/api.services";
-import { API_TRUCK } from "../../../services/API/api.constant";
+import { API } from "../../../services/api-helper/api.services";
+import { API_TRUCK } from "../../../services/api-helper/api.constant";
 
 
 

@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { ProfileUpdateContext } from "./profileContext";
 import { IProfilePassword } from "../../pofile/profileForm";
-import { API } from "../../../services/API/api.services";
-import { API_PROFILE } from "../../../services/API/api.constant";
+import { API } from "../../../services/api-helper/api.services";
+import { API_PROFILE } from "../../../services/api-helper/api.constant";
 import {  IProfileDetailsResponse } from "./profileTypes";
 import { IProfileUpdate } from "../../pofile/profileType";
 

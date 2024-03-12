@@ -1,13 +1,5 @@
-import React from "react";
-import { routes } from "./components/routes/routes";
-import {
-  ForgetPassword,
-  LoginPage,
-  RagistrationPage,
-  // LoginPage,
-  ResetPassword,
-} from "./components/login-page";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import React from 'react'
+import { Route, Routes } from "react-router-dom";
 // import { PrivateRoute } from "./components/private-routes";
 // import { IdleTimerProvider } from "react-idle-timer";
 // import { handleLogout, session_Time_Logout } from "./components/auth";
@@ -73,37 +65,18 @@ import ReportPage from "./components/ift-report-page/reportPage";
 import TaxRateByState from "./components/ift-report-page/taxRateByStatePage";
 import SafetyPage from "./components/safety-page/safetyPage";
 import SettingPage from "./components/setting-page/settingPage";
-import { ContextProvider } from "./components/context/ContextProvider";
-import { DashboardPage } from "./components/dashboard";
-import { PrivateRoute } from "./components/routes/PrivateRoute";
-import { ProfileForm } from "./components/pofile";
-import ForgotResetPassword from "./components/login-page/forgetResetPassword";
-import UserRolePage from "./components/user-role/userRole-page";
 
-const App = () => {
+// import { DashboardPage } from "./components/dashboard";
+// import { PrivateRoute } from "./components/routes/PrivateRoute";
+import { ProfileForm } from "./components/pofile";
+import { routes } from './components/routes/routes';
+
+const Mainbody = () => {
   return (
-    <ContextProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<LoginPage />} path={routes.login} />
-          <Route path={routes.forgotPassword} element={<ForgetPassword />} />
-          <Route
-            element={<ResetPassword />}
-            path={`${routes.emailVerification}`}
-          />
-          <Route
-            path={routes.registrationForm}
-            element={<RagistrationPage />}
-          />
-          <Route path={routes.resetPassword} element={<ResetPassword />} />
-          <Route element={<ForgotResetPassword/>} path={routes.forgotResetPassword}/>
-          <Route
-            path={routes.default}
-            element={
-              <PrivateRoute>
-                <Routes>
-                <Route element={<Navigate to={routes.dashboard} />} path={'*'} />
-                  <Route element={<DashboardPage />} path={routes.dashboard} />
+    <div className='main-content'>
+    <Routes>
+                {/* <Route element={<Navigate to={routes.dashboard} />} path={'*'} />
+                  <Route element={<DashboardPage />} path={routes.dashboard} /> */}
                   <Route path= {routes.profileForm} element={<ProfileForm/>}/>
                   <Route path={routes.driverpageAll} element={<DriverPage />} />
                   <Route
@@ -252,7 +225,6 @@ const App = () => {
                     element={<DispatchedBoardPage />}
                   />
                   <Route path={routes.UsersPage} element={<UserPage />} />
-                  <Route path={routes.UsersRole} element={<UserRolePage />} />
 
                   <Route path={routes.docExchange} element={<DocExchange />} />
 
@@ -265,13 +237,9 @@ const App = () => {
                   <Route path={routes.safetyPage} element={<SafetyPage />} />
                   <Route path={routes.settingPage} element={<SettingPage />} />
                 </Routes>
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </ContextProvider>
-  );
-};
+    </div>
+    
+  )
+}
 
-export default App;
+export default Mainbody

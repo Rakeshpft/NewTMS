@@ -1,6 +1,10 @@
-import React, { useState } from "react";
-import sidebarItems from "./sidebarData.json";
+import React, { useState, useEffect } from "react";
+//import sidebarItems from "./sidebarData.json";
 import { Link } from "react-router-dom";
+import { IAPIResponse } from "../../services/tms-objects/response.types";
+import { API } from "../../services/api-helper/api.services";
+import { API_REG } from "../../services/api-helper/api.constant";
+
 
 type SideBarProps = {
   isSidebarOpen: boolean;
@@ -10,6 +14,13 @@ type SideBarProps = {
 const SideBar = ({ isSidebarOpen, activePageId }: SideBarProps) => {
   const [openSubmenuId, setOpenSubmenuId] = useState(activePageId);
   const [openSubmenuId2, setOpenSubmenuId2] = useState(0);
+  const [sideBarItems, setSideBarItems] = useState([]);
+
+useEffect(() => {
+  API.get(API_REG.leftMenuList).then((data:IAPIResponse)=>{    
+    setSideBarItems(data.value);        
+  });
+}, []);
 
   const renderSubmenu = (submenuItems:any) => {
     return submenuItems.map((item:any) => (
@@ -50,38 +61,38 @@ const SideBar = ({ isSidebarOpen, activePageId }: SideBarProps) => {
     ));
   };
 
-  const renderSidebarItems = () => {
-    return sidebarItems.data.map((item) => (
-      <li
-        key={item.id}
-        className={`nav-item ${item.hasSubmenu ? "has-submenu" : ""}`}
-      >
-        {item.hasSubmenu ? (
-          <>
-            <Link
-              to="#"
-              className={`nav-link ps-4 ${item.label.toLowerCase()} ${
-                openSubmenuId === item.id ? "active" : ""
-              }`}
-              onClick={() => toggleSubmenu(item.id)}
-            >
+  const renderSidebarItems = () => {      
+    return sideBarItems.map((item:any) => (
+        <li
+          key={item.id}
+          className={`nav-item ${item.hasSubmenu ? "has-submenu" : ""}`}
+        >
+          {item.hasSubmenu ? (
+            <>
+              <Link
+                to="#"
+                className={`nav-link ps-4 ${item.label.toLowerCase()} ${
+                  openSubmenuId === item.id ? "active" : ""
+                }`}
+                onClick={() => toggleSubmenu(item.id)}
+              >
+                {item.label}
+              </Link>
+              <ul
+                className={`submenu list-unstyled collapse ${
+                  openSubmenuId === item.id ? "show" : ""
+                }`}
+              >
+                {renderSubmenu(item.submenuItems)}
+              </ul>
+            </>
+          ) : (
+            <Link to={item.link || ""} className="nav-link ps-4">
               {item.label}
             </Link>
-            <ul
-              className={`submenu list-unstyled collapse ${
-                openSubmenuId === item.id ? "show" : ""
-              }`}
-            >
-              {renderSubmenu(item.submenuItems)}
-            </ul>
-          </>
-        ) : (
-          <Link to={item.link || ""} className="nav-link ps-4">
-            {item.label}
-          </Link>
-        )}
-      </li>
-    ));
+          )}
+        </li>
+      ));    
   };
 
   const toggleSubmenu = (id: any) => {

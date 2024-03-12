@@ -4,18 +4,17 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
-  Nav,
-  NavItem,
+  
   Navbar,
   Row,
   UncontrolledButtonDropdown,
 } from "reactstrap";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import { handleLogout } from "../auth";
 import { BsBell, BsGear } from "react-icons/bs";
 import { BiMessageDetail } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
-import CompanyLogo from "../company-logo/company-logo";
+
 import lscache from "lscache";
 import { routes } from "../routes/routes";
 const NavigationBar = () => {
@@ -42,13 +41,7 @@ const navigateToProfile = () => {
   return (
     <div className="header-section">
       <Navbar className="px-md-3 px-0 border-bottom">
-        <Nav>
-          <NavItem>
-            <Link to={"/dashboard"} className="fs-2 pe-2 link-light">
-              <CompanyLogo height={64} shrinkOnSmallScreen />
-            </Link>
-          </NavItem>
-        </Nav>
+        
         <Row>
           <UncontrolledButtonDropdown>
             <DropdownToggle

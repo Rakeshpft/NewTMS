@@ -59,4 +59,5 @@ export const routes = {
   safetyPage: "/safety",
   settingPage: "/settings",
   profileForm: "/profileform",
+  UsersRole: "/userrole",
 };

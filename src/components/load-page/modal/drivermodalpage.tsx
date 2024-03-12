@@ -162,8 +162,8 @@ const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps) => {
         <ModalBody>
           <Container>
              <CreateNewDriverForm
-             isDriverFormOpen= {false}
-             toggle={toggle}
+             
+            
             /> 
           </Container>
         </ModalBody>
