@@ -1,0 +1,119 @@
+import React, { useState, useEffect } from "react";
+//import sidebarItems from "./sidebarData.json";
+import { Link } from "react-router-dom";
+import { IAPIResponse } from "../../services/tms-objects/response.types";
+import { API } from "../../services/api-helper/api.services";
+import { API_REG } from "../../services/api-helper/api.constant";
+import ReactIcon from "./react-icon";
+
+
+type SideBarProps = {
+  isSidebarOpen: boolean;
+  activePageId?: number;
+};
+
+const SideBar = ({ isSidebarOpen, activePageId }: SideBarProps) => {
+  const [activeMenuId, setActiveMenuId] = useState(activePageId);
+  const [activeSubMenuId, setActiveSubMenuId] = useState(0);
+  const [sideBarItems, setSideBarItems] = useState([]);
+
+useEffect(() => {
+  API.get(API_REG.leftMenuList).then((data:IAPIResponse)=>{    
+    setSideBarItems(data.value);        
+  });
+}, []);
+
+  const renderSubmenu = (submenuItems:any) => {
+    return submenuItems.map((item:any) => (
+      <li
+        key={item.id}
+        className={`nav-item ${item.hasSubmenu ? "has-submenu" : ""}`}
+      >
+        {item.hasSubmenu ? (
+          <>
+            <Link
+              to="#"
+              className={`nav-link ${item.label.toLowerCase()} ${
+                activeSubMenuId === item.id ? "active" : ""
+              }`}
+              onClick={() => toggleSubMenu(item.id)}
+            >
+              {item.label}
+            </Link>
+            <ul
+              className={`submenu list-unstyled collapse ${
+                activeSubMenuId === item.id ? "show" : ""
+              }`}
+            >
+              {renderSubmenu(item.submenuItems)}
+            </ul>
+          </>
+        ) : (
+          <Link
+            to={item.link || ""}
+            className={`nav-link ${
+              activeSubMenuId==item.id ? "active" : ""
+            }`}
+          >
+            {item.label}
+          </Link>
+        )}
+      </li>
+    ));
+  };
+
+  const renderSidebarItems = () => {      
+    return sideBarItems.map((item:any) => (
+        <li
+          key={item.id}
+          className={`nav-item main-menu ${item.hasSubmenu ? "has-submenu" : ""}`}
+        >
+          {item.hasSubmenu ? (
+            <>              
+              <Link
+                to="#" id={`link-${item.id}`}
+                className={`nav-link ${item.label.toLowerCase()} ${
+                  activeMenuId === item.id ? "active" : ""
+                }`}
+                onClick={() => toggleMenu(item.id)}
+              >
+                <ReactIcon name={item.icon} />&nbsp;&nbsp;&nbsp;{item.label}
+              </Link>
+              <ul
+                className={`submenu list-unstyled collapse ${
+                  activeMenuId === item.id ? "show" : ""
+                }`}
+              >
+                {renderSubmenu(item.submenuItems)}
+              </ul>
+            </>
+          ) : (
+            <Link to={item.link || ""} id={`link-${item.id}`} 
+            className={`nav-link ${
+              activeMenuId === item.id ? "active" : ""
+            }`}>
+              <ReactIcon name={item.icon} />&nbsp;&nbsp;&nbsp;{item.label}
+            </Link>
+          )}
+        </li>
+      ));    
+  };
+
+  const toggleMenu = (id: any) => {
+    setActiveMenuId((prevId) => (prevId === id ? null : id));
+  };
+  const toggleSubMenu = (id: any) => {
+    setActiveSubMenuId((prevId) => (prevId === id ? null : id));
+  };
+  return (
+    isSidebarOpen && (
+      <div className="sidebar-container">
+      <nav className="sidebar open">
+        <ul className="nav flex-column">{renderSidebarItems()}</ul>
+      </nav>
+      </div>
+    )
+  );
+};
+
+export default SideBar;

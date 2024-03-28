@@ -5,10 +5,11 @@ interface TabPageProps {
   tabTitles: string[];
   children?: any[] | JSX.Element | JSX.Element[];
   onclick?: React.Dispatch<React.SetStateAction<number>>;
+  disabledTabs?:number[];
 }
-const TabPage = ({ tabTitles, children, onclick }: TabPageProps) => {
+const TabPage = ({ tabTitles, children, onclick, disabledTabs }: TabPageProps) => {
   children = React.Children.toArray(children);
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);  
 
   useEffect(() => {
     if (onclick) onclick(activeTab);
@@ -24,6 +25,7 @@ const TabPage = ({ tabTitles, children, onclick }: TabPageProps) => {
               className={`text-dark py-2 cursor-pointer ${
                 activeTab === index ? "active fw-bold" : "fw-semibold"
               }`}
+              disabled={disabledTabs && disabledTabs.includes(index)}
               onClick={() => setActiveTab(index)}
             >
               {tabTitle}
@@ -39,6 +41,7 @@ const TabPage = ({ tabTitles, children, onclick }: TabPageProps) => {
             </TabPane>
           );
         })}
+        
       </TabContent>
     </>
   );

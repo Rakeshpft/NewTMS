@@ -12,13 +12,15 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 // import { IdleTimerProvider } from "react-idle-timer";
 // import { handleLogout, session_Time_Logout } from "./components/auth";
 // import { DashboardPage } from "./components/dashboard";
-import { DriverPage, CreateNewDriverPage } from "./components/driver-page";
+import { DriverPage } from "./components/driver-page";
 import { LoadPage, CreateNewLaodPage } from "./components/load-page";
 import {
   Customer,
   Vendors,
-  CreateNewCustomerPage,
+  // CreateNewCustomerPage,
   CreateNewVendorPage,
+ 
+  
 } from "./components/partenrs";
 import {
   CreateNewDriverPayrollPage,
@@ -73,12 +75,14 @@ import ReportPage from "./components/ift-report-page/reportPage";
 import TaxRateByState from "./components/ift-report-page/taxRateByStatePage";
 import SafetyPage from "./components/safety-page/safetyPage";
 import SettingPage from "./components/setting-page/settingPage";
-import { ContextProvider } from "./components/context/ContextProvider";
+import { ContextProvider } from "./services/context-provider/ContextProvider";
 import { DashboardPage } from "./components/dashboard";
 import { PrivateRoute } from "./components/routes/PrivateRoute";
 import { ProfileForm } from "./components/pofile";
 import ForgotResetPassword from "./components/login-page/forgetResetPassword";
 import UserRolePage from "./components/user-role/userRole-page";
+import UserAdminRole from "./components/user-page/userAdminRole";
+// import CreateNewCustomerPage from "./components/partenrs/customer/create-new-customer-page";
 
 const App = () => {
   return (
@@ -106,10 +110,10 @@ const App = () => {
                   <Route element={<DashboardPage />} path={routes.dashboard} />
                   <Route path= {routes.profileForm} element={<ProfileForm/>}/>
                   <Route path={routes.driverpageAll} element={<DriverPage />} />
-                  <Route
+                  {/* <Route
                     path={routes.createNewDriver}
                     element={<CreateNewDriverPage />}
-                  />
+                  /> */}
                   <Route path={routes.loadpageAll} element={<LoadPage />} />
                   <Route
                     path={routes.createNewLoad}
@@ -121,10 +125,10 @@ const App = () => {
                     element={<CreateNewVendorPage />}
                   />
                   <Route path={routes.customersAll} element={<Customer />} />
-                  <Route
+                  {/* <Route
                     path={routes.createNewCustomer}
-                    element={<CreateNewCustomerPage  />}
-                  />
+                    element={<CreateNewCustomerPage />}
+                  /> */}
                   <Route
                     path={routes.driverPayRoll}
                     element={<DriverPayRoll />}
@@ -264,6 +268,7 @@ const App = () => {
                   />
                   <Route path={routes.safetyPage} element={<SafetyPage />} />
                   <Route path={routes.settingPage} element={<SettingPage />} />
+                  <Route path={routes.userAdminRole} element={<UserAdminRole />} />
                 </Routes>
               </PrivateRoute>
             }

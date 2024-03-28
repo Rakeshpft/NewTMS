@@ -1,0 +1,13 @@
+.nav-tabs{
+    margin-bottom: 15px;
+    .nav-link{
+        cursor: pointer;
+    }
+    .nav-link.active{
+        border: none!important;
+        border-bottom: solid medium var(--bs-primary)!important;
+    }
+    .nav-link:hover{
+        border-color: transparent;      
+    }
+}

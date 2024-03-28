@@ -15,11 +15,12 @@ import {
   IRegistration,
   initialRegistrationState,
   salutationOptions,
-} from "../context/Auth/auth.types";
-import { useRegContext } from "../context/Auth/auth.reducer";
+} from "../../services/tms-objects/auth.types";
+import { useRegContext } from "../../services/reducer/auth.reducer";
 //  import { Notification } from "../../services/notification/Notification";
-import { Bounce, ToastContainer, toast } from "react-toastify";
+import {  ToastContainer,  } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { toastify } from "../../features/notification/toastify";
 
 const RagistrationPage = () => {
   const { regist  } = useRegContext();
@@ -38,20 +39,10 @@ const RagistrationPage = () => {
     };
   const handleRegistration = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    regist(regDetails).then((res) => {
-      //setApiResponseMsg(`${res.message}`);
+    regist(regDetails).then((response) => {
+      response &&   toastify({ message: response.message, type: (response.success ? "success" : "error") });
       
-      toast(res.message, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "light",
-        transition: Bounce,
-      });
-    });
+    }); 
      setregDetails(initialRegistrationState);
   };
   // console.log("api res", apiResponseMsg);

@@ -4,7 +4,6 @@ import { RxCross2 } from "react-icons/rx";
 import {
   Button,
   Col,
-  Container,
   Form,
   FormGroup,
   Input,
@@ -31,11 +30,10 @@ const InviteUserModal = (props: IUserManagementProps) => {
   const handleCancelModal = () => {
     closeModal();
   };
-
   
   const closeBtn = (
     <button
-      className="border-0 bg-transparent"
+      className="border-0 bg-transparent text-white"
       onClick={closeModal}
       type="button"
     >
@@ -49,99 +47,54 @@ const InviteUserModal = (props: IUserManagementProps) => {
         <ModalHeader
           onClose={() => closeModal()}
           close={closeBtn}
-          className="modalColor"
         >
+          
           <h6 className="mb-0 fw-bold ">
+
             {title ? "Invite User" : "Edit User"}
           </h6>
         </ModalHeader>
         <ModalBody>
-          <Container>
-            <Form onSubmit={handleSaveUser}>
+            <Form className="page-content" onSubmit={handleSaveUser}>
               <Row>
                 <Col md={6}>
                   <FormGroup>
-                    <Label for="name" className="fw-bold">
-                      First Name
-                    </Label>
-                    <Input
-                      bsSize="sm"
-                      className="form-control form-control-sm"
-                      id="name"
-                      name="name"
+                    <Label for="name">First Name</Label>
+                    <Input bsSize="sm" 
+                    className="form-control form-control-sm"
+                     id="name" 
+                     name="name"
                       type="text"
-                      value={userNewDetails.first_name}
-                      onChange={handleInputChange("first_name")}
-                    />
+                       value={userNewDetails.first_name} 
+                       onChange={handleInputChange("first_name")} />
                   </FormGroup>
                 </Col>
                 <Col md={6}>
                   <FormGroup>
-                    <Label for="name" className="fw-bold">
-                      Last Name
-                    </Label>
-                    <Input
-                      bsSize="sm"
-                      className="form-control form-control-sm"
-                      id="name"
-                      name="name"
-                      type="text"
-                      value={userNewDetails.last_name}
-                      onChange={handleInputChange("last_name")}
-                    />
+                    <Label for="name">Last Name</Label>
+                    <Input bsSize="sm" className="form-control form-control-sm" id="name" name="name" type="text" value={userNewDetails.last_name} onChange={handleInputChange("last_name")} />
                   </FormGroup>
                 </Col>
               </Row>
               <Row>
                 <Col md={6}>
                   <FormGroup>
-                    <Label for="Email" className="fw-bold">
-                      Email
-                    </Label>
-                    <Input
-                      bsSize="sm"
-                      className="form-control form-control-sm"
-                      id="Email"
-                      name="email"
-                      type="email"
-                      value={userNewDetails.email}
-                      disabled={!title}
-                      onChange={handleInputChange("email")}
-                    />
+                    <Label for="Email">Email</Label>
+                    <Input bsSize="sm" className="form-control form-control-sm" id="Email" name="email" type="email" value={userNewDetails.email} disabled={!title} onChange={handleInputChange("email")} />
                   </FormGroup>
                 </Col>
-
                 <Col md={6}>
                   <FormGroup>
-                    <Label for="phone" className="fw-bold">
-                      Phone
-                    </Label>
-                    <Input
-                      bsSize="sm"
-                      className="form-control form-control-sm"
-                      id="phone"
-                      name="phone"
-                      type="text"
-                      value={userNewDetails.contact_number}
-                      onChange={handleInputChange("contact_number")}
-                    />
+                    <Label for="phone">Phone</Label>
+                    <Input bsSize="sm" className="form-control form-control-sm" id="phone" name="phone" type="text" value={userNewDetails.contact_number} onChange={handleInputChange("contact_number")} />
                   </FormGroup>
                 </Col>
               </Row>
-              <Row className="mb-4">
+              <Row>
                 <Col md={6}>
-                  <Label className="fw-bold"> User Role </Label>
-                  <br />
                   <FormGroup>
-                    <Input
-                      bsSize="sm"
-                      className="form-control form-control-sm"
-                      type="select"
-                      id="user"
-                      name="user"
-                      value={userNewDetails.role_id}
-                      onChange={handleInputChange("role_id")}
-                    >
+                  <Label>User Role</Label>
+                    <Input bsSize="sm" className="form-control form-control-sm" type="select" id="user" name="user" value={userNewDetails.role_id} onChange={handleInputChange("role_id")}>
                       {userRole?.map((item) => {
                         return (
                           <option key={item.role_id} value={item.role_id}>
@@ -149,52 +102,31 @@ const InviteUserModal = (props: IUserManagementProps) => {
                           </option>
                         );
                       })}
-                    </Input>
-                   
+                    </Input>                   
                   </FormGroup>
                 </Col>
                 { !title &&
                   <Col md={6}>
-                  <Label for="Active" className="fw-bold">
-                    Active
-                  </Label>
+                  <Label for="Active">Active</Label>
                   <FormGroup switch>
-                    <Input
-                      type="switch"
-                      checked={userNewDetails.active}
-                      onChange= {handleCheckBox}
-                    
-                    
-                    />
+                    <Input type="switch" checked={userNewDetails.active} onChange= {handleCheckBox} />
                   </FormGroup>
                 </Col>
-                }
-                
+                }                
               </Row>
-              <Row>
+              <Row className="mt-2">
                 <Col className=" d-flex justify-content-end align-items-end">
-                  <Button
-                    color="primary"
-                    size="sm"
-                    className="me-3 save-button"
-                    onClick={() => {}}
-                    type="submit"
-                  >
+                  <Button color="primary" size="sm" className="me-3" onClick={() => {}} type="submit" >
                     <BiCheck fontSize={"16px"} />
                     Save
                   </Button>
-                  <Button
-                    className="cancel-button"
-                    size="sm"
-                    onClick={() => handleCancelModal()}
-                  >
-                    <RxCross2 fontSize={"16px"} color="red" />
+                  <Button size="sm" color="danger" outline={true} onClick={() => handleCancelModal()}>
+                    <RxCross2 fontSize={"16px"} />
                     Close
                   </Button>
                 </Col>
               </Row>
             </Form>
-          </Container>
         </ModalBody>
       </Modal>
     </div>

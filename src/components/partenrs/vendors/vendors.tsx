@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MdOutgoingMail } from "react-icons/md";
 import { AiOutlineFileExcel } from "react-icons/ai";
 import { PiFilePdfDuotone, PiGearDuotone } from "react-icons/pi";
-import { Header, SideBar } from "../../header";
+import { Header, SideBar } from "../../shared";
 import {
   Button,
   Card,

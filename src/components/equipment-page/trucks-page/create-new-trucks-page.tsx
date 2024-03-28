@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Navbar, NavbarBrand, Nav } from "reactstrap";
-import { Header } from "../../header";
+import { Header } from "../../shared";
 import Profile from "../../pofile";
 import CreateNewTruckForm from "./createNewTruckForm";
 

@@ -1,4 +1,4 @@
-import { IInviteUserDetails, IUserRole } from "../context/User/user.types";
+import { IInviteUserDetails, IUserRole } from "../../services/tms-objects/user.types";
 
 export interface IUserFormState {
   first_name: string;
@@ -26,7 +26,7 @@ export const initialUserFormState : IUserFormState = {
 export interface  IUserManagementProps  {
     modalOpen: boolean;
     closeModal: () => void;
-    slectedUser: IInviteUserDetails | null;
+    selectedUser: IInviteUserDetails | null;
     userNewDetails: IUserFormState;
     setUserDetails : React.Dispatch<React.SetStateAction<IUserFormState>>
     handleInputChange: (prop: keyof IUserFormState) => (event: React.ChangeEvent<HTMLInputElement>) => void;

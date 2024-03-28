@@ -1,0 +1,128 @@
+import { ITrailerObject } from "./trailer.types";
+import { ITruckObject } from "./truck.types";
+import { IVendorObject } from "./vendor.types";
+
+export interface IDriverObject {
+  driver_id: number;
+  first_name: string;
+  last_name: string;
+  dob: string;
+  phone: string;
+  email: string;
+  address_line1: string;
+  address_line2: string;
+  contact_number: string;
+  state_id: number;
+  city: string;
+  zipcode: string;
+  fuel_card: string;
+  create_new_factor: string;
+  full_name: string;
+  pay_to_id: number;
+  codriver_name: string;
+  truck_id: number;
+  trailer_id: number;
+  is_IFTA_handled_by_company: boolean;
+  status_id: boolean;
+  note: string;
+  driver_images: string;
+  suite_number: string;
+  street_number: string;
+  driver_type_id: number;
+  driver_status_id: number;
+  vendor_id: number;
+  active: boolean;
+  str_active: string;
+
+}
+
+export const initialStateDriver = {
+  driver_id: 0,
+  first_name: "",
+  last_name: "",
+  dob: "",
+  phone: "",
+  contact_number: "",
+  email: "",
+  address_line1: "",
+  address_line2: "",
+  state_id: 0,
+  city: "",
+  zipcode: "",
+  fuel_card: "",
+  create_new_factor: "",
+  full_name: "",
+  pay_to_id: 0,
+  codriver_name: "",
+  truck_id: 0,
+  trailer_id: 0,
+  vendor_id: 0,
+  is_IFTA_handled_by_company: false,
+  status_id: false,
+  note: "",
+  driver_images: "",
+  suite_number: "",
+  street_number: "",
+  driver_type_id: 0,
+  driver_status_id: 0,
+  active: false,
+  str_active: "",
+  
+ 
+};
+
+export interface IDriverType {
+  driver_type_id: number;
+  driver_type_name: string;
+  is_active: boolean;
+}
+
+export interface IDriverStatus {
+  driver_status_id: number;
+  driver_status_name: string;
+}
+
+export interface IDriverPayRatesOject {
+  driver_id: number;
+  driver_pay_rate_id: number;
+  pay_rate_type_id: number;
+  per_mile: number;
+  per_extra_stop: number;
+  per_empty_mile: number;
+  amount: number;
+  period: number;
+  starting_on: string;
+  per_hour: number;
+  active: boolean;
+}
+
+export const initialStatedriver_pay_rates = {
+  driver_id: 0,
+  driver_pay_rate_id: 0,
+  pay_rate_type_id: 0,
+  per_mile: 0,
+  per_extra_stop: 0,
+  per_empty_mile: 0,
+  amount: 0,
+  period: 0,
+  starting_on: "",
+  per_hour: 0,
+  active: false
+}
+
+
+export interface IDriverManagenetProps {
+  newDriver: IDriverObject;
+  handleInputChange: (prop: keyof IDriverObject) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCloseForm: () => void;
+  driverType: IDriverType[] | null;
+  driverStatus: IDriverStatus[] | null;
+  handleCheckboxChange: () => void;
+  SaveDriverIndividual: (event: { preventDefault: () => void }) => void;
+  vendorList: IVendorObject[] | null;
+  truckListStatus: ITruckObject[] | null;
+  trailerListStatus : ITrailerObject[] | null;
+  driverPayRates : IDriverPayRatesOject
+  handleInputDriverPayRates: (prop: keyof IDriverPayRatesOject) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleImageChange : (event: React.ChangeEvent<HTMLInputElement>) => void
+}

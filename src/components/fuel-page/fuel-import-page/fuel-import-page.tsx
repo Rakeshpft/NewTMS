@@ -12,7 +12,7 @@ import {
   Container,
   Button,
 } from "reactstrap";
-import { Header, SideBar } from "../../header";
+import { Header, SideBar } from "../../shared";
 import Profile from "../../pofile";
 
 type FormState = {

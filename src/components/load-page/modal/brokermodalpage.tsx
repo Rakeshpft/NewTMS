@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Container, Modal, ModalBody, ModalHeader } from "reactstrap";
-import CreateNewCustomerForm from "../../partenrs/customer/createNewCustomerForm";
+// import CreateNewCustomerForm from "../../partenrs/customer/createNewCustomerForm";
 // import { ICustomerForm } from "../../partenrs/customer/customerForm.types";
 // import { ICustomerObject, initialStateCustomer } from "../../context/Customer/customer.types";
 // import { IDriverObject, initialStateDriver } from "../../context/Driver/driver.types";
@@ -134,10 +134,10 @@ const BrokerModalPage = (
         <ModalBody>
           <Container>
 
-            <CreateNewCustomerForm
+            {/* <CreateNewCustomerForm
             toggle={toggle}
             fromCustomer={false}
-            />
+            /> */}
           </Container>
         </ModalBody>
       </Modal>

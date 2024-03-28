@@ -1,26 +1,32 @@
-import React, { useState } from 'react'
-import { Header, SideBar } from './components/header';
+
+import React, { Suspense, useState } from 'react'
+import { Header, SideBar } from './components/shared';
 import { Navbar } from 'reactstrap';
 import NavigationBar from './components/navigation-bar';
+import Loading from './features/loading/loading';
+import { ToastContainer } from "react-toastify";
 
- const CommonLayOut = ( { children }: { children: React.ReactNode}) => {
-    
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+const CommonLayOut = ({ children }: { children: React.ReactNode }) => {
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
-    <div className='main-content'>
-   <Navbar color="light" className="formpagenavbar" container={false}>
+    <div>
+      <Navbar color="light" className="header" container={false}>
         <Header
           sidebarToggle={() => {
             setIsSidebarOpen(!isSidebarOpen);
           }}
+          showHambuger={isSidebarOpen}
         />
         <NavigationBar />
       </Navbar>
-  <div className='d-flex'>
-  <SideBar isSidebarOpen={!isSidebarOpen}  />
-  <div className='w-100'> {children}</div>
-  </div>
-  
+      <div className='main-body d-flex'>
+        <SideBar isSidebarOpen={!isSidebarOpen} />
+        <Suspense fallback={<Loading />}>
+          <div className='main-content'> {children}</div>
+        </Suspense>
+      </div>
+      <ToastContainer position='top-center' />
     </div>
   )
 }

@@ -13,9 +13,10 @@ import {
   Row,
 } from "reactstrap";
 import CompanyLogo from "../company-logo";
-import { useRegContext } from "../context/Auth/auth.reducer";
+import { useRegContext } from "../../services/reducer/auth.reducer";
 import { every } from "lodash";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
+import { toastify } from "../../features/notification/toastify";
 
 // export interface IResetPassword {
 //   password: string;
@@ -69,7 +70,7 @@ const ForgotResetPassword = () => {
     event.preventDefault();
 
     postForgotPassword(verifyPass, company_guid).then(( data ) => {
-        console.log(data)
+      data &&   toastify({ message: data.message, type: (data.success ? "success" : "error") });
       setVerifyPass(initialForgotVerifyPass);
       setShowRegistrationMessage(true);
       setApiResponseMsg(`${data.message}`);

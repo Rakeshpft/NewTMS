@@ -20,7 +20,7 @@ import {
   NavItem,
   TabPane,
 } from "reactstrap";
-import { Header, SideBar } from "../../header";
+import { Header, SideBar } from "../../shared";
 import Profile from "../../pofile";
 import { BiCheck } from "react-icons/bi";
 import { BsSearch, BsSliders2 } from "react-icons/bs";

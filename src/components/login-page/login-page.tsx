@@ -12,7 +12,7 @@ import {
   Row,
 } from "reactstrap";
 import CompanyLogo from "../company-logo";
-import { useRegContext } from "../context/Auth/auth.reducer";
+import { useRegContext } from "../../services/reducer/auth.reducer";
 
 export interface LoginFormSate {
   email: string;

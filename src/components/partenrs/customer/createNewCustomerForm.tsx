@@ -1,389 +1,500 @@
-import React, { useState } from "react";
-import { BiCheck } from "react-icons/bi";
-// import { RxCross2 } from "react-icons/rx";
-import { Button, Form, Row, Label, Col, FormGroup, Input } from "reactstrap";
-// import { ICustomerForm } from "./customerForm.types";
+// import { Form, useNavigate } from "react-router-dom";
+// import { routes } from "../routes/routes";
+import React from "react";
 import {
-  ICustomerObject,
-  initialStateCustomer,
-} from "../../context/Customer/customer.types";
-import { useCustomerContext } from "../../context/Customer/customer.reducer";
-import { RxCross2 } from "react-icons/rx";
-import { useNavigate } from "react-router-dom";
-import { routes } from "../../routes/routes";
-// import { ICustomerObject } from "../../context/Customer/customer.types";
-interface ICreateNewCustomerForm {
-  toggle: () => void;
-  fromCustomer: boolean;
-}
+  // Form,
+  // Row,
+ 
+  TabPane,
+} from "reactstrap";
 
-const CreateNewCustomerForm = ({
-  toggle,
-  fromCustomer,
-}: ICreateNewCustomerForm) => {
-  const navigate = useNavigate();
-  const { saveCustomer } = useCustomerContext();
-  const [addNewCustomer, setAddNewCustomer] =
-    useState<ICustomerObject>(initialStateCustomer);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    saveCustomer(addNewCustomer);
-  };
+import TabPage from "../../driver-page/tab-page";
 
-  const handleCancleButton = () => {
-    //   history.location.pathname === routes.dashboard
-    //   //     ? history.push(routes.customersAll)
-    //   //     : history.goBack();
-    // }
-    {
-      navigate(routes.customersAll);
-    }
-  };
-  const handleCutomerInput =
-    (prop: keyof ICustomerObject) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setAddNewCustomer({ ...addNewCustomer, [prop]: event.target.value });
-    };
+import CommonLayOut from "../../../layout";
+import CustomerDetails from "./customer_detail/customerDetails";
+import CustomerDocuments from "./customer_documents/customerDocuments";
+import { ICustomerManagementProps } from "../../../services/tms-objects/customer.types";
+
+
+// import { ICustomerManagementProps } from "../../../services/tms-objects/customer.types";
+
+
+
+  // const navigate = useNavigate();
+
+  // {
+  //   navigate(routes.driverpageAll);
+  const CreateNewCustomerForm = ( props : ICustomerManagementProps)=>{
+    const{
+      CustomerNewDetails,
+      handleSaveCustomer,
+      handleInputChange,
+      setcustomerNewDetails,
+      handleClose,
+      selectedCustomer,
+      title,
+      
+      // handleFileUpload,
+      handleCheckBoxShipper,
+      handleCheckBoxBroker,
+      handleDirectBillingRadio,
+      handleFactoringRadio,
+    
+    }= props;
+  
+ 
+   
+  
+  
+    
+  // }
 
   return (
     <>
-      <Form
-        onSubmit={handleSubmit}
-        className="load-item container p-4"
-        style={{ zoom: "0.9" }}
-      >
-        <Row className="px-5">
-          <Col lg={6} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="company_name">Company Name</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="text"
-                name="company_name"
-                id="company_name"
-                value={addNewCustomer.company_name}
-                onChange={handleCutomerInput("company_name")}
-              />
-            </FormGroup>
-          </Col>
-          <Col lg={3} md={6} sm={12} className="px-3">
-            <h6 className="fw-bold">Customer Type</h6>
-            <FormGroup check inline>
-              <Input
-                type="checkbox"
-                // checked={formState.broker}
-                name="broker"
-                // onChange={handleCheckboxChange("SET_broker")}
-              />
-              <Label check>Broker</Label>
-            </FormGroup>
-            <FormGroup check inline>
-              <Input
-                type="checkbox"
-                // checked={formState.shipperOrReceiver}
-                name="shipperOrReceiver"
-                // onChange={handleCheckboxChange("SET_shipperOrReceiver")}
-              />
-              <Label check>Shipper/Receiver</Label>
-            </FormGroup>
-          </Col>
-          <Col lg={3} md={6} sm={12} className="px-3">
-            <FormGroup tag="fieldset">
-              <h6 className="fw-bold">Billing</h6>
-              <div className="d-flex gap-2">
-                <FormGroup check>
+    <CommonLayOut>
+      {/* <div> */}
+        
+      {/* <Form onSubmit={handleSaveCustomer}>
+        <Row className="page-title">
+        
+          <h5>
+            {title ? "New Customer " : "Edit Customer"}</h5>
+        </Row> */}
+        <TabPage tabTitles={["Details", "Documents"]}>
+          {/* <TabPane tabId={1} className="Details">
+            
+            <Row className="Customer-basic-details my-3">
+              <Row className="page-subtitle">
+                <h6>Basic Details</h6>
+              </Row>
+
+              <Row className="page-content align-items-center">
+                <Col md={3} className="d-flex align-items-center">
+                  <FormGroup >
+                    <Label for="fullName">Customer Type</Label>
+                    <div className="d-flex justify-content-between">
+                    <FormGroup check className="checkbox-inline me-3">
+                      <Input type="checkbox" id="is_broker" 
+                      value={CustomerNewDetails.is_broker}
+                      onChange={handleInputChange("is_broker")} />
+                      <Label for="brokerCheckbox" check className="checkbox-label">
+                        Broker
+                      </Label>
+                    </FormGroup>
+                    <FormGroup check className="checkbox-inline">
+                      <Input type="checkbox" id="is_shipper_receiver"
+                       value={CustomerNewDetails.is_shipper_receiver}
+                       onChange={handleInputChange("is_shipper_receiver")} />
+                      <Label
+                        for="shipperReceiverCheckbox"
+                        check
+                        className="checkbox-label"
+                       
+                      >
+                        Shipper/Receiver
+                      </Label>
+                    </FormGroup>
+                    </div>
+                  </FormGroup>
+                </Col>
+
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="first Name">First Name</Label>
+                    <Input
+                      bsSize="sm"
+                      className="form-control form-control-sm"
+                      type="text"
+                      id="first_name"
+                      name="first_name"
+                      value={CustomerNewDetails.first_name}
+                       onChange={handleInputChange("first_name")} 
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="last Name">Last Name</Label>
+                    <Input
+                      bsSize="sm"
+                      className="form-control form-control-sm"
+                      type="text"
+                      id="last_name"
+                      name="last_name"
+                      value={CustomerNewDetails.last_name}
+                      onChange={handleInputChange("last_name")} 
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="Email">Email</Label>
+                    <Input
+                      bsSize="sm"
+                      className="form-control form-control-sm"
+                      type="text"
+                      id="email"
+                      name="email"
+                      value={CustomerNewDetails.email}
+                      onChange={handleInputChange("email")} 
+                    />
+                  </FormGroup>
+                </Col>
+
+              </Row>
+              <Row className="page-content align-items-center">
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="Phone">Phone</Label>
+                    <Input
+                      bsSize="sm"
+                      className="form-control form-control-sm"
+                      type="text"
+                      id="phone"
+                      name="phone"
+                      value={CustomerNewDetails.phone}
+                      onChange={handleInputChange("phone")} 
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="Suit No.">Suit No.</Label>
+                    <Input
+                      bsSize="sm"
+                      className="form-control form-control-sm"
+                      type="text"
+                      id="suite_number"
+                      name="suite_number"
+                      value={CustomerNewDetails.suite_number}
+                      onChange={handleInputChange("suite_number")} 
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="Street No">Street No.</Label>
+                    <Input
+                      bsSize="sm"
+                      className="form-control form-control-sm"
+                      type="text"
+                      id="street_number"
+                      name="street_number"
+                      value={CustomerNewDetails.street_number}
+                      onChange={handleInputChange("street_number")} 
+                    />
+                  </FormGroup>
+                </Col>
+
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="City">City</Label>
+                    <Input
+                      bsSize="sm"
+                      className="form-control form-control-sm"
+                      type="text"
+                      id="city"
+                      name="city"
+                      value={CustomerNewDetails.city}
+                      onChange={handleInputChange("city")} 
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row className="page-content align-items-center">       
+               <Col md={3}>
+                <FormGroup>
+                  <Label for="State">State</Label>
                   <Input
-                    name="radio1"
-                    type="radio"
-                    value={"Direct Billing"}
-                    // checked={formState.radiovalue === "Direct Billing"}
-                    // onChange={handleInput("SET_radiovalue")}
+                    bsSize="sm"
+                    className="form-control form-control-sm"
+                    type="select"
+                    id="state_id"
+                    name="state_id"
+                    value={CustomerNewDetails.state_id}
+                    onChange={handleInputChange("state_id")} 
                   />
-                  <Label check>Direct Billing</Label>
                 </FormGroup>
-                <FormGroup check>
-                  <Input
-                    name="radio1"
-                    type="radio"
-                    value={"Factoring"}
-                    // checked={formState.radiovalue === "Factoring"}
-                    // onChange={handleInput("SET_radiovalue")}
-                  />
-                  <Label check>Factoring</Label>
-                </FormGroup>
-              </div>
-            </FormGroup>
-          </Col>
-        </Row>
-        <Row className="px-5">
-          <Col lg={6} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="addressLine1">Address Line1</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="text"
-                name="addressLine1"
-                id="addressLine1"
-                value={addNewCustomer.address_line1}
-                onChange={handleCutomerInput("address_line1")}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
-        <Row className="px-5">
-          <Col lg={6} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="addressLine2">Address Line2</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="text"
-                name="addressLine2"
-                id="addressLine2"
-                // value={formState.addressLine2}
-                // onChange={handleInput("SET_addressLine2")}
-              />
-            </FormGroup>
-          </Col>
-          <Col lg={3} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="quickPayFee">Quick Pay Fee</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="text"
-                //  value={formState.quickPayFee}
-                name="quickPayFee"
-                id="quickPayFee"
-                //  onChange={handleInput("SET_quickPayFee")}
-              />
-            </FormGroup>
-          </Col>
-          <Col lg={3} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="factoring">Factoring</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="text"
-                // value={formState.factoring}
-                name="factoring"
-                id="factoring"
-                // onChange={handleInput("SET_factoring")}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
-        <Row className="px-5">
-          <Col lg={3} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="phone">Phone</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="text"
-                // value={formState.phone}
-                name="phone"
-                id="phone"
-                // onChange={handleInput("SET_phone")}
-              />
-            </FormGroup>
-          </Col>
-          <Col lg={3} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="email">Email</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="email"
-                // value={formState.email}
-                name="email"
-                id="email"
-                // onChange={handleInput("SET_email")}
-              />
-            </FormGroup>
-          </Col>
-          <Col lg={3} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="stauts">Status</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="text"
-                // value={formState.stauts}
-                name="stauts"
-                id="stauts"
-                // onChange={handleInput("SET_stauts")}
-              />
-            </FormGroup>
-          </Col>
-          <Col lg={3} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="credit">Credit</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="text"
-                // value={formState.credit}
-                name="credit"
-                id="credit"
-                // onChange={handleInput("SET_credit")}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
-        <Row className="px-5">
-          <Col lg={3} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="city">City</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="text"
-                // value={formState.city}
-                name="city"
-                id="city"
-                // onChange={handleInput("SET_city")}
-              />
-            </FormGroup>
-          </Col>
-          <Col lg={3} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="state">State</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="text"
-                // value={formState.state}
-                name="state"
-                id="state"
-                // onChange={handleInput("SET_state")}
-              />
-            </FormGroup>
-          </Col>
-          <Col lg={3} md={6} sm={12} className="px-3"></Col>
-          <Col lg={3} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="payTerms">Pay Terms</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="text"
-                // value={formState.payTerms}
-                name="payTerms"
-                id="payTerms"
-                // onChange={handleInput("SET_payTerms")}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
-        <Row className="px-5">
-          <Col lg={3} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="zip">Zip</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="text"
-                // value={formState.zip}
-                name="zip"
-                id="zip"
-                // onChange={handleInput("SET_zip")}
-              />
-            </FormGroup>
-          </Col>
-          <Col lg={3} md={6} sm={12} className="px-3"></Col>
-          <Col lg={3} md={6} sm={12} className="px-3"></Col>
-          <Col lg={3} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="avgDaysToPay">Avg. Days To Pay</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="text"
-                // value={formState.avgDaysToPay}
-                name="avgDaysToPay"
-                id="avgDaysToPay"
-                // onChange={handleInput("SET_avgDaysToPay")}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
-        <Row className="px-5">
-          <Col lg={3} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="fid">FID/EIN</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="text"
-                // value={formState.fid}
-                name="fid"
-                id="fid"
-                // onChange={handleInput("SET_fid")}
-              />
-            </FormGroup>
-          </Col>
-          <Col lg={3} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="mc">MC</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="text"
-                // value={formState.mc}
-                name="mc"
-                id="mc"
-                // onChange={handleInput("SET_mc")}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
-        <Row className="px-5">
-          <Col lg={6} md={6} sm={12} className="px-3">
-            <FormGroup>
-              <Label for="notes">Notes</Label>
-              <Input
-                bsSize="sm"
-                className="form-control form-control-sm"
-                type="textarea"
-                // value={formState.notes}
-                name="notes"
-                id="notes"
-                // onChange={handleInput("SET_notes")}
-              />
-            </FormGroup>
-          </Col>
-          <Col lg={6} md={6} sm={12} className="px-3">
-            <FormGroup
-              className="d-flex justify-content-end align-self-center mt-5"
-              style={{ bottom: "0", right: "0" }}
-            >
-              <Button className="me-3 save-button" size="sm">
-                <BiCheck fontSize={"16px"} />
-                Save
-              </Button>
-              {fromCustomer ? (
-                <Button
-                  size="sm"
-                  className="cancel-button"
-                  onClick={handleCancleButton}
+              </Col>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="Zip code">ZIP</Label>
+                    <Input
+                      bsSize="sm"
+                      className="form-control form-control-sm"
+                      type="text"
+                      id="zipcode"
+                      name="zipcode"
+                      value={CustomerNewDetails.zipcode}
+                      onChange={handleInputChange("zipcode")} 
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="unit">Description</Label>
+                    <Input
+                      bsSize="sm"
+                      className="form-control form-control-sm"
+                      type="text"
+                      id="description"
+                      name="description"
+                      value={CustomerNewDetails.description}
+                      onChange={handleInputChange("description")} 
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={3}>
+              <FormGroup>
+                <Label for="Status">Status</Label>
+                <Input
+                  bsSize="sm"
+                  className="form-control form-control-sm"
+                  type="select"
+                  id="status_id"
+                  name="status_id"
+                  value={CustomerNewDetails.status_id}
+                  onChange={handleInputChange("status_id")} 
+                />
+              </FormGroup>
+            </Col>
+
+
+              </Row>
+            </Row>
+
+            <Row className="Customer-Company-details">
+              <Row className="page-subtitle">
+                <h6>Company Details</h6>
+              </Row>
+
+              <Row className="page-content align-items-center">
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="CompanyName">Company Name</Label>
+                    <Input
+                      bsSize="sm"
+                      className="form-control form-control-sm"
+                      type="text"
+                      id="company_name"
+                      name="company_name"
+                      value={CustomerNewDetails.company_name}
+                      onChange={handleInputChange("company_name")} 
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="FID/EID">FID/EID</Label>
+                    <Input
+                      bsSize="sm"
+                      className="form-control form-control-sm"
+                      type="text"
+                      id="fid_ein"
+                      name="fid_ein"
+                      value={CustomerNewDetails.fid_ein}
+                      onChange={handleInputChange("fid_ein")} 
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={3}>
+                  <FormGroup>
+                    <Label for="MC">MC
+                    </Label>
+                    <Input
+                      bsSize="sm"
+                      className="form-control form-control-sm"
+                      type="text"
+                      id="mc_number"
+                      name="mc_number"
+                      value={CustomerNewDetails.mc_number}
+                      onChange={handleInputChange("mc_number")} 
+                    />
+                  </FormGroup>
+                </Col>
+                
+              </Row>
+            </Row>
+
+            <Row className="Customer-basic-details">
+          <Row className="page-subtitle">
+            <h6>Billing</h6>
+          </Row>
+
+          <Row className="page-content align-items-center">
+            <Col md={3} className="d-flex align-items-center">
+              <FormGroup check className="checkbox-inline me-3">
+                <Input
+                  type="radio"
+                  id="directBillingRadio"
+                  checked={CustomerNewDetails.billing_type_id === true}
+                    onChange={() => handleBillingTypeChange()}
+                />
+                <Label for="directBillingRadio" check className="radio-label">
+                  Direct Billing
+                </Label>
+              </FormGroup>
+              <FormGroup check className="checkbox-inline">
+                <Input
+                  type="radio"
+                  id="factoringRadio"
+                  checked={CustomerNewDetails.billing_type_id}
+                
+                  onChange={handleBillingTypeChange}
+                />
+                <Label
+                  for="FactoringRadio"
+                  check
+                  className="radio-label"
                 >
-                  <RxCross2 fontSize={"16px"} color="red" /> Cancel
-                </Button>
-              ) : (
-                <Button size="sm" className="cancel-button" onClick={toggle}>
-                  <RxCross2 fontSize={"16px"} color="red" />
-                  Close
-                </Button>
+                  Factoring
+                </Label>
+              </FormGroup>
+            </Col>
+
+            <Col md={3}>
+              {CustomerNewDetails.billing_type_id  && (
+                <FormGroup>
+                  <Label for="Factoring">Factoring</Label>
+                  <Input
+                    bsSize="sm"
+                    className="form-control form-control-sm"
+                    type="select"
+                    id="factor_id"
+                    name="factor_id"
+                    value={CustomerNewDetails.factor_id}
+                    onChange={handleInputChange("factor_id")} 
+                  />
+                </FormGroup>
               )}
-            </FormGroup>
+            </Col>
+            <Col md={3}>
+              <FormGroup>
+                <Label for="Quick Pay">QuickPay</Label>
+                <Input
+                disabled
+                  bsSize="sm"
+                  className="form-control form-control-sm"
+                  type="text"
+                  id="quick_pay_fee"
+                  name="quick_pay_fee"
+                  value={CustomerNewDetails.quick_pay_fee}
+                  onChange={handleInputChange("quick_pay_fee")} 
+                />
+              </FormGroup>
+            </Col>
+            
+          </Row>
+          <Row className="page-content align-items-center">
+            <Col md={3}>
+              <FormGroup>
+                <Label for="Credit">Credit</Label>
+                <Input
+                  bsSize="sm"
+                  className="form-control form-control-sm"
+                  type="select"
+                  id="credit_id"
+                  name="credit_id"
+                  value={CustomerNewDetails.credit_id}
+                  onChange={handleInputChange("credit_id")} 
+                />
+              </FormGroup>
+            </Col>
+            <Col md={3}>
+              <FormGroup>
+                <Label for="Pay Terms">Pay Terms</Label>
+                <Input
+                  bsSize="sm"
+                  className="form-control form-control-sm"
+                  type="text"
+                  id="pay_terms"
+                  name="pay_terms"
+                  value={CustomerNewDetails.pay_terms}
+                  onChange={handleInputChange("pay_terms")} 
+                />
+              </FormGroup>
+            </Col>
+            <Col md={3}>
+              <FormGroup>
+                <Label for="Avg. Days to Pay">Avg. Days to Pay</Label>
+                <Input
+                  bsSize="sm"
+                  className="form-control form-control-sm"
+                  type="text"
+                  id="avg_days_to_pay"
+                  name="avg_days_to_pay"
+                  value={CustomerNewDetails.avg_days_to_pay}
+                  onChange={handleInputChange("avg_days_to_pay")} 
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+        <div className="d-flex justify-content-end">
+          <Col
+            md={3}
+            className=" d-flex justify-content-end align-items-end pb-3"
+          >
+            
+            <Button
+              color="primary"
+              size="sm"
+              className="me-3 save-button"
+              onClick={() => { handleSaveCustomer}}
+              type="submit"
+            >
+              
+              Save
+            </Button>
+            <Button className="cancel-button" size="sm" 
+            color="danger" outline={true} onClick={ handleClose}
+            >
+             
+              Close
+            </Button>
           </Col>
+          </div>
         </Row>
-      </Form>
+          </TabPane> */}
+          <TabPane tabId={1} className="Details">
+            <CustomerDetails
+              CustomerNewDetails={CustomerNewDetails}
+              setCustomerDetails={setcustomerNewDetails}
+              handleInputChange={handleInputChange}
+              selectedCustomer={selectedCustomer}
+              handleSaveCustomer={handleSaveCustomer}
+             
+              title={title}
+              handleClose={handleClose} 
+              handleCheckBoxShipper={handleCheckBoxShipper}
+              handleCheckBoxBroker={handleCheckBoxBroker}
+              setcustomerNewDetails={setcustomerNewDetails} 
+              handleDirectBillingRadio={handleDirectBillingRadio}
+          handleFactoringRadio={handleFactoringRadio} 
+                       />
+          </TabPane>
+          <TabPane tabId={2} className="Documents">
+          {/* <div className="d-flex justify-content-end m-3">
+          <Col
+            md={3}
+            className=" d-flex justify-content-end align-items-end pb-3"
+          >
+           
+      <label className="page-subtitle">
+        <Button onClick={
+        handleFileUpload}>
+          Upload
+        </Button>
+      </label>
+            
+          </Col>
+          </div> */}
+          <CustomerDocuments/>
+            </TabPane>
+        </TabPage>
+      {/* </Form >
+      </div> */}
+      </CommonLayOut>
     </>
   );
 };

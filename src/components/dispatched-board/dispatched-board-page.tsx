@@ -19,7 +19,7 @@ import {
   PaginationItem,
   PaginationLink,
 } from "reactstrap";
-import { Header } from "../header";
+import { Header } from "../shared";
 import Profile from "../pofile";
 import { BsExclamationCircle } from "react-icons/bs";
 import { PiCaretUpDownFill } from "react-icons/pi";

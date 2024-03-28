@@ -16,7 +16,7 @@ import {
   NavbarBrand,
   Row,
 } from "reactstrap";
-import { Header, SideBar } from "../header";
+import { Header, SideBar } from "../shared";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import Profile from "../pofile";
 import { PiGearDuotone } from "react-icons/pi";

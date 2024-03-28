@@ -13,7 +13,7 @@ import {
   Navbar,
   NavbarBrand,
 } from "reactstrap";
-import { Header } from "../../header";
+import { Header } from "../../shared";
 import Profile from "../../pofile";
 import { initialPaymentState, payments } from "../../tms-object/accountspage";
 // import { routes } from "../../routes/routes";

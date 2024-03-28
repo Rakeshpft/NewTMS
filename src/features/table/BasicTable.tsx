@@ -133,9 +133,8 @@ export const BasicTable = (props: BasicTableProps) => {
       {!noPagination && (
         <Row className='mb-2'>
           <Col sm={3}>
-            <div className='d-flex align-items-center '>
-              <div className='me-1'>Rows per Page : </div>
-
+            <div className='d-flex align-items-center small'>
+              <div className='me-2 fw-bold'>Show entries : </div>
               <Input bsSize='sm' className='w-25' type="select" name="select" id="select" value={rowsPerPage} onChange={handleChangeRowsPerPage}>
                 <option value="10">10</option>
                 <option value="25">25</option>
@@ -148,9 +147,7 @@ export const BasicTable = (props: BasicTableProps) => {
       }
 
       <Table>
-
         <TableHead className="items-column-heading">
-
           <TableRow className="items-column-row">
             {canSelectRows && selectedTableRows && setSelectionTableRows && (
               <TableCell align="center" style={{ width: '5%' }}>
@@ -239,8 +236,9 @@ export const BasicTable = (props: BasicTableProps) => {
                     page={page}
                     rowsPerPage={rowsPerPage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
+                    labelRowsPerPage = "Show entries : "
                     SelectProps={{
-                      inputProps: { 'aria-label': 'rows per page' },
+                      inputProps: { 'aria-label': 'Show entries :' },
                       native: true,
                     }}
                   />

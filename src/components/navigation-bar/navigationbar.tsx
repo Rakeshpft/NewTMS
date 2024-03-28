@@ -39,28 +39,15 @@ const navigateToProfile = () => {
    navigate(routes.profileForm)
 }
   return (
-    <div className="header-section">
-      <Navbar className="px-md-3 px-0 border-bottom">
-        
+    <div>
+      <Navbar className="px-md-3 px-0 border-bottom">        
         <Row>
           <UncontrolledButtonDropdown>
-            <DropdownToggle
-              caret
-              id="userProfileDropdown"
-              color="transparent"
-              className="user-dropdown__icon d-flex align-items-center"
-            >
-              <Row>
-                
-                <Col className="user-dropdown-greeting">
+            <DropdownToggle caret id="userProfileDropdown" color="transparent" className="d-flex align-items-center">
+              <Row>                
+                <Col className="d-flex align-self-center">
                   <div className="user-avatar me-2">
-                    <img
-                      loading="lazy"
-                      width="40"
-                      height="40"
-                      className="rounded-circle"
-                      src={require("../../../public/images/user-avatar.png")}
-                    />
+                    <img loading="lazy" width="40" height="40" className="rounded-circle" src={require("../../../public/images/user-avatar.png")} />
                   </div>
                   <div className="d-lg-block d-none text-start small">
                     <div className="fw-bold">{companyName}</div>
@@ -82,7 +69,7 @@ const navigateToProfile = () => {
                 </div>
               </DropdownItem>
             </DropdownMenu>
-            <Col className="d-sm-flex d-none user-dropdown-greeting">
+            <Col className="d-sm-flex d-none align-self-center">
               <div className="px-2">
                 <BiMessageDetail className="fs-4 " />
               </div>

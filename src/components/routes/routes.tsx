@@ -14,7 +14,7 @@ export const routes = {
   vendorsAll: "/partners/vendors",
   createNewVendor: "/createnewvendor",
   customersAll: "/partners/customers",
-  createNewCustomer: "/createnewcustomer",
+  createNewCustomer: "/createnewcustomerform",
   driverPayRoll: "/driverpayroll",
   createNewDriverPayRoll: "/createnewdriverpayroll",
   billingPage: "/accounts/billing",
@@ -60,4 +60,5 @@ export const routes = {
   settingPage: "/settings",
   profileForm: "/profileform",
   UsersRole: "/userrole",
+  userAdminRole : "/useradminrole"
 };

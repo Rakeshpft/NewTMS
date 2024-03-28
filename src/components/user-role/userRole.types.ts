@@ -1,8 +1,8 @@
-import { INewUserRoleDetails } from "../context/UserRole/userRole.types";
+import { INewUserRoleDetails } from "../../services/tms-objects/userRole.types";
 
 
 export interface IUserRoleFormState {
-    role_id : number;
+    role_id : number ;
     role_name :string;
     company_id : number;
     description: string;
@@ -20,7 +20,7 @@ export const initialUserRoleFormState : IUserRoleFormState = {
 export interface  IUserRoleManagementProps  {
     modalOpen: boolean;
     closeModal: () => void;
-    slectedUserRole: INewUserRoleDetails | null;
+    selectedUserRole: INewUserRoleDetails | null;
     userRoleNewDetails: IUserRoleFormState;
     setUserRoleDetails : React.Dispatch<React.SetStateAction<IUserRoleFormState>>
     handleInputChange: (prop: keyof IUserRoleFormState) => (event: React.ChangeEvent<HTMLInputElement>) => void;

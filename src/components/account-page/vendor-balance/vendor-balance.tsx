@@ -16,7 +16,7 @@ import {
   Col,
   Row,
 } from "reactstrap";
-import { Header, SideBar } from "../../header";
+import { Header, SideBar } from "../../shared";
 import Profile from "../../pofile";
 import { BsSearch, BsSliders2 } from "react-icons/bs";
 import { BiCheck } from "react-icons/bi";

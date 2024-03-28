@@ -1,0 +1,18 @@
+table p{
+    margin: 0!important;
+}
+.MuiTablePagination-selectLabel,.MuiTablePagination-input{
+    display: none!important;;
+}
+
+table thead th,table thead td,table tbody td,table tfoot th,table tfoot td{
+    font-family: var(--bs-body-font-family)!important;
+    padding: 10px!important;
+}
+table thead th{    
+    color : var(--bs-primary)!important;
+    font-weight: 600!important;
+}
+.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root{
+    padding: 0 !important;
+}

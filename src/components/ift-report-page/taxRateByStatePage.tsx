@@ -19,7 +19,7 @@ import {
   NavbarBrand,
   Row,
 } from "reactstrap";
-import { Header, SideBar } from "../header";
+import { Header, SideBar } from "../shared";
 import { BsSearch } from "react-icons/bs";
 import Profile from "../pofile";
 import GenericTable from "../table/custom-table";

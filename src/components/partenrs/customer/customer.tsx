@@ -9,7 +9,7 @@ import {
   NavbarBrand,
   TabPane,
 } from "reactstrap";
-import { Header, SideBar } from "../../header";
+import { Header, SideBar } from "../../shared";
 import { MdOutgoingMail } from "react-icons/md";
 import { AiOutlineFileExcel, AiOutlinePlus } from "react-icons/ai";
 import { PiFilePdfDuotone, PiGearDuotone } from "react-icons/pi";

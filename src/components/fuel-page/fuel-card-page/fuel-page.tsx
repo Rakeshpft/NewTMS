@@ -10,7 +10,7 @@ import {
   InputGroup,
   InputGroupText,
 } from "reactstrap";
-import { Header, SideBar } from "../../header";
+import { Header, SideBar } from "../../shared";
 import Profile from "../../pofile";
 import { PiGearDuotone } from "react-icons/pi";
 import { routes } from "../../routes/routes";

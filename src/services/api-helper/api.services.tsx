@@ -39,9 +39,16 @@ const del = async (endpoint: string, payload?: any) => {
     });
     return res.data;
   };
+
+  const postForm = async (endpoint: string, payload?: any) => {
+    const formData = axios.toFormData(payload);
+    const res : AxiosResponse = await axios.postForm(`${API_DEFAULT_OPTIONS.apiURL}${endpoint}`, formData, getAPIConfig());
+    return res.data ;
+}
+
   
 
-  export const API = { get , post , put , del , postFormData }; ;
+  export const API = { get , post , put , del , postFormData , postForm }; ;
 
 
 

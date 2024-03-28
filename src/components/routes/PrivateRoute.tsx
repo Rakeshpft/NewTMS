@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { useRegContext } from "../context/Auth/auth.reducer";
+import { useRegContext } from "../../services/reducer/auth.reducer";
 import { routes } from "./routes";
 import lscache from "lscache";
 

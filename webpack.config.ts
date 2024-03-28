@@ -43,11 +43,11 @@ export default (_env: Record<string, any>, argv: any): Configuration => ({
           },
         ],
       },
-      {
-        test: /\.svg$/i,
-        issuer: /\.[jt]sx?$/,
-        use: ["@svgr/webpack"],
-      },
+      // {
+      //   test: /\.svg$/i,
+      //   issuer: /\.[jt]sx?$/,
+      //   use: ["@svgr/webpack"],
+      // },
       {
         test: /\.tsx?$/i,
         exclude: /node_modules/,

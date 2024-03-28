@@ -8,7 +8,7 @@ import {
   InputGroup,
   InputGroupText,
 } from "reactstrap";
-import { Header, SideBar } from "../../header";
+import { Header, SideBar } from "../../shared";
 import Profile from "../../pofile";
 import { AiOutlinePlus } from "react-icons/ai";
 import { routes } from "../../routes/routes";

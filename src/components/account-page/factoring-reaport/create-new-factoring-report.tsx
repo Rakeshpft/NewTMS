@@ -17,7 +17,7 @@ import {
   Input,
   Button,
 } from "reactstrap";
-import { Header } from "../../header";
+import { Header } from "../../shared";
 import Profile from "../../pofile";
 // import { useHistory } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';

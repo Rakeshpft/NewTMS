@@ -13,7 +13,7 @@ import {
 } from "reactstrap";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
-import { Header } from "../../header";
+import { Header } from "../../shared";
 import Profile from "../../pofile";
 import {
   billingEntryPage,

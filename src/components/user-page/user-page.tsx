@@ -6,37 +6,32 @@ import {
   Input,
   InputGroup,
   InputGroupText,
-  // Input,
-  // InputGroup,
-  // InputGroupText,
+
   Modal,
   ModalBody,
   ModalHeader,
-  Nav,
-  Navbar,
-  NavbarBrand,
-} from "reactstrap";
-import { Header, SideBar } from "../header";
+  } from "reactstrap";
+
 import { BsSearch } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
-import Profile from "../pofile";
+
 import InviteUserModal from "./inviteusermodal";
 import { debounce, includes, isEmpty } from "lodash";
-import { IUserDetails } from "../context/User/user.types";
-import { useUserContext } from "../context/User/user.reducer";
+import { IUserDetails } from "../../services/tms-objects/user.types";
+import { useUserContext } from "../../services/reducer/user.reducer";
 import { BasicTable } from "../../features/table/BasicTable";
 import { tableCells, tableHeadCells } from "./user.constants";
 import { IUserFormState, initialUserFormState } from "./user.types";
 // import { Modal } from "@mui/material";
 import Notification from "../../features/notification/Notification";
-// import { InputAdornment, TextField } from "@mui/material";
+import CommonLayOut from "../../layout";
 
 const UserPage = () => {
   const {
     getUserDetails,
     userDetails,
     getIdividualUserDetails,
-    slectedUser,
+    selectedUser,
     saveUser,
     deleteUserContact,
     clearSuccessAndFailure,
@@ -49,14 +44,14 @@ const UserPage = () => {
   } = useUserContext();
 
   const inputRef = useRef<HTMLInputElement>(null);
+  
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [filteredData, setFilteredData] = useState<IUserDetails[] | []>([]);
   const [noUser, setNoUser] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [title, setTitle] = useState(true);
-  const [userNewDetails, setNewUserDetails] =
-    useState<IUserFormState>(initialUserFormState);
+ 
+  const [userNewDetails, setNewUserDetails] = useState<IUserFormState>(initialUserFormState);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedUsers, setSelectedUsers] = useState<IUserDetails[] | []>([]);
 
@@ -71,21 +66,20 @@ const UserPage = () => {
   };
 
   useEffect(() => {
-    if (slectedUser) {
+    if (selectedUser) {
       setNewUserDetails({
         ...userDetails,
-
-        first_name: slectedUser.first_name,
-        last_name: slectedUser.last_name,
-        full_name: slectedUser.full_name,
-        email: slectedUser.email,
-        contact_number: slectedUser.contact_number,
-        role_id: slectedUser.role_id,
-        staff_id: slectedUser.staff_id,
-        active: slectedUser.active,
+        first_name: selectedUser.first_name,
+        last_name: selectedUser.last_name,
+        full_name: selectedUser.full_name,
+        email: selectedUser.email,
+        contact_number: selectedUser.contact_number,
+        role_id: selectedUser.role_id,
+        staff_id: selectedUser.staff_id,
+        active: selectedUser.active,
       });
     }
-  }, [slectedUser]);
+  }, [selectedUser]);
 
   const handleSearch = debounce((searchValue: string) => {
     const searchResults =
@@ -96,7 +90,6 @@ const UserPage = () => {
         }
       });
     searchResults && setFilteredData(searchResults);
-    console.log("search result", searchResults);
   }, 500);
 
   const handleInviteUser = () => {
@@ -104,6 +97,9 @@ const UserPage = () => {
     setNewUserDetails(initialUserFormState);
     setTitle(true);
   };
+
+  
+
   const handleCloseModal = () => {
     setModalOpen(false);
     getUserDetails();
@@ -141,18 +137,17 @@ const UserPage = () => {
     clearSuccessAndFailure();
   };
 
-  const closeDeleteModal = () => {
-    setDeleteModalOpen(false);
-    setSelectedUsers([]);
-    setDeleteModalOpen(false);
-  };
-
   const handleDeleteUsers = () => {
     selectedUsers && deleteUserContact(selectedUsers);
     getUserDetails();
     setDeleteModalOpen(false);
+    setSelectedUsers([]);
   };
-
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
+    setSelectedUsers([]);
+  };
+ 
   useEffect(() => {
     getUserDetails();
   }, []);
@@ -172,42 +167,22 @@ const UserPage = () => {
 
   return (
     <>
-      <Navbar color="light" className="py-0">
-        <Header
-          sidebarToggle={() => {
-            setIsSidebarOpen(!isSidebarOpen);
-          }}
-        />
-        <NavbarBrand className="fw-bold px-4">Users</NavbarBrand>
-        <Nav className="me-auto" navbar></Nav>
-        <div className="d-flex align-items-center gap-3">
+           <CommonLayOut>        
+      <div className="d-flex justify-content-between">
+        <div className="page-title">Users</div>
+        <div className="d-flex align-items-center gap-1">
           <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
             <InputGroup className="shadow-sm border-secondary">
+             
               <InputGroupText className="bg-white">
                 <BsSearch size={16} />
-              </InputGroupText>
-              <Input
-                placeholder="Search"
-                className="border-start-0 border-end-0 search"
-                inputRef={inputRef}
-                onChange={(e : any) => handleSearch(e.target.value)}
-              />
-
+                </InputGroupText>
+              <Input placeholder="Search"
+               className="border-start-0 search" 
+               inputRef={inputRef} onChange=
+               {(e: any) => handleSearch(e.target.value)} />
             </InputGroup>
-            {/* <TextField
-              id="search-bar"
-              inputRef={inputRef}
-              variant="outlined"
-              placeholder="Search Users"
-              onChange={(e) => handleSearch(e.target.value)}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <BsSearch />
-                  </InputAdornment>
-                ),
-              }}
-            /> */}
+           
           </div>
           <InviteUserModal
             modalOpen={modalOpen}
@@ -215,7 +190,7 @@ const UserPage = () => {
             userNewDetails={userNewDetails}
             setUserDetails={setNewUserDetails}
             handleInputChange={handleInputChange}
-            slectedUser={slectedUser}
+            selectedUser={selectedUser}
             handleSaveUser={handleSaveUser}
             userRole={userRole}
             title={title}
@@ -224,26 +199,15 @@ const UserPage = () => {
           <div className="user-info-btn-wrapper">
             {!isEmpty(selectedUsers) && (
               <div className="user-info-btn">
-                <Button
-                  color="primary"
-                  className="px-4  shadow save-button "
-                  onClick={() => setDeleteModalOpen(true)}
-                >
-                  Delete
-                </Button>
+                
+                <Button color="primary" onClick={() => setDeleteModalOpen(true)}>Delete</Button>
               </div>
             )}
           </div>
-          <Button color="primary" onClick={handleInviteUser}>
-            Invite User
-            <AiOutlinePlus />
-          </Button>
-          <Profile />
+          <Button color="primary" onClick={handleInviteUser}><AiOutlinePlus /> Invite User</Button>
         </div>
-      </Navbar>
-      <div className="content d-flex">
-        <SideBar isSidebarOpen={!isSidebarOpen} />
-        <div className="aria-content">
+     
+        </div>
           <BasicTable
             emptyState={noUser}
             canSelectRows={true}
@@ -256,8 +220,9 @@ const UserPage = () => {
             canEditRow={true}
             editRow={handleEditContact}
           />
-        </div>
-      </div>
+       
+      </CommonLayOut>
+
       <div className="notification-container">
         <div>
           {saveUserSuccess && (
@@ -267,7 +232,6 @@ const UserPage = () => {
               closeAlert={handleCloseAlert}
             />
           )}
-
           {saveUserFailed && (
             <Notification
               type="error"
@@ -282,7 +246,6 @@ const UserPage = () => {
               closeAlert={handleCloseAlert}
             />
           )}
-
           {/* {deleteContactSuccess && (
               <Notification type="info" message="Contact Deleted" closeAlert={handleCloseAlert} />
             )}

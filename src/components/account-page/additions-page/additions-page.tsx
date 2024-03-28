@@ -19,7 +19,7 @@ import {
   Label,
   Row,
 } from "reactstrap";
-import { Header, SideBar } from "../../header";
+import { Header, SideBar } from "../../shared";
 import Profile from "../../pofile";
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";

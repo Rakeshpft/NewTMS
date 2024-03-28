@@ -6,16 +6,12 @@ import {
   FormGroup,
   Input,
   Label,
-  Nav,
-  Navbar,
-  NavbarBrand,
   Row,
 } from "reactstrap";
-import { Header, SideBar } from "../header";
-import Profile from "./profile";
-import { useProfileContext } from "../context/Profile/profile.Reducer";
+import { useProfileContext } from "../../services/reducer/profile.Reducer";
 import { IProfileUpdate, initialProfileUpdateState } from "./profileType";
 import { Bounce, ToastContainer, toast } from "react-toastify";
+import CommonLayOut from "../../layout";
 // import { Bounce, ToastContainer, toast } from "react-toastify";
 
 export interface IProfilePassword {
@@ -36,7 +32,6 @@ const ProfileForm = () => {
     confirmPassword: "",
   };
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [resetPasswordData, setResetPasswordData] = useState<IProfilePassword>(
     initialIProfilePassword
   );
@@ -63,26 +58,26 @@ const ProfileForm = () => {
 
   const handleProfileInput =
     (prop: keyof IProfileUpdate) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setEditProfileDetails({
-        ...editProfileDetails,
-        [prop]: event.target.value,
-      });
-    };
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        setEditProfileDetails({
+          ...editProfileDetails,
+          [prop]: event.target.value,
+        });
+      };
   const handleProfilePasswordInput =
     (prop: keyof IProfilePassword) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setResetPasswordData({
-        ...resetPasswordData,
-        [prop]: event.target.value,
-      });
-    };
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        setResetPasswordData({
+          ...resetPasswordData,
+          [prop]: event.target.value,
+        });
+      };
 
-  const handleProfileSubmit =  (
+  const handleProfileSubmit = (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-     postProfileDetails(editProfileDetails)?.then((data) => {
+    postProfileDetails(editProfileDetails)?.then((data) => {
       toast(data.message, {
         position: "top-center",
         autoClose: 5000,
@@ -93,9 +88,9 @@ const ProfileForm = () => {
         theme: "light",
         transition: Bounce,
       });
-       
-     });
-   
+
+    });
+
   };
   console.log("postdata", editProfileDetails);
 
@@ -113,8 +108,8 @@ const ProfileForm = () => {
         transition: Bounce,
       });
     })
-   
-    
+
+
     setResetPasswordData(initialIProfilePassword);
   };
 
@@ -137,167 +132,85 @@ const ProfileForm = () => {
   };
 
   return (
-    <>
-      <Navbar color="light" className="py-0">
-        <Header
-          sidebarToggle={() => {
-            setIsSidebarOpen(!isSidebarOpen);
-          }}
-        />
-        <NavbarBrand className="fw-bold px-4">Profile</NavbarBrand>
-        <Nav className="me-auto" navbar></Nav>
-        <div className="d-flex align-items-center gap-3">
-          <Profile />
-        </div>
-      </Navbar>
-      <div className="content d-flex ">
-        <SideBar isSidebarOpen={!isSidebarOpen} />
-
-        <div className="aria-content ps-4 ">
-          <h6 className=" settingTittle mb-3"> General </h6>
-          <Form onSubmit={handleProfileSubmit} encType="multipart/form-data">
+    <CommonLayOut>
+      <Form onSubmit={handleProfileSubmit} encType="multipart/form-data">
+        <Row className="page-title"><Col md={12}>General</Col></Row>
+        <Row className="page-content">
+          <Col lg={6} md={9} sm={12}>
             <Row>
-              <Col md={3}>
+              <Col md={6} sm={12}>
                 <FormGroup>
-                  <Label for="firstName" className="mb-0">
-                    First Name
-                  </Label>
-                  <Input
-                    id="firstName"
-                    name="firstName"
-                    type="text"
-                    className="form-control form-control-sm"
-                    value={editProfileDetails.first_name}
-                    onChange={handleProfileInput("first_name")}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="email" className="mb-0">
-                    Email
-                  </Label>
-                  <Input
-                    id="email"
-                    disabled
-                    name="email"
-                    type="email"
-                    className="form-control form-control-sm"
-                    value={editProfileDetails.email}
-                  ></Input>
+                  <Label for="firstName">First Name</Label>
+                  <Input id="firstName" name="firstName" type="text" className="form-control form-control-sm" value={editProfileDetails.first_name} onChange={handleProfileInput("first_name")} />
                 </FormGroup>
               </Col>
-              <Col md={3}>
+              <Col md={6} sm={12}>
                 <FormGroup>
-                  <Label for="lastname" className="mb-0">
-                    Last Name{" "}
-                  </Label>
-                  <Input
-                    id="lastname"
-                    name="lastname"
-                    type="text"
-                    className="form-control form-control-sm"
-                    value={editProfileDetails.last_name}
-                    onChange={handleProfileInput("last_name")}
-                  ></Input>
+                  <Label for="lastname">Last Name</Label>
+                  <Input id="lastname" name="lastname" type="text" className="form-control form-control-sm" value={editProfileDetails.last_name} onChange={handleProfileInput("last_name")}></Input>
                 </FormGroup>
+              </Col>
+              <Col md={6} sm={12}>
                 <FormGroup>
-                  <Label for="phone" className="mb-0">
-                    Phone{" "}
-                  </Label>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    type="text"
-                    className="form-control form-control-sm"
-                    value={editProfileDetails.contact_number}
-                    onChange={handleProfileInput("contact_number")}
-                  ></Input>
+                  <Label for="email">Email</Label>
+                  <Input id="email" disabled name="email" type="email" className="form-control form-control-sm" value={editProfileDetails.email}></Input>
+                </FormGroup>
+              </Col>
+              <Col md={6} sm={12}>
+                <FormGroup>
+                  <Label for="phone">Phone</Label>
+                  <Input id="phone" name="phone" type="text" className="form-control form-control-sm" value={editProfileDetails.contact_number} onChange={handleProfileInput("contact_number")} ></Input>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={12}>
+                <Button className="btn btn-primary" size="sm" type="submit">Update</Button>
+              </Col>
+            </Row>
+          </Col>
+          <Col lg={6} md={3} sm={12} className="align-items-center text-center">
+            <div>
+              <div className="user-avatar">
+                <img width="120" height="120" className="rounded-circle" src={editProfileDetails.image_url} />
+              </div>
+              <Input type="file" name="file" id="file" accept="image/*" onChange={handleImageChange} />
+              <Label className="page-subtitle">Set Profile Picture</Label>
+            </div>
+          </Col>
+        </Row>
+      </Form>
+      <hr />
+      <Form onSubmit={handlePasswordSubmit}>
+        <Row className="page-title">
+          <Col md={12}>Reset Password</Col>
+        </Row>
+        <Row className="page-content">
+          <Col lg={6} md={9} sm={12}>
+            <Row>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="password">New Password</Label>
+                  <Input id="password" name="password" type="password" className="form-control form-control-sm" value={resetPasswordData.password} onChange={handleProfilePasswordInput("password")}></Input>
                 </FormGroup>
               </Col>
               <Col md={6}>
-                <Label> Set profile picture</Label>
-                <div className="d-flex align-items-center">
-                  <div className="user-avatar me-2">
-                    <img
-                      width="120"
-                      height="120"
-                      className="rounded-circle"
-                      src={editProfileDetails.image_url}
-                    />
-                  </div>
-                  <FormGroup>
-                    <Input
-                      type="file"
-                      name="file"
-                      id="file"
-                      accept="image/*"
-                      onChange={handleImageChange}
-                    />
-                  </FormGroup>
-                </div>
+                <FormGroup>
+                  <Label for="confirmPassword">Confirm Password</Label>
+                  <Input id="confirmPassword" name="confirmPassword" type="password" className="form-control form-control-sm" value={resetPasswordData.confirmPassword} onChange={handleProfilePasswordInput("confirmPassword")}></Input>
+                </FormGroup>
               </Col>
             </Row>
-
             <Row>
-              <Col
-                sm={4}
-                className="user-dropdown-greeting mb-3 d-flex justify-content-between mt-4"
-              >
-                <div>
-                  <Button className="me-3 save-button" size="sm" type="submit">
-                   
-                    Update
-                  </Button>
-                </div>
+              <Col lg={9} md={9} sm={12}>
+              <Button size="sm" className="btn btn-primary">Reset Password</Button>
               </Col>
-            </Row>
-            <hr />
-          </Form>
-          <Form onSubmit={handlePasswordSubmit}>
-            <Row>
-              <Col>
-                <h6 className=" settingTittle mb-3 "> Reset Password </h6>
-                <Row>
-                  <Col md={3}>
-                    <FormGroup>
-                      <Label for="password" className="mb-0">
-                       New Password
-                      </Label>
-                      <Input
-                        id="password"
-                        name="password"
-                        type="password"
-                        className="form-control form-control-sm"
-                        value={resetPasswordData.password}
-                        onChange={handleProfilePasswordInput("password")}
-                      ></Input>
-                    </FormGroup>
-                  </Col>
-                  <Col md={3}>
-                    <FormGroup>
-                      <Label for="confirmPassword" className="mb-0">
-                        Confirm Password
-                      </Label>
-                      <Input
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        type="password"
-                        className="form-control form-control-sm"
-                        value={resetPasswordData.confirmPassword}
-                        onChange={handleProfilePasswordInput("confirmPassword")}
-                      ></Input>
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Button size="sm" className="me-3 save-button mt-4">
-                  Reset Password
-                </Button>
-              </Col>
-            </Row>
-          </Form>
-          {  <ToastContainer position="top-center" />}
-        </div>
-      </div>
-    </>
+            </Row>            
+          </Col>
+        </Row>
+      </Form>
+      {<ToastContainer position="top-center" />}
+    </CommonLayOut>
   );
 };
 

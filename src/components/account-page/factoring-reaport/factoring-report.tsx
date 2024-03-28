@@ -9,7 +9,7 @@ import {
   InputGroup,
   InputGroupText,
 } from "reactstrap";
-import { Header, SideBar } from "../../header";
+import { Header, SideBar } from "../../shared";
 import Profile from "../../pofile";
 import { AiOutlineFileExcel, AiOutlinePlus } from "react-icons/ai";
 import { MdOutgoingMail } from "react-icons/md";

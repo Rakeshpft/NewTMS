@@ -14,7 +14,7 @@ import {
 import { BiCheck } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import { GrFormAdd } from "react-icons/gr";
-import { Header } from "../../header";
+import { Header } from "../../shared";
 import Profile from "../../pofile";
 import { initialVendorState, vendor } from "../../tms-object/partners";
 import { useNavigate } from 'react-router-dom';

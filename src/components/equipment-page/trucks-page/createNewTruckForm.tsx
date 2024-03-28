@@ -13,7 +13,7 @@ import {
   } from "reactstrap";
 import { routes } from '../../routes/routes';
 import { useNavigate } from 'react-router-dom';
-import { ITruckObject, initialStateTruck } from '../../context/Truck/truck.types';
+import { ITruckObject, initialTruckObject,  } from '../../../services/tms-objects/truck.types';
 
 interface ICreateNewTruckFormProps {
     isFromTruckPage: boolean
@@ -24,7 +24,7 @@ const CreateNewTruckForm = ({ isFromTruckPage, toggle} : ICreateNewTruckFormProp
     const navigate = useNavigate();
 
 
-    const [ addNewTrucker , setAddNewtrcuker] = useState<ITruckObject>(initialStateTruck)
+    const [ addNewTrucker , setAddNewtrcuker] = useState<ITruckObject>(initialTruckObject )
 
     const handleInputNewTrucker = ( prop : keyof ITruckObject ) => (e : React.ChangeEvent<HTMLInputElement>) => {
         setAddNewtrcuker({
@@ -184,8 +184,7 @@ const CreateNewTruckForm = ({ isFromTruckPage, toggle} : ICreateNewTruckFormProp
                   id="purchaseDate"
                   name="purchaseDate"
                   type="date"
-                  value={addNewTrucker.purchase_date}
-                  onChange={handleInputNewTrucker("purchase_date")}
+                 
                 />
               </FormGroup>
             </Col>
@@ -214,8 +213,7 @@ const CreateNewTruckForm = ({ isFromTruckPage, toggle} : ICreateNewTruckFormProp
                   id="driver"
                   name="driver"
                   type="text"
-                  value={addNewTrucker.driver_name}
-                  onChange={handleInputNewTrucker("driver_name")}
+                 
                 />
               </FormGroup>
             </Col>

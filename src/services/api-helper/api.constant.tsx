@@ -3,7 +3,7 @@ import lscache from "lscache";
 
 // const env = window.location.href;
 
-export let apiURL =  "http://tms-api.eduxus.com/api";//"http://localhost:53207/api";//
+export let apiURL = "http://tms-api.eduxus.com/api";//"http://localhost:53207/api";// 
 let environment = "Prod";
 export const platformId = 1;
 export const getAPIConfig = () => {
@@ -53,22 +53,37 @@ export const API_LOAD = {
 export const API_CUSTOMER = {
   // House CUSTOMER API endpoints here
 
-  addCustomer: "/Partners",
+  getCustomer: "/Customer",
+  getIndividualCustomer : "/Customer",
+  postNewCustomerData: "/Customer",
+  deleteCustomer: "/Customer",
+  getCustomerstatus :"/Customer/status",
+  
+  getBillingType : "/billing/types"
 };
+export const API_STATE = {
+  getState : "/state",
+  postState : "/state",
+}
 
 export const API_DRIVER = {
   // House Driver API endpoints here
-  getDriver: "/Driver",
+  getDriver: "/driver",
+  getDriverType : "/driver/types",
+  getDriverStatus : "/driver/status",
+  getPayRates : "/pay-rates",
+  postDriverImage : "/image"
+  
 };
 
 export const API_TRUCK = {
   // House Truck API endpoints here
-  addTruck: "/Trucks",
+  getTruck: "/trucks",
 };
 
 export const API_TRAILER = {
   // House Trailer API endpoints here
-  addTrailer: "/Trailers",
+  getTrailer: "/Trailers",
 };
 export const API_USER = {
   // House Staff API endpoints here
@@ -84,4 +99,14 @@ export const API_USER_Role = {
   getIndividualUserRole : "/Role",
   postNewUserRoleData: "/Role",
   deleteUsersRole: "/Role",
+}
+
+export const API_ADMIN_PERMISSIONS = {
+  // House  API endpoints here
+  getAdminRole : "/Permission"
+}
+
+export const API_VENDOR = {
+  // House VENDOR API endpoints here
+  getVendor : "/vendor"
 }
