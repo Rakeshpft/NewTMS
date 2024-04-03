@@ -1,40 +1,49 @@
-import React , { createContext } from "react";
+import React, { createContext } from "react";
 import { Draft } from "immer";
-import { IVendorObject } from "../tms-objects/vendor.types";
 
 import { useImmer } from "use-immer";
+import { IVendorDetails, IVendorDocument } from "../tms-objects/vendor.types";
 
 export interface IVendorData {
-    vendorLoading: boolean;
-    vendorList: IVendorObject[] | null;
+  VendorDetails:IVendorDetails[] | null
+  DocumentList:IVendorDocument[] | null
+  VendorLoading: boolean;
+  is_error : boolean;
+  saveVendorSuccess :boolean;
+  saveVendorFailed : boolean;
+  selectedVendor: IVendorDetails | null; 
 }
-
- const initialState: IVendorData = {
-    vendorLoading: false,
-    vendorList: null
-}
-
-type VendorContextType = {
-    state: IVendorData;
-    setState: (
-        f: (draft: Draft<IVendorData>) => void | IVendorData
-    ) => void;
+ 
+const InitialState: IVendorData = {
+  VendorDetails:null,
+  DocumentList:null,
+  VendorLoading: false,
+  is_error : false,
+  saveVendorSuccess :false,
+  saveVendorFailed : false,
+  selectedVendor:null,
 };
 
- const VendorContext = createContext<VendorContextType>({
-    state: initialState,
-    setState: () => undefined
+type VendorUpdateContextType = {
+  state: IVendorData;
+  setState: (
+    f: (draft: Draft<IVendorData>) => void | IVendorData
+  ) => void;
+};
+
+const VendorUpdateContext = createContext<VendorUpdateContextType>({
+  state: InitialState,
+  setState: () => undefined,
 });
 
 const VendorProvider = ({ children }: { children: React.ReactNode }) => {
-    const [state, setState] = useImmer<IVendorData>(initialState);
-    return (
-        <VendorContext.Provider value={{ state, setState }}>
-            {children}
-        </VendorContext.Provider>
-    );
+  const [state, setState] = useImmer<IVendorData>(InitialState);
+
+  return (  
+    <VendorUpdateContext.Provider value={{ state, setState }}>
+      {children}
+    </VendorUpdateContext.Provider>
+  );
 };
 
-export { VendorContext, VendorProvider , initialState };
-
-
+export { VendorUpdateContext, VendorProvider, InitialState };

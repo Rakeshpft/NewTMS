@@ -9,8 +9,18 @@ import DocumentSsn from "./documentSubDetails/documentSsnPage/documentSsn";
 import DocumentMvr from "./documentSubDetails/documentMvrPage/documentMvr";
 import DocumentEmpVerify from "./documentSubDetails/documentEmpVerifyPage/documentEmpVerify";
 import DocumentOther from "./documentSubDetails/documentOtherPage/documentOther";
+import { IDriverDocApp } from "../../../../services/tms-objects/driver.types";
 
-const DocumentsDetails = () => {
+interface IFilterDocApp {
+  filterDocApp: IDriverDocApp[];
+}
+
+
+const DocumentsDetails = ({ filterDocApp }: IFilterDocApp) => {
+
+ 
+
+
   return (
     <div className="mt-4">
       <TabPage
@@ -26,7 +36,9 @@ const DocumentsDetails = () => {
         ]}
       >
         <TabPane tabId={1} className="">
-          <DocumentApplication />
+          <DocumentApplication
+          filterDocApp = {filterDocApp}
+          />
         </TabPane>
         <TabPane tabId={2} className="">
           <DocumentCdl />

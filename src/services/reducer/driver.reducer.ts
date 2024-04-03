@@ -171,6 +171,26 @@ const postDriverImage = async ( file : File , driver_id : number ) => {
   }
 }
 
+const getDriverDocAppList = async ( driver_id : number) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverDocAppData : IAPIResponse = await API.get( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDiverDocApp}` );
+    setState((draft) => {
+      draft.driverDocAppList = driverDocAppData.value;
+      draft.driverLoading = false;
+    });
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+
+
   return {
     ...state,
     getDriverList,
@@ -180,7 +200,8 @@ const postDriverImage = async ( file : File , driver_id : number ) => {
     postSaveDriverData,
     getDriverPayRateList,
     postPayRates,
-    postDriverImage
+    postDriverImage,
+    getDriverDocAppList
 
   }
 };

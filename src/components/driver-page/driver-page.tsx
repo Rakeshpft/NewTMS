@@ -10,16 +10,16 @@ import CreateNewDriverForm from "./createNewDriverForm";
 import { debounce, includes, isEmpty } from "lodash";
 import { IDriverObject, IDriverPayRatesOject, initialStateDriver, initialStatedriver_pay_rates } from "../../services/tms-objects/driver.types";
 import { toastify } from "../../features/notification/toastify";
-import useVendorContext from "../../services/reducer/vendor.reducer";
 import { useTruckContext } from "../../services/reducer/truck.reducer";
 import { useTrailerContext } from "../../services/reducer/trailer.reducer";
+import { useVendorContext } from "../../services/reducer/vendor.reducer";
 
 const DriverPage = () => {
 
   const { getDriverList, driverAddList, getIdividualDriver, driverLoading ,selectedDriver , getDriverType , driverType ,getDriverStatus ,driverStatus , postSaveDriverData , getDriverPayRateList , selectedPayRates , postPayRates ,postDriverImage } = useDriverContext();
-  const { getVendorList , vendorList} = useVendorContext();
-  const {   truckListStatus } = useTruckContext();
-  const { getTrailer  ,trailerListStatus } = useTrailerContext();
+  const { getVendorDetails , VendorDetails} = useVendorContext();
+  const { truckListStatus } = useTruckContext();
+  const { getTrailerList  ,trailerList } = useTrailerContext();
 
   const inputRef = useRef<HTMLInputElement>(null);
   
@@ -122,6 +122,7 @@ const  handleCloseForm = () => {
     setNewDriverDetails(true);
     console.log("indi", driver.driver_id)
   }
+  
   console.log("newDriver", newDriver.driver_id)
  
 
@@ -143,9 +144,9 @@ const  handleCloseForm = () => {
     getDriverList();
     getDriverType();
     getDriverStatus()
-    getVendorList()
+    getVendorDetails()
      //getTruck()
-    getTrailer()
+     getTrailerList()
   }, []);
 
 const handleImageChange = async(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -182,11 +183,11 @@ const handleImageChange = async(event: React.ChangeEvent<HTMLInputElement>) => {
         handleCloseForm={handleCloseForm}
         driverType={driverType}
         driverStatus = {driverStatus}
-        vendorList = {vendorList}
+        vendorList = {VendorDetails}
         truckListStatus = {truckListStatus}
         handleCheckboxChange={handleCheckboxChange}
         SaveDriverIndividual={SaveDriverIndividual}
-        trailerListStatus = {trailerListStatus}
+        trailerListStatus = {trailerList}
         driverPayRates = {driverPayRates}
         handleInputDriverPayRates = {handleInputDriverPayRates}
         handleImageChange = {handleImageChange}

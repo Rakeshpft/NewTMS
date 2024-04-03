@@ -83,6 +83,7 @@
   background-color: #fff;
   box-shadow: 0 0 5px var(--bs-shadow);
   min-height: calc(100vh - 100px);
+  overflow: auto;
 }
 .sidebar-container{
   width: 215px;

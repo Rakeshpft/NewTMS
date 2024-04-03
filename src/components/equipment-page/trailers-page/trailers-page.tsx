@@ -1,270 +1,293 @@
-import React, { useState } from "react";
-import { AiOutlineFileExcel, AiOutlinePlus } from "react-icons/ai";
-import { MdOutgoingMail } from "react-icons/md";
-import { PiFilePdfDuotone, PiGearDuotone } from "react-icons/pi";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
 import {
-  Navbar,
-  NavbarBrand,
-  Nav,
-  NavItem,
   Button,
-  Card,
-  CardBody,
-  Collapse,
+  Container,
   FormGroup,
   Input,
   InputGroup,
   InputGroupText,
-  Label,
-  Form,
-  Col,
-  Row,
+
+  Modal,
+
+  ModalBody,
+
+  ModalHeader,
+
+  //TabPane,
 } from "reactstrap";
-import { Header, SideBar } from "../../shared";
-import Profile from "../../pofile";
-import { BiCheck } from "react-icons/bi";
-import { BsSearch, BsSliders2 } from "react-icons/bs";
-import { RxCross2 } from "react-icons/rx";
+
+//import { TabPage } from "../../driver-page";
+
+import { BsSearch } from "react-icons/bs";
+import { useTrailerContext } from "../../../services/reducer/trailer.reducer";
+import { debounce, includes, isEmpty } from "lodash";
+import CommonLayOut from "../../../layout";
+import { AiOutlinePlus } from "react-icons/ai";
+import { BasicTable } from "../../../features/table/BasicTable";
+import { tableCells, tableHeadCells } from "../../driver-page/deiver.constants";
+//import CreateNewTrailerForm from "./createNewTrailersForm";
+import { ITrailerObject } from "../../../services/tms-objects/trailer.types";
+import { Link } from "react-router-dom";
 import { routes } from "../../routes/routes";
-import { GenericTable } from "../../table";
 
-const tableHeaders = [
-  "#",
-  "Unit",
-  "Make",
-  "Model",
-  "Vin",
-  "Plate",
-  "Plate State",
-  "Registration Date",
-  "Ownership",
-  "Driver",
-  "ELD Provider",
-  "Location",
-  "Warnings",
-  "Status",
-  "Actions",
-  <PiGearDuotone />,
-];
-const tableRowData = [
-  {
-    "#": 1,
-    Unit: "Unit 1",
-    Make: "Make 1",
-    Model: "Model 1",
-    Vin: "Vin 1",
-    Plate: "Plate 1",
-    "Plate State": "Plate State 1",
-    "Registration Date": "Registration Date 1",
-    Ownership: "Ownership 1",
-    Driver: "Driver 1",
-    "ELD Provider": "ELD Provider 1",
-    Location: "Location 1",
-    Warnings: "Warnings 1",
-    Status: "Status 1",
-    Actions: "icon",
-  },
-  {
-    "#": 2,
-    Unit: "Unit 2",
-    Make: "Make 1",
-    Model: "Model 1",
-    Vin: "Vin 1",
-    Plate: "Plate 1",
-    "Plate State": "Plate State 1",
-    "Registration Date": "Registration Date 1",
-    Ownership: "Ownership 1",
-    Driver: "Driver 1",
-    "ELD Provider": "ELD Provider 1",
-    Location: "Location 1",
-    Warnings: "Warnings 1",
-    Status: "Status 1",
-    Actions: "icon",
-  },
-];
+const TrailerPage = () => {
 
-const TrailersPage = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [filteredData, setFilteredData] = useState(tableRowData);
-  const [filter, setFilter] = useState("");
+  const {
+    getTrailerList,
+    //getTrailerDetail,
+    deleteTrailer,
+    //saveTrailer,
+    trailerList,
+    selectedTrailer,
+    isLoading,
 
-  const handleSearchFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.toLowerCase();
-    const filteredData = tableRowData.filter((item) => {
-      return tableHeaders.some((column) =>
-        String(item[column as keyof object])
-          .toLowerCase()
-          .includes(value)
-      );
-    });
-    setFilter(value);
-    setFilteredData(filteredData);
+  } = useTrailerContext();
+
+
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [filteredData, setFilteredData] = useState<ITrailerObject[] | []>([]);
+  const [noTrailer, setnoTrailer] = useState(false);
+  //const [Trailer, setTrailer] = useState(false)
+  //const [TrailerNewDetails, setTrailerNewDetails] = useState<ITrailerObject>(trailerInitialState);
+  //const [title, setTitle] = useState<boolean>(true);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
+  const [selectedVendors, setSelectedTrailer] = useState<ITrailerObject[] | []>([]);
+
+
+
+
+
+  // const handleInputChange =
+  //   (prop: keyof ITrailerObject) =>
+  //     (event: React.ChangeEvent<HTMLInputElement>) => {
+  //       setTrailerNewDetails({ ...TrailerNewDetails, [prop]: event.target.value });
+  //     };
+
+  
+  
+
+
+  // const handleSaveTrailer = async (event: { preventDefault: () => void }) => {
+  //   event.preventDefault();
+  //   await saveTrailer(TrailerNewDetails).then((data) => {
+  //     data?.success;
+  //   });
+  //   getTrailerList();
+  //   setTrailerNewDetails(trailerInitialState);
+  //   setTrailer(false);
+
+  // };
+  // const handleClose = () => {
+
+  //   setTrailer(false);
+
+  //   getTrailerList();
+
+  // }
+
+  // const navigateToCreateVendor = () => {
+  //   setTrailerNewDetails(trailerInitialState)
+  //   setTrailer(true);
+  //   setTitle(true);
+  // };
+
+  // const handleEditTrailer = (trailer: ITrailerObject) => {
+  //   getTrailerDetail(trailer.trailer_id);
+
+  //   setTrailer(true);
+  //   setTitle(false);
+  // }
+
+  // useEffect(() => {
+  //   if (selectedTrailer) {
+  //     setTrailerNewDetails({
+  //       ...trailerList,
+  //   trailer_id: selectedTrailer.trailer_id,
+  //   unit: selectedTrailer.unit,
+  //   vin_number: selectedTrailer.vin_number,
+  //   year: selectedTrailer.year,
+  //   make: selectedTrailer.make,
+  //   modal: selectedTrailer.modal,
+  //   driver_id: selectedTrailer.driver_id,
+  //   trailer_plate_id: selectedTrailer.trailer_plate_id,
+  //   plate_state_id: selectedTrailer.plate_state_id,
+  //   note: selectedTrailer.note,
+  //   history: selectedTrailer.history,
+  //   ownership_id: selectedTrailer.ownership_id,
+  //   purchase_price: selectedTrailer.purchase_price,
+  //   company_id: selectedTrailer.company_id,
+  //   created_by_id: selectedTrailer.created_by_id,
+  //   modified_by_id: selectedTrailer.modified_by_id,
+  //   status_id: selectedTrailer.status_id,
+  //   lease_date: selectedTrailer.lease_date,
+  //   lease_lessor_name: selectedTrailer.lease_lessor_name,
+  //   lease_fid: selectedTrailer.lease_fid,
+  //   lease_address: selectedTrailer.lease_address,
+  //   lease_address_line2: selectedTrailer.lease_address_line2,
+  //   lease_city: selectedTrailer.lease_city,
+  //   lease_state_id: selectedTrailer.lease_state_id,
+  //   lease_zipcode: selectedTrailer.lease_zipcode,
+  //   lease_phone: selectedTrailer.lease_phone,
+  //     });
+  //   }
+  // }, [selectedTrailer]);
+
+  const handleSearch = debounce((searchValue: string) => {
+    const searchResults =
+    trailerList &&
+    trailerList.filter((trailer) => {
+        if (includes(trailer.lease_address.toLowerCase(), searchValue.toLowerCase())) {
+          return trailer;
+        }
+      });
+    searchResults && setFilteredData(searchResults);
+  }, 500);
+
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
+    setSelectedTrailer([]);
   };
 
-  function searchToggle(): void {
-    console.log("search");
-    setIsOpen((isOpen) => !isOpen);
-  }
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("search");
+  const handleDeleteTrailer = () => {
+    selectedTrailer && deleteTrailer(selectedVendors);
+    
+    // getTrailerDetails().then((data) =>{
+    //   data && setFilteredData(data);
+    // });
+    setDeleteModalOpen(true)
+    console.log("clicked")
   };
+
+  // const handleFileUpload = () => {
+  //   setUploadModalOpen(true)
+  //   console.log("pushed")
+  // }
+
+  useEffect(() => {
+    if (!isLoading && trailerList) {
+      setFilteredData(trailerList);
+      setnoTrailer(isEmpty(trailerList));
+    }
+  }, [isLoading, trailerList]);
+
+
+
+  useEffect(() => {
+    if (isEmpty(filteredData)) {
+      setnoTrailer(true);
+    } else {
+      setnoTrailer(false);
+    }
+  }, [filteredData]);
+
+
+  useEffect(() => {
+    getTrailerList();
+  }, []);
+   
+
 
   return (
     <>
-      <Navbar color="light" className="py-0">
-        <Header
-          sidebarToggle={() => {
-            setIsSidebarOpen(!isSidebarOpen);
-          }}
-        />
-        <NavbarBrand className="fw-bold px-4">Trailers</NavbarBrand>
-        <Nav className="me-auto" navbar>
-          <div className="d-flex gap-2 align-items-center">
-            <NavItem className="small h6 mb-0">Export</NavItem>
-            <div className="d-flex justify-content-between gap-2">
-              <Link to={"#!"}>
-                <PiFilePdfDuotone className="text-danger fs-4" />
-              </Link>
-              <Link to={"#"}>
-                <AiOutlineFileExcel className="text-success fs-4" />
-              </Link>
-              <Link to={"#!"}>
-                <MdOutgoingMail className="fs-4" />
-              </Link>
-            </div>
-          </div>
-        </Nav>
-        <div className="d-flex align-items-center gap-3">
-          <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
-            <InputGroup className="shadow-sm border-secondary">
-              <InputGroupText className="bg-white">
-                <BsSearch size={16} />
-              </InputGroupText>
-              <Input
-                placeholder="Search"
-                className="border-start-0 border-end-0 search"
-                value={filter}
-                onChange={handleSearchFilterChange}
-              />
-              <InputGroupText className="bg-white">
-                <Button
-                  color="link"
-                  size="sm"
-                  className="p-0"
-                  onClick={() => searchToggle()}
-                >
-                  <BsSliders2 size={16} />
-                </Button>
-              </InputGroupText>
-            </InputGroup>
-          </div>
-          <Link
-            className="btn btn-sm btn-outline-primary"
-            to={routes.createNewTailers}
-          >
-            <AiOutlinePlus />
-            New Trailer
-          </Link>
-          <Profile />
-        </div>
-      </Navbar>
-      <div className="content d-flex">
-        <SideBar isSidebarOpen={!isSidebarOpen} activePageId={4} />
-        <div className="aria-content">
-          {isOpen && (
-            <Collapse isOpen={isOpen}>
-              <Card className="card-search mb-3">
-                <CardBody>
-                  <Form onSubmit={handleSearchSubmit}>
-                    <Row className="px-5">
-                      <Col lg={2} md={6} sm={12}>
-                        <h5 className="text-info mt-4 fw-bold ">
-                          Search Filter
-                        </h5>
-                      </Col>
-                      <Col lg={2} md={6} sm={12}>
-                        <FormGroup>
-                          <Label>Status</Label>
-                          <Input
-                            bsSize="sm"
-                            id="exampleSelect"
-                            name="select"
-                            type="select"
-                            className="form-control form-control-sm"
-                          >
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                          </Input>
-                        </FormGroup>
-                      </Col>
-                      <Col lg={2} md={6} sm={12}>
-                        <FormGroup>
-                          <Label>Driver</Label>
-                          <Input
-                            bsSize="sm"
-                            id="exampleSelect"
-                            name="select"
-                            type="select"
-                            className="form-control form-control-sm"
-                          >
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                          </Input>
-                        </FormGroup>
-                      </Col>
-                      <Col lg={2} md={6} sm={12}>
-                        <FormGroup>
-                          <Label>OwnerShip</Label>
-                          <Input
-                            bsSize="sm"
-                            id="exampleSelect"
-                            name="select"
-                            type="select"
-                            className="form-control form-control-sm"
-                          >
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                          </Input>
-                        </FormGroup>
-                      </Col>
-                      <Col lg={2} md={6} sm={12}></Col>
-                      <Col lg={2} md={6} sm={12} className="mt-4">
-                        <Button size="sm" className="me-3 save-button">
-                          <BiCheck fontSize={"16px"} />
-                          Apply
+            <CommonLayOut>
+              <div className=" d-flex p-3">
+                <div className=" content w-100">
+                  <div className=" content-header d-flex justify-content-between">
+                    <div className="page-title">
+                      <h5> Trailers </h5>
+                    </div>
+                    <div>
+                      <div className=" page-subtitle d-flex align-items-center gap-3">
+                        <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
+                          <InputGroup className="shadow-sm border-secondary">
+                            <InputGroupText className="bg-white">
+                              <BsSearch size={16} />
+                            </InputGroupText>
+                            <Input
+                              placeholder="Search"
+                              className="border-start-0 border-end-0 search"
+                              inputRef={inputRef} onChange={(e: any) =>
+                                handleSearch(e.target.value)}
+                            />
+                          </InputGroup>
+                        </div>
+
+                        <div className="user-info-btn-wrapper">
+                          {!isEmpty(selectedVendors) && (
+                            <div className="user-info-btn">
+
+                              <Button color="primary" onClick={() => setDeleteModalOpen(true)}>Delete</Button>
+                            </div>
+                          )}
+                        </div>
+                        <Link to={routes.createNewTailers}>
+                        <Button color="primary">
+                          <AiOutlinePlus />
+                          New Trailer
                         </Button>
-                        <Button size="sm" className="cancel-button">
-                          <RxCross2 fontSize={"16px"} color="red" /> Clear
-                        </Button>
-                      </Col>
-                    </Row>
-                  </Form>
-                </CardBody>
-              </Card>
-            </Collapse>
-          )}
-          <GenericTable
-            tableHeaders={tableHeaders}
-            tableData={filteredData}
-            defaultSortColumn="Unit"
-          />
-        </div>
-      </div>
+                        </Link>                        
+
+                      </div>
+                    </div>
+                  </div>
+                  
+                      <BasicTable
+                         emptyState={noTrailer}
+                         canSelectRows={true}
+                         selectedTableRows={selectedVendors}
+                         setSelectionTableRows={setSelectedTrailer}
+                         tableData={filteredData}
+                         tableHeadCells={tableHeadCells}
+                         loading={isLoading}
+                         tableCells={tableCells}
+                         //canEditRow={true}
+                         //editRow={handleEditTrailer}
+                      />
+                    
+                </div>
+
+
+              </div>
+
+            </CommonLayOut>
+            <Modal isOpen={deleteModalOpen} onClose={closeDeleteModal}>
+              <ModalHeader>
+                <h6 className="mb-0 fw-bold"> Delete </h6>
+              </ModalHeader>
+              <ModalBody>
+                <Container>
+                  {!isEmpty(selectedVendors) && (
+                    <div className=" my-3 ">
+                      {selectedVendors.length > 1
+                        ? `Are you sure you want to delete ${selectedVendors.length} contacts?`
+                        : `Are you sure you want to delete customer "${selectedVendors[0].vin_number} ${selectedVendors[0].vin_number}"?`}
+                    </div>
+                  )}
+                  <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">
+                    <Button
+                      color="primary"
+                      className="px-4 mr-3 shadow save-button  "
+                      onClick={() => closeDeleteModal()}
+                    >
+                      Cancel
+                    </Button>
+
+                    <Button
+                      color="primary"
+                      className="px-4  shadow save-button "
+                      onClick={() => handleDeleteTrailer()}
+                    >
+                      Delete
+                    </Button>
+                  </FormGroup>
+                </Container>
+              </ModalBody>
+            </Modal>
     </>
   );
 };
 
-export default TrailersPage;
+export default TrailerPage;

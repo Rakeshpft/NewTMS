@@ -4,7 +4,7 @@ export interface ILoadStatusObject {
   is_active: boolean;
 }
 
-export const loadInitialStatus = {
+export const loadStatusInitialState:ILoadStatusObject = {
   load_status_id: 0,
   load_status_name: "",
   is_active: false,

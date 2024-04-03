@@ -1,7 +1,7 @@
+
 import { ITrailerObject } from "./trailer.types";
 import { ITruckObject } from "./truck.types";
-import { IVendorObject } from "./vendor.types";
-
+import { IVendorDetails } from "./vendor.types";
 export interface IDriverObject {
   driver_id: number;
   first_name: string;
@@ -76,10 +76,21 @@ export interface IDriverType {
   driver_type_name: string;
   is_active: boolean;
 }
+export const driverTypeInitialState : IDriverType = {
+  driver_type_id:0,
+  driver_type_name:"",
+  is_active:false,
+}
 
 export interface IDriverStatus {
   driver_status_id: number;
   driver_status_name: string;
+  is_active: boolean;
+}
+export const driverStatusInitialState : IDriverStatus = {
+  driver_status_id:0,
+  driver_status_name:"",
+  is_active:false,
 }
 
 export interface IDriverPayRatesOject {
@@ -110,6 +121,32 @@ export const initialStatedriver_pay_rates = {
   active: false
 }
 
+export interface IDriverDocApp {
+  driver_id : number,
+  hire_date : string,
+  status_id : boolean,
+  company_id : number,
+  status_name : string,
+  application_id : number,
+  application_date : string,
+  termination_date : string,
+  attachment : string,
+  file  : File
+}
+
+export const  initialDriverDocApp = {
+  driver_id : 0,
+  hire_date : "",
+  status_id : false,
+  company_id : 0,
+  status_name : "",
+  application_id : 0,
+  application_date : "",
+  termination_date : "",
+  attachment : "",
+  file  : ""
+}
+
 
 export interface IDriverManagenetProps {
   newDriver: IDriverObject;
@@ -119,7 +156,7 @@ export interface IDriverManagenetProps {
   driverStatus: IDriverStatus[] | null;
   handleCheckboxChange: () => void;
   SaveDriverIndividual: (event: { preventDefault: () => void }) => void;
-  vendorList: IVendorObject[] | null;
+  vendorList: IVendorDetails[] | null;
   truckListStatus: ITruckObject[] | null;
   trailerListStatus : ITrailerObject[] | null;
   driverPayRates : IDriverPayRatesOject

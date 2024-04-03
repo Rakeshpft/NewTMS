@@ -230,7 +230,7 @@ export const BasicTable = (props: BasicTableProps) => {
               <TableFooter>
                 <TableRow>
                   <TablePagination
-                    className="items-table-pagination"
+                    //className="items-table-pagination"
                     count={tableData?.length || 0}
                     onPageChange={handleChangePage}
                     page={page}

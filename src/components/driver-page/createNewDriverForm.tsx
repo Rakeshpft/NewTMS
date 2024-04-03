@@ -1,6 +1,6 @@
 // import { Form, useNavigate } from "react-router-dom";
 // import { routes } from "../routes/routes";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, TabPane } from "reactstrap";
 import TabPage from "./tab-page";
 import DriversDetails from "./createDriver/driversDetails";
@@ -8,7 +8,9 @@ import DocumentsDetails from "./createDriver/documentDetailsPage/documentsDetail
 import SchedulePayment from "./createDriver/schedulePayment";
 import AdditionalPayee from "./createDriver/additionalPayee";
 import CommonLayOut from "../../layout";
-import { IDriverManagenetProps } from "../../services/tms-objects/driver.types";
+import {    IDriverDocApp, IDriverManagenetProps } from "../../services/tms-objects/driver.types";
+import { useDriverContext } from "../../services/reducer/driver.reducer";
+
 
 const CreateNewDriverForm = ( prop : IDriverManagenetProps ) => {
    const { 
@@ -28,9 +30,27 @@ const CreateNewDriverForm = ( prop : IDriverManagenetProps ) => {
    
   } = prop
 
-  // const [ filterDocApp , setFilterDocApp] = useState()
+  const {getDriverDocAppList , driverDocAppList , driverLoading } = useDriverContext()
 
+  const [ filterDocApp , setFilterDocApp] = useState<IDriverDocApp[]>([]);
 
+ const  searchResults =
+   driverDocAppList &&
+   driverDocAppList.filter((user) => {
+         return user;
+       }
+   );
+
+ searchResults &&  setFilterDocApp(searchResults);
+ 
+useEffect(() => {
+if( !driverLoading && driverDocAppList ) 
+setFilterDocApp(driverDocAppList)
+} , [driverDocAppList , driverLoading])
+
+useEffect(() => {
+  getDriverDocAppList(1);
+} , [1])
 
 
   return (
@@ -68,7 +88,10 @@ const CreateNewDriverForm = ( prop : IDriverManagenetProps ) => {
         </TabPane>
 
         <TabPane tabId={2} className=""  >
-          <DocumentsDetails />
+          <DocumentsDetails
+        filterDocApp = {filterDocApp}
+          
+          />
         </TabPane>
         <TabPane tabId={3} className="">
         <SchedulePayment/>

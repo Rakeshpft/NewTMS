@@ -24,13 +24,17 @@ import CommonLayOut from "../../../layout";
 import { useCustomerContext } from "../../../services/reducer/customer.reducer";
 import { AiOutlinePlus } from "react-icons/ai";
 
-import { tableCells, tableHeadCells } from "./customer.constants";
-import { BasicTable } from "../../../features/table/BasicTable";
-import { ICustomerDetails, initialStateCustomer } from "../../../services/tms-objects/customer.types";
+// import { tableCells, tableHeadCells } from "./customer.constants";
+// import { BasicTable } from "../../../features/table/BasicTable";
+import { ICustomerDetails } from "../../../services/tms-objects/customer.types";
 import { debounce, includes, isEmpty } from "lodash";
 
-import CreateNewCustomerForm from "./createNewCustomerForm";
-import { useStateContext } from "../../../services/reducer/state.reducer";
+// import CreateNewCustomerForm from "./createNewCustomerForm";
+import { HiOutlinePencilAlt } from "react-icons/hi";
+import { routes } from "../../routes/routes";
+import { CustomTable } from "../../../features/data-table/CustomTable";
+import { Link, useNavigate } from "react-router-dom";
+// import { useStateContext } from "../../../services/reducer/state.reducer";
 // import CreateNewCustomerForm from "./createNewCustomerForm";
 // import { initialCustomerState } from "../../tms-object/partners";
 
@@ -38,123 +42,31 @@ const CustomerPage = () => {
 
   const {
     getCustomerDetails,
-    getIdividualCustomerDetails,
+   
     CustomerDetails,
     deleteCustomer,
-    saveCustomer,
-    selectedCustomer,
+    
     customerLoading,
 
   } = useCustomerContext();
-  const {
-    getState,
-  } = useStateContext();
+
 
 
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [filteredData, setFilteredData] = useState<ICustomerDetails[] | []>([]);
-  const [noCustomer, setnoCustomer] = useState(false);
-  const [partnerCustomer, setPartnerCustomer] = useState(false)
-  const [customerNewDetails, setcustomerNewDetails] = useState<ICustomerDetails>(initialStateCustomer);
-  const [title, setTitle] = useState<boolean>(true);
+  // const [noCustomer, setnoCustomer] = useState(false);
+  // const [customerNewDetails, setcustomerNewDetails] = useState<ICustomerDetails>(initialStateCustomer);
+  // const [title, setTitle] = useState<boolean>(true);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
 
   const [selectedCustomers, setSelectedCustomers] = useState<ICustomerDetails[] | []>([]);
 
+  const navigate = useNavigate();
 
 
 
-
-  const handleInputChange =
-    (prop: keyof ICustomerDetails) =>
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        setcustomerNewDetails({ ...customerNewDetails, [prop]: event.target.value });
-      };
-
-  const handleCheckBoxBroker = () => {
-    setcustomerNewDetails({ ...customerNewDetails, is_broker: !customerNewDetails.is_broker });
-
-  };
-  const handleCheckBoxShipper = () => {
-    setcustomerNewDetails({ ...customerNewDetails, is_shipper_receiver: !customerNewDetails.is_shipper_receiver });
-  };
-
-  const handleDirectBillingRadio = () => {
-    setcustomerNewDetails({ ...customerNewDetails, billing_type_id: 1 });
-  };
-
-  const handleFactoringRadio = () => {
-    setcustomerNewDetails({ ...customerNewDetails, billing_type_id: 2 });
-  };
-
-  const handleSaveCustomer = async (event: { preventDefault: () => void }) => {
-    event.preventDefault();
-    await saveCustomer(customerNewDetails).then((data) => {
-      data?.success;
-    });
-    getCustomerDetails();
-    setcustomerNewDetails(initialStateCustomer);
-    setPartnerCustomer(false);
-
-  };
-  const handleClose = () => {
-
-    setPartnerCustomer(false);
-
-    getCustomerDetails();
-
-  }
-
-  const navigateToCreateCustomer = () => {
-
-    setcustomerNewDetails(initialStateCustomer)
-    setPartnerCustomer(true);
-    setTitle(true);
-  };
-
-  const handleEditCustomer = (customer: ICustomerDetails) => {
-    getIdividualCustomerDetails(customer.customer_id);
-
-    setPartnerCustomer(true);
-    setTitle(false);
-  }
-
-  useEffect(() => {
-    if (selectedCustomer) {
-      setcustomerNewDetails({
-        ...CustomerDetails,
-        first_name: selectedCustomer.first_name,
-        last_name: selectedCustomer.last_name,
-        full_name: selectedCustomer.full_name,
-        customer_id: selectedCustomer.customer_id,
-        is_broker: selectedCustomer.is_broker,
-        is_shipper_receiver: selectedCustomer.is_shipper_receiver,
-        email: selectedCustomer.email,
-        phone: selectedCustomer.phone,
-        suite_number: selectedCustomer.suite_number,
-        street_number: selectedCustomer.street_number,
-        city: selectedCustomer.city,
-        state_id: selectedCustomer.state_id,
-        
-        zipcode: selectedCustomer.zipcode,
-        address: selectedCustomer.address,
-        description: selectedCustomer.description,
-        company_name: selectedCustomer.company_name,
-        fid_ein: selectedCustomer.fid_ein,
-        mc_number: selectedCustomer.mc_number,
-        billing_type_id: selectedCustomer.billing_type_id,
-        factor_id: selectedCustomer.factor_id,
-        quick_pay_fee: selectedCustomer.quick_pay_fee,
-        status_id: selectedCustomer.status_id,
-        customer_status_name: selectedCustomer.customer_status_name,
-        credit_id: selectedCustomer.credit_id,
-        pay_terms: selectedCustomer.pay_terms,
-        avg_days_to_pay: selectedCustomer.avg_days_to_pay,
-        active: selectedCustomer.active,
-      });
-    }
-  }, [selectedCustomer]);
 
   const handleSearch = debounce((searchValue: string) => {
     const searchResults =
@@ -173,80 +85,116 @@ const CustomerPage = () => {
   };
 
 
+  
   const handleDeleteCustomers = () => {
     selectedCustomers && deleteCustomer(selectedCustomers);
 
     getCustomerDetails().then((data) => {
       data && setFilteredData(data);
     });
-    setDeleteModalOpen(true)
+    setDeleteModalOpen(false)
     console.log("clicked")
+    setSelectedCustomers([]);
   };
 
-  // const handleFileUpload = () => {
-  //   setUploadModalOpen(true)
-  //   console.log("pushed")
-  // }
-
+  
   useEffect(() => {
     if (!customerLoading && CustomerDetails) {
       setFilteredData(CustomerDetails);
-      setnoCustomer(isEmpty(CustomerDetails));
+     
     }
   }, [customerLoading, CustomerDetails]);
 
 
 
-  useEffect(() => {
-    if (isEmpty(filteredData)) {
-      setnoCustomer(true);
-    } else {
-      setnoCustomer(false);
-    }
-  }, [filteredData]);
+  // useEffect(() => {
+  //   if (isEmpty(filteredData)) {
+  //     setnoCustomer(true);
+  //   } else {
+  //     setnoCustomer(false);
+  //   }
+  // }, [filteredData]);
 
 
   useEffect(() => {
     getCustomerDetails();
   }, []);
    
-  useEffect(() => {
-    getState();
-  }, []);
-
-
+  const columns: CustomTableColumn[] = [
+    {
+      id: "full_name",
+      name: "NAME",
+      style: { width: "25%" },
+      sortable: true,
+      selector: (row: ICustomerDetails) => row.full_name
+    },
+    {
+      id: "address",
+      name: "ADDRESS",
+      style: { width: "25%" },
+      sortable: true,
+      selector: (row: ICustomerDetails) => row.address
+    },
+    {
+      id: "phone",
+      name: "PHONE",
+      style: { width: "20%" },
+      sortable: true,
+      selector: (row: ICustomerDetails) => row.phone
+    },
+    {
+      id: "mc_number",
+      name: "MC",
+      style: { width: "20%" },
+      sortable: true,
+      selector: (row: ICustomerDetails) => row.mc_number
+    },
+    {
+      id: "billing_type_id",
+      name: "PAY METHOD",
+      style: { width: "20%" },
+      sortable: true,
+      selector: (row: ICustomerDetails) => row.billing_type_id
+    },
+    {
+      id: "credit_id",
+      name: "CREDIT",
+      style: { width: "20%" },
+      sortable: true,
+      selector: (row: ICustomerDetails) => row.credit_id
+    },
+    {
+      id: "avg_days_to_pay",
+      name: "AVG. DTP",
+      style: { width: "20%" },
+      sortable: true,
+      selector: (row: ICustomerDetails) => row.credit_id
+    },
+    {
+      id: "active",
+      name: "STATUS",
+      style: { width: "20%" },
+      sortable: true,
+      selector: (row: ICustomerDetails) => row.credit_id
+    },
+    {
+      id: "action",
+      name: "ACTION",
+      style: { width: "5%" },
+      sortable: false,
+      selector: (row: ICustomerDetails) => row.customer_id,
+      cell: (row: ICustomerDetails) => <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={()=>{ navigate(`${routes.createNewCustomer}/${row.customer_id}`) }} />
+    }
+  ]
   return (
-    <>
-      {partnerCustomer ?
-        (<CreateNewCustomerForm
-          CustomerNewDetails={customerNewDetails}
-          setCustomerDetails={setcustomerNewDetails}
-          handleInputChange={handleInputChange}
-          selectedCustomer={selectedCustomer}
-          handleSaveCustomer={handleSaveCustomer}
-
-          title={title}
-          handleClose={handleClose}
-          handleCheckBoxBroker={handleCheckBoxBroker}
-          handleCheckBoxShipper={handleCheckBoxShipper}
-          setcustomerNewDetails={setcustomerNewDetails}
-          handleDirectBillingRadio={handleDirectBillingRadio}
-          handleFactoringRadio={handleFactoringRadio}
-
-
-        />) : (
+   
           <>
             <CommonLayOut>
-
-              <div className=" d-flex p-3">
-                <div className=" content w-100">
-                  <div className=" content-header d-flex justify-content-between">
-                    <div className="page-title">
-                      <h5> Customers </h5>
-                    </div>
-                    <div>
-                      <div className=" page-subtitle d-flex align-items-center gap-3">
-                        <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
+            <div className=" d-flex justify-content-between">
+          <div className="page-title">Customers</div>
+          <div>
+            <div className="d-flex align-items-center gap-3">
+              <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
                           <InputGroup className="shadow-sm border-secondary">
                             <InputGroupText className="bg-white">
                               <BsSearch size={16} />
@@ -268,50 +216,26 @@ const CustomerPage = () => {
                             </div>
                           )}
                         </div>
-                        <Button color="primary" onClick={navigateToCreateCustomer}>
+                        <Link to={routes.createNewCustomer}>
+                        <Button color="primary" >
                           <AiOutlinePlus />
                           New Customer
                         </Button>
-
+                        </Link>
                       </div>
                     </div>
                   </div>
                   <TabPage tabTitles={["Brokers", "Shippers/Receivers"]}>
 
                     <TabPane tabId={1} className="m-2">
-                      <BasicTable
-                        emptyState={noCustomer}
-                        canSelectRows={true}
-                        selectedTableRows={selectedCustomers}
-                        setSelectionTableRows={setSelectedCustomers}
-                        tableData={filteredData}
-                        tableHeadCells={tableHeadCells}
-                        loading={customerLoading}
-                        tableCells={tableCells}
-                        canEditRow={true}
-                        editRow={handleEditCustomer}
-                      />
+                    <CustomTable columns={columns} data={filteredData} noRecordMessage="No Customer found." canSelectRows={true} selectedTableRows={selectedCustomers} setSelectionTableRows={setSelectedCustomers} />
                     </TabPane>
                     <TabPane tabId={2} className="m-2">
-                      <BasicTable
-                        emptyState={noCustomer}
-                        canSelectRows={true}
-                        selectedTableRows={selectedCustomers}
-                        setSelectionTableRows={setSelectedCustomers}
-                        tableData={filteredData}
-                        tableHeadCells={tableHeadCells}
-                        loading={customerLoading}
-                        tableCells={tableCells}
-                        canEditRow={true}
-                        editRow={handleEditCustomer}
-                      />
+                    <CustomTable columns={columns} data={filteredData} noRecordMessage="No Customer found." canSelectRows={true} selectedTableRows={selectedCustomers} setSelectionTableRows={setSelectedCustomers} />
                     </TabPane>
 
                   </TabPage>
-                </div>
-
-
-              </div>
+                
 
             </CommonLayOut>
             <Modal isOpen={deleteModalOpen} onClose={closeDeleteModal}>
@@ -349,8 +273,8 @@ const CustomerPage = () => {
             </Modal>
 
           </>
-        )}
-    </>
+       
+    
 
 
   );

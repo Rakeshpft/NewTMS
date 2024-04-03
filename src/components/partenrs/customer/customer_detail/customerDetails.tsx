@@ -1,61 +1,88 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap'
 
-import { ICustomerDetails, ICustomerManagementProps } from '../../../../services/tms-objects/customer.types';
-import { useStateContext } from '../../../../services/reducer/state.reducer';
+import { ICustomerDetails, TCustomerProps, initialStateCustomer,  } from '../../../../services/tms-objects/customer.types';
+import { useListContext } from '../../../../services/reducer/list.reducer';
 import { useCustomerContext } from '../../../../services/reducer/customer.reducer';
+import { useNavigate } from 'react-router-dom';
+import { routes } from '../../../routes/routes';
 
 
-const CustomerDetails = (props: ICustomerManagementProps) => {
+const CustomerDetails = (props: TCustomerProps) => {
     const {
-        CustomerNewDetails,
-        handleSaveCustomer,
-        handleInputChange,
-        handleClose,
-        title,
-        
-       
-        handleCheckBoxShipper,
-        handleCheckBoxBroker,
-        // handleFileUpload,
-        handleDirectBillingRadio,
-        handleFactoringRadio,
-    } = props;
+        handleSubmit = undefined,
+        customer_id =0,
+        } = props
+      
 
-    const { getState,stateDetails } = useStateContext();
 
-    const {getCustomerStatus} = useCustomerContext();
+    const {getStateList,stateList,getCustomerStatusList,customerStatusList,getCreditList,creditList}= useListContext()
+        const{getIdividualCustomerDetails,selectedCustomer,customerLoading,saveCustomer}=useCustomerContext();
+       const [customerNewDetails, setcustomerNewDetails] = useState<ICustomerDetails>(initialStateCustomer);
+       const navigate = useNavigate();
 
-    // const [stateDetails, setStateDetails] = useState<IStateDetails[]>([]);
-    const [status, setstatus] = useState<ICustomerDetails[]>([]);
     useEffect(()=>{
-        const fetchStatus = async () => {
-            try {
-                const response = await getCustomerStatus();
-                if (response) {
-                    setstatus(response);
-                }
-            } catch (error) {
-                console.error("Error fetching state details:", error);
-            }
-        };
-        fetchStatus();
+        getCustomerStatusList();
     }, []);
   
-    useEffect(() => {
-       getState();
+    useEffect(()=>{
+        getCreditList();
     }, []);
+
+    useEffect(() => {
+        if(customer_id >0){
+            getIdividualCustomerDetails(customer_id)}
+        getStateList();
+    }, []);
+
+    useEffect(() => {
+        if(!customerLoading && selectedCustomer) {
+            setcustomerNewDetails(selectedCustomer);
+        }
+    }, [customerLoading, selectedCustomer]);
+   
+    const handleInputChange =
+    (prop: keyof ICustomerDetails) =>
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        setcustomerNewDetails({ ...customerNewDetails, [prop]: event.target.value });
+      };
+
+      const handleSaveCustomer = async (event: { preventDefault: () => void }) => {
+          event.preventDefault();
+          await saveCustomer(customerNewDetails).then((data) => {
+            data?.success&& handleSubmit && handleSubmit(data.value);
+            getIdividualCustomerDetails(data?.value.customer_id);
+          handleClose();
+        });
+    }
+
+     const handleCheckBoxBroker = () => {
+    setcustomerNewDetails({ ...customerNewDetails, is_broker: !customerNewDetails.is_broker });
+
+  };
+  const handleCheckBoxShipper = () => {
+    setcustomerNewDetails({ ...customerNewDetails, is_shipper_receiver: !customerNewDetails.is_shipper_receiver });
+  };
+
+  const handleDirectBillingRadio = () => {
+    setcustomerNewDetails({ ...customerNewDetails, billing_type_id: 1 });
+  };
+
+  const handleFactoringRadio = () => {
+    setcustomerNewDetails({ ...customerNewDetails, billing_type_id: 2 });
+  };
+
+    const handleClose = () => {
+        navigate(routes.customersAll);
+    }
+    
     return (
         <Form onSubmit={handleSaveCustomer}>
-            <Row className="page-title">
-
-                <h5>
-                    {title ? "New Customer " : "Edit Customer"}</h5>
-            </Row>
+        
             <Row className="Customer-basic-details my-3">
                 <Row className="page-subtitle">
                     <h6>Basic Details</h6>
-                </Row>
+                </Row>  
 
                 <Row className="page-content align-items-center">
                     <Col md={3} className="d-flex align-items-center">
@@ -64,7 +91,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                             <div className="d-flex justify-content-between">
                                 <FormGroup check className="checkbox-inline me-3">
                                     <Input type="checkbox" id="is_broker"
-                                        checked={CustomerNewDetails.is_broker}
+                                        checked={customerNewDetails.is_broker}
                                         onChange={handleCheckBoxBroker} />
                                     <Label for="brokerCheckbox" check className="checkbox-label">
                                         Broker
@@ -72,7 +99,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 </FormGroup>
                                 <FormGroup check className="checkbox-inline">
                                     <Input type="checkbox" id="is_shipper_receiver"
-                                        checked={CustomerNewDetails.is_shipper_receiver}
+                                        checked={customerNewDetails.is_shipper_receiver}
                                         onChange={handleCheckBoxShipper} />
                                     <Label
                                         for="shipperReceiverCheckbox"
@@ -96,7 +123,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="text"
                                 id="first_name"
                                 name="first_name"
-                                value={CustomerNewDetails.first_name}
+                                value={customerNewDetails.first_name}
                                 onChange={handleInputChange("first_name")}
                             />
                         </FormGroup>
@@ -110,7 +137,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="text"
                                 id="last_name"
                                 name="last_name"
-                                value={CustomerNewDetails.last_name}
+                                value={customerNewDetails.last_name}
                                 onChange={handleInputChange("last_name")}
                             />
                         </FormGroup>
@@ -124,7 +151,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="text"
                                 id="email"
                                 name="email"
-                                value={CustomerNewDetails.email}
+                                value={customerNewDetails.email}
                                 onChange={handleInputChange("email")}
                             />
                         </FormGroup>
@@ -141,7 +168,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="text"
                                 id="phone"
                                 name="phone"
-                                value={CustomerNewDetails.phone}
+                                value={customerNewDetails.phone}
                                 onChange={handleInputChange("phone")}
                             />
                         </FormGroup>
@@ -155,7 +182,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="text"
                                 id="suite_number"
                                 name="suite_number"
-                                value={CustomerNewDetails.suite_number}
+                                value={customerNewDetails.suite_number}
                                 onChange={handleInputChange("suite_number")}
                             />
                         </FormGroup>
@@ -169,7 +196,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="text"
                                 id="street_number"
                                 name="street_number"
-                                value={CustomerNewDetails.street_number}
+                                value={customerNewDetails.street_number}
                                 onChange={handleInputChange("street_number")}
                             />
                         </FormGroup>
@@ -184,7 +211,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="text"
                                 id="city"
                                 name="city"
-                                value={CustomerNewDetails.city}
+                                value={customerNewDetails.city}
                                 onChange={handleInputChange("city")}
                             />
                         </FormGroup>
@@ -198,9 +225,9 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="select"
                                 id="state_id"
                                 name="state_id"
-                                value={CustomerNewDetails.state_id}
+                                value={customerNewDetails.state_id}
                                 onChange={handleInputChange("state_id")}>
-                                  {stateDetails && stateDetails.map((item) => (
+                                  {stateList && stateList.map((item) => (
                                     <option key={item.state_id} value={item.state_id}>
                                         {item.state_name}
                                     </option>
@@ -217,7 +244,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="text"
                                 id="zipcode"
                                 name="zipcode"
-                                value={CustomerNewDetails.zipcode}
+                                value={customerNewDetails.zipcode}
                                 onChange={handleInputChange("zipcode")}
                             />
                         </FormGroup>
@@ -231,7 +258,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="text"
                                 id="description"
                                 name="description"
-                                value={CustomerNewDetails.description}
+                                value={customerNewDetails.description}
                                 onChange={handleInputChange("description")}
                             />
                                 
@@ -246,15 +273,15 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="select"
                                 id="status_id"
                                 name="status_id"
-                                value={CustomerNewDetails.status_id}
+                                value={customerNewDetails.status_id}
                                 onChange={handleInputChange("status_id")}
                             >
-                                {status.map((item) => (
-                                    <option key={item.status_id} value={item.status_id}>
+                                {customerStatusList && customerStatusList.map((item) => (
+                                    <option key={item.customer_status_id} value={item.customer_status_id}>
                                         {item.customer_status_name}
                                     </option>
                                 ))}
-                                x
+                                
                             </Input>
                         </FormGroup>
                     </Col>
@@ -277,7 +304,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="text"
                                 id="company_name"
                                 name="company_name"
-                                value={CustomerNewDetails.company_name}
+                                value={customerNewDetails.company_name}
                                 onChange={handleInputChange("company_name")}
                             />
                         </FormGroup>
@@ -291,7 +318,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="text"
                                 id="fid_ein"
                                 name="fid_ein"
-                                value={CustomerNewDetails.fid_ein}
+                                value={customerNewDetails.fid_ein}
                                 onChange={handleInputChange("fid_ein")}
                             />
                         </FormGroup>
@@ -306,7 +333,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="text"
                                 id="mc_number"
                                 name="mc_number"
-                                value={CustomerNewDetails.mc_number}
+                                value={customerNewDetails.mc_number}
                                 onChange={handleInputChange("mc_number")}
                             />
                         </FormGroup>
@@ -326,7 +353,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
     <Input
         type="radio"
         id="directBillingRadio"
-        checked={CustomerNewDetails.billing_type_id === 1}
+        checked={customerNewDetails.billing_type_id === 1}
         onChange={handleDirectBillingRadio}
     />
     <Label for="directBillingRadio" check className="radio-label">
@@ -337,7 +364,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
     <Input
         type="radio"
         id="factoringRadio"
-        checked={CustomerNewDetails.billing_type_id === 2}
+        checked={customerNewDetails.billing_type_id === 2}
         onChange={handleFactoringRadio}
     />
     <Label
@@ -351,7 +378,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
 </Col>
 
                     <Col md={3}>
-                        {CustomerNewDetails.billing_type_id === 2 && (
+                        {customerNewDetails.billing_type_id === 2 && (
                             <FormGroup>
                                 <Label for="Factoring">Factoring</Label>
                                 <Input
@@ -360,7 +387,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                     type="select"
                                     id="factor_id"
                                     name="factor_id"
-                                    value={CustomerNewDetails.factor_id}
+                                    value={customerNewDetails.factor_id}
                                     onChange={handleInputChange("factor_id")}
                                 />
                             </FormGroup>
@@ -376,7 +403,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="text"
                                 id="quick_pay_fee"
                                 name="quick_pay_fee"
-                                value={CustomerNewDetails.quick_pay_fee}
+                                value={customerNewDetails.quick_pay_fee}
                                 onChange={handleInputChange("quick_pay_fee")}
                             />
                         </FormGroup>
@@ -393,9 +420,14 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="select"
                                 id="credit_id"
                                 name="credit_id"
-                                value={CustomerNewDetails.credit_id}
+                                value={customerNewDetails.credit_id}
                                 onChange={handleInputChange("credit_id")}
-                            />
+                            >  {creditList && creditList.map((item) => (
+                                <option key={item.credit_id} value={item.credit_id}>
+                                    {item.credit_name}
+                                </option>
+                            ))}
+                            </Input>
                         </FormGroup>
                     </Col>
                     <Col md={3}>
@@ -407,7 +439,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="text"
                                 id="pay_terms"
                                 name="pay_terms"
-                                value={CustomerNewDetails.pay_terms}
+                                value={customerNewDetails.pay_terms}
                                 onChange={handleInputChange("pay_terms")}
                             />
                         </FormGroup>
@@ -421,7 +453,7 @@ const CustomerDetails = (props: ICustomerManagementProps) => {
                                 type="text"
                                 id="avg_days_to_pay"
                                 name="avg_days_to_pay"
-                                value={CustomerNewDetails.avg_days_to_pay}
+                                value={customerNewDetails.avg_days_to_pay}
                                 onChange={handleInputChange("avg_days_to_pay")}
                             />
                         </FormGroup>

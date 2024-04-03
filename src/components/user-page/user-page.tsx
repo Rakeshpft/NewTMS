@@ -6,7 +6,6 @@ import {
   Input,
   InputGroup,
   InputGroupText,
-
   Modal,
   ModalBody,
   ModalHeader,
@@ -43,8 +42,11 @@ const UserPage = () => {
     getUserRole,
   } = useUserContext();
 
+
+
   const inputRef = useRef<HTMLInputElement>(null);
   
+ 
 
   const [filteredData, setFilteredData] = useState<IUserDetails[] | []>([]);
   const [noUser, setNoUser] = useState(false);

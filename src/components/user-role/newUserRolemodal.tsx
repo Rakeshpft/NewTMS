@@ -62,7 +62,9 @@ const NewUserRoleModal = (props: IUserRoleManagementProps) => {
                   <Col md={6}>
                     <FormGroup>
                       <Label for="name">Role Name</Label>
-                      <Input bsSize="sm" className="form-control form-control-sm" id="name" name="name" type="text" value={userRoleNewDetails.role_name} onChange={handleInputChange("role_name")} />
+                      <Input bsSize="sm" className="form-control form-control-sm" id="name"
+                       name="name" type="text" 
+                       value={userRoleNewDetails.role_name} onChange={handleInputChange("role_name")} />
                     </FormGroup>
                   </Col>
                   <Col md={6}>

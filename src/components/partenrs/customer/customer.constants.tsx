@@ -14,10 +14,6 @@ export const tableHeadCells: TableHeadCell[] = [
     { id: "avg_days_to_pay", label: "AVG. DTP", style: { width: "20%" } },
 
     { id: "active", label: "STATUS", style: { width: "20%" } },
-    
-   
-  
-  
   ];
   export const tableCells: string[] = [ "full_name",
   "address",

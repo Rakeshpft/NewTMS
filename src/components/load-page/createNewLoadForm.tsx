@@ -12,19 +12,11 @@ import MapPage from "./map-page/mapPage";
 import { BasicTable } from "../../features/table/BasicTable";
 import { tableHeadCells } from "./load.constant";
 import { TabPage } from "../driver-page";
+import { useListContext } from "../../services/reducer/list.reducer";
 
 const CreateNewLaodForm = () => {
-  const {
-    getStatusList,
-    loadStatus,
-    getBillingStatusList,
-    loadBillingStatus,
-    getDispatcherStatusList,
-    loadDispatcherStatus,
-    getStateStatusList,
-    loadStateStatus,
-  } = useLoadContext();
-
+  const { getDispatcherStatusList, loadDispatcherStatus } = useLoadContext();
+  const{ getLoadStatusList, loadStatusList, getBillingStatusList, billingStatusList, getStateList, stateList } = useListContext();
   const navigate = useNavigate();
   // const [formState, dispatch] = useReducer(formReducer, initialLoadState);
   const [customerModal, setCustomerModal] = useState(false);
@@ -68,10 +60,10 @@ const CreateNewLaodForm = () => {
     }
   };
   useEffect(() => {
-    getStatusList();
     getBillingStatusList();
+    getLoadStatusList();
+    getStateList();
     getDispatcherStatusList();
-    getStateStatusList();
   }, []);
 
   return (
@@ -102,7 +94,7 @@ const CreateNewLaodForm = () => {
                 <Label for="pickupState">State</Label>
                 <Input id="pickupState" bsSize="sm" name="pickupState" type="select" className="form-control form-control-sm" /*value={formState.pickupState} onChange={handleInput("SET_pickupState")}*/ >
                   <option value="">Select State</option>
-                  {loadStateStatus?.map((item) => {
+                  {stateList?.map((item) => {
                     return (
                       <option key={item.state_id} value={item.state_id}>{item.state_name}</option>
                     );
@@ -138,7 +130,7 @@ const CreateNewLaodForm = () => {
                 <Label for="deliveryState">State</Label>
                 <Input id="deliveryState" name="deliveryState" type="select" bsSize="sm" className="form-control form-control-sm" /*value={formState.deliveryState} onChange={handleInput("SET_deliveryState")}*/>
                   <option value="">Select State</option>
-                  {loadStateStatus?.map((item) => {
+                  {stateList?.map((item) => {
                     return (
                       <option key={item.state_id} value={item.state_id}>{item.state_name}</option>
                     );
@@ -246,7 +238,7 @@ const CreateNewLaodForm = () => {
                 <Label for="loadSelect">Status</Label>
                 <Input id="loadSelect" name="status" type="select" bsSize="sm" /*value={statusData.status} onChange={handleLoadInput("status")}*/ >
                   <option value="">Select Status</option>
-                  {loadStatus?.map((item) => {
+                  {loadStatusList?.map((item) => {
                     return (
                       <option key={item.load_status_id} value={item.load_status_id}>
                         {item.load_status_name}
@@ -261,10 +253,10 @@ const CreateNewLaodForm = () => {
                 <Label for="BillingSelect">Billing Status</Label>
                 <Input id="BillingSelect" name="billingStatus" type="select" bsSize="sm" /*value={formState.billingStatus} onChange={handleInput("SET_billingStatus")}*/ >
                   <option value="">Select Billing Status</option>
-                  {loadBillingStatus?.map((item) => {
+                  {billingStatusList?.map((item) => {
                     return (
-                      <option key={item.load_billing_status_id} value={item.load_billing_status_id}>
-                        {item.load_billing_status_name}
+                      <option key={item.billing_status_id} value={item.billing_status_id}>
+                        {item.billing_status_name}
                       </option>
                     );
                   })}

@@ -27,77 +27,153 @@ import { SearchLoadPage, initialSearchState } from "../tms-object/loadpage";
 import { routes } from "../routes/routes";
 import EditLoadModal from "./editLoadModal";
 import CommonLayOut from "../../layout";
-import { BasicTable } from "../../features/table/BasicTable";
 import { useNavigate } from "react-router-dom";
+import { CustomTable } from "../../features/data-table/CustomTable";
+//import { CustomDataTable } from "../../features/data-table/dataTable";
+
+const rate = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 3,
+});
 
 const columns = [
-  "Load",
-  "Date",
-  "Driver",
-  "Broker",
-  "PO#",
-  "Pickup",
-  "Delivery",
-  "Rate",
-  "Completed",
-  "Status",
-  "Billing",
-  "Notes",
-  "Attachments",
-  // "Actions",
-  // <PiGearDuotone />,
+	{		
+    id:'load',
+		name: 'Load',
+		selector: (row: { load: string }) => row.load,
+    sortable:true
+	},
+	{	
+    id:'date',
+		name: 'Date',
+		selector: (row: { date: string }) => row.date,
+    sortable:true
+	},
+  {		
+    id:'driver',
+		name: 'Driver',
+		selector: (row: { driver: string }) => row.driver,
+    sortable:true
+	},
+  {		
+    id:'broker',
+		name: 'Broker',
+		selector: (row: { broker: string }) => row.broker,
+    sortable:true
+	},
+  {		
+    id:'po_no',
+		name: 'PO#',
+		selector: (row: { po_number: string }) => row.po_number,
+    sortable:true
+	},
+  {		
+    id:'pickup',
+		name: 'Pickup',
+		selector: (row: { pickup: string }) => row.pickup,
+    sortable:true
+	},
+  {		
+    id:'delivery',
+		name: 'Delivery',
+		selector: (row: { delivery: string }) => row.delivery,
+    sortable:true
+	},
+  {		
+    id:'rate',
+		name: 'Rate',
+		selector: (row: { rate: string }) => row.rate,
+    format:(row:{rate:number})=> rate.format(row.rate) ,
+    sortable:true
+	},
+  {		
+    id:'complete',
+		name: 'Completed',
+		selector: (row: { completed: string }) => row.completed,
+    sortable:true
+	},
+  {		
+    id:'status',
+		name: 'Status',
+		selector: (row: { status: string }) => row.status,
+    sortable:true
+	},
+  {		
+    id:'billing',
+		name: 'Billing',
+		selector: (row: { billing: string }) => row.billing,
+    sortable:true
+	},
+  {		
+    id:'notes',
+		name: 'Notes',
+		selector: (row: { notes: string }) => row.notes,
+    sortable:true
+	},
+  {		
+    id:'attachment',
+		name: 'Attachments',
+		selector: (row: { attachments: string }) => row.attachments,
+    cell: (row:{ attachments: string}) => <a href='http://www.google.com' target="_blank">{row.attachments}</a>,
+    sortable:true
+	},
 ];
 
-const Tabledata = [
-  {
-    Load: 1001,
-    Date: "07/14/23",
-    Driver: "Shyam payne [drv]",
-    Broker: "002063564 ONTARIO",
-    "PO#": "-",
-    Pickup: "Joliet, ILL",
-    Delivery: "Cameron, ILT",
-    Rate: "$500.00",
-    Completed: "23/06/2023",
-    Status: "Delivered - badge",
-    Billing: "Invoiced",
-    Notes: "Lumper: $50.00 :: Detention: $50.00",
-    Attachments: "[file-icon]",
+const data= //{
+  //rows:
+  [
+    {
+      load: 1001,
+      date: "07/14/23",
+      driver: "Shyam payne [drv]",
+      broker: "002063564 ONTARIO",
+      po_number: "-",
+      pickup: "Joliet, ILL",
+      delivery: "Cameron, ILT",
+      rate: "500.00",
+      completed: "23/06/2023",
+      status: "Delivered - badge",
+      billing: "Invoiced",
+      notes: "Lumper: $50.00 :: Detention: $50.00",
+      attachments: "[file-icon]",
+  
+    },
+    {
+      load: 1002,
+      date: "08/12/23",
+      driver: "Sita payne [drv]",
+      broker: "002063563 ONTARIO",
+      po_number: "-",
+      pickup: "Joliet",
+      delivery: "Cameron",
+      rate: "500.00",
+      completed: "24/06/2023",
+      status: "Delivered - badge",
+      billing: "Invoiced",
+      notes: "Lumper: $50.00 :: Detention: $50.00",
+      attachments: "[file-icon]",  
+    },
+    {
+      load: 1003,
+      date: "08/12/23",
+      driver: "Ram payne [drv]",
+      broker: "002063563 ONTARIO",
+      po_number: "-",
+      pickup: "Joliet-T",
+      delivery: "Cameron",
+      rate: "500.00",
+      completed: "25/06/2023",
+      status: "Delivered - badge",
+      billing: "Invoiced",
+      notes: "Lumper: $50.00 :: Detention: $50.00",
+      attachments: "[file-icon]",
+  
+    } 
+  ]
+  //,total_rows:12
+//}
 
-  },
-  {
-    Load: 1002,
-    Date: "08/12/23",
-    Driver: "Sita payne [drv]",
-    Broker: "002063563 ONTARIO",
-    "PO#": "-",
-    Pickup: "Joliet",
-    Delivery: "Cameron",
-    Rate: "$500.00",
-    Completed: "24/06/2023",
-    Status: "Delivered - badge",
-    Billing: "Invoiced",
-    Notes: "Lumper: $50.00 :: Detention: $50.00",
-    Attachments: "[file-icon]",
-
-  },
-  {
-    Load: 1003,
-    Date: "08/12/23",
-    Driver: "Ram payne [drv]",
-    Broker: "002063563 ONTARIO",
-    "PO#": "-",
-    Pickup: "Joliet-T",
-    Delivery: "Cameron",
-    Rate: "$500.00",
-    Completed: "25/06/2023",
-    Status: "Delivered - badge",
-    Billing: "Invoiced",
-    Notes: "Lumper: $50.00 :: Detention: $50.00",
-    Attachments: "[file-icon]",
-
-  },
-];
 
 type ActionTypes =
   | { type: "SET_PERIOD"; payload: string }
@@ -149,8 +225,7 @@ const LoadPage = () => {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [filteredData, setFilteredData] = useState(Tabledata);
-  const [editLoadModal, setEditLoadModal] = useState(false)
+  const [editLoadModal, setEditLoadModal] = useState(false);
   const [filter, setFilter] = useState("");
   const [formState, dispatch] = useReducer(
     filterformReducer,
@@ -163,15 +238,15 @@ const LoadPage = () => {
   };
   const handleSearchFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toLowerCase();
-    const filteredData = Tabledata.filter((item) => {
-      return columns.some((column) =>
-        String(item[column as keyof object])
-          .toLowerCase()
-          .includes(value)
-      );
-    });
+    // const filteredData = Tabledata.filter((item) => {
+    //   return columns.some((column) =>
+    //     String(item[column as keyof object])
+    //       .toLowerCase()
+    //       .includes(value)
+    //   );
+    // });
     setFilter(value);
-    setFilteredData(filteredData);
+    //setFilteredData(filteredData);
   };
 
   // const handleEditLoad = () => {
@@ -612,15 +687,11 @@ const LoadPage = () => {
       </div>
 
       <EditLoadModal isOpen={editLoadModal} toggle={() => setEditLoadModal(false)} />
-      <BasicTable
-        emptyState={false}
-        tableData={Tabledata}
-        tableHeadCells={columns}
-        loading={false}
-        tableCells={filteredData}
-      />
+      {/* <CustomDataTable columns={columns} data ={data} pagination={true} /> */}
+      <CustomTable columns={columns} data ={data} noRecordMessage="No load found."  />
     </CommonLayOut>
   );
 };
 
 export default LoadPage;
+

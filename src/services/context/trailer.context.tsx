@@ -1,39 +1,47 @@
-import React, { createContext } from "react";
 import { Draft } from "immer";
-import { ITrailerObject  } from "../tms-objects/trailer.types";
+import React, { createContext } from "react";
 import { useImmer } from "use-immer";
+import { ITrailerObject } from "../tms-objects/trailer.types";
 
-export interface ITrailerStatus {
-  trailerLoading: boolean;
-  trailerListStatus: ITrailerObject[] | null;
+export interface ITrailerData {
+    trailerList : ITrailerObject[] | null;
+    trailerDetail : ITrailerObject | null;
+    isLoading : boolean;
+    is_error : boolean;
+    saveTrailerSuccess :boolean;
+    saveTrailerFailed : boolean;
+    selectedTrailer: ITrailerObject | null;
 }
 
-const initialState: ITrailerStatus = {
-  trailerLoading: false,
-  trailerListStatus: null,
-};
+const trailerInitialData : ITrailerData = {
+  trailerList:null,
+  trailerDetail:null,
+  isLoading : false,
+  is_error : false,
+  saveTrailerSuccess :false,
+  saveTrailerFailed : false,
+  selectedTrailer:null,
+}
 
-type TrailerSattusType = {
-  state: ITrailerStatus;
-  setState: (
-    f: (draft: Draft<ITrailerStatus>) => void | ITrailerStatus
-  ) => void;
-};
-
-const TrailerAddContext = createContext<TrailerSattusType>({
-  state: initialState,
-  setState: () => undefined,
-});
-
-const TrailerStatusProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, setState] = useImmer<ITrailerStatus>(initialState);
-
-  return (
-    <TrailerAddContext.Provider value={{ state, setState }}>
-      {" "}
-      {children}
-    </TrailerAddContext.Provider>
-  );
-};
-
-export { TrailerStatusProvider, TrailerAddContext, initialState };
+type TrailerUpdateContextType = {
+    state: ITrailerData;
+    setState: (
+      f: (draft: Draft<ITrailerData>) => void | ITrailerData
+    ) => void;
+  };
+  const TrailerUpdateContext = createContext<TrailerUpdateContextType>({
+    state: trailerInitialData,
+    setState: () => undefined,
+  });
+  const TrailerProvider = ({ children }: { children: React.ReactNode }) => {
+    const [state, setState] = useImmer<ITrailerData>(trailerInitialData);
+  
+    return (  
+      <TrailerUpdateContext.Provider value={{ state, setState }}>
+        {children}
+      </TrailerUpdateContext.Provider>
+    );
+  };
+  
+  export { TrailerUpdateContext, TrailerProvider, trailerInitialData };
+  

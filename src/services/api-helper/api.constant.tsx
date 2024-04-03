@@ -53,13 +53,19 @@ export const API_LOAD = {
 export const API_CUSTOMER = {
   // House CUSTOMER API endpoints here
 
-  getCustomer: "/Customer",
+  getCustomer: "/customer",
   getIndividualCustomer : "/Customer",
   postNewCustomerData: "/Customer",
   deleteCustomer: "/Customer",
   getCustomerstatus :"/Customer/status",
-  
-  getBillingType : "/billing/types"
+  getBillingType : "/billing/types",
+  uploadDocuments : "/upload-document",
+  getContacts : "/contacts",
+  postContacts : "/contacts",
+  deleteContacts :"/delete",
+  getIndividualContacts :"/customer/contacts",
+  getCustomerDocument : "/documents",
+ postCustomerDocument : "/upload-document"
 };
 export const API_STATE = {
   getState : "/state",
@@ -72,7 +78,9 @@ export const API_DRIVER = {
   getDriverType : "/driver/types",
   getDriverStatus : "/driver/status",
   getPayRates : "/pay-rates",
-  postDriverImage : "/image"
+  postDriverImage : "/image",
+  getDiverDocApp : "/application",
+  
   
 };
 
@@ -84,6 +92,10 @@ export const API_TRUCK = {
 export const API_TRAILER = {
   // House Trailer API endpoints here
   getTrailer: "/Trailers",
+  getTrailerStatus: "/Trailers",
+  getIndividualTrailer : "/Trailers",
+  postNewTrailerData: "/Trailers",
+  deleteTrailer: "/Trailers",
 };
 export const API_USER = {
   // House Staff API endpoints here
@@ -102,11 +114,32 @@ export const API_USER_Role = {
 }
 
 export const API_ADMIN_PERMISSIONS = {
-  // House  API endpoints here
+  // House API endpoints here
   getAdminRole : "/Permission"
 }
 
 export const API_VENDOR = {
   // House VENDOR API endpoints here
-  getVendor : "/vendor"
+  getVendor: "/Vendor",
+  getIndividualVendor : "/Vendor",
+  postNewVendorData: "/Vendor",
+  deleteVendor: "/Vendor",
+  getVendorDocument : "/documents",
+  postVendorDocument : "/upload-document"
+}
+
+export const API_LIST = {
+  // House LIST API endpoints here
+  getBillingStatus:"/list/billing-status",
+  getBillingType:"/list/billing-type",
+  getCustomerStatus:"/list/customer-status",
+  getDriverStatus:'/list/driver-status',
+  getDriverType:"/list/driver-type",
+  getLoadStatus:"/list/load-status",
+  getStates:'/list/states',
+  getCredits:'/list/credits',
+}
+
+export const API_FUEL_CARD = {
+  getFuelCard:'/fuelcard' 
 }

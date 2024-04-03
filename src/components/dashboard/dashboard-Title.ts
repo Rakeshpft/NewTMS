@@ -68,7 +68,7 @@ export const dashboardTiles = {
             {
               title: "Add New Customer",
               icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createnewcustomer",
+              link: "/createNewCustomer",
             },
             {
               title: "View All Customers",

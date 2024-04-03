@@ -12,7 +12,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 // import { IdleTimerProvider } from "react-idle-timer";
 // import { handleLogout, session_Time_Logout } from "./components/auth";
 // import { DashboardPage } from "./components/dashboard";
-import { DriverPage } from "./components/driver-page";
+import {   DriverPage } from "./components/driver-page";
 import { LoadPage, CreateNewLaodPage } from "./components/load-page";
 import {
   Customer,
@@ -82,6 +82,9 @@ import { ProfileForm } from "./components/pofile";
 import ForgotResetPassword from "./components/login-page/forgetResetPassword";
 import UserRolePage from "./components/user-role/userRole-page";
 import UserAdminRole from "./components/user-page/userAdminRole";
+import CreateNewCustomerPage from "./components/partenrs/customer/create-new-customer-page";
+// import DriversDetails from "./components/driver-page/createDriver/driversDetails";
+// import DocumentApplication from "./components/driver-page/createDriver/documentDetailsPage/documentSubDetails/documentApplicationPage/documentApplication";
 // import CreateNewCustomerPage from "./components/partenrs/customer/create-new-customer-page";
 
 const App = () => {
@@ -121,14 +124,14 @@ const App = () => {
                   />
                   <Route path={routes.vendorsAll} element={<Vendors />} />
                   <Route
-                    path={routes.createNewVendor}
+                    path={`${routes.createNewVendor}/:id?`}
                     element={<CreateNewVendorPage />}
                   />
                   <Route path={routes.customersAll} element={<Customer />} />
-                  {/* <Route
-                    path={routes.createNewCustomer}
+                  <Route
+                    path={`${routes.createNewCustomer}/:id?`}
                     element={<CreateNewCustomerPage />}
-                  /> */}
+                  />
                   <Route
                     path={routes.driverPayRoll}
                     element={<DriverPayRoll />}
@@ -148,7 +151,7 @@ const App = () => {
                   />
                   <Route path={routes.fuelPage} element={<FuelPage />} />
                   <Route
-                    path={routes.createNewFuelPage}
+                    path={`${routes.createNewFuelPage}/:id?`}
                     element={<CreateNewFuelPage />}
                   />
                   <Route path={routes.fuelImport} element={<FuelImport />} />
@@ -167,7 +170,7 @@ const App = () => {
                   />
                   <Route path={routes.trailers} element={<TrailersPage />} />
                   <Route
-                    path={routes.createNewTailers}
+                    path={`${routes.createNewTailers}/:id?`}
                     element={<CreateNewTrailerPage />}
                   />
                   <Route path={routes.additions} element={<AdditionsPage />} />
@@ -269,6 +272,15 @@ const App = () => {
                   <Route path={routes.safetyPage} element={<SafetyPage />} />
                   <Route path={routes.settingPage} element={<SettingPage />} />
                   <Route path={routes.userAdminRole} element={<UserAdminRole />} />
+                  <Route path={routes.userAdminRole} element={<UserAdminRole />} />
+                  {/* <Route path={routes.driverApplication} element ={<DocumentApplication
+                  filterDocApp={filterDocApp}
+                   />} /> */}
+                 
+                 <Route path={routes.driverDetails} element={< Navigate to={routes.DocumentApplication}/>}/>   
+ 
+               
+
                 </Routes>
               </PrivateRoute>
             }

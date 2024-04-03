@@ -7,7 +7,7 @@ import { useImmer } from "use-immer";
 export interface IStateData {
     stateDetails : IStateDetails[] | null
     stateLoading : boolean;
-  is_error : boolean;
+   is_error : boolean;
   saveStateSuccess :boolean;
   saveStateFailed : boolean;
   selectedState : INewStateDetails | null;
