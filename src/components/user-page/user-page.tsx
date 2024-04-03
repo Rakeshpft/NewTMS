@@ -22,8 +22,8 @@ import { BasicTable } from "../../features/table/BasicTable";
 import { tableCells, tableHeadCells } from "./user.constants";
 import { IUserFormState, initialUserFormState } from "./user.types";
 // import { Modal } from "@mui/material";
-import Notification from "../../features/notification/Notification";
 import CommonLayOut from "../../layout";
+import { toastify } from "../../features/notification/toastify";
 
 const UserPage = () => {
   const {
@@ -33,10 +33,6 @@ const UserPage = () => {
     selectedUser,
     saveUser,
     deleteUserContact,
-    clearSuccessAndFailure,
-    saveUserSuccess,
-    saveUserFailed,
-    is_error,
     userLoading,
     userRole,
     getUserRole,
@@ -135,10 +131,7 @@ const UserPage = () => {
     }
   }, [userLoading]);
 
-  const handleCloseAlert = () => {
-    clearSuccessAndFailure();
-  };
-
+  
   const handleDeleteUsers = () => {
     selectedUsers && deleteUserContact(selectedUsers);
     getUserDetails();
@@ -156,10 +149,15 @@ const UserPage = () => {
 
   const handleSaveUser = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    await saveUser(userNewDetails).then((data) => {
-      data?.success && setModalOpen(false);
-    });
+
+    // await  saveUser(userNewDetails).then((data) => {
+    //   data?.success && setModalOpen(false);
+    // });
+    let response = await saveUser(userNewDetails);
+    response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
+    setModalOpen(false)
     getUserDetails();
+
     setNewUserDetails(initialUserFormState);
   };
 
@@ -225,40 +223,7 @@ const UserPage = () => {
        
       </CommonLayOut>
 
-      <div className="notification-container">
-        <div>
-          {saveUserSuccess && (
-            <Notification
-              type="success"
-              message="Staff registered successfully"
-              closeAlert={handleCloseAlert}
-            />
-          )}
-          {saveUserFailed && (
-            <Notification
-              type="error"
-              message="The email field is required."
-              closeAlert={handleCloseAlert}
-            />
-          )}
-          {is_error && saveUserSuccess && (
-            <Notification
-              type="error"
-              message="The email  is already in registered."
-              closeAlert={handleCloseAlert}
-            />
-          )}
-          {/* {deleteContactSuccess && (
-              <Notification type="info" message="Contact Deleted" closeAlert={handleCloseAlert} />
-            )}
-            {saveContactFailure && (
-              <Notification type="info" message="Failed to Save Contact" closeAlert={handleCloseAlert} />
-            )}
-            {deleteContactFailure && (
-              <Notification type="error" message="Failed to Delete Contact" closeAlert={handleCloseAlert} />
-            )} */}
-        </div>
-      </div>
+      
 
       <Modal isOpen={deleteModalOpen} onClose={closeDeleteModal}>
         <ModalHeader>

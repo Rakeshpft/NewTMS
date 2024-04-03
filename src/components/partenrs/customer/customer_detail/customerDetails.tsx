@@ -6,6 +6,7 @@ import { useListContext } from '../../../../services/reducer/list.reducer';
 import { useCustomerContext } from '../../../../services/reducer/customer.reducer';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../../routes/routes';
+import { toastify } from '../../../../features/notification/toastify';
 
 
 const CustomerDetails = (props: TCustomerProps) => {
@@ -13,8 +14,6 @@ const CustomerDetails = (props: TCustomerProps) => {
         handleSubmit = undefined,
         customer_id =0,
         } = props
-      
-
 
     const {getStateList,stateList,getCustomerStatusList,customerStatusList,getCreditList,creditList}= useListContext()
         const{getIdividualCustomerDetails,selectedCustomer,customerLoading,saveCustomer}=useCustomerContext();
@@ -22,21 +21,16 @@ const CustomerDetails = (props: TCustomerProps) => {
        const navigate = useNavigate();
 
     useEffect(()=>{
+        if(customer_id >0){
+            getIdividualCustomerDetails(customer_id)
+        }
+        getStateList();
         getCustomerStatusList();
-    }, []);
-  
-    useEffect(()=>{
         getCreditList();
     }, []);
 
     useEffect(() => {
-        if(customer_id >0){
-            getIdividualCustomerDetails(customer_id)}
-        getStateList();
-    }, []);
-
-    useEffect(() => {
-        if(!customerLoading && selectedCustomer) {
+        if(!customerLoading && selectedCustomer && customer_id>0) {
             setcustomerNewDetails(selectedCustomer);
         }
     }, [customerLoading, selectedCustomer]);
@@ -49,10 +43,11 @@ const CustomerDetails = (props: TCustomerProps) => {
 
       const handleSaveCustomer = async (event: { preventDefault: () => void }) => {
           event.preventDefault();
-          await saveCustomer(customerNewDetails).then((data) => {
-            data?.success&& handleSubmit && handleSubmit(data.value);
-            getIdividualCustomerDetails(data?.value.customer_id);
-          handleClose();
+       await saveCustomer(customerNewDetails).then((response) => {
+            response?.success&& handleSubmit && handleSubmit(response.value);
+            getIdividualCustomerDetails(response?.value.customer_id);
+        //   handleClose();
+          response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
         });
     }
 

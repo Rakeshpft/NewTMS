@@ -11,7 +11,6 @@ export interface IUserRoleData {
    saveUserRoleSuccess : boolean;
    saveUserRoleFailed : boolean;
    selectedUserRole : IUserRoleDetails | null
-
 }
 
 const InitialState : IUserRoleData = {

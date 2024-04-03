@@ -79,19 +79,16 @@ export const useUserRoleContext = () => {
     setState((draft) => {
       draft.userRoleLoading = true;
     })
-    clearSuccessAndFailure();
+   
     try{
       const response : IAPIResponse = await API.post(API_USER_Role.postNewUserRoleData, newUserRole);
       
-      console.log("post id data " ,response )
-       setState(draft => {
-        draft.is_error = response.is_error ? true : false
-          draft.saveUserRoleSuccess = response.success ? true : false
       
+       setState(draft => {
        
         draft.selectedUserRole = null;
       });
-
+return response
     } catch (error: any) {
       console.log(error);
       setState((draft) => {
@@ -104,7 +101,7 @@ export const useUserRoleContext = () => {
     setState((draft) => {
       draft.userRoleLoading = true;
     });
-    clearSuccessAndFailure();
+    
     try{
       await userToDeleted.forEach(user => {
 
@@ -120,19 +117,12 @@ export const useUserRoleContext = () => {
     
   }
 
-  const clearSuccessAndFailure = () => {
-    setState((draft) => {
-      draft.saveUserRoleFailed = false;
-      draft.saveUserRoleSuccess = false;
-
-    });
-  };
+  
   return {
     ...state,
     getUserRoleDetails,
     getIndividualUserRoleDetails,
     saveUserRole,
     deleteUserRole,
-    clearSuccessAndFailure
   };
 };

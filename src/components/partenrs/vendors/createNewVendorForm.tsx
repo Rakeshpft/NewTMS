@@ -1,16 +1,8 @@
-// import { Form, useNavigate } from "react-router-dom";
-// import { routes } from "../routes/routes";
 import React from "react";
 import {
-  // Form,
-  // Row,
- 
   TabPane,
 } from "reactstrap";
-
-
 import TabPage from "../../driver-page/tab-page";
-
 import CommonLayOut from "../../../layout";
 import { TVendorProps } from "../../../services/tms-objects/vendor.types";
 import VendorDocuments from "./vendor_documents/vendorDocuments";

@@ -18,16 +18,20 @@ const VendorDetails = (props: TVendorProps) => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log("vendor",vendor_id);
         if(vendor_id>0){
             getIdividualVendorDetails(vendor_id);
+        }
+        else{
+            setvendorNewDetails(initialStateVendor);
         }
         getStateList();        
     }, []);
     useEffect(() => {
-        if(!VendorLoading && selectedVendor) {
+        if(!VendorLoading && selectedVendor && vendor_id>0) {
             setvendorNewDetails(selectedVendor);
         }
-    }, [VendorLoading, selectedVendor]);
+    }, [selectedVendor]);
 
     const handleInputChange =
     (prop: keyof IVendorDetails) =>
@@ -42,6 +46,7 @@ const VendorDetails = (props: TVendorProps) => {
         });
     };
     const handleClose = () => {
+        setvendorNewDetails(initialStateVendor);
         navigate(routes.vendorsAll);
     }
 

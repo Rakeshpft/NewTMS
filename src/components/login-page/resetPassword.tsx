@@ -70,6 +70,7 @@ const ResetPassword = () => {
     event.preventDefault();
 
     verifyFirstPass(verifyPass, company_guid).then((data) => {
+      
       setVerifyPass(initialVerifyPass);
       setShowRegistrationMessage(true);
       setApiResponseMsg(`${data}`);

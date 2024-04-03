@@ -14,7 +14,6 @@ import {
 import { BsSearch } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
 import { debounce, includes, isEmpty } from "lodash";
-import Notification from "../../features/notification/Notification"
 import { IUserRoleFormState, initialUserRoleFormState } from "./userRole.types";
 import { IUserRoleDetails } from "../../services/tms-objects/userRole.types";
 import { useUserRoleContext } from "../../services/reducer/userRole.reducer";
@@ -24,6 +23,7 @@ import { HiOutlinePencilAlt, HiCheckCircle } from "react-icons/hi";
 import { CustomTable } from "../../features/data-table/CustomTable";
 import { Checkbox } from "@mui/material";
 import { MdCancel } from "react-icons/md";
+import { toastify } from "../../features/notification/toastify";
 
 const UserRolePage = () => {
   const {
@@ -33,10 +33,6 @@ const UserRolePage = () => {
     selectedUserRole,
     saveUserRole,
     deleteUserRole,
-    clearSuccessAndFailure,
-    saveUserRoleSuccess,
-    saveUserRoleFailed,
-    is_error,
     userRoleLoading,
 
   } = useUserRoleContext();
@@ -129,9 +125,7 @@ const UserRolePage = () => {
     }
   }, [userRoleLoading]);
 
-  const handleCloseAlert = () => {
-    clearSuccessAndFailure();
-  };
+  
 
   const closeDeleteModal = () => {
     setDeleteModalOpen(false);
@@ -159,7 +153,10 @@ const UserRolePage = () => {
 
   const handleSaveUserRole = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    await saveUserRole(userRoleNewDetails);
+    
+   let response =  await saveUserRole(userRoleNewDetails);
+    response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
+
     getUserRoleDetails()
     setModalOpen(false);
   };
@@ -284,7 +281,7 @@ const columns: CustomTableColumn[] = [
           editRow={handleEditRole}
         /> */}
         <CustomTable columns={columns} data={filteredData} noRecordMessage="No user  role found." />
-        <div className="notification-container">
+        {/* <div className="notification-container">
           <div>
 
             {saveUserRoleSuccess &&
@@ -308,7 +305,7 @@ const columns: CustomTableColumn[] = [
               />
             )}
           </div>
-        </div>
+        </div> */}
         <Modal isOpen={deleteModalOpen} onClose={closeDeleteModal}>
           <ModalHeader>
             <h6 className="mb-0 fw-bold"> Delete </h6>

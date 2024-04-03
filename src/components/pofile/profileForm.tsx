@@ -10,9 +10,9 @@ import {
 } from "reactstrap";
 import { useProfileContext } from "../../services/reducer/profile.Reducer";
 import { IProfileUpdate, initialProfileUpdateState } from "./profileType";
-import { Bounce, ToastContainer, toast } from "react-toastify";
+import {  ToastContainer } from "react-toastify";
 import CommonLayOut from "../../layout";
-// import { Bounce, ToastContainer, toast } from "react-toastify";
+import { toastify } from "../../features/notification/toastify";
 
 export interface IProfilePassword {
   password: string;
@@ -77,18 +77,9 @@ const ProfileForm = () => {
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-    postProfileDetails(editProfileDetails)?.then((data) => {
-      toast(data.message, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "light",
-        transition: Bounce,
-      });
-
+    postProfileDetails(editProfileDetails)?.then((response) => {
+      response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
+      
     });
 
   };
@@ -96,17 +87,9 @@ const ProfileForm = () => {
 
   const handlePasswordSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    profileResetPass(resetPasswordData)?.then((data) => {
-      toast(data.message, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "light",
-        transition: Bounce,
-      });
+    profileResetPass(resetPasswordData)?.then((response) => {
+      response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
+     
     })
 
 

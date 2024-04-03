@@ -63,7 +63,6 @@ export const useUserContext = () => {
     setState((draft) => {
       draft.userLoading = true;
     });
-    clearSuccessAndFailure();
     try {
       const response: IAPIResponse = await API.post(
         API_USER.postNewUserData,
@@ -71,8 +70,7 @@ export const useUserContext = () => {
       );
 
       setState((draft) => {
-        draft.is_error = response.is_error ? true : false;
-        draft.saveUserSuccess = response.success ? true : false;
+        
         draft.selectedUser = null;
       });
       return response;
@@ -89,8 +87,6 @@ export const useUserContext = () => {
       draft.userLoading = true;
     });
 
-    clearSuccessAndFailure();
-
     try {
       userToDeleted.forEach((user) => {
         API.del(`${API_USER.deleteUsers}/${user.staff_id}`); 
@@ -105,12 +101,7 @@ export const useUserContext = () => {
     }
   };
 
-  const clearSuccessAndFailure = () => {
-    setState((draft) => {
-      draft.saveUserFailed = false;
-      draft.saveUserSuccess = false;
-    });
-  };
+ 
 
   const getUserRole = async () => {
     setState((draft) => {
@@ -136,7 +127,6 @@ export const useUserContext = () => {
     getIdividualUserDetails,
     saveUser,
     deleteUserContact,
-    clearSuccessAndFailure,
     getUserRole,
   };
 };

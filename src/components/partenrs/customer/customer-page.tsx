@@ -92,6 +92,7 @@ const CustomerPage = () => {
     getCustomerDetails().then((data) => {
       data && setFilteredData(data);
     });
+    
     setDeleteModalOpen(false)
     console.log("clicked")
     setSelectedCustomers([]);
@@ -247,7 +248,7 @@ const CustomerPage = () => {
                   {!isEmpty(selectedCustomers) && (
                     <div className=" my-3 ">
                       {selectedCustomers.length > 1
-                        ? `Are you sure you want to delete ${selectedCustomers.length} contacts?`
+                        ? `Are you sure you want to delete ${selectedCustomers.length} customers?`
                         : `Are you sure you want to delete customer "${selectedCustomers[0].first_name} ${selectedCustomers[0].last_name}"?`}
                     </div>
                   )}
