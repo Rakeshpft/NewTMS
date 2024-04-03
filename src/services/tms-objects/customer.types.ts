@@ -159,7 +159,7 @@ export interface INewCustomerContacts {
 }
 export type TCustomerProps = {
   customer_id?:number;
-  handleSubmit?:(obj:ICustomerDetails)=>void;
+  handleSubmit?:(obj :ICustomerDetails)=>void;
 }
 
 export interface ICustomerManagementProps {

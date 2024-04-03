@@ -18,6 +18,6 @@ const CreateNewCustomerPage = ( ) => {
         <CreateNewCustomerForm customer_id={customer_id} />
     );
 }
-// )};
+
 
 export default CreateNewCustomerPage;

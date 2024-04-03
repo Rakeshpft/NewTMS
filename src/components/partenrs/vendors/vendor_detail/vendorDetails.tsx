@@ -5,11 +5,12 @@ import { useVendorContext } from '../../../../services/reducer/vendor.reducer';
 import { useListContext } from '../../../../services/reducer/list.reducer';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../../routes/routes';
+import { toastify } from '../../../../features/notification/toastify';
 
 const VendorDetails = (props: TVendorProps) => {
     const {
-        vendor_id=0,
-        handleSubmit=undefined
+        vendor_id = 0,
+        handleSubmit = undefined
     } = props;
 
     const { getStateList, stateList } = useListContext();
@@ -18,32 +19,53 @@ const VendorDetails = (props: TVendorProps) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("vendor",vendor_id);
-        if(vendor_id>0){
+        console.log("vendor", vendor_id);
+        if (vendor_id > 0) {
             getIdividualVendorDetails(vendor_id);
         }
-        else{
+        else {
             setvendorNewDetails(initialStateVendor);
         }
-        getStateList();        
+        getStateList();
     }, []);
     useEffect(() => {
-        if(!VendorLoading && selectedVendor && vendor_id>0) {
+        if (!VendorLoading && selectedVendor && vendor_id > 0) {
             setvendorNewDetails(selectedVendor);
         }
     }, [selectedVendor]);
 
+
+    const VendorValidate = () => {
+        if (vendorNewDetails.first_name == "") {
+            toastify({ message: "Please enter first name", type: "error" })
+            return false
+        }
+        if (vendorNewDetails.last_name == "") {
+            toastify({ message: "Please enter last name", type: "error" })
+            return false
+        }
+        if (vendorNewDetails.email == "") {
+            toastify({ message: "Please enter email Id", type: "error" })
+            return false
+        }
+        return true
+    }
+
     const handleInputChange =
-    (prop: keyof IVendorDetails) =>
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        setvendorNewDetails({ ...vendorNewDetails, [prop]: event.target.value });
-      };
+        (prop: keyof IVendorDetails) =>
+            (event: React.ChangeEvent<HTMLInputElement>) => {
+                setvendorNewDetails({ ...vendorNewDetails, [prop]: event.target.value });
+            };
     const handleSaveVendor = async (event: { preventDefault: () => void }) => {
         event.preventDefault();
-        await saveVendor(vendorNewDetails).then((data) => {
-            data?.success && handleSubmit && handleSubmit(data.value);
-            getIdividualVendorDetails(data?.value.vendor_id);
-        });
+
+        if (VendorValidate()) {
+            await saveVendor(vendorNewDetails).then((response) => {
+                response?.success && handleSubmit && handleSubmit(response.value);
+                getIdividualVendorDetails(response?.value.vendor_id);
+                response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
+            });
+        }
     };
     const handleClose = () => {
         setvendorNewDetails(initialStateVendor);

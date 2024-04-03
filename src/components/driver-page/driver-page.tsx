@@ -170,7 +170,6 @@ const handleImageChange = async(event: React.ChangeEvent<HTMLInputElement>) => {
     setNewDriver(initialStateDriver);
     setDriverPayrates(initialStatedriver_pay_rates)
 
-   
   };
 
 

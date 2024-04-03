@@ -127,7 +127,8 @@ const CustomerPage = () => {
       name: "NAME",
       style: { width: "25%" },
       sortable: true,
-      selector: (row: ICustomerDetails) => row.full_name
+      selector: (row: ICustomerDetails) => row.full_name,
+      format:(row:ICustomerDetails)=>(`${row.first_name} ${row.last_name}`)
     },
     {
       id: "address",

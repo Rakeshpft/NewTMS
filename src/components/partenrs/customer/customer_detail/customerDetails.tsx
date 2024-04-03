@@ -44,7 +44,7 @@ const CustomerDetails = (props: TCustomerProps) => {
       const handleSaveCustomer = async (event: { preventDefault: () => void }) => {
           event.preventDefault();
        await saveCustomer(customerNewDetails).then((response) => {
-            response?.success&& handleSubmit && handleSubmit(response.value);
+            response?.success && handleSubmit && handleSubmit(response.value);
             getIdividualCustomerDetails(response?.value.customer_id);
         //   handleClose();
           response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
