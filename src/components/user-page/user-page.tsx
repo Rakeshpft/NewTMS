@@ -9,7 +9,7 @@ import {
   Modal,
   ModalBody,
   ModalHeader,
-  } from "reactstrap";
+} from "reactstrap";
 
 import { BsSearch } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -38,18 +38,15 @@ const UserPage = () => {
     getUserRole,
   } = useUserContext();
 
-
-
   const inputRef = useRef<HTMLInputElement>(null);
-  
- 
 
   const [filteredData, setFilteredData] = useState<IUserDetails[] | []>([]);
   const [noUser, setNoUser] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [title, setTitle] = useState(true);
- 
-  const [userNewDetails, setNewUserDetails] = useState<IUserFormState>(initialUserFormState);
+
+  const [userNewDetails, setNewUserDetails] =
+    useState<IUserFormState>(initialUserFormState);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedUsers, setSelectedUsers] = useState<IUserDetails[] | []>([]);
 
@@ -79,6 +76,28 @@ const UserPage = () => {
     }
   }, [selectedUser]);
 
+  const validateUser = () => {
+    if (userNewDetails.first_name === "") {
+      toastify({ message: "Please enter first name", type: "error" });
+      return false;
+    } else if (userNewDetails.email === "") {
+      toastify({ message: "Please enter email", type: "error" });
+   
+      return false;
+    } else if (userNewDetails.contact_number === "") {
+      toastify({ message: "Please enter contact number", type: "error" });
+      return false;
+    } else if (userNewDetails.role_id === 0) {
+      toastify({ message: "Please select role", type: "error" });
+      return false;
+    } else if (userNewDetails.staff_id === 0) {
+      toastify({ message: "Please select staff", type: "error" });
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const handleSearch = debounce((searchValue: string) => {
     const searchResults =
       userDetails &&
@@ -95,8 +114,6 @@ const UserPage = () => {
     setNewUserDetails(initialUserFormState);
     setTitle(true);
   };
-
-  
 
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -131,7 +148,6 @@ const UserPage = () => {
     }
   }, [userLoading]);
 
-  
   const handleDeleteUsers = () => {
     selectedUsers && deleteUserContact(selectedUsers);
     getUserDetails();
@@ -142,21 +158,23 @@ const UserPage = () => {
     setDeleteModalOpen(false);
     setSelectedUsers([]);
   };
- 
+
   useEffect(() => {
     getUserDetails();
   }, []);
 
   const handleSaveUser = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-
-    // await  saveUser(userNewDetails).then((data) => {
-    //   data?.success && setModalOpen(false);
-    // });
-    let response = await saveUser(userNewDetails);
-    response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
-    setModalOpen(false)
-    getUserDetails();
+    if (validateUser()) {
+      let response = await saveUser(userNewDetails);
+      response &&
+        toastify({
+          message: response.message,
+          type: response.success ? "success" : "error",
+        });
+      setModalOpen(false);
+      getUserDetails();
+    }
 
     setNewUserDetails(initialUserFormState);
   };
@@ -167,63 +185,65 @@ const UserPage = () => {
 
   return (
     <>
-           <CommonLayOut>        
-      <div className="d-flex justify-content-between">
-        <div className="page-title">Users</div>
-        <div className="d-flex align-items-center gap-1">
-          <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
-            <InputGroup className="shadow-sm border-secondary">
-             
-              <InputGroupText className="bg-white">
-                <BsSearch size={16} />
+      <CommonLayOut>
+        <div className="d-flex justify-content-between">
+          <div className="page-title">Users</div>
+          <div className="d-flex align-items-center gap-1">
+            <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
+              <InputGroup className="shadow-sm border-secondary">
+                <InputGroupText className="bg-white">
+                  <BsSearch size={16} />
                 </InputGroupText>
-              <Input placeholder="Search"
-               className="border-start-0 search" 
-               inputRef={inputRef} onChange=
-               {(e: any) => handleSearch(e.target.value)} />
-            </InputGroup>
-           
+                <Input
+                  placeholder="Search"
+                  className="border-start-0 search"
+                  inputRef={inputRef}
+                  onChange={(e: any) => handleSearch(e.target.value)}
+                />
+              </InputGroup>
+            </div>
+            <InviteUserModal
+              modalOpen={modalOpen}
+              closeModal={handleCloseModal}
+              userNewDetails={userNewDetails}
+              setUserDetails={setNewUserDetails}
+              handleInputChange={handleInputChange}
+              selectedUser={selectedUser}
+              handleSaveUser={handleSaveUser}
+              userRole={userRole}
+              title={title}
+              handleCheckBox={handleCheckBox}
+            />
+            <div className="user-info-btn-wrapper">
+              {!isEmpty(selectedUsers) && (
+                <div className="user-info-btn">
+                  <Button
+                    color="primary"
+                    onClick={() => setDeleteModalOpen(true)}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              )}
+            </div>
+            <Button color="primary" onClick={handleInviteUser}>
+              <AiOutlinePlus /> Invite User
+            </Button>
           </div>
-          <InviteUserModal
-            modalOpen={modalOpen}
-            closeModal={handleCloseModal}
-            userNewDetails={userNewDetails}
-            setUserDetails={setNewUserDetails}
-            handleInputChange={handleInputChange}
-            selectedUser={selectedUser}
-            handleSaveUser={handleSaveUser}
-            userRole={userRole}
-            title={title}
-            handleCheckBox={handleCheckBox}
-          />
-          <div className="user-info-btn-wrapper">
-            {!isEmpty(selectedUsers) && (
-              <div className="user-info-btn">
-                
-                <Button color="primary" onClick={() => setDeleteModalOpen(true)}>Delete</Button>
-              </div>
-            )}
-          </div>
-          <Button color="primary" onClick={handleInviteUser}><AiOutlinePlus /> Invite User</Button>
         </div>
-     
-        </div>
-          <BasicTable
-            emptyState={noUser}
-            canSelectRows={true}
-            selectedTableRows={selectedUsers}
-            setSelectionTableRows={setSelectedUsers}
-            tableData={filteredData}
-            tableHeadCells={tableHeadCells}
-            loading={userLoading}
-            tableCells={tableCells}
-            canEditRow={true}
-            editRow={handleEditContact}
-          />
-       
+        <BasicTable
+          emptyState={noUser}
+          canSelectRows={true}
+          selectedTableRows={selectedUsers}
+          setSelectionTableRows={setSelectedUsers}
+          tableData={filteredData}
+          tableHeadCells={tableHeadCells}
+          loading={userLoading}
+          tableCells={tableCells}
+          canEditRow={true}
+          editRow={handleEditContact}
+        />
       </CommonLayOut>
-
-      
 
       <Modal isOpen={deleteModalOpen} onClose={closeDeleteModal}>
         <ModalHeader>

@@ -73,26 +73,51 @@ const ProfileForm = () => {
         });
       };
 
+      const profileValidate = () => {
+
+        if (editProfileDetails.first_name == "") {
+          toastify({ message: "Please enter first name", type: "error" })
+          return false
+        }
+        if (editProfileDetails.last_name == "") {
+          toastify({ message: "Please enter last name", type: "error" })
+          return false
+        }
+       
+        if (editProfileDetails.contact_number == "") {
+          toastify({ message: "Please enter contact number", type: "error" })
+    
+    
+          return false
+        }
+        return true
+      }
+
   const handleProfileSubmit = (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-    postProfileDetails(editProfileDetails)?.then((response) => {
-      response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
-      
-    });
-
+    if(profileValidate()){
+      postProfileDetails(editProfileDetails)?.then((response) => {
+        response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
+        
+      });
+    }
   };
-  console.log("postdata", editProfileDetails);
+  
 
   const handlePasswordSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
+
+    
+    if (resetPasswordData.password != resetPasswordData.confirmPassword) {
+      toastify({ message: "Password and confirm password not match", type: "error" });
+      return;
+    }
     profileResetPass(resetPasswordData)?.then((response) => {
       response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
      
     })
-
-
     setResetPasswordData(initialIProfilePassword);
   };
 
@@ -113,6 +138,8 @@ const ProfileForm = () => {
 
     console.log("imageFile", event.target.files);
   };
+
+  
 
   return (
     <CommonLayOut>
