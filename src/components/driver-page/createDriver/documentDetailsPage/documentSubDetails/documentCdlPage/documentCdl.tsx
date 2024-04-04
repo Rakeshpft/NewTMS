@@ -8,11 +8,14 @@ import { CustomTable } from '../../../../../../features/data-table/CustomTable';
 import { useDriverContext } from '../../../../../../services/reducer/driver.reducer';
 import { RxCross2 } from 'react-icons/rx';
 import { toastify } from '../../../../../../features/notification/toastify';
+import { useListContext } from '../../../../../../services/reducer/list.reducer';
 
 const DocumentCdl = ( prop : TDriverProps) => {
 
   const {  driver_id = 0 } = prop
   const { getDriverCdlList , driverCdlLists, postDriverCdl ,driverLoading } = useDriverContext()
+
+   const { getStateList, stateList } = useListContext();
 
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [driverCdl, setDriverCdl] = useState<IDriverCdl>(initialDriverCdl);
@@ -75,11 +78,14 @@ const DocumentCdl = ( prop : TDriverProps) => {
   }
 
   useEffect(() => {
-    if(driver_id > 0)
-    getDriverCdlList(driver_id) 
-    
+    if(driver_id > 0){
+      getDriverCdlList(driver_id) 
+    }
+    getStateList();
+   
   }, [])
 
+  
 
 
   const columns: CustomTableColumn[] = [
@@ -165,8 +171,14 @@ const DocumentCdl = ( prop : TDriverProps) => {
         <Col md={6}>
         <FormGroup>
           <Label for="name">State</Label>
-          <Input bsSize="sm" className="form-control form-control-sm" type="select" id="user" name="user"  value={1}>
-            <option value="1">Completed</option>
+          <Input bsSize="sm" className="form-control form-control-sm" type="select" id="user" name="user"  value={driverCdl.state_id} onChange={handleDriverInput('state_id')}>
+            <option value="">Select State</option>
+            {stateList?.map((state) => (
+              <option key={state.state_id} value={state.state_id}>
+                {state.state_name}
+              </option>
+            ))}
+            
             </Input>
           </FormGroup>
         </Col>

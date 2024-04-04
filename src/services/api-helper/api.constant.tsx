@@ -133,14 +133,14 @@ export const API_LIST = {
   // House LIST API endpoints here
   getMenuList:"/menu",
   getBillingStatus:"/list/billing-status",
-  getBillingType:"/list/billing-type",
+  getBillingType:"/list/billing-types",
   getCustomerStatus:"/list/customer-status",
   getDriverStatus:'/list/driver-status',
-  getDriverType:"/list/driver-type",
+  getDriverType:"/list/driver-types",
   getLoadStatus:"/list/load-status",
   getStates:'/list/states',
   getCredits:'/list/credits',
-  getOwnershipType:'/list/ownership-type',
+  getOwnershipType:'/list/ownership-types',
   getDocumentStatus:'/list/document-status',
   getFactors:'/list/factors',
 }
