@@ -10,8 +10,7 @@ const CustomerContactsModal = (props : ICustomerContactsProps) => {
     const {
         modalOpen,
         closeModal,
-        
-        title,
+         title,
         contactNewDetails,
         handleInputContactChange,
         handleSaveContact,

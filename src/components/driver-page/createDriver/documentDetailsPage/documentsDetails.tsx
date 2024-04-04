@@ -44,7 +44,9 @@ const DocumentsDetails = (prop : TDriverProps) => {
           />
         </TabPane>
         <TabPane tabId={3} className="">
-          <DocumentMedical />
+          <DocumentMedical 
+           driver_id = {driver_id}
+          />
         </TabPane>
         <TabPane tabId={4} className="">
           <DocumentDrugTest />

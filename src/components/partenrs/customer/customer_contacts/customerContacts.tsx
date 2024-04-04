@@ -1,4 +1,4 @@
-import { includes, isEmpty } from 'lodash'
+import { isEmpty } from 'lodash'
 
 import React, { useEffect, useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
@@ -11,7 +11,6 @@ import { useCustomerContext } from '../../../../services/reducer/customer.reduce
 // import { IUserRoleDetails } from '../../../../services/tms-objects/userRole.types'
 import { ICustomerContacts, TCustomerProps, initialCustomerContacts } from '../../../../services/tms-objects/customer.types'
 // import CustomerDetails from '../customer_detail/customerDetails'
-import { Checkbox } from '@mui/material'
 import { HiCheckCircle, HiOutlinePencilAlt } from 'react-icons/hi'
 import { CustomTable } from '../../../../features/data-table/CustomTable'
 import { toastify } from '../../../../features/notification/toastify'
@@ -22,6 +21,7 @@ const CustomerContacts = (prop: TCustomerProps) => {
     customer_id = 0
   } = prop;
   console.log(customer_id);
+
   const {
     selectedContact,
     ContactList,
@@ -36,7 +36,6 @@ const CustomerContacts = (prop: TCustomerProps) => {
 
 
   const [filteredData, setFilteredData] = useState<ICustomerContacts[]>([]);;
-  //const [noUserRole, setNoUserRole] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [title, setTitle] = useState(true);
   const [contactNewDetails, setcontactNewDetails] = useState<ICustomerContacts>(initialCustomerContacts);
@@ -107,18 +106,21 @@ const CustomerContacts = (prop: TCustomerProps) => {
     setcontactNewDetails(initialCustomerContacts);
     setTitle(true);
   };
+
   const handleCloseModal = () => {
     setModalOpen(false);
     getContacts(customer_id).then((data) => {
       data && setFilteredData(data);
     });
   };
+
   const handleEditContact = (contact: ICustomerContacts) => {
     getIndividualContacts(contact.contact_id);
     setcontactNewDetails(contact)
     setModalOpen(true);
     setTitle(false);
   };
+
   useEffect(() => {
     if (customerLoading && ContactList) {
       setFilteredData(ContactList);
@@ -165,9 +167,10 @@ const CustomerContacts = (prop: TCustomerProps) => {
   };
 
   useEffect(() => {
+    if(customer_id>0){
     getContacts(customer_id).then((data) => {
       data && setFilteredData(data);
-    });
+    })};
   }, []);
 
   const handleSaveContact = async (event: { preventDefault: () => void }) => {
@@ -184,26 +187,9 @@ const CustomerContacts = (prop: TCustomerProps) => {
 
     })
   }};
-  const handleSelectContact = (event: React.ChangeEvent<HTMLInputElement>, row: any) => {
-    const checked = event.target.checked;
-    if (checked && selectedContacts) {
-      setSelectedContacts && setSelectedContacts([...selectedContacts, row]);
-    } else {
-      setSelectedContacts &&
-        selectedContacts &&
-        setSelectedContacts(selectedContacts.filter(selectedRow => selectedRow !== row));
-    }
-  };
+
+
   const columns: CustomTableColumn[] = [
-    {
-      id: 'contact_id',
-      name: '',
-      style: { width: '5%' },
-      sortable: false,
-      align: 'center',
-      selector: (row: ICustomerContacts) => row.contact_id,
-      cell: (row: ICustomerContacts) => (row.company_id == 0 ? '' : <Checkbox id={`checkbox-${row.contact_id}`} value={row.contact_id} checked={includes(selectedContacts, row)} onChange={e => handleSelectContact(e, row)} />)
-    },
     {
       id: 'name',
       name: 'CONTACT',
@@ -305,7 +291,7 @@ const CustomerContacts = (prop: TCustomerProps) => {
 
 
       <div>
-        <CustomTable columns={columns} data={filteredData} noRecordMessage="No user  role found." />
+        <CustomTable columns={columns} data={filteredData} noRecordMessage="No Contacts found." canSelectRows={true} selectedTableRows={selectedContacts} setSelectionTableRows={setSelectedContacts}/>
 
         {/* <BasicTable
           emptyState={noUserRole}

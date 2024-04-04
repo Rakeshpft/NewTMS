@@ -4,6 +4,7 @@ import { API } from "../api-helper/api.services";
 import { API_CUSTOMER } from "../api-helper/api.constant";
 import { ICustomerContacts, ICustomerContactsResponse, ICustomerDetails, ICustomerDetailsResponse, ICustomerDocument} from "../tms-objects/customer.types";
 import { IAPIResponse } from "../tms-objects/response.types";
+import { toastify } from "../../features/notification/toastify";
 
 export const useCustomerContext = () => {
     const { state , setState } = useContext(CustomerUpdateContext);
@@ -21,8 +22,7 @@ export const useCustomerContext = () => {
              
             const customerList : ICustomerDetailsResponse = await API.get(API_CUSTOMER.getCustomer );
              const newCustomerList = customerList.value.map((customer)=>{
-              customer.full_name = `${customer.first_name} ${customer.last_name}`;
-              customer.address = `${customer.suite_number} ${customer.street_number} ${customer.city} ${customer.state_id} ${customer.zipcode}`;
+
             return customer;
         })
             setState((draft) => {
@@ -157,7 +157,7 @@ export const useCustomerContext = () => {
         })      
         clearSuccessAndFailure();      
         try {      
-           
+
           const response = await API.postForm(`${API_CUSTOMER.getCustomer}/${customer_id}${API_CUSTOMER.uploadDocuments}`, payload);
           response.value = response && response.value && response.value+'?id='+Math.random()
           return response;
@@ -168,6 +168,28 @@ export const useCustomerContext = () => {
           });
         }
       };
+
+      const deleteDocument = async (customer_id: number, document_ids: number[]) => {
+        setState((draft) => {
+          draft.customerLoading = true;
+        });
+      
+        clearSuccessAndFailure();
+      
+        try {
+        let response = await API.del(`${API_CUSTOMER.getCustomer}/${customer_id}/documents${API_CUSTOMER.deleteDocuments}`, document_ids);
+          setTimeout(() => getCustomerDocument(customer_id), 200);
+          response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
+
+        } catch (error: any) {
+          console.log(error);
+          setState((draft) => {
+            draft.customerLoading = false;
+          });
+        }
+      };
+      
+
       const getContacts = async (customer_id:number) => {
         setState((draft) => {
             draft.customerLoading = true;
@@ -287,6 +309,7 @@ export const useCustomerContext = () => {
         getIndividualContacts,
         deleteContact,
         clearSuccessAndFailure,
+        deleteDocument,
         
     }
 

@@ -7,7 +7,6 @@ import { useCustomerContext } from '../../../../services/reducer/customer.reduce
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../../routes/routes';
 import { toastify } from '../../../../features/notification/toastify';
-// import CreateNewCustomerForm from '../createNewCustomerForm';
 
 
 const CustomerDetails = (props: TCustomerProps) => {
@@ -257,6 +256,7 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 name="phone"
                                 value={customerNewDetails.phone}
                                 onChange={handleInputChange("phone")}
+                                
                             />
                         </FormGroup>
                     </Col>

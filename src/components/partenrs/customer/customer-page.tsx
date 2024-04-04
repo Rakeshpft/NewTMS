@@ -87,7 +87,7 @@ const CustomerPage = () => {
 
   
   const handleDeleteCustomers = () => {
-    selectedCustomers && deleteCustomer(selectedCustomers);
+     selectedCustomers && deleteCustomer(selectedCustomers);
 
     getCustomerDetails().then((data) => {
       data && setFilteredData(data);
@@ -135,7 +135,8 @@ const CustomerPage = () => {
       name: "ADDRESS",
       style: { width: "25%" },
       sortable: true,
-      selector: (row: ICustomerDetails) => row.address
+      selector: (row: ICustomerDetails) => row.address,
+      format:(row :ICustomerDetails)=>(`${row.suite_number} ${row.street_number} ${row.city} ${row.state_short_name} ${row.zipcode}`)
     },
     {
       id: "phone",
@@ -156,28 +157,28 @@ const CustomerPage = () => {
       name: "PAY METHOD",
       style: { width: "20%" },
       sortable: true,
-      selector: (row: ICustomerDetails) => row.billing_type_id
+      selector: (row: ICustomerDetails) => row.billing_type_name
     },
     {
       id: "credit_id",
       name: "CREDIT",
       style: { width: "20%" },
       sortable: true,
-      selector: (row: ICustomerDetails) => row.credit_id
+      selector: (row: ICustomerDetails) => row.credit_name
     },
     {
       id: "avg_days_to_pay",
       name: "AVG. DTP",
       style: { width: "20%" },
       sortable: true,
-      selector: (row: ICustomerDetails) => row.credit_id
+      selector: (row: ICustomerDetails) => row.avg_days_to_pay
     },
     {
       id: "active",
       name: "STATUS",
       style: { width: "20%" },
       sortable: true,
-      selector: (row: ICustomerDetails) => row.credit_id
+      selector: (row: ICustomerDetails) => row.status_name
     },
     {
       id: "action",

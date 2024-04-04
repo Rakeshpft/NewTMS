@@ -206,6 +206,28 @@ export const initialDriverCdl : IDriverCdl = {
   state_name:""
 }
 
+export interface IDriverMedical {
+  driver_id : number,
+  company_id : number,
+  card_id : number,
+  card_number : string,
+  issue_date : string, 
+  exp_date : string,
+  attachment : string,
+  file  : File
+}
+export const initialDriverMedical : IDriverMedical = {
+  driver_id : 0,
+  company_id : 0,
+  card_id : 0,
+  card_number : "",
+  issue_date : "",
+  exp_date : "",
+  attachment : "",
+  file : new File([], "")
+  
+}
+
 export interface IDriverManagenetProps {
   newDriver: IDriverObject;
   handleInputChange: (prop: keyof IDriverObject) => (event: React.ChangeEvent<HTMLInputElement>) => void;

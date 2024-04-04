@@ -37,6 +37,8 @@ export interface ICustomerDetails {
   street_number: string;
   city: string;
   state_id: number;
+  state_name :string;
+  state_short_name:string;
   zipcode: string;
   address: string;
   description: string;
@@ -44,13 +46,15 @@ export interface ICustomerDetails {
   fid_ein: string;
   mc_number: string;
   billing_type_id: number;
+  billing_type_name : string;
   factor_id: number;
   quick_pay_fee: string;
   status_id: number;
-  customer_status_name: string;
+  status_name: string;
   credit_id: number;
+  credit_name : string;
   pay_terms: string;
-  avg_days_to_pay?: any;
+  avg_days_to_pay: string;
   active: boolean;
 
 
@@ -70,6 +74,8 @@ export const initialStateCustomer: ICustomerDetails = {
   street_number: "",
   city: "",
   state_id: 0,
+  state_name:"",
+  state_short_name:"",
   zipcode: "",
   address: "",
   description: "",
@@ -77,13 +83,15 @@ export const initialStateCustomer: ICustomerDetails = {
   fid_ein: "",
   mc_number: "",
   billing_type_id: 0,
+  billing_type_name:"",
   factor_id: 0,
   quick_pay_fee: "",
   status_id: 0,
-  customer_status_name: "",
+  status_name: "",
   credit_id: 0,
+  credit_name:"",
   pay_terms: "",
-  avg_days_to_pay: undefined,
+  avg_days_to_pay: "",
   active: false,
 
 };
@@ -102,6 +110,7 @@ export interface INewCustomerDetails {
   city: string;
   state_id: number;
   state_name: string;
+  state_short_name:string;
   zipcode: string;
   address: string;
   description: string;
@@ -109,13 +118,15 @@ export interface INewCustomerDetails {
   fid_ein: string;
   mc_number: string;
   billing_type_id: number;
+  billing_type_name :string;
   factor_id: number;
   quick_pay_fee: string;
   status_id: number;
-  customer_status_name: string;
+  status_name: string;
   credit_id: number;
+  credit_name: string;
   pay_terms: string;
-  avg_days_to_pay?: any;
+  avg_days_to_pay: string;
   active: boolean;
 }
 

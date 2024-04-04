@@ -239,6 +239,24 @@ const postDriverCdl = async (  driver_id : number , payload : IDriverCdl ) => {
   }
 }
 
+const getDriverMedicalList = async (driver_id : number) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverMedicalData : IAPIResponse = await API.get(`${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverMedical}` );
+    setState((draft) => {
+      draft.driverMedicalLists = driverMedicalData.value;
+      draft.driverLoading = false;
+    });
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
 
   return {
     ...state,
@@ -253,7 +271,8 @@ const postDriverCdl = async (  driver_id : number , payload : IDriverCdl ) => {
     getDriverDocAppList,
     postApplication,
     getDriverCdlList,
-    postDriverCdl
+    postDriverCdl,
+    getDriverMedicalList
 
   }
 };

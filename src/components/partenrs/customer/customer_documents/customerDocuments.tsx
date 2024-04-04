@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
-import { Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalHeader } from 'reactstrap'
+import { Button, Col, Container, Form, FormGroup, Input, Label, Modal, ModalBody, ModalHeader } from 'reactstrap'
 import { useCustomerContext } from '../../../../services/reducer/customer.reducer'
 import { CustomerDocumentInitialState, ICustomerDocument, TCustomerProps} from '../../../../services/tms-objects/customer.types'
 import { CustomTable } from '../../../../features/data-table/CustomTable'
@@ -8,18 +8,21 @@ import moment from 'moment'
 import { HiOutlinePencilAlt } from 'react-icons/hi'
 import { toastify } from '../../../../features/notification/toastify'
 import { RxCross2 } from 'react-icons/rx'
+import { isEmpty } from 'lodash'
 
 
 const CustomerDocuments = (prop: TCustomerProps) => { 
   const {
     customer_id = 0
   }= prop;
-  const { postCustomerDocument,DocumentList,customerLoading ,getCustomerDocument } = useCustomerContext();
+  const { postCustomerDocument,DocumentList,customerLoading ,getCustomerDocument,deleteDocument} = useCustomerContext();
 
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [customerDocument, setCustomerDocument] = useState<ICustomerDocument>(CustomerDocumentInitialState);
   const [customerDocumentList, setCustomerDocumentList] = useState<ICustomerDocument[]>([]);
-  
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [selectedDocuments, setSelectedDocuments] = useState<ICustomerDocument[] | []>([]);
+
   const UploadModalClose = () => {
     setUploadModalOpen(false);
     setCustomerDocument(CustomerDocumentInitialState)
@@ -36,6 +39,7 @@ const CustomerDocuments = (prop: TCustomerProps) => {
   useEffect(()=>{
     if(!customerLoading && DocumentList){
       setCustomerDocumentList(DocumentList);
+      setDeleteModalOpen(false)
     }
   },[customerLoading,DocumentList])
 
@@ -73,6 +77,25 @@ const CustomerDocuments = (prop: TCustomerProps) => {
       });
     }
   }
+
+  const handleDeleteDocuments = () => {
+    const deletedDocumentIds = selectedDocuments.map(doc => doc.document_id);
+  
+    deleteDocument(customer_id, deletedDocumentIds)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+  };
+  
+  
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
+    setSelectedDocuments([]);
+    
+  };
   const handleEditDocument = (id:number) => {
     const filteredData = customerDocumentList?.filter(l=>l.document_id == id)
     if (filteredData && filteredData.length>0) {      
@@ -129,19 +152,33 @@ const CustomerDocuments = (prop: TCustomerProps) => {
   ]
   return (
     <>
-      <div className="d-flex justify-content-end m-3">
-        <Col md={3} className=" d-flex justify-content-end align-items-end pb-3">
-          <label className="page-subtitle">
-            <Button color="success"  outline={true}  onClick={() => setUploadModalOpen(true)}><AiOutlinePlus />Upload</Button>
-          </label>
-        </Col>
-      </div>
-      <CustomTable columns={columns} data={customerDocumentList} noRecordMessage="No Document found." />
+     <div className="d-flex justify-content-end m-3">
+  <Col md={3} className="d-flex justify-content-end align-items-end pb-3">
+    <label className="page-subtitle d-flex align-items-end">
 
+      {!isEmpty(selectedDocuments) && (
+        <div className="user-info-btn me-2">
+          <Button
+            color="primary"
+            className="px-4 shadow save-button"
+            onClick={() => setDeleteModalOpen(true)}
+          >
+            Delete
+          </Button>
+        </div>
+      )}
+      <Button color="success" outline={true} onClick={()=>{setUploadModalOpen(true)}}>
+        <AiOutlinePlus /> Upload
+      </Button>
+    </label>
+  </Col>
+</div>
+      <CustomTable columns={columns} data={customerDocumentList} noRecordMessage="No Document found." canSelectRows={true} selectedTableRows={selectedDocuments} setSelectionTableRows={setSelectedDocuments}/>
+    
       <Modal isOpen={uploadModalOpen} onClose={UploadModalClose}>
       <ModalHeader close={closeBtn}
                  onClose={() => UploadModalClose()}>
-          <h6 className="mb-0 fw-bold">Edit Document </h6>
+          <h6 className="mb-0 fw-bold">Upload Document </h6>
         </ModalHeader>
         <ModalBody
         className="square border border-info-rounded">
@@ -160,6 +197,38 @@ const CustomerDocuments = (prop: TCustomerProps) => {
           </Form>
         </ModalBody>
       </Modal>
+      <Modal isOpen={deleteModalOpen} onClose={closeDeleteModal}>
+          <ModalHeader>
+            <h6 className="mb-0 fw-bold"> Delete </h6>
+          </ModalHeader>
+          <ModalBody>
+            <Container>
+              {!isEmpty(selectedDocuments) && (
+                <div className=" my-3 " >
+                  {selectedDocuments.length > 1
+                    ? `Are you sure you want to delete ${selectedDocuments.length} Documents?`
+                    : `Are you sure you want to delete role  " ${selectedDocuments[0].document_name}"?`}
+                </div>
+              )}
+              <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">
+                <Button
+                  color="primary"
+                  className="px-4 mr-3 shadow save-button  "
+                  onClick={() => closeDeleteModal()}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  color="primary"
+                  className="px-4  shadow save-button "
+                  onClick={() => handleDeleteDocuments()}
+                >
+                  Delete
+                </Button>
+              </FormGroup>
+            </Container>
+          </ModalBody>
+        </Modal>
     </>
   )
 }

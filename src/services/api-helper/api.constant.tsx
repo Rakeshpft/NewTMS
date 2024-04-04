@@ -60,6 +60,7 @@ export const API_CUSTOMER = {
   getCustomerstatus :"/Customer/status",
   getBillingType : "/billing/types",
   uploadDocuments : "/upload-document",
+  deleteDocuments : "/delete",
   getContacts : "/contacts",
   postContacts : "/contacts",
   deleteContacts :"/delete",
@@ -81,7 +82,7 @@ export const API_DRIVER = {
   postDriverImage : "/image",
   getDiverDocApp : "/application",
   getDriverCdl : "/cdl",
-  
+  getDriverMedical :"/medical-card"
   
 };
 
