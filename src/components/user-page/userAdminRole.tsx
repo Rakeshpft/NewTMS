@@ -46,38 +46,38 @@ const UserAdminRole = () => {
     console.log(permissionList);
   }
   const handleExpand = (num: number) => {
-    const filteredNumbers = collapseItem.filter((n) => n !== num);
+    let filteredNumbers = collapseItem.filter((n) => n !== num);
     setCollapseItem(filteredNumbers);
   };
   const handleRead = (menu_id: number, status: boolean) => {
-    var updatedList = updateMenuList(menu_id, status, false);
+    let updatedList = updateMenuList(menu_id, status, false);
     setPermissionList(updatedList);
   }
   const handleWrite = (menu_id: number, status: boolean) => {
-    var updatedList = updateMenuList(menu_id, status, true);
+    let updatedList = updateMenuList(menu_id, status, true);
     setPermissionList(updatedList);
   }
   const updateMenuList = (menu_id: number, status: boolean, write: boolean): IUserAdminRole[] => {
-    var updatedList = permissionList.map((item) => (item.menu_id == menu_id ? { ...item, is_read: (write && !status ? item.is_read : status), is_write: (write || !status ? status : item.is_write) } : item));
-    var childs = permissionList.filter(l => l.parent_menu_id == menu_id)?.length;
+    let updatedList = permissionList.map((item) => (item.menu_id == menu_id ? { ...item, is_read: (write && !status ? item.is_read : status), is_write: (write || !status ? status : item.is_write) } : item));
+    let childs = permissionList.filter(l => l.parent_menu_id == menu_id)?.length;
     updatedList = childs > 0 ? updateMenuChild(updatedList, menu_id, status, write) : updatedList;
-    var parent_menu_id = updatedList.filter(l => l.menu_id == menu_id)[0].parent_menu_id;
+    let parent_menu_id = updatedList.filter(l => l.menu_id == menu_id)[0].parent_menu_id;
     updatedList = parent_menu_id > 0 ? updateMenuParent(updatedList, parent_menu_id, status, write) : updatedList;
     return updatedList;
   }
   const updateMenuChild = (list: IUserAdminRole[], menu_id: number, status: boolean, write: boolean): IUserAdminRole[] => {
-    var updatedList = list.map((item) => (item.parent_menu_id == menu_id ? { ...item, is_read: (write && !status ? item.is_read : status), is_write: (write || !status ? status : item.is_write) } : item));
-    var childs = updatedList.filter(l => l.parent_menu_id == menu_id)?.length;
+    let updatedList = list.map((item) => (item.parent_menu_id == menu_id ? { ...item, is_read: (write && !status ? item.is_read : status), is_write: (write || !status ? status : item.is_write) } : item));
+    let childs = updatedList.filter(l => l.parent_menu_id == menu_id)?.length;
     childs > 0 && updatedList.filter(l => l.parent_menu_id == menu_id).map((item) => { updatedList = updateMenuChild(updatedList, item.menu_id, status, write); });
     return updatedList;
   }
   const updateMenuParent = (list: IUserAdminRole[], menu_id: number, status: boolean, write: boolean): IUserAdminRole[] => {
-    var checkedRead = list.filter(l => l.parent_menu_id == menu_id && l.is_read).length;
-    var checkedWrite = list.filter(l => l.parent_menu_id == menu_id && l.is_write).length;
-    var totalLength = list.filter(l => l.parent_menu_id == menu_id).length;
-    var updatedList = (status && totalLength == checkedWrite) || (!status && checkedWrite < totalLength) ? list.map((item) => (item.menu_id == menu_id ? { ...item, is_write: status } : item)) : list;
-    var updatedList = (status && totalLength == checkedRead) || (!status && checkedRead < totalLength) ? updatedList.map((item) => (item.menu_id == menu_id ? { ...item, is_read: status } : item)) : updatedList;
-    var parent_menu_id = updatedList.filter(l => l.menu_id == menu_id)[0].parent_menu_id;
+    let checkedRead = list.filter(l => l.parent_menu_id == menu_id && l.is_read).length;
+    let checkedWrite = list.filter(l => l.parent_menu_id == menu_id && l.is_write).length;
+    let totalLength = list.filter(l => l.parent_menu_id == menu_id).length;
+    let updatedList = (status && totalLength == checkedWrite) || (!status && checkedWrite < totalLength) ? list.map((item) => (item.menu_id == menu_id ? { ...item, is_write: status } : item)) : list;
+    updatedList = (status && totalLength == checkedRead) || (!status && checkedRead < totalLength) ? updatedList.map((item) => (item.menu_id == menu_id ? { ...item, is_read: status } : item)) : updatedList;
+    let parent_menu_id = updatedList.filter(l => l.menu_id == menu_id)[0].parent_menu_id;
     updatedList = parent_menu_id > 0 ? updateMenuParent(updatedList, parent_menu_id, status, write) : updatedList;
     return updatedList;
   }

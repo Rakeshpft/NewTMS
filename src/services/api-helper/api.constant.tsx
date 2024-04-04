@@ -80,6 +80,7 @@ export const API_DRIVER = {
   getPayRates : "/pay-rates",
   postDriverImage : "/image",
   getDiverDocApp : "/application",
+  getDriverCdl : "/cdl",
   
   
 };
@@ -130,6 +131,7 @@ export const API_VENDOR = {
 
 export const API_LIST = {
   // House LIST API endpoints here
+  getMenuList:"/menu",
   getBillingStatus:"/list/billing-status",
   getBillingType:"/list/billing-type",
   getCustomerStatus:"/list/customer-status",
@@ -138,6 +140,9 @@ export const API_LIST = {
   getLoadStatus:"/list/load-status",
   getStates:'/list/states',
   getCredits:'/list/credits',
+  getOwnershipType:'/list/ownership-type',
+  getDocumentStatus:'/list/document-status',
+  getFactors:'/list/factors',
 }
 
 export const API_FUEL_CARD = {

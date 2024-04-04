@@ -16,7 +16,7 @@ import { useListContext } from "./list.reducer";
 export const useRegContext = () => {    
     const navigate = useNavigate();
     const { state, setState } = useContext(RegContext);
-    const { getBillingStatusList, getBillingTypeList, getCustomerStatusList, getDriverStatusList, getDriverTypeList, getLoadStatusList, getStateList, getCreditList } = useListContext();
+    const { getBillingStatusList, getBillingTypeList, getCustomerStatusList, getDriverStatusList, getDriverTypeList, getLoadStatusList, getStateList, getCreditList, getOwnershipTypeList, getDocumentStatusList, getFactorList } = useListContext();
     if (setState === undefined) {
       throw new Error("Must have setState defined");
     }
@@ -65,6 +65,9 @@ export const useRegContext = () => {
       getLoadStatusList(true);
       getStateList(true);
       getCreditList(true);
+      getOwnershipTypeList(true);
+      getDocumentStatusList(true);
+      getFactorList(true);
     }    
   }
 

@@ -1,6 +1,6 @@
 // import { Form, useNavigate } from "react-router-dom";
 // import { routes } from "../routes/routes";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Row, Col, TabPane } from "reactstrap";
 import TabPage from "./tab-page";
 import DriversDetails from "./createDriver/driversDetails";
@@ -8,49 +8,14 @@ import DocumentsDetails from "./createDriver/documentDetailsPage/documentsDetail
 import SchedulePayment from "./createDriver/schedulePayment";
 import AdditionalPayee from "./createDriver/additionalPayee";
 import CommonLayOut from "../../layout";
-import {    IDriverDocApp, IDriverManagenetProps } from "../../services/tms-objects/driver.types";
-import { useDriverContext } from "../../services/reducer/driver.reducer";
+import {  TDriverProps } from "../../services/tms-objects/driver.types";
 
 
-const CreateNewDriverForm = ( prop : IDriverManagenetProps ) => {
+const CreateNewDriverForm = ( prop : TDriverProps ) => {
    const { 
-    newDriver ,
-    handleInputChange ,
-    handleCloseForm ,
-    driverType,
-    driverStatus,
-    handleCheckboxChange,
-    SaveDriverIndividual,
-    vendorList,
-    truckListStatus,
-    trailerListStatus,
-    driverPayRates,
-    handleInputDriverPayRates,
-    handleImageChange
-   
+    handleSubmit = undefined,
+    driver_id = 0,
   } = prop
-
-  const {getDriverDocAppList , driverDocAppList , driverLoading } = useDriverContext()
-
-  const [ filterDocApp , setFilterDocApp] = useState<IDriverDocApp[]>([]);
-
- const  searchResults =
-   driverDocAppList &&
-   driverDocAppList.filter((user) => {
-         return user;
-       }
-   );
-
- searchResults &&  setFilterDocApp(searchResults);
- 
-useEffect(() => {
-if( !driverLoading && driverDocAppList ) 
-setFilterDocApp(driverDocAppList)
-} , [driverDocAppList , driverLoading])
-
-useEffect(() => {
-  getDriverDocAppList(1);
-} , [1])
 
 
   return (
@@ -66,30 +31,19 @@ useEffect(() => {
           "Schedule Payment/ Deduction",
           "Additional Payee",
         ]}
-        disabledTabs={newDriver.driver_id===0?[1,2,3]:[]}
+        disabledTabs={driver_id===0?[1,2,3]:[]}
       >
         <TabPane tabId={1} className=""   >
           <DriversDetails 
-          newDriver = {newDriver}
-          handleInputChange = {handleInputChange}
-          handleCloseForm = {handleCloseForm}
-          driverType = {driverType}
-          driverStatus= {driverStatus}
-          handleCheckboxChange = {handleCheckboxChange}
-          SaveDriverIndividual = {SaveDriverIndividual}
-          vendorList = {vendorList}
-          truckListStatus={truckListStatus}
-          trailerListStatus = {trailerListStatus}
-          handleInputDriverPayRates = {handleInputDriverPayRates}
-          driverPayRates = {driverPayRates}
-          handleImageChange = {handleImageChange}
+         driver_id={driver_id}
+         handleSubmit={handleSubmit}
           
           />
         </TabPane>
 
         <TabPane tabId={2} className=""  >
           <DocumentsDetails
-        filterDocApp = {filterDocApp}
+        driver_id = {driver_id}
           
           />
         </TabPane>

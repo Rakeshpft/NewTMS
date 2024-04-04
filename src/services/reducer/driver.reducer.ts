@@ -3,7 +3,7 @@ import { DriverAddContext } from "../context/driver.context";
 import { API } from "../api-helper/api.services";
 import { API_DRIVER } from "../api-helper/api.constant";
 import { IAPIResponse } from "../tms-objects/response.types";
-import { IDriverObject, IDriverPayRatesOject } from "../tms-objects/driver.types";
+import { IDriverCdl, IDriverDoc, IDriverObject, IDriverPayRatesOject } from "../tms-objects/driver.types";
 
 export const useDriverContext = () => {
   const { state, setState } = useContext(DriverAddContext);
@@ -189,6 +189,55 @@ const getDriverDocAppList = async ( driver_id : number) => {
   }
 }
 
+const postApplication = async ( payload : IDriverDoc ,  driver_id : number  ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const response  = await API.postForm( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDiverDocApp}` , payload );
+    response.value = response && response.value && response.value+'?id='+Math.random()
+
+    return response
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const getDriverCdlList = async (driver_id : number) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverCdlData : IAPIResponse = await API.get( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverCdl}` );
+    setState((draft) => {
+      draft.driverCdlLists = driverCdlData.value;
+      draft.driverLoading = false;
+    });
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const postDriverCdl = async (  driver_id : number , payload : IDriverCdl ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const SaveDriverCdl : IAPIResponse = await API.post( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverCdl}` , payload );
+    return SaveDriverCdl ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
 
 
   return {
@@ -201,7 +250,10 @@ const getDriverDocAppList = async ( driver_id : number) => {
     getDriverPayRateList,
     postPayRates,
     postDriverImage,
-    getDriverDocAppList
+    getDriverDocAppList,
+    postApplication,
+    getDriverCdlList,
+    postDriverCdl
 
   }
 };

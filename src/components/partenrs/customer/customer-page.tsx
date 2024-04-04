@@ -203,7 +203,7 @@ const CustomerPage = () => {
                             </InputGroupText>
                             <Input
                               placeholder="Search"
-                              className="border-start-0 border-end-0 search"
+                              className="border-start-0 search"
                               inputRef={inputRef} onChange={(e: any) =>
                                 handleSearch(e.target.value)}
                             />

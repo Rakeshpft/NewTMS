@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Row,
   Col,
@@ -8,27 +8,121 @@ import {
   Button,
   Form,
 } from "reactstrap";
-import { IDriverManagenetProps } from "../../../services/tms-objects/driver.types";
+import {  IDriverObject, IDriverPayRatesOject, TDriverProps, initialStateDriver, initialStatedriver_pay_rates } from "../../../services/tms-objects/driver.types";
+import { useDriverContext } from "../../../services/reducer/driver.reducer";
+import { toastify } from "../../../features/notification/toastify";
 
-const DriversDetails = ( prop : IDriverManagenetProps) => {
+const DriversDetails = (props : TDriverProps ) => {
 
-  const { 
-    newDriver ,
-    handleInputChange ,
-    handleCloseForm ,
-    driverType ,
-    driverStatus ,
-    handleCheckboxChange,
-    SaveDriverIndividual,
-    vendorList,
-    truckListStatus,
-    trailerListStatus,
-    driverPayRates,
-    handleInputDriverPayRates,
-    handleImageChange
-   } = prop
+const { 
+  handleSubmit = undefined, 
+  driver_id = 0 
+} = props
 
+  const {
+    getDriverList,
+  // driverAddList,
+    getIdividualDriver,
+    selectedDriver,
+    driverLoading,
+    getDriverType,
+    getDriverStatus,
+    postSaveDriverData,
+    getDriverPayRateList, 
+    postPayRates,
+    postDriverImage,
+    selectedPayRates
+  } = useDriverContext();
+  
+  const [newDriver, setNewDriver] = useState<IDriverObject>(initialStateDriver);
+  const [driverPayRates, setDriverPayrates] = useState<IDriverPayRatesOject>(
+    initialStatedriver_pay_rates
+  );
     const [activeRowTab, setActiveRowTab] = useState(0);
+    const handleInputChange =
+    (prop: keyof IDriverObject) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setNewDriver({ ...newDriver, [prop]: event.target.value });
+    };
+
+    const handleInputDriverPayRates =
+    (prop: keyof IDriverPayRatesOject) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setDriverPayrates({ ...driverPayRates, [prop]: event.target.value });
+    };
+
+    const handleCheckboxChange = () => {
+      setNewDriver({
+        ...newDriver,
+        is_IFTA_handled_by_company: !newDriver.is_IFTA_handled_by_company,
+      });
+    };
+    
+    useEffect(()=>{
+      if(driver_id >0){
+        getIdividualDriver(driver_id);
+        getDriverPayRateList(driver_id);
+      }} , [])
+
+      useEffect(() => {
+        if(!driverLoading && selectedDriver && selectedPayRates && driver_id>0) {
+          setNewDriver(selectedDriver);
+          setDriverPayrates(selectedPayRates);
+        }
+    }, [driverLoading, selectedDriver, driver_id]);
+
+    // const navigateToCreateDriver = () => {
+    //   setNewDriver(initialStateDriver);
+    //   setDriverPayrates(initialStatedriver_pay_rates);
+    // };
+
+    // const handleEditDriver = (driver: IDriverObject) => {
+    //   getIdividualDriver(driver.driver_id);
+    //   getDriverPayRateList(driver.driver_id);
+
+    // };
+
+    const handleImageChange = async (
+      event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+      if (event.target.files) {
+        await postDriverImage(event.target.files[0], newDriver.driver_id).then(
+          (response) => {
+            response?.value &&
+              setNewDriver({ ...newDriver, driver_images: response.value });
+          }
+        );
+      }
+    };
+
+    const SaveDriverIndividual = (event: { preventDefault: () => void }) => {
+      event.preventDefault();
+      postSaveDriverData(newDriver).then((response) => {
+        response?.success && handleSubmit && handleSubmit(response.value);
+        response &&  toastify({
+            message: response.message,
+            type: response.success ? "success" : "error",
+          });
+      });
+  
+      postPayRates(driverPayRates, newDriver.driver_id);
+      getDriverList();
+      setNewDriver(initialStateDriver);
+      setDriverPayrates(initialStatedriver_pay_rates);
+    };
+
+    const handleCloseForm = () => {
+      getDriverList();
+    };
+
+    useEffect(() => {
+      
+      getDriverList();
+      getDriverType();
+      getDriverStatus();
+      
+    }, []);
+
 
   return(
     <Form onSubmit={SaveDriverIndividual} encType="multipart/form-data">
@@ -128,18 +222,18 @@ const DriversDetails = ( prop : IDriverManagenetProps) => {
                       <Label for="ELDprovider">Driver Type</Label>
                       <Input  bsSize="sm" className="form-control form-control-sm" type="select" value={newDriver.driver_type_id} onChange={handleInputChange("driver_type_id")}>
                         <option value = {0}> Select Driver type </option>
-                        { driverType && driverType.map((driver) => (
+                        {/* { driverType && driverType.map((driver) => (
 
                           <option key={driver.driver_type_id} value={driver.driver_type_id}>
                             {driver.driver_type_name}
                           </option>
-                        ))}
+                        ))} */}
                       </Input>
                     </FormGroup>
                   </Col>
                  
                   <Col md={4}>
-                  { driverType && driverType.map((driver) => (
+                  {/* { driverType && driverType.map((driver) => (
 
                         driver.driver_type_name === "Vendor/Driver" && (
                           
@@ -158,7 +252,7 @@ const DriversDetails = ( prop : IDriverManagenetProps) => {
                     </FormGroup>
                         )
                      
-                      ))}
+                      ))} */}
                     
                   </Col>
                   <Col md={4}>
@@ -174,13 +268,13 @@ const DriversDetails = ( prop : IDriverManagenetProps) => {
                       <Label for="status">Status</Label>
                       <Input bsSize="sm" className="form-control form-control-sm"  type="select" id="status"  value={newDriver.driver_status_id}  onChange={handleInputChange("driver_status_id")} >
                         <option value={0}> Select Status </option>
-                        {
+                        {/* {
                           driverStatus && driverStatus.map((status) => (
                             <option key={status.driver_status_id} value={status.driver_status_id}>
                               {status.driver_status_name}
                             </option>
                           ))
-                        }
+                        } */}
                       </Input>
                     </FormGroup>
                   </Col>
@@ -202,13 +296,13 @@ const DriversDetails = ( prop : IDriverManagenetProps) => {
                     <FormGroup>
                       <Label for="truck">Truck</Label>
                       <Input bsSize="sm" className="form-control form-control-sm" type="select" id="truck" value={newDriver.truck_id} onChange={handleInputChange("truck_id")} >
-                       {
+                       {/* {
                          truckListStatus && truckListStatus.map((truck) => (
                            <option key={truck.truck_id} value={truck.truck_id}>
                              { truck.lease_lessor_name }
                            </option>
                          ))
-                       } 
+                       }  */}
                       </Input>
                     </FormGroup>
                   </Col>
@@ -218,13 +312,13 @@ const DriversDetails = ( prop : IDriverManagenetProps) => {
                       <Input bsSize="sm" className="form-control form-control-sm" type="select"  id="trailer" value={newDriver.trailer_id} onChange={handleInputChange("trailer_id")}    
                       >
                         <option value={0}> Select Trailer </option>
-                        {
+                        {/* {
                           trailerListStatus && trailerListStatus.map((trailer) => (
                             <option key={trailer.trailer_id} value={trailer.trailer_id}>
                               { trailer.lease_lessor_name }
                             </option>
                           ))
-                        }
+                        } */}
                       </Input>
                     </FormGroup>
                   </Col>

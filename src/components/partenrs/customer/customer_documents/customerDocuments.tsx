@@ -6,6 +6,8 @@ import { CustomerDocumentInitialState, ICustomerDocument, TCustomerProps} from '
 import { CustomTable } from '../../../../features/data-table/CustomTable'
 import moment from 'moment'
 import { HiOutlinePencilAlt } from 'react-icons/hi'
+import { toastify } from '../../../../features/notification/toastify'
+import { RxCross2 } from 'react-icons/rx'
 
 
 const CustomerDocuments = (prop: TCustomerProps) => { 
@@ -56,11 +58,16 @@ const CustomerDocuments = (prop: TCustomerProps) => {
     }
   }
 
-  const handleSaveDocument = (event: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSaveDocument = async(event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     if(customerDocument.file){
-      postCustomerDocument(customer_id,customerDocument).then((data : any ) => {
+    await postCustomerDocument(customer_id,customerDocument).then((data : any ) => {
           console.log("getdata", data); 
+          data &&
+        toastify({
+          message: data.message,
+          type: data.success ? "success" : "error",
+        });
           getCustomerDocument(customer_id)     
           UploadModalClose();
       });
@@ -73,6 +80,17 @@ const CustomerDocuments = (prop: TCustomerProps) => {
     }
     setUploadModalOpen(true);
   }
+  const closeBtn = (
+    <button
+      className="border-0 bg-transparent text-white"
+      type="button"
+      onClick={() => UploadModalClose()}
+    >
+       
+      <RxCross2 />
+    </button>
+);
+
 
 
   const columns: CustomTableColumn[] = [
@@ -121,7 +139,8 @@ const CustomerDocuments = (prop: TCustomerProps) => {
       <CustomTable columns={columns} data={customerDocumentList} noRecordMessage="No Document found." />
 
       <Modal isOpen={uploadModalOpen} onClose={UploadModalClose}>
-        <ModalHeader>
+      <ModalHeader close={closeBtn}
+                 onClose={() => UploadModalClose()}>
           <h6 className="mb-0 fw-bold">Edit Document </h6>
         </ModalHeader>
         <ModalBody
@@ -137,7 +156,6 @@ const CustomerDocuments = (prop: TCustomerProps) => {
               <Input id="notes" name="notes" type="textarea" value={customerDocument.notes} onChange={handleDocumentInput("notes")} />            
             <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">
               <Button color="primary" className="px-4 mr-3 shadow save-button" type="submit">Save</Button>
-              <Button color="primary" className="px-4 mr-3 shadow save-button" onClick={() => UploadModalClose()}>Cancel</Button>
             </FormGroup>
           </Form>
         </ModalBody>

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 //import sidebarItems from "./sidebarData.json";
 import { Link } from "react-router-dom";
-import { IAPIResponse } from "../../services/tms-objects/response.types";
-import { API } from "../../services/api-helper/api.services";
-import { API_REG } from "../../services/api-helper/api.constant";
 import ReactIcon from "./react-icon";
+import { useListContext } from "../../services/reducer/list.reducer";
+import { ISideMenuObject } from "../../services/tms-objects/side-menu.types";
 
 
 type SideBarProps = {
@@ -13,17 +12,20 @@ type SideBarProps = {
 };
 
 const SideBar = ({ isSidebarOpen, activePageId }: SideBarProps) => {
+  const { getMenuList, menuList} = useListContext();
   const [activeMenuId, setActiveMenuId] = useState(activePageId);
   const [activeSubMenuId, setActiveSubMenuId] = useState(0);
-  const [sideBarItems, setSideBarItems] = useState([]);
+  const [sideBarItems, setSideBarItems] = useState<ISideMenuObject[]>([]);
 
 useEffect(() => {
-  API.get(API_REG.leftMenuList).then((data:IAPIResponse)=>{    
-    setSideBarItems(data.value);        
-  });
+  getMenuList();
 }, []);
 
-  const renderSubmenu = (submenuItems:any) => {
+useEffect(()=>{
+  menuList && setSideBarItems(menuList);
+},[,menuList])
+
+const renderSubmenu = (submenuItems:any) => {
     return submenuItems.map((item:any) => (
       <li
         key={item.id}
@@ -100,8 +102,10 @@ useEffect(() => {
   };
 
   const toggleMenu = (id: any) => {
-    setActiveMenuId((prevId) => (prevId === id ? null : id));
-  };
+    setActiveMenuId((prevId) => (prevId === id ? null : id));   
+    let sidebars = sideBarItems.map((item:ISideMenuObject)=> (item.id==id ? {...item, isOpen:!item.isOpen}: item));
+    setSideBarItems(sidebars);
+  };  
   const toggleSubMenu = (id: any) => {
     setActiveSubMenuId((prevId) => (prevId === id ? null : id));
   };

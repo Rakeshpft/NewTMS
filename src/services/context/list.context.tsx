@@ -7,8 +7,11 @@ import { IDriverStatus, IDriverType } from "../tms-objects/driver.types";
 import { IBillingStatusObject, IBillingTypeObject } from "../tms-objects/billing.types";
 import { ICustomerStatusObject } from "../tms-objects/customer.types";
 import { ILoadStatusObject } from "../tms-objects/load.type";
+import { ISideMenuObject } from "../tms-objects/side-menu.types";
+import { IDocumentStatusObject, IFactorObject, IOwnershipTypeObject } from "../tms-objects/list.types";
 
 export interface IListData {
+    menuList:ISideMenuObject[]|null;
     creditList : ICredits[] | null;
     stateList : IStateDetails[] | null;
     billingTypeList : IBillingTypeObject[] | null;    
@@ -17,11 +20,15 @@ export interface IListData {
     driverStatusList: IDriverStatus[] | null;
     customerStatusList: ICustomerStatusObject[] | null;
     loadStatusList:ILoadStatusObject[] | null;
+    ownershipTypeList:IOwnershipTypeObject[]|null;
+    documentStatusList:IDocumentStatusObject[]|null;
+    factorList:IFactorObject[]|null;
     listLoading : boolean;
     is_error : boolean;
 }
 
 const listInitialData : IListData = {
+    menuList:null,
     creditList:null,
     stateList:null,
     billingTypeList:null,
@@ -30,6 +37,9 @@ const listInitialData : IListData = {
     driverStatusList:null,
     customerStatusList:null,
     loadStatusList:null,
+    ownershipTypeList:null,
+    documentStatusList:null,
+    factorList:null,
     listLoading : false,
     is_error : false,
 }

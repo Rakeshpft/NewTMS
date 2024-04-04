@@ -9,16 +9,14 @@ import DocumentSsn from "./documentSubDetails/documentSsnPage/documentSsn";
 import DocumentMvr from "./documentSubDetails/documentMvrPage/documentMvr";
 import DocumentEmpVerify from "./documentSubDetails/documentEmpVerifyPage/documentEmpVerify";
 import DocumentOther from "./documentSubDetails/documentOtherPage/documentOther";
-import { IDriverDocApp } from "../../../../services/tms-objects/driver.types";
-
-interface IFilterDocApp {
-  filterDocApp: IDriverDocApp[];
-}
+import { TDriverProps } from "../../../../services/tms-objects/driver.types";
 
 
-const DocumentsDetails = ({ filterDocApp }: IFilterDocApp) => {
 
- 
+
+const DocumentsDetails = (prop : TDriverProps) => {
+
+ const { driver_id } = prop
 
 
   return (
@@ -37,11 +35,13 @@ const DocumentsDetails = ({ filterDocApp }: IFilterDocApp) => {
       >
         <TabPane tabId={1} className="">
           <DocumentApplication
-          filterDocApp = {filterDocApp}
+         driver_id = {driver_id}
           />
         </TabPane>
         <TabPane tabId={2} className="">
-          <DocumentCdl />
+          <DocumentCdl 
+           driver_id = {driver_id}
+          />
         </TabPane>
         <TabPane tabId={3} className="">
           <DocumentMedical />

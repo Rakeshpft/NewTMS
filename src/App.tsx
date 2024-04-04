@@ -83,6 +83,7 @@ import ForgotResetPassword from "./components/login-page/forgetResetPassword";
 import UserRolePage from "./components/user-role/userRole-page";
 import UserAdminRole from "./components/user-page/userAdminRole";
 import CreateNewCustomerPage from "./components/partenrs/customer/create-new-customer-page";
+import CreateNewDriverPage from "./components/driver-page/create-new-driver-page";
 // import DriversDetails from "./components/driver-page/createDriver/driversDetails";
 // import DocumentApplication from "./components/driver-page/createDriver/documentDetailsPage/documentSubDetails/documentApplicationPage/documentApplication";
 // import CreateNewCustomerPage from "./components/partenrs/customer/create-new-customer-page";
@@ -131,6 +132,10 @@ const App = () => {
                   <Route
                     path={`${routes.createNewCustomer}/:id?`}
                     element={<CreateNewCustomerPage />}
+                  />
+                  <Route
+                    path={`${routes.createNewDriver}/:id?`}
+                    element={<CreateNewDriverPage />}
                   />
                   <Route
                     path={routes.driverPayRoll}

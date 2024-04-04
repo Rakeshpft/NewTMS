@@ -10,6 +10,23 @@ export const useListContext = () => {
   if (setList === undefined) {
     throw new Error("Must have setState defined");
   }
+  const getMenuList = async (isRefresh: boolean = false) => {
+    setList((draft) => { draft.listLoading = true; });
+    if (!lscache.get("menuList") || isRefresh) {
+      try {
+        const menuListResponse: IAPIResponse = await API.get(API_LIST.getMenuList);
+        setList((draft) => { draft.menuList = menuListResponse.value; draft.listLoading = false; });
+        lscache.set("menuList", menuListResponse.value);
+        return menuListResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+    }
+    else {
+      setList((draft) => { draft.menuList = lscache.get("menuList"); draft.listLoading = false; });
+      return lscache.get("menuList");
+    }
+  }
   const getCreditList = async (isRefresh: boolean = false) => {
     setList((draft) => { draft.listLoading = true; });
     if (!lscache.get("creditList") || isRefresh) {
@@ -148,8 +165,63 @@ export const useListContext = () => {
       return lscache.get("loadStatusList");
     }
   }
+  const getOwnershipTypeList = async (isRefresh: boolean = false) => {
+    debugger;
+    setList((draft) => { draft.listLoading = true; });
+    if (!lscache.get("ownershipTypeList") || isRefresh) {
+      try {
+        const ownershipTypeResponse: IAPIResponse = await API.get(API_LIST.getOwnershipType);
+        setList((draft) => { draft.ownershipTypeList = ownershipTypeResponse.value; draft.listLoading = false; });
+        lscache.set("ownershipTypeList", ownershipTypeResponse.value);
+        return ownershipTypeResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+    }
+    else {
+      setList((draft) => { draft.ownershipTypeList = lscache.get("ownershipTypeList"); draft.listLoading = false; });
+      return lscache.get("ownershipTypeList");
+    }
+  }
+  const getDocumentStatusList = async (isRefresh: boolean = false) => {
+    debugger;
+    setList((draft) => { draft.listLoading = true; });
+    if (!lscache.get("documentStatusList") || isRefresh) {
+      try {
+        const documentStatusResponse: IAPIResponse = await API.get(API_LIST.getDocumentStatus);
+        setList((draft) => { draft.documentStatusList = documentStatusResponse.value; draft.listLoading = false; });
+        lscache.set("documentStatusList", documentStatusResponse.value);
+        return documentStatusResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+    }
+    else {
+      setList((draft) => { draft.documentStatusList = lscache.get("documentStatusList"); draft.listLoading = false; });
+      return lscache.get("documentStatusList");
+    }
+  }
+  const getFactorList = async (isRefresh: boolean = false) => {
+    debugger;
+    setList((draft) => { draft.listLoading = true; });
+    if (!lscache.get("factorList") || isRefresh) {
+      try {
+        const factorResponse: IAPIResponse = await API.get(API_LIST.getDocumentStatus);
+        setList((draft) => { draft.factorList = factorResponse.value; draft.listLoading = false; });
+        lscache.set("factorList", factorResponse.value);
+        return factorResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+    }
+    else {
+      setList((draft) => { draft.factorList = lscache.get("factorList"); draft.listLoading = false; });
+      return lscache.get("factorList");
+    }
+  }
   return {
     ...list,
+    getMenuList,
     getCreditList,
     getStateList,
     getBillingStatusList,
@@ -157,6 +229,9 @@ export const useListContext = () => {
     getCustomerStatusList,
     getDriverTypeList,
     getDriverStatusList,
-    getLoadStatusList
+    getLoadStatusList,
+    getOwnershipTypeList,
+    getDocumentStatusList,
+    getFactorList
   }
 }

@@ -99,7 +99,7 @@ export const useCustomerContext = () => {
     
         try {
             customerToDeleted.forEach((customer) => {
-            API.del(`${API_CUSTOMER.deleteCustomer}/${customer.customer_id}`); 
+             API.del(`${API_CUSTOMER.deleteCustomer}/${customer.customer_id}`); 
           });
     
           setTimeout(() => getCustomerDetails(), 200);
@@ -157,7 +157,7 @@ export const useCustomerContext = () => {
         })      
         clearSuccessAndFailure();      
         try {      
-    
+           
           const response = await API.postForm(`${API_CUSTOMER.getCustomer}/${customer_id}${API_CUSTOMER.uploadDocuments}`, payload);
           response.value = response && response.value && response.value+'?id='+Math.random()
           return response;

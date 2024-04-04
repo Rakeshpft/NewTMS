@@ -12,8 +12,10 @@ import { useCustomerContext } from '../../../../services/reducer/customer.reduce
 import { ICustomerContacts, TCustomerProps, initialCustomerContacts } from '../../../../services/tms-objects/customer.types'
 // import CustomerDetails from '../customer_detail/customerDetails'
 import { Checkbox } from '@mui/material'
-import { HiOutlinePencilAlt } from 'react-icons/hi'
+import { HiCheckCircle, HiOutlinePencilAlt } from 'react-icons/hi'
 import { CustomTable } from '../../../../features/data-table/CustomTable'
+import { toastify } from '../../../../features/notification/toastify'
+import { MdCancel } from 'react-icons/md'
 
 const CustomerContacts = (prop: TCustomerProps) => {
   const {
@@ -67,6 +69,23 @@ const CustomerContacts = (prop: TCustomerProps) => {
     }
   }, [selectedContact]);
 
+  const validateContact = () => {
+    if (contactNewDetails.name === "") {
+        toastify({ message: "Please enter first Name", type: "error" });
+        return false;
+    }
+  else  if (contactNewDetails.phone === "") {
+      toastify({ message: "Please enter Phone", type: "error" });
+      return false;
+    } else if (contactNewDetails.email === "") {
+      toastify({ message: "Please enter last Email", type: "error" });
+   
+      return false;
+    }
+    else {
+      return true;
+    }
+  };
   // const handleSearch = debounce((searchValue: string) => {
   //   const searchResults =
   //     ContactDetails &&
@@ -131,11 +150,17 @@ const CustomerContacts = (prop: TCustomerProps) => {
     setDeleteModalOpen(false);
     console.log("clicked");
   };
-  const handleDirectCheckBox = () => {
+  const handleDefaultCheckBox = () => {
+    if (!contactNewDetails.is_default_billing){
+      setcontactNewDetails({ ...contactNewDetails,is_default : true});
+    }else
     setcontactNewDetails({ ...contactNewDetails, is_default: !contactNewDetails.is_default });
 
   };
-  const handleDirectBillingCheckBox = () => {
+  const handleDefaultBillingCheckBox = () => {
+    if (!contactNewDetails.is_default){
+      setcontactNewDetails({ ...contactNewDetails,is_default_billing : true});
+    }else
     setcontactNewDetails({ ...contactNewDetails, is_default_billing: !contactNewDetails.is_default_billing });
   };
 
@@ -147,15 +172,18 @@ const CustomerContacts = (prop: TCustomerProps) => {
 
   const handleSaveContact = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    await saveContact(customer_id, contactNewDetails).then((data: any) => {
-      ;
-      console.log("getdata", data);
+    if(validateContact()){
+    await saveContact(customer_id, contactNewDetails).then((response: any) => {
+      
+      console.log("getdata", response);
       setModalOpen(false);
       getContacts(customer_id).then((data) => {
         data && setFilteredData(data);
       });
+      response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
+
     })
-  };
+  }};
   const handleSelectContact = (event: React.ChangeEvent<HTMLInputElement>, row: any) => {
     const checked = event.target.checked;
     if (checked && selectedContacts) {
@@ -189,14 +217,18 @@ const CustomerContacts = (prop: TCustomerProps) => {
       name: 'DEFAULT',
       style: { width: '15%' },
       sortable: true,
-      selector: (row: ICustomerContacts) => row.is_default
+      selector: (row: ICustomerContacts) => 
+       row.is_default,
+       cell:(row:ICustomerContacts)=>(row.is_default ? <HiCheckCircle size={20} className="text-success" /> : <MdCancel size={20} className="text-danger" />)
     },
     {
       id: 'is_default_billing',
       name: 'DEFAULT BILLING',
       style: { width: '15%' },
       sortable: true,
-      selector: (row: ICustomerContacts) => row.is_default_billing
+      selector: (row: ICustomerContacts) => 
+      row.is_default_billing,
+      cell:(row:ICustomerContacts)=>(row.is_default_billing ? <HiCheckCircle size={20} className="text-success" /> : <MdCancel size={20} className="text-danger" />)
     },
     {
       id: 'phone',
@@ -265,8 +297,8 @@ const CustomerContacts = (prop: TCustomerProps) => {
           selectedContact={selectedContact}
           handleSaveContact={handleSaveContact}
           title={title}
-          handleDirectCheckBox={handleDirectCheckBox}
-          handleDirectBillingCheckBox={handleDirectBillingCheckBox}
+          handleDirectCheckBox={handleDefaultCheckBox}
+          handleDirectBillingCheckBox={handleDefaultBillingCheckBox}
         />
 
       </div>

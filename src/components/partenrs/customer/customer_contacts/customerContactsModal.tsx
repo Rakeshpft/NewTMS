@@ -30,6 +30,7 @@ const CustomerContactsModal = (props : ICustomerContactsProps) => {
           <RxCross2 />
         </button>
     );
+    
 
     return (
         <>

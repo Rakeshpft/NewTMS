@@ -7,6 +7,7 @@ import { useCustomerContext } from '../../../../services/reducer/customer.reduce
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../../routes/routes';
 import { toastify } from '../../../../features/notification/toastify';
+// import CreateNewCustomerForm from '../createNewCustomerForm';
 
 
 const CustomerDetails = (props: TCustomerProps) => {
@@ -29,6 +30,82 @@ const CustomerDetails = (props: TCustomerProps) => {
         getCreditList();
     }, []);
 
+    const validateUser = () => {
+        if (customerNewDetails.first_name === "") {
+            toastify({ message: "Please enter first name", type: "error" });
+            return false;
+        }
+      else  if (customerNewDetails.first_name === "") {
+          toastify({ message: "Please enter first name", type: "error" });
+          return false;
+        } else if (customerNewDetails.last_name === "") {
+          toastify({ message: "Please enter last name", type: "error" });
+       
+          return false;
+        }else if (customerNewDetails.email === "") {
+            toastify({ message: "Please enter email", type: "error" });
+         
+            return false;
+        } else if (customerNewDetails.phone === "") {
+          toastify({ message: "Please enter contact number", type: "error" });
+          return false;
+        }else if (customerNewDetails.suite_number === "") {
+            toastify({ message: "Please enter suite number", type: "error" });
+            return false;
+        } else if (customerNewDetails.street_number === "") {
+            toastify({ message: "Please enter street number", type: "error" });
+            return false;
+        } else if (customerNewDetails.city === "") {
+            toastify({ message: "Please enter city", type: "error" });
+            return false;
+        } else if (customerNewDetails.state_id === 0) {
+            toastify({ message: "Please enter state", type: "error" });
+            return false;
+        } else if (customerNewDetails.zipcode === "") {
+            toastify({ message: "Please enter ZIP", type: "error" });
+            return false;
+        }
+        else if (customerNewDetails.description === "") {
+            toastify({ message: "Please enter Description", type: "error" });
+            return false;
+        }
+        else if (customerNewDetails.status_id === 0) {
+            toastify({ message: "Please enter Status", type: "error" });
+            return false;
+        }
+        else if (customerNewDetails.company_name === "") {
+            toastify({ message: "Please enter Company name", type: "error" });
+            return false;
+        }
+        else if (customerNewDetails.fid_ein === "") {
+            toastify({ message: "Please enter fID/EIN", type: "error" });
+            return false;
+        }
+        else if (customerNewDetails.mc_number === "") {
+            toastify({ message: "Please enter MC", type: "error" });
+            return false;
+        }
+        else if (customerNewDetails.billing_type_id === 0) {
+            toastify({ message: "Please enter Pay method", type: "error" });
+            return false;
+        }
+        else if (customerNewDetails.credit_id === 0) {
+            toastify({ message: "Please enter Credit", type: "error" });
+            return false;
+        }
+        else if (customerNewDetails.pay_terms === "") {
+            toastify({ message: "Please enter Pay Terms", type: "error" });
+            return false;
+        }
+        else if (customerNewDetails.avg_days_to_pay === "") {
+            toastify({ message: "Please enter Avg. Days to Pay", type: "error" });
+            return false;
+        }
+        else {
+          return true;
+        }
+      };
+
     useEffect(() => {
         if(!customerLoading && selectedCustomer && customer_id>0) {
             setcustomerNewDetails(selectedCustomer);
@@ -43,21 +120,35 @@ const CustomerDetails = (props: TCustomerProps) => {
 
       const handleSaveCustomer = async (event: { preventDefault: () => void }) => {
           event.preventDefault();
+          if (validateUser()) {
        await saveCustomer(customerNewDetails).then((response) => {
             response?.success && handleSubmit && handleSubmit(response.value);
-            getIdividualCustomerDetails(response?.value.customer_id);
+            // response?.success && setcustomerNewDetails({ ...customerNewDetails, customer_id:response.value });
+            // getIdividualCustomerDetails(response?.value);
+           response?.success && navigate(`${routes.createNewCustomer}/${response.value}`)
         //   handleClose();
           response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
         });
-    }
+     
+    }}
 
-     const handleCheckBoxBroker = () => {
-    setcustomerNewDetails({ ...customerNewDetails, is_broker: !customerNewDetails.is_broker });
-
-  };
-  const handleCheckBoxShipper = () => {
-    setcustomerNewDetails({ ...customerNewDetails, is_shipper_receiver: !customerNewDetails.is_shipper_receiver });
-  };
+    const handleCheckBoxBroker = () => {
+        if (!customerNewDetails.is_shipper_receiver) {
+            setcustomerNewDetails({ ...customerNewDetails, is_broker: true });
+        } else {
+            setcustomerNewDetails({ ...customerNewDetails, is_broker: !customerNewDetails.is_broker });
+        }
+    };
+    
+    const handleCheckBoxShipper = () => {
+        if (!customerNewDetails.is_broker) {
+            setcustomerNewDetails({ ...customerNewDetails, is_shipper_receiver: true });
+        } else {
+            setcustomerNewDetails({ ...customerNewDetails, is_shipper_receiver: !customerNewDetails.is_shipper_receiver });
+        }
+    };
+    
+    
 
   const handleDirectBillingRadio = () => {
     setcustomerNewDetails({ ...customerNewDetails, billing_type_id: 1 });
@@ -120,6 +211,7 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 name="first_name"
                                 value={customerNewDetails.first_name}
                                 onChange={handleInputChange("first_name")}
+                                pattern=' ^[a-zA-Z]+$'
                             />
                         </FormGroup>
                     </Col>
@@ -390,9 +482,9 @@ const CustomerDetails = (props: TCustomerProps) => {
                     </Col>
                     <Col md={3}>
                         <FormGroup>
-                            <Label for="Quick Pay">QuickPay</Label>
+                            <Label for="Quick Pay">QuickPay Fee%(e.g 2.5%)</Label>
                             <Input
-                                disabled
+                                color='d'
                                 bsSize="sm"
                                 className="form-control form-control-sm"
                                 type="text"

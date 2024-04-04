@@ -1,7 +1,6 @@
 import React from "react";
 import { Modal, ModalHeader, ModalBody, Container } from "reactstrap";
 import CreateNewDriverForm from "../../driver-page/createNewDriverForm";
-import { IDriverManagenetProps } from "../../../services/tms-objects/driver.types";
 
 
 
@@ -10,23 +9,9 @@ interface DriverModalPageProps {
   toggle: () => void;
 }
 
-const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps ,prop : IDriverManagenetProps ) => {
+const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps  ) => {
 
-  const {  newDriver ,
-    handleInputChange ,
-    handleCloseForm , 
-    driverType ,
-    driverStatus ,
-    handleCheckboxChange,
-    SaveDriverIndividual,
-    vendorList,
-    truckListStatus,
-    trailerListStatus,
-    driverPayRates,
-    handleInputDriverPayRates,
-    handleImageChange
-   
-  } = prop
+ 
   
 
   return (
@@ -39,19 +24,7 @@ const DriverModalPage = ({ isDriverOpen, toggle }: DriverModalPageProps ,prop : 
           <Container>
              <CreateNewDriverForm
              
-             newDriver = {newDriver}
-             handleInputChange = {handleInputChange}
-             handleCloseForm = {handleCloseForm}
-             driverType = {driverType}
-             driverStatus={driverStatus}
-             handleCheckboxChange = {handleCheckboxChange}
-             SaveDriverIndividual = {SaveDriverIndividual}
-             vendorList = {vendorList}
-             truckListStatus = {truckListStatus}
-             trailerListStatus = {trailerListStatus}
-             driverPayRates = {driverPayRates}
-             handleInputDriverPayRates = {handleInputDriverPayRates}
-             handleImageChange = {handleImageChange}
+            
             /> 
           </Container>
         </ModalBody>

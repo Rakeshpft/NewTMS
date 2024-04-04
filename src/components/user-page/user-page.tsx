@@ -165,7 +165,8 @@ const UserPage = () => {
 
   const handleSaveUser = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    if (validateUser()) {
+    if (validateUser()) 
+    {
       let response = await saveUser(userNewDetails);
       response &&
         toastify({

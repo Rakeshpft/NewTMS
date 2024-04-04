@@ -147,6 +147,64 @@ export const  initialDriverDocApp = {
   file  : ""
 }
 
+export type TDriverProps = {
+  driver_id?:number;
+  handleSubmit?:(obj :IDriverObject)=>void;
+}
+
+
+export interface IDriverDoc {
+  application_id : number,
+  status_id : number,
+  status_name : string,
+  application_date : string,
+  hire_date : string,
+  termination_date : string,
+  attachment : string,
+  driver_id : number
+  company_id : number
+  file  : File
+}
+
+export const initialDriverDoc : IDriverDoc = {
+  application_id : 0,
+  status_id : 0,
+  status_name : "",
+  application_date : "",
+  hire_date : "",
+  termination_date : "",
+  attachment : "",
+  driver_id : 0,
+  company_id : 0,
+  file : new File([], ""),
+
+  
+}
+
+export interface IDriverCdl {
+  driver_id : number,
+  company_id : number,
+  cdl_number : string,
+  cdl_id : number,
+  issue_date : string, 
+  exp_date : string,
+  attachment : string,
+  file  : File,
+  state_id : number,
+  state_name:string
+}
+export const initialDriverCdl : IDriverCdl = {
+  driver_id : 0,
+  company_id : 0,
+  cdl_number : "",
+  cdl_id : 0,
+  issue_date : "",
+  exp_date : "",
+  attachment : "",
+  file : new File([], ""),
+  state_id : 0,
+  state_name:""
+}
 
 export interface IDriverManagenetProps {
   newDriver: IDriverObject;
