@@ -228,6 +228,53 @@ export const initialDriverMedical : IDriverMedical = {
   
 }
 
+export interface IDriverDrugTest {
+  driver_id : number,
+  company_id : number,
+  status_id : number,
+  drug_test_id : number,
+  status_name : string,
+  note :string,
+  attachment : string,
+  date : string,
+  file  : File
+}
+
+export const initialDriverDrugTest : IDriverDrugTest = {
+  driver_id : 0,
+  company_id : 0,
+  status_id : 0,
+  drug_test_id : 0,
+  status_name : "",
+  note : "",
+  attachment : "",
+  date : "",
+  file : new File([], "")
+}
+
+export interface IDriverMvr {
+  
+  driver_id : number,
+  company_id : number, 
+  mvr_id : number,
+  note :string,
+  attachment : string,
+  date : string,
+  file  : File
+}
+
+export const initialDriverMvr : IDriverMvr = {
+  
+  driver_id : 0,
+  company_id : 0,
+  mvr_id : 0,
+  note : "",
+  attachment : "",
+  date : "",
+  file : new File([], "")
+}
+
+
 export interface IDriverManagenetProps {
   newDriver: IDriverObject;
   handleInputChange: (prop: keyof IDriverObject) => (event: React.ChangeEvent<HTMLInputElement>) => void;

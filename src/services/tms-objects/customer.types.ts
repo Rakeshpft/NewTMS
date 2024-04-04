@@ -34,11 +34,10 @@ export interface ICustomerDetails {
   email: string;
   phone: string;
   suite_number: string;
-  street_number: string;
+  street: string;
   city: string;
   state_id: number;
   state_name :string;
-  state_short_name:string;
   zipcode: string;
   address: string;
   description: string;
@@ -48,22 +47,20 @@ export interface ICustomerDetails {
   billing_type_id: number;
   billing_type_name : string;
   factor_id: number;
-  quick_pay_fee: string;
+  quick_pay_fee: number;
   status_id: number;
   status_name: string;
   credit_id: number;
   credit_name : string;
-  pay_terms: string;
-  avg_days_to_pay: string;
-  active: boolean;
-
-
+  pay_terms: number;
+  avg_days_to_pay: number;
+  is_active: boolean;
 }
 
 
 export const initialStateCustomer: ICustomerDetails = {
   customer_id: 0,
-  is_broker: false,
+  is_broker: true,
   is_shipper_receiver: false,
   full_name: "",
   first_name: "",
@@ -71,29 +68,27 @@ export const initialStateCustomer: ICustomerDetails = {
   email: "",
   phone: "",
   suite_number: "",
-  street_number: "",
+  street: "",
   city: "",
   state_id: 0,
   state_name:"",
-  state_short_name:"",
   zipcode: "",
   address: "",
   description: "",
   company_name: "",
   fid_ein: "",
   mc_number: "",
-  billing_type_id: 0,
+  billing_type_id: 1,
   billing_type_name:"",
   factor_id: 0,
-  quick_pay_fee: "",
+  quick_pay_fee: 0,
   status_id: 0,
   status_name: "",
   credit_id: 0,
   credit_name:"",
-  pay_terms: "",
-  avg_days_to_pay: "",
-  active: false,
-
+  pay_terms: 0,
+  avg_days_to_pay: 0,
+  is_active: false,
 };
 export interface INewCustomerDetails {
   [x: string]: any;
@@ -106,7 +101,7 @@ export interface INewCustomerDetails {
   email: string;
   phone: string;
   suite_number: string;
-  street_number: string;
+  street: string;
   city: string;
   state_id: number;
   state_name: string;
@@ -120,14 +115,14 @@ export interface INewCustomerDetails {
   billing_type_id: number;
   billing_type_name :string;
   factor_id: number;
-  quick_pay_fee: string;
+  quick_pay_fee: number;
   status_id: number;
   status_name: string;
   credit_id: number;
   credit_name: string;
-  pay_terms: string;
-  avg_days_to_pay: string;
-  active: boolean;
+  pay_terms: number;
+  avg_days_to_pay: number;
+  is_active: boolean;
 }
 
 export interface ICustomerContacts {

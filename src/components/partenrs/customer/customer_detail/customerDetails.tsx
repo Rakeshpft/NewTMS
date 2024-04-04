@@ -29,81 +29,7 @@ const CustomerDetails = (props: TCustomerProps) => {
         getCreditList();
     }, []);
 
-    const validateUser = () => {
-        if (customerNewDetails.first_name === "") {
-            toastify({ message: "Please enter first name", type: "error" });
-            return false;
-        }
-      else  if (customerNewDetails.first_name === "") {
-          toastify({ message: "Please enter first name", type: "error" });
-          return false;
-        } else if (customerNewDetails.last_name === "") {
-          toastify({ message: "Please enter last name", type: "error" });
-       
-          return false;
-        }else if (customerNewDetails.email === "") {
-            toastify({ message: "Please enter email", type: "error" });
-         
-            return false;
-        } else if (customerNewDetails.phone === "") {
-          toastify({ message: "Please enter contact number", type: "error" });
-          return false;
-        }else if (customerNewDetails.suite_number === "") {
-            toastify({ message: "Please enter suite number", type: "error" });
-            return false;
-        } else if (customerNewDetails.street_number === "") {
-            toastify({ message: "Please enter street number", type: "error" });
-            return false;
-        } else if (customerNewDetails.city === "") {
-            toastify({ message: "Please enter city", type: "error" });
-            return false;
-        } else if (customerNewDetails.state_id === 0) {
-            toastify({ message: "Please enter state", type: "error" });
-            return false;
-        } else if (customerNewDetails.zipcode === "") {
-            toastify({ message: "Please enter ZIP", type: "error" });
-            return false;
-        }
-        else if (customerNewDetails.description === "") {
-            toastify({ message: "Please enter Description", type: "error" });
-            return false;
-        }
-        else if (customerNewDetails.status_id === 0) {
-            toastify({ message: "Please enter Status", type: "error" });
-            return false;
-        }
-        else if (customerNewDetails.company_name === "") {
-            toastify({ message: "Please enter Company name", type: "error" });
-            return false;
-        }
-        else if (customerNewDetails.fid_ein === "") {
-            toastify({ message: "Please enter fID/EIN", type: "error" });
-            return false;
-        }
-        else if (customerNewDetails.mc_number === "") {
-            toastify({ message: "Please enter MC", type: "error" });
-            return false;
-        }
-        else if (customerNewDetails.billing_type_id === 0) {
-            toastify({ message: "Please enter Pay method", type: "error" });
-            return false;
-        }
-        else if (customerNewDetails.credit_id === 0) {
-            toastify({ message: "Please enter Credit", type: "error" });
-            return false;
-        }
-        else if (customerNewDetails.pay_terms === "") {
-            toastify({ message: "Please enter Pay Terms", type: "error" });
-            return false;
-        }
-        else if (customerNewDetails.avg_days_to_pay === "") {
-            toastify({ message: "Please enter Avg. Days to Pay", type: "error" });
-            return false;
-        }
-        else {
-          return true;
-        }
-      };
+    
 
     useEffect(() => {
         if(!customerLoading && selectedCustomer && customer_id>0) {
@@ -112,14 +38,15 @@ const CustomerDetails = (props: TCustomerProps) => {
     }, [customerLoading, selectedCustomer]);
    
     const handleInputChange =
-    (prop: keyof ICustomerDetails) =>
+    (prop: keyof ICustomerDetails,is_numeric:boolean = false) =>
       (event: React.ChangeEvent<HTMLInputElement>) => {
-        setcustomerNewDetails({ ...customerNewDetails, [prop]: event.target.value });
+        let value = is_numeric && event.target.value== "" ? 0 : event.target.value;
+        setcustomerNewDetails({ ...customerNewDetails, [prop]: value });
       };
 
       const handleSaveCustomer = async (event: { preventDefault: () => void }) => {
           event.preventDefault();
-          if (validateUser()) {
+          
        await saveCustomer(customerNewDetails).then((response) => {
             response?.success && handleSubmit && handleSubmit(response.value);
             // response?.success && setcustomerNewDetails({ ...customerNewDetails, customer_id:response.value });
@@ -129,7 +56,7 @@ const CustomerDetails = (props: TCustomerProps) => {
           response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
         });
      
-    }}
+    }
 
     const handleCheckBoxBroker = () => {
         if (!customerNewDetails.is_shipper_receiver) {
@@ -210,7 +137,8 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 name="first_name"
                                 value={customerNewDetails.first_name}
                                 onChange={handleInputChange("first_name")}
-                                pattern=' ^[a-zA-Z]+$'
+                                pattern='^[a-zA-Z]+$' title="Only alphabets are allowed"
+                                required 
                             />
                         </FormGroup>
                     </Col>
@@ -225,6 +153,8 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 name="last_name"
                                 value={customerNewDetails.last_name}
                                 onChange={handleInputChange("last_name")}
+                                pattern='^[a-zA-Z]+$' title="Only alphabets are allowed"
+                                required 
                             />
                         </FormGroup>
                     </Col>
@@ -239,6 +169,8 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 name="email"
                                 value={customerNewDetails.email}
                                 onChange={handleInputChange("email")}
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"title='Please enter valid email address'
+                                required
                             />
                         </FormGroup>
                     </Col>
@@ -256,7 +188,9 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 name="phone"
                                 value={customerNewDetails.phone}
                                 onChange={handleInputChange("phone")}
-                                
+                                pattern='^(\+\d{1,3}[- ]?)?\d{10}$' title="Please enter valid phone number"
+                                required
+                
                             />
                         </FormGroup>
                     </Col>
@@ -283,8 +217,8 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 type="text"
                                 id="street_number"
                                 name="street_number"
-                                value={customerNewDetails.street_number}
-                                onChange={handleInputChange("street_number")}
+                                value={customerNewDetails.street}
+                                onChange={handleInputChange("street")}
                             />
                         </FormGroup>
                     </Col>
@@ -300,6 +234,7 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 name="city"
                                 value={customerNewDetails.city}
                                 onChange={handleInputChange("city")}
+                                
                             />
                         </FormGroup>
                     </Col>
@@ -333,6 +268,7 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 name="zipcode"
                                 value={customerNewDetails.zipcode}
                                 onChange={handleInputChange("zipcode")}
+                                pattern='^(\+\d{1,3}[- ]?)?\d{10}$' title="Please enter valid zipcode"
                             />
                         </FormGroup>
                     </Col>
@@ -363,7 +299,7 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 value={customerNewDetails.status_id}
                                 onChange={handleInputChange("status_id")}
                             >
-                                {customerStatusList && customerStatusList.map((item) => (
+                            {customerStatusList && customerStatusList.map((item) => (
                                     <option key={item.customer_status_id} value={item.customer_status_id}>
                                         {item.customer_status_name}
                                     </option>
@@ -490,8 +426,8 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 type="text"
                                 id="quick_pay_fee"
                                 name="quick_pay_fee"
-                                value={customerNewDetails.quick_pay_fee}
-                                onChange={handleInputChange("quick_pay_fee")}
+                                value={customerNewDetails.quick_pay_fee === 0 ? "" : customerNewDetails.quick_pay_fee}
+                                onChange={handleInputChange("quick_pay_fee",true)}
                             />
                         </FormGroup>
                     </Col>
@@ -526,8 +462,8 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 type="text"
                                 id="pay_terms"
                                 name="pay_terms"
-                                value={customerNewDetails.pay_terms}
-                                onChange={handleInputChange("pay_terms")}
+                                value={customerNewDetails.pay_terms== 0? "" : customerNewDetails.pay_terms}
+                                onChange={handleInputChange("pay_terms",true)}
                             />
                         </FormGroup>
                     </Col>
@@ -540,8 +476,8 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 type="text"
                                 id="avg_days_to_pay"
                                 name="avg_days_to_pay"
-                                value={customerNewDetails.avg_days_to_pay}
-                                onChange={handleInputChange("avg_days_to_pay")}
+                                value={customerNewDetails.avg_days_to_pay == 0? "" : customerNewDetails.avg_days_to_pay} 
+                                onChange={handleInputChange("avg_days_to_pay",true)}
                             />
                         </FormGroup>
                     </Col>

@@ -7,12 +7,13 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { CustomTable } from '../../../../../../features/data-table/CustomTable'
 import { RxCross2 } from 'react-icons/rx'
 import { useDriverContext } from '../../../../../../services/reducer/driver.reducer'
+import { toastify } from '../../../../../../features/notification/toastify'
 
 const DocumentMedical = ( prop : TDriverProps) => {
 
   const {driver_id = 0} = prop
 
-  const { getDriverMedicalList ,driverMedicalLists ,driverLoading } = useDriverContext()
+  const { getDriverMedicalList ,driverMedicalLists , postDriverMedical ,driverLoading } = useDriverContext()
 
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [driverMedical, setDriverMedical] = useState<IDriverMedical>(initialDriverMedical);
@@ -49,6 +50,17 @@ const handleDriverInput = (prop: keyof IDriverMedical) => (event: React.ChangeEv
   setDriverMedical({ ...driverMedical, [prop]: event.target.value });
 }
 
+const handleDriverMedicalSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
+  event.preventDefault();
+  if(driverMedical.file){
+    await postDriverMedical(driver_id,driverMedical).then((data : any ) => {
+      data?.value && data && toastify({ message: data.message, type: data.success ? "success" : "error", });
+      UploadModalClose();
+      getDriverMedicalList(driver_id)
+    })
+  }
+}
+
 useEffect(() => {
   if(driver_id > 0){
     getDriverMedicalList(driver_id)
@@ -71,7 +83,7 @@ useEffect(() => {
 
     {
       id: 'card_number',
-      name: 'Number',
+      name: 'NUMBER',
       style: { width: '10%' },
       sortable: true,
       selector: (row: IDriverMedical) => row.card_number,
@@ -79,7 +91,7 @@ useEffect(() => {
     },
     {
       id: 'issue_date',
-      name: 'Number',
+      name: 'ISSUE DATE',
       style: { width: '10%' },
       sortable: true,
       selector: (row: IDriverMedical) => row.issue_date,
@@ -88,7 +100,7 @@ useEffect(() => {
     },
     {
       id: 'exp_date',
-      name: 'Number',
+      name: 'EXP DATE',
       style: { width: '10%' },
       sortable: true,
       selector: (row: IDriverMedical) => row.exp_date,
@@ -96,14 +108,14 @@ useEffect(() => {
     },
     {
       id: 'attachment',
-      name: 'Number',
+      name: 'ATTACHMENTS',
       style: { width: '10%' },
       sortable: true,
       selector: (row: IDriverMedical) => row.attachment,
     },
     {
       id : "action",
-      name : "Action",
+      name : "",
       style : {width : "10%"},
       sortable : true,
       selector : (row : IDriverMedical) => row.card_id,
@@ -129,7 +141,7 @@ useEffect(() => {
           <h6 className="mb-0 fw-bold">Edit Application </h6>
         </ModalHeader>
         <ModalBody className="square border border-info-rounded">
-        <Form  >
+        <Form onSubmit={handleDriverMedicalSubmit} >
 
         <Row>
         <Col md={6}>

@@ -117,6 +117,7 @@ const CustomerPage = () => {
   // }, [filteredData]);
 
 
+
   useEffect(() => {
     getCustomerDetails();
   }, []);
@@ -136,7 +137,7 @@ const CustomerPage = () => {
       style: { width: "25%" },
       sortable: true,
       selector: (row: ICustomerDetails) => row.address,
-      format:(row :ICustomerDetails)=>(`${row.suite_number} ${row.street_number} ${row.city} ${row.state_short_name} ${row.zipcode}`)
+      format:(row :ICustomerDetails)=>(`${row.suite_number} ${row.street} ${row.city} ${row.state_name} ${row.zipcode}`)
     },
     {
       id: "phone",

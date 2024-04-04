@@ -25,7 +25,7 @@ export const useVendorContext = () => {
             const vendorList : IVendorDetailsResponse = await API.get(API_VENDOR.getVendor );
              const newVendorList = vendorList.value.map((vendor)=>{
               vendor.full_name = `${vendor.first_name} ${vendor.last_name}`;
-              vendor.address = `${vendor.suite_number} ${vendor.street_number} ${vendor.city} ${vendor.state_id} ${vendor.zipcode}`;
+              vendor.address = `${vendor.suite_number} ${vendor.street} ${vendor.city} ${vendor.state_name} ${vendor.zipcode}`;
             return vendor;
         })
             setState((draft) => {

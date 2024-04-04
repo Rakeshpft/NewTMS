@@ -186,7 +186,8 @@ const CustomerDocuments = (prop: TCustomerProps) => {
           <Label>Upload File</Label>
           <FormGroup>
               
-                  <Input type="file" name="file" id="file" onChange={handleFileUpload} />
+                  <Input type="file" name="file" id="file" onChange={handleFileUpload}
+                  required title='Please select file' />
                 
            </FormGroup>
               <Label for="exampleText">Notes</Label>

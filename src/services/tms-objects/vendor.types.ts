@@ -27,16 +27,17 @@ export interface IVendorDetails {
   email: string
   phone: string
   suite_number: string
-  street_number: string
+  street: string
   address : string
   city: string
   state_id: number
+  state_name:string
   zipcode: string
   description: string
   company_name: string
   fid_ein: string
   mc_number: string
-  active: boolean
+  is_active: boolean
 }
 export const initialStateVendor: IVendorDetails = {
   vendor_id : 0,
@@ -48,16 +49,17 @@ export const initialStateVendor: IVendorDetails = {
   email : "",
   phone : "",
   suite_number : "",
-  street_number : "",
+  street : "",
   address: "",
   city : "",
   state_id : 0,
+  state_name : "",
   zipcode : "",
   description : "",
   company_name : "",
   fid_ein : "",
   mc_number : "",
-  active: true
+  is_active: true
 };
 export interface INewVendorDetails  {
   [x: string]: any;
@@ -69,15 +71,16 @@ export interface INewVendorDetails  {
   email: string
   phone: string
   suite_number: string
-  street_number: string
+  street: string
   city: string
   state_id: number
+  state_name: string
   zipcode: string
   description: string
   company_name: string
   fid_ein: string
   mc_number: string
-  active: boolean
+  is_active: boolean
 }
 
 export type TVendorProps = {

@@ -68,23 +68,7 @@ const CustomerContacts = (prop: TCustomerProps) => {
     }
   }, [selectedContact]);
 
-  const validateContact = () => {
-    if (contactNewDetails.name === "") {
-        toastify({ message: "Please enter first Name", type: "error" });
-        return false;
-    }
-  else  if (contactNewDetails.phone === "") {
-      toastify({ message: "Please enter Phone", type: "error" });
-      return false;
-    } else if (contactNewDetails.email === "") {
-      toastify({ message: "Please enter last Email", type: "error" });
-   
-      return false;
-    }
-    else {
-      return true;
-    }
-  };
+
   // const handleSearch = debounce((searchValue: string) => {
   //   const searchResults =
   //     ContactDetails &&
@@ -175,7 +159,7 @@ const CustomerContacts = (prop: TCustomerProps) => {
 
   const handleSaveContact = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    if(validateContact()){
+  
     await saveContact(customer_id, contactNewDetails).then((response: any) => {
       
       console.log("getdata", response);
@@ -186,7 +170,7 @@ const CustomerContacts = (prop: TCustomerProps) => {
       response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
 
     })
-  }};
+  };
 
 
   const columns: CustomTableColumn[] = [

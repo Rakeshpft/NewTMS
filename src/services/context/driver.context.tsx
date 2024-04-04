@@ -1,6 +1,6 @@
 import React ,  { createContext } from "react";
 import { Draft } from "immer";
-import { IDriverCdl, IDriverDoc, IDriverMedical, IDriverObject, IDriverPayRatesOject, IDriverStatus, IDriverType } from "../tms-objects/driver.types";
+import { IDriverCdl, IDriverDoc, IDriverDrugTest, IDriverMedical, IDriverMvr, IDriverObject, IDriverPayRatesOject, IDriverStatus, IDriverType } from "../tms-objects/driver.types";
 
 import { useImmer } from "use-immer";
 
@@ -16,7 +16,8 @@ export interface   IDriverAdd {
     driverDocAppList : IDriverDoc[] | null
     driverCdlLists : IDriverCdl[] | null
     driverMedicalLists : IDriverMedical[] | null
-  
+    driverDrugLists : IDriverDrugTest[] | null
+    driverMvrLists:IDriverMvr[]|null
     
 }
 
@@ -30,7 +31,9 @@ export interface   IDriverAdd {
     selectedPayRates : null,
     driverDocAppList : null,
     driverCdlLists : null,
-    driverMedicalLists : null
+    driverMedicalLists : null,
+    driverDrugLists : null,
+    driverMvrLists:null
 }
 
 type DriverContextType =  {

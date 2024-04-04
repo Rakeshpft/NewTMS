@@ -82,7 +82,9 @@ export const API_DRIVER = {
   postDriverImage : "/image",
   getDiverDocApp : "/application",
   getDriverCdl : "/cdl",
-  getDriverMedical :"/medical-card"
+  getDriverMedical :"/medical-card",
+  getDriverDrugList : "/drug-test",
+  getDriverMvr : "/mvr"
   
 };
 

@@ -3,7 +3,7 @@ import { DriverAddContext } from "../context/driver.context";
 import { API } from "../api-helper/api.services";
 import { API_DRIVER } from "../api-helper/api.constant";
 import { IAPIResponse } from "../tms-objects/response.types";
-import { IDriverCdl, IDriverDoc, IDriverObject, IDriverPayRatesOject } from "../tms-objects/driver.types";
+import { IDriverCdl, IDriverDoc, IDriverDrugTest, IDriverMedical, IDriverObject, IDriverPayRatesOject } from "../tms-objects/driver.types";
 
 export const useDriverContext = () => {
   const { state, setState } = useContext(DriverAddContext);
@@ -257,6 +257,72 @@ const getDriverMedicalList = async (driver_id : number) => {
   }
 }
 
+const postDriverMedical = async (  driver_id : number , payload : IDriverMedical ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const SaveDriverMedical : IAPIResponse = await API.post( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverMedical}` , payload );
+    return SaveDriverMedical ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const getDriverDrugList = async ( driver_id : number) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverDrugData : IAPIResponse = await API.get( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverDrugList}` );
+    setState((draft) => {
+      draft.driverDrugLists = driverDrugData.value;
+      draft.driverLoading = false;
+    });
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const postDriverDrugTest = async (  driver_id : number , payload : IDriverDrugTest ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const SaveDriverDrugTest : IAPIResponse = await API.post( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverDrugList}` , payload );
+    return SaveDriverDrugTest ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const getDriverMvr = async ( driver_id : number) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverMvrData : IAPIResponse = await API.get( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverMvr}` );
+    setState((draft) => {
+      draft.driverMvrLists = driverMvrData.value;
+      draft.driverLoading = false;
+    });
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
 
   return {
     ...state,
@@ -272,7 +338,11 @@ const getDriverMedicalList = async (driver_id : number) => {
     postApplication,
     getDriverCdlList,
     postDriverCdl,
-    getDriverMedicalList
+    getDriverMedicalList,
+    postDriverMedical,
+    getDriverDrugList,
+    postDriverDrugTest,
+    getDriverMvr
 
   }
 };

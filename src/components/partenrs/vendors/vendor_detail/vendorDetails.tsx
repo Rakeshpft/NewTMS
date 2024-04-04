@@ -128,7 +128,7 @@ const VendorDetails = (props: TVendorProps) => {
                         <FormGroup>
                             <Label for="Street No.">Street No.</Label>
                             <Input bsSize="sm" className="form-control" type="text" id="street_number" name="street_number"
-                                value={vendorNewDetails.street_number} onChange={handleInputChange("street_number")} />
+                                value={vendorNewDetails.street} onChange={handleInputChange("street")} />
                         </FormGroup>
                     </Col>
                     <Col md={3}>

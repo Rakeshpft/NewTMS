@@ -54,7 +54,9 @@ const CustomerContactsModal = (props : ICustomerContactsProps) => {
                                         id="name"
                                         name="name"
                                         value={contactNewDetails.name} onChange={handleInputContactChange("name")} 
-                                    />
+                                        pattern='^[a-zA-Z]+$' title="Only alphabets are allowed"
+                                        required
+                                        />
                                 </FormGroup>
                             </Col>
                             <Col md={6}>
@@ -81,22 +83,27 @@ const CustomerContactsModal = (props : ICustomerContactsProps) => {
                         <Row>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Label for="name">Phone</Label>
+                                    <Label for="phone">Phone</Label>
                                     <Input bsSize="sm"
                                         className="form-control form-control-sm"
-                                        id="name" name="name"
+                                        id="phone" name="phone"
                                         type="text"
                                             value={contactNewDetails.phone}
                                             onChange={handleInputContactChange("phone")}
+                                            pattern='^(\+\d{1,3}[- ]?)?\d{10}$' title="Please enter valid phone number"
+                                            required
                                     />
                                 </FormGroup>
                             </Col>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Label for="name"> Email </Label>
-                                    <Input bsSize="sm" className="form-control form-control-sm" id="description" name="name" type="text" 
+                                    <Label for="email"> Email </Label>
+                                    <Input bsSize="sm" className="form-control form-control-sm" id="description" name="email" type="text" 
                                      value={contactNewDetails.email}
-                                     onChange={handleInputContactChange("email")}/>
+                                     onChange={handleInputContactChange("email")}
+                                     pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$' title="Please enter valid email"
+                                     required
+                                     />
                                 </FormGroup>
                             </Col>
                         </Row>
