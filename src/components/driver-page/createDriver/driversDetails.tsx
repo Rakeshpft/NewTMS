@@ -13,6 +13,9 @@ import { useDriverContext } from "../../../services/reducer/driver.reducer";
 import { toastify } from "../../../features/notification/toastify";
 import { useListContext } from "../../../services/reducer/list.reducer";
 import { useVendorContext } from "../../../services/reducer/vendor.reducer";
+import { useTrailerContext } from "../../../services/reducer/trailer.reducer";
+import { useTruckContext } from "../../../services/reducer/truck.reducer";
+import { useNavigate } from "react-router-dom";
 
 const DriversDetails = (props : TDriverProps ) => {
 
@@ -35,8 +38,12 @@ const {
     selectedPayRates
   } = useDriverContext();
   
+  const navigate = useNavigate();
+
   const { getDriverTypeList  , driverTypeList  ,getDriverStatusList ,driverStatusList } = useListContext();
   const { getVendorDetails ,VendorDetails } = useVendorContext();
+  const { getTrailerList ,trailerList   }  = useTrailerContext();
+  const { getTruck , truckListStatus}= useTruckContext()
   
 
   const [newDriver, setNewDriver] = useState<IDriverObject>(initialStateDriver);
@@ -117,7 +124,7 @@ const {
     };
 
     const handleCloseForm = () => {
-      getDriverList();
+     navigate(-1)
     };
 
     useEffect(() => {
@@ -126,6 +133,8 @@ const {
       getDriverTypeList()
       getVendorDetails()
       getDriverStatusList()
+      getTrailerList()
+      getTruck()
       getDriverStatus()
       
     }, []);
@@ -304,13 +313,13 @@ const {
                     <FormGroup>
                       <Label for="truck">Truck</Label>
                       <Input bsSize="sm" className="form-control form-control-sm" type="select" id="truck" value={newDriver.truck_id} onChange={handleInputChange("truck_id")} >
-                       {/* {
+                       {
                          truckListStatus && truckListStatus.map((truck) => (
                            <option key={truck.truck_id} value={truck.truck_id}>
                              { truck.lease_lessor_name }
                            </option>
                          ))
-                       }  */}
+                       } 
                       </Input>
                     </FormGroup>
                   </Col>
@@ -320,13 +329,13 @@ const {
                       <Input bsSize="sm" className="form-control form-control-sm" type="select"  id="trailer" value={newDriver.trailer_id} onChange={handleInputChange("trailer_id")}    
                       >
                         <option value={0}> Select Trailer </option>
-                        {/* {
-                          trailerListStatus && trailerListStatus.map((trailer) => (
+                        {
+                          trailerList && trailerList.map((trailer) => (
                             <option key={trailer.trailer_id} value={trailer.trailer_id}>
                               { trailer.lease_lessor_name }
                             </option>
                           ))
-                        } */}
+                        }
                       </Input>
                     </FormGroup>
                   </Col>
@@ -472,8 +481,8 @@ const {
                 Save
                 </Button>
 
-                <Button className="cancel-button" size="sm" onClick={handleCloseForm}>
-                  Close
+                <Button className="cancel-button" size="sm" color="danger" outline={true} onClick={handleCloseForm} >
+                Close
                 </Button>
               </Col>
             </Row>

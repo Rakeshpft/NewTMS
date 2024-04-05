@@ -73,7 +73,7 @@ useEffect(() => {
   if(driver_id > 0){
     getDriverOther(driver_id)
   }
-})
+} , [])
   
 const columns: CustomTableColumn[] = [
 
