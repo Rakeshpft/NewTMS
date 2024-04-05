@@ -22,27 +22,14 @@ const CreateNewTrailerForm = (props: ITrailerProps) => {
   return (
     <>
       <CommonLayOut>
-        <TabPage tabTitles={["Detail","Documents"]}>
+      <div className="page-title">{trailer_id == 0 ? "New Trailer " : "Edit Trailer"}</div>
+        <TabPage tabTitles={["Details", "Documents"]} disabledTabs={trailer_id == 0 ? [1]:[]}>
           <TabPane tabId={1} className="Details">
             <TrailerDetails trailer_id={trailer_id} handleSubmit={handleSubmit} />
-            {/* <TrailerDetails
-
-              TrailerNewDetails={TrailerNewDetails}
-              handleSaveTrailer={handleSaveTrailer}
-              handleInputChange={handleInputChange}
-              handleClose={handleClose}
-              setTrailerDetails={setTrailerNewDetails}
-              selectedTrailer={selectedTrailer}
-              title={title}
-              setTrailerNewDetails={setTrailerNewDetails}
-
-            /> */}
           </TabPane>
           <TabPane tabId={2} className="Documents">
           </TabPane>
         </TabPage>
-        {/* </Form >
-      </div> */}
       </CommonLayOut>
     </>
   );

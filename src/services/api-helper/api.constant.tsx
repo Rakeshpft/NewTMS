@@ -84,8 +84,10 @@ export const API_DRIVER = {
   getDriverCdl : "/cdl",
   getDriverMedical :"/medical-card",
   getDriverDrugList : "/drug-test",
-  getDriverMvr : "/mvr"
-  
+  getDriverMvr : "/mvr",
+  getDriverSsn:"/ssn-card",
+  getDriverEmpVerify :"/employee-verification",
+  getDriverOther : "/other-documents"
 };
 
 export const API_TRUCK = {
@@ -95,11 +97,11 @@ export const API_TRUCK = {
 
 export const API_TRAILER = {
   // House Trailer API endpoints here
-  getTrailer: "/Trailers",
-  getTrailerStatus: "/Trailers",
-  getIndividualTrailer : "/Trailers",
-  postNewTrailerData: "/Trailers",
-  deleteTrailer: "/Trailers",
+  getTrailer: "/Trailer",
+  getTrailerStatus: "/Trailer",
+  getIndividualTrailer : "/Trailer",
+  postNewTrailerData: "/Trailer",
+  deleteTrailer: "/Trailer",
 };
 export const API_USER = {
   // House Staff API endpoints here
@@ -129,7 +131,8 @@ export const API_VENDOR = {
   postNewVendorData: "/Vendor",
   deleteVendor: "/Vendor",
   getVendorDocument : "/documents",
-  postVendorDocument : "/upload-document"
+  postVendorDocument : "/upload-document",
+  deleteDocuments : "/delete",
 }
 
 export const API_LIST = {

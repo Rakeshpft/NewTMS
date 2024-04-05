@@ -6,7 +6,7 @@ import TabPage from "./tab-page";
 import DriversDetails from "./createDriver/driversDetails";
 import DocumentsDetails from "./createDriver/documentDetailsPage/documentsDetails";
 import SchedulePayment from "./createDriver/schedulePayment";
-import AdditionalPayee from "./createDriver/additionalPayee";
+// import AdditionalPayee from "./createDriver/additionalPayee";
 import CommonLayOut from "../../layout";
 import {  TDriverProps } from "../../services/tms-objects/driver.types";
 
@@ -50,9 +50,9 @@ const CreateNewDriverForm = ( prop : TDriverProps ) => {
         <TabPane tabId={3} className="">
         <SchedulePayment/>
         </TabPane>
-        <TabPane tabId={4} className="">
+        {/* <TabPane tabId={4} className="">
         <AdditionalPayee/>
-        </TabPane>
+        </TabPane> */}
       </TabPage>
     </CommonLayOut>
   );

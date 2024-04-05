@@ -79,6 +79,7 @@ const CustomerDocuments = (prop: TCustomerProps) => {
   }
 
   const handleDeleteDocuments = () => {
+    debugger;
     const deletedDocumentIds = selectedDocuments.map(doc => doc.document_id);
   
     deleteDocument(customer_id, deletedDocumentIds)

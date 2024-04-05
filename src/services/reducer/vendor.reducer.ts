@@ -4,6 +4,7 @@ import { API_VENDOR } from "../api-helper/api.constant";
 import { VendorUpdateContext } from "../context/vendor.context";
 import { IVendorDetails, IVendorDetailsResponse, IVendorDocument } from "../tms-objects/vendor.types";
 import { IAPIResponse } from "../tms-objects/response.types";
+import { toastify } from "../../features/notification/toastify";
 
 
 
@@ -24,8 +25,8 @@ export const useVendorContext = () => {
              
             const vendorList : IVendorDetailsResponse = await API.get(API_VENDOR.getVendor );
              const newVendorList = vendorList.value.map((vendor)=>{
-              vendor.full_name = `${vendor.first_name} ${vendor.last_name}`;
-              vendor.address = `${vendor.suite_number} ${vendor.street} ${vendor.city} ${vendor.state_name} ${vendor.zipcode}`;
+              // vendor.full_name = `${vendor.first_name} ${vendor.last_name}`;
+              // vendor.address = `${vendor.suite_number} ${vendor.street_number} ${vendor.city} ${vendor.state_id} ${vendor.zipcode}`;
             return vendor;
         })
             setState((draft) => {
@@ -141,6 +142,29 @@ export const useVendorContext = () => {
           });
         }
       };
+
+
+      const deleteDocument = async (vendor_id: number, document_ids: number[]) => {
+        setState((draft) => {
+          draft.VendorLoading = true;
+        });
+      
+        clearSuccessAndFailure();
+      
+        try {
+        let response = await API.del(`${API_VENDOR.getVendor}/${vendor_id}/documents${API_VENDOR.deleteDocuments}`, document_ids);
+          setTimeout(() => getVendorDocument(vendor_id), 200);
+          response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
+
+        } catch (error: any) {
+          console.log(error);
+          setState((draft) => {
+            draft.VendorLoading = false;
+          });
+        }
+      };
+
+
       const clearSuccessAndFailure = () => {
         setState((draft) => {
           draft.saveVendorFailed = false;
@@ -156,6 +180,7 @@ export const useVendorContext = () => {
         getIdividualVendorDetails,
         getVendorDocument,
         postVendorDocument,
+        deleteDocument,
     }
 
 }

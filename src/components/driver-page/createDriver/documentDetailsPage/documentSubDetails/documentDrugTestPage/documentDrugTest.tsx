@@ -141,7 +141,7 @@ const columns: CustomTableColumn[] = [
       <Modal isOpen={uploadModalOpen} onClose={UploadModalClose}>
       <ModalHeader close={closeBtn}
                  onClose={() => UploadModalClose()}>
-          <h6 className="mb-0 fw-bold">Edit Application </h6>
+          <h6 className="mb-0 fw-bold">Edit Drug TEst </h6>
         </ModalHeader>
 
         <ModalBody className="square border border-info-rounded">
@@ -177,7 +177,9 @@ const columns: CustomTableColumn[] = [
            </FormGroup>
         </Col>
        </Row>
-
+       <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">
+          <Button color="primary" className="px-4 mr-3 shadow save-button" type="submit">Save</Button>
+       </FormGroup>
         </Form>
         </ModalBody>
         </Modal>

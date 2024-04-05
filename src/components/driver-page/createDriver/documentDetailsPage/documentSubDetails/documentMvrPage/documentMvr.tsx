@@ -7,11 +7,12 @@ import { HiOutlinePencilAlt } from 'react-icons/hi'
 import { CustomTable } from '../../../../../../features/data-table/CustomTable'
 import { RxCross2 } from 'react-icons/rx'
 import { useDriverContext } from '../../../../../../services/reducer/driver.reducer'
+import { toastify } from '../../../../../../features/notification/toastify'
 
 const DocumentMvr = ( prop : TDriverProps) => {
 
   const { driver_id = 0 } = prop;
-  const { getDriverMvr , driverMvrLists ,driverLoading  } = useDriverContext()
+  const { getDriverMvr , driverMvrLists , postDriverMvr ,driverLoading  } = useDriverContext()
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [driverMvr, setDriverMvr] = useState<IDriverMvr>(initialDriverMvr);
   const [driverMvrList , setDriverMvrList] = useState<IDriverMvr[]>([]);
@@ -37,6 +38,7 @@ const handleEditMvr = (id:number) => {
   }
   setUploadModalOpen(true);
  }
+
  const handleFileUpload = async(event: React.ChangeEvent<HTMLInputElement>) => {
   if (event.target.files) {      
     setDriverMvr({
@@ -56,12 +58,23 @@ const closeBtn = (
   </button>
 
 );
+const handleSaveMvr = async (event: React.ChangeEvent<HTMLFormElement>) => {
+  event.preventDefault();
+  if(driverMvr.file){
+    await postDriverMvr(driver_id, driverMvr).then((data : any ) => {
+      data?.value && data && toastify({ message: data.message, type: data.success ? "success" : "error", });
+      
+    })
+  }
+  UploadModalClose();
+      getDriverMvr(driver_id);
+}
 
 useEffect(() => {
-  if (driver_id) {
+  if (driver_id>0) {
     getDriverMvr(driver_id)
   }
-})
+}, [])
   const columns: CustomTableColumn[] = [
 
     {
@@ -104,10 +117,10 @@ useEffect(() => {
       <Modal isOpen={uploadModalOpen} onClose={UploadModalClose}>
       <ModalHeader close={closeBtn}
                  onClose={() => UploadModalClose()}>
-          <h6 className="mb-0 fw-bold">Edit Application </h6>
+          <h6 className="mb-0 fw-bold">Edit MVR </h6>
         </ModalHeader>
         <ModalBody className="square border border-info-rounded">
-          <Form>
+          <Form onSubmit={handleSaveMvr}>
         <Row>
         <Col md={6}>
         <FormGroup>
@@ -123,6 +136,9 @@ useEffect(() => {
            </FormGroup>
         </Col>
        </Row>
+       <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">
+          <Button color="primary" className="px-4 mr-3 shadow save-button" type="submit">Save</Button>
+       </FormGroup>
        </Form>
           </ModalBody>
         </Modal>

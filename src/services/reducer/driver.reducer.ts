@@ -3,7 +3,7 @@ import { DriverAddContext } from "../context/driver.context";
 import { API } from "../api-helper/api.services";
 import { API_DRIVER } from "../api-helper/api.constant";
 import { IAPIResponse } from "../tms-objects/response.types";
-import { IDriverCdl, IDriverDoc, IDriverDrugTest, IDriverMedical, IDriverObject, IDriverPayRatesOject } from "../tms-objects/driver.types";
+import { IDriverCdl, IDriverDoc, IDriverDrugTest, IDriverEmpVerify, IDriverMedical, IDriverMvr, IDriverObject, IDriverOther, IDriverPayRatesOject, IDriverSSn } from "../tms-objects/driver.types";
 
 export const useDriverContext = () => {
   const { state, setState } = useContext(DriverAddContext);
@@ -229,7 +229,7 @@ const postDriverCdl = async (  driver_id : number , payload : IDriverCdl ) => {
     draft.driverLoading = true;
   });
   try {
-    const SaveDriverCdl : IAPIResponse = await API.post( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverCdl}` , payload );
+    const SaveDriverCdl : IAPIResponse = await API.postForm( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverCdl}` , payload );
     return SaveDriverCdl ;
   } catch (error: any) {
     console.log(error);
@@ -262,7 +262,7 @@ const postDriverMedical = async (  driver_id : number , payload : IDriverMedical
     draft.driverLoading = true;
   });
   try {
-    const SaveDriverMedical : IAPIResponse = await API.post( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverMedical}` , payload );
+    const SaveDriverMedical : IAPIResponse = await API.postForm( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverMedical}` , payload );
     return SaveDriverMedical ;
   } catch (error: any) {
     console.log(error);
@@ -295,7 +295,7 @@ const postDriverDrugTest = async (  driver_id : number , payload : IDriverDrugTe
     draft.driverLoading = true;
   });
   try {
-    const SaveDriverDrugTest : IAPIResponse = await API.post( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverDrugList}` , payload );
+    const SaveDriverDrugTest : IAPIResponse = await API.postForm( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverDrugList}` , payload );
     return SaveDriverDrugTest ;
   } catch (error: any) {
     console.log(error);
@@ -322,7 +322,118 @@ const getDriverMvr = async ( driver_id : number) => {
     });
   }
 }
+const postDriverMvr = async (  driver_id : number , payload : IDriverMvr ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const SaveDriverMvr : IAPIResponse = await API.postForm( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverMvr}` , payload );
+    return SaveDriverMvr ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
 
+const getDriverSsn = async ( driver_id : number) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverSsnData : IAPIResponse = await API.get( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverSsn}` );
+    setState((draft) => {
+      draft.driverSsnListsData = driverSsnData.value;
+      draft.driverLoading = false;
+    });
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+} 
+
+const postDriverSsn = async (  driver_id : number , payload : IDriverSSn ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const SaveDriverSsn : IAPIResponse = await API.postForm( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverSsn}` , payload );
+    return SaveDriverSsn ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+const getDriverEmpVerify = async ( driver_id : number) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverEmpVerifyData : IAPIResponse = await API.get( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverEmpVerify}` );
+    setState((draft) => {
+      draft.driverEmpVerifyList = driverEmpVerifyData.value;
+      draft.driverLoading = false;
+    });
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const postDriverEmpVerify = async (  driver_id : number , payload : IDriverEmpVerify ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const SaveDriverEmpVerify : IAPIResponse = await API.postForm( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverEmpVerify}` , payload );
+    return SaveDriverEmpVerify ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const getDriverOther = async ( driver_id : number) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverOtherData : IAPIResponse = await API.get( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverOther}` );
+    setState((draft) => {
+      draft.driverOtherListsData = driverOtherData.value;
+      draft.driverLoading = false;
+    });
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const postDriverOther = async (  driver_id : number , payload : IDriverOther ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const SaveDriverOther : IAPIResponse = await API.postForm( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverOther}` , payload );
+    return SaveDriverOther ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
 
   return {
     ...state,
@@ -342,7 +453,14 @@ const getDriverMvr = async ( driver_id : number) => {
     postDriverMedical,
     getDriverDrugList,
     postDriverDrugTest,
-    getDriverMvr
+    getDriverMvr,
+    postDriverMvr,
+    getDriverSsn,
+    postDriverSsn,
+    getDriverEmpVerify,
+    postDriverEmpVerify,
+    getDriverOther,
+    postDriverOther
 
   }
 };

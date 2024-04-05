@@ -138,7 +138,7 @@ useEffect(() => {
 
       <ModalHeader close={closeBtn}
                  onClose={() => UploadModalClose()}>
-          <h6 className="mb-0 fw-bold">Edit Application </h6>
+          <h6 className="mb-0 fw-bold">Edit Medical Card </h6>
         </ModalHeader>
         <ModalBody className="square border border-info-rounded">
         <Form onSubmit={handleDriverMedicalSubmit} >

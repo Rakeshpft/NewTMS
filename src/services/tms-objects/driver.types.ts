@@ -274,6 +274,86 @@ export const initialDriverMvr : IDriverMvr = {
   file : new File([], "")
 }
 
+export interface IDriverSSn {
+  driver_id : number,
+  company_id : number, 
+  ssn_id : number,
+  ss_number : string,
+  attachment : string,
+  file  : File
+}
+
+export const initialDriverSsn : IDriverSSn = {
+  driver_id : 0,
+  company_id : 0,
+  ssn_id : 0,
+  ss_number : "",
+  attachment : "",
+  file : new File([], "")
+}
+
+export interface IDriverEmpVerify {
+  driver_id : number,
+  company_id : number, 
+  status_id : number,
+  verification_id : number,
+  date : string,
+  note :string,
+  attachment : string,
+  file  : File
+  status_name : string
+}
+
+export const initialDriverEmpVerify : IDriverEmpVerify = {
+  driver_id : 0,
+  company_id : 0,
+  status_id : 0,
+  status_name : "",
+  verification_id : 0,
+  date : "",
+  note : "",
+  attachment : "",
+  file : new File([], "")
+}
+
+export interface IDriverOther {
+  doc_id  : number,
+  name : string,
+  expiry_date : string,
+  notes : string,
+  attachment : string,
+  file  : File,
+  driver_id : number,
+  company_id  : number
+}
+
+export const initialDriverOther : IDriverOther = {
+  doc_id  : 0,
+  name : "",
+  expiry_date : "",
+  notes : "",
+  attachment : "",
+  file : new File([], ""),
+  driver_id : 0,
+  company_id  : 0
+}
+
+export interface IDriverSchedulePayee{
+  categgory : string,
+  amount : number,
+  schedule : string,
+  last : string,
+  schedule_id : number
+
+}
+
+export const initialDriverSchedule : IDriverSchedulePayee = {
+  categgory : "",
+  amount : 0,
+  schedule : "",
+  last : "",
+  schedule_id : 0
+}
 
 export interface IDriverManagenetProps {
   newDriver: IDriverObject;

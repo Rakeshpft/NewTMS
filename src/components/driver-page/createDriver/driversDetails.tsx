@@ -11,6 +11,8 @@ import {
 import {  IDriverObject, IDriverPayRatesOject, TDriverProps, initialStateDriver, initialStatedriver_pay_rates } from "../../../services/tms-objects/driver.types";
 import { useDriverContext } from "../../../services/reducer/driver.reducer";
 import { toastify } from "../../../features/notification/toastify";
+import { useListContext } from "../../../services/reducer/list.reducer";
+import { useVendorContext } from "../../../services/reducer/vendor.reducer";
 
 const DriversDetails = (props : TDriverProps ) => {
 
@@ -25,7 +27,6 @@ const {
     getIdividualDriver,
     selectedDriver,
     driverLoading,
-    getDriverType,
     getDriverStatus,
     postSaveDriverData,
     getDriverPayRateList, 
@@ -34,6 +35,10 @@ const {
     selectedPayRates
   } = useDriverContext();
   
+  const { getDriverTypeList  , driverTypeList  ,getDriverStatusList ,driverStatusList } = useListContext();
+  const { getVendorDetails ,VendorDetails } = useVendorContext();
+  
+
   const [newDriver, setNewDriver] = useState<IDriverObject>(initialStateDriver);
   const [driverPayRates, setDriverPayrates] = useState<IDriverPayRatesOject>(
     initialStatedriver_pay_rates
@@ -118,8 +123,10 @@ const {
     useEffect(() => {
       
       getDriverList();
-      getDriverType();
-      getDriverStatus();
+      getDriverTypeList()
+      getVendorDetails()
+      getDriverStatusList()
+      getDriverStatus()
       
     }, []);
 
@@ -222,18 +229,19 @@ const {
                       <Label for="ELDprovider">Driver Type</Label>
                       <Input  bsSize="sm" className="form-control form-control-sm" type="select" value={newDriver.driver_type_id} onChange={handleInputChange("driver_type_id")}>
                         <option value = {0}> Select Driver type </option>
-                        {/* { driverType && driverType.map((driver) => (
-
-                          <option key={driver.driver_type_id} value={driver.driver_type_id}>
-                            {driver.driver_type_name}
-                          </option>
-                        ))} */}
+                        {  
+                          driverTypeList && driverTypeList.map((driver) => (
+                            <option key={driver.driver_type_id} value={driver.driver_type_id}>
+                              {driver.driver_type_name}
+                            </option>
+                          ))
+                        }
                       </Input>
                     </FormGroup>
                   </Col>
                  
                   <Col md={4}>
-                  {/* { driverType && driverType.map((driver) => (
+                  { driverTypeList && driverTypeList.map((driver) => (
 
                         driver.driver_type_name === "Vendor/Driver" && (
                           
@@ -242,7 +250,7 @@ const {
                       <Input bsSize="sm" className="form-control form-control-sm" type="select" id="vendor" value={newDriver.vendor_id}   onChange={handleInputChange("vendor_id")} >
                         <option value={0}> Select Vendor </option>
                         {
-                          vendorList && vendorList.map((vendor) => (
+                          VendorDetails && VendorDetails.map((vendor) => (
                             <option key={vendor.vendor_id} value={vendor.vendor_id}>
                               {vendor.first_name}
                             </option>
@@ -252,7 +260,7 @@ const {
                     </FormGroup>
                         )
                      
-                      ))} */}
+                      ))}
                     
                   </Col>
                   <Col md={4}>
@@ -268,13 +276,13 @@ const {
                       <Label for="status">Status</Label>
                       <Input bsSize="sm" className="form-control form-control-sm"  type="select" id="status"  value={newDriver.driver_status_id}  onChange={handleInputChange("driver_status_id")} >
                         <option value={0}> Select Status </option>
-                        {/* {
-                          driverStatus && driverStatus.map((status) => (
+                        {
+                          driverStatusList && driverStatusList.map((status) => (
                             <option key={status.driver_status_id} value={status.driver_status_id}>
                               {status.driver_status_name}
                             </option>
                           ))
-                        } */}
+                        }
                       </Input>
                     </FormGroup>
                   </Col>

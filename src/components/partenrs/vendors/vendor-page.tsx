@@ -47,7 +47,7 @@ const VendorPage = () => {
 
   const handleDeleteVendor = () => {
     selectedVendors && deleteVendor(selectedVendors);
-    setDeleteModalOpen(true)
+    setDeleteModalOpen(false)
   };
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const VendorPage = () => {
   useEffect(() => {
     getVendorDetails();
   }, []);
-  
+
   const columns: CustomTableColumn[] = [
     {
       id: "full_name",
@@ -73,7 +73,8 @@ const VendorPage = () => {
       name: "Address",
       style: { width: "35%" },
       sortable: true,
-      selector: (row: IVendorDetails) => row.address
+      selector: (row: IVendorDetails) => row.address,
+      format: (row: IVendorDetails) => (`${row.suite_number} ${row.street} ${row.city} ${row.state_name} ${row.zipcode}`)
     },
     {
       id: "phone",
@@ -95,7 +96,7 @@ const VendorPage = () => {
       style: { width: "5%" },
       sortable: false,
       selector: (row: IVendorDetails) => row.vendor_id,
-      cell: (row: IVendorDetails) => <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={()=>{ navigate(`${routes.createNewVendor}/${row.vendor_id}`) }} />
+      cell: (row: IVendorDetails) => <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={() => { navigate(`${routes.createNewVendor}/${row.vendor_id}`) }} />
     }
   ]
 
@@ -111,9 +112,9 @@ const VendorPage = () => {
                   <InputGroupText className="bg-white">
                     <BsSearch size={16} />
                   </InputGroupText>
-                  <Input placeholder="Search" 
-                  className="border-start-0 search" 
-                  inputRef={inputRef} onChange={(e: any) => handleSearch(e.target.value)} />
+                  <Input placeholder="Search"
+                    className="border-start-0 search"
+                    inputRef={inputRef} onChange={(e: any) => handleSearch(e.target.value)} />
                 </InputGroup>
               </div>
               <div className="user-info-btn-wrapper">
@@ -143,8 +144,8 @@ const VendorPage = () => {
             {!isEmpty(selectedVendors) && (
               <div className=" my-3 ">
                 {selectedVendors.length > 1
-                  ? `Are you sure you want to delete ${selectedVendors.length} contacts?`
-                  : `Are you sure you want to delete customer "${selectedVendors[0].first_name} ${selectedVendors[0].last_name}"?`}
+                  ? `Are you sure you want to delete selected ${selectedVendors.length} vendor?`
+                  : `Are you sure you want to delete vendor`}
               </div>
             )}
             <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">

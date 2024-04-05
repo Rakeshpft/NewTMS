@@ -56,6 +56,10 @@ const VendorDetails = (props: TVendorProps) => {
             (event: React.ChangeEvent<HTMLInputElement>) => {
                 setvendorNewDetails({ ...vendorNewDetails, [prop]: event.target.value });
             };
+
+
+
+            
     const handleSaveVendor = async (event: { preventDefault: () => void }) => {
         event.preventDefault();
 
@@ -67,6 +71,7 @@ const VendorDetails = (props: TVendorProps) => {
             });
         }
     };
+    
     const handleClose = () => {
         setvendorNewDetails(initialStateVendor);
         navigate(routes.vendorsAll);
