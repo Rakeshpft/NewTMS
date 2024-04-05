@@ -66,7 +66,8 @@ const VendorPage = () => {
       name: "Name",
       style: { width: "25%" },
       sortable: true,
-      selector: (row: IVendorDetails) => row.full_name
+      selector: (row: IVendorDetails) => row.full_name,
+      format: (row: IVendorDetails) => (`${row.first_name} ${"  "} ${row.last_name} `)
     },
     {
       id: "address",

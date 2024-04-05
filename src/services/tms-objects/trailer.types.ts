@@ -12,7 +12,7 @@ export interface ITrailerObject {
   is_active: boolean;
   ownership_type_id: number;
   purchase_date: string;
-  purchase_price: string;
+  purchase_price: number;
   lease_date: string;
   lease_lessor_name: string;
   lease_fid: string;
@@ -44,7 +44,7 @@ export const trailerInitialState: ITrailerObject = {
   is_active: false,
   ownership_type_id: 0,
   purchase_date: "",
-  purchase_price: "",
+  purchase_price: 0,
   lease_date:"",
   lease_lessor_name:"",
   lease_fid:"",

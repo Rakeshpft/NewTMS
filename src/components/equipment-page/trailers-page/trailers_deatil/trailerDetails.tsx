@@ -55,7 +55,7 @@ const TrailerDetails = (prop: ITrailerProps) => {
         event.preventDefault();
         await saveTrailer(editTrailerDetail).then((response) => {
             response?.success && handleSubmit && handleSubmit(response.value);
-            getTrailerDetail(trailer_id);
+            //getTrailerDetail(trailer_id);
             response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
         });
 
@@ -199,7 +199,7 @@ const TrailerDetails = (prop: ITrailerProps) => {
                                 <Col md={3}>
                                     <FormGroup>
                                         <Label for="purchase_date">Purchase Date</Label>
-                                        <Input bsSize="sm" className="form-control" type="text" id="purchase_date" name="purchase_date"
+                                        <Input bsSize="sm" className="form-control" type="date" id="purchase_date" name="purchase_date"
                                             value={editTrailerDetail.purchase_date} onChange={handleInputChange("purchase_date")} />
                                     </FormGroup>
                                 </Col>

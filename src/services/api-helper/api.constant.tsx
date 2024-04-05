@@ -97,10 +97,10 @@ export const API_TRUCK = {
 
 export const API_TRAILER = {
   // House Trailer API endpoints here
-  getTrailer: "/Trailer",
+  getTrailer: "/equipment/trailer",
   getTrailerStatus: "/Trailer",
   getIndividualTrailer : "/Trailer",
-  postNewTrailerData: "/Trailer",
+  postNewTrailerData: "/equipment/trailer",
   deleteTrailer: "/Trailer",
 };
 export const API_USER = {
