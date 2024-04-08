@@ -164,6 +164,7 @@ export interface IDriverDoc {
   attachment : string,
   driver_id : number
   company_id : number
+  attachment_url : string
   file  : File
 }
 
@@ -177,6 +178,7 @@ export const initialDriverDoc : IDriverDoc = {
   attachment : "",
   driver_id : 0,
   company_id : 0,
+  attachment_url : "",
   file : new File([], ""),
 
   
@@ -190,6 +192,7 @@ export interface IDriverCdl {
   issue_date : string, 
   exp_date : string,
   attachment : string,
+  attachment_url : string
   file  : File,
   state_id : number,
   state_name:string
@@ -202,6 +205,7 @@ export const initialDriverCdl : IDriverCdl = {
   issue_date : "",
   exp_date : "",
   attachment : "",
+  attachment_url : "",
   file : new File([], ""),
   state_id : 0,
   state_name:""
@@ -214,6 +218,7 @@ export interface IDriverMedical {
   card_number : string,
   issue_date : string, 
   exp_date : string,
+  attachment_url : string
   attachment : string,
   file  : File
 }
@@ -224,6 +229,7 @@ export const initialDriverMedical : IDriverMedical = {
   card_number : "",
   issue_date : "",
   exp_date : "",
+  attachment_url : "",
   attachment : "",
   file : new File([], "")
   
@@ -236,6 +242,7 @@ export interface IDriverDrugTest {
   drug_test_id : number,
   status_name : string,
   note :string,
+  attachment_url : string
   attachment : string,
   date : string,
   file  : File
@@ -248,6 +255,7 @@ export const initialDriverDrugTest : IDriverDrugTest = {
   drug_test_id : 0,
   status_name : "",
   note : "",
+  attachment_url : "",
   attachment : "",
   date : "",
   file : new File([], "")
@@ -260,6 +268,7 @@ export interface IDriverMvr {
   mvr_id : number,
   note :string,
   attachment : string,
+  attachment_url : string
   date : string,
   file  : File
 }
@@ -271,6 +280,7 @@ export const initialDriverMvr : IDriverMvr = {
   mvr_id : 0,
   note : "",
   attachment : "",
+  attachment_url : "",
   date : "",
   file : new File([], "")
 }
@@ -281,6 +291,7 @@ export interface IDriverSSn {
   ssn_id : number,
   ss_number : string,
   attachment : string,
+  attachment_url : string
   file  : File
 }
 
@@ -289,6 +300,7 @@ export const initialDriverSsn : IDriverSSn = {
   company_id : 0,
   ssn_id : 0,
   ss_number : "",
+  attachment_url : "",
   attachment : "",
   file : new File([], "")
 }
@@ -301,6 +313,7 @@ export interface IDriverEmpVerify {
   date : string,
   note :string,
   attachment : string,
+  attachment_url : string
   file  : File
   status_name : string
 }
@@ -314,6 +327,7 @@ export const initialDriverEmpVerify : IDriverEmpVerify = {
   date : "",
   note : "",
   attachment : "",
+  attachment_url : "",
   file : new File([], "")
 }
 
@@ -324,6 +338,7 @@ export interface IDriverOther {
   notes : string,
   attachment : string,
   file  : File,
+  attachment_url : string
   driver_id : number,
   company_id  : number
 }
@@ -334,6 +349,7 @@ export const initialDriverOther : IDriverOther = {
   expiry_date : "",
   notes : "",
   attachment : "",
+  attachment_url : "",
   file : new File([], ""),
   driver_id : 0,
   company_id  : 0

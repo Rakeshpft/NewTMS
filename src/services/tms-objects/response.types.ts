@@ -1,5 +1,5 @@
 export interface IAPIResponse {
-    value: any;
+     value: any;
      exception?: Exception;
      is_error?: boolean;
      success?: boolean;

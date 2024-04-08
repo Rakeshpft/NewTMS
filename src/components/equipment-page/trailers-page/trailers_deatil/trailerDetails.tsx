@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
 import { useTrailerContext } from '../../../../services/reducer/trailer.reducer';
 import { ITrailerObject, trailerInitialState } from '../../../../services/tms-objects/trailer.types';
@@ -6,6 +6,7 @@ import { useListContext } from '../../../../services/reducer/list.reducer';
 import { toastify } from '../../../../features/notification/toastify';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../../routes/routes';
+import { LoadingContext } from '../../../../services/context/loading.context';
 //import { ITrailerDetails, ITrailerManagementProps } from '../../../../services/tms-objects/trailer.types';
 
 export type ITrailerProps = {
@@ -18,13 +19,13 @@ const TrailerDetails = (prop: ITrailerProps) => {
         trailer_id = 0,
         handleSubmit = undefined,
     } = prop;
+    const { setLoader } = useContext(LoadingContext);
     const { getStateList, stateList, getTrailerTypeList, trailerTypeList, getOwnershipTypeList, ownershipTypeList } = useListContext();
     const [editTrailerDetail, setEditTrailerDetail] = useState<ITrailerObject>(trailerInitialState);
     const { getTrailerDetail, selectedTrailer, saveTrailer, isLoading } = useTrailerContext();
-    const navigate = useNavigate();   
+    const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("trailer", trailer_id);
         if (trailer_id > 0) {
             getTrailerDetail(trailer_id);
         }
@@ -32,14 +33,15 @@ const TrailerDetails = (prop: ITrailerProps) => {
             setEditTrailerDetail(trailerInitialState);
             setEditTrailerDetail({
                 ...editTrailerDetail,
-                trailer_type_id:1,
-                ownership_type_id:1
+                trailer_type_id: 1,
+                ownership_type_id: 1
             })
         }
         getStateList();
         getTrailerTypeList();
         getOwnershipTypeList();
     }, []);
+
     useEffect(() => {
         if (!isLoading && selectedTrailer && trailer_id > 0) {
             setEditTrailerDetail(selectedTrailer);
@@ -51,15 +53,34 @@ const TrailerDetails = (prop: ITrailerProps) => {
             (event: React.ChangeEvent<HTMLInputElement>) => {
                 setEditTrailerDetail({ ...editTrailerDetail, [prop]: event.target.value });
             };
+
     const handleSaveTrailer = async (event: { preventDefault: () => void }) => {
         debugger;
         event.preventDefault();
+        setLoader(true);
         await saveTrailer(editTrailerDetail).then((response) => {
-            response?.success && handleSubmit && handleSubmit(response.value);
-            //getTrailerDetail(trailer_id);
-            response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
+            if (response) {
+                toastify({ message: response.message, type: (response.success ? "success" : "error") });
+                if (response.success) {
+                    if (handleSubmit) {
+                        setTimeout(function () {
+                            setLoader(false);
+                            handleSubmit(response.value);
+                        }, 2000);
+                    }
+                    else {
+                        setEditTrailerDetail({ ...editTrailerDetail, trailer_id: response.value });
+                        getTrailerDetail(response.value);
+                        setTimeout(function () {
+                            setLoader(false);
+                            navigate(`${routes.createNewTailers}/${response.value}`)
+                        }, 2000);
+                    }
+                }
+                else { setLoader(false); }
+            }
+            else { setLoader(false); }
         });
-
     };
 
     const handleClose = () => {
@@ -97,7 +118,7 @@ const TrailerDetails = (prop: ITrailerProps) => {
                                     <Label for="trailer_type_id">Type</Label>
                                     <Input bsSize="sm" className="form-control" type="select" id="trailer_type_id" name="trailer_type_id"
                                         value={editTrailerDetail.trailer_type_id} onChange={handleInputChange("trailer_type_id")} >
-                                            {trailerTypeList && trailerTypeList.map((item) => (
+                                        {trailerTypeList && trailerTypeList.map((item) => (
                                             <option key={item.trailer_type_id} value={item.trailer_type_id}>{item.trailer_type_name}</option>
                                         ))}
                                     </Input>
@@ -166,7 +187,7 @@ const TrailerDetails = (prop: ITrailerProps) => {
                             </Col>
 
                             <Col md={3}>
-                            <Label for="is_active" className='ml-3'>Active</Label>
+                                <Label for="is_active" className='ml-3'>Active</Label>
                                 <FormGroup switch>
                                     <Input type="switch" checked={editTrailerDetail.is_active} onChange={handleStatus} />
                                 </FormGroup>
@@ -183,8 +204,8 @@ const TrailerDetails = (prop: ITrailerProps) => {
                                 <FormGroup>
                                     <Input bsSize="sm" className="form-control" type="select" id="ownership_type_id" name="ownership_type_id"
                                         value={editTrailerDetail.ownership_type_id} onChange={handleInputChange("ownership_type_id")}>
-                                      {ownershipTypeList && ownershipTypeList.map((item) => (
-                                      <option key={item.ownership_type_id} value={item.ownership_type_id}>{item.ownership_type_name}</option>))}
+                                        {ownershipTypeList && ownershipTypeList.map((item) => (
+                                            <option key={item.ownership_type_id} value={item.ownership_type_id}>{item.ownership_type_name}</option>))}
                                     </Input>
                                 </FormGroup>
                             </Col>

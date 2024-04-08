@@ -93,7 +93,7 @@ useEffect(() => {
   const columns: CustomTableColumn[] = [
 
     {
-       id: 'categgory',
+       id: 'payment_category_name',
        name: 'CATEGORY',
        style: { width: '10%' },
        sortable: true,
@@ -109,7 +109,7 @@ useEffect(() => {
      
     },
     {
-      id: 'schedule',
+      id: 'schedule_frequency_name',
       name: 'SCHEDULE',
       style: { width: '10%' },
       sortable: true,
@@ -117,7 +117,7 @@ useEffect(() => {
       format: (row: IDriverSchedulePayee) =>  moment(row.schedule_frequency_name).format('L')
     },
      {
-       id: 'last',
+       id: 'last_date_of_trans',
        name: 'LAST',
        style: { width: '10%' },
        sortable: true,
@@ -200,7 +200,7 @@ useEffect(() => {
         <Col md={6}>
         <FormGroup>
           <Label for="name">Schedule Type </Label>
-          <Input bsSize="sm" className="form-control form-control-sm" type="select" id="user" name="user"  value={1}>
+          <Input bsSize="sm" className="form-control form-control-sm" type="select" id="user" name="user"  value={driverSchedulePayee.schedule_frequency_id} onChange={handleInputSchedulePayeeChange('schedule_frequency_id')}>
            {
             scheduleFrequencyList && scheduleFrequencyList.length>0 && scheduleFrequencyList.map((item, index) => (
               <option key={index} value={item.schedule_frequency_id}>{item.schedule_frequency_name}</option>

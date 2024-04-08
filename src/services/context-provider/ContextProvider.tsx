@@ -2,7 +2,7 @@ import React from "react";
 import { RegProvider } from "../context/auth.contxt";
 import { LoadProvider } from "../context/load.context";
 import { CustomerProvider } from "../context/customer.context";
-import { TruckStatusProvider } from "../context/truck.context";
+import { TruckProvider } from "../context/truck.context";
 import { DriverAddProvider } from "../context/driver.context";
 import { ProfileProvider } from "../context/profileContext";
 import { UserProvider } from "../context/user.context";
@@ -21,21 +21,23 @@ export const ContextProvider = ({
   children: React.ReactNode;
 }) => (
   <RegProvider>
+  <LoadingProvider>
     <ListProvider>
       <LoadProvider>
         <CustomerProvider>
           <StateProvider>
-            <TruckStatusProvider>
+           
+        <TruckProvider>
               <TrailerProvider>
                 <DriverAddProvider>
                   <ProfileProvider>
                     <UserProvider>
                       <UserRoleProvider>
                         <UserAdminRoleProvider>
+                      
                           <VendorProvider>
                             <FuelCardProvider>
-                              <LoadingProvider>{children}</LoadingProvider>
-                            </FuelCardProvider>
+                              {children}                            </FuelCardProvider>
                           </VendorProvider>
                         </UserAdminRoleProvider>
                       </UserRoleProvider>
@@ -43,10 +45,12 @@ export const ContextProvider = ({
                   </ProfileProvider>
                 </DriverAddProvider>
               </TrailerProvider>
-            </TruckStatusProvider>
+            
+        </TruckProvider>
           </StateProvider>
         </CustomerProvider>
       </LoadProvider>
     </ListProvider>
+    </LoadingProvider>
   </RegProvider>
 );

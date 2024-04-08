@@ -1,39 +1,48 @@
 import React , { createContext } from "react"
 import { Draft } from "immer"
-import { ITruckObject } from "../tms-objects/truck.types"
 import { useImmer } from "use-immer"
+import { ITruckObject} from "../tms-objects/truck.types"
 
 
 export interface ITruckStatus {
+    truckList : ITruckObject[] | null
     truckLoading : boolean
-    truckListStatus : ITruckObject[] | null
+    is_error :  boolean
+    saveTruckSuccess : boolean
+    saveTruckFailed : boolean
+    selectedTruck: ITruckObject | null
+    
 }
 
 const initialState : ITruckStatus = {
     truckLoading : false,
-    truckListStatus : null
+    truckList : null,
+    is_error : false,
+    saveTruckSuccess : false,
+    saveTruckFailed : false,
+    selectedTruck : null,
 }
 
 
-type TruckStatusType = {
+type TruckAddContextType = {
     state : ITruckStatus
     setState : (f : (draft : Draft<ITruckStatus>) => void | ITruckStatus) => void
 }
 
 
-const truckAddContext = createContext<TruckStatusType>({
+const truckUpdateContext = createContext<TruckAddContextType>({
     state : initialState,
     setState : () => undefined
 })
 
-const TruckStatusProvider = ({children} : {children : React.ReactNode}) => {
+const TruckProvider = ({children} : {children : React.ReactNode}) => {
     const [state, setState] = useImmer<ITruckStatus>(initialState); 
 
     return (
-        <truckAddContext.Provider value={{state, setState}}>{children}</truckAddContext.Provider>
+        <truckUpdateContext.Provider value={{state, setState}}>{children}</truckUpdateContext.Provider>
 
     )
 
 }
 
-export {TruckStatusProvider  , truckAddContext , initialState}
+export {TruckProvider  , truckUpdateContext , initialState}

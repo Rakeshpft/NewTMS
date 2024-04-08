@@ -14,7 +14,7 @@ import { toastify } from "../../../features/notification/toastify";
 import { useListContext } from "../../../services/reducer/list.reducer";
 import { useVendorContext } from "../../../services/reducer/vendor.reducer";
 import { useTrailerContext } from "../../../services/reducer/trailer.reducer";
-import { useTruckContext } from "../../../services/reducer/truck.reducer";
+//import { useTruckContext } from "../../../services/reducer/truck.reducer";
 import { useNavigate } from "react-router-dom";
 
 const DriversDetails = (props : TDriverProps ) => {
@@ -44,7 +44,7 @@ const {
   const { getVendorDetails ,VendorDetails } = useVendorContext();
   const { getTrailerList ,trailerList   }  = useTrailerContext();
   const { getStateList, stateList } = useListContext();
-  const {   truckListStatus}= useTruckContext()
+  //const {   truckListStatus}= useTruckContext()
   
 
   const [newDriver, setNewDriver] = useState<IDriverObject>(initialStateDriver);
@@ -322,13 +322,13 @@ const {
                     <FormGroup>
                       <Label for="truck">Truck</Label>
                       <Input bsSize="sm" className="form-control form-control-sm" type="select" id="truck" value={newDriver.truck_id} onChange={handleInputChange("truck_id")} >
-                       {
+                       {/* {
                          truckListStatus && truckListStatus.map((truck) => (
                            <option key={truck.truck_id} value={truck.truck_id}>
                              { truck.lease_lessor_name }
                            </option>
                          ))
-                       } 
+                       }  */}
                       </Input>
                     </FormGroup>
                   </Col>

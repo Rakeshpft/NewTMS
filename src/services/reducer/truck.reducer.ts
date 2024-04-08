@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { truckAddContext } from "../context/truck.context";
+import { truckUpdateContext } from "../context/truck.context";
 import { API } from "../api-helper/api.services";
 import { API_TRUCK } from "../api-helper/api.constant";
 import { IAPIResponse } from "../tms-objects/response.types";
@@ -7,7 +7,7 @@ import { IAPIResponse } from "../tms-objects/response.types";
 
 
 export const useTruckContext = () => {
-    const {state , setState} = useContext(truckAddContext)
+    const {state , setState} = useContext(truckUpdateContext)
 
     if (setState === undefined) {
         throw new Error("Must have setState defined");
@@ -21,7 +21,7 @@ export const useTruckContext = () => {
           const truckList : IAPIResponse = await API.get( API_TRUCK.getTruck);
     
           setState((draft) => {
-          draft.truckListStatus = truckList.value;
+          draft.truckList = truckList.value;
           draft.truckLoading = false;
           });
         } catch (error: any) {

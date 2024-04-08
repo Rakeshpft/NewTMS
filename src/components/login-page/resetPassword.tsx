@@ -58,7 +58,7 @@ const ResetPassword = () => {
 
     rePass(company_guid).then((data) => {
       console.log("showEmail", data);
-      data && setEmailStatus(data.value);
+      data && setEmailStatus(data.success);
       data && setEmailMessage(data.message);
     });
    
@@ -118,7 +118,7 @@ const ResetPassword = () => {
                   <>
                     <Row>
                       <Col sm={10} className="mx-auto">
-                        {emailStatus ? (
+                        {!emailStatus ? (
                           <>
                             <div className="text-center my-4">
                               <p className="fw-bold">{emailMessage}</p>

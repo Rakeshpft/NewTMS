@@ -115,6 +115,8 @@ useEffect(() => {
       style: { width: '10%' },
       sortable: true,
       selector: (row: IDriverEmpVerify) => row.attachment,
+      cell:(row:IDriverEmpVerify)=><a href={row.attachment_url} target='_blank' download={true}>{row.attachment}</a>
+
     },
     {
       id : "action",

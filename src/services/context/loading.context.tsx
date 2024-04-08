@@ -1,35 +1,23 @@
 import React, { createContext } from "react";
-import { Draft } from "immer";
-import { ILoadingObject } from "../tms-objects/loading.types";
 import { useImmer } from "use-immer";
 
-export interface ILoadingStatus {
-  loadingStatus: ILoadingObject | null;
-}
-
-const initialState: ILoadingStatus = {
-  loadingStatus: null,
-};
-
 type LoadingContextType = {
-  state: ILoadingStatus;
-  setState: (
-    f: (draft: Draft<ILoadingStatus>) => void | ILoadingStatus
-  ) => void;
+  loader: boolean;
+  setLoader: (f: boolean) => void;
 };
 
 const LoadingContext = createContext<LoadingContextType>({
-  state: initialState,
-  setState: () => undefined,
+  loader: false,
+  setLoader: () => undefined,
 });
 
 const LoadingProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, setState] = useImmer<ILoadingStatus>(initialState);
+  const [loader, setLoader] = useImmer<boolean>(false);
   return (
-    <LoadingContext.Provider value={{ state, setState }}>
+    <LoadingContext.Provider value={{ loader, setLoader }}>
       {children}
     </LoadingContext.Provider>
   );
 };
 
-export { LoadingProvider, LoadingContext, initialState };
+export { LoadingProvider, LoadingContext };

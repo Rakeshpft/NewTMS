@@ -220,14 +220,14 @@ export const useCustomerContext = () => {
      }
      
 
-     const getIndividualContacts = async (CustomerId: number) => {
+     const getIndividualContacts = async (Customer_id: number, Contact_id: number) => {
         setState((draft) => {
           draft.customerLoading = true;
         });
     
         try {
           const response: IAPIResponse = await API.get(
-            `${API_CUSTOMER.getIndividualContacts}/${CustomerId}`
+            `${API_CUSTOMER.getCustomer}/${Customer_id}${API_CUSTOMER.getIndividualContacts}/${Contact_id}`
           );
     
           setState((draft) => {

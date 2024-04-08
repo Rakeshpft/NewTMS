@@ -99,7 +99,7 @@ const CustomerContacts = (prop: TCustomerProps) => {
   };
 
   const handleEditContact = (contact: ICustomerContacts) => {
-    getIndividualContacts(contact.contact_id);
+    getIndividualContacts(customer_id,contact.contact_id);
     setcontactNewDetails(contact)
     setModalOpen(true);
     setTitle(false);

@@ -1,61 +1,75 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap'
 
-import { ICustomerDetails, TCustomerProps, initialStateCustomer,  } from '../../../../services/tms-objects/customer.types';
+import { ICustomerDetails, TCustomerProps, initialStateCustomer, } from '../../../../services/tms-objects/customer.types';
 import { useListContext } from '../../../../services/reducer/list.reducer';
 import { useCustomerContext } from '../../../../services/reducer/customer.reducer';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../../routes/routes';
 import { toastify } from '../../../../features/notification/toastify';
+import { LoadingContext } from '../../../../services/context/loading.context';
 
 
 const CustomerDetails = (props: TCustomerProps) => {
     const {
         handleSubmit = undefined,
-        customer_id =0,
-        } = props
+        customer_id = 0,
+    } = props
+    const { setLoader } = useContext(LoadingContext);
+    const { getStateList, stateList, getCustomerStatusList, customerStatusList, getCreditList, creditList, getFactorList, factorList } = useListContext()
+    const { getIdividualCustomerDetails, selectedCustomer, customerLoading, saveCustomer } = useCustomerContext();
+    const [customerNewDetails, setcustomerNewDetails] = useState<ICustomerDetails>(initialStateCustomer);
+    const navigate = useNavigate();
 
-    const {getStateList,stateList,getCustomerStatusList,customerStatusList,getCreditList,creditList}= useListContext()
-        const{getIdividualCustomerDetails,selectedCustomer,customerLoading,saveCustomer}=useCustomerContext();
-       const [customerNewDetails, setcustomerNewDetails] = useState<ICustomerDetails>(initialStateCustomer);
-       const navigate = useNavigate();
-
-    useEffect(()=>{
-        if(customer_id >0){
+    useEffect(() => {
+        if (customer_id > 0) {
             getIdividualCustomerDetails(customer_id)
         }
         getStateList();
         getCustomerStatusList();
         getCreditList();
+        getFactorList();
     }, []);
 
-    
-
     useEffect(() => {
-        if(!customerLoading && selectedCustomer && customer_id>0) {
+        if (!customerLoading && selectedCustomer && customer_id > 0) {
             setcustomerNewDetails(selectedCustomer);
         }
-    }, [customerLoading, selectedCustomer]);
-   
-    const handleInputChange =
-    (prop: keyof ICustomerDetails,is_numeric:boolean = false) =>
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        let value = is_numeric && event.target.value== "" ? 0 : event.target.value;
-        setcustomerNewDetails({ ...customerNewDetails, [prop]: value });
-      };
+    }, [selectedCustomer]);
 
-      const handleSaveCustomer = async (event: { preventDefault: () => void }) => {
-          event.preventDefault();
-          
-       await saveCustomer(customerNewDetails).then((response) => {
-            response?.success && handleSubmit && handleSubmit(response.value);
-            // response?.success && setcustomerNewDetails({ ...customerNewDetails, customer_id:response.value });
-            // getIdividualCustomerDetails(response?.value);
-           response?.success && navigate(`${routes.createNewCustomer}/${response.value}`)
-        //   handleClose();
-          response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
+    const handleInputChange =
+        (prop: keyof ICustomerDetails, is_numeric: boolean = false) =>
+            (event: React.ChangeEvent<HTMLInputElement>) => {
+                let value = is_numeric && event.target.value == "" ? 0 : event.target.value;
+                setcustomerNewDetails({ ...customerNewDetails, [prop]: value });
+            };
+
+    const handleSaveCustomer = async (event: { preventDefault: () => void }) => {
+        event.preventDefault();
+        setLoader(true);
+        await saveCustomer(customerNewDetails).then((response) => {
+            if (response) {
+                toastify({ message: response.message, type: (response.success ? "success" : "error") });
+                if (response.success) {
+                    if (handleSubmit) {
+                        setTimeout(function () {
+                            setLoader(false);
+                            handleSubmit(response.value);
+                        }, 2000);                        
+                    }
+                    else {
+                        setcustomerNewDetails({ ...customerNewDetails, customer_id: response.value });
+                        getIdividualCustomerDetails(response?.value);
+                        setTimeout(function () {
+                            setLoader(false);
+                            navigate(`${routes.createNewCustomer}/${response.value}`)
+                        }, 2000);
+                    }
+                }
+                else { setLoader(false);}
+            }
+            else { setLoader(false); }
         });
-     
     }
 
     const handleCheckBoxBroker = () => {
@@ -65,7 +79,7 @@ const CustomerDetails = (props: TCustomerProps) => {
             setcustomerNewDetails({ ...customerNewDetails, is_broker: !customerNewDetails.is_broker });
         }
     };
-    
+
     const handleCheckBoxShipper = () => {
         if (!customerNewDetails.is_broker) {
             setcustomerNewDetails({ ...customerNewDetails, is_shipper_receiver: true });
@@ -73,29 +87,27 @@ const CustomerDetails = (props: TCustomerProps) => {
             setcustomerNewDetails({ ...customerNewDetails, is_shipper_receiver: !customerNewDetails.is_shipper_receiver });
         }
     };
-    
-    
 
-  const handleDirectBillingRadio = () => {
-    setcustomerNewDetails({ ...customerNewDetails, billing_type_id: 1 });
-  };
 
-  const handleFactoringRadio = () => {
-    setcustomerNewDetails({ ...customerNewDetails, billing_type_id: 2 });
-  };
+
+    const handleDirectBillingRadio = () => {
+        setcustomerNewDetails({ ...customerNewDetails, billing_type_id: 1 });
+    };
+
+    const handleFactoringRadio = () => {
+        setcustomerNewDetails({ ...customerNewDetails, billing_type_id: 2 });
+    };
 
     const handleClose = () => {
         navigate(routes.customersAll);
     }
-    
+
     return (
         <Form onSubmit={handleSaveCustomer}>
-        
-            <Row className="Customer-basic-details my-3">
+            <Row className="Customer-basic-details">
                 <Row className="page-subtitle">
                     <h6>Basic Details</h6>
-                </Row>  
-
+                </Row>
                 <Row className="page-content align-items-center">
                     <Col md={3} className="d-flex align-items-center">
                         <FormGroup >
@@ -138,7 +150,7 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 value={customerNewDetails.first_name}
                                 onChange={handleInputChange("first_name")}
                                 pattern='^[a-zA-Z]+$' title="Only alphabets are allowed"
-                                required 
+                                required
                             />
                         </FormGroup>
                     </Col>
@@ -154,7 +166,7 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 value={customerNewDetails.last_name}
                                 onChange={handleInputChange("last_name")}
                                 pattern='^[a-zA-Z]+$' title="Only alphabets are allowed"
-                                required 
+                                required
                             />
                         </FormGroup>
                     </Col>
@@ -169,7 +181,7 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 name="email"
                                 value={customerNewDetails.email}
                                 onChange={handleInputChange("email")}
-                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"title='Please enter valid email address'
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title='Please enter valid email address'
                                 required
                             />
                         </FormGroup>
@@ -190,7 +202,7 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 onChange={handleInputChange("phone")}
                                 pattern='^(\+\d{1,3}[- ]?)?\d{10}$' title="Please enter valid phone number"
                                 required
-                
+
                             />
                         </FormGroup>
                     </Col>
@@ -234,7 +246,7 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 name="city"
                                 value={customerNewDetails.city}
                                 onChange={handleInputChange("city")}
-                                
+
                             />
                         </FormGroup>
                     </Col>
@@ -249,7 +261,7 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 name="state_id"
                                 value={customerNewDetails.state_id}
                                 onChange={handleInputChange("state_id")}>
-                                  {stateList && stateList.map((item) => (
+                                {stateList && stateList.map((item) => (
                                     <option key={item.state_id} value={item.state_id}>
                                         {item.state_name}
                                     </option>
@@ -284,7 +296,6 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 value={customerNewDetails.description}
                                 onChange={handleInputChange("description")}
                             />
-                                
                         </FormGroup>
                     </Col>
                     <Col md={3}>
@@ -299,12 +310,12 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 value={customerNewDetails.status_id}
                                 onChange={handleInputChange("status_id")}
                             >
-                            {customerStatusList && customerStatusList.map((item) => (
+                                {customerStatusList && customerStatusList.map((item) => (
                                     <option key={item.customer_status_id} value={item.customer_status_id}>
                                         {item.customer_status_name}
                                     </option>
                                 ))}
-                                
+
                             </Input>
                         </FormGroup>
                     </Col>
@@ -329,6 +340,7 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 name="company_name"
                                 value={customerNewDetails.company_name}
                                 onChange={handleInputChange("company_name")}
+                                required title='Comapany name is required'
                             />
                         </FormGroup>
                     </Col>
@@ -343,6 +355,8 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 name="fid_ein"
                                 value={customerNewDetails.fid_ein}
                                 onChange={handleInputChange("fid_ein")}
+                                pattern='^[a-zA-Z0-9]+$' title="Please enter valid FID/EID"
+                                required
                             />
                         </FormGroup>
                     </Col>
@@ -358,6 +372,8 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 name="mc_number"
                                 value={customerNewDetails.mc_number}
                                 onChange={handleInputChange("mc_number")}
+                                pattern='^[a-zA-Z0-9]+$' title="Please enter valid MC"
+                                required
                             />
                         </FormGroup>
                     </Col>
@@ -372,33 +388,33 @@ const CustomerDetails = (props: TCustomerProps) => {
 
                 <Row className="page-content align-items-center">
                     <Col md={3} className="d-flex align-items-center">
-                    <FormGroup check className="checkbox-inline me-3">
-    <Input
-        type="radio"
-        id="directBillingRadio"
-        checked={customerNewDetails.billing_type_id === 1}
-        onChange={handleDirectBillingRadio}
-    />
-    <Label for="directBillingRadio" check className="radio-label">
-        Direct Billing
-    </Label>
-</FormGroup>
-<FormGroup check className="checkbox-inline">
-    <Input
-        type="radio"
-        id="factoringRadio"
-        checked={customerNewDetails.billing_type_id === 2}
-        onChange={handleFactoringRadio}
-    />
-    <Label
-        for="factoringRadio"
-        check
-        className="radio-label"
-    >
-        Factoring
-    </Label>
-</FormGroup>
-</Col>
+                        <FormGroup check className="checkbox-inline me-3">
+                            <Input
+                                type="radio"
+                                id="directBillingRadio"
+                                checked={customerNewDetails.billing_type_id === 1}
+                                onChange={handleDirectBillingRadio}
+                            />
+                            <Label for="directBillingRadio" check className="radio-label">
+                                Direct Billing
+                            </Label>
+                        </FormGroup>
+                        <FormGroup check className="checkbox-inline">
+                            <Input
+                                type="radio"
+                                id="factoringRadio"
+                                checked={customerNewDetails.billing_type_id === 2}
+                                onChange={handleFactoringRadio}
+                            />
+                            <Label
+                                for="factoringRadio"
+                                check
+                                className="radio-label"
+                            >
+                                Factoring
+                            </Label>
+                        </FormGroup>
+                    </Col>
 
                     <Col md={3}>
                         {customerNewDetails.billing_type_id === 2 && (
@@ -412,7 +428,13 @@ const CustomerDetails = (props: TCustomerProps) => {
                                     name="factor_id"
                                     value={customerNewDetails.factor_id}
                                     onChange={handleInputChange("factor_id")}
-                                />
+                                >
+                                    {factorList && factorList.map((item) => (
+                                    <option key={item.factor_id} value={item.factor_id}>
+                                        {item.factor_name}
+                                    </option>
+                                ))}
+                                </Input>
                             </FormGroup>
                         )}
                     </Col>
@@ -427,11 +449,12 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 id="quick_pay_fee"
                                 name="quick_pay_fee"
                                 value={customerNewDetails.quick_pay_fee === 0 ? "" : customerNewDetails.quick_pay_fee}
-                                onChange={handleInputChange("quick_pay_fee",true)}
+                                onChange={handleInputChange("quick_pay_fee", true)}
+                                pattern='^[0-9]+$' title="Please enter valid quick pay fee"
+                                required
                             />
                         </FormGroup>
                     </Col>
-
                 </Row>
                 <Row className="page-content align-items-center">
                     <Col md={3}>
@@ -462,8 +485,10 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 type="text"
                                 id="pay_terms"
                                 name="pay_terms"
-                                value={customerNewDetails.pay_terms== 0? "" : customerNewDetails.pay_terms}
-                                onChange={handleInputChange("pay_terms",true)}
+                                value={customerNewDetails.pay_terms == 0 ? "" : customerNewDetails.pay_terms}
+                                onChange={handleInputChange("pay_terms", true)}
+                                pattern='^[0-9]+$' title="Please enter valid pay terms"
+                                required
                             />
                         </FormGroup>
                     </Col>
@@ -476,8 +501,10 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 type="text"
                                 id="avg_days_to_pay"
                                 name="avg_days_to_pay"
-                                value={customerNewDetails.avg_days_to_pay == 0? "" : customerNewDetails.avg_days_to_pay} 
-                                onChange={handleInputChange("avg_days_to_pay",true)}
+                                value={customerNewDetails.avg_days_to_pay == 0 ? "" : customerNewDetails.avg_days_to_pay}
+                                onChange={handleInputChange("avg_days_to_pay", true)}
+                                pattern='^[0-9]+$' title="Please enter valid avg days to pay"
+                                required
                             />
                         </FormGroup>
                     </Col>
@@ -487,7 +514,6 @@ const CustomerDetails = (props: TCustomerProps) => {
                         md={3}
                         className=" d-flex justify-content-end align-items-end pb-3"
                     >
-
                         <Button
                             color="primary"
                             size="sm"
@@ -495,13 +521,11 @@ const CustomerDetails = (props: TCustomerProps) => {
                             onClick={() => { handleSaveCustomer }}
                             type="submit"
                         >
-
                             Save
                         </Button>
                         <Button className="cancel-button" size="sm"
                             color="danger" outline={true} onClick={handleClose}
                         >
-
                             Close
                         </Button>
                     </Col>

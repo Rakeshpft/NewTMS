@@ -25,7 +25,7 @@ const CreateNewCustomerForm = (props: TCustomerProps ) => {
     <>
       <CommonLayOut>
         <Row className="page-title">
-        <div className="page-title">{customer_id == 0 ? "New Customer " : "Edit Customer"}</div>
+        {customer_id == 0 ? "New Customer " : "Edit Customer"}
         </Row>
         <TabPage tabTitles={["Details", "Documents", "Contacts"]} disabledTabs={customer_id === 0 ? [1, 2] : []}>
           <TabPane tabId={0} className="Details">

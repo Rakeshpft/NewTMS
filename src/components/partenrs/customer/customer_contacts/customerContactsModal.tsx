@@ -54,7 +54,7 @@ const CustomerContactsModal = (props : ICustomerContactsProps) => {
                                         id="name"
                                         name="name"
                                         value={contactNewDetails.name} onChange={handleInputContactChange("name")} 
-                                        pattern='^[a-zA-Z]+$' title="Only alphabets are allowed"
+                                        pattern='[a-zA-Z]+( [a-zA-Z]+)*' title="Only alphabets are allowed"
                                         required
                                         />
                                 </FormGroup>

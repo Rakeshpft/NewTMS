@@ -15,7 +15,7 @@ const DocumentApplication = ( props: TDriverProps) => {
 
   const { driver_id = 0 } = props
 const { getDriverDocAppList  , driverDocAppList , driverLoading ,postApplication } = useDriverContext()
-const {getFactorList , factorList } = useListContext()
+const {getDocumentStatusList , documentStatusList } = useListContext()
   
 const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [driverDocument, setDriverDocument] = useState<IDriverDoc>(initialDriverDoc);
@@ -43,7 +43,7 @@ const [uploadModalOpen, setUploadModalOpen] = useState(false);
   }, [])
 
   useEffect(() => {
-    getFactorList()
+    getDocumentStatusList()
   },[])
 
   const UploadModalClose = () => {
@@ -97,7 +97,7 @@ const [uploadModalOpen, setUploadModalOpen] = useState(false);
       name: 'Status',
       style: { width: '10%' },
       sortable: true,
-      selector: (row: IDriverDoc) => row.status_id,
+      selector: (row: IDriverDoc) => row.status_name,
      
     },
     {
@@ -131,7 +131,7 @@ const [uploadModalOpen, setUploadModalOpen] = useState(false);
       style: { width: '10%' },
       sortable: true,
       selector: (row: IDriverDoc) => row.attachment,
-      cell:(row:IDriverDoc)=><a href={row.attachment} target='_blank' download={true}>{row.attachment}</a>
+      cell:(row:IDriverDoc)=><a href={row.attachment_url} target='_blank' download={true}>{row.attachment}</a>
 
     },
     {
@@ -172,13 +172,11 @@ const [uploadModalOpen, setUploadModalOpen] = useState(false);
           <FormGroup>
           <Label for="name">Status</Label>
           <Input bsSize="sm" className="form-control form-control-sm" type="select" id="user" name="user"  value={driverDocument.status_id} onChange={handleDriverInput('status_id')}>
-      {
-        factorList  && factorList.map((factor) => {
-          return (
-            <option value={factor.factor_id}>{factor.factor_name}</option>
-          )
-        })
-      }
+    {
+      documentStatusList && documentStatusList.map((status) => (
+        <option key={status.status_id} value={status.status_name}>{status.status_name}</option>
+      ))
+    }
             </Input>
           
           </FormGroup>

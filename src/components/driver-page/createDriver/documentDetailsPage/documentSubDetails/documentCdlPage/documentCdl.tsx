@@ -129,7 +129,9 @@ const DocumentCdl = ( prop : TDriverProps) => {
       name: 'Attachment',
       style: { width: '10%' },
       sortable: true,
-      selector: (row: IDriverCdl) => row.attachment
+      selector: (row: IDriverCdl) => row.attachment,
+      cell:(row:IDriverCdl)=><a href={row.attachment_url} target='_blank' download={true}>{row.attachment}</a>
+
     },
     {
       id : "action",

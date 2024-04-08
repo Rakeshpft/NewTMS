@@ -93,6 +93,8 @@ useEffect(() => {
       style: { width: '10%' },
       sortable: true,
       selector: (row: IDriverMvr) => row.attachment,
+      cell:(row:IDriverMvr)=><a href={row.attachment_url} target='_blank' download={true}>{row.attachment}</a>
+
     },
     {
       id : "action",

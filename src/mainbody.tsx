@@ -16,7 +16,7 @@ import {
   DriverPayRoll,
 } from "./components/driverpayroll-page";
 import {
-  TrucksPage,
+  //TrucksPage,
   CreateNewTruckPage,
   TrailersPage,
   CreateNewTrailerPage,
@@ -128,7 +128,7 @@ const Mainbody = () => {
                     path={routes.createNewFuelTransaction}
                     element={<CreateNewFuelTransactionPage />}
                   />
-                  <Route path={routes.trucks} element={<TrucksPage />} />
+                  {/* <Route path={routes.trucks} element={<TrucksPage />} /> */}
                   <Route
                     path={routes.createNewTruck}
                     element={<CreateNewTruckPage />}

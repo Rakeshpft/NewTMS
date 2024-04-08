@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+
 import { Button, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap'
 import { IVendorDetails, TVendorProps, initialStateVendor } from '../../../../services/tms-objects/vendor.types';
 import { useVendorContext } from '../../../../services/reducer/vendor.reducer';
@@ -6,25 +7,23 @@ import { useListContext } from '../../../../services/reducer/list.reducer';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../../routes/routes';
 import { toastify } from '../../../../features/notification/toastify';
+import { LoadingContext } from '../../../../services/context/loading.context';
+
 
 const VendorDetails = (props: TVendorProps) => {
     const {
         vendor_id = 0,
         handleSubmit = undefined
     } = props;
-
+    const { setLoader } = useContext(LoadingContext);
     const { getStateList, stateList } = useListContext();
     const { getIdividualVendorDetails, selectedVendor, VendorLoading, saveVendor } = useVendorContext();
     const [vendorNewDetails, setvendorNewDetails] = useState<IVendorDetails>(initialStateVendor);
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("vendor", vendor_id);
         if (vendor_id > 0) {
             getIdividualVendorDetails(vendor_id);
-        }
-        else {
-            setvendorNewDetails(initialStateVendor);
         }
         getStateList();
     }, []);
@@ -33,7 +32,6 @@ const VendorDetails = (props: TVendorProps) => {
             setvendorNewDetails(selectedVendor);
         }
     }, [selectedVendor]);
-
 
     const VendorValidate = () => {
         if (vendorNewDetails.first_name == "") {
@@ -55,25 +53,40 @@ const VendorDetails = (props: TVendorProps) => {
         (prop: keyof IVendorDetails) =>
             (event: React.ChangeEvent<HTMLInputElement>) => {
                 setvendorNewDetails({ ...vendorNewDetails, [prop]: event.target.value });
+                console.log(vendorNewDetails.phone);
             };
 
-
-
-            
     const handleSaveVendor = async (event: { preventDefault: () => void }) => {
         event.preventDefault();
-
         if (VendorValidate()) {
+            setLoader(true);
             await saveVendor(vendorNewDetails).then((response) => {
-                response?.success && handleSubmit && handleSubmit(response.value);
-                getIdividualVendorDetails(response?.value.vendor_id);
-                response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
+                if (response) {
+                    toastify({ message: response.message, type: (response.success ? "success" : "error") });
+                    if (response.success) {
+                        if (handleSubmit) {
+                            setTimeout(function () {
+                                setLoader(false);
+                                handleSubmit(response.value);
+                            }, 2000);
+                        }
+                        else {
+                            setvendorNewDetails({ ...vendorNewDetails, vendor_id: response.value });
+                            getIdividualVendorDetails(response.value);
+                            setTimeout(function () {
+                                setLoader(false);
+                                navigate(`${routes.createNewVendor}/${response.value}`)
+                            }, 2000);
+                        }
+                    }
+                    else { setLoader(false); }
+                }
+                else { setLoader(false); }
             });
         }
     };
-    
+
     const handleClose = () => {
-        setvendorNewDetails(initialStateVendor);
         navigate(routes.vendorsAll);
     }
 
@@ -119,7 +132,8 @@ const VendorDetails = (props: TVendorProps) => {
                         <FormGroup>
                             <Label for="Phone">Phone</Label>
                             <Input bsSize="sm" className="form-control" type="text" id="phone" name="phone"
-                                value={vendorNewDetails.phone} onChange={handleInputChange("phone")} />
+                                value={vendorNewDetails.phone} onChange={handleInputChange("phone")} />            
+                            
                         </FormGroup>
                     </Col>
                     <Col md={3}>

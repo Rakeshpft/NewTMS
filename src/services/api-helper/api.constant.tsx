@@ -64,7 +64,7 @@ export const API_CUSTOMER = {
   getContacts : "/contacts",
   postContacts : "/contacts",
   deleteContacts :"/delete",
-  getIndividualContacts :"/customer/contacts",
+  getIndividualContacts :"/contacts",
   getCustomerDocument : "/documents",
  postCustomerDocument : "/upload-document"
 };

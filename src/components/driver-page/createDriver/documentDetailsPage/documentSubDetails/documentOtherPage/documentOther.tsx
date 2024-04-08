@@ -111,6 +111,8 @@ const columns: CustomTableColumn[] = [
     style: { width: '10%' },
     sortable: true,
     selector: (row: IDriverOther) => row.attachment,
+    cell:(row:IDriverOther)=><a href={row.attachment_url} target='_blank' download={true}>{row.attachment}</a>
+
   },
   {
     id : "action",

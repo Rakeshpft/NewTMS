@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CommonLayOut from "../../layout";
 import { Button, Col, FormGroup, Input, Label, Row } from "reactstrap";
 import { useUserAdminRoleContext } from "../../services/reducer/userAdminRole.reducer";
@@ -10,8 +10,10 @@ import { useUserContext } from "../../services/reducer/user.reducer";
 import { IUserAdminRole } from "../../services/tms-objects/userAdminRole.types";
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 import { toastify } from "../../features/notification/toastify";
+import { LoadingContext } from "../../services/context/loading.context";
 
 const UserAdminRole = () => {
+  const {setLoader} = useContext(LoadingContext);
   const { getUserAdminRole, userAdminRole, postUserAdminRole } = useUserAdminRoleContext();
   const { userRole, getUserRole } = useUserContext();
   const [role, setRole] = useState<IUserRoleFormState>(initialUserRoleFormState);
@@ -24,8 +26,16 @@ const UserAdminRole = () => {
 
   const handleSave = async (event: { preventDefault: () => void }) => {
     event?.preventDefault();
-    let response = await postUserAdminRole(permissionList);
-    response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
+    setLoader(true);
+    await postUserAdminRole(permissionList).then((response)=>{
+      if(response){
+        toastify({ message: response.message, type: (response.success ? "success" : "error") });
+        setTimeout(function(){ setLoader(false);},2000);
+      }
+      else{
+        setLoader(false);
+      }
+    });    
   }
 
   useEffect(() => {

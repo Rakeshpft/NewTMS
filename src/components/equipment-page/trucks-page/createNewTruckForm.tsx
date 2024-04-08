@@ -13,7 +13,7 @@ import {
   } from "reactstrap";
 import { routes } from '../../routes/routes';
 import { useNavigate } from 'react-router-dom';
-import { ITruckObject, initialTruckObject,  } from '../../../services/tms-objects/truck.types';
+import { ITruckObject, initialStateTruck,  } from '../../../services/tms-objects/truck.types';
 
 interface ICreateNewTruckFormProps {
     isFromTruckPage: boolean
@@ -24,7 +24,7 @@ const CreateNewTruckForm = ({ isFromTruckPage, toggle} : ICreateNewTruckFormProp
     const navigate = useNavigate();
 
 
-    const [ addNewTrucker , setAddNewtrcuker] = useState<ITruckObject>(initialTruckObject )
+    const [ addNewTrucker , setAddNewtrcuker] = useState<ITruckObject>(initialStateTruck )
 
     const handleInputNewTrucker = ( prop : keyof ITruckObject ) => (e : React.ChangeEvent<HTMLInputElement>) => {
         setAddNewtrcuker({
@@ -146,8 +146,8 @@ const CreateNewTruckForm = ({ isFromTruckPage, toggle} : ICreateNewTruckFormProp
                   type="select"
                   id="ownership"
                   name="ownership"
-                  value={addNewTrucker.ownership_id}
-                  onChange={handleInputNewTrucker("ownership_id")}
+                  value={addNewTrucker.ownership_type_id}
+                  onChange={handleInputNewTrucker("ownership_type_id")}
                 >
                   <option>1</option>
                   <option>2</option>
@@ -226,8 +226,8 @@ const CreateNewTruckForm = ({ isFromTruckPage, toggle} : ICreateNewTruckFormProp
                   type="select"
                   id="plate"
                   name="plate"
-                  value={addNewTrucker.plate_id}
-                  onChange={handleInputNewTrucker("plate_id")}
+                  value={addNewTrucker.plate_state_id}
+                  onChange={handleInputNewTrucker("plate_state_id")}
                 >
                   <option>1</option>
                   <option>2</option>
