@@ -87,7 +87,8 @@ export const API_DRIVER = {
   getDriverMvr : "/mvr",
   getDriverSsn:"/ssn-card",
   getDriverEmpVerify :"/employee-verification",
-  getDriverOther : "/other-documents"
+  getDriverOther : "/other-documents",
+  getDriverSchedulePayee : "/schedule",
 };
 
 export const API_TRUCK = {
@@ -149,6 +150,10 @@ export const API_LIST = {
   getOwnershipType:'/list/ownership-types',
   getDocumentStatus:'/list/document-status',
   getFactors:'/list/factors',
+  getTrailerType:'/list/trailer-types',
+  getPaymentCategory:'/list/payment-categories',
+  getProductCodes:'/list/product-codes',
+  getScheduleFrequency:'/list/schedule-frequencies',
 }
 
 export const API_FUEL_CARD = {

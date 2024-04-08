@@ -35,10 +35,10 @@ const ForgotResetPassword = () => {
   };
 
   const {  postForgotPassword , verifyForgotPasswordLink } = useRegContext();
-   const navigate = useNavigate();
-  const [apiResponseMsg, setApiResponseMsg] = useState("");
-  const [showRegistrationMessage, setShowRegistrationMessage] = useState(false);
-     const [linkStatus, setLinkStatus] = useState(false);
+  const navigate = useNavigate();
+  // const [apiResponseMsg, setApiResponseMsg] = useState("");
+  // const [showRegistrationMessage, setShowRegistrationMessage] = useState(false);
+  // const [linkStatus, setLinkStatus] = useState(false);
 
 //   const [emailStatus, setEmailStatus] = useState(null);
 //   const [emailMessage, setEmailMessage] = useState("");
@@ -61,8 +61,9 @@ const ForgotResetPassword = () => {
       useEffect(() => {
         verifyForgotPasswordLink(company_guid).then((data) => {
           console.log("showEmail", data);
-          data && !data.status && setLinkStatus(true);
-          data && setApiResponseMsg(data.message)
+          data && toastify({ message: data.message, type: (data.success ? "success" : "error") });
+          // data && !data.status && setLinkStatus(true);
+          // data && setApiResponseMsg(data.message)
         });
       }, [company_guid]);
   const handleVerifyPassword = (event: { preventDefault: () => void }) => {
@@ -71,9 +72,9 @@ const ForgotResetPassword = () => {
 
     postForgotPassword(verifyPass, company_guid).then(( data ) => {
       data &&   toastify({ message: data.message, type: (data.success ? "success" : "error") });
+      console.log("verifyPass from forgetpage", data);
       setVerifyPass(initialForgotVerifyPass);
-      setShowRegistrationMessage(true);
-      setApiResponseMsg(`${data.message}`);
+     
     });
   };
 const navigateToLogin = () => {
@@ -100,11 +101,11 @@ const navigateToLogin = () => {
                     </div>
                   </Col>
                 </Row>
-                {showRegistrationMessage || linkStatus ? (
+                {/* {showRegistrationMessage || linkStatus ? (
                   <div className="text-center">
                     <h5 className="text-success text-center my-3">
                       {apiResponseMsg}
-                    </h5>
+                    </h5> */}
 
                     <Button
                             color="primary"
@@ -113,8 +114,8 @@ const navigateToLogin = () => {
                           >
                             Back to Login
                           </Button>
-                  </div>
-                ) : (
+                 
+)                 : (
                   <>
                     <Row>
                       <Col sm={10} className="mx-auto">
@@ -192,7 +193,7 @@ const navigateToLogin = () => {
                       </Col>
                     </Row>
                   </>
-                )}
+                )
               </Container>
             </Col>
           </Row>

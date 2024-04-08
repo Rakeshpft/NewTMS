@@ -78,6 +78,7 @@ useEffect(() => {
     getDriverEmpVerify(driver_id)
   }
 } ,[])
+
   const columns: CustomTableColumn[] = [
 
     {
@@ -143,7 +144,7 @@ useEffect(() => {
           <h6 className="mb-0 fw-bold">Edit Employee Verification </h6>
         </ModalHeader>
         <ModalBody className="square border border-info-rounded">
-        <Form onSubnit={handleSaveDrverEmp}>    
+        <Form onSubmit={handleSaveDrverEmp}>    
         <Row>
         <Col md={6}>
         <FormGroup>

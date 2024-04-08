@@ -225,9 +225,7 @@ const RagistrationPage = () => {
                               type="text"
                               name="text"
                               id="mobile"
-                              onKeyDown={(event) => {
-                                return event.key >= "0" && event.key <= "9";
-                              }}
+                              required
                               value={regDetails.mobile}
                               onChange={handleInputChange("mobile")}
                               placeholder="Enter Your Mobile"

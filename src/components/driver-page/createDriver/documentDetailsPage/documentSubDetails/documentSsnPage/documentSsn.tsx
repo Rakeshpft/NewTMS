@@ -29,7 +29,7 @@ const DocumentSsn = ( props : TDriverProps) => {
     if (filteredData && filteredData.length>0) {      
       setDriverSsn(filteredData[0])
     }
-    setUploadModalOpen(true);
+    setUploadModalOpen(true)
    }
 
    useEffect(()=>{

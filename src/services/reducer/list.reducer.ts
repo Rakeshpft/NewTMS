@@ -7,6 +7,7 @@ import lscache from "lscache";
 
 export const useListContext = () => {
   const { list, setList } = useContext(ListUpdateContext);
+  
   if (setList === undefined) {
     throw new Error("Must have setState defined");
   }
@@ -62,7 +63,7 @@ export const useListContext = () => {
     }
   }
   const getBillingStatusList = async (isRefresh: boolean = false) => {
-    debugger;
+    
     setList((draft) => { draft.listLoading = true; });
     if (!lscache.get("billingStatusList") || isRefresh) {
       try {
@@ -148,7 +149,7 @@ export const useListContext = () => {
     }
   }
   const getLoadStatusList = async (isRefresh: boolean = false) => {
-    debugger;
+   
     setList((draft) => { draft.listLoading = true; });
     if (!lscache.get("loadStatusList") || isRefresh) {
       try {
@@ -166,7 +167,7 @@ export const useListContext = () => {
     }
   }
   const getOwnershipTypeList = async (isRefresh: boolean = false) => {
-    debugger;
+
     setList((draft) => { draft.listLoading = true; });
     if (!lscache.get("ownershipTypeList") || isRefresh) {
       try {
@@ -184,7 +185,7 @@ export const useListContext = () => {
     }
   }
   const getDocumentStatusList = async (isRefresh: boolean = false) => {
-    debugger;
+    
     setList((draft) => { draft.listLoading = true; });
     if (!lscache.get("documentStatusList") || isRefresh) {
       try {
@@ -202,11 +203,11 @@ export const useListContext = () => {
     }
   }
   const getFactorList = async (isRefresh: boolean = false) => {
-    debugger;
+    
     setList((draft) => { draft.listLoading = true; });
     if (!lscache.get("factorList") || isRefresh) {
       try {
-        const factorResponse: IAPIResponse = await API.get(API_LIST.getDocumentStatus);
+        const factorResponse: IAPIResponse = await API.get(API_LIST.getFactors);
         setList((draft) => { draft.factorList = factorResponse.value; draft.listLoading = false; });
         lscache.set("factorList", factorResponse.value);
         return factorResponse.value;
@@ -217,6 +218,78 @@ export const useListContext = () => {
     else {
       setList((draft) => { draft.factorList = lscache.get("factorList"); draft.listLoading = false; });
       return lscache.get("factorList");
+    }
+  }
+  const getTrailerTypeList = async (isRefresh: boolean = false) => {
+  
+    setList((draft) => { draft.listLoading = true; });
+    if (!lscache.get("trailerTypeList") || isRefresh) {
+      try {
+        const trailerTypeResponse: IAPIResponse = await API.get(API_LIST.getTrailerType);
+        setList((draft) => { draft.trailerTypeList = trailerTypeResponse.value; draft.listLoading = false; });
+        lscache.set("trailerTypeList", trailerTypeResponse.value);
+        return trailerTypeResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+    }
+    else {
+      setList((draft) => { draft.trailerTypeList = lscache.get("trailerTypeList"); draft.listLoading = false; });
+      return lscache.get("trailerTypeList");
+    }
+  }
+  const getPaymentCategoryList = async (isRefresh: boolean = false) => {
+  
+    setList((draft) => { draft.listLoading = true; });
+    if (!lscache.get("paymentCategoryList") || isRefresh) {
+      try {
+        const paymentCategoryResponse: IAPIResponse = await API.get(API_LIST.getPaymentCategory);
+        setList((draft) => { draft.paymentCategoryList = paymentCategoryResponse.value; draft.listLoading = false; });
+        lscache.set("paymentCategoryList", paymentCategoryResponse.value);
+        return paymentCategoryResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+    }
+    else {
+      setList((draft) => { draft.paymentCategoryList = lscache.get("paymentCategoryList"); draft.listLoading = false; });
+      return lscache.get("paymentCategoryList");
+    }
+  }
+  const getProductCodeList = async (isRefresh: boolean = false) => {
+    
+    setList((draft) => { draft.listLoading = true; });
+    if (!lscache.get("productCodeList") || isRefresh) {
+      try {
+        const productCodeResponse: IAPIResponse = await API.get(API_LIST.getProductCodes);
+        setList((draft) => { draft.productCodeList = productCodeResponse.value; draft.listLoading = false; });
+        lscache.set("productCodeList", productCodeResponse.value);
+        return productCodeResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+    }
+    else {
+      setList((draft) => { draft.productCodeList = lscache.get("productCodeList"); draft.listLoading = false; });
+      return lscache.get("productCodeList");
+    }
+  }
+  const getScheduleFrequencyList = async (isRefresh: boolean = false) => {
+
+    setList((draft) => { draft.listLoading = true; });
+    if (!lscache.get("sceduleFrequencyList") || isRefresh) {
+      try {
+        const scheduleFrequencyResponse: IAPIResponse = await API.get(API_LIST.getScheduleFrequency);
+        setList((draft) => { draft.scheduleFrequencyList = scheduleFrequencyResponse.value; draft.listLoading = false; });
+        lscache.set("sceduleFrequencyList", scheduleFrequencyResponse.value);
+        return scheduleFrequencyResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+    }
+    else {
+      setList((draft) => { draft.scheduleFrequencyList = lscache.get("sceduleFrequencyList"); draft.listLoading = false; });
+      return lscache.get("sceduleFrequencyList");
     }
   }
   return {
@@ -232,6 +305,10 @@ export const useListContext = () => {
     getLoadStatusList,
     getOwnershipTypeList,
     getDocumentStatusList,
-    getFactorList
+    getFactorList,
+    getTrailerTypeList,
+    getPaymentCategoryList,
+    getProductCodeList,
+    getScheduleFrequencyList,
   }
 }

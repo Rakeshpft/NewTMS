@@ -8,7 +8,7 @@ import { IBillingStatusObject, IBillingTypeObject } from "../tms-objects/billing
 import { ICustomerStatusObject } from "../tms-objects/customer.types";
 import { ILoadStatusObject } from "../tms-objects/load.type";
 import { ISideMenuObject } from "../tms-objects/side-menu.types";
-import { IDocumentStatusObject, IFactorObject, IOwnershipTypeObject } from "../tms-objects/list.types";
+import { IDocumentStatusObject, IFactorObject, IOwnershipTypeObject, ITrailerTypeObject, IPaymentCategoryObject, IProductCodeObject, IScheduleFrequencyObject } from "../tms-objects/list.types";
 
 export interface IListData {
     menuList:ISideMenuObject[]|null;
@@ -23,6 +23,10 @@ export interface IListData {
     ownershipTypeList:IOwnershipTypeObject[]|null;
     documentStatusList:IDocumentStatusObject[]|null;
     factorList:IFactorObject[]|null;
+    trailerTypeList:ITrailerTypeObject[]|null;
+    paymentCategoryList:IPaymentCategoryObject[]|null;
+    productCodeList:IProductCodeObject[]|null;
+    scheduleFrequencyList:IScheduleFrequencyObject[]|null;
     listLoading : boolean;
     is_error : boolean;
 }
@@ -40,6 +44,10 @@ const listInitialData : IListData = {
     ownershipTypeList:null,
     documentStatusList:null,
     factorList:null,
+    trailerTypeList:null,
+    paymentCategoryList:null,
+    productCodeList:null,
+    scheduleFrequencyList:null,
     listLoading : false,
     is_error : false,
 }

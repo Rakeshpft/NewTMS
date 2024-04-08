@@ -18,16 +18,10 @@ const TrailerDetails = (prop: ITrailerProps) => {
         trailer_id = 0,
         handleSubmit = undefined,
     } = prop;
-    const { getStateList, stateList } = useListContext();
+    const { getStateList, stateList, getTrailerTypeList, trailerTypeList, getOwnershipTypeList, ownershipTypeList } = useListContext();
     const [editTrailerDetail, setEditTrailerDetail] = useState<ITrailerObject>(trailerInitialState);
     const { getTrailerDetail, selectedTrailer, saveTrailer, isLoading } = useTrailerContext();
-    const navigate = useNavigate();
-
-    const [selectedOption, setSelectedOption] = useState('Owned');
-
-    const handleSelectChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-        setSelectedOption(event.target.value);
-    };
+    const navigate = useNavigate();   
 
     useEffect(() => {
         console.log("trailer", trailer_id);
@@ -36,8 +30,15 @@ const TrailerDetails = (prop: ITrailerProps) => {
         }
         else {
             setEditTrailerDetail(trailerInitialState);
+            setEditTrailerDetail({
+                ...editTrailerDetail,
+                trailer_type_id:1,
+                ownership_type_id:1
+            })
         }
         getStateList();
+        getTrailerTypeList();
+        getOwnershipTypeList();
     }, []);
     useEffect(() => {
         if (!isLoading && selectedTrailer && trailer_id > 0) {
@@ -94,8 +95,12 @@ const TrailerDetails = (prop: ITrailerProps) => {
                             <Col md={3}>
                                 <FormGroup>
                                     <Label for="trailer_type_id">Type</Label>
-                                    <Input bsSize="sm" className="form-control" type="text" id="trailer_type_id" name="trailer_type_id"
-                                        value={editTrailerDetail.trailer_type_id} onChange={handleInputChange("trailer_type_id")} />
+                                    <Input bsSize="sm" className="form-control" type="select" id="trailer_type_id" name="trailer_type_id"
+                                        value={editTrailerDetail.trailer_type_id} onChange={handleInputChange("trailer_type_id")} >
+                                            {trailerTypeList && trailerTypeList.map((item) => (
+                                            <option key={item.trailer_type_id} value={item.trailer_type_id}>{item.trailer_type_name}</option>
+                                        ))}
+                                    </Input>
                                 </FormGroup>
                             </Col>
                             <Col md={3}>
@@ -166,14 +171,6 @@ const TrailerDetails = (prop: ITrailerProps) => {
                                     <Input type="switch" checked={editTrailerDetail.is_active} onChange={handleStatus} />
                                 </FormGroup>
                             </Col>
-
-                            {/* <Col md={3}>
-                                <FormGroup>
-                                    <Label for="unit">Description</Label>
-                                    <Input bsSize="sm" className="form-control" type="text" id="description" name="description"
-                                        value={editTrailerDetail.description} onChange={handleInputChange("description")} />
-                                </FormGroup>
-                            </Col> */}
                         </Row>
                     </Row>
                     <Row>
@@ -184,16 +181,16 @@ const TrailerDetails = (prop: ITrailerProps) => {
                             <Label for="ownership_id">Ownership</Label>
                             <Col md={3}>
                                 <FormGroup>
-                                    <Input bsSize="sm" className="form-control" type="select"
-                                        value={selectedOption} onChange={handleSelectChange}>
-                                        <option value="Owned">Owned</option>
-                                        <option value="Leased">Leased</option>
+                                    <Input bsSize="sm" className="form-control" type="select" id="ownership_type_id" name="ownership_type_id"
+                                        value={editTrailerDetail.ownership_type_id} onChange={handleInputChange("ownership_type_id")}>
+                                      {ownershipTypeList && ownershipTypeList.map((item) => (
+                                      <option key={item.ownership_type_id} value={item.ownership_type_id}>{item.ownership_type_name}</option>))}
                                     </Input>
                                 </FormGroup>
                             </Col>
                         </Row>
                     </Row>
-                    {selectedOption === 'Owned' && (
+                    {editTrailerDetail.ownership_type_id == 1 && (
                         <div>
                             <Row className="page-content align-items-center">
                                 <Col md={3}>
@@ -213,7 +210,7 @@ const TrailerDetails = (prop: ITrailerProps) => {
                             </Row>
                         </div>
                     )}
-                    {selectedOption === 'Leased' && (
+                    {editTrailerDetail.ownership_type_id == 2 && (
                         <div>
                             <Row className="page-content align-items-center">
                                 <Col md={3}>

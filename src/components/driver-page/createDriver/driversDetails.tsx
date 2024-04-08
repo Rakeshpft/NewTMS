@@ -43,7 +43,8 @@ const {
   const { getDriverTypeList  , driverTypeList  ,getDriverStatusList ,driverStatusList } = useListContext();
   const { getVendorDetails ,VendorDetails } = useVendorContext();
   const { getTrailerList ,trailerList   }  = useTrailerContext();
-  const { getTruck , truckListStatus}= useTruckContext()
+  const { getStateList, stateList } = useListContext();
+  const {   truckListStatus}= useTruckContext()
   
 
   const [newDriver, setNewDriver] = useState<IDriverObject>(initialStateDriver);
@@ -74,14 +75,14 @@ const {
       if(driver_id >0){
         getIdividualDriver(driver_id);
         getDriverPayRateList(driver_id);
-      }} , [])
+      }} , [ ]);
 
       useEffect(() => {
         if(!driverLoading && selectedDriver && selectedPayRates && driver_id>0) {
           setNewDriver(selectedDriver);
           setDriverPayrates(selectedPayRates);
         }
-    }, [driverLoading, selectedDriver, driver_id]);
+    }, [driverLoading, selectedDriver]);
 
     // const navigateToCreateDriver = () => {
     //   setNewDriver(initialStateDriver);
@@ -134,8 +135,9 @@ const {
       getVendorDetails()
       getDriverStatusList()
       getTrailerList()
-      getTruck()
+     // getTruck()
       getDriverStatus()
+      getStateList()
       
     }, []);
 
@@ -202,8 +204,15 @@ const {
                   <Col md={4}>
                     <FormGroup>
                       <Label for="unit">State</Label>
-                      <Input bsSize="sm" className="form-control form-control-sm" type="select" id="unit"  
-                      />
+                      <Input bsSize="sm" className="form-control form-control-sm" type="select" id="unit"value={newDriver.state_id} onChange={handleInputChange("state_id")} 
+                    
+                    >
+                      {
+                        stateList && stateList.map((state) =>{
+                          return <option key={state.state_id} value={state.state_id}>{state.state_name}</option>
+                        })
+                      }
+                      </Input>
                     </FormGroup>
                   </Col>
                   <Col md={4}>

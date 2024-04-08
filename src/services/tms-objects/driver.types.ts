@@ -33,6 +33,7 @@ export interface IDriverObject {
   vendor_id: number;
   active: boolean;
   str_active: string;
+  state_name: string;
 
 }
 
@@ -67,7 +68,7 @@ export const initialStateDriver = {
   driver_status_id: 0,
   active: false,
   str_active: "",
-  
+  state_name: "",
  
 };
 
@@ -338,21 +339,37 @@ export const initialDriverOther : IDriverOther = {
   company_id  : 0
 }
 
-export interface IDriverSchedulePayee{
-  categgory : string,
-  amount : number,
-  schedule : string,
-  last : string,
-  schedule_id : number
-
+export interface IDriverSchedulePayee {
+  schedule_id: number;
+  driver_id: number;
+  payment_category_id: number;
+  payment_category_name: string;
+  schedule_frequency_id: number;
+  schedule_frequency_name: string;
+  start_date: string;
+  amount: number;
+  last_date_of_trans: string;
+  next_date_of_trans: string;
+  notes: string;
+  is_active: boolean;
+  company_id: number;
 }
 
+
 export const initialDriverSchedule : IDriverSchedulePayee = {
-  categgory : "",
-  amount : 0,
-  schedule : "",
-  last : "",
-  schedule_id : 0
+  schedule_id: 0,
+  driver_id: 0,
+  payment_category_id: 0,
+  payment_category_name: "",
+  schedule_frequency_id: 0,
+  schedule_frequency_name: "",
+  start_date: "",
+  amount: 0,
+  last_date_of_trans: "",
+  next_date_of_trans: "",
+  notes: "",
+  is_active: false,
+  company_id: 0
 }
 
 export interface IDriverManagenetProps {

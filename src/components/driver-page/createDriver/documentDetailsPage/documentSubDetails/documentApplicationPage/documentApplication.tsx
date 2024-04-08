@@ -8,13 +8,16 @@ import { HiOutlinePencilAlt } from "react-icons/hi";
 import { useDriverContext } from "../../../../../../services/reducer/driver.reducer";
 import { RxCross2 } from "react-icons/rx";
 import { toastify } from "../../../../../../features/notification/toastify";
+import { useListContext } from "../../../../../../services/reducer/list.reducer";
 
 
 const DocumentApplication = ( props: TDriverProps) => {
 
   const { driver_id = 0 } = props
 const { getDriverDocAppList  , driverDocAppList , driverLoading ,postApplication } = useDriverContext()
-  const [uploadModalOpen, setUploadModalOpen] = useState(false);
+const {getFactorList , factorList } = useListContext()
+  
+const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [driverDocument, setDriverDocument] = useState<IDriverDoc>(initialDriverDoc);
   const [driverDocumentList, setDriverDocumentList] = useState<IDriverDoc[]>([]);
   
@@ -25,6 +28,7 @@ const { getDriverDocAppList  , driverDocAppList , driverLoading ,postApplication
     }
     setUploadModalOpen(true);
   }
+
   useEffect(()=>{
     if(!driverLoading && driverDocAppList){
       setDriverDocumentList(driverDocAppList);
@@ -37,6 +41,10 @@ const { getDriverDocAppList  , driverDocAppList , driverLoading ,postApplication
     getDriverDocAppList(driver_id) 
     
   }, [])
+
+  useEffect(() => {
+    getFactorList()
+  },[])
 
   const UploadModalClose = () => {
     setUploadModalOpen(false);
@@ -81,6 +89,7 @@ const { getDriverDocAppList  , driverDocAppList , driverLoading ,postApplication
       <RxCross2 />
     </button>
 );
+
   const columns: CustomTableColumn[] = [
 
    {
@@ -121,7 +130,9 @@ const { getDriverDocAppList  , driverDocAppList , driverLoading ,postApplication
       name: 'Attachment',
       style: { width: '10%' },
       sortable: true,
-      selector: (row: IDriverDoc) => row.attachment
+      selector: (row: IDriverDoc) => row.attachment,
+      cell:(row:IDriverDoc)=><a href={row.attachment} target='_blank' download={true}>{row.attachment}</a>
+
     },
     {
       id : "action",
@@ -134,8 +145,6 @@ const { getDriverDocAppList  , driverDocAppList , driverLoading ,postApplication
     }
   
   ]
-
-
 
   return (
 
@@ -162,8 +171,14 @@ const { getDriverDocAppList  , driverDocAppList , driverLoading ,postApplication
         <Col md={6}>
           <FormGroup>
           <Label for="name">Status</Label>
-          <Input bsSize="sm" className="form-control form-control-sm" type="select" id="user" name="user"  value={1}>
-            <option value="1">Completed</option>
+          <Input bsSize="sm" className="form-control form-control-sm" type="select" id="user" name="user"  value={driverDocument.status_id} onChange={handleDriverInput('status_id')}>
+      {
+        factorList  && factorList.map((factor) => {
+          return (
+            <option value={factor.factor_id}>{factor.factor_name}</option>
+          )
+        })
+      }
             </Input>
           
           </FormGroup>

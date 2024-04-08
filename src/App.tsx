@@ -91,6 +91,7 @@ import CreateNewDriverPage from "./components/driver-page/create-new-driver-page
 const App = () => {
   return (
     <ContextProvider>
+      
       <BrowserRouter>
         <Routes>
           <Route element={<LoginPage />} path={routes.login} />

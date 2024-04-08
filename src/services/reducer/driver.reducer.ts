@@ -3,7 +3,7 @@ import { DriverAddContext } from "../context/driver.context";
 import { API } from "../api-helper/api.services";
 import { API_DRIVER } from "../api-helper/api.constant";
 import { IAPIResponse } from "../tms-objects/response.types";
-import { IDriverCdl, IDriverDoc, IDriverDrugTest, IDriverEmpVerify, IDriverMedical, IDriverMvr, IDriverObject, IDriverOther, IDriverPayRatesOject, IDriverSSn } from "../tms-objects/driver.types";
+import { IDriverCdl, IDriverDoc, IDriverDrugTest, IDriverEmpVerify, IDriverMedical, IDriverMvr, IDriverObject, IDriverOther, IDriverPayRatesOject, IDriverSSn, IDriverSchedulePayee } from "../tms-objects/driver.types";
 
 export const useDriverContext = () => {
   const { state, setState } = useContext(DriverAddContext);
@@ -435,6 +435,57 @@ const postDriverOther = async (  driver_id : number , payload : IDriverOther ) =
   }
 }
 
+const getDriverSchedule = async ( driver_id : number) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverScheduleData : IAPIResponse = await API.get( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverSchedulePayee}` );
+    setState((draft) => {
+      draft.driverScheduleLists = driverScheduleData.value;
+      draft.driverLoading = false;
+    });
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const getIndividualSchedulePayee = async ( driver_id : number, schedule_id : number) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverIndividualdata : IAPIResponse = await API.get( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverSchedulePayee}/${schedule_id}` );
+    setState((draft) => {
+      draft.selectedScheduleDriver = driverIndividualdata.value
+      draft.driverLoading = false;
+    });
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const postDriverSchedulePayee= async (  driver_id : number , payload : IDriverSchedulePayee ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const SaveDriverCdl : IAPIResponse = await API.post( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverSchedulePayee}` , payload );
+    return SaveDriverCdl ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
   return {
     ...state,
     getDriverList,
@@ -460,7 +511,10 @@ const postDriverOther = async (  driver_id : number , payload : IDriverOther ) =
     getDriverEmpVerify,
     postDriverEmpVerify,
     getDriverOther,
-    postDriverOther
+    postDriverOther,
+    getDriverSchedule,
+    getIndividualSchedulePayee,
+    postDriverSchedulePayee
 
   }
 };

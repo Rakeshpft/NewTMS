@@ -48,7 +48,9 @@ const CreateNewDriverForm = ( prop : TDriverProps ) => {
           />
         </TabPane>
         <TabPane tabId={3} className="">
-        <SchedulePayment/>
+        <SchedulePayment
+          driver_id = {driver_id}
+        />
         </TabPane>
         {/* <TabPane tabId={4} className="">
         <AdditionalPayee/>

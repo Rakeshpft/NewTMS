@@ -13,6 +13,7 @@ import { StateProvider } from "../context/state.context";
 import { ListProvider } from "../context/list.context";
 import { FuelCardProvider } from "../context/fuel-card.context";
 import { TrailerProvider } from "../context/trailer.context";
+import { LoadingProvider } from "../context/loading.context";
 
 export const ContextProvider = ({
   children,
@@ -21,32 +22,31 @@ export const ContextProvider = ({
 }) => (
   <RegProvider>
     <ListProvider>
-    <LoadProvider>
-      <CustomerProvider>
-        <StateProvider>
-        <TruckStatusProvider>
-          <TrailerProvider>
-            <DriverAddProvider>
-              <ProfileProvider>
-                <UserProvider>
-                  <UserRoleProvider>
-                    <UserAdminRoleProvider>
-                      
-                      <VendorProvider>
-                        <FuelCardProvider>
-                        {children}
-                        </FuelCardProvider>                        
-                        </VendorProvider>
-                    </UserAdminRoleProvider>
-                  </UserRoleProvider>
-                </UserProvider>
-              </ProfileProvider>
-            </DriverAddProvider>
-          </TrailerProvider>
-        </TruckStatusProvider>
-        </StateProvider>
-      </CustomerProvider>
-    </LoadProvider>
+      <LoadProvider>
+        <CustomerProvider>
+          <StateProvider>
+            <TruckStatusProvider>
+              <TrailerProvider>
+                <DriverAddProvider>
+                  <ProfileProvider>
+                    <UserProvider>
+                      <UserRoleProvider>
+                        <UserAdminRoleProvider>
+                          <VendorProvider>
+                            <FuelCardProvider>
+                              <LoadingProvider>{children}</LoadingProvider>
+                            </FuelCardProvider>
+                          </VendorProvider>
+                        </UserAdminRoleProvider>
+                      </UserRoleProvider>
+                    </UserProvider>
+                  </ProfileProvider>
+                </DriverAddProvider>
+              </TrailerProvider>
+            </TruckStatusProvider>
+          </StateProvider>
+        </CustomerProvider>
+      </LoadProvider>
     </ListProvider>
   </RegProvider>
 );

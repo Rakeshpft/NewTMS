@@ -74,6 +74,7 @@ const ResetPassword = () => {
       setVerifyPass(initialVerifyPass);
       setShowRegistrationMessage(true);
       setApiResponseMsg(`${data}`);
+      console.log("verifyPass from resetpage", data);
     });
   };
   const navigateToLogin = () => {

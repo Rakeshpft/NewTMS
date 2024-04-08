@@ -78,7 +78,9 @@ const { driverAddList ,getDriverList, driverLoading } = useDriverContext();
   
 
   useEffect(() => {
-    if (!driverLoading && driverAddList) setFilteredData(driverAddList);
+    if (!driverLoading && driverAddList)
+      
+       setFilteredData(driverAddList);
    
   }, [driverAddList, driverLoading]);
 
@@ -100,7 +102,7 @@ const { driverAddList ,getDriverList, driverLoading } = useDriverContext();
   const columns: CustomTableColumn[] = [
     {
       id: "full_name",
-      name: "Name",
+      name: "NAME",
       style: { width: "15%" },
       selector: (row: IDriverObject) => row.full_name,
       format: (row: IDriverObject) => `${row.first_name} ${row.last_name}`,
@@ -108,49 +110,49 @@ const { driverAddList ,getDriverList, driverLoading } = useDriverContext();
     },
     {
       id: "email",
-      name: "Email",
+      name: "EMAIL",
       style: { width: "15%" },
       selector: (row: IDriverObject) => row.email,
       sortable: true,
     },
     {
-      id: "phone",
-      name: "Phone",
+      id: "contact_number",
+      name: "PHONE",
       style: { width: "15%" },
-      selector: (row: IDriverObject) => row.phone,
+      selector: (row: IDriverObject) => row.contact_number,
       sortable: true,
     },
     {
       id: "driver_type",
-      name: "Driver Type",
+      name: "DRIVER TYPE",
       style: { width: "15%" },
-      selector: (row: IDriverObject) => row.driver_type_id,
+      selector: (row: IDriverObject) => row.driver_id,
       sortable: true,
     },
     {
       id: "vendor_id",
-      name: "Driver Type",
+      name: "VENDOR",
       style: { width: "15%" },
       selector: (row: IDriverObject) => row.vendor_id,
       sortable: true,
     },
     {
       id: "status",
-      name: "Status",
+      name: "STATUS",
       style: { width: "15%" },
       selector: (row: IDriverObject) => row.status_id,
       sortable: true,
     },
     {
       id: "truck_id",
-      name: "Truck",
+      name: "TRUCK",
       style: { width: "15%" },
       selector: (row: IDriverObject) => row.truck_id,
       sortable: true,
     },
     {
       id: "trailer_id",
-      name: "Trailer",
+      name: "TRAILER",
       style: { width: "15%" },
       selector: (row: IDriverObject) => row.trailer_id,
       sortable: true,
@@ -158,7 +160,7 @@ const { driverAddList ,getDriverList, driverLoading } = useDriverContext();
 
     {
       id: "action",
-      name: "Action",
+      name: "ACTIONS",
       style: { width: "5%" },
       selector: (row: IDriverObject) => row.driver_id,
       cell: (row: IDriverObject) => (
@@ -170,7 +172,7 @@ const { driverAddList ,getDriverList, driverLoading } = useDriverContext();
           }}
         />
       ),
-      sortable: true,
+      sortable: false,
     },
   ];
 
