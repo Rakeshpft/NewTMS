@@ -16,7 +16,6 @@ import CompanyLogo from "../company-logo";
 import { useRegContext } from "../../services/reducer/auth.reducer";
 import { every } from "lodash";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
-import { toastify } from "../../features/notification/toastify";
 
 // export interface IResetPassword {
 //   password: string;
@@ -37,7 +36,7 @@ const ForgotResetPassword = () => {
   const navigate = useNavigate();
   const [apiResponseMsg, setApiResponseMsg] = useState("");
   const [showRegistrationMessage, setShowRegistrationMessage] = useState(false);
-  const [linkStatus, setLinkStatus] = useState(false);
+  // const [linkStatus, setLinkStatus] = useState(false);
 
   const [emailStatus, setEmailStatus] = useState(null);
   const [emailMessage, setEmailMessage] = useState("");
@@ -58,15 +57,10 @@ const ForgotResetPassword = () => {
 
   useEffect(() => {
     verifyForgotPasswordLink(company_guid).then((data) => {
-      console.log("showEmail", data);
-      data &&
-        toastify({
-          message: data.message,
-          type: data.success ? "success" : "error",
-        });
-       data && !data.status && setLinkStatus(true);
-       data && setApiResponseMsg(data.message)
-       data && setEmailStatus(data.value);
+      console.log("showEmail", data);     
+      //  data && !data.status && setLinkStatus(true);
+      //  data && setApiResponseMsg(data.message)
+       data && setEmailStatus(data.success);
        data && setEmailMessage(data.message);
     });
   }, [company_guid]);
@@ -78,7 +72,6 @@ const ForgotResetPassword = () => {
       data && setShowRegistrationMessage(true);
       setVerifyPass(initialForgotVerifyPass);
       console.log("verifyPass from forgetpage", data);
-      setVerifyPass(initialForgotVerifyPass);
     });
   };
   const navigateToLogin = () => {
@@ -104,7 +97,7 @@ const ForgotResetPassword = () => {
                     </div>
                   </Col>
                 </Row>
-                {showRegistrationMessage || linkStatus ? (
+                {showRegistrationMessage  ? (
                   <div className="text-center">
                     <h5 className="text-success text-center my-3">
                       {apiResponseMsg}
@@ -122,7 +115,7 @@ const ForgotResetPassword = () => {
                   <>
                     <Row>
                       <Col sm={10} className="mx-auto">
-                        { emailStatus ? (
+                        { !emailStatus ? (
                           <>
                           <div className="text-center my-4">
                             <p className="fw-bold">{emailMessage}</p>
