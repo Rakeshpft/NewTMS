@@ -3,10 +3,10 @@ import { isEmpty } from 'lodash'
 import React, { useEffect, useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 // import { BsSearch } from 'react-icons/bs'
-import { Button, Label, Container, FormGroup, Modal, ModalBody, ModalHeader, Col } from 'reactstrap'
+import { Button, Label, Container, FormGroup, Modal, ModalBody, ModalHeader, Col, Form, Input, Row } from 'reactstrap'
 // import { BasicTable } from '../../../../features/table/BasicTable'
 // import { tableHeadCells, tableCells } from '../customer.constants'
-import CustomerContactsModal from './customerContactsModal'
+// import CustomerContactsModal from './customerContactsModal'
 import { useCustomerContext } from '../../../../services/reducer/customer.reducer'
 // import { IUserRoleDetails } from '../../../../services/tms-objects/userRole.types'
 import { ICustomerContacts, TCustomerProps, initialCustomerContacts } from '../../../../services/tms-objects/customer.types'
@@ -15,109 +15,65 @@ import { HiCheckCircle, HiOutlinePencilAlt } from 'react-icons/hi'
 import { CustomTable } from '../../../../features/data-table/CustomTable'
 import { toastify } from '../../../../features/notification/toastify'
 import { MdCancel } from 'react-icons/md'
+import { BiCheck } from 'react-icons/bi'
+import { RxCross2 } from 'react-icons/rx'
 
 const CustomerContacts = (prop: TCustomerProps) => {
   const {
     customer_id = 0
   } = prop;
-  console.log(customer_id);
+  
 
   const {
-    selectedContact,
+    
     ContactList,
     customerLoading,
 
     getContacts,
     saveContact,
     deleteContact,
-    getIndividualContacts,
+   
 
   } = useCustomerContext();
 
 
-  const [filteredData, setFilteredData] = useState<ICustomerContacts[]>([]);;
   const [modalOpen, setModalOpen] = useState(false);
   const [title, setTitle] = useState(true);
-  const [contactNewDetails, setcontactNewDetails] = useState<ICustomerContacts>(initialCustomerContacts);
+  const [customerContact, setcustomerContact] =  useState<ICustomerContacts>(initialCustomerContacts);
+  const [customerContactList, setcustomerContactList] = useState<ICustomerContacts[]>([])
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedContacts, setSelectedContacts] = useState<ICustomerContacts[] | []>([]);
 
-  // const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInputContactChange =
     (prop: keyof ICustomerContacts) =>
       (event: React.ChangeEvent<HTMLInputElement>) => {
-        setcontactNewDetails({ ...contactNewDetails, [prop]: event.target.value });
+        setcustomerContact({ ...customerContact, [prop]: event.target.value });
 
       };
-  useEffect(() => {
-    if (selectedContact) {
-      setcontactNewDetails({
-        ...ContactList,
-        contact_id: selectedContact.contact_id,
-        name: selectedContact.name,
-        email: selectedContact.email,
-        phone: selectedContact.description,
-        notes: selectedContact.notes,
-        is_default: selectedContact.is_default,
-        is_default_billing: selectedContact.is_default_billing,
-        customer_id: selectedContact.customer_id,
-        company_id: selectedContact.company_id,
+      const ContactModalClose = () => {
+        setModalOpen(false);
+        setcustomerContact(initialCustomerContacts)
+      }
 
-      });
+  const handleEditContact = (id:number) => {
+    const filteredData = customerContactList?.filter(l=>l.contact_id == id)
+    if (filteredData && filteredData.length>0){
+      setcustomerContact(filteredData[0])
     }
-  }, [selectedContact]);
-
-
-  // const handleSearch = debounce((searchValue: string) => {
-  //   const searchResults =
-  //     ContactDetails &&
-  //     ContactDetails.filter((contacts) => {
-  //       if (
-  //         includes(
-  //           contacts.name.toLowerCase(),
-  //           searchValue.toLowerCase()
-  //         )
-  //       ) {
-  //         return contacts;
-  //       }
-  //     });
-  //   searchResults && setFilteredData(searchResults);
-  // }, 500);
-
-  const handleNewContacts = () => {
-    setModalOpen(true);
-    setcontactNewDetails(initialCustomerContacts);
-    setTitle(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalOpen(false);
-    getContacts(customer_id).then((data) => {
-      data && setFilteredData(data);
-    });
-  };
-
-  const handleEditContact = (contact: ICustomerContacts) => {
-    getIndividualContacts(customer_id,contact.contact_id);
-    setcontactNewDetails(contact)
     setModalOpen(true);
     setTitle(false);
   };
 
   useEffect(() => {
-    if (customerLoading && ContactList) {
-      setFilteredData(ContactList);
-      //setNoUserRole(isEmpty(userRoleDetails));
+    if (!customerLoading && ContactList) {
+    setcustomerContactList(ContactList)
+      setDeleteModalOpen(false);
+      
     }
   }, [customerLoading, ContactList]);
 
-  useEffect(() => {
-    if (!customerLoading) {
-      setDeleteModalOpen(false);
-      setSelectedContacts([]);
-    }
-  }, [customerLoading]);
+
 
 
 
@@ -128,47 +84,57 @@ const CustomerContacts = (prop: TCustomerProps) => {
   };
 
   const handleDeleteContacts = () => {
-    selectedContacts && deleteContact(selectedContacts);
-
-    getContacts(customer_id).then((data) => {
-      data && setFilteredData(data);
+    selectedContacts && deleteContact(selectedContacts).then(response=>{
+      console.log(response)
+    }).catch(error=>{
+      console.error(error)
     });
-    setDeleteModalOpen(false);
-    console.log("clicked");
-  };
+    setSelectedContacts([])
+    }
+
   const handleDefaultCheckBox = () => {
-    if (!contactNewDetails.is_default_billing){
-      setcontactNewDetails({ ...contactNewDetails,is_default : true});
+    if (!customerContact.is_default_billing){
+      setcustomerContact({ ...customerContact,is_default : true});
     }else
-    setcontactNewDetails({ ...contactNewDetails, is_default: !contactNewDetails.is_default });
+    setcustomerContact({ ...customerContact, is_default: !customerContact.is_default });
 
   };
+  const closeBtn = (
+    <button
+      className="border-0 bg-transparent text-white"
+      type="button"
+      onClick={() => setModalOpen(false)}
+    >
+       
+      <RxCross2 />
+    </button>
+);
+
   const handleDefaultBillingCheckBox = () => {
-    if (!contactNewDetails.is_default){
-      setcontactNewDetails({ ...contactNewDetails,is_default_billing : true});
+    if (!customerContact.is_default){
+      setcustomerContact({ ...customerContact,is_default_billing : true});
     }else
-    setcontactNewDetails({ ...contactNewDetails, is_default_billing: !contactNewDetails.is_default_billing });
+    setcustomerContact({ ...customerContact, is_default_billing: !customerContact.is_default_billing });
   };
 
   useEffect(() => {
     if(customer_id>0){
-    getContacts(customer_id).then((data) => {
-      data && setFilteredData(data);
-    })};
+    getContacts(customer_id)
+    }
   }, []);
 
   const handleSaveContact = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
   
-    await saveContact(customer_id, contactNewDetails).then((response: any) => {
+    await saveContact(customer_id, customerContact).then((response: any) => {
       
       console.log("getdata", response);
-      setModalOpen(false);
-      getContacts(customer_id).then((data) => {
-        data && setFilteredData(data);
-      });
-      response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
-
+     response && 
+     toastify({ message: response.message, 
+      type: (response.success ? "success" : "error") });
+      getContacts(customer_id)
+      ContactModalClose();
+      
     })
   };
 
@@ -229,7 +195,7 @@ const CustomerContacts = (prop: TCustomerProps) => {
       sortable: false,
       align: 'center',
       selector: (row: ICustomerContacts) => row.contact_id,
-      cell: (row: ICustomerContacts) => (row.company_id == 0 ? '' : <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={() => handleEditContact(row)} />)
+      cell: (row: ICustomerContacts) => (row.company_id == 0 ? '' : <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={() => handleEditContact(row.contact_id)} />)
     },
   ]
   return (
@@ -249,33 +215,118 @@ const CustomerContacts = (prop: TCustomerProps) => {
           </Button>
         </div>
       )}
-      <Button color="success" outline={true} onClick={handleNewContacts}>
+      <Button color="success" outline={true} onClick={() => {setModalOpen(true),setTitle(true)}}>
         <AiOutlinePlus /> New Contacts
       </Button>
     </label>
   </Col>
 </div>
-
       <div className="d-flex align-items-center gap-1">
-        <CustomerContactsModal
-          modalOpen={modalOpen}
-          closeModal={handleCloseModal}
-          contactNewDetails={contactNewDetails}
-          setcontactNewDetails={setcontactNewDetails}
-          setContactDetails={setcontactNewDetails}
-          handleInputContactChange={handleInputContactChange}
-          selectedContact={selectedContact}
-          handleSaveContact={handleSaveContact}
-          title={title}
-          handleDirectCheckBox={handleDefaultCheckBox}
-          handleDirectBillingCheckBox={handleDefaultBillingCheckBox}
-        />
+      <Modal isOpen={modalOpen} >
+                <ModalHeader close={closeBtn}
+                 onClose={() => ContactModalClose()}>
+                    <h6 className="mb-0 fw-bold ">
+                    {title ? "New Contact " : "Edit Contact"}
+                    </h6>
+                </ModalHeader>
+                <ModalBody>
+                    <Form className="page-content" onSubmit={handleSaveContact}>
+                        <Row className="page-content align-items-center">
+                            <Col md={6}>
+                                <FormGroup>
+                                    <Label for="first Name">Name</Label>
+                                    <Input
+                                        bsSize="sm"
+                                        className="form-control form-control-sm"
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        value={customerContact.name} onChange={handleInputContactChange("name")} 
+                                        pattern='[A-Za-z ]*' title="Only alphabets are allowed"
+                                        required
+                                        />
+                                </FormGroup>
+                            </Col>
+                            <Col md={6}>
+                                <FormGroup className="d-flex align-items-center mt-3">
+                                    <FormGroup check className="checkbox-inline me-3">
+                                        <Input type="checkbox" id="default" 
+                                         checked={customerContact.is_default}
+                                        onChange={handleDefaultCheckBox}  />
+                                        <Label for="defaultCheckbox" check className="checkbox-label">
+                                            Default
+                                        </Label>
+                                    </FormGroup>
+                                    <FormGroup check className="checkbox-inline">
+                                        <Input type="checkbox" id="default_billing" 
+                                         checked={customerContact.is_default_billing}
+                                        onChange={handleDefaultBillingCheckBox}  />
+                                        <Label for="default_billing" check className="checkbox-label">
+                                            Default Billing
+                                        </Label>
+                                    </FormGroup>
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={6}>
+                                <FormGroup>
+                                    <Label for="phone">Phone</Label>
+                                    <Input bsSize="sm"
+                                        className="form-control form-control-sm"
+                                        id="phone" name="phone"
+                                        type="text"
+                                            value={customerContact.phone}
+                                            onChange={handleInputContactChange("phone")}
+                                            pattern='[0-9]{10}' title="Please enter valid phone number"
+                                            required
+                                    />
+                                </FormGroup>
+                            </Col>
+                            <Col md={6}>
+                                <FormGroup>
+                                    <Label for="email"> Email </Label>
+                                    <Input bsSize="sm" className="form-control form-control-sm" id="description" name="email" type="text" 
+                                     value={customerContact.email}
+                                     onChange={handleInputContactChange("email")}
+                                     pattern='[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}' title="Please enter valid email"
+                                     required
+                                     />
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={12}>
+                                <FormGroup>
+                                    <Label for="exampleText">
+                                        Notes
+                                    </Label>
+                                    <Input
+                                        id="notes"
+                                        name="text"
+                                        type="textarea"
+                                        value={customerContact.notes}
+                                     onChange={handleInputContactChange("notes")}
+                                    />
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        <Row className="mt-2">
+                            <Col className="d-flex justify-content-end align-items-end">
+                                <Button color="primary" className="me-3" size="sm" onClick={() => { }} type="submit">
+                                    <BiCheck fontSize={"16px"} /> Save
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Form>
+                </ModalBody>
+            </Modal>
 
       </div>
 
 
       <div>
-        <CustomTable columns={columns} data={filteredData} noRecordMessage="No Contacts found." canSelectRows={true} selectedTableRows={selectedContacts} setSelectionTableRows={setSelectedContacts}/>
+        <CustomTable columns={columns} data={customerContactList} noRecordMessage="No Contacts found." canSelectRows={true} selectedTableRows={selectedContacts} setSelectionTableRows={setSelectedContacts}/>
 
         {/* <BasicTable
           emptyState={noUserRole}

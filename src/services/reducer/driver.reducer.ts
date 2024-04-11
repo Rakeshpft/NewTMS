@@ -19,9 +19,7 @@ export const useDriverContext = () => {
     try {
       const driverData : IAPIResponse = await API.get(API_DRIVER.getDriver);
        
-      const driverListData = driverData.value.map((driver : IDriverObject )  => {
-        driver.full_name = `${driver.first_name} ${driver.last_name}`;
-        driver.str_active = driver.status_id ? "Active" : "Inactive";
+      const driverListData = driverData.value.map((driver : IDriverObject )  => { 
         return driver ;
       })
 
@@ -149,7 +147,7 @@ const postPayRates = async ( driverPayRates : IDriverPayRatesOject ,  driver_id 
   }
 }
 
-const postDriverImage = async ( file : File , driver_id : number ) => {
+const postDriverImage  = async ( file : File , driver_id : number ) => {
   setState((draft) => {
     draft.driverLoading = true;
   });
@@ -189,7 +187,7 @@ const getDriverDocAppList = async ( driver_id : number) => {
   }
 }
 
-const postApplication = async ( payload : IDriverDoc ,  driver_id : number  ) => {
+const postApplication = async (driver_id : number , payload : IDriverDoc  ) => {
   setState((draft) => {
     draft.driverLoading = true;
   });
@@ -476,8 +474,155 @@ const postDriverSchedulePayee= async (  driver_id : number , payload : IDriverSc
     draft.driverLoading = true;
   });
   try {
-    const SaveDriverCdl : IAPIResponse = await API.post( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverSchedulePayee}` , payload );
-    return SaveDriverCdl ;
+    const SaveDriverSchedule : IAPIResponse = await API.post( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.getDriverSchedulePayee}` , payload );
+    return SaveDriverSchedule ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const driverDelete = async ( driver_id : number[]) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverDeleteData : IAPIResponse = await API.del( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.deleteDriver}` );
+    return driverDeleteData ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const deleteDriverAppliaction  = async ( driver_id : number , application_id : number[] ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverDeleteData : IAPIResponse = await API.del( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.deleteApplication}` , application_id );
+    return driverDeleteData ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const deleteDriverCdl  = async ( driver_id : number , cdl_id : number[] ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverDeleteData : IAPIResponse = await API.del( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.deleteCdl}` , cdl_id );
+    return driverDeleteData ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const deleteDriveMedical = async ( driver_id : number , medical_id : number[] ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverDeleteData : IAPIResponse = await API.del( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.deleteMedical}` , medical_id );
+    return driverDeleteData ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const deleteDriverDrugTest = async ( driver_id : number , drug_test_id : number[] ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverDeleteData : IAPIResponse = await API.del( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.deleteDrugTest}` , drug_test_id );
+    return driverDeleteData ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+const deleteDriverMvr = async ( driver_id : number , mvr_id : number[] ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverDeleteData : IAPIResponse = await API.del( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.deleteMvr}` , mvr_id );
+    return driverDeleteData ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const deleteDriverSsn = async ( driver_id : number , ssn_id : number[] ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverDeleteData : IAPIResponse = await API.del( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.deleteSsn}` , ssn_id );
+    return driverDeleteData ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+const deleteDriverEmpVerify = async ( driver_id : number , verification_id : number[] ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverDeleteData : IAPIResponse = await API.del( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.deleteEmpVerify}` , verification_id );
+    return driverDeleteData ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+
+const deleteDriverOther = async ( driver_id : number , other_id : number[] ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverDeleteData : IAPIResponse = await API.del( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.deleteOther}` , other_id );
+    return driverDeleteData ;
+  } catch (error: any) {
+    console.log(error);
+    setState((draft) => {
+      draft.driverLoading = false;
+    });
+  }
+}
+const deleteDriverSchedule = async ( driver_id : number , schedule_id : number[] ) => {
+  setState((draft) => {
+    draft.driverLoading = true;
+  });
+  try {
+    const driverDeleteData : IAPIResponse = await API.del( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.deleteSchedule}` , schedule_id );
+    return driverDeleteData ;
   } catch (error: any) {
     console.log(error);
     setState((draft) => {
@@ -514,7 +659,16 @@ const postDriverSchedulePayee= async (  driver_id : number , payload : IDriverSc
     postDriverOther,
     getDriverSchedule,
     getIndividualSchedulePayee,
-    postDriverSchedulePayee
-
+    postDriverSchedulePayee,
+    driverDelete,
+    deleteDriverAppliaction,
+    deleteDriverCdl,
+    deleteDriveMedical,
+    deleteDriverDrugTest,
+    deleteDriverMvr,
+    deleteDriverSsn,
+    deleteDriverEmpVerify,
+    deleteDriverOther,
+    deleteDriverSchedule
   }
 };

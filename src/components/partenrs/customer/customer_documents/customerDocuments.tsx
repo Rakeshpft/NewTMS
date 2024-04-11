@@ -18,6 +18,7 @@ const CustomerDocuments = (prop: TCustomerProps) => {
   const { postCustomerDocument,DocumentList,customerLoading ,getCustomerDocument,deleteDocument} = useCustomerContext();
 
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
+  const[title,setTitle] = useState(true);
   const [customerDocument, setCustomerDocument] = useState<ICustomerDocument>(CustomerDocumentInitialState);
   const [customerDocumentList, setCustomerDocumentList] = useState<ICustomerDocument[]>([]);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -40,6 +41,7 @@ const CustomerDocuments = (prop: TCustomerProps) => {
     if(!customerLoading && DocumentList){
       setCustomerDocumentList(DocumentList);
       setDeleteModalOpen(false)
+      
     }
   },[customerLoading,DocumentList])
 
@@ -78,20 +80,25 @@ const CustomerDocuments = (prop: TCustomerProps) => {
     }
   }
 
-  const handleDeleteDocuments = () => {
-    debugger;
+  const handleDeleteDocuments = async() => {
+   
     const deletedDocumentIds = selectedDocuments.map(doc => doc.document_id);
   
-    deleteDocument(customer_id, deletedDocumentIds)
+    await deleteDocument(customer_id, deletedDocumentIds)
       .then(response => {
         console.log(response);
+        response &&
+        toastify({
+          message: response.message,
+          type: response.success ? "success" : "error",
       })
-      .catch(error => {
-        console.error("Error:", error);
-      });
-  };
+    
+      
+      setSelectedDocuments([]);
+
+  });
   
-  
+} 
   const closeDeleteModal = () => {
     setDeleteModalOpen(false);
     setSelectedDocuments([]);
@@ -103,6 +110,7 @@ const CustomerDocuments = (prop: TCustomerProps) => {
       setCustomerDocument(filteredData[0])
     }
     setUploadModalOpen(true);
+    setTitle(false);
   }
   const closeBtn = (
     <button
@@ -168,7 +176,8 @@ const CustomerDocuments = (prop: TCustomerProps) => {
           </Button>
         </div>
       )}
-      <Button color="success" outline={true} onClick={()=>{setUploadModalOpen(true)}}>
+      <Button color="success" outline={true} onClick={()=>{setUploadModalOpen(true),setTitle(true)}
+    }>
         <AiOutlinePlus /> Upload
       </Button>
     </label>
@@ -179,7 +188,7 @@ const CustomerDocuments = (prop: TCustomerProps) => {
       <Modal isOpen={uploadModalOpen} onClose={UploadModalClose}>
       <ModalHeader close={closeBtn}
                  onClose={() => UploadModalClose()}>
-          <h6 className="mb-0 fw-bold">Upload Document </h6>
+          <h6 className="mb-0 fw-bold">  {title ? "New Document " : "Edit Document"} </h6>
         </ModalHeader>
         <ModalBody
         className="square border border-info-rounded">
@@ -209,7 +218,7 @@ const CustomerDocuments = (prop: TCustomerProps) => {
                 <div className=" my-3 " >
                   {selectedDocuments.length > 1
                     ? `Are you sure you want to delete ${selectedDocuments.length} Documents?`
-                    : `Are you sure you want to delete role  " ${selectedDocuments[0].document_name}"?`}
+                    : `Are you sure you want to delete " ${selectedDocuments[0].document_name}"?`}
                 </div>
               )}
               <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Button, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap'
-
 import { ICustomerDetails, TCustomerProps, initialStateCustomer, } from '../../../../services/tms-objects/customer.types';
 import { useListContext } from '../../../../services/reducer/list.reducer';
 import { useCustomerContext } from '../../../../services/reducer/customer.reducer';
@@ -17,7 +16,7 @@ const CustomerDetails = (props: TCustomerProps) => {
     } = props
     const { setLoader } = useContext(LoadingContext);
     const { getStateList, stateList, getCustomerStatusList, customerStatusList, getCreditList, creditList, getFactorList, factorList } = useListContext()
-    const { getIdividualCustomerDetails, selectedCustomer, customerLoading, saveCustomer } = useCustomerContext();
+    const { getIdividualCustomerDetails, selectedCustomer, saveCustomer } = useCustomerContext();
     const [customerNewDetails, setcustomerNewDetails] = useState<ICustomerDetails>(initialStateCustomer);
     const navigate = useNavigate();
 
@@ -25,14 +24,38 @@ const CustomerDetails = (props: TCustomerProps) => {
         if (customer_id > 0) {
             getIdividualCustomerDetails(customer_id)
         }
+        else{
+            setcustomerNewDetails(initialStateCustomer);
+        }
         getStateList();
         getCustomerStatusList();
         getCreditList();
         getFactorList();
-    }, []);
+    }, [customer_id]);
 
     useEffect(() => {
-        if (!customerLoading && selectedCustomer && customer_id > 0) {
+        if (stateList && stateList.length > 0 && selectedCustomer?.state_id==0) {
+            setcustomerNewDetails({...selectedCustomer, state_id:stateList[0].state_id});
+        }
+    }, [stateList]);
+    useEffect(() => {
+        if (customerStatusList && customerStatusList.length > 0 && selectedCustomer?.status_id==0) {
+            setcustomerNewDetails({...selectedCustomer, status_id:customerStatusList[0].customer_status_id});
+        }
+    }, [customerStatusList]);
+    useEffect(() => {
+        if (creditList && creditList.length > 0 && selectedCustomer?.credit_id==0) {
+            setcustomerNewDetails({...selectedCustomer, credit_id:creditList[0].credit_id});
+        }
+    }, [creditList]);
+    useEffect(() => {
+        if (factorList && factorList.length > 0 && selectedCustomer?.factor_id==0) {
+            setcustomerNewDetails({...selectedCustomer, factor_id:factorList[0].factor_id});
+        }
+    }, [factorList]);
+
+    useEffect(() => {
+        if (selectedCustomer && customer_id > 0) {
             setcustomerNewDetails(selectedCustomer);
         }
     }, [selectedCustomer]);
@@ -87,8 +110,6 @@ const CustomerDetails = (props: TCustomerProps) => {
             setcustomerNewDetails({ ...customerNewDetails, is_shipper_receiver: !customerNewDetails.is_shipper_receiver });
         }
     };
-
-
 
     const handleDirectBillingRadio = () => {
         setcustomerNewDetails({ ...customerNewDetails, billing_type_id: 1 });
@@ -181,7 +202,7 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 name="email"
                                 value={customerNewDetails.email}
                                 onChange={handleInputChange("email")}
-                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title='Please enter valid email address'
+                                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title='Please enter valid email address'
                                 required
                             />
                         </FormGroup>
@@ -200,7 +221,7 @@ const CustomerDetails = (props: TCustomerProps) => {
                                 name="phone"
                                 value={customerNewDetails.phone}
                                 onChange={handleInputChange("phone")}
-                                pattern='^(\+\d{1,3}[- ]?)?\d{10}$' title="Please enter valid phone number"
+                                pattern='[0-9]{10}' title="Please enter valid phone number"
                                 required
 
                             />

@@ -19,7 +19,8 @@ import {
   //TrucksPage,
   CreateNewTruckPage,
   TrailersPage,
-  CreateNewTrailerPage,
+
+  TrucksPage,
 } from "./components/equipment-page";
 import {
   FuelPage,
@@ -128,16 +129,16 @@ const Mainbody = () => {
                     path={routes.createNewFuelTransaction}
                     element={<CreateNewFuelTransactionPage />}
                   />
-                  {/* <Route path={routes.trucks} element={<TrucksPage />} /> */}
+                  <Route path={routes.trucksAll} element={<TrucksPage />} />
                   <Route
                     path={routes.createNewTruck}
                     element={<CreateNewTruckPage />}
                   />
                   <Route path={routes.trailers} element={<TrailersPage />} />
-                  <Route
+                  {/* <Route
                     path={routes.createNewTailers}
                     element={<CreateNewTrailerPage />}
-                  />
+                  /> */}
                   <Route path={routes.additions} element={<AdditionsPage />} />
                   <Route
                     path={routes.createNewAdditions}

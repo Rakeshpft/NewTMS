@@ -1,11 +1,16 @@
 import React , { createContext } from "react"
 import { Draft } from "immer"
 import { useImmer } from "use-immer"
-import { ITruckObject} from "../tms-objects/truck.types"
+import { ITruckDocument, ITruckObject} from "../tms-objects/truck.types"
 
 
 export interface ITruckStatus {
     truckList : ITruckObject[] | null
+    truckDetails : ITruckObject | null
+    documentAnnualInspectionList : ITruckDocument[] | null
+    documentRegistrationList : ITruckDocument[] | null
+    documentRepairMaintenanceList : ITruckDocument[] | null
+    documentOtherList: ITruckDocument[] | null
     truckLoading : boolean
     is_error :  boolean
     saveTruckSuccess : boolean
@@ -17,6 +22,11 @@ export interface ITruckStatus {
 const initialState : ITruckStatus = {
     truckLoading : false,
     truckList : null,
+    truckDetails : null,
+    documentAnnualInspectionList : null,
+    documentRegistrationList : null,
+    documentRepairMaintenanceList : null,
+    documentOtherList : null,
     is_error : false,
     saveTruckSuccess : false,
     saveTruckFailed : false,

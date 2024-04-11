@@ -15,7 +15,7 @@ export const routes = {
   customersAll: "/partners/customers",
   createNewCustomer: "/partners/customer-detail",
   
- driverPayRoll: "/driver-payrolls",
+   driverPayRoll: "/driver-payrolls",
   createNewDriverPayRoll: "/driver-payroll-detail",  billingPage: "/accounts/billing",
   createNewBillingPage: "/createnewbillingpage",
   vendorBalance: "/accounts/vendorbalance",
@@ -25,7 +25,7 @@ export const routes = {
   fuelImport: "/fuel/fuel-import",
   fuelTransaction: "/fuel/fuel-transactions",
   createNewFuelTransaction: "/createnewfueltransaction",
-  trucks: "/equipments/trucks",
+  trucksAll: "/equipments/trucks",
   createNewTruck: "/equipments/truck-detail",
   trailers: "/equipments/trailers",
   createNewTailers: "/equipments/trailer-detail",

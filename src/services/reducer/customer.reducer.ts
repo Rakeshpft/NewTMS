@@ -4,7 +4,6 @@ import { API } from "../api-helper/api.services";
 import { API_CUSTOMER } from "../api-helper/api.constant";
 import { ICustomerContacts, ICustomerContactsResponse, ICustomerDetails, ICustomerDetailsResponse, ICustomerDocument} from "../tms-objects/customer.types";
 import { IAPIResponse } from "../tms-objects/response.types";
-import { toastify } from "../../features/notification/toastify";
 
 export const useCustomerContext = () => {
     const { state , setState } = useContext(CustomerUpdateContext);
@@ -179,7 +178,7 @@ export const useCustomerContext = () => {
         try {
         let response = await API.del(`${API_CUSTOMER.getCustomer}/${customer_id}/documents${API_CUSTOMER.deleteDocuments}`, document_ids);
           setTimeout(() => getCustomerDocument(customer_id), 200);
-          response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
+          return response;
 
         } catch (error: any) {
           console.log(error);

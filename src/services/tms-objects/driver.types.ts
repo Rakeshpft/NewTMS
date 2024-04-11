@@ -4,72 +4,64 @@ import { ITruckObject } from "./truck.types";
 import { IVendorDetails } from "./vendor.types";
 export interface IDriverObject {
   driver_id: number;
+  driver_name: string;
+  login_id: number;
   first_name: string;
   last_name: string;
   dob: string;
-  phone: string;
   email: string;
-  address_line1: string;
-  address_line2: string;
   contact_number: string;
-  state_id: number;
-  city: string;
-  zipcode: string;
-  fuel_card: string;
-  create_new_factor: string;
-  full_name: string;
-  pay_to_id: number;
-  codriver_name: string;
-  truck_id: number;
-  trailer_id: number;
-  is_IFTA_handled_by_company: boolean;
-  status_id: boolean;
-  note: string;
-  driver_images: string;
   suite_number: string;
   street_number: string;
+  application_date: string;
+  hire_date: string;
+  state_id: number;
+  zipcode: string;
   driver_type_id: number;
-  driver_status_id: number;
+  driver_type_name: string;
   vendor_id: number;
+  vendor_name: string;
+  is_IFTA_handled_by_company: boolean;
+  driver_status_id: number;
+  driver_status_name: string;
+  truck_id: number;
+  trailer_id: number;
+  fuel_card_id: number;
+  fuel_card_number: string;
+  fuel_card_expiration_date: string;
   active: boolean;
-  str_active: string;
-  state_name: string;
-
+  driver_images: string;
 }
 
-export const initialStateDriver = {
+export const initialStateDriver : IDriverObject = {
   driver_id: 0,
   first_name: "",
   last_name: "",
   dob: "",
-  phone: "",
   contact_number: "",
   email: "",
-  address_line1: "",
-  address_line2: "",
   state_id: 0,
-  city: "",
   zipcode: "",
-  fuel_card: "",
-  create_new_factor: "",
-  full_name: "",
-  pay_to_id: 0,
-  codriver_name: "",
   truck_id: 0,
+  application_date: "",
+  hire_date: "",
   trailer_id: 0,
   vendor_id: 0,
   is_IFTA_handled_by_company: false,
-  status_id: false,
-  note: "",
   driver_images: "",
   suite_number: "",
   street_number: "",
   driver_type_id: 0,
   driver_status_id: 0,
   active: false,
-  str_active: "",
-  state_name: "",
- 
+  driver_name: "",
+  login_id: 0,
+  driver_type_name: "",
+  vendor_name: "",
+  driver_status_name: "",
+  fuel_card_id: 0,
+  fuel_card_number: "",
+  fuel_card_expiration_date: ""
 };
 
 export interface IDriverType {
@@ -356,19 +348,28 @@ export const initialDriverOther : IDriverOther = {
 }
 
 export interface IDriverSchedulePayee {
-  schedule_id: number;
-  driver_id: number;
-  payment_category_id: number;
-  payment_category_name: string;
-  schedule_frequency_id: number;
-  schedule_frequency_name: string;
-  start_date: string;
-  amount: number;
-  last_date_of_trans: string;
-  next_date_of_trans: string;
-  notes: string;
-  is_active: boolean;
-  company_id: number;
+ 
+  
+    schedule_id: number;
+    driver_id: number;
+    schedule_type_id: number;
+    schedule_type_name: string;
+    payment_category_id: number;
+    payment_category_name: string;
+    schedule_frequency_id: number;
+    schedule_frequency_name: string;
+    start_date: string;
+    amount: number;
+    schedule_repeat_id: number;
+    schedule_repeat_name: string;
+    number_of_times: number;
+    end_date: string ;
+    notes: string;
+    is_active: boolean;
+    last_date_of_trans?: null;
+    next_date_of_trans?: null;
+    company_id: number;
+ 
 }
 
 
@@ -381,8 +382,14 @@ export const initialDriverSchedule : IDriverSchedulePayee = {
   schedule_frequency_name: "",
   start_date: "",
   amount: 0,
-  last_date_of_trans: "",
-  next_date_of_trans: "",
+  schedule_type_id: 0,
+  schedule_type_name: "",
+  schedule_repeat_id: 0,
+  schedule_repeat_name: "",
+  number_of_times: 0,
+  last_date_of_trans: null,
+  next_date_of_trans: null,
+  end_date: "",
   notes: "",
   is_active: false,
   company_id: 0

@@ -277,19 +277,87 @@ export const useListContext = () => {
   const getScheduleFrequencyList = async (isRefresh: boolean = false) => {
 
     setList((draft) => { draft.listLoading = true; });
-    if (!lscache.get("sceduleFrequencyList") || isRefresh) {
+    if (!lscache.get("scheduleFrequencyList") || isRefresh) {
       try {
         const scheduleFrequencyResponse: IAPIResponse = await API.get(API_LIST.getScheduleFrequency);
         setList((draft) => { draft.scheduleFrequencyList = scheduleFrequencyResponse.value; draft.listLoading = false; });
-        lscache.set("sceduleFrequencyList", scheduleFrequencyResponse.value);
+        lscache.set("scheduleFrequencyList", scheduleFrequencyResponse.value);
         return scheduleFrequencyResponse.value;
       }
       catch (error: any) { console.log(error); }
       setList((draft) => { draft.listLoading = false; });
     }
     else {
-      setList((draft) => { draft.scheduleFrequencyList = lscache.get("sceduleFrequencyList"); draft.listLoading = false; });
-      return lscache.get("sceduleFrequencyList");
+      setList((draft) => { draft.scheduleFrequencyList = lscache.get("scheduleFrequencyList"); draft.listLoading = false; });
+      return lscache.get("scheduleFrequencyList");
+    }
+  }
+  const getScheduleTypeList = async (isRefresh: boolean = false) => {
+    setList((draft) => { draft.listLoading = true; });
+    if (!lscache.get("scheduleTypeList") || isRefresh) {
+      try {
+        const scheduleTypeResponse: IAPIResponse = await API.get(API_LIST.getScheduleType);
+        setList((draft) => { draft.scheduleTypeList = scheduleTypeResponse.value; draft.listLoading = false; });
+        lscache.set("scheduleTypeList", scheduleTypeResponse.value);
+        return scheduleTypeResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+    }
+    else {
+      setList((draft) => { draft.scheduleTypeList = lscache.get("scheduleTypeList"); draft.listLoading = false; });
+      return lscache.get("scheduleTypeList");
+    }
+  }
+  const getScheduleRepeatList = async (isRefresh: boolean = false) => {
+    setList((draft) => { draft.listLoading = true; });
+    if (!lscache.get("scheduleRepeatList") || isRefresh) {
+      try {
+        const scheduleRepeatResponse: IAPIResponse = await API.get(API_LIST.getScheduleRepeat);
+        setList((draft) => { draft.scheduleRepeatList = scheduleRepeatResponse.value; draft.listLoading = false; });
+        lscache.set("scheduleRepeatList", scheduleRepeatResponse.value);
+        return scheduleRepeatResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+    }
+    else {
+      setList((draft) => { draft.scheduleRepeatList = lscache.get("scheduleRepeatList"); draft.listLoading = false; });
+      return lscache.get("scheduleRepeatList");
+    }
+  }
+  const getELDProviderList = async (isRefresh: boolean = false) => {
+    setList((draft) => { draft.listLoading = true; });
+    if (!lscache.get("eldProviderList") || isRefresh) {
+      try {
+        const eldProviderResponse: IAPIResponse = await API.get(API_LIST.getELDProvider);
+        setList((draft) => { draft.eldProviderList = eldProviderResponse.value; draft.listLoading = false; });
+        lscache.set("eldProviderList", eldProviderResponse.value);
+        return eldProviderResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+    }
+    else {
+      setList((draft) => { draft.eldProviderList = lscache.get("eldProviderList"); draft.listLoading = false; });
+      return lscache.get("eldProviderList");
+    }
+  }
+  const getDriverList = async (isRefresh: boolean = false) => {
+    setList((draft) => { draft.listLoading = true; });
+    if (!lscache.get("driverList") || isRefresh) {
+      try {
+        const driverResponse: IAPIResponse = await API.get(API_LIST.getDrivers);
+        setList((draft) => { draft.driverList = driverResponse.value; draft.listLoading = false; });
+        lscache.set("driverList", driverResponse.value);
+        return driverResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+    }
+    else {
+      setList((draft) => { draft.driverList = lscache.get("driverList"); draft.listLoading = false; });
+      return lscache.get("driverList");
     }
   }
   return {
@@ -310,5 +378,9 @@ export const useListContext = () => {
     getPaymentCategoryList,
     getProductCodeList,
     getScheduleFrequencyList,
+    getScheduleTypeList,
+    getScheduleRepeatList,
+    getELDProviderList,
+    getDriverList
   }
 }

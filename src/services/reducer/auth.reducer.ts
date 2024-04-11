@@ -16,7 +16,9 @@ import { useListContext } from "./list.reducer";
 export const useRegContext = () => {    
     const navigate = useNavigate();
     const { state, setState } = useContext(RegContext);
-    const { getBillingStatusList, getBillingTypeList, getCustomerStatusList, getDriverStatusList, getDriverTypeList, getLoadStatusList, getStateList, getCreditList, getOwnershipTypeList, getDocumentStatusList, getFactorList } = useListContext();
+    const { getBillingStatusList, getBillingTypeList, getCustomerStatusList, getDriverStatusList, getDriverTypeList, getLoadStatusList,
+       getStateList, getCreditList, getOwnershipTypeList, getDocumentStatusList, getFactorList , getPaymentCategoryList, getProductCodeList,
+        getScheduleFrequencyList, getScheduleTypeList, getScheduleRepeatList, getELDProviderList, getDriverList } = useListContext();
     if (setState === undefined) {
       throw new Error("Must have setState defined");
     }
@@ -68,6 +70,13 @@ export const useRegContext = () => {
       getOwnershipTypeList(true);
       getDocumentStatusList(true);
       getFactorList(true);
+      getPaymentCategoryList(true);
+      getProductCodeList(true);
+      getScheduleFrequencyList(true);
+      getScheduleTypeList(true);
+      getScheduleRepeatList(true);
+      getELDProviderList(true);
+      getDriverList(true);
     }    
   }
 
@@ -173,3 +182,11 @@ export const useRegContext = () => {
     verifyForgotPasswordLink
   };
 };
+
+
+
+
+
+
+
+

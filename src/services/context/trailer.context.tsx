@@ -1,11 +1,15 @@
 import { Draft } from "immer";
 import React, { createContext } from "react";
 import { useImmer } from "use-immer";
-import { ITrailerObject } from "../tms-objects/trailer.types";
+import { ITrailerDocument, ITrailerObject } from "../tms-objects/trailer.types";
 
 export interface ITrailerData {
     trailerList : ITrailerObject[] | null;
     trailerDetail : ITrailerObject | null;
+    AnnualInspectionDocumentList:ITrailerDocument[] | null
+    RegistrationDocumentList:ITrailerDocument[] | null
+    OtherDocumentList:ITrailerDocument[] | null
+    RepairMaintenanceDocumentList:ITrailerDocument[] | null
     isLoading : boolean;
     is_error : boolean;
     saveTrailerSuccess :boolean;
@@ -16,6 +20,10 @@ export interface ITrailerData {
 const trailerInitialData : ITrailerData = {
   trailerList:null,
   trailerDetail:null,
+  AnnualInspectionDocumentList:null,
+  RegistrationDocumentList:null,
+  OtherDocumentList:null,
+  RepairMaintenanceDocumentList:null,
   isLoading : false,
   is_error : false,
   saveTrailerSuccess :false,

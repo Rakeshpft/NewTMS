@@ -79,3 +79,53 @@ export interface IDocumentStatusObject {
     schedule_frequency_name: "",
     is_active: false
   }
+
+  export interface IScheduleTypeObject {
+    schedule_type_id: number;
+    schedule_type_name: string;
+    is_active: boolean;
+  }
+
+  export const scheduleTypeInitialState : IScheduleTypeObject = {
+    schedule_type_id: 0,
+    schedule_type_name: "",
+    is_active: false
+  }
+
+  export interface IScheduleRepeatObject {
+    schedule_repeat_id: number;
+    schedule_repeat_name: string;
+    is_active: boolean;
+  }
+
+  export const scheduleRepeatInitialState : IScheduleRepeatObject = {
+    schedule_repeat_id: 0,
+    schedule_repeat_name: "",
+    is_active: false
+  }
+
+  export interface IELDProviderObject {
+    eld_provider_id: number;
+    eld_provider_name: string;
+    is_active: boolean;
+  }
+
+  export const eldProvideInitialState : IELDProviderObject = {
+    eld_provider_id: 0,
+    eld_provider_name: "",
+    is_active: false
+  }
+
+  export interface IDriverListObject {
+    driver_id: number;
+    driver_name: string;
+    vendor_id: number;
+    vendor_name: string;
+  }
+
+  export const driverInitialState : IDriverListObject = {
+    driver_id: 0,
+    driver_name: "",
+    vendor_id: 0,
+    vendor_name:""
+  }

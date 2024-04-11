@@ -8,7 +8,7 @@ import {
 } from "reactstrap";
 // import { initialTruckState, truckType } from "../../tms-object/equipmenrs";
 
-import CreateNewTruckForm from "../../equipment-page/trucks-page/createNewTruckForm";
+// import CreateNewTruckForm from "../../equipment-page/trucks-page/createNewTruckForm";
 
 // type FormAction =
 //   | { type: "SET_unit"; payload: string }
@@ -94,10 +94,10 @@ const TruckModalPage = ({ isTruckOpen, toggle }: TruckModalPageProps) => {
         </ModalHeader>
         <ModalBody>
           <Container>
-            <CreateNewTruckForm
+            {/* <CreateNewTruckForm
          isFromTruckPage = {false}
          toggle = {toggle}
-         />
+         /> */}
           </Container>
         </ModalBody>
       </Modal>

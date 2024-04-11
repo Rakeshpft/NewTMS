@@ -68,7 +68,7 @@ export const dashboardTiles = {
             {
               title: "Add New Customer",
               icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createNewCustomer",
+              link: "/partners/customer-detail",
             },
             {
               title: "View All Customers",
@@ -84,7 +84,7 @@ export const dashboardTiles = {
             {
               title: "Add New Vendor",
               icon: require("../../../public/icons/create.png"),
-              link: "/createnewvendor",
+              link: "/partners/vendor-detail",
             },
             {
               title: "View All Vendors",
@@ -110,7 +110,7 @@ export const dashboardTiles = {
             {
               title: "Add New Truck",
               icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createnewtruck",
+              link: "/equipments/truck-detail",
             },
             {
               title: "View All Trucks",
@@ -126,7 +126,7 @@ export const dashboardTiles = {
             {
               title: "Add New Trailer",
               icon: require("../../../public/icons/create.png"),
-              link: "/createnewtrailers",
+              link: "/equipments/trailer-detail",
             },
             {
               title: "View All Trailers",
@@ -272,12 +272,12 @@ export const dashboardTiles = {
             {
               title: "Add New Fuel Card",
               icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createnewfuelpage",
+              link: "/fuel/fuel-card-detail",
             },
             {
               title: "View All Fuel Card",
               icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/fuel/fuelcard",
+              link: "/fuel/fuel-cards",
             },
           ],
         },

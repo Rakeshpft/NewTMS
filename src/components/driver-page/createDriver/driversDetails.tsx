@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Row,
   Col,
@@ -16,6 +16,10 @@ import { useVendorContext } from "../../../services/reducer/vendor.reducer";
 import { useTrailerContext } from "../../../services/reducer/trailer.reducer";
 //import { useTruckContext } from "../../../services/reducer/truck.reducer";
 import { useNavigate } from "react-router-dom";
+import ReactDatePicker from "react-datepicker";
+import { Convert, Dictionary } from "../../../features/validation/general-helper";
+import { routes } from "../../routes/routes";
+import { LoadingContext } from "../../../services/context/loading.context";
 
 const DriversDetails = (props : TDriverProps ) => {
 
@@ -25,8 +29,7 @@ const {
 } = props
 
   const {
-    getDriverList,
-  // driverAddList,
+    
     getIdividualDriver,
     selectedDriver,
     driverLoading,
@@ -44,14 +47,13 @@ const {
   const { getVendorDetails ,VendorDetails } = useVendorContext();
   const { getTrailerList ,trailerList   }  = useTrailerContext();
   const { getStateList, stateList } = useListContext();
-  //const {   truckListStatus}= useTruckContext()
-  
+  const { setLoader } = useContext(LoadingContext);
 
   const [newDriver, setNewDriver] = useState<IDriverObject>(initialStateDriver);
-  const [driverPayRates, setDriverPayrates] = useState<IDriverPayRatesOject>(
-    initialStatedriver_pay_rates
-  );
-    const [activeRowTab, setActiveRowTab] = useState(0);
+  const [driverPayRates, setDriverPayrates] = useState<IDriverPayRatesOject>( initialStatedriver_pay_rates);
+  const [activeRowTab, setActiveRowTab] = useState(0);
+
+ 
     const handleInputChange =
     (prop: keyof IDriverObject) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,25 +77,28 @@ const {
       if(driver_id >0){
         getIdividualDriver(driver_id);
         getDriverPayRateList(driver_id);
-      }} , [ ]);
+      }
+    else {
+      setNewDriver(initialStateDriver);
+      setDriverPayrates(initialStatedriver_pay_rates);
+    }
+    
+    } , [ driver_id ]);
+
 
       useEffect(() => {
-        if(!driverLoading && selectedDriver && selectedPayRates && driver_id>0) {
+        if(!driverLoading && selectedDriver && driver_id>0) {
           setNewDriver(selectedDriver);
-          setDriverPayrates(selectedPayRates);
         }
-    }, [driverLoading, selectedDriver]);
 
-    // const navigateToCreateDriver = () => {
-    //   setNewDriver(initialStateDriver);
-    //   setDriverPayrates(initialStatedriver_pay_rates);
-    // };
+    }, [selectedDriver]);
 
-    // const handleEditDriver = (driver: IDriverObject) => {
-    //   getIdividualDriver(driver.driver_id);
-    //   getDriverPayRateList(driver.driver_id);
-
-    // };
+    useEffect(() => {
+      if(!driverLoading && selectedPayRates && driver_id>0) {
+        setDriverPayrates(selectedPayRates);
+      }
+  }, [selectedPayRates]);
+    
 
     const handleImageChange = async (
       event: React.ChangeEvent<HTMLInputElement>
@@ -108,34 +113,71 @@ const {
       }
     };
 
-    const SaveDriverIndividual = (event: { preventDefault: () => void }) => {
+    const SaveDriverIndividual = async (event: { preventDefault: () => void }) => {
       event.preventDefault();
-      postSaveDriverData(newDriver).then((response) => {
-        response?.success && handleSubmit && handleSubmit(response.value);
-        response &&  toastify({
-            message: response.message,
-            type: response.success ? "success" : "error",
-          });
-      });
+      setLoader(true);
+      await  postSaveDriverData(newDriver).then(
+        (response) => {
+
+        if (response) {
+          toastify({ message: response.message, type: (response.success ? "success" : "error") });
+          if (response.success) {
+              if (handleSubmit) {
+                  setTimeout(function () {
+                      setLoader(false);
+                      handleSubmit(response.value);
+                  }, 2000);                        
+              }
+              else {
+                  setNewDriver({ ...newDriver, driver_id: response.value });
+                  getIdividualDriver(response?.value);
+                  postPayRates(driverPayRates, response.value).then((response1) => {
+                    if(response1){
+                      
+                      if(response1.success){
+
+                        getDriverPayRateList(response.value);
+                      }
+                    }
+                  })
+                  setTimeout(function () {
+                      setLoader(false);
+                      navigate(`${routes.createNewDriver}/${response.value}`)
+                  }, 2000);
+              }
+          }
+          else { setLoader(false);}
+      }
+      else { setLoader(false); }
+
+      //   response?.success && handleSubmit && handleSubmit(response.value);
+      //   response &&  toastify({
+      //       message: response.message,
+      //       type: response.success ? "success" : "error",
+      //     });
+      //     if(response?.success  ){
+      //       postPayRates(driverPayRates, newDriver.driver_id);
+      //     }
+          
+      // });
   
-      postPayRates(driverPayRates, newDriver.driver_id);
-      getDriverList();
-      setNewDriver(initialStateDriver);
-      setDriverPayrates(initialStatedriver_pay_rates);
-    };
+      
+      // getIdividualDriver(driver_id);
+      // setDriverPayrates(initialStatedriver_pay_rates);
+    
+      } 
+      )}
 
     const handleCloseForm = () => {
      navigate(-1)
     };
 
     useEffect(() => {
-      
-      getDriverList();
+    
       getDriverTypeList()
       getVendorDetails()
       getDriverStatusList()
       getTrailerList()
-     // getTruck()
       getDriverStatus()
       getStateList()
       
@@ -166,7 +208,8 @@ const {
                   <Col md={4}>
                     <FormGroup>
                       <Label for=" birth">D.O.B</Label>
-                      <Input bsSize="sm"  className="form-control form-control-sm"  type="date" id="birth" value={newDriver.dob.toString()}  onChange={handleInputChange("dob")} />
+                      <ReactDatePicker showYearDropdown showMonthDropdown placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm" onChange={(date)=>{setNewDriver({...newDriver, dob: Convert.ToISODate(date) })}} selected={Convert.ToDate(newDriver.dob)} ></ReactDatePicker>
+
                     </FormGroup>
                   </Col>
                 </Row>
@@ -226,11 +269,14 @@ const {
               </Col>
               <Col md={3} className="mt-4">
                 <div className="align-items-center text-center">
+                  
+                 <label htmlFor="fileupload" onClick={()=>handleImageChange} role="button">
                   <div className="user-avatar me-2">
-                    <img width="120" height="120" className="rounded-circle" src={newDriver.driver_images}/>
+                    <img width="120" height="120" className="rounded-circle" src={newDriver.driver_images} />
                   </div>
-                 
-                    <Input type="file" name="file" id="file" accept="image/*" onChange={handleImageChange} />
+                    <Input type="file" name="file" id="file" accept="image/*" itemID="forupload" />
+                    
+                    </label>
                  
                   <Label className="page-subtitle">Upload Photo</Label>
                 </div>
@@ -257,12 +303,10 @@ const {
                       </Input>
                     </FormGroup>
                   </Col>
+                  { newDriver.driver_type_id == 3 && 
                  
-                  <Col md={4}>
-                  { driverTypeList && driverTypeList.map((driver) => (
-
-                        driver.driver_type_name === "Vendor/Driver" && (
-                          
+                 <Col md={4}>
+    
                           <FormGroup>
                       <Label for="vendor">Vendor</Label>
                       <Input bsSize="sm" className="form-control form-control-sm" type="select" id="vendor" value={newDriver.vendor_id}   onChange={handleInputChange("vendor_id")} >
@@ -276,16 +320,19 @@ const {
                         }
                       </Input>
                     </FormGroup>
-                        )
-                     
-                      ))}
-                    
                   </Col>
+
+                      }
+                    
                   <Col md={4}>
-                    <FormGroup check>
-                      <Label for="ifta">IFTA Handled by Company </Label>
-                      <Input  bsSize="sm" className="form-control form-control-sm" type="checkbox"  checked = {newDriver.is_IFTA_handled_by_company} onChange={handleCheckboxChange} />
-                    </FormGroup>
+                  <Label for="ifta">IFTA Handled by Company </Label>
+                  <FormGroup switch>
+                     <Input type="switch"
+                    checked={newDriver.is_IFTA_handled_by_company}
+                    onChange={handleCheckboxChange}
+                  />
+                </FormGroup>
+                  
                   </Col>
                 </Row>
                 <Row>
@@ -307,13 +354,13 @@ const {
                   <Col md={4}>
                     <FormGroup>
                       <Label for="application">Application Date</Label>
-                      <Input bsSize="sm" className="form-control form-control-sm" type="date" id="application" />
+                      <ReactDatePicker showYearDropdown showMonthDropdown placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm" onChange={(date)=>{setNewDriver({...newDriver, application_date: Convert.ToISODate(date) })}} selected={Convert.ToDate(newDriver.application_date)} />
                     </FormGroup>
                   </Col>
                   <Col md={4}>
                     <FormGroup>
                       <Label for="date">Hire Date</Label>
-                      <Input  bsSize="sm"  className="form-control form-control-sm"  type="date" id="date"  />
+                      <ReactDatePicker showYearDropdown showMonthDropdown placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm" onChange={(date)=>{setNewDriver({...newDriver, hire_date: Convert.ToISODate(date) })}} selected={Convert.ToDate(newDriver.hire_date)} />
                     </FormGroup>
                   </Col>
                 </Row>
@@ -348,13 +395,13 @@ const {
                       </Input>
                     </FormGroup>
                   </Col>
-                  <Col md={4}>
+                  {/* <Col md={4}>
                     <FormGroup>
                       <Label for="fuelcard">Fuel Card #</Label>
                       <Input bsSize="sm" className="form-control form-control-sm" type="select"  id="fuelcard"  >  
                       </Input>
                     </FormGroup>
-                  </Col>
+                  </Col> */}
                 </Row>
               </Col>
 
@@ -433,7 +480,7 @@ const {
                   <Col md={4}>
                     <FormGroup>
                       <Label for="period">Period </Label>
-                      <Input bsSize="sm" className="form-control form-control-sm" type="select" id="period" value={driverPayRates.period} onChange={handleInputDriverPayRates("period")} />
+                      <Input bsSize="sm" className="form-control form-control-sm" type="text" id="period" value={driverPayRates.period} onChange={handleInputDriverPayRates("period")} />
                     </FormGroup>
                   </Col>
                   <Col md={4}>
@@ -447,7 +494,9 @@ const {
                 <Row>
                   <Col md={4}>
                     <FormGroup>
-                      <Label for="startingon"> Starting On </Label> <Input bsSize="sm" className="form-control form-control-sm" type="date" id="startingon" value={driverPayRates.starting_on} onChange={handleInputDriverPayRates("starting_on")} />
+                      <Label for="startingon"> Starting On </Label> 
+                      <ReactDatePicker showYearDropdown showMonthDropdown placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm" onChange={(date)=>{setDriverPayrates({...driverPayRates, starting_on: Convert.ToISODate(date) })}} selected={Convert.ToDate(driverPayRates.starting_on)} ></ReactDatePicker>
+
                     </FormGroup>
                   </Col>
                   <Col md={4}>
@@ -500,4 +549,4 @@ const {
   )
 };
 
-export default DriversDetails;
+export default DriversDetails

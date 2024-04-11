@@ -8,7 +8,7 @@ import { IBillingStatusObject, IBillingTypeObject } from "../tms-objects/billing
 import { ICustomerStatusObject } from "../tms-objects/customer.types";
 import { ILoadStatusObject } from "../tms-objects/load.type";
 import { ISideMenuObject } from "../tms-objects/side-menu.types";
-import { IDocumentStatusObject, IFactorObject, IOwnershipTypeObject, ITrailerTypeObject, IPaymentCategoryObject, IProductCodeObject, IScheduleFrequencyObject } from "../tms-objects/list.types";
+import { IDocumentStatusObject, IFactorObject, IOwnershipTypeObject, ITrailerTypeObject, IPaymentCategoryObject, IProductCodeObject, IScheduleFrequencyObject, IScheduleTypeObject, IScheduleRepeatObject, IELDProviderObject, IDriverListObject } from "../tms-objects/list.types";
 
 export interface IListData {
     menuList:ISideMenuObject[]|null;
@@ -27,6 +27,10 @@ export interface IListData {
     paymentCategoryList:IPaymentCategoryObject[]|null;
     productCodeList:IProductCodeObject[]|null;
     scheduleFrequencyList:IScheduleFrequencyObject[]|null;
+    scheduleTypeList:IScheduleTypeObject[]|null;
+    scheduleRepeatList:IScheduleRepeatObject[]|null;
+    eldProviderList:IELDProviderObject[]|null;
+    driverList:IDriverListObject[]|null;
     listLoading : boolean;
     is_error : boolean;
 }
@@ -48,6 +52,10 @@ const listInitialData : IListData = {
     paymentCategoryList:null,
     productCodeList:null,
     scheduleFrequencyList:null,
+    scheduleTypeList:null,
+    scheduleRepeatList:null,
+    eldProviderList:null,
+    driverList:null,
     listLoading : false,
     is_error : false,
 }

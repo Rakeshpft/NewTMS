@@ -3,6 +3,7 @@
 
 :root {
     --bs-primary: #9c2422!important; //#d5554d !important;
+    --bs-primary-contrast:#fff!important;
     --bs-primary-border: #9c2411 !important;
     --bs-primary-hover: #b52a3a !important;
     --bs-primary-disable: #9c2433 !important;
@@ -15,7 +16,7 @@
     --bs-body-font-family:"Manrope", sans-serif!important;
     --bs-shadow: rgb(0,0,0,0.5)!important;
     --bs-border-radius:0!important;
-    --bs-border-color:#babbbc!important;
+    --bs-border-color:#babbbc!important;    
   }
   .form-control,.form-select,.btn{
     border-radius: var(--bs-border-radius);
@@ -83,7 +84,10 @@
   background-color: #fff;
   box-shadow: 0 0 5px var(--bs-shadow);
   min-height: calc(100vh - 100px);
-  overflow: visible;
+  overflow: clip;
+}
+.overflow-visible{
+  overflow: visible !important;
 }
 .sidebar-container{
   width: 215px;
@@ -104,7 +108,9 @@
     box-shadow: 0 0 10px var(--bs-shadow);
   }
 }
-
+.sidebar ul.submenu :has(.nav-link.active){
+  display: block!important;
+}
 .sidebar ul.submenu{
   margin-left: 0.4rem;
 }
@@ -262,3 +268,4 @@
 @import './login';
 @import './table';
 @import './tab';
+@import './datepicker';

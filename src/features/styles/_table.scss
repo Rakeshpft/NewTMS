@@ -1,6 +1,10 @@
 table p{
     margin: 0!important;
 }
+table td span{
+    padding: 0!important;
+}
+
 .MuiTablePagination-selectLabel,.MuiTablePagination-input{
     display: none!important;;
 }

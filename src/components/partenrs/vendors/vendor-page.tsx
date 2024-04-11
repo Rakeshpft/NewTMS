@@ -48,6 +48,7 @@ const VendorPage = () => {
   const handleDeleteVendor = () => {
     selectedVendors && deleteVendor(selectedVendors);
     setDeleteModalOpen(false)
+    setSelectedVendors([]);
   };
 
   useEffect(() => {

@@ -23,7 +23,7 @@ useEffect(() => {
 
 useEffect(()=>{
   menuList && setSideBarItems(menuList);
-},[,menuList])
+},[menuList])
 
 const renderSubmenu = (submenuItems:any) => {
     return submenuItems.map((item:any) => (
@@ -34,7 +34,7 @@ const renderSubmenu = (submenuItems:any) => {
         {item.hasSubmenu ? (
           <>
             <Link
-              to="#"
+              to="javascript:void(0)"
               className={`nav-link ${item.label.toLowerCase()} ${
                 activeSubMenuId === item.id ? "active" : ""
               }`}
@@ -52,7 +52,7 @@ const renderSubmenu = (submenuItems:any) => {
           </>
         ) : (
           <Link
-            to={item.link || ""}
+            to={item.link || "javascript:void(0)"}
             className={`nav-link ${
               activeSubMenuId==item.id ? "active" : ""
             }`}
@@ -73,7 +73,7 @@ const renderSubmenu = (submenuItems:any) => {
           {item.hasSubmenu ? (
             <>              
               <Link
-                to="#" id={`link-${item.id}`}
+                to="javascript:void(0)" id={`link-${item.id}`}
                 className={`nav-link ${item.label.toLowerCase()} ${
                   activeMenuId === item.id ? "active" : ""
                 }`}
@@ -90,7 +90,7 @@ const renderSubmenu = (submenuItems:any) => {
               </ul>
             </>
           ) : (
-            <Link to={item.link || ""} id={`link-${item.id}`} 
+            <Link to={item.link || "javascript:void(0)"} id={`link-${item.id}`} 
             className={`nav-link ${
               activeMenuId === item.id ? "active" : ""
             }`}>
@@ -102,8 +102,8 @@ const renderSubmenu = (submenuItems:any) => {
   };
 
   const toggleMenu = (id: any) => {
-    setActiveMenuId((prevId) => (prevId === id ? null : id));   
-    let sidebars = sideBarItems.map((item:ISideMenuObject)=> (item.id==id ? {...item, isOpen:!item.isOpen}: item));
+    setActiveMenuId((prevId) => (prevId === id ? null : id));
+    let sidebars = sideBarItems.map((item:ISideMenuObject)=> (item.id==id ? {...item, isOpen:(item.hasSubmenu?!item.isOpen:item.isOpen), active:true}: item));
     setSideBarItems(sidebars);
   };  
   const toggleSubMenu = (id: any) => {

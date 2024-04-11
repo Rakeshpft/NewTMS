@@ -170,9 +170,9 @@ const App = () => {
                     path={routes.createNewFuelTransaction}
                     element={<CreateNewFuelTransactionPage />}
                   />
-                  <Route path={routes.trucks} element={<TrucksPage />} />
+                  <Route path={routes.trucksAll} element={<TrucksPage />} />
                   <Route
-                    path={routes.createNewTruck}
+                    path={`${routes.createNewTruck}/:id?`}
                     element={<CreateNewTruckPage />}
                   />
                   <Route path={routes.trailers} element={<TrailersPage />} />
