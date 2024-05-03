@@ -152,6 +152,8 @@ const postDriverImage  = async ( file : File , driver_id : number ) => {
     draft.driverLoading = true;
   });
 
+ 
+
   const formData = new FormData();
   file && formData.append('file', file);
 
@@ -489,7 +491,7 @@ const driverDelete = async ( driver_id : number[]) => {
     draft.driverLoading = true;
   });
   try {
-    const driverDeleteData : IAPIResponse = await API.del( `${API_DRIVER.getDriver}/${driver_id}${API_DRIVER.deleteDriver}` );
+    const driverDeleteData : IAPIResponse = await API.del( `${API_DRIVER.deleteDriver}` , driver_id );
     return driverDeleteData ;
   } catch (error: any) {
     console.log(error);
@@ -587,6 +589,7 @@ const deleteDriverSsn = async ( driver_id : number , ssn_id : number[] ) => {
     });
   }
 }
+
 const deleteDriverEmpVerify = async ( driver_id : number , verification_id : number[] ) => {
   setState((draft) => {
     draft.driverLoading = true;
@@ -616,6 +619,7 @@ const deleteDriverOther = async ( driver_id : number , other_id : number[] ) => 
     });
   }
 }
+
 const deleteDriverSchedule = async ( driver_id : number , schedule_id : number[] ) => {
   setState((draft) => {
     draft.driverLoading = true;
@@ -629,7 +633,7 @@ const deleteDriverSchedule = async ( driver_id : number , schedule_id : number[]
       draft.driverLoading = false;
     });
   }
-}
+} 
 
   return {
     ...state,

@@ -21,6 +21,9 @@
   .form-control,.form-select,.btn{
     border-radius: var(--bs-border-radius);
   }
+  .form-check-input{
+    margin-right: 5px;
+  }
   .form-check-input:checked{
     background-color: var(--bs-primary);
     border-color: var(--bs-primary);
@@ -107,9 +110,6 @@
     overflow-y: auto;
     box-shadow: 0 0 10px var(--bs-shadow);
   }
-}
-.sidebar ul.submenu :has(.nav-link.active){
-  display: block!important;
 }
 .sidebar ul.submenu{
   margin-left: 0.4rem;
@@ -265,6 +265,7 @@
   background: #fff;
   z-index: 10;
 }
+
 @import './login';
 @import './table';
 @import './tab';

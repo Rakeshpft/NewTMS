@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { Nav, NavItem, NavLink } from "reactstrap";
 import DocumentApplication from "./document-application";
 import DocumentCdl from "./document-cdl";
@@ -20,7 +19,7 @@ const DocumentsDetails = (prop: TDriverProps) => {
       <Nav tabs>
         <NavItem>
           <NavLink className={driverDocActive == 1 ? "active" : ""} onClick={() => setDriverDocActive(1)}>
-            APPLICATION
+            Application
           </NavLink>
         </NavItem>
         <NavItem>
@@ -62,14 +61,14 @@ const DocumentsDetails = (prop: TDriverProps) => {
 
       {
         {
-          "1": <DocumentApplication driver_id={driver_id} />,
-          "2": <DocumentCdl driver_id={driver_id} />,
-          "3": <DocumentMedical driver_id={driver_id} />,
-          "4": <DocumentDrugTest driver_id={driver_id} />,
-          "5": <DocumentSsn driver_id={driver_id} />,
-          "6": <DocumentMvr driver_id={driver_id} />,
-          "7": <DocumentEmpVerify driver_id={driver_id} />,
-          "8": <DocumentOther driver_id={driver_id} />,
+          1: <DocumentApplication driver_id={driver_id} />,
+          2: <DocumentCdl driver_id={driver_id} />,
+          3: <DocumentMedical driver_id={driver_id} />,
+          4: <DocumentDrugTest driver_id={driver_id} />,
+          5: <DocumentMvr driver_id={driver_id} />,
+          6: <DocumentSsn driver_id={driver_id} />,
+          7: <DocumentEmpVerify driver_id={driver_id} />,
+          8: <DocumentOther driver_id={driver_id} />,
         }[driverDocActive]
       }
     </>

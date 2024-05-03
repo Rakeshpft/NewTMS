@@ -23,7 +23,7 @@ const TruckDocumentForm = (prop: ITruckProps) => {
       tabTitles={[
         "Annual Inspection",
         "Registration", 
-        "Repair & Maintance",
+        "Repair & Maintenance",
         "Other"
       ]}
     >

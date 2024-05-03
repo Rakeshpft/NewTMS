@@ -18,7 +18,7 @@ export const useRegContext = () => {
     const { state, setState } = useContext(RegContext);
     const { getBillingStatusList, getBillingTypeList, getCustomerStatusList, getDriverStatusList, getDriverTypeList, getLoadStatusList,
        getStateList, getCreditList, getOwnershipTypeList, getDocumentStatusList, getFactorList , getPaymentCategoryList, getProductCodeList,
-        getScheduleFrequencyList, getScheduleTypeList, getScheduleRepeatList, getELDProviderList, getDriverList } = useListContext();
+        getScheduleFrequencyList, getScheduleTypeList, getScheduleRepeatList, getELDProviderList,getPayRateTypeList } = useListContext();
     if (setState === undefined) {
       throw new Error("Must have setState defined");
     }
@@ -76,7 +76,7 @@ export const useRegContext = () => {
       getScheduleTypeList(true);
       getScheduleRepeatList(true);
       getELDProviderList(true);
-      getDriverList(true);
+      getPayRateTypeList(true);
     }    
   }
 

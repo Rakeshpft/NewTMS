@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { IDriverCdl, TDriverProps, initialDriverCdl } from '../../../../services/tms-objects/driver.types'
-import moment from 'moment';
-import { HiOutlinePencilAlt } from 'react-icons/hi';
+import { HiOutlineDocumentDownload, HiOutlinePencilAlt } from 'react-icons/hi';
 import { Button, Col, Container, Form, FormGroup, Input, Label, Modal, ModalBody, ModalHeader, Row } from 'reactstrap';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { CustomTable } from '../../../../features/data-table/CustomTable';
@@ -11,7 +10,7 @@ import { toastify } from '../../../../features/notification/toastify';
 import { useListContext } from '../../../../services/reducer/list.reducer';
 import { isEmpty } from 'lodash';
 import ReactDatePicker from 'react-datepicker';
-import { Dictionary, Convert } from '../../../../features/validation/general-helper';
+import { Convert, Dictionary, Helper } from '../../../../features/shared/helper';
 
 const DocumentCdl = ( prop : TDriverProps) => {
 
@@ -25,6 +24,7 @@ const DocumentCdl = ( prop : TDriverProps) => {
   const [driverCdlList, setDriverCdlList] = useState<IDriverCdl[]>([]);
   const [selectedDriver, setSelectedDriver] = useState<IDriverCdl[] | []>([]);
 const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
 
   const handleEditCdl = (id:number) => {
     const filteredData = driverCdlList?.filter(l=>l.cdl_id == id)
@@ -76,6 +76,7 @@ const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const handleSaveDriverCdl = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
+        
     if(driverCdl.file || driverCdl.cdl_id > 0){
       await postDriverCdl( driver_id, driverCdl).then((data : any ) => {
         data?.value && data && toastify({ message: data.message, type: data.success ? "success" : "error", });
@@ -107,78 +108,66 @@ const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     }
     getStateList();
    
-  }, [])
-
-  
+  }, [])  
 
 
   const columns: CustomTableColumn[] = [
-
     {
       id: 'status_id',
-      name: 'Number',
-      style: { width: '10%' },
+      name: 'NUMBER',
+      style: { width: '20%' },
       sortable: true,
-      selector: (row: IDriverCdl) => row.cdl_number,
-     
+      selector: (row: IDriverCdl) => row.cdl_number,     
     },
     {
       id: 'state',
-      name: 'State',
-      style: { width: '10%' },
+      name: 'STATE',
+      style: { width: '20%' },
       sortable: true,
       selector: (row: IDriverCdl) => row.state_name,
-     
-
     },
     {
       id: 'issue_date',
-      name: 'Issue Date',
-      style: { width: '10%' },
+      name: 'ISSUE DATE',
+      style: { width: '20%' },
       sortable: true,
       selector: (row: IDriverCdl) => row.issue_date,
-      format: (row: IDriverCdl) =>  moment(row.issue_date).format('L')
+      format: (row: IDriverCdl) =>  Convert.ToUserDate(row.issue_date)
     },
     {
       id: 'exp_date',
-      name: 'Exp Date',
-      style: { width: '10%' },
+      name: 'EXP DATE',
+      style: { width: '20%' },
       sortable: true,
       selector: (row: IDriverCdl) => row.exp_date,
-      format: (row: IDriverCdl) =>  moment(row.exp_date).format('L')
-    },
-    
-    {
-      id: 'attachment',
-      name: 'Attachment',
-      style: { width: '10%' },
-      sortable: true,
-      selector: (row: IDriverCdl) => row.attachment,
-      cell:(row:IDriverCdl)=><a href={row.attachment_url} target='_blank' download={true}>{row.attachment}</a>
-
+      format: (row: IDriverCdl) =>  Convert.ToUserDate(row.exp_date)
     },
     {
       id : "action",
-      name : "Action",
-      style : {width : "10%"},
-      sortable : true,
+      name : "",
+      style : {width : "15%"},
+      sortable : false,
+      align:'center',
       selector : (row : IDriverCdl) => row.cdl_id,
-      cell: (row: IDriverCdl) => <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={()=>{ handleEditCdl(row.cdl_id) }} />
-
+      cell: (row: IDriverCdl) => 
+      <>
+        <HiOutlineDocumentDownload className='me-2' size={22} style={{ cursor: "pointer" }} onClick={()=>{Helper.FileDownload(row.attachment_url)}} />
+        <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={()=>{ handleEditCdl(row.cdl_id) }} />
+      </>
     }
    ]
 
   return (
    <>
     <div className="d-flex justify-content-end m-3">
-        <Col md={3} className=" d-flex justify-content-end align-items-end pb-3" column-gap="3">
+        <Col md={3} className=" d-flex justify-content-end align-items-end pb-3 column-gap-3" >
         {!isEmpty(selectedDriver) && (
                   <div className="user-info-btn">
 
                     <Button color="primary" onClick={() => setDeleteModalOpen(true)}>Delete</Button>
                   </div>
                 )}
-          <label className="page-subtitle">
+          <label className="page-subtitle mb-0" >
             <Button color="success"  outline={true}  onClick={() => setUploadModalOpen(true)}><AiOutlinePlus />Add</Button>
           </label>
         </Col>
@@ -189,7 +178,7 @@ const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
       <ModalHeader close={closeBtn}
                  onClose={() => UploadModalClose()}>
-          <h6 className="mb-0 fw-bold">Edit CDL </h6>
+          <h6 className="mb-0 fw-bold">{ driverCdl.cdl_id > 0 ? "Edit CDL" : "Add CDL"}</h6>
         </ModalHeader>
       <ModalBody className="square border border-info-rounded">
       <Form onSubmit={handleSaveDriverCdl} >
@@ -197,21 +186,20 @@ const [deleteModalOpen, setDeleteModalOpen] = useState(false);
       <Row>
         <Col md={6}>
         <FormGroup>
-        <Label for="number">NUMBER</Label>
-       <Input bsSize="sm" className="form-control form-control-sm" type="text" id="number" name="number" value={driverCdl.cdl_number} onChange={handleDriverInput('cdl_number')} />
+        <Label for="number">Number</Label>
+       <Input bsSize="sm" className="form-control form-control-sm" type="text" id="number" name="number" value={driverCdl.cdl_number} onChange={handleDriverInput('cdl_number')} required />
         </FormGroup> 
         </Col>
         <Col md={6}>
         <FormGroup>
-          <Label for="state">STATE</Label>
-          <Input bsSize="sm" className="form-control form-control-sm" type="select" id="state" name="state"  value={driverCdl.state_id} onChange={handleDriverInput('state_id')}>
+          <Label for="state">State</Label>
+          <Input bsSize="sm" className="form-control form-control-sm" type="select" id="state" name="state"  value={driverCdl.state_id} onChange={handleDriverInput('state_id')} required>
             <option value="">Select State</option>
             {stateList?.map((state) => (
               <option key={state.state_id} value={state.state_id}>
                 {state.state_name}
               </option>
-            ))}
-            
+            ))}            
             </Input>
           </FormGroup>
         </Col>
@@ -219,22 +207,22 @@ const [deleteModalOpen, setDeleteModalOpen] = useState(false);
        <Row>
         <Col md={6}>
         <FormGroup>
-        <Label for="issue_date">ISSUE DATE</Label>
-        <ReactDatePicker showYearDropdown showMonthDropdown placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm" onChange={(date)=>{setDriverCdl({...driverCdl, issue_date: Convert.ToISODate(date) })}} selected={Convert.ToDate(driverCdl.issue_date)} ></ReactDatePicker>
+        <Label for="issue_date">Issue Date </Label>
+        <ReactDatePicker  showYearDropdown showMonthDropdown showIcon fixedHeight isClearable onKeyDown={(event)=>{event.preventDefault()}} placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm" onChange={(date)=>{setDriverCdl({...driverCdl, issue_date: Convert.ToISODate(date) })}} selected={Convert.ToDate(driverCdl.issue_date)} required />
         
         </FormGroup> 
         </Col>
         <Col md={6}>
         <FormGroup>
-        <Label for="exp_date">EXP DATE</Label>
-        <ReactDatePicker showYearDropdown showMonthDropdown placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm" onChange={(date)=>{setDriverCdl({...driverCdl, exp_date: Convert.ToISODate(date) })}} selected={Convert.ToDate(driverCdl.exp_date)} ></ReactDatePicker>
+        <Label for="exp_date">Exp Date </Label>
+        <ReactDatePicker  showYearDropdown showMonthDropdown showIcon fixedHeight isClearable onKeyDown={(event)=>{event.preventDefault()}} placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm" onChange={(date)=>{setDriverCdl({...driverCdl, exp_date: Convert.ToISODate(date) })}} selected={Convert.ToDate(driverCdl.exp_date)} required />
         </FormGroup>
         </Col>
        </Row>
        <Row>
        <FormGroup>
-       <Label>ATTACHMENTS</Label>
-       <Input type="file" name="file" id="file" onChange={handleFileUpload}  /> 
+       <Label>Attachments </Label>
+       <Input type="file" name="file" id="file" onChange={handleFileUpload} required  /> 
            </FormGroup>
        </Row>
        <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">
@@ -242,8 +230,8 @@ const [deleteModalOpen, setDeleteModalOpen] = useState(false);
             </FormGroup>
        </Form>
        </ModalBody>
-
       </Modal>
+
       <Modal isOpen={deleteModalOpen} onClose={closeDeleteModal}>
               <ModalHeader>
                 <h6 className="mb-0 fw-bold"> Delete </h6>
@@ -251,11 +239,10 @@ const [deleteModalOpen, setDeleteModalOpen] = useState(false);
               <ModalBody>
                 <Container>
                   {!isEmpty(selectedDriver) && (
-                    <div className=" my-3 ">
-                      {selectedDriver.length > 1
-                        ? `Are you sure you want to delete ${selectedDriver.length} customers?`
-                        : `Are you sure you want to delete customer "${selectedDriver[0].cdl_id} "?`}
-                    </div>
+                     <div className=" dle my-3 ">                      
+                     {selectedDriver.length > 1?(<div>You have selected {selectedDriver.length} CDL.<br /></div>):null}
+                       Are you sure you want to delete?
+                   </div>
                   )}
                   <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">
                     <Button

@@ -6,12 +6,24 @@ import lscache from "lscache";
 export let apiURL = "http://tms-api.eduxus.com/api";//"http://localhost:53207/api";// 
 let environment = "Prod";
 export const platformId = 1;
-export const getAPIConfig = () => {
+export const getAPIConfig = (payload?:any) => {  
   const config = {
     headers: {
       Authorization: "Bearer " + lscache.get("auth")?.data.access_token,
+      "Content-Type": "application/json",
     },
-  };
+    data: payload
+  };  
+  return config;
+};
+export const apiConfig = (payload?:any) => {  
+  const config = {
+    headers: {
+      Authorization: "Bearer " + lscache.get("auth")?.data.access_token,
+      "Content-Type": "application/json",
+    },
+    params: payload
+  };  
   return config;
 };
 
@@ -44,10 +56,20 @@ export const API_PROFILE = {
 
 export const API_LOAD = {
   // House Create Load API endpoints here
+  getLoad: "/load",
   loadStatus: "/LoadStatus",
   billingStatusList: "/BillingStatus",
   dispatcherLoadList: "/LoadDispatchers",
   stateLoadList: "/State",
+  getLoadNotes : "/notes" ,
+  deleteLoadNotes : "/notes/delete",
+  loadServices:"/services",
+  postServicesLumper : "/lumper",
+  postServicesDetention : "/detention",
+  postServicesNewCharges : "/new-charge",
+  getLoadDocumentsList : "/documents",
+  postLoadServicesDriverPayable : "/driver-payable",
+  
 };
 
 export const API_CUSTOMER = {
@@ -89,7 +111,7 @@ export const API_DRIVER = {
   getDriverEmpVerify :"/employee-verification",
   getDriverOther : "/other-documents",
   getDriverSchedulePayee : "/schedule",
-  deleteDriver: "/delete",
+  deleteDriver: "/driver/delete",
   deleteApplication: "/application/delete",
   deleteCdl: "/cdl/delete",
   deleteMedical: "/medical-card/delete",
@@ -100,6 +122,13 @@ export const API_DRIVER = {
   deleteOther: "/other-documents/delete",
   deleteSchedule: "/schedule/delete",
 };
+
+export const API_DRIVER_PAYROLL = {
+  getPendingDriverPayroll: "/driver-payroll",
+  getSettledDriverPayroll: "/driver-payroll",
+  postSettlementDriverPayroll: "/driver-payroll/settlement",
+  postPaymentDriverPayroll: "/driver-payroll",
+}
 
 export const API_TRUCK = {
   // House Truck API endpoints here
@@ -202,9 +231,31 @@ export const API_LIST = {
   getScheduleType:'/list/schedule-types',
   getScheduleRepeat:'/list/schedule-repeats',
   getELDProvider:'/list/eld-providers',
+  getPayRateType:'/list/pay-rate-types',
   getDrivers:'/list/drivers',
+  getVendors:'/list/vendors',
+  getTrucks:'/list/trucks',
+  getTrailers:'/list/trailers',
+  getDispatchers:'/list/dispatchers',
+  getFuelCards:'/list/fuel-cards',
+  getPaymentMethods:'/list/payment-methods',
+  getLoadStops:'/list/load-stops'
 }
 
 export const API_FUEL_CARD = {
-  getFuelCard:'/fuelcard' 
+  getFuelCard:'/fuelcard',
+  getFuelCardAssign:'/assignee',
+  getFuelCardCurrentAssign:'/current-assignee',  
+  postNewFuelCard: "/fuelcard",
+  deleteFuelCard: "/fuelcard/delete",
+  postNewAssignFuelCard: "/assign-card",
+  postNewReturnAssignFuelCard: "/return-card",
+  postNewCancelAssignFuelCard: "/cancel-card",
+  
+}
+
+export const API_FUEL_TRANSACTION = {
+  getFuelTransaction:'/fuel-transaction',
+  postNewFuelTransaction: "/fuel-transaction",
+  deleteFuelTransaction: "/fuel-transaction/delete",
 }

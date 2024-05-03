@@ -16,10 +16,11 @@ export interface  ITruckObject {
     is_active: boolean;
     eld_provider_id: number;
     eld_provider_name: string;
-    eld_id: number;
+    eld_id: string;
     ownership_type_id: number;
     ownership_type_name: string;
     purchase_date: string;
+    registration_date: string;
     purchase_price: number;
     lease_date: string;
     lease_lessor_name: string;
@@ -31,7 +32,7 @@ export interface  ITruckObject {
     lease_state_id: number;
     lease_state_name: string;
     lease_zipcode: string;
-    warning:string;
+    warning:boolean;
     lease_phone: string;
     company_id: number;
   }
@@ -54,10 +55,11 @@ export const initialStateTruck : ITruckObject = {
   is_active: true,
   eld_provider_id: 0,
   eld_provider_name: "",
-  eld_id: 0,
+  eld_id: "",
   ownership_type_id: 0,
   ownership_type_name: "",
   purchase_date: "",
+  registration_date: "",
   purchase_price: 0,
   lease_date: '',
   lease_lessor_name: '',
@@ -69,7 +71,7 @@ export const initialStateTruck : ITruckObject = {
   lease_state_id: 0,
   lease_state_name: "",
   lease_zipcode: "",
-  warning: "",
+  warning: false,
   lease_phone: "",
   company_id: 0,
 };

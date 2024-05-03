@@ -70,7 +70,7 @@ export const initialStateCustomer: ICustomerDetails = {
   suite_number: "",
   street: "",
   city: "",
-  state_id: 0,
+  state_id: 1,
   state_name:"",
   zipcode: "",
   address: "",
@@ -82,9 +82,9 @@ export const initialStateCustomer: ICustomerDetails = {
   billing_type_name:"",
   factor_id: 0,
   quick_pay_fee: 0,
-  status_id: 0,
+  status_id: 1,
   status_name: "",
-  credit_id: 0,
+  credit_id: 1,
   credit_name:"",
   pay_terms: 0,
   avg_days_to_pay: 0,
@@ -168,64 +168,7 @@ export type TCustomerProps = {
   handleSubmit?:(obj :ICustomerDetails)=>void;
 }
 
-export interface ICustomerManagementProps {
 
-
-  selectedCustomer: INewCustomerDetails | null;
-
-  customerNewDetails: ICustomerDetails;
-  setCustomerDetails: React.Dispatch<React.SetStateAction<ICustomerDetails>>;
-  handleInputChange: (prop: keyof ICustomerDetails) => (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSaveCustomer: (event: { preventDefault: () => void }) => void;
-  title: boolean;
-  setcustomerNewDetails: React.Dispatch<React.SetStateAction<ICustomerDetails>>;
- 
-  
- 
- 
-
-  handleClose: (event: { preventDefault: () => void }) => void;
-
-
-
-  handleCheckBoxBroker: () => void;
-  handleCheckBoxShipper: () => void;
-  handleDirectBillingRadio: () => void;
-  handleFactoringRadio: () => void
-}
-
-
-
-// export interface  ICustomerManagementPropsDocuments {
-
- 
-
-
-
-
-//   handleFileUpload: (event: { preventDefault: () => void }) => void;
-
-// }
-
-// export interface  ICustomerManagementPropsContacts {
-
-//   handleSaveContact: (event: { preventDefault: () => void }) => void;
-
-// }
-
-export interface ICustomerContactsProps {
-    modalOpen: boolean;
-    closeModal: () => void;
-    selectedContact : INewCustomerContacts | null;
-    contactNewDetails : ICustomerContacts;
-    setContactDetails :React.Dispatch<React.SetStateAction<ICustomerContacts>>
-    setcontactNewDetails :React.Dispatch<React.SetStateAction<ICustomerContacts>>
-    handleSaveContact: (event: { preventDefault: () => void }) => void;
-    handleInputContactChange: (prop: keyof ICustomerContacts) => (event: React.ChangeEvent<HTMLInputElement>) => void;
-    title: Boolean;
-    handleDirectCheckBox:() => void;
-    handleDirectBillingCheckBox:() => void;
-}
 
 
  
@@ -267,4 +210,9 @@ export const CustomerDocumentInitialState : ICustomerDocument = {
   file : new File([], ""),
  
  
+}
+
+export interface ICustomerFilter  {
+ is_broker: boolean;
+ is_shipper_receiver: boolean;
 }

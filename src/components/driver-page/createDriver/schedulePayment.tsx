@@ -4,7 +4,6 @@ import {
   TDriverProps,
   initialDriverSchedule,
 } from "../../../services/tms-objects/driver.types";
-import moment from "moment";
 import { HiOutlinePencilAlt } from "react-icons/hi";
 import {
   Button,
@@ -27,7 +26,7 @@ import { useListContext } from "../../../services/reducer/list.reducer";
 import { toastify } from "../../../features/notification/toastify";
 import { isEmpty } from "lodash";
 import ReactDatePicker from "react-datepicker";
-import { Dictionary, Convert } from "../../../features/validation/general-helper";
+import { Dictionary, Convert } from "../../../features/shared/helper";
 // import SchedulePayemntModal from './schedulePayemntModal'
 
 const SchedulePayment = (props: TDriverProps) => {
@@ -39,8 +38,8 @@ const SchedulePayment = (props: TDriverProps) => {
     getIndividualSchedulePayee,
     postDriverSchedulePayee,
     deleteDriverSchedule,
-    driverLoading,
   } = useDriverContext();
+  
   const {
     getPaymentCategoryList,
     paymentCategoryList,
@@ -53,14 +52,9 @@ const SchedulePayment = (props: TDriverProps) => {
   } = useListContext();
 
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
-  const [driverSchedulePayee, setDriverSchedulePayee] =
-    useState<IDriverSchedulePayee>(initialDriverSchedule);
-  const [driverSchedulePayeeList, setDriverSchedulePayeeList] = useState<
-    IDriverSchedulePayee[]
-  >([]);
-  const [selectedDriver, setSelectedDriver] = useState<
-    IDriverSchedulePayee[] | []
-  >([]);
+  const [driverSchedulePayee, setDriverSchedulePayee] = useState<IDriverSchedulePayee>(initialDriverSchedule);
+  const [driverSchedulePayeeList, setDriverSchedulePayeeList] = useState<IDriverSchedulePayee[]>([]);
+  const [selectedDriver, setSelectedDriver] = useState<IDriverSchedulePayee[] | []>([]);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const handleCheckBox = () => {
@@ -76,10 +70,17 @@ const SchedulePayment = (props: TDriverProps) => {
   };
 
   useEffect(() => {
-    if (!driverLoading && driverScheduleLists) {
+    if (  driverScheduleLists) {
       setDriverSchedulePayeeList(driverScheduleLists);
     }
-  }, [driverLoading, driverScheduleLists]);
+  }, [driverScheduleLists]);
+
+
+  useEffect( () => {
+    if( scheduleTypeList && scheduleTypeList.length>0 && driverSchedulePayee.schedule_type_id == 0) {
+      setDriverSchedulePayee({...driverSchedulePayee, schedule_type_id:scheduleTypeList[0].schedule_type_id})
+    }
+  } , [scheduleTypeList])
 
   const handleInputSchedulePayeeChange =
     (prop: keyof IDriverSchedulePayee) =>
@@ -94,6 +95,7 @@ const SchedulePayment = (props: TDriverProps) => {
     setDeleteModalOpen(false);
     setSelectedDriver([]);
   };
+  
 
   const handleEditSchedulePayee = (schedule_id: number) => {
     const filteredData = driverScheduleLists?.filter(
@@ -139,7 +141,13 @@ const SchedulePayment = (props: TDriverProps) => {
     event: React.ChangeEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-    await postDriverSchedulePayee(driver_id, driverSchedulePayee).then(
+    
+    let scheduleDetails :IDriverSchedulePayee  =  driverSchedulePayee ;
+
+
+   
+    
+    await postDriverSchedulePayee(driver_id, scheduleDetails).then(
       (response) => {
         response &&
           response.message &&
@@ -149,7 +157,7 @@ const SchedulePayment = (props: TDriverProps) => {
           });
       }
     );
-
+ 
     getDriverSchedule(driver_id);
     setUploadModalOpen(false);
   };
@@ -181,13 +189,12 @@ const SchedulePayment = (props: TDriverProps) => {
       selector: (row: IDriverSchedulePayee) => row.amount,
     },
     {
-      id: "schedule_frequency_name",
+      id: "schedule_frequency_id",
       name: "SCHEDULE",
       style: { width: "10%" },
       sortable: true,
       selector: (row: IDriverSchedulePayee) => row.schedule_frequency_name,
-      format: (row: IDriverSchedulePayee) =>
-        moment(row.schedule_frequency_name).format("L"),
+         
     },
     {
       id: "last_date_of_trans",
@@ -195,8 +202,7 @@ const SchedulePayment = (props: TDriverProps) => {
       style: { width: "10%" },
       sortable: true,
       selector: (row: IDriverSchedulePayee) => row.last_date_of_trans,
-      format: (row: IDriverSchedulePayee) =>
-        moment(row.last_date_of_trans).format("L"),
+      format: (row: IDriverSchedulePayee) =>  Convert.ToUserDate(row.last_date_of_trans)
     },
     {
       id: "last",
@@ -204,8 +210,8 @@ const SchedulePayment = (props: TDriverProps) => {
       style: { width: "10%" },
       sortable: true,
       selector: (row: IDriverSchedulePayee) => row.next_date_of_trans,
-      format: (row: IDriverSchedulePayee) =>
-        moment(row.next_date_of_trans).format("L"),
+      
+      format: (row: IDriverSchedulePayee) =>  Convert.ToUserDate(row.next_date_of_trans )
     },
 
     {
@@ -214,6 +220,7 @@ const SchedulePayment = (props: TDriverProps) => {
       style: { width: "10%" },
       sortable: true,
       selector: (row: IDriverSchedulePayee) => row.is_active,
+      format: (row: IDriverSchedulePayee) => (row.is_active ? "YES" : "NO"),
     },
     {
       id: "notes",
@@ -273,7 +280,7 @@ const SchedulePayment = (props: TDriverProps) => {
       />
       <Modal isOpen={uploadModalOpen} onClose={UploadModalClose} size="lg">
         <ModalHeader close={closeBtn} onClose={() => UploadModalClose()}>
-          <h6 className="mb-0 fw-bold">Edit Schedule/Payee </h6>
+          <h6 className="mb-0 fw-bold">{ driverSchedulePayee.schedule_id > 0 ? "Edit schedule payment/deduction" : "Add schedule payment/deduction"}</h6>
         </ModalHeader>
         <ModalBody className="square border border-info-rounded">
           <Form onSubmit={handleSchedulePayeeSave}>
@@ -281,25 +288,10 @@ const SchedulePayment = (props: TDriverProps) => {
               <Col md={4}>
                 <FormGroup>
                   <Label for="name">Schedule Type </Label>
-                  <Input
-                    bsSize="sm"
-                    className="form-control form-control-sm"
-                    type="select"
-                    id="user"
-                    name="user"
-                    value={driverSchedulePayee.schedule_type_id}
-                    onChange={handleInputSchedulePayeeChange(
-                      "schedule_type_id"
-                    )}
-                  >
-                    {scheduleTypeList &&
-                      scheduleTypeList.map((item) => (
-                        <option
-                          key={item.schedule_type_id}
-                          value={item.schedule_type_id}
-                        >
-                          {item.schedule_type_name}
-                        </option>
+                  <Input bsSize="sm" required  className="form-control form-control-sm" type="select" id="user" name="user" value={driverSchedulePayee.schedule_type_id} onChange={handleInputSchedulePayeeChange( "schedule_type_id" )} >
+                   <option value={0}> Select Schedule Type</option> 
+                    {scheduleTypeList && scheduleTypeList.map((item) => (
+                       <option  key={item.schedule_type_id}  value={item.schedule_type_id} >{item.schedule_type_name} </option>
                       ))}
                   </Input>
                 </FormGroup>
@@ -307,42 +299,17 @@ const SchedulePayment = (props: TDriverProps) => {
               <Col md={4}>
                 <FormGroup>
                   <Label for="name">Category</Label>
-                  <Input
-                    bsSize="sm"
-                    className="form-control form-control-sm"
-                    type="select"
-                    id="user"
-                    name="user"
-                    value={driverSchedulePayee.payment_category_id}
-                    onChange={handleInputSchedulePayeeChange(
-                      "payment_category_id"
-                    )}
-                  >
-                    {paymentCategoryList &&
-                      paymentCategoryList.length > 0 &&
-                      paymentCategoryList.map((item) => (
-                        <option
-                          key={item.payment_category_id}
-                          value={item.payment_category_id}
-                        >
-                          {item.payment_category_name}
-                        </option>
-                      ))}
+                  <Input bsSize="sm" required className="form-control form-control-sm" type="select" id="user" name="user"  value={driverSchedulePayee.payment_category_id} onChange={handleInputSchedulePayeeChange("payment_category_id")} >
+                   <option value={0}> Select Category </option>
+                    {paymentCategoryList && paymentCategoryList.length > 0 && paymentCategoryList.map((item ) => ( 
+                    <option key={item.payment_category_id}   value={item.payment_category_id}> {item.payment_category_name} </option> ))}   
                   </Input>
                 </FormGroup>
               </Col>
               <Col md={4}>
                 <FormGroup>
                   <Label for="amount">Amount</Label>
-                  <Input
-                    bsSize="sm"
-                    className="form-control form-control-sm"
-                    type="text"
-                    id="amount"
-                    name="amount"
-                    value={driverSchedulePayee.amount}
-                    onChange={handleInputSchedulePayeeChange("amount")}
-                  />
+                  <Input bsSize="sm" required className="form-control form-control-sm" type="text" id="amount" name="amount" value={driverSchedulePayee.amount}  onChange={handleInputSchedulePayeeChange("amount")} />
                 </FormGroup>
               </Col>
             </Row>
@@ -350,44 +317,23 @@ const SchedulePayment = (props: TDriverProps) => {
               <Col md={4}>
                 <FormGroup>
                   <Label for="name">Schedule</Label>
-                  <Input
-                    bsSize="sm"
-                    className="form-control form-control-sm"
-                    type="select"
-                    id="user"
-                    name="user"
-                    value={driverSchedulePayee.schedule_frequency_id}
-                    onChange={handleInputSchedulePayeeChange(
-                      "schedule_frequency_id"
-                    )}
-                  >
-                    {scheduleFrequencyList &&
-                      scheduleFrequencyList.length > 0 &&
-                      scheduleFrequencyList.map((item) => (
-                        <option
-                          key={item.schedule_frequency_id}
-                          value={item.schedule_frequency_id}
-                        >
-                          {item.schedule_frequency_name}
-                        </option>
-                      ))}
+                  <Input bsSize="sm" required  className="form-control form-control-sm" type="select" id="user"  name="user"    value={driverSchedulePayee.schedule_frequency_id} onChange={handleInputSchedulePayeeChange( "schedule_frequency_id" )} >
+                    <option value={0}> Select Schedule </option>
+                    {scheduleFrequencyList && scheduleFrequencyList.length > 0 &&  scheduleFrequencyList.map((item) => (  
+                    <option key={item.schedule_frequency_id} value={item.schedule_frequency_id} >{item.schedule_frequency_name} </option>  ))}  
                   </Input>
                 </FormGroup>
               </Col>
               <Col md={4}>
                 <FormGroup>
                   <Label for="schedule">Schedule Date </Label>
-                  <ReactDatePicker showYearDropdown showMonthDropdown placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm" onChange={(date)=>{setDriverSchedulePayee({...driverSchedulePayee, start_date: Convert.ToISODate(date) })}} selected={Convert.ToDate(driverSchedulePayee.start_date)} ></ReactDatePicker>
-
+                  <ReactDatePicker required showYearDropdown showMonthDropdown showIcon fixedHeight isClearable onKeyDown={(event)=>{event.preventDefault()}} placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm" onChange={(date)=>{setDriverSchedulePayee({...driverSchedulePayee, start_date: Convert.ToISODate(date) })}} selected={Convert.ToDate(driverSchedulePayee.start_date)} ></ReactDatePicker>
                 </FormGroup>
               </Col>
               <Col md={4}>
                 <Label for="Active">Active</Label>
                 <FormGroup switch>
-                     <Input type="switch"
-                    checked={driverSchedulePayee.is_active}
-                    onChange={handleCheckBox}
-                  />
+                     <Input type="switch" checked={driverSchedulePayee.is_active} onChange={handleCheckBox} />
                 </FormGroup>
               </Col>
             </Row>
@@ -395,52 +341,27 @@ const SchedulePayment = (props: TDriverProps) => {
               <Col md={4}>
                 <FormGroup>
                   <Label for="name">Repeat</Label>
-                  <Input
-                    bsSize="sm"
-                    className="form-control form-control-sm"
-                    type="select"
-                    id="user"
-                    name="user"
-                    value={driverSchedulePayee.schedule_repeat_id}
-                    onChange={handleInputSchedulePayeeChange(
-                      "schedule_repeat_id"
-                    )}
-                  >
-                    {scheduleRepeatList &&
-                      scheduleRepeatList.length > 0 &&
-                      scheduleRepeatList.map((item) => (
-                        <option
-                          key={item.schedule_repeat_id}
-                          value={item.schedule_repeat_id}
-                        >
-                          {item.schedule_repeat_name}
-                        </option>
+                  <Input bsSize="sm" required  className="form-control form-control-sm"  type="select"  id="user"  name="user" value={driverSchedulePayee.schedule_repeat_id} onChange={handleInputSchedulePayeeChange("schedule_repeat_id")} >
+                    <option value={0}> Select Repeat</option>
+                    {scheduleRepeatList &&  scheduleRepeatList.length > 0 &&  scheduleRepeatList.map((item) => (
+                         <option key={item.schedule_repeat_id} value={item.schedule_repeat_id} > {item.schedule_repeat_name} </option>
                       ))}
                   </Input>
                 </FormGroup>
               </Col>
-              {driverSchedulePayee.schedule_type_id === 1 && (
+              {driverSchedulePayee.schedule_repeat_id == 2 && (
                 <Col md={4}>
                   <FormGroup>
                     <Label for="amount">No of Times</Label>
-                    <Input
-                      bsSize="sm"
-                      className="form-control form-control-sm"
-                      type="text"
-                      id="amount"
-                      name="amount"
-                      value={driverSchedulePayee.amount}
-                      onChange={handleInputSchedulePayeeChange("amount")}
-                    />
+                    <Input bsSize="sm" className="form-control form-control-sm" type="text" id="amount" name="amount" value={driverSchedulePayee.number_of_times} onChange={handleInputSchedulePayeeChange("number_of_times")}/>
                   </FormGroup>
                 </Col>
               )}
-              {driverSchedulePayee.schedule_type_id === 2 && (
+              {driverSchedulePayee.schedule_repeat_id == 3 && (
                 <Col md={4}>
                 <FormGroup>
                   <Label for="schedule">Schedule Date </Label>
-                  <ReactDatePicker showYearDropdown showMonthDropdown placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm" onChange={(date)=>{setDriverSchedulePayee({...driverSchedulePayee, end_date: Convert.ToISODate(date) })}} selected={Convert.ToDate(driverSchedulePayee.end_date)} />
-
+                  <ReactDatePicker  showYearDropdown showMonthDropdown showIcon fixedHeight isClearable onKeyDown={(event)=>{event.preventDefault()}} placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm" onChange={(date)=>{setDriverSchedulePayee({...driverSchedulePayee, end_date: Convert.ToISODate(date) })}} selected={Convert.ToDate(driverSchedulePayee.end_date)} />
                 </FormGroup>
               </Col>
               )}
@@ -448,16 +369,8 @@ const SchedulePayment = (props: TDriverProps) => {
             <Row>
               <Col>
                 <FormGroup>
-                  <Label for="Notes">Notes</Label>
-                  <Input
-                    bsSize="sm"
-                    className="form-control form-control-sm"
-                    type="textarea"
-                    id="notes"
-                    name="notes"
-                    value={driverSchedulePayee.notes}
-                    onChange={handleInputSchedulePayeeChange("notes")}
-                  />
+                  <Label for="notes">Notes</Label>
+                  <Input bsSize="sm" className="form-control form-control-sm" type="textarea" id="notes" name="notes"  value={driverSchedulePayee.notes} onChange={handleInputSchedulePayeeChange("notes")}/>
                 </FormGroup>
               </Col>
             </Row>
@@ -475,16 +388,15 @@ const SchedulePayment = (props: TDriverProps) => {
       </Modal>
       <Modal isOpen={deleteModalOpen} onClose={closeDeleteModal}>
         <ModalHeader>
-          <h6 className="mb-0 fw-bold"> Delete </h6>
+          <h6 className="mb-0 fw-bold">Delete </h6>
         </ModalHeader>
         <ModalBody>
           <Container>
             {!isEmpty(selectedDriver) && (
-              <div className=" my-3 ">
-                {selectedDriver.length > 1
-                  ? `Are you sure you want to delete ${selectedDriver.length} customers?`
-                  : `Are you sure you want to delete customer "${selectedDriver[0].schedule_id} "?`}
-              </div>
+               <div className=" dle my-3 ">                      
+              {selectedDriver.length > 1?(<div>You have selected {selectedDriver.length} schedules.<br /></div>):null}
+                 Are you sure you want to delete?
+             </div>
             )}
             <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">
               <Button

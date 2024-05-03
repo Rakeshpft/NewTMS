@@ -1,23 +1,23 @@
 import axios, { AxiosResponse } from "axios";
 import lscache from "lscache";
-import { API_DEFAULT_OPTIONS, getAPIConfig } from "./api.constant";
+import { API_DEFAULT_OPTIONS, getAPIConfig, apiConfig } from "./api.constant";
 
 
-const get = async (endpoint: string) => {
-    const res: AxiosResponse = await axios.get(`${API_DEFAULT_OPTIONS.apiURL}${endpoint}`, getAPIConfig());
+const get = async (endpoint: string, payload?:any) => {
+    const res: AxiosResponse = await axios.get(`${API_DEFAULT_OPTIONS.apiURL}${endpoint}`, apiConfig(payload));
     return res.data;
-  };
+};
 
 const post = async (endpoint: string, payload?: any) => {
     const res : AxiosResponse = await axios.post(`${API_DEFAULT_OPTIONS.apiURL}${endpoint}`, payload, getAPIConfig());
     return res.data ;
 }
 
-const put = async ( endpoint : string , payload : any ) => {
-  
+const put = async ( endpoint : string , payload : any ) => {  
     const res : AxiosResponse = await axios.put(`${API_DEFAULT_OPTIONS.apiURL}${endpoint}`, payload, getAPIConfig());
     return res.data  ;
 }
+
 const postFormData = async ( endpoint : string , payload : any) => {
   const res : AxiosResponse = await axios.post(`${API_DEFAULT_OPTIONS.apiURL}${endpoint}`, payload, {
     headers: {
@@ -28,6 +28,7 @@ const postFormData = async ( endpoint : string , payload : any) => {
   });
   return res.data ;
 }
+
 const del = async (endpoint: string, payload?: any) => {
     const res: AxiosResponse = await axios.delete(`${API_DEFAULT_OPTIONS.apiURL}${endpoint}`, {
       headers: {
@@ -44,11 +45,9 @@ const del = async (endpoint: string, payload?: any) => {
     const formData = axios.toFormData(payload);
     const res : AxiosResponse = await axios.postForm(`${API_DEFAULT_OPTIONS.apiURL}${endpoint}`, formData, getAPIConfig());
     return res.data ;
-}
+} 
 
-  
-
-  export const API = { get , post , put , del , postFormData , postForm }; ;
+export const API = { get , post , put , del , postFormData , postForm }; ;
 
 
 

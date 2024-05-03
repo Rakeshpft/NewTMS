@@ -7,7 +7,8 @@
 }
 
 .react-datepicker__header .react-datepicker__current-month,
-.react-datepicker__header .react-datepicker__day-name{
+.react-datepicker__header .react-datepicker__day-name,
+.react-datepicker-year-header{
     color: var(--bs-primary-contrast);
 }
 .react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, 
@@ -15,7 +16,8 @@
 .react-datepicker__month-text--in-selecting-range, .react-datepicker__month-text--in-range, 
 .react-datepicker__quarter-text--selected, .react-datepicker__quarter-text--in-selecting-range, 
 .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--selected, 
-.react-datepicker__year-text--in-selecting-range, .react-datepicker__year-text--in-range{
+.react-datepicker__year-text--in-selecting-range, .react-datepicker__year-text--in-range,
+.react-datepicker__month-text--keyboard-selected{
     background-color: var(--bs-primary);
     color: var(--bs-primary-contrast) ;
 }
@@ -53,3 +55,40 @@
  {
     transform: rotate(135deg);
  }
+
+ .react-datepicker__month-dropdown-container--scroll,.react-datepicker__year-dropdown-container--scroll{
+   margin: 0 3px;   
+ }
+ 
+.react-datepicker__current-month--hasYearDropdown,.react-datepicker__current-month--hasMonthDropdown{
+   display: none;
+}
+.react-datepicker__month-read-view--down-arrow,.react-datepicker__year-read-view--down-arrow{
+   display: none;
+}
+.react-datepicker__month-read-view--selected-month,.react-datepicker__year-read-view--selected-year{
+   visibility: visible!important;
+   color: var(--bs-primary-contrast);
+   font-weight: 600;
+   text-decoration: underline;
+   font-size: 1rem;
+}
+.react-datepicker__triangle::after{
+   border-bottom-color:var(--bs-primary)!important;
+}
+.react-datepicker__month-option{
+   line-height: 30px;
+}
+
+.react-datepicker__view-calendar-icon input{
+   padding: 0.25rem 0.5rem 0.25rem 1.75rem;
+}
+
+.react-datepicker__close-icon::after{
+   background-color: var(--bs-primary);
+   color:var(--bs-primary-contrast);
+}
+
+.react-datepicker-popper{
+   z-index: 100;
+}

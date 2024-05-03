@@ -9,6 +9,7 @@ import {
   TableSortLabel,
   TableBody,
   TablePagination,
+  TableFooter,
 } from '@mui/material';
 import { includes } from 'lodash';
 import { Col, Input, Row } from 'reactstrap';
@@ -17,6 +18,7 @@ interface TableProps {
   id?: string;
   columns: CustomTableColumn[];
   data: any[];
+  footerData?:any[];
   noRecordMessage?:string  
   canSelectRows?: boolean;
   selectedTableRows?: any[];
@@ -34,6 +36,7 @@ export const CustomTable = (props: TableProps) => {
     id,
     columns,
     data,
+    footerData,
     noRecordMessage='',
     canSelectRows,
     selectedTableRows,
@@ -82,8 +85,8 @@ export const CustomTable = (props: TableProps) => {
   };
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: ISortHeadings) => {
-    event.preventDefault();
-    const isAsc = orderBy === property && order === 'asc';
+    event.preventDefault();    
+    const isAsc = orderBy !== property ? false : orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
@@ -130,7 +133,6 @@ export const CustomTable = (props: TableProps) => {
         </Row>
       )
       }
-
       <Table>
         <TableHead className="items-column-heading">
           <TableRow className="items-column-row">
@@ -153,7 +155,7 @@ export const CustomTable = (props: TableProps) => {
                 align={column.align?column.align:'left'}
               >
                 {column.sortable ?
-                (<TableSortLabel active={orderBy === column.id} direction={orderBy === column.id ? order : 'asc'} onClick={e => handleRequestSort(e, column.id)}>                  
+                (<TableSortLabel active={orderBy === column.id} direction={orderBy === column.id ? order : 'asc'} onClick={e => handleRequestSort(e, column.id)}>
                 {column.headCell ? column.headCell : column.name}
                 </TableSortLabel>):(column.headCell ? column.headCell : column.name)}
               </TableCell>
@@ -193,7 +195,22 @@ export const CustomTable = (props: TableProps) => {
                   </TableCell>
                 </TableRow>
               )}
-            </TableBody>            
+            </TableBody>
+          {footerData && footerData.length>0 &&
+            <TableFooter>
+            {!loading && footerData.map((row, index) => (
+              <TableRow key={index}>
+                {canSelectRows && selectedTableRows && setSelectionTableRows && (
+                  <TableCell align="center" style={{ width: '5%' }}></TableCell>)}
+                    {columns.map(column => (
+                      <TableCell key={column.id} align={column.align?column.align:'left'}>
+                        {column.footCell ? column.footCell(row) : column.selector(row)}
+                      </TableCell>
+                    ))}            
+              </TableRow>
+            ))}
+          </TableFooter>   
+          }               
           </>
         )}
       </Table>      

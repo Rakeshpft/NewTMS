@@ -8,7 +8,7 @@ import { IBillingStatusObject, IBillingTypeObject } from "../tms-objects/billing
 import { ICustomerStatusObject } from "../tms-objects/customer.types";
 import { ILoadStatusObject } from "../tms-objects/load.type";
 import { ISideMenuObject } from "../tms-objects/side-menu.types";
-import { IDocumentStatusObject, IFactorObject, IOwnershipTypeObject, ITrailerTypeObject, IPaymentCategoryObject, IProductCodeObject, IScheduleFrequencyObject, IScheduleTypeObject, IScheduleRepeatObject, IELDProviderObject, IDriverListObject } from "../tms-objects/list.types";
+import { IDocumentStatusObject, IFactorObject, IOwnershipTypeObject, ITrailerTypeObject, IPaymentCategoryObject, IProductCodeObject, IScheduleFrequencyObject, IScheduleTypeObject, IScheduleRepeatObject, IELDProviderObject, IDriverListObject, IPayRateTypeObject, IVendorListObject, ITruckListObject, ITrailerListObject, IDispatcherListObject, IFuelCardListObject, IPaymentMethodObject, ILoadStop } from "../tms-objects/list.types";
 
 export interface IListData {
     menuList:ISideMenuObject[]|null;
@@ -30,7 +30,15 @@ export interface IListData {
     scheduleTypeList:IScheduleTypeObject[]|null;
     scheduleRepeatList:IScheduleRepeatObject[]|null;
     eldProviderList:IELDProviderObject[]|null;
-    driverList:IDriverListObject[]|null;
+    payRateTypeList:IPayRateTypeObject[]|null;
+    driverList:IDriverListObject[]|null;    
+    vendorList:IVendorListObject[]|null;
+    truckList:ITruckListObject[]|null;
+    trailerList:ITrailerListObject[]|null;
+    dispatcherList:IDispatcherListObject[]|null;
+    fuelCardList:IFuelCardListObject[]|null;
+    paymentMethodList:IPaymentMethodObject[]|null;
+    loadStopList:ILoadStop[]|null;
     listLoading : boolean;
     is_error : boolean;
 }
@@ -55,8 +63,16 @@ const listInitialData : IListData = {
     scheduleTypeList:null,
     scheduleRepeatList:null,
     eldProviderList:null,
+    payRateTypeList:null,
     driverList:null,
-    listLoading : false,
+    vendorList:null,
+    truckList:null,
+    trailerList:null,
+    dispatcherList:null,
+    fuelCardList:null,
+    paymentMethodList:null,
+    loadStopList:null,
+    listLoading : false,    
     is_error : false,
 }
 

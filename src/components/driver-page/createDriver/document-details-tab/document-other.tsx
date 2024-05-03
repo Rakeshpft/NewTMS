@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {  IDriverOther, TDriverProps, initialDriverOther } from '../../../../services/tms-objects/driver.types'
-import { HiOutlinePencilAlt } from 'react-icons/hi'
-import moment from 'moment'
+import { HiOutlineDocumentDownload, HiOutlinePencilAlt } from 'react-icons/hi'
 import { Button, Col, Container, Form, FormGroup, Input, Label, Modal, ModalBody, ModalHeader, Row } from 'reactstrap'
 import { CustomTable } from '../../../../features/data-table/CustomTable'
 import { RxCross2 } from 'react-icons/rx'
@@ -10,7 +9,7 @@ import { useDriverContext } from '../../../../services/reducer/driver.reducer'
 import { toastify } from '../../../../features/notification/toastify'
 import { isEmpty } from 'lodash'
 import ReactDatePicker from 'react-datepicker'
-import { Dictionary, Convert } from '../../../../features/validation/general-helper'
+import { Dictionary, Convert, Helper } from '../../../../features/shared/helper'
 
 const DocumentOther = (props : TDriverProps) => {
   const { driver_id = 0} = props
@@ -102,66 +101,54 @@ useEffect(() => {
 } , [])
   
 const columns: CustomTableColumn[] = [
-
   {
     id: 'name',
     name: ' NAME',
-    style: { width: '10%' },
+    style: { width: '30%' },
     sortable: true,
     selector: (row: IDriverOther) => row.name,
-    
-   
   },
-
   {
     id: 'expiry_date',
     name: 'EXP DATE',
     style: { width: '10%' },
     sortable: true,
     selector: (row: IDriverOther) => row.expiry_date,
-    format: (row: IDriverOther) =>  moment(row.expiry_date).format('L')
-   
+    format: (row: IDriverOther) =>  Convert.ToUserDate(row.expiry_date)   
   },
   {
     id: 'notes',
     name: 'NOTES',
-    style: { width: '10%' },
+    style: { width: '40%' },
     sortable: true,
     selector: (row: IDriverOther) => row.notes,
-   
-   
-  },
-  {
-    id: 'attachment',
-    name: 'ATTACHMENTS',
-    style: { width: '10%' },
-    sortable: true,
-    selector: (row: IDriverOther) => row.attachment,
-    cell:(row:IDriverOther)=><a href={row.attachment_url} target='_blank' download={true}>{row.attachment}</a>
-
   },
   {
     id : "action",
     name : "",
-    style : {width : "10%"},
-    sortable : true,
-    selector : (row : IDriverOther) => row.file,
-    cell: (row: IDriverOther ) => <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={()=>{ handleEditOther(row.doc_id) }} />
-
+    style : {width : "15%"},
+    sortable : false,
+    align:'center',
+    selector : (row : IDriverOther) => row.attachment,
+    cell: (row: IDriverOther ) => 
+    <>
+    <HiOutlineDocumentDownload className='me-2' size={22} style={{ cursor: "pointer" }} onClick={()=>{Helper.FileDownload(row.attachment_url)}} />
+    <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={()=>{ handleEditOther(row.doc_id) }} />
+  </>  
   },
 
 ]
   return (
     <>
       <div className="d-flex justify-content-end m-3">
-        <Col md={3} className=" d-flex justify-content-end align-items-end pb-3" column-gap-3>
+        <Col md={3} className=" d-flex justify-content-end align-items-end pb-3 column-gap-3" >
         {!isEmpty(selectedDriver) && (
                   <div className="user-info-btn">
 
                     <Button color="primary" onClick={() => setDeleteModalOpen(true)}>Delete</Button>
                   </div>
                 )}
-          <label className="page-subtitle">
+          <label className="page-subtitle mb-0">
             <Button color="success"  outline={true}  onClick={() => setUploadModalOpen(true)}><AiOutlinePlus />Add</Button>
           </label>
         </Col>
@@ -171,7 +158,7 @@ const columns: CustomTableColumn[] = [
       <Modal isOpen={uploadModalOpen} onClose={UploadModalClose}>
       <ModalHeader close={closeBtn}
                  onClose={() => UploadModalClose()}>
-          <h6 className="mb-0 fw-bold">Edit Other </h6>
+          <h6 className="mb-0 fw-bold">{ driverOtherDoc.doc_id ? "Edit other" : "Add other"}</h6>
         </ModalHeader>
         <ModalBody className="square border border-info-rounded">
         <Form onSubmit={handleOtherSave} >    
@@ -186,7 +173,7 @@ const columns: CustomTableColumn[] = [
         <Col md={6}>
         <FormGroup>
         <Label for="application_date"> EXP DATE</Label>
-        <ReactDatePicker showYearDropdown showMonthDropdown placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm" onChange={(date)=>{setDriverOtherDoc({...driverOtherDoc, expiry_date: Convert.ToISODate(date) })}} selected={Convert.ToDate(driverOtherDoc.expiry_date)} ></ReactDatePicker>
+        <ReactDatePicker  showYearDropdown showMonthDropdown showIcon fixedHeight isClearable onKeyDown={(event)=>{event.preventDefault()}} placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm" onChange={(date)=>{setDriverOtherDoc({...driverOtherDoc, expiry_date: Convert.ToISODate(date) })}} selected={Convert.ToDate(driverOtherDoc.expiry_date)} ></ReactDatePicker>
         </FormGroup>
         </Col>
        </Row>
@@ -219,11 +206,10 @@ const columns: CustomTableColumn[] = [
               <ModalBody>
                 <Container>
                   {!isEmpty(selectedDriver) && (
-                    <div className=" my-3 ">
-                      {selectedDriver.length > 1
-                        ? `Are you sure you want to delete ${selectedDriver.length} customers?`
-                        : `Are you sure you want to delete customer "${selectedDriver[0].doc_id} "?`}
-                    </div>
+                    <div className=" dle my-3 ">                      
+                    {selectedDriver.length > 1?(<div>You have selected {selectedDriver.length} documents.<br /></div>):null}
+                      Are you sure you want to delete?
+                  </div>
                   )}
                   <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">
                     <Button

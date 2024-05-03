@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { IDriverMvr, TDriverProps, initialDriverMvr } from '../../../../services/tms-objects/driver.types'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { Col, Button, Modal, ModalHeader, ModalBody, FormGroup, Input, Label, Row, Form, Container } from 'reactstrap'
-import moment from 'moment'
-import { HiOutlinePencilAlt } from 'react-icons/hi'
+import { HiOutlineDocumentDownload, HiOutlinePencilAlt } from 'react-icons/hi'
 import { CustomTable } from '../../../../features/data-table/CustomTable'
 import { RxCross2 } from 'react-icons/rx'
 import { useDriverContext } from '../../../../services/reducer/driver.reducer'
 import { toastify } from '../../../../features/notification/toastify'
 import { isEmpty } from 'lodash'
-import { Convert, Dictionary } from '../../../../features/validation/general-helper'
+import { Convert, Dictionary, Helper } from '../../../../features/shared/helper'
 import ReactDatePicker from 'react-datepicker'
 
 const DocumentMvr = ( prop : TDriverProps) => {
@@ -100,47 +99,39 @@ useEffect(() => {
   }
 }, [])
   const columns: CustomTableColumn[] = [
-
     {
       id: 'date',
       name: ' DATE',
-      style: { width: '10%' },
+      style: { width: '80%' },
       sortable: true,
       selector: (row: IDriverMvr) => row.date,
-      format: (row: IDriverMvr) =>  moment(row.date).format('L')
-     
-    },
-    
-    {
-      id: 'attachment',
-      name: 'ATTACHMENTS',
-      style: { width: '10%' },
-      sortable: true,
-      selector: (row: IDriverMvr) => row.attachment,
-      cell:(row:IDriverMvr)=><a href={row.attachment_url} target='_blank' download={true}>{row.attachment}</a>
-
+      format: (row: IDriverMvr) =>  Convert.ToUserDate(row.date)     
     },
     {
       id : "action",
       name : "",
-      style : {width : "10%"},
-      sortable : true,
+      style : {width : "15%"},
+      sortable : false,
+      align:'center',
       selector : (row : IDriverMvr) => row.mvr_id,
-      cell: (row: IDriverMvr ) => <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={()=>{ handleEditMvr(row.mvr_id) }} />
-  
+      cell: (row: IDriverMvr ) => 
+      <>
+      <HiOutlineDocumentDownload className='me-2' size={22} style={{ cursor: "pointer" }} onClick={()=>{Helper.FileDownload(row.attachment_url)}} />
+      <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={()=>{ handleEditMvr(row.mvr_id) }} />
+    </>  
     }
   ]
   return (
     <>
       <div className="d-flex justify-content-end m-3">
-        <Col md={3} className=" d-flex justify-content-end align-items-end pb-3" column-gap-3>
+        <Col md={3} className=" d-flex justify-content-end align-items-end pb-3 column-gap-3" >
         {!isEmpty(selectedDriver) && (
                   <div className="user-info-btn">
 
                     <Button color="primary" onClick={() => setDeleteModalOpen(true)}>Delete</Button>
                   </div>
                 )}
-          <label className="page-subtitle">
+          <label className="page-subtitle mb-0">
             <Button color="success"  outline={true}  onClick={() => setUploadModalOpen(true)}><AiOutlinePlus />Add</Button>
           </label>
         </Col>
@@ -150,24 +141,22 @@ useEffect(() => {
       <Modal isOpen={uploadModalOpen} onClose={UploadModalClose}>
       <ModalHeader close={closeBtn}
                  onClose={() => UploadModalClose()}>
-          <h6 className="mb-0 fw-bold">Edit MVR </h6>
+          <h6 className="mb-0 fw-bold">{ driverMvr.mvr_id > 0 ? "Edit MVR" : "Add MVR"}</h6>
         </ModalHeader>
         <ModalBody className="square border border-info-rounded">
           <Form onSubmit={handleSaveMvr}>
         <Row>
         <Col md={6}>
         <FormGroup>
-        <Label for="application_date">DATE</Label>
-       {/* <Input bsSize="sm" className="form-control form-control-sm" type="text" id="application_date" name="application_date" value={driverMvr.date} onChange={handleDriverInput('date')} /> */}
-       <ReactDatePicker showYearDropdown showMonthDropdown placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm" onChange={(date)=>{setDriverMvr({...driverMvr, date: Convert.ToISODate(date) })}} selected={Convert.ToDate(driverMvr.date)} ></ReactDatePicker>
-
+        <Label for="application_date">Date</Label>
+          <ReactDatePicker required showYearDropdown showMonthDropdown showIcon fixedHeight isClearable onKeyDown={(event)=>{event.preventDefault()}} placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm" onChange={(date)=>{setDriverMvr({...driverMvr, date: Convert.ToISODate(date) })}} selected={Convert.ToDate(driverMvr.date)} ></ReactDatePicker>
         </FormGroup> 
         </Col>
         
         <Col md={6}>
         <FormGroup>
-       <Label>ATTACHMENT</Label>
-       <Input type="file" name="file" id="file" onChange={handleFileUpload}  /> 
+       <Label>Attachments</Label>
+       <Input type="file" required name="file" id="file" onChange={handleFileUpload}  /> 
            </FormGroup>
         </Col>
        </Row>
@@ -184,11 +173,10 @@ useEffect(() => {
               <ModalBody>
                 <Container>
                   {!isEmpty(selectedDriver) && (
-                    <div className=" my-3 ">
-                      {selectedDriver.length > 1
-                        ? `Are you sure you want to delete ${selectedDriver.length} customers?`
-                        : `Are you sure you want to delete customer "${selectedDriver[0].mvr_id} "?`}
-                    </div>
+                     <div className=" dle my-3 ">                      
+                     {selectedDriver.length > 1?(<div>You have selected {selectedDriver.length} MVR.<br /></div>):null}
+                       Are you sure you want to delete?
+                   </div>
                   )}
                   <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">
                     <Button

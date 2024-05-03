@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, {  useEffect, useRef, useState } from "react";
 import {
   Button,
   Card,
@@ -19,16 +19,20 @@ import {
   Table,
 } from "reactstrap";
 import { BiCheck } from "react-icons/bi";
-import { BsSearch, BsSliders2 } from "react-icons/bs";
+import { BsSearch } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlinePlus } from "react-icons/ai";
 // import { PiGearDuotone } from "react-icons/pi";
-import { SearchLoadPage, initialSearchState } from "../tms-object/loadpage";
 import { routes } from "../routes/routes";
 import EditLoadModal from "./editLoadModal";
 import CommonLayOut from "../../layout";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CustomTable } from "../../features/data-table/CustomTable";
+import { ILoadObject } from "../../services/tms-objects/load.type";
+import { HiOutlinePencilAlt } from "react-icons/hi";
+import { debounce, includes } from "lodash";
+import { useLoadContext } from "../../services/reducer/load.reducer";
+import { Convert } from "../../features/shared/helper";
 //import { CustomDataTable } from "../../features/data-table/dataTable";
 
 const rate = new Intl.NumberFormat("en-US", {
@@ -37,240 +41,153 @@ const rate = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 3,
 });
 
-const columns = [
-	{		
-    id:'load',
-		name: 'Load',
-		selector: (row: { load: string }) => row.load,
-    sortable:true
-	},
-	{	
-    id:'date',
-		name: 'Date',
-		selector: (row: { date: string }) => row.date,
-    sortable:true
-	},
-  {		
-    id:'driver',
-		name: 'Driver',
-		selector: (row: { driver: string }) => row.driver,
-    sortable:true
-	},
-  {		
-    id:'broker',
-		name: 'Broker',
-		selector: (row: { broker: string }) => row.broker,
-    sortable:true
-	},
-  {		
-    id:'po_no',
-		name: 'PO#',
-		selector: (row: { po_number: string }) => row.po_number,
-    sortable:true
-	},
-  {		
-    id:'pickup',
-		name: 'Pickup',
-		selector: (row: { pickup: string }) => row.pickup,
-    sortable:true
-	},
-  {		
-    id:'delivery',
-		name: 'Delivery',
-		selector: (row: { delivery: string }) => row.delivery,
-    sortable:true
-	},
-  {		
-    id:'rate',
-		name: 'Rate',
-		selector: (row: { rate: string }) => row.rate,
-    format:(row:{rate:number})=> rate.format(row.rate) ,
-    sortable:true
-	},
-  {		
-    id:'complete',
-		name: 'Completed',
-		selector: (row: { completed: string }) => row.completed,
-    sortable:true
-	},
-  {		
-    id:'status',
-		name: 'Status',
-		selector: (row: { status: string }) => row.status,
-    sortable:true
-	},
-  {		
-    id:'billing',
-		name: 'Billing',
-		selector: (row: { billing: string }) => row.billing,
-    sortable:true
-	},
-  {		
-    id:'notes',
-		name: 'Notes',
-		selector: (row: { notes: string }) => row.notes,
-    sortable:true
-	},
-  {		
-    id:'attachment',
-		name: 'Attachments',
-		selector: (row: { attachments: string }) => row.attachments,
-    cell: (row:{ attachments: string}) => <a href='http://www.google.com' target="_blank">{row.attachments}</a>,
-    sortable:true
-	},
-];
-
-const data= //{
-  //rows:
-  [
-    {
-      load: 1001,
-      date: "07/14/23",
-      driver: "Shyam payne [drv]",
-      broker: "002063564 ONTARIO",
-      po_number: "-",
-      pickup: "Joliet, ILL",
-      delivery: "Cameron, ILT",
-      rate: "500.00",
-      completed: "23/06/2023",
-      status: "Delivered - badge",
-      billing: "Invoiced",
-      notes: "Lumper: $50.00 :: Detention: $50.00",
-      attachments: "[file-icon]",
-  
-    },
-    {
-      load: 1002,
-      date: "08/12/23",
-      driver: "Sita payne [drv]",
-      broker: "002063563 ONTARIO",
-      po_number: "-",
-      pickup: "Joliet",
-      delivery: "Cameron",
-      rate: "500.00",
-      completed: "24/06/2023",
-      status: "Delivered - badge",
-      billing: "Invoiced",
-      notes: "Lumper: $50.00 :: Detention: $50.00",
-      attachments: "[file-icon]",  
-    },
-    {
-      load: 1003,
-      date: "08/12/23",
-      driver: "Ram payne [drv]",
-      broker: "002063563 ONTARIO",
-      po_number: "-",
-      pickup: "Joliet-T",
-      delivery: "Cameron",
-      rate: "500.00",
-      completed: "25/06/2023",
-      status: "Delivered - badge",
-      billing: "Invoiced",
-      notes: "Lumper: $50.00 :: Detention: $50.00",
-      attachments: "[file-icon]",
-  
-    } 
-  ]
-  //,total_rows:12
-//}
 
 
-type ActionTypes =
-  | { type: "SET_PERIOD"; payload: string }
-  | { type: "SET_PICKUPDATE"; payload: string }
-  | { type: "SET_DEVIVERYDATE"; payload: string }
-  | { type: "SET_BROKER"; payload: string }
-  | { type: "SET_CITY"; payload: string }
-  | { type: "SET_STATE"; payload: string }
-  | { type: "SET_DRIVER"; payload: string }
-  | { type: "SET_DISPATCHER"; payload: string }
-  | { type: "SET_TRUCK"; payload: string }
-  | { type: "SET_TRAILER"; payload: string }
-  | { type: "SET_DIRECTBILLING"; payload: string };
 
-const filterformReducer = (
-  state: SearchLoadPage,
-  action: ActionTypes
-): SearchLoadPage => {
-  switch (action.type) {
-    case "SET_PERIOD":
-      return { ...state, period: action.payload };
-    case "SET_PICKUPDATE":
-      return { ...state, pickupDate: action.payload };
-    case "SET_DEVIVERYDATE":
-      return { ...state, deviveryDate: action.payload };
-    case "SET_BROKER":
-      return { ...state, broker: action.payload };
-    case "SET_CITY":
-      return { ...state, city: action.payload };
-    case "SET_STATE":
-      return { ...state, state: action.payload };
-    case "SET_DRIVER":
-      return { ...state, driver: action.payload };
-    case "SET_DISPATCHER":
-      return { ...state, dispatcher: action.payload };
-    case "SET_TRUCK":
-      return { ...state, truck: action.payload };
-    case "SET_TRAILER":
-      return { ...state, trailer: action.payload };
-    case "SET_DIRECTBILLING":
-      return { ...state, directBilling: action.payload };
-    default:
-      return state;
-  }
-};
 
-const LoadPage = () => {
-  //const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const navigate = useNavigate();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+const LoadPage = ( ) => {
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
+
+
+
+  const navigate = useNavigate()
+  const { getLaodList , loadList , statusLoading }= useLoadContext();
+
+  console.log(" load list", loadList)
+
+  const [dropdownOpen] = useState(false);
+  const [isOpen] = useState(false);
   const [editLoadModal, setEditLoadModal] = useState(false);
-  const [filter, setFilter] = useState("");
-  const [formState, dispatch] = useReducer(
-    filterformReducer,
-    initialSearchState
-  );
+  
+  const [fileteredData, setFilteredData] = useState<ILoadObject[]>([]);
+  
+  const handleLoadSearch = debounce((searchValue: string) => {
 
-  const toggle = () => setDropdownOpen((prevState) => !prevState);
-  const navigateToCreateLoad = () => {
-    navigate(routes.createNewLoad);
-  };
-  const handleSearchFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.toLowerCase();
-    // const filteredData = Tabledata.filter((item) => {
-    //   return columns.some((column) =>
-    //     String(item[column as keyof object])
-    //       .toLowerCase()
-    //       .includes(value)
-    //   );
-    // });
-    setFilter(value);
-    //setFilteredData(filteredData);
-  };
+    const searchResults =
+    loadList &&
+    loadList.filter(( load ) => {
+        if (includes(load.driver_name.toLowerCase(), searchValue.toLowerCase())) {
+          return load;
+        }
+      });
+    searchResults && setFilteredData(searchResults);
+    
+  }, 500);
 
-  // const handleEditLoad = () => {
-  //   setEditLoadModal(true)
-  // }
+  console.log(" filtered data", fileteredData)
 
-  const searchToggle = (): void => {
-    setIsOpen((isOpen) => !isOpen);
-  };
+  useEffect(() => {
+    if (!statusLoading && loadList) 
+      setFilteredData(loadList);
+    
+  }, [loadList]);
 
-  const handleFilterInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = event.target;
-    dispatch({
-      type: `SET_${name.toUpperCase()}` as ActionTypes["type"],
-      payload: value,
-    });
-  };
-
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log(formState);
-  };
+  useEffect(() => {
+    getLaodList();
+  }, []);
+ 
+  const columns = [
+    {		
+      id:'load_number',
+      name: 'LOAD',
+      selector: (row : ILoadObject) => row.load_number,
+      sortable:true
+    },
+    {	
+      id:'pickup_date',
+      name: 'DATE',
+      sortable:true,
+      selector: (row: ILoadObject) => row.pickup_date,
+      format: (row: ILoadObject) =>  Convert.ToUserDate(row.pickup_date),
+    },
+    {		
+      id:'driver_name',
+      name: 'Driver',
+      selector: (row : ILoadObject) => row.driver_name,
+      sortable:true
+    },
+    {		
+      id:'broker_name',
+      name: 'BROKER',
+      selector: (row: ILoadObject) => row.broker_name,
+      sortable:true
+    },
+    {		
+      id:'po_number',
+      name: 'PO#',
+      selector: (row: ILoadObject) => row.po_number,
+      sortable:true
+    },
+    {		
+      id:'pickup_state_id',
+      name: 'PICKUP',
+      selector: (row: ILoadObject) => row.pickup_state_name,
+      sortable:true
+    },
+    {		
+      id:'delivery_state_id',
+      name: 'DELIVERY',
+      selector: (row: ILoadObject) => row.delivery_state_name,
+      sortable:true
+    },
+  
+    {		
+      id:'rate',
+      name: 'RATE',
+      selector: (row: ILoadObject) => row.rate,
+      format:(row:{rate:number})=> rate.format(row.rate) ,
+      sortable:true
+    },
+    {		
+      id:'delivery_date',
+      name: 'COMPLETED',
+      sortable:true,
+      selector: (row: ILoadObject) => row.delivery_date,
+      format: (row: ILoadObject) =>  Convert.ToUserDate(row.delivery_date)
+    },
+    {		
+      id:'billing_status_id',
+      name: 'BILLING',
+      selector: (row: ILoadObject) => row.billing_status_name,
+      sortable:true
+    },
+    {		
+      id:'load_status_id',
+      name: 'STATUS',
+      selector: (row: ILoadObject) => row.load_status_name,
+      sortable:true
+    },
+    
+    {		
+      id:'co_driver_name',
+      name: 'NOTES',
+      selector: (row: ILoadObject) => row.co_driver_name,
+      sortable:true
+    },
+    {		
+      id:'co_driver_name',
+      name: 'ATTACHMENTS',
+      selector: (row: ILoadObject) => row.co_driver_name,
+      cell: (row: ILoadObject) => <a href='http://www.google.com' target="_blank">{row.co_driver_name}</a>,
+      
+      sortable:true
+    },
+  
+    {
+      id: "action",
+      name: "ACTIONS",
+      style: { width: "5%" },
+      selector: (row: ILoadObject) => row.load_id,
+      cell: (row: ILoadObject) => ( <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={() => { navigate(`${routes.createNewLoad}/${row.load_id}`); }} />
+      ),
+      sortable: false,
+    },
+  ];
+  
+ 
 
   return (
     <CommonLayOut>
@@ -296,7 +213,7 @@ const LoadPage = () => {
                   </DropdownMenu>
                 </Dropdown>
               </div>
-              <InputGroup className="shadow-sm border-secondary">
+              {/* <InputGroup className="shadow-sm border-secondary">
                 <InputGroupText className="bg-white">
                   <BsSearch size={16} />
                 </InputGroupText>
@@ -316,12 +233,18 @@ const LoadPage = () => {
                     <BsSliders2 size={16} />
                   </Button>
                 </InputGroupText>
-              </InputGroup>
+              </InputGroup> */}
             </div>
-            <Button color="primary" onClick={navigateToCreateLoad}>
+            {/* <Button color="primary" onClick={navigateToCreateLoad}>
               <AiOutlinePlus />
               New Load
-            </Button>
+            </Button> */}
+             <Link to={routes.createNewLoad}>
+                  <Button color="primary" >
+                    <AiOutlinePlus />
+                    New Load
+                  </Button>
+                </Link>
           </div>
         </div>
       </div>
@@ -332,7 +255,7 @@ const LoadPage = () => {
               <Card className="card-search mb-3">
                 <CardBody>
                   <Form
-                    onSubmit={handleSearchSubmit}
+                    onSubmit={() => console.log("search")}
                     className="loadsSearchForm"
                   >
                     <Row className="mb-2">
@@ -353,8 +276,8 @@ const LoadPage = () => {
                               name="period"
                               type="select"
                               className="form-control form-control-sm"
-                              value={formState.period}
-                              onChange={handleFilterInputChange}
+                              // value={formState.period}
+                              // onChange={handleFilterInputChange}
                             >
                               <option>1</option>
                               <option>2</option>
@@ -371,8 +294,8 @@ const LoadPage = () => {
                               type="date"
                               className="form-control form-control-sm"
                               name="pickupDate"
-                              value={formState.pickupDate}
-                              onChange={handleFilterInputChange}
+                              // value={formState.pickupDate}
+                              // onChange={handleFilterInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -383,8 +306,8 @@ const LoadPage = () => {
                               type="date"
                               name="deliveryDate"
                               className="form-control form-control-sm"
-                              value={formState.deviveryDate}
-                              onChange={handleFilterInputChange}
+                              // value={formState.deviveryDate}
+                              // onChange={handleFilterInputChange}
                             />
                           </FormGroup>
                         </Col>
@@ -397,8 +320,8 @@ const LoadPage = () => {
                               name="broker"
                               type="select"
                               className="form-control form-control-sm"
-                              value={formState.broker}
-                              onChange={handleFilterInputChange}
+                              // value={formState.broker}
+                              // onChange={handleFilterInputChange}
                             >
                               <option>1</option>
                               <option>2</option>
@@ -415,8 +338,8 @@ const LoadPage = () => {
                               name="city"
                               type="text"
                               className="form-control form-control-sm"
-                              value={formState.city}
-                              onChange={handleFilterInputChange}
+                              // value={formState.city}
+                              // onChange={handleFilterInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -427,8 +350,8 @@ const LoadPage = () => {
                               name="city"
                               type="text"
                               className="form-control form-control-sm"
-                              value={formState.city}
-                              onChange={handleFilterInputChange}
+                              // value={formState.city}
+                              // onChange={handleFilterInputChange}
                             />
                           </FormGroup>
                         </Col>
@@ -441,8 +364,8 @@ const LoadPage = () => {
                               name="driver"
                               type="select"
                               className="form-control form-control-sm"
-                              value={formState.driver}
-                              onChange={handleFilterInputChange}
+                              // value={formState.driver}
+                              // onChange={handleFilterInputChange}
                             >
                               <option>1</option>
                               <option>2</option>
@@ -459,8 +382,8 @@ const LoadPage = () => {
                               name="state"
                               type="text"
                               className="form-control form-control-sm"
-                              value={formState.state}
-                              onChange={handleFilterInputChange}
+                              // value={formState.state}
+                              // onChange={handleFilterInputChange}
                             />
                           </FormGroup>
                           <FormGroup>
@@ -471,8 +394,8 @@ const LoadPage = () => {
                               name="state"
                               type="text"
                               className="form-control form-control-sm"
-                              value={formState.state}
-                              onChange={handleFilterInputChange}
+                              // value={formState.state}
+                              // onChange={handleFilterInputChange}
                             />
                           </FormGroup>
                         </Col>
@@ -485,8 +408,8 @@ const LoadPage = () => {
                               name="dispatcher"
                               type="select"
                               className="form-control form-control-sm"
-                              value={formState.dispatcher}
-                              onChange={handleFilterInputChange}
+                              // value={formState.dispatcher}
+                              // onChange={handleFilterInputChange}
                             >
                               <option>1</option>
                               <option>2</option>
@@ -503,8 +426,8 @@ const LoadPage = () => {
                               name="truck"
                               type="select"
                               className="form-control form-control-sm"
-                              value={formState.truck}
-                              onChange={handleFilterInputChange}
+                              // value={formState.truck}
+                              // onChange={handleFilterInputChange}
                             >
                               <option>1</option>
                               <option>2</option>
@@ -521,8 +444,8 @@ const LoadPage = () => {
                               name="trailer"
                               type="select"
                               className="form-control form-control-sm"
-                              value={formState.trailer}
-                              onChange={handleFilterInputChange}
+                              // value={formState.trailer}
+                              // onChange={handleFilterInputChange}
                             >
                               <option>1</option>
                               <option>2</option>
@@ -541,8 +464,8 @@ const LoadPage = () => {
                               name="directBilling"
                               type="select"
                               className="form-control form-control-sm"
-                              value={formState.directBilling}
-                              onChange={handleFilterInputChange}
+                              // value={formState.directBilling}
+                              // onChange={handleFilterInputChange}
                             >
                               <option>1</option>
                               <option>2</option>
@@ -685,10 +608,22 @@ const LoadPage = () => {
           )}
         </div>
       </div>
-
+      <div className="d-flex justify-content-end ms-auto align-items-center column-gap-2">
+                  <InputGroup className="shadow-sm border-secondary">
+                    <InputGroupText className="bg-white">
+                      <BsSearch size={16} />
+                    </InputGroupText>
+                    <Input
+                      placeholder="Search"
+                      className="border-start-0 search"
+                      inputRef={inputRef}
+                      onChange={(e: any) => handleLoadSearch(e.target.value)}
+                    />
+                  </InputGroup>
+                </div>
       <EditLoadModal isOpen={editLoadModal} toggle={() => setEditLoadModal(false)} />
       {/* <CustomDataTable columns={columns} data ={data} pagination={true} /> */}
-      <CustomTable columns={columns} data ={data} noRecordMessage="No load found."  />
+      <CustomTable columns={columns} data={fileteredData} noRecordMessage="No load found."  />
     </CommonLayOut>
   );
 };

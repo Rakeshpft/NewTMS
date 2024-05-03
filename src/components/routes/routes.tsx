@@ -10,21 +10,23 @@ export const routes = {
   driverpageAll: "/drivers",
   createNewDriver: "/driver-detail",
   loadpageAll: "/loads",
-  createNewLoad: "/load-detail",  vendorsAll: "/partners/vendors",
+  createNewLoad: "/load-detail", vendorsAll: "/partners/vendors",
   createNewVendor: "/partners/vendor-detail",
   customersAll: "/partners/customers",
   createNewCustomer: "/partners/customer-detail",
-  
-   driverPayRoll: "/driver-payrolls",
-  createNewDriverPayRoll: "/driver-payroll-detail",  billingPage: "/accounts/billing",
+  driverPayRoll: "/driver-payrolls",
+  createNewDriverPayRoll: "/driver-payroll-detail", 
+  billingPage: "/accounts/billing",
   createNewBillingPage: "/createnewbillingpage",
   vendorBalance: "/accounts/vendorbalance",
   fuelPage: "/fuel/fuel-cards",
   createNewFuelPage: "/fuel/fuel-card-detail",
-  
+
   fuelImport: "/fuel/fuel-import",
-  fuelTransaction: "/fuel/fuel-transactions",
-  createNewFuelTransaction: "/createnewfueltransaction",
+
+  fuelTransactionPage: "/fuel/fuel-transactions",
+  createNewFuelTransaction: "/fuel/fuel-transaction-detail",
+
   trucksAll: "/equipments/trucks",
   createNewTruck: "/equipments/truck-detail",
   trailers: "/equipments/trailers",
@@ -60,7 +62,7 @@ export const routes = {
   settingPage: "/settings",
   profileForm: "/profileform",
   UsersRole: "/users/user-roles",
-  userAdminRole : "/users/permissions",
+  userAdminRole: "/users/permissions",
   DocumentApplication: "/driverDoc",
   driverDetails: "/driverDetails",
 };

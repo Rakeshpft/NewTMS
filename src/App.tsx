@@ -1,72 +1,23 @@
 import React from "react";
 import { routes } from "./components/routes/routes";
-import {
-  ForgetPassword,
-  LoginPage,
-  RagistrationPage,
-  // LoginPage,
-  ResetPassword,
-} from "./components/login-page";
+import { ForgetPassword, LoginPage, RagistrationPage, ResetPassword } from "./components/login-page";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 // import { PrivateRoute } from "./components/private-routes";
 // import { IdleTimerProvider } from "react-idle-timer";
 // import { handleLogout, session_Time_Logout } from "./components/auth";
 // import { DashboardPage } from "./components/dashboard";
-import {   DriverPage } from "./components/driver-page";
+import { DriverPage } from "./components/driver-page";
 import { LoadPage, CreateNewLaodPage } from "./components/load-page";
-import {
-  Customer,
-  Vendors,
-  // CreateNewCustomerPage,
-  CreateNewVendorPage,
- 
-  
-} from "./components/partenrs";
-import {
-  CreateNewDriverPayrollPage,
-  DriverPayRoll,
-} from "./components/driverpayroll-page";
-import {
-  TrucksPage,
-  CreateNewTruckPage,
-  TrailersPage,
-  CreateNewTrailerPage,
-} from "./components/equipment-page";
-import {
-  FuelPage,
-  CreateNewFuelPage,
-  FuelImport,
-  FuelTransaction,
-  CreateNewFuelTransactionPage,
-} from "./components/fuel-page";
-import {
-  AdditionsPage,
-  CreateNewAdditionsPage,
-  BillingPage,
-  CreateNewBillingPage,
-  ChartofAccounts,
-  CreateNewChartofAccounts,
-  ExpansesPage,
-  CreateNewExpansesPage,
-  CreateNewExpensesSchedulePage,
-  FactoringReport,
-  CreateNewFactoringReport,
-  PaymentsPage,
-  CreateNewPaymentsPage,
-  ScheduledPage,
-  CreateNewScheduledPage,
-  VendorBalance,
-} from "./components/account-page";
-import {
-  DriverPaymentsPage,
-  ExpensesReportPage,
-  GrossProfitLoadPage,
-  GrossProfitReportPage,
-  ProfitLossReportPage,
-  RateMileReportPage,
-  RevenueDispatcherPage,
-  TotalRevenuePage,
-} from "./components/reports-page";
+import { Customer, Vendors, // CreateNewCustomerPage, 
+CreateNewVendorPage,} from "./components/partenrs";
+import { CreateNewDriverPayrollPage, DriverPayRoll,} from "./components/driverpayroll-page";
+import { TrucksPage, CreateNewTruckPage, TrailersPage, CreateNewTrailerPage } from "./components/equipment-page";
+import { FuelPage, CreateNewFuelPage, FuelImport,CreateNewFuelTransactionPage } from "./components/fuel-page";
+import { AdditionsPage, CreateNewAdditionsPage, BillingPage, CreateNewBillingPage, ChartofAccounts, CreateNewChartofAccounts,
+  ExpansesPage, CreateNewExpansesPage, CreateNewExpensesSchedulePage, FactoringReport, CreateNewFactoringReport, PaymentsPage,
+  CreateNewPaymentsPage, ScheduledPage, CreateNewScheduledPage, VendorBalance } from "./components/account-page";
+import { DriverPaymentsPage, ExpensesReportPage, GrossProfitLoadPage, GrossProfitReportPage, ProfitLossReportPage,
+  RateMileReportPage, RevenueDispatcherPage, TotalRevenuePage } from "./components/reports-page";
 import { DispatchedBoardPage } from "./components/dispatched-board";
 import UserPage from "./components/user-page/user-page";
 import DocExchange from "./components/doc-exchange-page/docExchange";
@@ -85,6 +36,8 @@ import UserAdminRole from "./components/user-page/userAdminRole";
 import CreateNewCustomerPage from "./components/partenrs/customer/create-new-customer-page";
 import CreateNewDriverPage from "./components/driver-page/create-new-driver-page";
 import Loading from "./features/loading/loading";
+import FuelTransactionPage from "./components/fuel-page/fuel-transaction-page/fuel-transaction-page";
+
 // import DriversDetails from "./components/driver-page/createDriver/driversDetails";
 // import DocumentApplication from "./components/driver-page/createDriver/documentDetailsPage/documentSubDetails/documentApplicationPage/documentApplication";
 // import CreateNewCustomerPage from "./components/partenrs/customer/create-new-customer-page";
@@ -122,7 +75,7 @@ const App = () => {
                   /> */}
                   <Route path={routes.loadpageAll} element={<LoadPage />} />
                   <Route
-                    path={routes.createNewLoad}
+                    path={`${routes.createNewLoad}/:id?`}
                     element={<CreateNewLaodPage />}
                   />
                   <Route path={routes.vendorsAll} element={<Vendors />} />
@@ -144,7 +97,7 @@ const App = () => {
                     element={<DriverPayRoll />}
                   />
                   <Route
-                    path={routes.createNewDriverPayRoll}
+                    path={`${routes.createNewDriverPayRoll}/:id?`}
                     element={<CreateNewDriverPayrollPage />}
                   />
                   <Route path={routes.billingPage} element={<BillingPage />} />
@@ -163,11 +116,11 @@ const App = () => {
                   />
                   <Route path={routes.fuelImport} element={<FuelImport />} />
                   <Route
-                    path={routes.fuelTransaction}
-                    element={<FuelTransaction />}
+                    path={routes.fuelTransactionPage}
+                    element={<FuelTransactionPage />}
                   />
                   <Route
-                    path={routes.createNewFuelTransaction}
+                    path={`${routes.createNewFuelTransaction}/:id?`}
                     element={<CreateNewFuelTransactionPage />}
                   />
                   <Route path={routes.trucksAll} element={<TrucksPage />} />

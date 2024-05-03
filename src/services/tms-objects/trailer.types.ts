@@ -15,6 +15,7 @@ export interface ITrailerObject {
   ownership_type_id: number;
   ownership_type_name: string;
   purchase_date: string;
+  registration_date: string;
   purchase_price: number;
   lease_date: string;
   lease_lessor_name: string;
@@ -31,6 +32,7 @@ export interface ITrailerObject {
   created_by_id: number;
   modified_date: string;
   modified_by_id: number;
+  warning:boolean;
   trailer_type_id: number;
 }
 
@@ -47,10 +49,11 @@ export const trailerInitialState: ITrailerObject = {
   plate_state_id: 0,
   plate_state_name: "",
   description: "",
-  is_active: false,
+  is_active: true,
   ownership_type_id: 0,
   ownership_type_name: "",
   purchase_date: "",
+  registration_date: "",
   purchase_price: 0,
   lease_date: "",
   lease_lessor_name: "",
@@ -67,6 +70,7 @@ export const trailerInitialState: ITrailerObject = {
   created_by_id: 0,
   modified_date: "",
   modified_by_id: 0,
+  warning:false,
   trailer_type_id: 0,
 }
 
@@ -77,6 +81,7 @@ export interface ITrailerDocument {
   trailer_id: number;
   name: string;
   attachment: string;
+  attachment_url: string;
   notes: string;
   file: File;
 }
@@ -88,6 +93,7 @@ export const trailerDocumentInitialState: ITrailerDocument = {
   trailer_id: 0,
   name: "",
   attachment: "",
+  attachment_url: "",
   notes: "",
   file: new File([], "")
 }

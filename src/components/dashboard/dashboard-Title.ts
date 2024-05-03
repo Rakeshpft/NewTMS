@@ -150,12 +150,12 @@ export const dashboardTiles = {
             {
               title: "Add New Driver Payroll",
               icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createnewdriverpayroll",
+              link: "/driver-payroll-detail",
             },
             {
               title: "View All Driver Payroll",
               icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/driverpayroll",
+              link: "/driver-payrolls",
             },
           ],
         },
@@ -288,12 +288,12 @@ export const dashboardTiles = {
             {
               title: "Add New Fuel Txn",
               icon: require("../../../public/icons/create-a-load.png"),
-              link: "/createnewfueltransaction",
+              link: "/fuel/createnewfueltransaction",
             },
             {
               title: "View All Fuel Txn",
               icon: require("../../../public/icons/view-existing-loads.png"),
-              link: "/fuel/fueltransaction",
+              link: "/fuel/fueltransactionPage",
             },
           ],
         },

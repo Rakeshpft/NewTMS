@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CustomerUpdateContext } from "../context/customer.context";
 import { API } from "../api-helper/api.services";
 import { API_CUSTOMER } from "../api-helper/api.constant";
-import { ICustomerContacts, ICustomerContactsResponse, ICustomerDetails, ICustomerDetailsResponse, ICustomerDocument} from "../tms-objects/customer.types";
+import { ICustomerContacts, ICustomerContactsResponse, ICustomerDetails, ICustomerDetailsResponse, ICustomerDocument, ICustomerFilter} from "../tms-objects/customer.types";
 import { IAPIResponse } from "../tms-objects/response.types";
 
 export const useCustomerContext = () => {
@@ -12,15 +12,18 @@ export const useCustomerContext = () => {
         throw new Error("Must have setState defined");
     }
 
-    const getCustomerDetails = async () => {
+    const getCustomerDetails = async (payload:ICustomerFilter) => {
         setState((draft) => {
             draft.customerLoading = true;
           });
           
+          debugger;
           try {
              
-            const customerList : ICustomerDetailsResponse = await API.get(API_CUSTOMER.getCustomer );
+            const customerList : ICustomerDetailsResponse = await API.get(API_CUSTOMER.getCustomer,payload); 
              const newCustomerList = customerList.value.map((customer)=>{
+              customer.full_name = `${customer.first_name} ${customer.last_name}`;
+              customer.address = `${customer.suite_number} ${customer.street} ${customer.city} ${customer.state_name} ${customer.zipcode}`
 
             return customer;
         })
@@ -89,19 +92,18 @@ export const useCustomerContext = () => {
         }
       };
     
-      const deleteCustomer = async (customerToDeleted: ICustomerDetails[]) => {
+      const deleteCustomer = async ( customer_ids: number[]) => {
         setState((draft) => {
           draft.customerLoading = true;
         });
-    
+      
         clearSuccessAndFailure();
-    
+      
         try {
-            customerToDeleted.forEach((customer) => {
-             API.del(`${API_CUSTOMER.deleteCustomer}/${customer.customer_id}`); 
-          });
-    
-          setTimeout(() => getCustomerDetails(), 200);
+        let response = await API.del(`${API_CUSTOMER.deleteCustomer}/delete`, customer_ids);
+          
+          return response;
+
         } catch (error: any) {
           console.log(error);
           setState((draft) => {
@@ -263,20 +265,18 @@ export const useCustomerContext = () => {
         }
       };
     
-      const deleteContact = async (contactToDeleted: ICustomerContacts[]) => {
+      const deleteContact = async (customer_id: number, contact_ids: number[]) => {
         setState((draft) => {
           draft.customerLoading = true;
         });
-    
+      
         clearSuccessAndFailure();
-        let customer_id = 0;
+      
         try {
-          contactToDeleted.forEach((contact) => {
-            customer_id = contact.customer_id;
-            API.del(`${API_CUSTOMER.getCustomer}/${customer_id}/contact/${contact.contact_id}${API_CUSTOMER.deleteContacts}`); 
-          });
-    
+        let response = await API.del(`${API_CUSTOMER.getCustomer}/${customer_id}/contact${API_CUSTOMER.deleteContacts}`, contact_ids);
           setTimeout(() => getContacts(customer_id), 200);
+          return response;
+
         } catch (error: any) {
           console.log(error);
           setState((draft) => {
@@ -284,6 +284,7 @@ export const useCustomerContext = () => {
           });
         }
       };
+
     
       const clearSuccessAndFailure = () => {
         setState((draft) => {

@@ -4,7 +4,8 @@ export interface ISideMenuObject {
     link:string;
     hasSubmenu:boolean;
     isOpen: boolean;
-    icon:string;   
+    icon:string;
+    submenuItems:ISideMenuObject[]; 
 }
 
 export const sideMenuInitialState:ISideMenuObject={
@@ -14,4 +15,5 @@ export const sideMenuInitialState:ISideMenuObject={
     hasSubmenu:false,
     isOpen:false,
     icon:"",
+    submenuItems:[]
 }

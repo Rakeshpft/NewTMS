@@ -29,7 +29,7 @@ export const useTrailerContext = () => {
     try {
       const response: IAPIResponse = await API.get(`${API_TRAILER.getIndividualTrailer}/${id}`);
       setState((draft) => {
-        draft.trailerDetail = response.value;
+      draft.trailerDetail = response.value;
         draft.isLoading = false;
       })
       return response.value;

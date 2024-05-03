@@ -4,6 +4,7 @@ import { API_LIST } from "../api-helper/api.constant";
 import { API } from "../api-helper/api.services";
 import { IAPIResponse } from "../tms-objects/response.types";
 import lscache from "lscache";
+import { IDriverFilter, ITrailerFilter, ITruckFilter, driverFilterInitialState } from "../tms-objects/list.types";
 
 export const useListContext = () => {
   const { list, setList } = useContext(ListUpdateContext);
@@ -343,22 +344,109 @@ export const useListContext = () => {
       return lscache.get("eldProviderList");
     }
   }
-  const getDriverList = async (isRefresh: boolean = false) => {
+  const getPayRateTypeList = async (isRefresh: boolean = false) => {
     setList((draft) => { draft.listLoading = true; });
-    if (!lscache.get("driverList") || isRefresh) {
+    if (!lscache.get("payRateTypeList") || isRefresh) {
       try {
-        const driverResponse: IAPIResponse = await API.get(API_LIST.getDrivers);
-        setList((draft) => { draft.driverList = driverResponse.value; draft.listLoading = false; });
-        lscache.set("driverList", driverResponse.value);
-        return driverResponse.value;
+        const payRateTypeResponse: IAPIResponse = await API.get(API_LIST.getPayRateType);
+        setList((draft) => { draft.payRateTypeList = payRateTypeResponse.value; draft.listLoading = false; });
+        lscache.set("payRateTypeList", payRateTypeResponse.value);
+        return payRateTypeResponse.value;
       }
       catch (error: any) { console.log(error); }
       setList((draft) => { draft.listLoading = false; });
     }
     else {
-      setList((draft) => { draft.driverList = lscache.get("driverList"); draft.listLoading = false; });
-      return lscache.get("driverList");
+      setList((draft) => { draft.payRateTypeList = lscache.get("payRateTypeList"); draft.listLoading = false; });
+      return lscache.get("payRateTypeList");
     }
+  }
+  const getDriverList = async (payload:IDriverFilter=driverFilterInitialState) => {
+    setList((draft) => { draft.listLoading = true; });
+      try {
+        const driverResponse: IAPIResponse = await API.get(API_LIST.getDrivers,payload);
+        setList((draft) => { draft.driverList = driverResponse.value; draft.listLoading = false; });
+        return driverResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+  }
+  const getVendorList = async () => {
+    setList((draft) => { draft.listLoading = true; });
+      try {
+        const vendorResponse: IAPIResponse = await API.get(API_LIST.getVendors);
+        setList((draft) => { draft.vendorList = vendorResponse.value; draft.listLoading = false; });
+        return vendorResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+  }
+  const getTruckList = async (payload:ITruckFilter) => {
+    setList((draft) => { draft.listLoading = true; });
+      try {
+        const truckResponse: IAPIResponse = await API.get(API_LIST.getTrucks,payload);
+        setList((draft) => { draft.truckList = truckResponse.value; draft.listLoading = false; });
+        return truckResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+  }
+  const getTrailerList = async (payload:ITrailerFilter) => {
+    setList((draft) => { draft.listLoading = true; });
+      try {
+        const trailerResponse: IAPIResponse = await API.get(API_LIST.getTrailers,payload);
+        setList((draft) => { draft.trailerList = trailerResponse.value; draft.listLoading = false; });
+        return trailerResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+  }
+  const getDispatcherList = async () => {
+    setList((draft) => { draft.listLoading = true; });
+      try {
+        const dispatcherResponse: IAPIResponse = await API.get(API_LIST.getDispatchers);
+        setList((draft) => { draft.dispatcherList = dispatcherResponse.value; draft.listLoading = false; });
+        return dispatcherResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+  }
+  const getFuelCardList = async (driver_id:number) => {
+    setList((draft) => { draft.listLoading = true; });
+      try {
+        const fuelCardResponse: IAPIResponse = await API.get(`${API_LIST.getFuelCards}/${driver_id}`);
+        setList((draft) => { draft.fuelCardList = fuelCardResponse.value; draft.listLoading = false; });
+        return fuelCardResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+  }
+  const getPaymentMethodList = async (isRefresh:boolean=false) => {    
+    setList((draft) => { draft.listLoading = true; });
+    if (!lscache.get("paymentMethodList") || isRefresh) {
+      try {
+        const paymentMethodResponse: IAPIResponse = await API.get(`${API_LIST.getPaymentMethods}`);
+        setList((draft) => { draft.paymentMethodList = paymentMethodResponse.value; draft.listLoading = false; });
+        lscache.set("paymentMethodList", paymentMethodResponse.value);
+        return paymentMethodResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
+    }
+    else {
+      setList((draft) => { draft.paymentMethodList = lscache.get("paymentMethodList"); draft.listLoading = false; });
+      return lscache.get("paymentMethodList");
+    }
+  }
+  const getLoadStopList = async (load_id:number) => {
+    setList((draft) => { draft.listLoading = true; });
+      try {
+        const loadStopResponse: IAPIResponse = await API.get(`${API_LIST.getLoadStops}/${load_id}`);
+        setList((draft) => { draft.loadStopList = loadStopResponse.value; draft.listLoading = false; });
+        return loadStopResponse.value;
+      }
+      catch (error: any) { console.log(error); }
+      setList((draft) => { draft.listLoading = false; });
   }
   return {
     ...list,
@@ -381,6 +469,14 @@ export const useListContext = () => {
     getScheduleTypeList,
     getScheduleRepeatList,
     getELDProviderList,
-    getDriverList
+    getPayRateTypeList,
+    getDriverList,
+    getVendorList,
+    getTruckList,
+    getTrailerList,
+    getDispatcherList,
+    getFuelCardList,
+    getPaymentMethodList,
+    getLoadStopList
   }
 }

@@ -1,12 +1,15 @@
 
-import React from "react";
+import React, { useState } from "react";
 import {
-  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  Row,
 } from "reactstrap";
 import CommonLayOut from "../../../layout";
-import { TabPage } from "../../driver-page";
 import TrailerDetails from "./trailer-detail/trailer-detail";
 import DocumentsDetails from "./trailer-documents/trailer-document-detail";
+import { toastify } from "../../../features/notification/toastify";
 
 export interface ITrailerProps {
   trailer_id?: number;
@@ -19,32 +22,55 @@ const CreateNewTrailerForm = (props: ITrailerProps) => {
     trailer_id = 0,
     handleSubmit = undefined
   } = props;
-debugger;
+
+  const [trailerActive, setTrailerActive] = useState(1);
+
+  const handleClick = (tabId: number) => {
+    if (trailer_id > 0) {
+      setTrailerActive(tabId);
+    } else {
+      toastify({
+        message: "Please save the Trailer details first.",
+        type: "error",
+      });
+    }
+  };
   
   return (
     <>
     
       <CommonLayOut>
-        <div className="page-title">{trailer_id == 0 ? "New Trailer " : "Edit Trailer"}</div>
-        <TabPage
-          tabTitles={[
-            "Details",
-            "Documents",
-          ]}
-          disabledTabs={trailer_id === 0 ? [1, 2, 3] : []}
-        >
-          
-          <TabPane tabId={1} className="Details">
-            <TrailerDetails trailer_id={trailer_id} handleSubmit={handleSubmit} />
-          </TabPane>
-          <TabPane tabId={2} className="Documents">
-            <DocumentsDetails trailer_id={trailer_id} />
-          </TabPane>
+      <Row className="page-title">
+      <div className="page-title">{trailer_id == 0 ? "New Trailer " : "Edit Trailer"}</div>
+      </Row>
+      <Nav tabs>
+        <NavItem>
+          <NavLink className={trailerActive == 1 ? "active" : ""} onClick={() => handleClick(1)}>
+            Details
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className={trailerActive == 2 ? "active" : ""} onClick={() => handleClick(2)}>
+            Documents
+          </NavLink>
+        </NavItem>
+       
+      </Nav>
+
+        {
+          {
+            1: <TrailerDetails trailer_id={trailer_id} handleSubmit={handleSubmit} />,
+
+            2: <DocumentsDetails trailer_id={trailer_id} />,
+
+      
+          }[trailerActive]
+        }
+    
+    </CommonLayOut>
 
 
 
-        </TabPage>
-      </CommonLayOut>
     </>
   );
 };

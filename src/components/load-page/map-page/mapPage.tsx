@@ -4,7 +4,7 @@ import MapShow from "./mapShow";
 
 const MapPage = () => {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey : 'AIzaSyBlic5scF6ExE5qp4PSVrpvN2j5K7R47Tw',
+    googleMapsApiKey : 'AIzaSyCjcFMNmB-oZA3nQ6yKO52EHK4gUv97pJA',
      libraries: ["places"] ,
   });
   if (!isLoaded) return <div>Loading</div>;

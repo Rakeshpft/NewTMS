@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ITruckDocument, initialStateTruckDocument } from '../../../../../services/tms-objects/truck.types';
-import moment from 'moment';
-import { HiOutlinePencilAlt } from 'react-icons/hi';
+import { HiOutlineDocumentDownload, HiOutlinePencilAlt } from 'react-icons/hi';
 import { Button, Col, Container, Form, FormGroup, Input, Label, Modal, ModalBody, ModalHeader, Row } from 'reactstrap';
 import { isEmpty } from 'lodash';
 import { AiOutlinePlus } from 'react-icons/ai';
@@ -9,8 +8,9 @@ import { RxCross2 } from 'react-icons/rx';
 import { CustomTable } from '../../../../../features/data-table/CustomTable';
 import { useTruckContext } from '../../../../../services/reducer/truck.reducer';
 import { toastify } from '../../../../../features/notification/toastify';
-import { Convert, Dictionary } from '../../../../../features/validation/general-helper';
 import ReactDatePicker from 'react-datepicker';
+import { Convert, Dictionary, Helper } from '../../../../../features/shared/helper';
+import { LoadingContext } from '../../../../../services/context/loading.context';
 
 export type ITruckProps = {
   truck_id?: number,
@@ -20,9 +20,12 @@ const AnnualInspection = (props: ITruckProps) => {
   const{
     truck_id= 0,
   }=props
+ 
+
+  const { setLoader } = useContext(LoadingContext);
+
   const{postAnnualInspectionDocument, documentAnnualInspectionList,getAnnualInspectionDocument,deleteAnnualInspectionDocument } = useTruckContext();
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
-  const[title,setTitle] = useState(true);
   const [truckDocument, setTruckDocument] = useState<ITruckDocument>(initialStateTruckDocument);
   const [truckDocumentList, setTruckDocumentList] = useState<ITruckDocument[]>([]);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -44,6 +47,8 @@ const AnnualInspection = (props: ITruckProps) => {
     }
   },[documentAnnualInspectionList])
 
+
+
   const UploadModalClose = () => {
     setUploadModalOpen(false);
     setTruckDocument(initialStateTruckDocument)
@@ -60,23 +65,34 @@ const AnnualInspection = (props: ITruckProps) => {
 
   const handleSaveDocument = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if(new Date(truckDocument.expiry_date) < new Date(truckDocument.issue_date)){
+
+    const data: ITruckDocument = { ...truckDocument };
+    data.file = truckDocument.file == null ? new File([], "") : truckDocument.file;
+    if(data.file.size==0 && data.document_id == 0){
+      toastify({ message: "Please upload document.", type:"error", });
+      return;
+    }
+    if(new Date(data.expiry_date) < new Date(data.issue_date)){
       toastify({message: "Expiry date must be after the issue date", type: "error" });
     }
-   else if(truckDocument.file || truckDocument.document_id> 0){
+   else if(data.file.size >0 || data.document_id> 0){
+    setLoader(true);
      postAnnualInspectionDocument(truck_id,truckDocument).then((data : any ) => {
         data && toastify({ message: data.message, type: data.success ? "success" : "error", });
         data.success && getAnnualInspectionDocument(truck_id);
         UploadModalClose();
+        setLoader(false);
       });
     }
   }
 
   const handleDeleteDocuments = () => {
-    const deletedDocumentIds = selectedDocuments.map(doc => doc.document_id);  
+    const deletedDocumentIds = selectedDocuments.map(doc => doc.document_id); 
+    setLoader(true); 
     deleteAnnualInspectionDocument(truck_id, deletedDocumentIds).then(response => {
         response && toastify({ message: response.message, type: response.success ? "success" : "error" });
         response.success && getAnnualInspectionDocument(truck_id);
+        setLoader(false);
     })  
     setDeleteModalOpen(false);
     setSelectedDocuments([]);
@@ -93,7 +109,7 @@ const AnnualInspection = (props: ITruckProps) => {
       setTruckDocument(filteredData[0])
     }
     setUploadModalOpen(true);
-    setTitle(false);
+    
   }
   
   const closeBtn = (
@@ -112,35 +128,30 @@ const columns: CustomTableColumn[] = [
   {
     id: 'issue_date',
     name: 'ISSUE DATE',
-    style: { width: '10%' },
+    style: { width: '40%' },
     sortable: true,
     selector: (row: ITruckDocument) => row.issue_date,
-    format: (row: ITruckDocument) =>  moment(row.issue_date).format('L')
+    format: (row: ITruckDocument) =>  Convert.ToUserDate(row.issue_date)
   },
   {
     id: 'expiry_date',
     name: 'EXPIRY DATE',
-    style: { width: '10%' },
+    style: { width: '40%' },
     sortable: true,
     selector: (row: ITruckDocument) => row.expiry_date,
-    format: (row: ITruckDocument) =>  moment(row.expiry_date).format('L')
+    format: (row: ITruckDocument) =>  Convert.ToUserDate(row.expiry_date)
   },
-  {
-    id: 'attachment',
-    name: 'ATTACHMENT',
-    style: { width: '30%' },
-    sortable: true,
-    selector: (row: ITruckDocument) => row.attachment,
-    cell:(row:ITruckDocument)=><a href={row.attachment} target='_blank' download={true}>{row.attachment}</a>
-  },
-
   {
     id: "action",
-    name: "Action",
-    style: { width: "5%" },
-    sortable: true,
+    name: "ACTION",
+    style: { width: "15%" },
+    sortable: false,
     selector: (row: ITruckDocument) => row.document_id,
-    cell: (row: ITruckDocument) => <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={()=>{ handleEditDocument(row.document_id) }} />
+    cell: (row: ITruckDocument) => 
+      <>
+          <HiOutlineDocumentDownload className='me-2' size={22} style={{ cursor: "pointer" }} onClick={()=>{Helper.FileDownload(row.attachment_url)}} />
+          <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={()=>{ handleEditDocument(row.document_id) }} />
+      </>
   }
 ];
 
@@ -162,7 +173,7 @@ const columns: CustomTableColumn[] = [
           </Button>
         </div>
       )}
-      <Button color="success" outline={true} onClick={()=>{setUploadModalOpen(true),setTitle(true)}}>
+      <Button color="success" outline={true} onClick={()=>{setUploadModalOpen(true)}}>
         <AiOutlinePlus /> Upload
       </Button>
     </label>
@@ -173,7 +184,7 @@ const columns: CustomTableColumn[] = [
       <Modal isOpen={uploadModalOpen} onClose={UploadModalClose}>
       <ModalHeader close={closeBtn}
                  onClose={() => UploadModalClose()}>
-        <h6 className="mb-0 fw-bold">  {title ? "New Document " : "Edit Document"} </h6>
+      <h6 className="mb-0 fw-bold">{truckDocument.document_id > 0 ? "Edit Annual Inspection" : "Add Annual Inspection" } </h6>
         </ModalHeader>
         <ModalBody
         className="square border border-info-rounded">
@@ -184,9 +195,9 @@ const columns: CustomTableColumn[] = [
           <FormGroup>
           <Label for="Issue_date">Issue Date</Label>
         {/* <Input bsSize="sm" className="form-control form-control-sm" type="date" id="Hire_date" name="Hire_date" value={truckDocument.issue_date} onChange={handleDocumentInput('issue_date')} */}
-        <ReactDatePicker showYearDropdown showMonthDropdown placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="issue_date" className="form-control form-control-sm" onChange={(date)=>{setTruckDocument({...truckDocument,issue_date: Convert.ToISODate(date) })}} selected={Convert.ToDate(truckDocument.issue_date)} 
+        <ReactDatePicker  showYearDropdown showMonthDropdown showIcon fixedHeight isClearable onKeyDown={(event)=>{event.preventDefault()}} placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="issue_date" className="form-control form-control-sm" onChange={(date)=>{setTruckDocument({...truckDocument,issue_date: Convert.ToISODate(date) })}} selected={Convert.ToDate(truckDocument.issue_date)} 
 
-       required />
+       required autoComplete='off' />
         
           </FormGroup>
           </Col>
@@ -194,9 +205,9 @@ const columns: CustomTableColumn[] = [
           <FormGroup>
           <Label for="Expiry_date">Expiry Date</Label>
           {/* <Input bsSize="sm" className="form-control form-control-sm" type="date" id="termination_date" value={truckDocument.expiry_date} name="expiry_date" onChange={handleDocumentInput('expiry_date')} */}
-          <ReactDatePicker showYearDropdown showMonthDropdown placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="expiry_date" className="form-control form-control-sm" onChange={(date)=>{setTruckDocument({...truckDocument,expiry_date: Convert.ToISODate(date) })}} selected={Convert.ToDate(truckDocument.expiry_date)} 
+          <ReactDatePicker  showYearDropdown showMonthDropdown showIcon fixedHeight isClearable onKeyDown={(event)=>{event.preventDefault()}} placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="expiry_date" className="form-control form-control-sm" onChange={(date)=>{setTruckDocument({...truckDocument,expiry_date: Convert.ToISODate(date) })}} selected={Convert.ToDate(truckDocument.expiry_date)} 
 
-          required  />
+          required autoComplete='off'/>
         
         </FormGroup>
         </Col>
@@ -215,15 +226,14 @@ const columns: CustomTableColumn[] = [
       </Modal>
       <Modal isOpen={deleteModalOpen} onClose={closeDeleteModal}>
           <ModalHeader>
-            <h6 className="mb-0 fw-bold"> Delete </h6>
+            <h6 className="mb-0 fw-bold">Delete Document</h6>
           </ModalHeader>
           <ModalBody>
             <Container>
               {!isEmpty(selectedDocuments) && (
                 <div className=" my-3 " >
-                  {selectedDocuments.length > 1
-                    ? `Are you sure you want to delete ${selectedDocuments.length} Documents?`
-                    : `Are you sure you want to delete document  " ${selectedDocuments[0].attachment}"?`}
+                  {selectedDocuments.length > 1?(<div>You have selected {selectedDocuments.length} documents.<br /></div>):null}
+                  Are you sure you want to delete?
                 </div>
               )}
               <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">

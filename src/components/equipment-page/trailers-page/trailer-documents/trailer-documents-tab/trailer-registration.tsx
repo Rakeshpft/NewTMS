@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { Button, Col, Container, Form, FormGroup, Input, Label, Modal, ModalBody, ModalHeader, Row } from 'reactstrap'
-import { HiOutlinePencilAlt } from 'react-icons/hi'
-import moment from 'moment'
+import { HiOutlineDocumentDownload, HiOutlinePencilAlt } from 'react-icons/hi'
 import { isEmpty } from 'lodash'
 import { ITrailerDocument, TtrailerProps, trailerDocumentInitialState } from '../../../../../services/tms-objects/trailer.types'
 import { useTrailerContext } from '../../../../../services/reducer/trailer.reducer'
 import { CustomTable } from '../../../../../features/data-table/CustomTable'
 import ReactDatePicker from 'react-datepicker'
-import { Convert, Dictionary } from '../../../../../features/validation/general-helper'
 import { toastify } from '../../../../../features/notification/toastify'
+import { Convert, Dictionary, Helper } from '../../../../../features/shared/helper'
+import { LoadingContext } from '../../../../../services/context/loading.context'
 
 
 const RegistrationDocuments = (props: TtrailerProps) => {
@@ -18,6 +18,7 @@ const RegistrationDocuments = (props: TtrailerProps) => {
     } = props;
     const { getRegistraionDocument, RegistrationDocumentList, postRegistraionDocument, deleteRegistraionDocument } = useTrailerContext();
     const [uploadModalOpen, setUploadModalOpen] = useState(false);
+    const { setLoader } = useContext(LoadingContext);
     const [trailerDocument, setTrailerDocument] = useState<ITrailerDocument>(trailerDocumentInitialState);
     const [trailerDocumentList, setTrailerDocumentList] = useState<ITrailerDocument[]>([]);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -53,25 +54,37 @@ const RegistrationDocuments = (props: TtrailerProps) => {
         }
     }
 
-    const handleSaveDocument = (event: React.ChangeEvent<HTMLFormElement>) => {
+    const handleSaveDocument = async (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
         if(new Date(trailerDocument.expiry_date) < new Date(trailerDocument.issue_date)){
             toastify({message: "Expiry date must be after the issue date", type: "error"});
+            return;
         }
-        else if (trailerDocument.file) {
-            postRegistraionDocument(trailer_id, trailerDocument).then((data: any) => {
-                data && toastify({ message: data.message, type: data.success ? "success" : "error", });
-                data.success && getRegistraionDocument(trailer_id);
-                UploadModalClose();
-            });
+        const data: ITrailerDocument = { ...trailerDocument };
+        data.file = trailerDocument.file == null ? new File([], "") : trailerDocument.file;
+        if (data.file.size == 0 && data.document_id == 0) {
+          toastify({ message: "Please upload document.", type: "error", });
+          return;
         }
-    }
+        if (data.file.size > 0 || data.document_id > 0) {
+            setLoader(true)
+          await postRegistraionDocument(trailer_id, data).then((response: any) => {
+            response && toastify({ message: response.message, type: response.success ? "success" : "error", });
+            getRegistraionDocument(trailer_id)
+            UploadModalClose();
+            setLoader(false)
+          });
+        }
+      }
+
 
     const handleDeleteDocuments = () => {
         const deletedDocumentIds = selectedDocuments.map(doc => doc.document_id);
+        setLoader(true)
         deleteRegistraionDocument(trailer_id, deletedDocumentIds).then(response => {
             response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
-            response.success && getRegistraionDocument(trailer_id);                
+            response.success && getRegistraionDocument(trailer_id);    
+            setLoader(false)            
         })
         setSelectedDocuments([]);
     };
@@ -91,37 +104,32 @@ const RegistrationDocuments = (props: TtrailerProps) => {
 
     const columns: CustomTableColumn[] = [
         {
-            id: "created_date",
+            id: "issue_date",
             name: "ISSUE DATE",
-            style: { width: "10%" },
+            style: { width: "40%" },
             sortable: true,
             selector: (row: ITrailerDocument) => row.issue_date,
-            format: (row: ITrailerDocument) => moment(row.issue_date).format('L')
+            format: (row: ITrailerDocument) => Convert.ToUserDate(row.issue_date)
         },
         {
-            id: "created_date",
-            name: "EXP DATE",
-            style: { width: "10%" },
+            id: "expiry_date",
+            name: "EXPIRY DATE",
+            style: { width: "40%" },
             sortable: true,
             selector: (row: ITrailerDocument) => row.expiry_date,
-            format: (row: ITrailerDocument) => moment(row.expiry_date).format('L')
+            format: (row: ITrailerDocument) => Convert.ToUserDate(row.expiry_date)
         },
         {
-            id: "attachment",
-            name: "Attachment",
-            style: { width: "30%" },
-            sortable: true,
-            selector: (row: ITrailerDocument) => row.attachment,
-            cell: (row: ITrailerDocument) => <a href={row.attachment} target='_blank' download={true}>{row.attachment}</a>
-          },
-
-        {
             id: "action",
-            name: "Action",
-            style: { width: "5%" },
-            sortable: true,
+            name: "ACTION",
+            style: { width: "15%" },
+            sortable: false,
             selector: (row: ITrailerDocument) => row.document_id,
-            cell: (row: ITrailerDocument) => <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={() => { handleEditDocument(row.document_id); }} />
+            cell: (row: ITrailerDocument) => 
+            <>
+                <HiOutlineDocumentDownload className='me-2' size={22} style={{ cursor: "pointer" }} onClick={()=>{Helper.FileDownload(row.attachment_url)}} />
+                <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={() => { handleEditDocument(row.document_id); }} />
+            </>
         }
     ]
 
@@ -153,7 +161,7 @@ const RegistrationDocuments = (props: TtrailerProps) => {
 
             <Modal isOpen={uploadModalOpen} onClose={UploadModalClose}>
                 <ModalHeader>
-                    <h6 className="mb-0 fw-bold">Edit Document </h6>
+                <h6 className="mb-0 fw-bold">{trailerDocument.trailer_id == 0 ? "Add Registration Document" : "Edit Registration Document"}</h6>
                 </ModalHeader>
                 <ModalBody
                     className="square border border-info-rounded">
@@ -163,24 +171,20 @@ const RegistrationDocuments = (props: TtrailerProps) => {
                         <Row className="page-content align-items-center">
                             <Col md={6}>
                                 <FormGroup>
-                                    <Label for="issue_date">ISSUE Date</Label>
-                                    <ReactDatePicker showYearDropdown showMonthDropdown placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="issue_date" className="form-control form-control-sm" onChange={(date) => { setTrailerDocument({ ...trailerDocument, issue_date: Convert.ToISODate(date) }) }} selected={Convert.ToDate(trailerDocument.issue_date)} >
-
-                                    </ReactDatePicker>
+                                    <Label for="issue_date">Issue Date</Label>
+                                    <ReactDatePicker  showYearDropdown showMonthDropdown showIcon fixedHeight isClearable onKeyDown={(event)=>{event.preventDefault()}} placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="issue_date" className="form-control form-control-sm" onChange={(date) => { setTrailerDocument({ ...trailerDocument, issue_date: Convert.ToISODate(date) }) }} selected={Convert.ToDate(trailerDocument.issue_date)} autoComplete="off" required />
                                 </FormGroup>
                             </Col>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Label for="expiry_date">EXP Date</Label>
-                                    <ReactDatePicker showYearDropdown showMonthDropdown placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="expiry_date" className="form-control form-control-sm" onChange={(date) => { setTrailerDocument({ ...trailerDocument, expiry_date: Convert.ToISODate(date) }) }} selected={Convert.ToDate(trailerDocument.expiry_date)} >
-
-                                    </ReactDatePicker>
+                                    <Label for="expiry_date">Expiry Date</Label>
+                                    <ReactDatePicker  showYearDropdown showMonthDropdown showIcon fixedHeight isClearable onKeyDown={(event)=>{event.preventDefault()}} placeholderText={Dictionary.UserDateFormat.toUpperCase()} dateFormat={Dictionary.UserDateFormat} name="expiry_date" className="form-control form-control-sm" onChange={(date) => { setTrailerDocument({ ...trailerDocument, expiry_date: Convert.ToISODate(date) }) }} selected={Convert.ToDate(trailerDocument.expiry_date)} autoComplete="off" required />
                                 </FormGroup>
                             </Col>
                         </Row>
                         <Label>Upload File</Label>
                         <FormGroup>
-                            <Input type="file" name="file" id="file" onChange={handleFileUpload} />
+                            <Input type="file" name="file" id="file" onChange={handleFileUpload} autoComplete="off" />
                         </FormGroup>
 
                         <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">
@@ -194,15 +198,14 @@ const RegistrationDocuments = (props: TtrailerProps) => {
 
             <Modal isOpen={deleteModalOpen} onClose={closeDeleteModal}>
                 <ModalHeader>
-                    <h6 className="mb-0 fw-bold"> Delete </h6>
+                    <h6 className="mb-0 fw-bold"> Delete Document</h6>
                 </ModalHeader>
                 <ModalBody>
                     <Container>
                         {!isEmpty(selectedDocuments) && (
                             <div className=" my-3 " >
-                                {selectedDocuments.length > 1
-                                    ? `Are you sure you want to delete ${selectedDocuments.length} Documents?`
-                                    : `Are you sure you want to delete   " ${selectedDocuments[0].name}"?`}
+                               {selectedDocuments.length > 1?(<div>You have selected {selectedDocuments.length} documents.<br /></div>):null}
+                                Are you sure you want to delete?
                             </div>
                         )}
                         <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">

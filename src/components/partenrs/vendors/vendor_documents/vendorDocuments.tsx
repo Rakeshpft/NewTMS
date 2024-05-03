@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { Button, Col, Container, Form, FormGroup, Input, Label, Modal, ModalBody, ModalHeader } from 'reactstrap'
 import { IVendorDocument, TVendorProps, vendorDocumentInitialState } from '../../../../services/tms-objects/vendor.types'
 import { useVendorContext } from '../../../../services/reducer/vendor.reducer'
-import { HiOutlinePencilAlt } from 'react-icons/hi'
+import { HiOutlineDocumentDownload, HiOutlinePencilAlt } from 'react-icons/hi'
 import { CustomTable } from '../../../../features/data-table/CustomTable'
-import moment from 'moment'
 import { isEmpty } from 'lodash'
+import { toastify } from '../../../../features/notification/toastify'
+import { Convert, Helper } from '../../../../features/shared/helper'
+import { Validate } from '../../../../features/shared/validate'
+import { LoadingContext } from '../../../../services/context/loading.context'
 
 const CustomerDocuments = (props: TVendorProps) => {
   const {
@@ -14,6 +17,7 @@ const CustomerDocuments = (props: TVendorProps) => {
   } = props;
   const { getVendorDocument, DocumentList, postVendorDocument, VendorLoading, deleteDocument } = useVendorContext();
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
+  const { setLoader } = useContext(LoadingContext);
   const [vendorDocument, setVendorDocument] = useState<IVendorDocument>(vendorDocumentInitialState);
   const [vendorDocumentList, setVendorDocumentList] = useState<IVendorDocument[]>([]);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -55,13 +59,21 @@ const CustomerDocuments = (props: TVendorProps) => {
     }
   }
 
-  const handleSaveDocument = (event: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSaveDocument = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (vendorDocument.file) {
-      postVendorDocument(vendor_id, vendorDocument).then((data: any) => {
-        console.log("getdata", data);
-        getVendorDocument(vendor_id);
+    const data: IVendorDocument = { ...vendorDocument };
+    data.file = vendorDocument.file == null ? new File([], "") : vendorDocument.file;
+    if (data.file.size == 0 && data.document_id == 0) {
+      toastify({ message: "Please upload document.", type: "error", });
+      return;
+    }
+    if (data.file.size > 0 || data.document_id > 0) {
+      setLoader(true)
+      await postVendorDocument(vendor_id, data).then((response: any) => {
+        response && toastify({ message: response.message, type: response.success ? "success" : "error", });
+        getVendorDocument(vendor_id)
         UploadModalClose();
+        setLoader(false)
       });
     }
   }
@@ -70,25 +82,23 @@ const CustomerDocuments = (props: TVendorProps) => {
 
   const handleDeleteDocuments = () => {
     const deletedDocumentIds = selectedDocuments.map(doc => doc.document_id);
-
-    deleteDocument(vendor_id, deletedDocumentIds)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.error("Error:", error);
-      });
-  };
-
+    setLoader(true)
+    deleteDocument(vendor_id, deletedDocumentIds).then(response => {
+      response &&
+        toastify({
+          message: response.message,
+          type: response.success ? "success" : "error",
+        })
+        setDeleteModalOpen(false);
+        setSelectedDocuments([]);
+        setLoader(false)
+    })
+  }
 
   const closeDeleteModal = () => {
     setDeleteModalOpen(false);
     setSelectedDocuments([]);
-
   };
-
-
-
 
   const handleEditDocument = (id: number) => {
     const filteredData = vendorDocumentList?.filter(l => l.document_id == id)
@@ -102,33 +112,37 @@ const CustomerDocuments = (props: TVendorProps) => {
     {
       id: "created_date",
       name: "Date",
-      style: { width: "10%" },
+      style: { width: "20%" },
       sortable: true,
       selector: (row: IVendorDocument) => row.created_date,
-      format: (row: IVendorDocument) => moment(row.created_date).format('L')
+      format: (row: IVendorDocument) => Convert.ToUserDate(row.created_date)
     },
-    {
-      id: "document_name",
-      name: "Name",
-      style: { width: "30%" },
-      sortable: true,
-      selector: (row: IVendorDocument) => row.document_name,
-      cell: (row: IVendorDocument) => <a href={row.document_url} target='_blank' download={true}>{row.document_name}</a>
-    },
+    // {
+    //   id: "document_name",
+    //   name: "Name",
+    //   style: { width: "30%" },
+    //   sortable: true,
+    //   selector: (row: IVendorDocument) => row.document_name,
+    //   cell: (row: IVendorDocument) => <a href={row.document_url} target='_blank' download={true}>{row.document_name}</a>
+    // },
     {
       id: "notes",
       name: "Notes",
-      style: { width: "50%" },
+      style: { width: "65%" },
       sortable: true,
       selector: (row: IVendorDocument) => row.notes
     },
     {
       id: "action",
       name: "Action",
-      style: { width: "5%" },
+      style: { width: "10%" },
       sortable: true,
       selector: (row: IVendorDocument) => row.document_id,
-      cell: (row: IVendorDocument) => <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={() => { handleEditDocument(row.document_id); }} />
+      cell: (row: IVendorDocument) => 
+      <>
+      <HiOutlineDocumentDownload className='me-2' size={22} style={{ cursor: "pointer" }} onClick={()=>{Helper.FileDownload(row.document_url)}} />
+      <HiOutlinePencilAlt size={20} style={{ cursor: "pointer" }} onClick={() => { handleEditDocument(row.document_id); }} />
+    </>
     }
   ]
 
@@ -160,17 +174,17 @@ const CustomerDocuments = (props: TVendorProps) => {
 
       <Modal isOpen={uploadModalOpen} onClose={UploadModalClose}>
         <ModalHeader>
-          <h6 className="mb-0 fw-bold">Edit Document </h6>
+        <h6 className="mb-0 fw-bold">{vendorDocument.vendor_id == 0 ? "Upload New Document" : "Edit Document"}</h6>
         </ModalHeader>
         <ModalBody
           className="square border border-info-rounded">
           <Form onSubmit={handleSaveDocument} encType="multipart/form-data" >
             <Label>Upload File</Label>
             <FormGroup>
-              <Input type="file" name="file" id="file" onChange={handleFileUpload} />
+              <Input type="file" name="file" id="file" onChange={handleFileUpload}  required/>
             </FormGroup>
             <Label for="exampleText">Notes</Label>
-            <Input id="notes" name="notes" type="textarea" value={vendorDocument.notes} onChange={handleDocumentInput("notes")} />
+            <Input id="notes" name="notes" type="textarea" value={vendorDocument.notes} onChange={handleDocumentInput("notes")} pattern='^[a-zA-Z]+$' title="Only alphabets are allowed" onKeyDownCapture={Validate} validation="chars" length="50" autoComplete="off" />
             <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">
               <Button color="primary" className="px-4 mr-3" type="submit">Save</Button>
               <Button color="danger" outline={true} className="px-4 mr-3" onClick={() => UploadModalClose()}>Cancel</Button>
@@ -182,15 +196,14 @@ const CustomerDocuments = (props: TVendorProps) => {
 
       <Modal isOpen={deleteModalOpen} onClose={closeDeleteModal}>
         <ModalHeader>
-          <h6 className="mb-0 fw-bold"> Delete </h6>
+          <h6 className="mb-0 fw-bold">Delete Document</h6>
         </ModalHeader>
         <ModalBody>
           <Container>
             {!isEmpty(selectedDocuments) && (
               <div className=" my-3 " >
-                {selectedDocuments.length > 1
-                  ? `Are you sure you want to delete ${selectedDocuments.length} Documents?`
-                  : `Are you sure you want to delete role  " ${selectedDocuments[0].document_name}"?`}
+                {selectedDocuments.length > 1?(<div>You have selected {selectedDocuments.length} documents.<br /></div>):null}
+                Are you sure you want to delete?
               </div>
             )}
             <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">

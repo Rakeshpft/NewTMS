@@ -1,242 +1,143 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Form, FormGroup, Input, InputGroup, Label, Row, TabPane } from "reactstrap";
-import { BiCheck } from "react-icons/bi";
-import { RxCross2 } from "react-icons/rx";
-//  import { LoadPage, initialLoadState } from "../tms-object/loadpage";
+import { Button, Col, Form, FormGroup, Input, InputGroup, Label, Row } from "reactstrap";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BrokerModalPage, DriverModalPage, TrailerModalPage, TruckModalPage } from "./modal";
-import { useNavigate } from "react-router-dom";
-import { routes } from "../routes/routes";
-import { useLoadContext } from "../../services/reducer/load.reducer";
 import MapPage from "./map-page/mapPage";
-import { BasicTable } from "../../features/table/BasicTable";
-import { tableHeadCells } from "./load.constant";
-import { TabPage } from "../driver-page";
 import { useListContext } from "../../services/reducer/list.reducer";
+import ReactDatePicker from "react-datepicker";
+import { Dictionary, Convert } from "../../features/shared/helper";
+import { ILoadObject, ILoadProps, LoadStopObject, initialLoad, initialLoadStop } from "../../services/tms-objects/load.type";
+import { ITrailerFilter, ITruckFilter } from "../../services/tms-objects/list.types";
+import { MdOutlineNoteAdd } from "react-icons/md";
+import AddPickupDeliveryStop from "./add-pickup-delivery-stop";
+import { TrailersPage } from "../equipment-page";
+import DriversDetails from "../driver-page/createDriver/driversDetails";
+import TruckDetails from "../equipment-page/trucks-page/truck-detail/truck-detail";
+import CustomerDetails from "../partenrs/customer/customer_detail/customerDetails";
+import { useLoadContext } from "../../services/reducer/load.reducer";
+import { toastify } from "../../features/notification/toastify";
 
-const LoadDetail = () => {
-  const { getDispatcherStatusList, loadDispatcherStatus } = useLoadContext();
-  const{ getLoadStatusList, loadStatusList, getBillingStatusList, billingStatusList, getStateList, stateList } = useListContext();
-  const navigate = useNavigate();
-  // const [formState, dispatch] = useReducer(formReducer, initialLoadState);
+const LoadDetail = (props: ILoadProps) => {
+  const { load_id = 0 } = props;
+
+  console.log(" load_id ", load_id);
+
+  const {
+    getLoadStatusList,
+    loadStatusList,
+    getBillingStatusList,
+    billingStatusList,
+    getStateList,
+    stateList,
+    getDispatcherList,
+    dispatcherList,
+    getTrailerList,
+    trailerList,
+    getTruckList,
+    truckList,
+    getDriverList,
+    driverList,
+  } = useListContext();
+
+  const { getIndividualLoad  , selectedLoad  , postLoad} = useLoadContext();
+
   const [customerModal, setCustomerModal] = useState(false);
   const [driverModal, setDriverModal] = useState(false);
   const [trailerModal, setTrailerModal] = useState(false);
   const [truckModal, setTruckModal] = useState(false);
-  // const [statusData , setStatusData] = useState<LoadPage>( initialLoadState);
 
-  const toggleCustomer = () => setCustomerModal(!customerModal);
-  const toggleDriver = () => setDriverModal(true);
-  const toggleTrailer = () => setTrailerModal(!trailerModal);
-  const toggleTruck = () => setTruckModal(!truckModal);
+  const [newLoad, setNewload] = useState<ILoadObject>(initialLoad);
+  const [pickupStopList, setPickupStopList] = useState<LoadStopObject[]>([]);
+  const [deliveryStopList, setDeliveryStopList] = useState<LoadStopObject[]>([]);
+  const [showCurrentComponent, setShowCurrentComponent] = useState(1);
 
-  // const handleInput =
-  //   (type: FormAction["type"]) =>
-  //   (
-  //     event: React.ChangeEvent<
-  //       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-  //     >
-  //   ) => {
-  //     dispatch({ type, payload: event.target.value });
-  //   };
-
-  // const handleLoadInput = (prop: keyof LoadPage) => (event: React.ChangeEvent<HTMLInputElement>) => (
-  //   setStatusData({ ...statusData, [prop]: event.target.value })
-  // )
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // getStatusList();
-    // console.log(formState);
+  const toggleCustomer = () => {
+    setShowCurrentComponent(2);
+  };
+  const toggleDriver = () => {
+    setShowCurrentComponent(3);
+  };
+  const toggleTrailer = () => {
+    setShowCurrentComponent(5);
+  };
+  const toggleTruck = () => {
+    setShowCurrentComponent(4);
   };
 
-  const handleCancleButton = () => {
-    // {
-    //   history.location.pathname === routes.dashboard
-    //     ? history.push(routes.loadpageAll)
-    //     : history.goBack();
-    // }
-    {
-      navigate(routes.loadpageAll);
-    }
-  };
+
   useEffect(() => {
+    let trailerFilter: ITrailerFilter = { unassigned: true, driver_id:0 };
+    let truckFilter: ITruckFilter = { unassigned: true, driver_id:0 };
+
     getBillingStatusList();
     getLoadStatusList();
     getStateList();
-    getDispatcherStatusList();
+    getDispatcherList();
+    getTrailerList(trailerFilter);
+    getTruckList(truckFilter);
+    getDriverList();
   }, []);
 
-  return (
-    <main>
-      <Form onSubmit={handleSubmit}>
-        <Row className="page-title">
-          <Col lg={12}>Create New Load</Col>
-        </Row>
-        <Row className="page-content">
-          <Row className="page-subtitle">
-            <Col lg={12}>Pickup</Col>
-          </Row>
-          <Row>
-            <Col lg={3} md={6} sm={12}>
-              <FormGroup>
-                <Label for="pickupDate">Date</Label>
-                <Input id="pickupDate" name="pickupDate" type="date" className="form-control form-control-sm" /*value={formState.pickupDate} onChange={handleInput("SET_pickupDate")}*/ />
-              </FormGroup>
-            </Col>
-            <Col lg={3} md={6} sm={12}>
-              <FormGroup>
-                <Label for="pickupCity">City</Label>
-                <Input id="pickupCity" name="pickupCity" type="text" className="form-control form-control-sm" /*value={formState.pickupCity} onChange={handleInput("SET_pickupCity")}*/ />
-              </FormGroup>
-            </Col>
-            <Col lg={3} md={6} sm={12}>
-              <FormGroup>
-                <Label for="pickupState">State</Label>
-                <Input id="pickupState" bsSize="sm" name="pickupState" type="select" className="form-control form-control-sm" /*value={formState.pickupState} onChange={handleInput("SET_pickupState")}*/ >
-                  <option value="">Select State</option>
-                  {stateList?.map((item) => {
-                    return (
-                      <option key={item.state_id} value={item.state_id}>{item.state_name}</option>
-                    );
-                  })}
-                </Input>
-              </FormGroup>
-            </Col>
-            <Col lg={3} md={6} sm={12}>
-              <FormGroup>
-                <Label for="pickupZip">ZIP</Label>
-                <Input id="pickupZip" name="pickupZip" type="text" className="form-control form-control-sm" /*value={formState.pickupZip} onChange={handleInput("SET_pickupZip")}*/ />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row className="page-subtitle">
-            <Col lg={12}>Delivery</Col>
-          </Row>
-          <Row>
-            <Col lg={3} md={6} sm={12} >
-              <FormGroup>
-                <Label for="deliveryDate">Date</Label>
-                <Input id="deliveryDate" name="deliveryDate" type="date" className="form-control form-control-sm"  /*value={formState.deliveryDate} onChange={handleInput("SET_deliveryDate")}*/ />
-              </FormGroup>
-            </Col>
-            <Col lg={3} md={6} sm={12} >
-              <FormGroup>
-                <Label for="deliveryCity">City</Label>
-                <Input id="deliveryCity" name="deliveryCity" type="text" className="form-control form-control-sm" /*value={formState.deliveryCity} onChange={handleInput("SET_deliveryCity")}*/ />
-              </FormGroup>
-            </Col>
-            <Col lg={3} md={6} sm={12} >
-              <FormGroup>
-                <Label for="deliveryState">State</Label>
-                <Input id="deliveryState" name="deliveryState" type="select" bsSize="sm" className="form-control form-control-sm" /*value={formState.deliveryState} onChange={handleInput("SET_deliveryState")}*/>
-                  <option value="">Select State</option>
-                  {stateList?.map((item) => {
-                    return (
-                      <option key={item.state_id} value={item.state_id}>{item.state_name}</option>
-                    );
-                  })}
-                </Input>
-              </FormGroup>
-            </Col>
-            <Col lg={3} md={6} sm={12} >
-              <FormGroup>
-                <Label for="deliveryZip">ZIP</Label>
-                <Input id="deliveryZip" name="deliveryZip" bsSize="sm" type="text" className="form-control form-control-sm" /*value={formState.deliveryZip} onChange={handleInput("SET_deliveryZip")}*/ />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={12}>
-              <FormGroup>
-              <MapPage />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row className="page-subtitle">
-            <Col lg={12}>Broker</Col>
-          </Row>
-          <Row>
-            <Col lg={3} md={6} sm={12}>
-              <FormGroup>
-                <Label for="loadSelect">Broker</Label>
-                <InputGroup>
-                  <Input id="loadSelect" name="broker" type="select" bsSize="sm" className="form-control form-control-sm" /*value={formState.broker} onChange={handleInput("SET_broker")}*/ >
-                    <option value="0">Select Broker</option>
-                  </Input>
-                  <Button size="sm" style={{ backgroundColor: "#D5554D" }} onClick={toggleCustomer}>
-                    <AiOutlinePlus />
-                  </Button>
-                </InputGroup>
-              </FormGroup>
-            </Col>
-            <Col lg={3} md={6} sm={12} >
-              <FormGroup>
-                <Label for="po">PO #</Label>
-                <Input id="po" name="po" type="text" className="form-control form-control-sm" /*value={formState.po} onChange={handleInput("SET_po")}*/ />
-              </FormGroup>
-            </Col>
-            <Col lg={3} md={6} sm={12} >
-              <FormGroup>
-                <Label for="rate">Rate</Label>
-                <Input id="rate" name="rate" type="text" className="form-control form-control-sm" /*value={formState.rate} onChange={handleInput("SET_rate")}*/ />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row className="page-subtitle">
-            <Col lg={12}>Driver</Col>
-          </Row>
-          <Row>
-            <Col lg={3} md={6} sm={12}>
-              <FormGroup>
-                <Label for="driver">Driver</Label>
-                <InputGroup>
-                  <Input id="driver" name="driver" type="select" bsSize="sm" className="form-control form-control-sm" /*value={formState.driver} onChange={handleInput("SET_driver")}*/ >
-                    <option value="0">Select Driver</option>
-                  </Input>
-                  <Button size="sm" style={{ backgroundColor: "#D5554D" }} onClick={toggleDriver}>
-                    <AiOutlinePlus />
-                    <DriverModalPage isDriverOpen={driverModal} toggle={() => { setDriverModal(false); }} />
-                  </Button>
-                </InputGroup>
-              </FormGroup>
-            </Col>
-            <Col lg={3} md={6} sm={12}>
-              <FormGroup>
-                <Label for="truck">Truck</Label>
-                <InputGroup>
-                  <Input id="truck" name="truck" type="select" bsSize="sm" className="form-control form-control-sm" /*value={formState.truck} onChange={handleInput("SET_truck")}*/ >
-                    <option value="0">Select Truck</option>
-                  </Input>
-                  <Button size="sm" style={{ backgroundColor: "#D5554D" }} onClick={toggleTruck} >
-                    <AiOutlinePlus />
-                    <TruckModalPage isTruckOpen={truckModal} toggle={() => { setTruckModal(false); }} />
-                  </Button>
-                </InputGroup>
-              </FormGroup>
-            </Col>
-            <Col lg={3} md={6} sm={12}>
-              <FormGroup>
-                <Label for="trailer">Trailer</Label>
-                <InputGroup>
-                  <Input id="trailer" name="select" type="select" bsSize="sm" className="form-control form-control-sm" /*value={formState.trailer} onChange={handleInput("SET_trailer")}*/>
-                    <option value="0">Select Trailer</option>
-                  </Input>
-                  <Button size="sm" style={{ backgroundColor: "#D5554D" }} onClick={toggleTrailer} >
-                    <AiOutlinePlus />
-                    <TrailerModalPage isTrailerOpen={trailerModal} toggle={() => { setTrailerModal(false); }} />
-                  </Button>
-                </InputGroup>
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row className="page-subtitle">
+ useEffect( () => {
+if(load_id > 0){
+  getIndividualLoad(load_id);
+
+}
+ } , [load_id])
+
+useEffect(() => {
+  if(selectedLoad && load_id > 0){
+    setNewload(selectedLoad);
+    setPickupStopList(selectedLoad.pickupStopList);
+    setDeliveryStopList(selectedLoad.deliveryStopList);
+  }
+} , [selectedLoad])
+
+  const handleLoadInput = (prop: keyof ILoadObject) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewload({ ...newLoad, [prop]: event.target.value });
+  };
+
+  const handleAddPickup = () => {
+    setPickupStopList([...pickupStopList, initialLoadStop]);
+  };
+
+  const handleAddDelivery = () => {
+    setDeliveryStopList([...deliveryStopList, initialLoadStop]);
+  };
+
+
+const saveIndividualLoad = (event : React.FormEvent<HTMLFormElement>) => {
+
+   event.preventDefault();
+   postLoad( newLoad ).then((response) => {
+     response && toastify({ message: response.message, type: (response.success ? "success" : "error") });
+   })
+
+}
+
+  switch (showCurrentComponent) {
+    case 1:
+      return (
+        <>
+          <Form onSubmit={saveIndividualLoad}>
+            <Row className="page-content">
+
+            <Row className="page-subtitle">
             <Col lg={12}>Load</Col>
           </Row>
-          <Row>
+          
+      <Row>
+          <Col lg={3} md={6} sm={12}>
+              <FormGroup>
+                <Label for="loadNumber">Load Number</Label>
+                <Input id="loadNumber" name="loadNumber" type="text" className="form-control form-control-sm" value={newLoad.load_number} onChange={handleLoadInput("load_number")} />
+              </FormGroup>
+            </Col>
+
             <Col lg={3} md={6} sm={12}>
               <FormGroup>
                 <Label for="loadSelect">Status</Label>
-                <Input id="loadSelect" name="status" type="select" bsSize="sm" /*value={statusData.status} onChange={handleLoadInput("status")}*/ >
+                <Input id="loadSelect" name="status" type="select" bsSize="sm"  value={newLoad.load_status_id} onChange={handleLoadInput("load_status_id")}   >
                   <option value="">Select Status</option>
                   {loadStatusList?.map((item) => {
                     return (
@@ -251,7 +152,7 @@ const LoadDetail = () => {
             <Col lg={3} md={6} sm={12} >
               <FormGroup>
                 <Label for="BillingSelect">Billing Status</Label>
-                <Input id="BillingSelect" name="billingStatus" type="select" bsSize="sm" /*value={formState.billingStatus} onChange={handleInput("SET_billingStatus")}*/ >
+                <Input id="BillingSelect" name="billingStatus" type="select" bsSize="sm" value={newLoad.billing_status_id} onChange={handleLoadInput("billing_status_id")} >
                   <option value="">Select Billing Status</option>
                   {billingStatusList?.map((item) => {
                     return (
@@ -266,138 +167,293 @@ const LoadDetail = () => {
             <Col lg={3} md={6} sm={12}>
               <FormGroup>
                 <Label for="dispatcherSelect">Dispatcher</Label>
-                <Input id="dispatcherSelect" name="dispatcher" type="select" bsSize="sm" /*value={formState.dispatcher} onChange={handleInput("SET_dispatcher")}*/>
-                  <option value="">Select Dispatcher</option>
-                  {loadDispatcherStatus?.map((item) => {
-                    return (
-                      <option
-                        key={item.load_dispatcher_id}
-                      // value={item.load_dispatcher_id}
-                      >
-                        {item.load_dispatcher_name}
-                      </option>
-                    );
-                  })}
+                <Input id="dispatcherSelect" name="dispatcher" type="select" bsSize="sm" value={newLoad.dispatcher_id} onChange={handleLoadInput("dispatcher_id")}>
+                  {
+                    dispatcherList && dispatcherList.map((dispatcherItem) => {
+                     return (
+                      <option key={dispatcherItem.dispatcher_id} value={dispatcherItem.dispatcher_id} >{dispatcherItem.dispatcher_name}</option>
+                     )
+                    })
+                  }
                 </Input>
               </FormGroup>
             </Col>
           </Row>
-          <Row className="page-subtitle mb-2">
-            <Col lg={9} md={12}>Notes
-              <Button size="sm" className="edit-button" style={{ float: 'right' }} /*onClick={handleEditLoad}*/ >Add Note</Button></Col>
-          </Row>
-          <Row>
-            <Col lg={9} md={12} sm={12}>
-              <FormGroup>
-                <BasicTable
-                  emptyState={false}
-                  tableData={[]}
-                  tableHeadCells={tableHeadCells}
-                  loading={false}
-                  tableCells={[]}
-                  noPagination={true}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={9} md={12} sm={12}>
-            <FormGroup>
-                <TabPage
-                  tabTitles={["Services", "Documents", "Billing", "History"]}
-                >
-                  <TabPane tabId={1}>
-                    <Row className="mt-3">
-                      <div className="d-flex justify-content-end">
-                        <Button size="sm" className="edit-button " /*onClick={handleEditLumper}*/>New Lumper</Button>
-                        <Button
-                          size="sm"
-                          className="edit-button px-1 mx-1"
-                          // onClick={handleEditDetention}
-                        >
-                          New Detention
-                        </Button>
-                        <Button
-                          size="sm"
-                          className="edit-button"
-                          // onClick={handleEditAddDeduct}
-                        >
-                          Other Additions/ Deductions
-                        </Button>
-                      </div>
-                    </Row>
-                  </TabPane>
-                  <TabPane tabId={2}>
 
-                    <Row className="mt-3 px-4">
-                      <div className="d-flex justify-content-between ">
-                        <div>
-                        <Button
-                          size="sm"
-                          className="edit-button "
-                          // onClick={handleUploadConfirmation}
-                        >
-                         Merge Documents
-                        </Button>
-                        </div>
-                        <div>
-                        <Button
-                          size="sm"
-                          className="edit-button "
-                          // onClick={handleUploadConfirmation}
-                        >
-                         UpLoad Confirmation
-                        </Button>
-                        <Button
-                          size="sm"
-                          className="edit-button px-1 mx-1"
-                          // onClick={handleEditDetention}
-                        >
-                          UpLoad BOL
-                        </Button>
-                        <Button
-                          size="sm"
-                          className="edit-button"
-                          // onClick={handleEditAddDeduct}
-                        >
-                          Other
-                        </Button>
-                        </div>
-                       
-                      </div>
-                    </Row>
-                  </TabPane>
-                  <TabPane tabId={3}>
-                    <Row className="mt-3 px-4">
-                      </Row>
-                  </TabPane>
-                  <TabPane tabId={4}>
-                    <Row className="mt-3 px-4">
-                      </Row>
-                  </TabPane>
-                </TabPage>
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row className="mt-4 justify-content-end">
-            <Col lg={3} md={6} sm={12} className="align-self-end">
-              <FormGroup className="d-flex justify-content-end mb-1" style={{ bottom: "0", right: "0" }} >
-                <Button className="me-3 save-button" size="sm" type="submit"><BiCheck fontSize={"16px"} />Save</Button>
-                <Button className="cancel-button" size="sm" onClick={handleCancleButton} > <RxCross2 fontSize={"13px"} color="red" /> Cancel</Button>
-              </FormGroup>
-            </Col>
-          </Row>
-        </Row>
-      </Form>
-      <BrokerModalPage
-        isCustomerOpen={customerModal}
-        toggle={() => {
-          setCustomerModal(false);
-        }}
+              <Row className="page-subtitle">
+                <Col lg={12}>Pickup</Col>
+              </Row>
+              <Row>
+                <Col lg={3} md={6} sm={12}>
+                  <FormGroup>
+                    <Label for="pickupDate">Date</Label>
+                    <ReactDatePicker  showYearDropdown showMonthDropdown showIcon fixedHeight isClearable onKeyDown={(event) => { event.preventDefault(); }}  dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm"  onChange={(date) => { ({ ...newLoad, pickup_date: Convert.ToISODate(date) });   }} selected={Convert.ToDate(newLoad.pickup_date)} required autoComplete="off" />
+                   
+                  </FormGroup>
+                </Col>
+                <Col lg={3} md={6} sm={12}>
+                  <FormGroup>
+                    <Label for="pickupCity">Location</Label>
+                    <Input id="pickupCity" name="pickupCity" type="text" className="form-control form-control-sm" value={newLoad.pickup_city} onChange={handleLoadInput("pickup_city")}  required autoComplete="off"/>
+                  </FormGroup>
+                </Col>
+                <Col lg={3} md={6} sm={12}>
+                  <FormGroup>
+                    <Label for="pickupState">State</Label>
+                    <Input id="pickupState" bsSize="sm" name="pickupState" type="select" className="form-control form-control-sm" value={newLoad.pickup_state_id} onChange={handleLoadInput("pickup_state_id")} required autoComplete= "off">
+                      <option value="">Select State</option>
+                      {stateList?.map((item) => {
+                        return (
+                          <option key={item.state_id} value={item.state_id}>
+                            {item.state_name}
+                          </option>
+                        );
+                      })}
+                    </Input>
+                  </FormGroup>
+                </Col>
+                <Col lg={3} md={6} sm={12}>
+                  <FormGroup>
+                    <Label for="pickupZip">ZIP</Label>
+                    <Input id="pickupZip" name="pickupZip" type="text" className="form-control form-control-sm" value={newLoad.pickup_zipcode} onChange={handleLoadInput("pickup_zipcode")} requird autoComplete="off" />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col lg={12} className="d-flex justify-content-end">
+                  <Button onClick={handleAddPickup}>
+                    <MdOutlineNoteAdd fontSize={"16px"} /> Add Pickup Stop
+                  </Button>
+                </Col>
+              </Row>
 
-      />
-    </main>
-  );
+              <AddPickupDeliveryStop stopList={pickupStopList} setStopList={setPickupStopList} />
+
+              <Row className="page-subtitle">
+                <Col lg={12}>Delivery</Col>
+              </Row>
+              <Row>
+                <Col lg={3} md={6} sm={12}>
+                  <FormGroup>
+                    <Label for="deliveryDate">Date</Label>
+                    <ReactDatePicker  showYearDropdown showMonthDropdown showIcon fixedHeight isClearable onKeyDown={(event) => { event.preventDefault(); }}  dateFormat={Dictionary.UserDateFormat} name="purchase_date" className="form-control form-control-sm"  onChange={(date) => { ({ ...newLoad, delivery_date: Convert.ToISODate(date) });   }} selected={Convert.ToDate(newLoad.delivery_date)} required autoComplete="off" />
+
+                  </FormGroup>
+                </Col>
+                <Col lg={3} md={6} sm={12}>
+                  <FormGroup>
+                    <Label for="city">Location</Label>
+                    <Input id="city" name="city" type="text" className="form-control form-control-sm" value={newLoad.delivery_city} onChange={handleLoadInput("delivery_city")}  requierd autoComplete="off"/>
+                  </FormGroup>
+                </Col>
+                <Col lg={3} md={6} sm={12}>
+                  <FormGroup>
+                    <Label for="state">State</Label>
+                    <Input id="state" name="state" type="select" bsSize="sm" className="form-control form-control-sm" value={newLoad.delivery_state_id} onChange={handleLoadInput("delivery_state_id")} required autoComplete="off">
+                      <option value="">Select State</option>
+                      {stateList?.map((item) => {
+                        return (
+                          <option key={item.state_id} value={item.state_id}>
+                            {item.state_name}
+                          </option>
+                        );
+                      })}
+                    </Input>
+                  </FormGroup>
+                </Col>
+                <Col lg={3} md={6} sm={12}>
+                  <FormGroup>
+                    <Label for="deliveryZip">ZIP</Label>
+                    <Input id="deliveryZip" name="deliveryZip" bsSize="sm" type="text" className="form-control form-control-sm" value={newLoad.delivery_zipcode} onChange={handleLoadInput("delivery_zipcode")}  required autoComplete="off"/>
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col lg={12} className="d-flex justify-content-end">
+                  <Button onClick={handleAddDelivery}>
+                    <MdOutlineNoteAdd fontSize={"16px"} /> Add Delivery Stop
+                  </Button>
+                </Col>
+              </Row>
+
+              <AddPickupDeliveryStop stopList={deliveryStopList} setStopList={setDeliveryStopList} />
+
+              <Row>
+                <Col lg={12}>
+                  <FormGroup>
+                    <MapPage />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row className="page-subtitle">
+                <Col lg={12}>Broker</Col>
+              </Row>
+              <Row>
+                <Col lg={3} md={6} sm={12}>
+                  <FormGroup>
+                    <Label for="loadSelect">Broker</Label>
+                    <InputGroup>
+                      <Input id="loadSelect" name="broker" type="select" bsSize="sm" className="form-control form-control-sm" value={newLoad.broker_id} onChange={handleLoadInput("broker_id")} required autoComplete="off">
+                        <option value="0">Select Broker</option>
+                      </Input>
+                      <Button size="sm" style={{ backgroundColor: "#D5554D" }} onClick={toggleCustomer}>
+                        <AiOutlinePlus />
+                      </Button>
+                    </InputGroup>
+                  </FormGroup>
+                </Col>
+                <Col lg={3} md={6} sm={12}>
+                  <FormGroup>
+                    <Label for="po">PO #</Label>
+                    <Input id="po" name="po" type="text" className="form-control form-control-sm" value={newLoad.po_number} onChange={handleLoadInput("po_number")} required autoComplete="off" />
+                  </FormGroup>
+                </Col>
+                <Col lg={3} md={6} sm={12}>
+                  <FormGroup>
+                    <Label for="rate">Rate</Label>
+                    <Input id="rate" name="rate" type="text" className="form-control form-control-sm" value={newLoad.rate} onChange={handleLoadInput("rate")} />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row className="page-subtitle">
+                <Col lg={12}>Driver</Col>
+              </Row>
+              <Row>
+                <Col lg={3} md={6} sm={12}>
+                  <FormGroup>
+                    <Label for="driver">Driver</Label>
+                    <InputGroup>
+                      <Input id="driver" name="driver" type="select" bsSize="sm" className="form-control form-control-sm" value={newLoad.driver_id} onChange={handleLoadInput("driver_id")}>
+                        <option value="0">Select Driver</option>
+                        {driverList &&
+                          driverList.map((drivers) => {
+                            return (
+                              <option key={drivers.driver_id} value={drivers.driver_id}>
+                                {" "}
+                                {drivers.driver_name}
+                              </option>
+                            );
+                          })}
+                      </Input>
+                      <Button size="sm" style={{ backgroundColor: "#D5554D" }} onClick={toggleDriver}>
+                        <AiOutlinePlus />
+                        <DriverModalPage
+                          isDriverOpen={driverModal}
+                          toggle={() => {
+                            setDriverModal(false);
+                          }}
+                        />
+                      </Button>
+                    </InputGroup>
+                  </FormGroup>
+                </Col>
+                <Col lg={3} md={6} sm={12}>
+                  <FormGroup>
+                    <Label for="truck">Truck</Label>
+                    <InputGroup>
+                      <Input id="truck" name="truck" type="select" bsSize="sm" className="form-control form-control-sm" value={newLoad.truck_id} onChange={handleLoadInput("truck_id")}>
+                        <option value="0">Select Truck</option>
+                        {truckList &&
+                          truckList.map((trucks) => {
+                            return (
+                              <option key={trucks.truck_id} value={trucks.truck_id}>
+                                {" "}
+                                {trucks.truck_name}
+                              </option>
+                            );
+                          })}
+                      </Input>
+                      <Button size="sm" style={{ backgroundColor: "#D5554D" }} onClick={toggleTruck}>
+                        <AiOutlinePlus />
+                        <TruckModalPage
+                          isTruckOpen={truckModal}
+                          toggle={() => {
+                            setTruckModal(false);
+                          }}
+                        />
+                      </Button>
+                    </InputGroup>
+                  </FormGroup>
+                </Col>
+                <Col lg={3} md={6} sm={12}>
+                  <FormGroup>
+                    <Label for="trailer">Trailer</Label>
+                    <InputGroup>
+                      <Input id="trailer" name="select" type="select" bsSize="sm" className="form-control form-control-sm" value={newLoad.trailer_id} onChange={handleLoadInput("trailer_id")}>
+                        <option value="0">Select Trailer</option>
+                        {trailerList &&
+                          trailerList.map((trailers) => {
+                            return (
+                              <option key={trailers.trailer_id} value={trailers.trailer_id}>
+                                {" "}
+                                {trailers.trailer_name}
+                              </option>
+                            );
+                          })}
+                      </Input>
+                      <Button size="sm" style={{ backgroundColor: "#D5554D" }} onClick={toggleTrailer}>
+                        <AiOutlinePlus />
+                        <TrailerModalPage
+                          isTrailerOpen={trailerModal}
+                          toggle={() => {
+                            setTrailerModal(false);
+                          }}
+                        />
+                      </Button>
+                    </InputGroup>
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col lg={3} md={6} sm={12}>
+                  <FormGroup>
+                    <Label for="co-driver">Co-Driver</Label>
+                    <Input id="co-driver" name="co-driver" type="select" bsSize="sm" className="form-control form-control-sm" value={newLoad.co_driver_id} onChange={handleLoadInput("co_driver_id")} >
+                    <option value="0">Select Co-Driver</option>
+                        {driverList &&
+                          driverList.filter((l=>l.driver_id != newLoad.driver_id )).map((drivers) => {
+                            return (
+                              <option key={drivers.driver_id} value={drivers.driver_id}>
+                                {drivers.driver_name}
+                              </option>
+                            );
+                          })}
+                  </Input>
+                  </FormGroup>
+                </Col>
+              </Row>
+              
+
+              <Row className="mt-4 justify-content-end">
+                <Col lg={3} md={6} sm={12} className="align-self-end">
+                  <FormGroup className="d-flex justify-content-end mb-1" style={{ bottom: "0", right: "0" }}>
+                    <Button className="me-3 save-button" size="sm" type="submit">
+                     
+                  Save
+                    </Button>
+                    {/* <Button className="cancel-button" size="sm" onClick={handleCancleButton} > <RxCross2 fontSize={"13px"} color="red" /> Cancel</Button> */}
+                  </FormGroup>
+                </Col>
+              </Row>
+            </Row>
+          </Form>
+          <BrokerModalPage
+            isCustomerOpen={customerModal}
+            toggle={() => {
+              setCustomerModal(false);
+            }}
+          />
+        </>
+      );
+    case 2:
+      return <CustomerDetails />;
+    case 3:
+      return <DriversDetails />;
+    case 4:
+      return <TruckDetails />;
+    case 5:
+      return <TrailersPage />;
+  }
 };
 
-export default LoadDetail ;
+export default LoadDetail;

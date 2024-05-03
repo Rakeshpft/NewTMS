@@ -17,7 +17,8 @@ import { toastify } from "../../features/notification/toastify";
 const DriverPage = () => {
  
   
-const { driverAddList , getDriverList , driverDelete , driverLoading } = useDriverContext();
+const { driverAddList , getDriverList , driverDelete  } = useDriverContext();
+console.log( " driverAddList " , driverAddList );
   const inputRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const { driverAddList , getDriverList , driverDelete , driverLoading } = useDriv
         }
       });
     searchResults && setFilteredData(searchResults);
-    console.log("filetered data", filteredData);
+    
   }, 500);
 
   const closeDeleteModal = () => {
@@ -45,17 +46,17 @@ const { driverAddList , getDriverList , driverDelete , driverLoading } = useDriv
   };
 
   useEffect(() => {
-    if (!driverLoading && driverAddList)
+    if (driverAddList)
       
        setFilteredData(driverAddList);
    
-  }, [driverAddList, driverLoading]);
+  }, [driverAddList]);
 
  const  handleDeleteDriver = () => {
 
-  const deletedDriverId = selectedDriver.map( driverId => driverId.driver_id );
+  const deletedDriverId  = selectedDriver.map( driverId => driverId.driver_id );
 
-  driverDelete(deletedDriverId).then((response ) => {
+  driverDelete( deletedDriverId  ).then((response ) => {
     response &&  response.message && toastify({ message: response.message, type: (response.success ? "success" : "error") })
   })
   getDriverList();
@@ -119,14 +120,14 @@ const { driverAddList , getDriverList , driverDelete , driverLoading } = useDriv
       id: "truck_id",
       name: "TRUCK",
       style: { width: "15%" },
-      selector: (row: IDriverObject) => row.truck_id,
+      selector: (row: IDriverObject) => row.truck_name,
       sortable: true,
     },
     {
       id: "trailer_id",
       name: "TRAILER",
       style: { width: "15%" },
-      selector: (row: IDriverObject) => row.trailer_id,
+      selector: (row: IDriverObject) => row.trailer_name,
       sortable: true,
     },
 
@@ -192,16 +193,15 @@ const { driverAddList , getDriverList , driverDelete , driverLoading } = useDriv
         </CommonLayOut>
         <Modal isOpen={deleteModalOpen} onClose={closeDeleteModal}>
               <ModalHeader>
-                <h6 className="mb-0 fw-bold"> Delete </h6>
+                <h6 className="mb-0 fw-bold"> Delete Driver</h6>
               </ModalHeader>
               <ModalBody>
                 <Container>
                   {!isEmpty(selectedDriver) && (
-                    <div className=" my-3 ">
-                      {selectedDriver.length > 1
-                        ? `Are you sure you want to delete ${selectedDriver.length} customers?`
-                        : `Are you sure you want to delete customer "${selectedDriver[0].first_name} ${selectedDriver[0].last_name}"?`}
-                    </div>
+                     <div className=" dle my-3 ">                      
+                      {selectedDriver.length > 1?(<div>You have selected {selectedDriver.length} drivers.<br /></div>):null}
+                       Are you sure you want to delete?
+                   </div>
                   )}
                   <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">
                     <Button

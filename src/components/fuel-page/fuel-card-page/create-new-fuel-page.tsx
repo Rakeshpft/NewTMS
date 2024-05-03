@@ -5,13 +5,9 @@ import { useParams } from "react-router-dom";
 const CreateNewFuelPage = () => {
   const params = useParams();
   const fuel_card_id = params.id ? parseInt(params.id,10) : 0;
-
-  const handleSubmit=(x:any)=>{
-    alert(x.fuel_card_id);
-  }
   return (
     <>
-      <CreateFuelCardPage fuel_card_id={fuel_card_id} handleSubmit={handleSubmit} />
+      <CreateFuelCardPage fuel_card_id={fuel_card_id}  />
     </>
   );
 };

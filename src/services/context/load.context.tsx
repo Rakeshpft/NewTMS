@@ -1,18 +1,27 @@
 import React, { createContext } from "react";
 import { Draft } from "immer";
-import { IDispatcherLoadObject } from "../tms-objects/load.type";
 import { useImmer } from "use-immer";
+import { ILoadDocuments, ILoadNotesObject, ILoadObject, ILoadServices } from "../tms-objects/load.type";
 
 export interface ILoadStatus {
   statusLoading: boolean;
-  loadDispatcherStatus: IDispatcherLoadObject[] | null;
+  loadList : ILoadObject[] | null;
+  selectedLoad : ILoadObject | null
+  loadNotesList : ILoadNotesObject[] | null;
+  loadServicesList : ILoadServices[] | null;
+  loadDocumentsList : ILoadDocuments[] | null;
+  
 }
 
 
-
 const initialState : ILoadStatus = {
-    statusLoading: false,
-    loadDispatcherStatus: null,
+    statusLoading: false,   
+    loadList : null ,
+    selectedLoad : null,
+    loadNotesList : null,
+    loadServicesList : null,
+    loadDocumentsList : null,
+
 }
 
 type LoadContextType = {
@@ -22,7 +31,7 @@ type LoadContextType = {
 
 
 
-const LoadContext = createContext<LoadContextType>({
+const LoadAddContext = createContext<LoadContextType>({
     state : initialState,
     setState :() => undefined,
     
@@ -31,11 +40,11 @@ const LoadContext = createContext<LoadContextType>({
 const LoadProvider = ({ children }: { children: React.ReactNode }) => {
     const [state, setState] = useImmer<ILoadStatus>(initialState);
     return (
-        <LoadContext.Provider value={{ state, setState }}>{children}</LoadContext.Provider>
+        <LoadAddContext.Provider value={{ state, setState }}>{children}</LoadAddContext.Provider>
     );
 };
 
-export {LoadProvider, LoadContext , initialState}
+export {LoadProvider, LoadAddContext , initialState}
 
 
 

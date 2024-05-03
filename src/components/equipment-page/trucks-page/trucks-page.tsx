@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect,  useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 // import { MdOutgoingMail } from "react-icons/md";
 // import { PiFilePdfDuotone, PiGearDuotone } from "react-icons/pi";
@@ -24,8 +24,8 @@ import { BsSearch } from "react-icons/bs";
 // import { RxCross2 } from "react-icons/rx";
 import { routes } from "../../routes/routes";
 
-import { debounce, includes, isEmpty } from "lodash";
-import { HiCheckCircle, HiOutlinePencilAlt } from "react-icons/hi";
+import { isEmpty } from "lodash";
+import { HiCheckCircle, HiExclamationCircle, HiOutlinePencilAlt } from "react-icons/hi";
 import CommonLayOut from "../../../layout";
 // import { ICustomerDetails } from "../../../services/tms-objects/customer.types";
 // import { TabPage } from "../../driver-page";
@@ -34,7 +34,8 @@ import { ITruckObject } from "../../../services/tms-objects/truck.types";
 import { useTruckContext } from "../../../services/reducer/truck.reducer";
 import { toastify } from "../../../features/notification/toastify";
 import { MdCancel } from "react-icons/md";
-import moment from "moment";
+import { LoadingContext } from "../../../services/context/loading.context";
+import { Convert } from "../../../features/shared/helper";
 
 
 const TrucksPage = () => {
@@ -47,37 +48,28 @@ const TrucksPage = () => {
   } = useTruckContext();
 
   const navigate = useNavigate();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const { setLoader } = useContext(LoadingContext);
 
   const [filteredData, setFilteredData] = useState<ITruckObject[] | []>([]);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
-
+  const [filter, setFilter] = useState("");
   const [selectedTrucks, setSelectedTrucks] = useState<ITruckObject[] | []>([]);
 
 
-  const handleSearch = debounce((searchValue: string) => {
-    const searchResults =
-      truckList &&
-      truckList.filter((truck) => {
-        if (includes(truck.eld_provider_name.toLowerCase(), searchValue.toLowerCase())
-        || includes(truck.unit.toLowerCase(), searchValue.toLowerCase())
-      || includes(truck.make.toLowerCase(), searchValue.toLowerCase())
-      || includes(truck.model.toLowerCase(), searchValue.toLowerCase())
-      || includes(truck.vin_number.toLowerCase(), searchValue.toLowerCase())
-      || includes(truck.ownership_type_name.toLowerCase(), searchValue.toLowerCase())
-      || includes(truck.driver_name.toLowerCase(), searchValue.toLowerCase())
-      || includes(truck.location.toLowerCase(), searchValue.toLowerCase())
-      || includes(truck.plate_number.toString(), searchValue.toLowerCase())
-      || includes(truck.purchase_date.toString(), searchValue.toLowerCase())
-
-        )
-           {
-          return truck;
-        }
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    truckList
+      const value = e.target.value.toLowerCase();
+      const filteredData = truckList && truckList.filter((item) => {
+        return columns.some((column) =>
+          String(item[column.id as keyof object])
+            .toLowerCase()
+            .includes(value)
+        );
       });
-    searchResults && setFilteredData(searchResults);
-  }, 500);
+      setFilter(value);
+      filteredData && setFilteredData(filteredData);
+    };
 
 
   const closeDeleteModal = () => {
@@ -89,7 +81,7 @@ const TrucksPage = () => {
   const handleDeleteTrucks =async () => {
     
     const deletedTruckIds = selectedTrucks.map(doc => doc.truck_id);
-  
+  setLoader(true);
    await deleteTruck(deletedTruckIds)
       .then(response => {
         console.log(response);
@@ -98,6 +90,7 @@ const TrucksPage = () => {
         message: response.message,
         type: response.success ? "success" : "error",
     })
+    setLoader(false);
   })
       setDeleteModalOpen(false);
       setSelectedTrucks([]);
@@ -152,30 +145,30 @@ const TrucksPage = () => {
       selector: (row: ITruckObject) => row.plate_number
     },
     {
-      id: "purchase_date",
+      id: "registration_date",
       name: "REG. DATE",
       style: { width: "8.5%" },
       sortable: true,
-      selector: (row: ITruckObject) => row.purchase_date,
-      format: (row: ITruckObject) =>  moment(row.purchase_date).format('L')
-
+      selector: (row: ITruckObject) => row.registration_date  ,
+      format: (row: ITruckObject) =>Convert.ToUserDate(row.registration_date)
+       
     },
     {
-      id: "ownership_type_id",
+      id: "ownership_type_name",
       name: "OWNERSHIP",
       style: { width: "8.5%" },
       sortable: true,
       selector: (row: ITruckObject) => row.ownership_type_name
     },
     {
-      id: "driver_id",
+      id: "driver_name",
       name: "DRIVER",
       style: { width: "8.5%" },
       sortable: true,
       selector: (row: ITruckObject) => row.driver_name
     },
     {
-      id: "eld_provider_id",
+      id: "eld_provider_name",
       name: "ELD PROVIDER",
       style: { width: "8.5%" },
       sortable: true,
@@ -194,17 +187,21 @@ const TrucksPage = () => {
       id: "warnings",
       name: "WARNINGS",
       style: { width: "8.5%" },
-      sortable: true,
+      sortable: false,
+      align: "center",
       selector: (row: ITruckObject) => row.warning,
+      cell:(row:ITruckObject)=>(row.warning ? <HiCheckCircle size={20} className="text-success " /> : <HiExclamationCircle size={20} className="text-warning " />)
+
 
     },
     {
       id: "active",
       name: "STATUS",
-      style: { width: "5%" },
-      sortable: true,
+      style: { width: "5%"}, 
+      align: "center",
+      sortable: false,
       selector: (row: ITruckObject) => row.is_active,
-      cell:(row:ITruckObject)=>(row.is_active ? <HiCheckCircle size={20} className="text-success" /> : <MdCancel size={20} className="text-danger" />)
+      cell:(row:ITruckObject)=>(row.is_active ? <HiCheckCircle size={20} className="text-success " /> : <MdCancel size={20} className="text-danger align-center" />)
     },
     {
       id: "action",
@@ -231,9 +228,8 @@ const TrucksPage = () => {
                   <Input
                     placeholder="Search"
                     className="border-start-0 search"
-                    inputRef={inputRef} onChange={(e: any) =>
-                      handleSearch(e.target.value)}
-                  />
+                   value={filter}
+                   onChange={handleSearch}/>
                 </InputGroup>
               </div>
 
@@ -258,15 +254,14 @@ const TrucksPage = () => {
       </CommonLayOut>
       <Modal isOpen={deleteModalOpen} onClose={closeDeleteModal}>
         <ModalHeader>
-          <h6 className="mb-0 fw-bold"> Delete </h6>
+          <h6 className="mb-0 fw-bold">Delete Truck</h6>
         </ModalHeader>
         <ModalBody>
           <Container>
             {!isEmpty(selectedTrucks) && (
               <div className=" my-3 ">
-                {selectedTrucks.length > 1
-                  ? `Are you sure you want to delete ${selectedTrucks.length} trucks?`
-                  : `Are you sure you want to delete truck "${selectedTrucks[0].unit}"?`}
+                {selectedTrucks.length > 1?(<div>You have selected {selectedTrucks.length} trucks.<br /></div>):null}
+                  Are you sure you want to delete?
               </div>
             )}
             <FormGroup className=" d-flex justify-content-end mt-3 column-gap-2 ">

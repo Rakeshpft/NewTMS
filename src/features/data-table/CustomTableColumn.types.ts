@@ -6,6 +6,7 @@ interface CustomTableColumn{
     selector:any,
     format?:any,
     cell?:any,
-    sortable?:boolean  ,
+    sortable?:boolean,
     align?:'left'|'right'|'center'
+    footCell?:any,
 }
